@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +33,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('/fetch-permission',[PermissionController::class,'fetchPermission'])->name('fetchPermission');
     Route::post('/assign-permission',[PermissionController::class,'assignPermission'])->name('assignPermission');
 
+});
+
+
+Route::get('/optimize', function(){
+    Artisan::call('optimize');
+});
+Route::get('/optimize-clear', function(){
+    Artisan::call('optimize:clear');
 });
