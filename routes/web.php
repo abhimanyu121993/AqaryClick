@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // FrontEnd Routes
-Route::resource('/',LoginController::class);
+Route::get('/',[LoginController::class, 'index'])->name('admin');
+Route::post('/login',[LoginController::class, 'store'])->name('login');
 
 
 // Backend Routes
