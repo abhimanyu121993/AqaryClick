@@ -22,7 +22,7 @@ Route::resource('/',LoginController::class);
 
 
 // Backend Routes
-Route::group(['prefix'=>'admin','as'=>'admin.'],function(){
+Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function(){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     Route::resource('/user', UserController::class);
