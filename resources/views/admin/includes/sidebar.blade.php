@@ -7,7 +7,7 @@
                 <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50"><span class="fw-bold" style="font-size:1.3rem;color:#22438e;">AqueryClick</span>
+                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50"><span class="fw-bold" style="font-size:1.3rem;color:#22438e;">Aqary<span style="color:#f05b27;">Click</span></span>
             </span>
         </a>
 
@@ -57,6 +57,66 @@
                     </div>
                 </li>
 
+                <!-- Building Management Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Building Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards5">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> All Buildings </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Building Type </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Unit Management Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i data-feather="box" class="icon-dual"></i> <span data-key="t-dashboards">Unit Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards6">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> All Units </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Unit Feature </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Tenant Management Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards7" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i data-feather="briefcase" class="icon-dual"></i> <span data-key="t-dashboards">Tenant Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards7">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> All Tenants </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <!-- Owner Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards2" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -91,48 +151,6 @@
                         <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Customer Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards4">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Building Management Menu -->
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Building Management</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards5">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Unit Management Menu -->
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i data-feather="box" class="icon-dual"></i> <span data-key="t-dashboards">Unit Management</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards6">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Tenant Management Menu -->
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards7" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i data-feather="briefcase" class="icon-dual"></i> <span data-key="t-dashboards">Tenant Management</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
