@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\BuildingTypeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UnitFeatureController;
+use App\Models\BuildingType;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +37,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('/role-has-permission',[PermissionController::class,'rolePermission'])->name('rolePermission');
     Route::post('/fetch-permission',[PermissionController::class,'fetchPermission'])->name('fetchPermission');
     Route::post('/assign-permission',[PermissionController::class,'assignPermission'])->name('assignPermission');
-
+    Route::resource('buildingtype',BuildingTypeController::class);
+    Route::resource('unit-type',UnitController::class);
+    Route::resource('unit-feature',UnitFeatureController::class);
+    Route::get('user-profile/{id}',[UserController::class,'profile'])->name('profile');
+    Route::get('edit-user-profile/{id}',[UserController::class,'editProfile'])->name('editprofile');
 });
 
 
