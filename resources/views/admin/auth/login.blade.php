@@ -68,7 +68,7 @@
                                     <p class="text-muted">Sign in to continue to AqaryClick</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="{{ url('/') }}" method="POST">
+                                    <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>

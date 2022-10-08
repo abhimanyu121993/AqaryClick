@@ -2,7 +2,7 @@
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
-        <a href="index.html" class="logo logo-dark">
+        <a href="#" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50">
             </span>
@@ -65,13 +65,13 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards5">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.buildingtype.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> All Buildings </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> All Buildings </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Building Type </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Building Type </a>
                             </li>
                         </ul>
                     </div>
@@ -85,16 +85,16 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards6">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> All Units </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> All Units </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
+                                <a href="{{route('admin.unit-type.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Unit Feature </a>
+                                <a href="{{route('admin.unit-feature.index')}}" class="nav-link" data-key="t-analytics"> Unit Feature </a>
                             </li>
                         </ul>
                     </div>
@@ -108,10 +108,10 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> All Tenants </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> All Tenants </a>
                             </li>
                         </ul>
                     </div>
@@ -125,7 +125,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li>
                         </ul>
                     </div>
@@ -139,7 +139,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li>
                         </ul>
                     </div>
@@ -153,7 +153,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li>
                         </ul>
                     </div>
@@ -167,12 +167,11 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.index')}}" class="nav-link" data-key="t-analytics"> Role </a>
+                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-
 
             </ul>
         </div>
