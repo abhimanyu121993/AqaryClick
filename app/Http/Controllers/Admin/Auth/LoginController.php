@@ -27,7 +27,7 @@ class LoginController extends Controller
         }
         else {
             session()->flash('error','Invalid Username or Password !');
-            return redirect('/');
+            return redirect('/admin');
         }
     }
 }
