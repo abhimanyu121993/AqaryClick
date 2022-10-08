@@ -42,6 +42,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('unit-feature',UnitFeatureController::class);
     Route::get('user-profile/{id}',[UserController::class,'profile'])->name('profile');
     Route::get('edit-user-profile/{id}',[UserController::class,'editProfile'])->name('editprofile');
+    Route::post('user-profile-update',[UserController::class,'updateProfile'])->name('updateprofile');
+    Route::post('user-pass-update',[UserController::class,'changePass'])->name('uppass');
 });
 
 

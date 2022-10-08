@@ -1,7 +1,8 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'User Profile'])
+@section('title', 'User Profile')
 @section('main-content')
 
-<div class="page-content">
+<div class="page-content"   style="margin-top: -115px">
     <div class="container-fluid">
         <div class="position-relative margin-top:85px">
             <div class="profile-wid-bg ">

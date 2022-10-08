@@ -7,6 +7,7 @@ use App\Models\Error;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -140,8 +141,68 @@ class UserController extends Controller
 
         return view('admin.profile.user_profile');
     }
-    public function editProfile()
+    public function editProfile($id)
     {
-        return view('admin.profile.edit_profile');
+        $udata=User::find($id);
+        return view('admin.profile.edit_profile',compact('udata'));
+    }
+    public function updateProfile(Request $request, $id)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'nullable',
+            'email' => 'required',
+            'roleid' => 'required',
+            'phone' => 'nullable'
+        ]);
+
+        try{
+
+             $user = User::find($id)->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'phone' => $request->phone
+            ]);
+            // $role_name = Role::find($request->roleid);
+            if($user)
+            {
+                // $user->assignRole($role_name);
+                Session::flash('success', 'User Upade successfully');
+            }
+            else
+            {
+                Session::flash('error', 'User not Updated');
+            }
+        }
+        catch(Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+            Session::flash('error','Server Error ');
+        }
+        return redirect()->back();
+    }
+    public function changePass(Request $request)
+    {
+        $request->validate([
+            'password'=> 'required',
+            'cnfrm_password' =>'required',
+            're_cnfrm_password'=>'required'
+        ]);
+        if(Hash::check($request->password , Auth::user()->password))
+        {
+                $pass=User::find(Auth::user()->id)->update([
+                    'password' => Hash::make($request->cnfrm_password)
+                ]);
+        }
+        if($pass)
+        {
+            Session::flash('success','Password has been updated');
+        }
+        else
+        {
+            Session::flash('error','Something went wrong');
+        }
     }
 }

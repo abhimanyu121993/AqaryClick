@@ -65,7 +65,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards5">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.buildingtype.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-analytics"> All Buildings </a>
@@ -91,10 +91,10 @@
                                 <a href="#" class="nav-link" data-key="t-analytics"> All Units </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Unit Type </a>
+                                <a href="{{route('admin.unit-type.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Unit Feature </a>
+                                <a href="{{route('admin.unit-feature.index')}}" class="nav-link" data-key="t-analytics"> Unit Feature </a>
                             </li>
                         </ul>
                     </div>

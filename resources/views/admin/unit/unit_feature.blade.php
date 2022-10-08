@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($unitfeat)? 'Update Unit Type' : 'Create Unit Type' }}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($unitfeat)? 'Update Unit Feature' : 'Create Unit Feature' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -17,7 +17,7 @@
                             @csrf
                             <div class="row gy-4">
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="name" class="form-label">Unit Type Name</label>
+                                    <label for="name" class="form-label">Unit Feature Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="name" name="name" value="{{isset($unitfeat)? $unitfeat->name: '' }}" placeholder="Unit Type Name">
                                         <button class="btn btn-primary" type="submit">{{isset($unitfeat) ? 'Update' : 'Submit'}}</button>
