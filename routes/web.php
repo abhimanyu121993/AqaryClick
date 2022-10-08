@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // FrontEnd Routes
-Route::get('/',[LoginController::class, 'index'])->name('admin');
+Route::get('/admin',[LoginController::class, 'index'])->name('admin');
 Route::post('/login',[LoginController::class, 'store'])->name('login');
 
 
