@@ -1,57 +1,7 @@
 
 
     <header class="header-wrap style1">
-        <!-- <div class="header-top">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="header-top-left">
-                            <div class="close-header-top xl-none">
-                                <button type="button"><i class="las la-times"></i></button>
-                            </div>
-                            <div class="header-contact">
-                                <p><i class="ri-map-pin-fill"></i> 24th North Lane, Hill Town, New York</p>
-                            </div>
-                            <div class="header-contact">
-                                <a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#b5ddd0d9d9daf5d0d6dac0c79bd6dad8"> <i class="ri-mail-send-line"></i> <span class="__cf_email__" data-cfemail="1d74737b725d787e72686f337e7270">[email&#160;protected]</span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="header-top-right">
-                            <div class="lang_selctor  style1">
-                                <i class="ri-global-line"> </i>
-                                <select>
-                                    <option value="1">English</option>
-                                    <option value="2">French</option>
-                                    <option value="3">Arabic</option>
-                                </select>
-                            </div>
-                            <div class="header-social">
-                                <span>Follow us :</span>
-                                <ul class="social-profile style3">
-                                    <li><a target="_blank" href="https://facebook.com/"><i class="ri-facebook-fill"></i> </a></li>
-                                    <li><a target="_blank" href="https://linkedin.com/"> <i class="ri-linkedin-fill"></i> </a></li>
-                                    <li><a target="_blank" href="https://twitter.com/"> <i class="ri-twitter-fill"></i> </a></li>
-                                    <li><a target="_blank" href="https://instagram.com/"> <i class="ri-instagram-line"></i> </a></li>
-                                </ul>
-                            </div>
-                            <a href="login.html" class="link style3"> Login/Register</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 xl-none">
-                        <div class="header-search">
-                            <form action="#">
-                                <div class="form-group">
-                                    <input type="search" placeholder="Search Here ...">
-                                    <button type="submit"> <i class="ri-search-eye-line"></i> </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+       
         <div class="header-bottom">
             <div class="container">
                 <div class="row align-items-center">
@@ -87,6 +37,9 @@
                                     </li>
                                     <li>
                                         <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login In</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register</button>
                                     </li>
                                 </ul>
                             </div>
