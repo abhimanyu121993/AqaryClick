@@ -1,0 +1,368 @@
+.contect-form h4 {
+  color: #20438E !important;
+}
+
+.form-label {
+  color: #20438E !important;
+}
+
+.input-icons input {
+  height: 43px;
+  border-radius: 0;
+}
+
+.input-icons textarea {
+  border-radius: 0;
+}
+
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.icon {
+  padding: 13px;
+  min-width: 40px;
+  color: #20438E;
+}
+
+.input-field {
+  padding-left: 35px;
+  border: 1px solid #20438E;
+  color: #20438E !important;
+}
+
+.close-btn {
+  height: 30px;
+  width: 30px;
+  background: #fff;
+  border-radius: 100%;
+  float: right;
+  top: -19px;
+  margin-top: -30px;
+  margin-right: -28px;
+}
+
+.btn-close {
+  margin-top: 5px;
+  opacity: 1 !important;
+  padding: 2px 2px 1px 12px;
+}
+
+.modal-content {
+  background: rgb(255 255 255 / 45%);
+}
+
+.login-img img {
+  width: 30%;
+}
+
+#reload {
+  height: 37px;
+  width: 39px;
+  line-height: 10px !important;
+  color: #fff;
+  border-radius: 0 4px 4px 0px;
+  background: #000;
+  margin-left: -5px;
+}
+
+.login-btn-f {
+  float: right;
+}
+
+.login-btn-f a {
+  color: #fffffff5 !important;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-right: 11px;
+}
+
+.login-btn-f button {
+  padding: 0px 11px 5px 11px;
+  border-radius: 3px;
+  height: 38px;
+  line-height: 40px;
+  background: #20438E;
+  text-transform: uppercase;
+  border: #20438E;
+}
+
+.term-body {
+  /* background: #F99E1B !important; */
+  background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%) !important;
+  border: 4px solid #fff;
+}
+
+.term-body h5 {
+  color: #fff;
+}
+
+.term-body p {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.term-btn {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.decline {
+  background-color: #fff !important;
+  border: 2px solid #20438E;
+  color: #20438E !important;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.accept {
+  background-color: #20438E !important;
+  border: 2px solid #20438E;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.value-img img {
+  border-radius: 310px 310px 0px 0px;
+  margin-left: 100px;
+}
+
+.footer-footer li,
+a {
+  color: #20438E !important;
+}
+
+.footer-box-layout {
+  background-color: #fff;
+}
+
+.box-footer {
+  /* background-color: #F99E1B; */
+  background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%) !important;
+}
+
+.address p {
+  color: #20438E !important;
+  margin-top: -32px !important;
+  margin-bottom: 26px !important;
+  font-size: 15px;
+  font-family: poppins, sans-serif;
+}
+
+.login-btn {
+  background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%);
+  border: #ff4f1e !important;
+  border-radius: 3px !important;
+  padding: 4px 12px 5px 14px !important;
+  text-transform: uppercase !important;
+  font-size: 15px !important;
+  font-weight: 500m !important;
+}
+
+.instructor-title {
+  color: #20438E !important;
+}
+
+.rent-home {
+  background: #fff !important;
+}
+
+.rent h4 {
+  color: #20438E !important;
+}
+
+.rent-btn .btn {
+  border: 2px solid #20438E;
+  background-color: #fff !important;
+  color: #20438E !important;
+  font-weight: 600;
+  border-radius: 3px;
+}
+
+.rent-btn .btn:hover {
+  background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%);
+  color: #fff !important;
+  border: rgb(255, 197, 61);
+  cursor: pointer;
+}
+
+.head-model {
+  background-color: #fff !important;
+}
+
+.owner-body {
+  background-color: #fff !important;
+}
+
+.address-user .user-add li {
+  margin-left: -66px;
+  font-size: 15px;
+  color: #20438E;
+}
+
+.btb span::before {
+  position: absolute;
+  top: 56px;
+  left: 49%;
+  content: "";
+  background: rgba(0, 0, 0, .2);
+  width: 1px;
+  height: 278px;
+}
+
+dt {
+  float: left;
+  clear: left;
+  width: auto;
+  font-weight: bold;
+  color: #000;
+  margin-right: 10px;
+  margin-left: 22px;
+}
+
+dt::after {
+  content: ":";
+}
+
+dd {
+  margin: 0 0 0 80px;
+  padding: 0 0 0.5em 0;
+}
+
+.amenties .ul-list li {
+  float: left;
+  padding: 0px 193px 19px 21px;
+}
+
+.amenties li,
+input {
+  margin-right: 6px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.post-fil textarea {
+  border: 1px solid #20438E;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.cancle-btn {
+  background: #fff;
+  border: 1px solid #20438E;
+  color: #000;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 6px 12px 6px 12px;
+  font-weight: 500;
+}
+
+.post-btn {
+  background: #20438E;
+  border: 1px solid #20438E;
+  font-size: 15px;
+  float: right;
+  border-radius: 5px;
+  padding: 6px 12px 6px 12px;
+  font-weight: 500;
+}
+
+.search-area {
+  background: rgb(255 255 255 / 45%);
+  position: relative;
+  z-index: 5;
+  bottom: 150px;
+  padding: 12px 0px 12px 23px;
+
+}
+
+.form-search input {
+  border: 1px solid #f4f4f4;
+  border-radius: 2px;
+}
+
+.form-search select {
+  border: 1px solid #f4f4f4;
+  border-radius: 2px;
+}
+
+.button-next-slid {
+  float: right;
+}
+
+.button-next-slid button {
+  padding: 0px 9px 0px 10px;
+  background: #F5F5F5;
+  border: 1px solid #F5F5F5;
+  color: #20438E;
+}
+
+.button-next-slid button:hover {
+  background: #0d6efd !important;
+  border: 1px solid #0d6efd !important;
+  color: #fff;
+}
+
+.ic {
+  color: #20438E;
+}
+
+.card-body {
+  border: 4px solid #fff;
+  border-bottom: none;
+  background: #f4f4f4;
+}
+
+.pep img {
+  border-radius: 100%;
+  height: 74px;
+  width: 99px;
+  position: absolute;
+  bottom: 40px;
+}
+
+@media(max-width: 375px) {
+  .pep img {
+    left: 221px !important;
+    bottom: 40px;
+  }
+}
+
+@media(max-width: 568px) {
+  .pep img {
+    left: 221px !important;
+    bottom: 40px;
+  }
+}
+
+@media(max-width: 768px) {
+  .pep img {
+    left: 71px !important;
+    bottom: 40px;
+  }
+}
+
+.card-footer {
+  border: 4px solid #fff;
+  border-top: none;
+  background-color: #20438E;
+  padding: 30px 0px 14px 0px;
+}
+
+.name-p small {
+  color: #fff;
+  z-index: 9999999;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.card-title i {
+  font-size: 40px;
+}
