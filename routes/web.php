@@ -23,11 +23,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // FrontEnd Routes
-Route::get('/admin',[LoginController::class, 'index'])->name('admin');
-Route::post('/login',[LoginController::class, 'store'])->name('login');
+Route::get('/', function(){
+    return view('welcome');
+});
+
+
+
+
+
+
+
+
+
+
 
 
 // Backend Routes
+Route::get('/admin',[LoginController::class, 'index'])->name('admin');
+Route::post('/login',[LoginController::class, 'store'])->name('login');
+
 Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function(){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
