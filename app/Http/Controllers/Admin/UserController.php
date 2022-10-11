@@ -141,38 +141,78 @@ class UserController extends Controller
 
         return view('admin.profile.user_profile');
     }
-    public function editProfile($id)
+    public function editProfile()
     {
-        $udata=User::find($id);
+        $udata=User::find(Auth::user()->id);
+        // dd($udata);
         return view('admin.profile.edit_profile',compact('udata'));
     }
-    public function updateProfile(Request $request, $id)
+    public function updateProfile(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'first_name' => 'required',
+            'first_name' => 'nullable',
             'last_name' => 'nullable',
-            'email' => 'required',
-            'roleid' => 'required',
             'phone' => 'nullable'
         ]);
-
-        try{
-
-             $user = User::find($id)->update([
+             $user =User::find(Auth::user()->id)
+             ->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'email' => $request->email,
                 'phone' => $request->phone
             ]);
-            // $role_name = Role::find($request->roleid);
+            // dd($user);
             if($user)
             {
-                // $user->assignRole($role_name);
+
                 Session::flash('success', 'User Upade successfully');
+                return redirect()->back();
             }
             else
             {
                 Session::flash('error', 'User not Updated');
+                return redirect()->back();
+            }
+
+
+
+    }
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password'=>'required',
+            'new_password'=>'required',
+            'cnew_password'=>'required'
+        ]);
+        try
+        {
+            if($request->new_password == $request->cnew_password)
+            {
+
+                if(Hash::check($request->current_password, Auth::user()->password))
+                {
+                    $res = User::find(Auth::user()->id)->update(['password' => Hash::make($request->new_password)]);
+                    if($res)
+                    {
+                        session()->flash('success','Password changed Sucessfully');
+                        return redirect()->back();
+                    }
+                    else
+                    {
+                        session()->flash('error','Password not changed ');
+                        return redirect()->back();
+                    }
+                }
+                else
+                {
+                    session()->flash('error','Incorrect current password');
+                    return redirect()->back();
+                }
+            }
+            else
+            {
+                session()->flash('error','Password did not matched ');
+                return redirect()->back();
             }
         }
         catch(Exception $ex)
@@ -181,28 +221,6 @@ class UserController extends Controller
             Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
             Session::flash('error','Server Error ');
         }
-        return redirect()->back();
-    }
-    public function changePass(Request $request)
-    {
-        $request->validate([
-            'password'=> 'required',
-            'cnfrm_password' =>'required',
-            're_cnfrm_password'=>'required'
-        ]);
-        if(Hash::check($request->password , Auth::user()->password))
-        {
-                $pass=User::find(Auth::user()->id)->update([
-                    'password' => Hash::make($request->cnfrm_password)
-                ]);
-        }
-        if($pass)
-        {
-            Session::flash('success','Password has been updated');
-        }
-        else
-        {
-            Session::flash('error','Something went wrong');
-        }
+            return redirect()->back();
     }
 }
