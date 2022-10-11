@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 
-class UnitController extends Controller
+class OwnerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return view('admin.unit.register_unit');
+        //
     }
 
     /**
@@ -24,7 +25,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        $owners = Owner::all();
+        return view('admin.owner.all_owner', compact('owners'));
     }
 
     /**

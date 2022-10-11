@@ -2,13 +2,15 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
+use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\UnitTypeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\UnitFeatureController;
-use App\Models\BuildingType;
+use App\Http\Controllers\Admin\UnitFeatureController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -23,17 +25,14 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// FrontEnd Routes
 Route::controller(HomeController::class)->group(function(){
     Route::get("/","index");
     Route::get("/about-us","about");
     Route::get("/properties","properties");
     Route::get('/propertie-details','propertie_details');
     Route::get("/contect-us","contect");
-});
-
-// FrontEnd Routes
-Route::get('/', function(){
-    return view('welcome');
 });
 
 
@@ -61,12 +60,16 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('/fetch-permission',[PermissionController::class,'fetchPermission'])->name('fetchPermission');
     Route::post('/assign-permission',[PermissionController::class,'assignPermission'])->name('assignPermission');
     Route::resource('buildingtype',BuildingTypeController::class);
-    Route::resource('unit-type',UnitController::class);
+    Route::resource('unit-type',UnitTypeController::class);
     Route::resource('unit-feature',UnitFeatureController::class);
     Route::get('user-profile/{id}',[UserController::class,'profile'])->name('profile');
     Route::get('edit-user-profile/{id}',[UserController::class,'editProfile'])->name('editprofile');
     Route::post('user-profile-update',[UserController::class,'updateProfile'])->name('userupdate');
     Route::post('user-pass-update',[UserController::class,'updatePassword'])->name('uppass');
+
+    Route::resource('building',BuildingController::class);
+    Route::resource('unit',UnitController::class);
+    Route::resource('owner',OwnerController::class);
 });
 
 

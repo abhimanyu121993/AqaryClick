@@ -7,7 +7,7 @@
                 <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50"><span class="fw-bold" style="font-size:1.3rem;color:#22438e;">Aqary<span style="color:#f05b27;">Click</span></span>
+                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="80"></span>
             </span>
         </a>
 
@@ -65,13 +65,13 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards5">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.buildingtype.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> All Buildings </a>
+                                <a href="{{route('admin.building.create')}}" class="nav-link" data-key="t-analytics"> All Buildings </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Building Type </a>
+                                <a href="{{route('admin.buildingtype.index')}}" class="nav-link" data-key="t-analytics"> Building Type </a>
                             </li>
                         </ul>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards6">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.unit.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-analytics"> All Units </a>
@@ -125,7 +125,10 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
+                                <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.owner.create')}}" class="nav-link" data-key="t-analytics"> All Owners </a>
                             </li>
                         </ul>
                     </div>
