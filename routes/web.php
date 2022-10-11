@@ -11,6 +11,7 @@ use App\Http\Controllers\UnitFeatureController;
 use App\Models\BuildingType;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +23,34 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::controller(HomeController::class)->group(function(){
+    Route::get("/","index");
+    Route::get("/about-us","about");
+    Route::get("/properties","properties");
+    Route::get('/propertie-details','propertie_details');
+    Route::get("/contect-us","contect");
+});
+
 // FrontEnd Routes
-Route::get('/admin',[LoginController::class, 'index'])->name('admin');
-Route::post('/login',[LoginController::class, 'store'])->name('login');
+Route::get('/', function(){
+    return view('welcome');
+});
+
+
+
+
+
+
+
+
+
+
 
 
 // Backend Routes
+Route::get('/admin',[LoginController::class, 'index'])->name('admin');
+Route::post('/login',[LoginController::class, 'store'])->name('login');
+
 Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function(){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
