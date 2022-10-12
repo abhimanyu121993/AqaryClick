@@ -58,7 +58,7 @@
 <section class="team-wrap">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-member rent-home">
                     <div class="team-member-img">
                         <img src="/front/assets/img/about/rent-1.jpg" alt="Image">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-member rent-home">
                     <div class="team-member-img">
                         <img src="/front/assets/img/about/rent-2.jpg" alt="Image">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="team-member rent-home">
                     <div class="team-member-img">
                         <img src="/front/assets/img/about/rent-3.jpg" alt="Image">

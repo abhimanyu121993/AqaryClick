@@ -499,10 +499,10 @@
                                 <textarea class="form-control " rows="5"></textarea>
                             </div>
 
-                            <div class="col-md-10">
+                            <div class="col-md-10 col-sm-10 col-10">
                                 <button type="button" class="btn btn-success cancle-btn">Cancle</button>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-2 col-2">
                                 <button type="button" class="btn btn-primary post-btn">Post</button>
                             </div>
                         </div>
