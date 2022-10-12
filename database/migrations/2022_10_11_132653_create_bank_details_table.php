@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('owner_companies', function (Blueprint $table) {
+        Schema::create('bank_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('name')->nullable();
-            $table->string('company_activity')->nullable();
-            $table->string('authorised_manager')->nullable();
+            $table->string('bank_name');
+            $table->string('account_number');
+            $table->string('ifsc');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('owner_companies');
+        Schema::dropIfExists('bank_details');
     }
 };

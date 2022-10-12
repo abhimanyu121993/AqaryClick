@@ -6,6 +6,9 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
 
     <!-- jsvectormap css -->
