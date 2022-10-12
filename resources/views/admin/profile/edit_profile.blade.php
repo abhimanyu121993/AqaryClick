@@ -82,13 +82,16 @@
                             <div class="card-body p-4">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <form action="javascript:void(0);">
+                                        <form action="{{ route('admin.userupdate',$udata->id) }}" method="POST">
+                                            @csrf
+                                            {{ Auth::user()->id }}
+                                            <input type="hidden" value="{{$udata->id }}">
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
                                                         <label for="firstnameInput" class="form-label">First
                                                             Name</label>
-                                                        <input type="text" class="form-control" id="firstnameInput"
+                                                        <input type="text" name="first_name" class="form-control" id="firstnameInput"
                                                             placeholder="Enter your firstname" value="{{$udata->first_name}}">
                                                     </div>
                                                 </div>
@@ -97,7 +100,7 @@
                                                     <div class="mb-3">
                                                         <label for="lastnameInput" class="form-label">Last
                                                             Name</label>
-                                                        <input type="text" class="form-control" id="lastnameInput"
+                                                        <input type="text" name="last_name" class="form-control" id="lastnameInput"
                                                             placeholder="Enter your lastname" value="{{$udata->last_name}}">
                                                     </div>
                                                 </div>
@@ -108,6 +111,7 @@
                                                             Number</label>
                                                         <input type="text" class="form-control"
                                                             id="phonenumberInput"
+                                                            name="phone"
                                                             placeholder="Enter your phone number"
                                                             value="{{$udata->phone}}  ">
                                                     </div>
@@ -117,9 +121,9 @@
                                                     <div class="mb-3">
                                                         <label for="emailInput" class="form-label">Email
                                                             Address</label>
-                                                        <input type="email" class="form-control" id="emailInput"
+                                                        <input type="email" disabled class="form-control" id="emailInput"
                                                             placeholder="Enter your email"
-                                                            value="{{$udata->email}}">
+                                                            value="{{Auth::user()->email}}">
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -127,7 +131,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="hstack gap-2 justify-content-end">
                                                         <button type="submit"
-                                                            class="btn btn-primary">Updates</button>
+                                                            class="btn btn-primary">Update</button>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -137,13 +141,14 @@
                                     </div>
                                     <!--end tab-pane-->
                                     <div class="tab-pane" id="changePassword" role="tabpanel">
-                                        <form action="javascript:void(0);">
+                                        <form action="{{ route('admin.uppass') }}" method="POST" >
+                                            @csrf
                                             <div class="row g-2">
                                                 <div class="col-lg-4">
                                                     <div>
                                                         <label for="oldpasswordInput" class="form-label">Old
                                                             Password*</label>
-                                                        <input type="password" class="form-control"
+                                                        <input type="password" name="current_password" class="form-control"
                                                             id="oldpasswordInput"
                                                             placeholder="Enter current password">
                                                     </div>
@@ -153,7 +158,7 @@
                                                     <div>
                                                         <label for="newpasswordInput" class="form-label">New
                                                             Password*</label>
-                                                        <input type="password" class="form-control"
+                                                        <input type="password" name="new_password" class="form-control"
                                                             id="newpasswordInput" placeholder="Enter new password">
                                                     </div>
                                                 </div>
@@ -162,7 +167,7 @@
                                                     <div>
                                                         <label for="confirmpasswordInput" class="form-label">Confirm
                                                             Password*</label>
-                                                        <input type="password" class="form-control"
+                                                        <input type="password" name="cnew_password" class="form-control"
                                                             id="confirmpasswordInput"
                                                             placeholder="Confirm password">
                                                     </div>

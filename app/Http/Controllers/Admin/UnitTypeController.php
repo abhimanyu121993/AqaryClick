@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\UnitType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class UnitTypeController extends Controller
 {
@@ -14,7 +16,8 @@ class UnitTypeController extends Controller
      */
     public function index()
     {
-        //
+        $units=UnitType::all();
+        return view('admin.unit.unit_type',compact('units'));
     }
 
     /**
@@ -35,7 +38,18 @@ class UnitTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+       $data= UnitType::create([
+            'name' => $request->name
+        ]);
+        if($data){
+        return redirect()->back()->with('success','Unit Type has been created successfully.');
+        }
+        else{
+            return redirect()->back()->with('error','Unit Type not created.');
+        }
     }
 
     /**
@@ -57,7 +71,10 @@ class UnitTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $unitedit=UnitType::find($id);
+        $units=UnitType::all();
+        return view('admin.unit.unit_type',compact('unitedit','units'));
     }
 
     /**
@@ -69,7 +86,20 @@ class UnitTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $data=UnitType::find($id)->update([
+            'name' => $request->name
+        ]);
+        if($data)
+        {
+        return redirect()->back()->with('success','Unit Type has been Updated successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Unit Type not created.');
+        }
     }
 
     /**
@@ -80,6 +110,15 @@ class UnitTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $data=UnitType::find($id);
+        if($data->delete())
+        {
+            return redirect()->back()->with('success','Data Deleted successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data not deleted.');
+        }
     }
 }

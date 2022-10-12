@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <!--end col-->
-                <div class="col">
+                <div class="col ">
                     <div class="p-2">
                         <h3 class="text-white mb-1">{{Auth::user()->first_name}}</h3>
                         <p class="text-white-75">{{ Auth::user()->roles[0]->name}}</p>
@@ -44,10 +44,10 @@
                     <div class="tab-content pt-4 text-muted">
                         <div class="tab-pane active" id="overview-tab" role="tabpanel">
                             <div class="row">
-                                <div class="col-xxl-3">
+                                <div class="col-12">
 
 
-                                    <div class="card">
+                                    <div class="card ">
                                         <div class="card-body">
                                             <h5 class="card-title mb-3">Info</h5>
                                             <div class="table-responsive">

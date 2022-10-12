@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>|| {{ config('app.name', 'AQARYCLICK') }}</title>
+  <title>{{ config('app.name', 'AQARYCLICK') }}</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com/">
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;family=Poppins:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -211,12 +211,18 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12 col-sm-12 col-lg-12 mt-3">
-              <div class="row justify-content-md-center">
-                <div class="col-md-2">
-                  <button class="btn btn-primary save-btn">Upload</button>
-                </div>
-              </div>
+            <div class="col-md-12">
+            <div class="login-btn-f">
+              <a href="">
+                Forgot your password?
+              </a>
+              <button type="submit" class="btn btn-primary">log in</button>
+            </div>
+            </div>
+
+            <div class="col-md-12 ">
+              <div class="text-center mt-70">
+            Not a member? <a href="/register">Register</a>
             </div>
           </div>
         </div>
@@ -225,26 +231,27 @@
   </div>
 
 
-  <!-- Term & Conditions -->
-  <div class="modal fade" id="termModal" tabindex="-1" aria-labelledby="termModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
 
-        <div class="modal-body term-body">
-          <h5 class="modal-title" id="termModalLabel">Term & Conditions</h5>
-          <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet, pellentesque bibendum vel amet, facilisi ac sem sem. Sem ipsum mauris, leo morbi eget morbi. Ipsum ut nullam a ullamcorper eget. Sagittis, sed adipiscing eget neque, risus dapibus. Facilisis in quam adipiscing habitant commodo maecenas. Sem amet adipiscing pellentesque egestas. In non dolor, ut faucibus fringilla. Scelerisque id tincidunt faucibus erat nunc nibh amet morbi ut. Volutpat pellentesque eu nec sociis pretium massa, arcu. Cursus at interdum viverra suspendisse sit turpis pellentesque. Ut at rutrum purus, nibh ut scelerisque in.
-            Nisl at curabitur vitae suspendisse tristique a. Phasellus quam risus consequat sit. Sed morbi laoreet eget habitasse etiam tempor. Id lobortis purus facilisis consectetur gravida pellentesque purus ultricies. Amet pellentesque dignissim auctor et, viverra sed. Dolor eget sem ut pretium. Egestas lectus adipiscing consequat etiam. Lorem neque, adipiscing phasellus gravida odio neque, eros orci. Velit pellentesque est sed eleifend pellentesque duis est tortor.
-            Tincidunt urna feugiat elementum arcu magna. Consectetur arcu scelerisque convallis tristique. Suspendisse a tincidunt a in tellus eget adipiscing enim. Habitasse eu in tortor mauris elementum massa arcu. Ipsum dui commodo ultricies adipiscing dolor consectetur ante at. Nec tempor sapien, gravida nisl in blandit pretium mi. Lectus est nec leo sociis.
+<!-- Term & Conditions -->
+<div class="modal fade" id="termModal" tabindex="-1" aria-labelledby="termModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-          <div class="term-btn row justify-content-md-center">
-            <div class="col-md-12 mb-10">
-              <button type="button" class="btn btn-secondary decline" data-bs-dismiss="modal">Decline</button>
-              <button type="button" class="btn btn-primary accept">Accept</button>
-            </div>
-          </div>
+      <div class="modal-body term-body">
+      <h5 class="modal-title" id="termModalLabel">Term & Conditions</h5>
+        <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet, pellentesque bibendum vel amet, facilisi ac sem sem. Sem ipsum mauris, leo morbi eget morbi. Ipsum ut nullam a ullamcorper eget. Sagittis, sed adipiscing eget neque, risus dapibus. Facilisis in quam adipiscing habitant commodo maecenas. Sem amet adipiscing pellentesque egestas. In non dolor, ut faucibus fringilla. Scelerisque id tincidunt faucibus erat nunc nibh amet morbi ut. Volutpat pellentesque eu nec sociis pretium massa, arcu. Cursus at interdum viverra suspendisse sit turpis pellentesque. Ut at rutrum purus, nibh ut scelerisque in.
+Nisl at curabitur vitae suspendisse tristique a. Phasellus quam risus consequat sit. Sed morbi laoreet eget habitasse etiam tempor. Id lobortis purus facilisis consectetur gravida pellentesque purus ultricies. Amet pellentesque dignissim auctor et, viverra sed. Dolor eget sem ut pretium. Egestas lectus adipiscing consequat etiam. Lorem neque, adipiscing phasellus gravida odio neque, eros orci. Velit pellentesque est sed eleifend pellentesque duis est tortor.
+Tincidunt urna feugiat elementum arcu magna. Consectetur arcu scelerisque convallis tristique. Suspendisse a tincidunt a in tellus eget adipiscing enim. Habitasse eu in tortor mauris elementum massa arcu. Ipsum dui commodo ultricies adipiscing dolor consectetur ante at. Nec tempor sapien, gravida nisl in blandit pretium mi. Lectus est nec leo sociis.
+
+      <div class="term-btn row justify-content-md-center">
+        <div class="col-md-12 mb-10">
+        <button type="button" class="btn btn-secondary decline" data-bs-dismiss="modal">Decline</button>
+        <button type="button" class="btn btn-primary accept">Accept</button>
+        </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <div class="page-wrapper">
