@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
+use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -12,6 +14,8 @@ use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UnitTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UnitFeatureController;
+use App\Http\Controllers\admin\UnitFloorController;
+use App\Http\Controllers\admin\UnitStatusController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -61,7 +65,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('/fetch-permission',[PermissionController::class,'fetchPermission'])->name('fetchPermission');
     Route::post('/assign-permission',[PermissionController::class,'assignPermission'])->name('assignPermission');
     Route::resource('buildingtype',BuildingTypeController::class);
+    Route::resource('register_building',BuildingController::class);
     Route::resource('unit-type',UnitTypeController::class);
+    Route::resource('unit-status',UnitStatusController::class);
+    Route::resource('unit-floor',UnitFloorController::class);
     Route::resource('unit-feature',UnitFeatureController::class);
     Route::get('user-profile/{id}',[UserController::class,'profile'])->name('profile');
     Route::get('edit-user-profile/{id}',[UserController::class,'editProfile'])->name('editprofile');
@@ -72,6 +79,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('unit',UnitController::class);
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
+    Route::resource('city',CityController::class);
+    Route::resource('area',AreaController::class);
 });
 
 
