@@ -9,7 +9,7 @@
                     <h4 class="card-title mb-0 flex-grow-1"> Personal Detail</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
-                        <form action="route" method="POST">
+                        <form action="{{ route('admin.customer.store') }}" method="POST" enctype="multipart/form-data">
                             {{-- @if (isset($customer))
                             @method('patch')
                         @endif --}}
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="space" class="form-label">Customer Type</label>
-                                    <select class="form-control" id="building" name="building_type">
+                                    <select class="form-control" id="customer" name="customer_type">
                                         <option value="">-----Select Customer-----</option>
                                         <option value="one">Individual</option>
                                         <option value="two">Company</option>
@@ -86,9 +86,21 @@
                             </div>
                         </div>
                         <div class="col-md-6" id="fname">
+                            <label for="country" class="form-label">Document Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="document_name" placeholder="Document name">
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="fname">
                             <label for="country" class="form-label">Document</label>
                             <div class="input-group">
                                 <input type="file" class="form-control" name="document_file" placeholder="Upload File">
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="fname">
+                            <label for="country" class="form-label">Serial Number</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="serial_number" placeholder="Upload File">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -105,7 +117,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="space" class="form-label">Company Activity</label>
-                            <select class="form-control" id="building" name="building_type">
+                            <select class="form-control" id="building" name="company_activity">
                                 <option value="">-----Select Customer-----</option>
                                 <option value="Trading_in_Computer_Software">Trading in Computer Software</option>
                                 <option value="Real_Estate_Management">Real Estate Management</option>
@@ -119,7 +131,7 @@
                     <div class="row">
                         <hr>
                         <div class="col-md-6 mb-2">
-                            <label for="country" class="form-label">Bank Details</label>
+                            <label for="country" class="form-label">Bank Name</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="bank_name" placeholder="Bank Details">
                             </div>
@@ -127,7 +139,7 @@
                         <div class="col-md-6 mb-2">
                             <label for="state" class="form-label">Account Number</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="acccount_number"
+                                <input type="text" class="form-control" name="account_number"
                                     placeholder="Company Address">
                             </div>
                         </div>
@@ -159,7 +171,7 @@
     <script>
         $(document).ready(function() {
             // alert("jhgigygyugy");
-            $("#building").change(function() {
+            $("#customer").change(function() {
                 $('#indi').hide();
                 $('#cmpname').hide();
                 $(this).find("option:selected").each(function() {

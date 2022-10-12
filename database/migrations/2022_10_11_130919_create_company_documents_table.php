@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('company_id');
             $table->string('document_name');
+            $table->string('serial_number');
             $table->string('document_exp_date');
             $table->string('document_file');
             $table->softDeletes();

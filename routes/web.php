@@ -72,6 +72,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('unit',UnitController::class);
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
+    Route::get('company-details',[CustomerController::class,'company'])->name('company');
+    Route::get('bank-details',[CustomerController::class,'bankdetail'])->name('bank');
 });
 
 

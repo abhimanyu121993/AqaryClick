@@ -28,7 +28,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $user=User::get();
+        return view('admin.customer.all_customer',compact('user'));
     }
 
     /**
@@ -39,6 +40,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -54,12 +56,15 @@ class CustomerController extends Controller
             'bank_name'=>'required',
         ]);
        $user= User::create([
-            'first_name' => $request->name,
-            'last_name' => $request->name,
-            'address' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address' => $request->address,
             'email'=>$request->email,
-            'phone' => $request->name
+            'phone' => $request->phone,
+            'customer_type'=>$request->customer_type
         ]);
+        // dd($request);
+        $logo='';
         if($request->hasFile('company_logo'))
         {
             $company='Copnamy-logo-'.time().'-'.rand(0,99).'.'.$request->company_logo->extension();
@@ -68,26 +73,32 @@ class CustomerController extends Controller
         }
         $company=OwnerCompany::create([
             'user_id'=>$user->id,
-            'company_name'=>$request->company,
+            'company_name'=>$request->company_name,
             'company_address'=>$request->company_address,
             'authorised_manager'=>$request->authorised_manager,
-            'company_logo'=>$logo
+            'company_activity'=>$request->company_activity,
+            'company_logo'=>$logo,
         ]);
         $bankdata=BankDetail::create([
             'user_id'=>$user->id,
             'company_id'=>$company->id,
-            'bank_name'=>$request->bank_detail,
-            'acccount_number'=>$request->acccount_number,
+            'bank_name'=>$request->bank_name,
+            'account_number'=>$request->account_number,
             'ifsc'=>$request->ifsc
         ]);
+        $document='';
         if($request->hasFile('document_file'))
         {
             $document='Copnamy-logo-'.time().'-'.rand(0,99).'.'.$request->document_file->extension();
-            $request->company_logo->move(public_path('company/document/'),$document);
-            $logo = 'company/document/'.$document;
+            $request->document_file->move(public_path('company/document/'),$document);
+            $document_img= 'company/document/'.$document;
         }
         $company_document=CompanyDocument::create([
-
+            'company_id'=>'1',
+            'document_file'=>$document,
+            'serial_number'=>$request->serial_number,
+            'document_exp_date'=>$request->document_exp_date,
+            'document_name'=>$request->document_name
         ]);
         if($user){
         return redirect()->back()->with('success','Customer has been created successfully.');
@@ -114,7 +125,10 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $useraccount=BankDetail::get($id);
+        return view('admin.customer.customer_bank_detail',compact('useraccount'));
+
+
     }
 
     /**
@@ -125,9 +139,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
 
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -149,5 +162,14 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function company()
+    {
+        return view('admin.customer.customer_company');
+    }
+    public function bankdetail()
+    {
+        return view('admin.customer.customer_bank_detail');
     }
 }

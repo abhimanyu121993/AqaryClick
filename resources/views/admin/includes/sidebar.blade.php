@@ -156,7 +156,8 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
+                                <a href="{{ route('admin.customer.index') }}" class="nav-link" data-key="t-analytics">Customer Registration </a>
+                                <a href="{{ route('admin.customer.create') }}" class="nav-link" data-key="t-analytics">Customer</a>
                             </li>
                         </ul>
                     </div>
