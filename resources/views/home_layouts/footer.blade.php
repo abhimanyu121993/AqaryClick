@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="footer-box-layout">
                         <div class="team-member box-footer img-thumbnail">
                             <div class="footer-text">
@@ -41,24 +41,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="footer-bottom">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12 col-md-8">
-                    <div class="copyright-text">
-                        <p>Copyright <span class="las la-copyright"></span>
-                            <script data-cfasync="false"
-                                src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-                            <script>
-                            document.write(new Date().getFullYear())
-                            </script>. All Rights Reserved By <a
-                                href="https://themeforest.net/user/hibootstrap/portfolio">Hibootstrap</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </footer>
 
 </div>

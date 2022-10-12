@@ -89,7 +89,7 @@
             <div class="col-md-12 col-sm-12 col-lg-12">
               <h4>Who You Are ? </h4>
             </div>
-            <div class="col-md-2">
+            <div class="col-12 col-md-2">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
