@@ -3954,27 +3954,27 @@ textarea:-ms-input-placeholder {
 }
 
 .hero-bg-1 {
-    background-image: url(../img/hero/hero-1.jpg)
+    background-image: url(/front/assets/img/slider/slider-1.jpg)
 }
 
 .hero-bg-2 {
-    background-image: url(../img/hero/hero-2.html)
+    background-image: url(/front/assets/img/slider/slider-2.jpg)
 }
 
 .hero-bg-3 {
-    background-image: url(../img/hero/hero-3.jpg)
+    background-image: url(/front/assets/img/slider/slider-3.jpg)
 }
 
 .hero-bg-4 {
-    background-image: url(../img/hero/hero-4.jpg)
+    background-image: url(/front/assets/img/slider/slider-4.jpg)
 }
 
 .hero-bg-5 {
-    background-image: url(../img/hero/hero-5.jpg)
+    background-image: url(/front/assets/img/slider/slider.jpg)
 }
 
 .hero-bg-6 {
-    background-image: url(../img/hero/hero-6.jpg)
+    background-image: url(/front/assets/img/slider/slider.jpg)
 }
 
 .hero-bg-7 {
@@ -4046,7 +4046,7 @@ textarea:-ms-input-placeholder {
 }
 
 .hero-wrap.style2 .hero-slider-two .hero-slider-item {
-    padding: 130px 0 150px;
+    padding: 300px 0 150px;
     position: relative
 }
 
@@ -5654,7 +5654,7 @@ textarea:-ms-input-placeholder {
 
     .about-wrap.style2 .about-img,
     .about-wrap.style2 .about-content {
-        width: 540px !important;
+        /* width: 540px !important; */
         margin: 0 auto;
         padding: 0 15px
     }

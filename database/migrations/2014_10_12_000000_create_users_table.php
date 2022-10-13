@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('password')->nullable();
             $table->string('pic')->nullable();
+            $table->string('address')->nullable();
+            $table->string('customer_type')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
