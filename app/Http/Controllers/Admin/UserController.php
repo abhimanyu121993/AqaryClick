@@ -155,11 +155,20 @@ class UserController extends Controller
             'last_name' => 'nullable',
             'phone' => 'nullable'
         ]);
+
+        $upic = Auth::user()->pic;
+        if($request->hasFile('pic'))
+        {
+            $upic='user-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+            $request->pic->move(public_path('upload/user/'),$upic);
+            $pic_name = 'upload/user/'.$upic;
+        }
              $user =User::find(Auth::user()->id)
              ->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'phone' => $request->phone
+                'phone' => $request->phone,
+                'pic'=>$upic
             ]);
             // dd($user);
             if($user)
