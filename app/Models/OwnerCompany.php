@@ -11,7 +11,7 @@ class OwnerCompany extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
-    public function owenrs()
+    public function companyDocuments()
     {
         return $this->hasMany(CompanyDocument::class,'company_id','id');
     }

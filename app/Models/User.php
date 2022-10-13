@@ -19,7 +19,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(OwnerCompany::class,'user_id','id');
     }
-    public function bank_dts()
+    public function bank_details()
     {
         return $this->hasMany(BankDetail::class,'user_id','id');
     }
