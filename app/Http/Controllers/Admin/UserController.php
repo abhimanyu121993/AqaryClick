@@ -168,13 +168,13 @@ class UserController extends Controller
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,
-                'pic'=>$upic
+                'pic'=>$pic_name
             ]);
             // dd($user);
             if($user)
             {
 
-                Session::flash('success', 'User Upade successfully');
+                Session::flash('success', 'User Upadated successfully');
                 return redirect()->back();
             }
             else
