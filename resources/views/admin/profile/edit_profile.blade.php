@@ -35,7 +35,7 @@
                                             alt="user-profile-image">
                                         <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
                                             <input id="profile-img-file-input" type="file"
-                                                class="profile-img-file-input">
+                                               name="pic" disabled class="profile-img-file-input">
                                             <label for="profile-img-file-input"
                                                 class="profile-photo-edit avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-light text-body">
@@ -82,9 +82,9 @@
                             <div class="card-body p-4">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                        <form action="{{ route('admin.userupdate',$udata->id) }}" method="POST">
+                                        <form action="{{ route('admin.userupdate',$udata->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            {{-- {{ Auth::user()->pic }} --}}
+                                            {{-- {{ $udata->pic }} --}}
                                             <input type="hidden" value="{{$udata->id }}">
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -124,6 +124,13 @@
                                                         <input type="email" disabled class="form-control" id="emailInput"
                                                             placeholder="Enter your email"
                                                             value="{{Auth::user()->email}}">
+                                                    </div>
+                                                </div> <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="emailInput" class="form-label">Update
+                                                            Picture</label>
+                                                        <input type="file" name="pic" value="{{ $udata->pic }}" class="form-control" id="emailInput"
+                                                            >
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -171,17 +178,7 @@
                                                             id="confirmpasswordInput"
                                                             placeholder="Confirm password">
                                                     </div>
-                                                </div>
-                                                <!--end col-->
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <a href="javascript:void(0);"
-                                                            class="link-primary text-decoration-underline">Forgot
-                                                            Password ?</a>
-                                                    </div>
-                                                </div>
-                                                <!--end col-->
-                                                <div class="col-lg-12">
+                                                </div>                                                <div class="col-lg-12">
                                                     <div class="text-end">
                                                         <button type="submit" class="btn btn-success">Change
                                                             Password</button>
