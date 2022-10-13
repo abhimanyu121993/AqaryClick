@@ -2,6 +2,7 @@
 @section('title', 'Register Customer')
 @section('main-content')
 <div class="row">
+    {{ $company }}
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
