@@ -45,10 +45,10 @@ class CityController extends Controller
             'name' => $request->name
         ]);
         if($data){
-        return redirect()->back()->with('success','Unit city has been created successfully.');
+        return redirect()->back()->with('success','City has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Unit city not created.');
+            return redirect()->back()->with('error','City not created.');
         }
     }
 

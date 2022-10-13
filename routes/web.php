@@ -67,6 +67,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('buildingtype',BuildingTypeController::class);
     Route::resource('register_building',BuildingController::class);
     Route::resource('unit-type',UnitTypeController::class);
+    Route::resource('unit-type',UnitTypeController::class);
     Route::resource('unit-status',UnitStatusController::class);
     Route::resource('unit-floor',UnitFloorController::class);
     Route::resource('unit-feature',UnitFeatureController::class);
@@ -79,10 +80,15 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('unit',UnitController::class);
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
+
+    Route::get('bank-details/{id}',[CustomerController::class,'showBankDetail'])->name('showBankDetail');
+    Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
+    Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
+    Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
+
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
-    Route::get('company-details',[CustomerController::class,'company'])->name('company');
-    Route::get('bank-details',[CustomerController::class,'bankdetail'])->name('bank');
+
 
 });
 
