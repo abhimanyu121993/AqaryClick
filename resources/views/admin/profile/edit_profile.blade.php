@@ -84,7 +84,7 @@
                                     <div class="tab-pane active" id="personalDetails" role="tabpanel">
                                         <form action="{{ route('admin.userupdate',$udata->id) }}" method="POST">
                                             @csrf
-                                            {{ Auth::user()->id }}
+                                            {{-- {{ Auth::user()->pic }} --}}
                                             <input type="hidden" value="{{$udata->id }}">
                                             <div class="row">
                                                 <div class="col-lg-6">
