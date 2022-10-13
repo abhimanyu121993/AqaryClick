@@ -94,6 +94,12 @@
                                 <a href="{{route('admin.unit-type.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{route('admin.unit-status.index')}}" class="nav-link" data-key="t-analytics"> Unit Status </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.unit-floor.index')}}" class="nav-link" data-key="t-analytics"> Unit Floor </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{route('admin.unit-feature.index')}}" class="nav-link" data-key="t-analytics"> Unit Feature </a>
                             </li>
                         </ul>
@@ -176,7 +182,22 @@
                         </ul>
                     </div>
                 </li>
-
+ <!-- Contract Settings Menu -->
+ <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i data-feather="settings" class="icon-dual"></i> <span data-key="t-dashboards">Settings</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards8">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.city.index')}}" class="nav-link" data-key="t-analytics"> City </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.area.index')}}" class="nav-link" data-key="t-analytics"> Area </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
