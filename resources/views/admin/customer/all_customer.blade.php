@@ -1,47 +1,38 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Owners'])
-@section('title', 'Manage Owners')
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Customers'])
+@section('title', 'Manage Customers')
 @section('main-content')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Owners</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Customer's</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <table class="table table-nowrap container">
                         <thead>
                             <tr>
-                                <th scope="col">Sr.No.</th>
+                     <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Created at</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Company</th>
+                                <th scope="col">Bank Accounts</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($customer as $building)
+                            @foreach ($user as $usr)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $building->name }}</td>
-                                    <td>{{ $building->created_at }}</td>
+                                    <td>{{ $usr->name }}</td>
+                                    <td>{{ $usr->email }}</td>
+                                    <td>{{ $usr->phone}}</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                <i class="ri-more-2-fill"></i>
-                                            </a>
-                                            @php $bid=Crypt::encrypt($building->id); @endphp
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="{{route('admin.buildingtype.edit',$bid)}}">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+                        {{-- <a href="{{ route('admin.customer.show',$usr->id) }}">View Company</a> --}}
 
-                                                <form id="delete-form-{{ $bid }}" action="{{ route('admin.buildingtype.destroy', $bid) }}"
-                                                    method="post" style="display: none;">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                </form>
-                                            </ul>
-                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{{ ('admin.customer.show'.$usr->id) }}">Show Account's</a>
                                     </td>
                             @endforeach
                             </tr>

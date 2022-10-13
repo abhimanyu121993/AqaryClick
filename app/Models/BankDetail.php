@@ -10,4 +10,5 @@ class BankDetail extends Model
 {
     use HasFactory ,SoftDeletes;
     protected $guarded = [];
+
 }

@@ -18,7 +18,7 @@
 <section class="contact-wrap mt-3">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 ">
                 <div class="section-title style1 text-center mb-40">
                     <h2>Get In Touch</h2><span></span>
                     <p>Feel free to contact us.Give us a call or Drop us a message !</p>
@@ -68,7 +68,7 @@
 <section class="team-wrap mt-3 mb-3">
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-lg-10 col-md-6 col-sm-6">
+            <div class="col-lg-10 col-md-12 col-sm-12">
                 <div class="team-member">
                     <div class="contect-form">
                         <h4>Contact Form</h4>
@@ -119,7 +119,7 @@
             </div>
         </div>
         <div class="row justify-content-md-center">
-            <div class="col-lg-12 col-md-6 col-sm-6">
+        <div class="col-lg-10 col-md-12 col-sm-12">
                 <div class="team-member">
                     <div class="company-location">
                         <div class="comp-map">

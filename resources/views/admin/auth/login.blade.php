@@ -44,7 +44,7 @@
         <!-- auth page content -->
         <div class="auth-page-content">
             <div class="container">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center mt-sm-1 mb-2 text-white-50">
                             <div>
@@ -52,20 +52,27 @@
                                     <img src="{{ asset('assets/images/logo.png') }}" alt="" height="120">
                                 </a>
                             </div>
-                            {{-- <p class="mt-3 fs-15 fw-medium">AquaryClick | Sign In</p> --}}
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- end row -->
 
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="col-md-8 col-lg-6 col-xl-5 align-text-bottom">
                         <div class="card mt-4">
 
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary">Welcome Back !</h5>
+                                    <div class="text-center mt-sm-1 mb-2 text-white-50">
+                                        <div>
+                                            <a href="#" class="d-inline-block auth-logo">
+                                                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="120">
+                                            </a>
+                                        </div>
+                                    </div>
                                     <p class="text-muted">Sign in to continue to AqaryClick</p>
+
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form action="{{ route('login') }}" method="POST">
