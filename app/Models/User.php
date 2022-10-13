@@ -15,4 +15,16 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
     protected $guarded = [];
 
+    public function companyOwner()
+    {
+        return $this->hasMany(OwnerCompany::class,'user_id','id');
+    }
+    public function bank_dts()
+    {
+        return $this->hasMany(BankDetail::class,'user_id','id');
+    }
+
+    public function getNameAttribute(){
+        return $this->first_name.' '.$this->last_name;
+    }
 }
