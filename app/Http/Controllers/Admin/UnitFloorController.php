@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Unit;
+use App\Models\UnitFloor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
-class UnitController extends Controller
+class UnitFloorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units=Unit::all();
-        return view('admin.unit.register_unit',compact('units'));
+        $units=UnitFloor::all();
+        return view('admin.unit.unit_floor',compact('units'));
     }
 
     /**
@@ -37,18 +38,19 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
+            'name' => 'required',
         ]);
-       $data= Unit::create([
+       $data= UnitFloor::create([
             'name' => $request->name
         ]);
         if($data){
-        return redirect()->back()->with('success','Unit Feature has been created successfully.');
+        return redirect()->back()->with('success','Unit Floor has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Unit Feature not created.');
-        }    }
+            return redirect()->back()->with('error','Unit Floor not created.');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -69,7 +71,11 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        //
+      
+        $id = Crypt::decrypt($id);
+        $unitfloor=UnitFloor::find($id);
+        $units=UnitFloor::all();
+        return view('admin.unit.unit_floor',compact('unitfloor','units'));
     }
 
     /**
@@ -81,7 +87,20 @@ class UnitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $data=UnitFloor::find($id)->update([
+            'name' => $request->name
+        ]);
+        if($data)
+        {
+        return redirect()->back()->with('success','Unit Floor Updated successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Unit Floor not created.');
+        }
     }
 
     /**
@@ -92,6 +111,15 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $data=UnitFloor::find($id);
+        if($data->delete())
+        {
+            return redirect()->back()->with('success','Data Deleted successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data not deleted.');
+        }
     }
 }

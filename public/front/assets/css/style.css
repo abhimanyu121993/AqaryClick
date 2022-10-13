@@ -59,6 +59,7 @@
 
 .login-img img {
   width: 30%;
+  margin: 0 auto;
 }
 
 #reload {
@@ -131,7 +132,7 @@
 
 .value-img img {
   border-radius: 310px 310px 0px 0px;
-  margin-left: 100px;
+  /* margin-left: 100px; */
 }
 
 .footer-footer li,
@@ -279,7 +280,7 @@ input {
   position: relative;
   z-index: 5;
   bottom: 150px;
-  padding: 12px 0px 12px 23px;
+  padding: 12px 0px 12px 46px;
 
 }
 
@@ -418,7 +419,7 @@ border: 1px solid #20438E;
 
 @media(max-width: 768px) {
   .pep img {
-    left: 71px !important;
+    left: 207px !important;
     bottom: 40px;
   }
 }
@@ -432,11 +433,42 @@ border: 1px solid #20438E;
 
 .name-p small {
   color: #fff;
-  z-index: 9999999;
+  z-index: 5;
   font-size: 15px;
   font-weight: 500;
 }
 
 .card-title i {
   font-size: 40px;
+}
+
+@media only screen and (min-width:768px) {
+  .search-area {
+     left:20px !important;
+  }
+}
+@media only screen  and (min-width:567px) {
+  .search-area {
+      right: 0px !important;
+  left: 54px;
+      padding: 12px 50px 12px 10px;
+  }
+}
+@media only screen and (max-width:575px) {
+  .search-area {
+      right: 0px !important;
+  left: 0px;
+  padding: 8px 20px 12px 23px;
+  }
+  .form-search input {
+  border: 1px solid #f4f4f4;
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+.form-search select {
+  border: 1px solid #f4f4f4;
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+
 }

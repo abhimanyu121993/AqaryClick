@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Unit;
+use App\Models\UnitStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
-class UnitController extends Controller
+class UnitStatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units=Unit::all();
-        return view('admin.unit.register_unit',compact('units'));
+        $units=UnitStatus::all();
+        return view('admin.unit.unit_status',compact('units'));
+        
     }
 
     /**
@@ -37,18 +39,20 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-
+       
         $request->validate([
+            'name' => 'required',
         ]);
-       $data= Unit::create([
+       $data= UnitStatus::create([
             'name' => $request->name
         ]);
         if($data){
-        return redirect()->back()->with('success','Unit Feature has been created successfully.');
+        return redirect()->back()->with('success','Unit Status has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Unit Feature not created.');
-        }    }
+            return redirect()->back()->with('error','Unit Status not created.');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -69,7 +73,10 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $unitstatus=UnitStatus::find($id);
+        $units=UnitStatus::all();
+        return view('admin.unit.unit_status',compact('unitstatus','units'));
     }
 
     /**
@@ -81,7 +88,20 @@ class UnitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $data=UnitStatus::find($id)->update([
+            'name' => $request->name
+        ]);
+        if($data)
+        {
+        return redirect()->back()->with('success','Unit Status Updated successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Unit Status not created.');
+        }
     }
 
     /**
@@ -92,6 +112,15 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $data=UnitStatus::find($id);
+        if($data->delete())
+        {
+            return redirect()->back()->with('success','Data Deleted successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data not deleted.');
+        }
     }
 }
