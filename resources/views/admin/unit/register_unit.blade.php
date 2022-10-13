@@ -10,18 +10,24 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{ isset($buildingedit) ? route('admin.buildingtype.update', $buildingedit->id) : route('admin.buildingtype.store') }}" method="POST">
+                        <form action="{{ isset($buildingedit) ? route('admin.unit.update', $buildingedit->id) : route('admin.unit.store') }}" method="POST">
                             @if (isset($buildingedit))
                             @method('patch')
                         @endif
                             @csrf
                             <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="name" class="form-label">Building Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="name" name="name" value="{{isset($buildingedit)? $buildingedit->name: '' }}" placeholder="Building Name">
-                                    </div>
-                                </div>
+                            <div class="col-md-6 mb-1">
+                    <label class="form-label" for="flag">Building Name</label>
+
+                    <select class="select2 form-select" id="flag" name='building_id' @if (isset($buildingedit)) disabled @endif required>
+                        @if (isset($buildingedit))
+                        <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->name}}</option>
+                        @endif
+                        @foreach($units as $unit)
+                        <option value="{{ $unit->id}}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="owner_name" class="form-label">Owner Name</label>
                                     <div class="input-group">

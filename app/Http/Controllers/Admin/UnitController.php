@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -14,7 +15,8 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return view('admin.unit.register_unit');
+        $units=Unit::all();
+        return view('admin.unit.register_unit',compact('units'));
     }
 
     /**
@@ -35,8 +37,18 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+
+        $request->validate([
+        ]);
+       $data= Unit::create([
+            'name' => $request->name
+        ]);
+        if($data){
+        return redirect()->back()->with('success','Unit Feature has been created successfully.');
+        }
+        else{
+            return redirect()->back()->with('error','Unit Feature not created.');
+        }    }
 
     /**
      * Display the specified resource.
