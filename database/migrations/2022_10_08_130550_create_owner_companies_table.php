@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('owner_companies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('name')->nullable();
-            $table->string('company_activity')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_logo')->nullable();
             $table->string('authorised_manager')->nullable();
+            $table->string('company_activity')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -45,17 +45,51 @@ class BuildingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
-       $data= BuildingType::create([
-            'name' => $request->name
+        $mainpic='';
+        $otherpic=[];
+        if($request->hasFile('building_pic')){
+            $mainpic='build-'.time().'-'.rand(0,99).'.'.$request->building_pic->extension();
+            $request->building_pic->move(public_path('upload/building'),$mainpic);
+        }
+
+        if($request->hasFile('building_file'))
+        {
+            foreach($request->file('building_file') as $file)
+            {
+                $name='build-'.time().'-'.rand(0,99).'.'.$file->extension();
+                $file->move(public_path('upload/building_doc'),$name);
+                $otherpic[]=$name;
+            }
+        }
+       $data= Building::create([
+            'building_code' => $request->building_code,
+            'name' => $request->building_name,
+            'owner_name'=>$request->owner_name,
+            'lessor_name'=>$request->lessor_name,
+            'person_incharge'=>$request->incharge_name,
+            'total_unit'=>$request->total_unit,
+            'building_type'=>$request->building_type,
+            'construction_date'=>$request->cdate,
+            'person_name'=>$request->person_name,
+            'person_mobile'=>$request->person_mobile,
+            'building_receive_date'=>$request->rdate,
+            'space'=>$request->space,
+            'location'=>$request->building_location,
+            'contract_no'=>$request->contract_no,
+            'country'=>$request->country,
+            'city'=>$request->city,
+            'state'=>$request->state,
+            'area'=>$request->area,
+            'pincode'=>$request->pincode,
+            'building_pic'=>$request->building_pic,
+            'file' =>$request->building_file,
+            'remark'=>$request->remark,           
         ]);
         if($data){
-        return redirect()->back()->with('success','Building Type has been created successfully.');
+        return redirect()->back()->with('success','Building Registration has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Building Type not created.');
+            return redirect()->back()->with('error','Building Registration not created.');
         }
     }
 

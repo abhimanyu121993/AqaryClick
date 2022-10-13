@@ -10,4 +10,9 @@ class CompanyDocument extends Model
 {
     use HasFactory ,SoftDeletes;
     protected $guarded = [];
+
+    public function ownerdetail()
+    {
+        return $this->belongsTo(OwnerCompany::class,'company_id','id');
+    }
 }
