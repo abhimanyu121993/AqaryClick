@@ -125,7 +125,10 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $useraccount=BankDetail::get($id);
+        // dd($id);
+        
+        $useraccount=BankDetail::find($id);
+        // dd($useraccount);
         return view('admin.customer.customer_bank_detail',compact('useraccount'));
 
 
@@ -166,7 +169,8 @@ class CustomerController extends Controller
 
     public function company()
     {
-        return view('admin.customer.customer_company');
+        $company=OwnerCompany::get();
+        return view('admin.customer.customer_company',compact('company'));
     }
     public function bankdetail()
     {

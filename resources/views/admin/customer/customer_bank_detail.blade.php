@@ -1,8 +1,7 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Owners'])
 @section('title', 'Manage Owners')
 @section('main-content')
-{{-- {{ $useraccount }} --}}
-
+{{ $useraccount }}
 
 <div class="row">
     <div class="col-lg-12">

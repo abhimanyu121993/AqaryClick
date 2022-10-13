@@ -1,5 +1,5 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Owners'])
-@section('title', 'Manage Owners')
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Customers'])
+@section('title', 'Manage Customers')
 @section('main-content')
 
     <div class="row">
@@ -28,11 +28,11 @@
                                     <td>{{ $usr->email }}</td>
                                     <td>{{ $usr->phone}}</td>
                                     <td>
-                        <a href="{{ route('admin.company') }}">View Company</a>
+                        {{-- <a href="{{ route('admin.customer.show',$usr->id) }}">View Company</a> --}}
 
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.bank')}}">Show Account's</a>
+                                        <a href="{{ ('admin.customer.show'.$usr->id) }}">Show Account's</a>
                                     </td>
                             @endforeach
                             </tr>
