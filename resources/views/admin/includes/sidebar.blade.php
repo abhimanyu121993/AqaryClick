@@ -88,7 +88,7 @@
                                 <a href="{{route('admin.unit.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> All Units </a>
+                                <a href="{{route('admin.unit.create')}}" class="nav-link" data-key="t-analytics"> All Units </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.unit-type.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
@@ -194,6 +194,9 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.area.index')}}" class="nav-link" data-key="t-analytics"> Area </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.nationality.index')}}" class="nav-link" data-key="t-analytics"> Nationality </a>
                             </li>
                         </ul>
                     </div>

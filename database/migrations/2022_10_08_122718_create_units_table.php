@@ -15,6 +15,23 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->string('building_name')->nullable();
+            $table->string('unit_no')->nullable();
+            $table->string('unit_type')->nullable();
+            $table->string('unit_status')->nullable();
+            $table->string('unit_floor')->nullable();
+            $table->string('unit_size')->nullable();
+            $table->string('unit_feature')->nullable();
+            $table->string('electric_no')->nullable();
+            $table->string('water_no')->nullable();
+            $table->string('intial_rent')->nullable();
+            $table->string('actual_rent')->nullable();
+            $table->string('unit_desc')->nullable();
+            $table->string('unit_ref')->nullable();
+            $table->string('revenue')->nullable();
+            $table->json('attachment')->default(json_encode([]));
+            $table->text('remark')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

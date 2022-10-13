@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BuildingTypeController;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UnitController;
@@ -88,6 +89,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
+    Route::resource('nationality',NationalityController::class);
+
 
 
 });
