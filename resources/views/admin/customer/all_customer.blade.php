@@ -28,11 +28,10 @@
                                     <td>{{ $usr->email }}</td>
                                     <td>{{ $usr->phone}}</td>
                                     <td>
-                        {{-- <a href="{{ route('admin.customer.show',$usr->id) }}">View Company</a> --}}
-
+                                        <a href="{{ route('admin.companyOwnerDetail', $usr->id) }}">Show Company</a>
                                     </td>
                                     <td>
-                                        <a href="{{ ('admin.customer.show'.$usr->id) }}">Show Account's</a>
+                                        <a href="{{ route('admin.showBankDetail', $usr->id) }}">Show Account's</a>
                                     </td>
                             @endforeach
                             </tr>

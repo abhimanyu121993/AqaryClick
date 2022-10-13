@@ -94,7 +94,7 @@ class CustomerController extends Controller
             $document_img= 'company/document/'.$document;
         }
         $company_document=CompanyDocument::create([
-            'company_id'=>'1',
+            'company_id'=>$company->id,
             'document_file'=>$document,
             'serial_number'=>$request->serial_number,
             'document_exp_date'=>$request->document_exp_date,
@@ -125,13 +125,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        // dd($id);
-        
-        $useraccount=BankDetail::find($id);
-        // dd($useraccount);
-        return view('admin.customer.customer_bank_detail',compact('useraccount'));
-
-
+        //
     }
 
     /**
@@ -167,13 +161,32 @@ class CustomerController extends Controller
         //
     }
 
-    public function company()
+    public function companyOwnerDetail($id)
     {
-        $company=OwnerCompany::get();
-        return view('admin.customer.customer_company',compact('company'));
+        $company_details=User::find($id);
+        return view('admin.customer.customer_company',compact('company_details'));
     }
     public function bankdetail()
     {
         return view('admin.customer.customer_bank_detail');
+    }
+
+    public function showBankDetail($id)
+    {
+        $bank_details=User::find($id);
+        return view('admin.customer.customer_bank_detail',compact('bank_details'));
+    }
+
+    public function usercompanydelete($id)
+    {
+// dd($id);
+        $companydel=OwnerCompany::find($id)->delete();
+        return redirect()->back();
+    }
+    public function userbankdelete($id)
+    {
+// dd($id);
+        $companydel=BankDetail::find($id)->delete();
+        return redirect()->back();
     }
 }
