@@ -37,8 +37,15 @@
                                         <input type="text" class="form-control" id="lessor_name" name="unit_no" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit No">
                                     </div>
                                 </div>
+                               
                                 </div>
                             <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-6">
+                                    <label for="unit_code" class="form-label">Unit code </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="unit_code" name="unit_code" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit No">
+                                    </div>
+                                </div>
                             <div class="col-md-6 mb-1">
                     <label class="form-label" for="flag">Unit Type</label>
 
@@ -63,9 +70,7 @@
                         @endforeach
                     </select>
                 </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                            <div class="col-md-6 mb-1">
+                <div class="col-md-6 mb-1">
                     <label class="form-label" for="flag">Unit Floor</label>
 
                     <select class="select2 form-select" id="flag" name='unit_floor' @if (isset($buildingedit)) disabled @endif required>
@@ -77,15 +82,16 @@
                         @endforeach
                     </select>
                 </div>
+                            </div>
+                            <div class="row gy-4 mb-3">
+                      
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="building_location" class="form-label">Unit Size<sup class="text-danger"> *(in square meter)</sup></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="unit_size" name="unit_size" value="{{isset($buildingedit)? $buildingedit->unit_size: '' }}" placeholder="Enter Unit Size">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                            <div class="col-md-6 mb-1">
+                                <div class="col-md-6 mb-1">
                     <label class="form-label" for="flag">Unit Feature</label>
 
                     <select class="select2 form-select" id="flag" name='unit_feature' @if (isset($buildingedit)) disabled @endif required>
@@ -97,8 +103,8 @@
                         @endforeach
                     </select>
                 </div>
-                               
                             </div>
+                            
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="contract_no" class="form-label">Electric No</label>

@@ -63,6 +63,7 @@ class UnitController extends Controller
        $data= Unit::create([
             'building_name' => $request->building_name,
             'unit_no'=>$request->unit_no,
+            'unit_code'=>$request->unit_code,
             'unit_type'=>$request->unit_type,
             'unit_size'=>$request->unit_size,
             'unit_status'=>$request->unit_status,
@@ -142,6 +143,7 @@ class UnitController extends Controller
        $data= Unit::find($id)->update([
             'building_name' => $request->building_name,
             'unit_no'=>$request->unit_no,
+            'unit_code'=>$request->unit_code,
             'unit_type'=>$request->unit_type,
             'unit_size'=>$request->unit_size,
             'unit_status'=>$request->unit_status,

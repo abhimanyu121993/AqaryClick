@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
 use App\Http\Controllers\admin\CityController;
+use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\NationalityController;
@@ -81,7 +82,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('unit',UnitController::class);
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
-
+    Route::resource('contract',ContractController::class);
+    
     Route::get('bank-details/{id}',[CustomerController::class,'showBankDetail'])->name('showBankDetail');
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');

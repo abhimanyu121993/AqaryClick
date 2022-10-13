@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('building_name')->nullable();
             $table->string('unit_no')->nullable();
+            $table->string('unit_code')->nullable();
             $table->string('unit_type')->nullable();
             $table->string('unit_status')->nullable();
             $table->string('unit_floor')->nullable();
