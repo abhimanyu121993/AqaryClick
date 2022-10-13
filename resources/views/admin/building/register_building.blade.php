@@ -15,6 +15,9 @@
                             @method('patch')
                         @endif
                             @csrf
+                            @if ($errors->any())
+                         <div class="alert alert-danger alert-dismissible">{{ $errors }}</div>
+                    @endif
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="name" class="form-label">Building Code</label>
@@ -27,21 +30,16 @@
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="building_cdate" name="cdate" value="{{isset($buildingedit)? $buildingedit->cdate: '' }}" placeholder="12-12-2022">
                                     </div>
-                                </div><div class="col-xxl-3 col-md-6">
-                                    <label for="name" class="form-label">Building Recieve  Date</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" id="building_rdate" name="rdate" value="{{isset($buildingedit)? $buildingedit->cdate: '' }}" placeholder="12-12-2022">
-                                    </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-6">
+                                                              
+                            </div>
+                            <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-6">
                                     <label for="name" class="form-label">Building Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="name" name="building_name" value="{{isset($buildingedit)? $buildingedit->building_name: '' }}" placeholder="Building Name">
                                     </div>
                                 </div>
-                                
-                            </div>
-                            <div class="row gy-4 mb-3">
                             <div class="col-xxl-3 col-md-6">
                                     <label for="owner_name" class="form-label">Owner Name</label>
                                     <div class="input-group">
@@ -54,20 +52,29 @@
                                         <input type="name" class="form-control" id="lessor_name" name="lessor_name" value="{{isset($buildingedit)? $buildingedit->lessor_name: '' }}" placeholder="Lessor's Name">
                                     </div>
                                 </div>
-                              
-                            </div>
-                            <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="space" class="form-label">Building Size <sup class="text-danger">(In Sq.Meter)</sup></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="space" name="space" value="{{isset($buildingedit)? $buildingedit->space: '' }}" placeholder="Building Area (Sq.Meter)">
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="row gy-4 mb-3">
+                                
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="building_location" class="form-label">Building Location Link</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="building_location" name="building_location" value="{{isset($buildingedit)? $buildingedit->building_location: '' }}" placeholder="Google Map Link">
                                     </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-6">
+                                    <label for="space" class="form-label">Building Status</label>
+                                    <select class="form-control" id="building_type" name="status">
+                                        <option value="">--Select Builiding Status--</option>
+                                        <option value="">Old</option>
+                                        <option value="">New</option>                                      
+                                    </select>
                                 </div>
                             </div>
                             <div class="row gy-4 mb-3">
@@ -81,17 +88,7 @@
                                     </select>
                                 </div>
                                 
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="space" class="form-label">Building Status</label>
-                                    <select class="form-control" id="building_type" name="status">
-                                        <option value="">--Select Builiding Status--</option>
-                                        <option value="">Old</option>
-                                        <option value="">New</option>
-
-                                       
-                                    </select>
-                                </div>
-                                <div class="col-xxl-3 col-md-6">
+                                     <div class="col-xxl-3 col-md-6">
                                     <label for="space" class="form-label">Status</label>
                                     <select class="form-control" id="building_type" name="building_type">
                                         <option value="">--Select Status--</option>
@@ -180,6 +177,12 @@
                                     <label for="state" class="form-label">Mobile No.</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="mobile" name="person_mobile" value="{{isset($buildingedit)? $buildingedit->person_mobile: '' }}" placeholder="Enter mobile">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-6">
+                                    <label for="name" class="form-label">Building Recieve  Date</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="building_rdate" name="rdate" value="{{isset($buildingedit)? $buildingedit->cdate: '' }}" placeholder="12-12-2022">
                                     </div>
                                 </div>
                             </div>

@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('area')->nullable();
             $table->string('pincode')->nullable();
             $table->string('building_pic')->nullable();
-            $table->string('file')->nullable();
+            $table->json('file')->default(json_encode([]));
             $table->string('remark')->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -67,6 +67,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('buildingtype',BuildingTypeController::class);
     Route::resource('register_building',BuildingController::class);
     Route::resource('unit-type',UnitTypeController::class);
+    Route::resource('unit-type',UnitTypeController::class);
     Route::resource('unit-status',UnitStatusController::class);
     Route::resource('unit-floor',UnitFloorController::class);
     Route::resource('unit-feature',UnitFeatureController::class);
