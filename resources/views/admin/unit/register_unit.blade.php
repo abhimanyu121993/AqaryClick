@@ -157,7 +157,7 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="building_pic" class="form-label">Attachment</label>
                                     <div class="input-group">
-                                        <input type="file" class="form-control" id="file" name="file">
+                                        <input type="file" class="form-control" id="file" name="attachment" multiple>
                                     </div>
                                 </div>
                             </div>

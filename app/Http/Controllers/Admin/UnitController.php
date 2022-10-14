@@ -51,12 +51,12 @@ class UnitController extends Controller
         $request->validate([
         ]);
         $otherpic=[];
-        if($request->hasFile('file'))
+        if($request->hasFile('attachment'))
         {
-            foreach($request->file('file') as $file)
+            foreach($request->file('attachment') as $file)
             {
                 $name='unit-'.time().'-'.rand(0,99).'.'.$file->extension();
-                $file->move(public_path('upload/unit'),$name);
+                $file->move(public_path('upload/unit_doc'),$name);
                 $otherpic[]=$name;
             }
         }

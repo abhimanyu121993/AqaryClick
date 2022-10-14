@@ -17,7 +17,7 @@
                             @csrf
                             <div class="row gy-4">
                             <div class="col-md-6 mb-1">
-                    <label class="form-label" for="flag">Select Type</label>
+                    <label class="form-label" for="flag">Select City</label>
 
                     <select class="select2 form-select" id="flag" name='city_id' @if (isset($area)) disabled @endif required>
                         @if (isset($area))
