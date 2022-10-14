@@ -192,6 +192,9 @@
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
                         <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                                <a href="{{route('admin.staff.index')}}" class="nav-link" data-key="t-analytics"> Staff </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.city.index')}}" class="nav-link" data-key="t-analytics"> City </a>
                             </li>
@@ -201,6 +204,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.nationality.index')}}" class="nav-link" data-key="t-analytics"> Nationality </a>
                             </li>
+                           
                         </ul>
                     </div>
                 </li>
