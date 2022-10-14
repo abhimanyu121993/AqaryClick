@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\admin\StaffController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UnitTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UnitFeatureController;
@@ -89,13 +90,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
+
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::resource('staff',StaffController::class);
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
-
-
+    Route::resource('tenant',TenantController::class);
 
 });
 

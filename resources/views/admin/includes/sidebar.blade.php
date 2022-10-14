@@ -114,10 +114,10 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{ route('admin.tenant.index') }}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> All Tenants </a>
+                                <a href="{{ route('admin.tenant.create') }}" class="nav-link" data-key="t-analytics"> All Tenants </a>
                             </li>
                         </ul>
                     </div>
