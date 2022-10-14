@@ -40,6 +40,13 @@
                                             placeholder="Phone Number">
                                     </div>
                                 </div>
+                                <div class=" col-md-6">
+                                    <label for="incharge_name" class="form-label">Customer Code</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_code"
+                                            placeholder="Customer Code">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <label for="remark" class="form-label">Address</label>
                                     <textarea class="form-control" name="address">
@@ -49,8 +56,8 @@
                                     <label for="space" class="form-label">Customer Type</label>
                                     <select class="form-control" id="customer" name="customer_type">
                                         <option value="">-----Select Customer-----</option>
-                                        <option value="one">Individual</option>
-                                        <option value="two">Company</option>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Company">Company</option>
                                     </select>
                                 </div>
                             </div>
@@ -177,9 +184,9 @@
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     // alert(optionValue);
-                    if (optionValue == 'one') {
+                    if (optionValue == 'Individual') {
                         $('#indi').show();
-                    } else if (optionValue == 'two') {
+                    } else if (optionValue == 'Company') {
                         $('#cmpname').show();
                     }
                 });

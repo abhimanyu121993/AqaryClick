@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('pic')->nullable();
             $table->string('address')->nullable();
+            $table->string ('customer_code')->nullable();
             $table->string('customer_type')->nullable();
             $table->rememberToken();
             $table->softDeletes();
