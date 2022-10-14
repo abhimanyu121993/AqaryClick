@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Unit extends Model
+class Tenant extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $guarded=[];
+    use HasFactory ,SoftDeletes;
+    protected $guarded = [];
 }

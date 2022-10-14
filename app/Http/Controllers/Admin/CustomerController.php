@@ -41,26 +41,28 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'address' => 'required',
-            'email'=>'required',
-            'phone' => 'required',
-            'bank_name'=>'required',
-            'account_number'=>'required',
-            'ifsc'=>'required',
-            'company_name'=>'required',
-            'company_add'=>'required',
-            'person'=>'required',
-            'bank_name'=>'required',
-        ]);
+        // $request->validate([
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'address' => 'required',
+        //     'email'=>'required',
+        //     'phone' => 'required',
+        //     'bank_name'=>'required',
+        //     'account_number'=>'required',
+        //     'ifsc'=>'required',
+        //     'company_name'=>'required',
+        //     'company_add'=>'required',
+        //     'person'=>'required',
+        //     'customer_code'=>'required',
+        //     'bank_name'=>'required',
+        // ]);
        $user= User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'address' => $request->address,
             'email'=>$request->email,
             'phone' => $request->phone,
+            'customer_code' => $request->customer_code,
             'customer_type'=>$request->customer_type
         ]);
         // dd($request);

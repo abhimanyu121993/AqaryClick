@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
 use App\Models\Building;
 use App\Models\BuildingStatus;
 use App\Models\BuildingType;
+use App\Models\City;
+use App\Models\Nationality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
@@ -22,7 +25,10 @@ class BuildingController extends Controller
         $buildings=Building::all();
         $building_types=BuildingType::all();
         $building_statuses=BuildingStatus::all();
-        return view('admin.building.register_building',compact('buildings', 'building_types', 'building_statuses'));
+        $cityDetail=City::all();
+        $countryDetail=Nationality::all();
+        $zoneDetail=Area::all();
+        return view('admin.building.register_building',compact('buildings', 'building_types', 'building_statuses','cityDetail','countryDetail','zoneDetail'));
     }
 
     /**
@@ -75,7 +81,24 @@ class BuildingController extends Controller
             'total_unit'=>$request->total_unit,
             'building_type'=>$request->building_type,
             'construction_date'=>$request->cdate,
-            'person_name'=>$request->person_name,
+            'ownership_type'=>$request->ownership_type,
+            'ownership_no'=>$request->ownership_no,
+            'contract_exp'=>$request->contract_exp,
+            'person_job'=>$request->person_job,
+            'building_no'=>$request->building_no,
+            'building_age'=>$request->building_age,
+            'land_size_foot'=>$request->land_size_foot,
+            'price_foot'=>$request->price_foot,
+            'total_land'=>$request->total_land,
+            'landsize_meter'=>$request->landsize_meter,
+            'cost_building'=>$request->cost_building,
+            'building_value'=>$request->building_value,
+            'monthly_income'=>$request->monthly_income,
+            'annual_income'=>$request->annual_income,
+            'payback'=>$request->payback,
+            'property_vlaue'=>$request->property_vlaue,
+            'zone_no'=>$request->zone_no,
+            'street_no'=>$request->street_no,
             'person_mobile'=>$request->person_mobile,
             'building_receive_date'=>$request->rdate,
             'space'=>$request->space,
@@ -167,9 +190,26 @@ class BuildingController extends Controller
             'lessor_name'=>$request->lessor_name,
             'person_incharge'=>$request->incharge_name,
             'total_unit'=>$request->total_unit,
+            'building_no'=>$request->building_no,
+            'land_size_foot'=>$request->land_size_foot,
+            'price_foot'=>$request->price_foot,
+            'total_land'=>$request->total_land,
+            'landsize_meter'=>$request->landsize_meter,
+            'cost_building'=>$request->cost_building,
+            'building_value'=>$request->building_value,
+            'monthly_income'=>$request->monthly_income,
+            'annual_income'=>$request->annual_income,
+            'payback'=>$request->payback,
+            'ownership_type'=>$request->ownership_type,
+            'ownership_no'=>$request->ownership_no,
+            'contract_exp'=>$request->contract_exp,
+            'property_vlaue'=>$request->property_vlaue,
+            'zone_no'=>$request->zone_no,
             'building_type'=>$request->building_type,
             'construction_date'=>$request->cdate,
-            'person_name'=>$request->person_name,
+            'person_job'=>$request->person_job,
+            'street_no'=>$request->street_no,
+            'building_age'=>$request->building_age,
             'person_mobile'=>$request->person_mobile,
             'building_receive_date'=>$request->rdate,
             'space'=>$request->space,
@@ -211,4 +251,14 @@ class BuildingController extends Controller
             return redirect()->back()->with('error','Data not deleted.');
         }
     }
+
+public function fetchZone($city_id){
+
+$res=Area::where('city_id',$city_id)->get();
+$html='';
+foreach($res as $r){
+    $html .='<option value="'.$r->name.'">'.$r->name.'</option>';
+}
+return response()->json($html);
+}
 }

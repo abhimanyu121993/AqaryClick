@@ -6,11 +6,15 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
 use App\Http\Controllers\admin\CityController;
+use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\admin\StaffController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UnitTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UnitFeatureController;
@@ -80,15 +84,19 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('unit',UnitController::class);
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
-
+    Route::resource('contract',ContractController::class);
+    
     Route::get('bank-details/{id}',[CustomerController::class,'showBankDetail'])->name('showBankDetail');
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
 
+    Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
+    Route::resource('staff',StaffController::class);
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
-
+    Route::resource('nationality',NationalityController::class);
+    Route::resource('tenant',TenantController::class);
 
 });
 

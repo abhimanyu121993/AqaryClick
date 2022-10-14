@@ -88,7 +88,7 @@
                                 <a href="{{route('admin.unit.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> All Units </a>
+                                <a href="{{route('admin.unit.create')}}" class="nav-link" data-key="t-analytics"> All Units </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.unit-type.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
@@ -114,10 +114,10 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{ route('admin.tenant.index') }}" class="nav-link" data-key="t-analytics"> Register </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> All Tenants </a>
+                                <a href="{{ route('admin.tenant.create') }}" class="nav-link" data-key="t-analytics"> All Tenants </a>
                             </li>
                         </ul>
                     </div>
@@ -177,6 +177,9 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
+                                <a href="{{route('admin.contract.index')}}" class="nav-link" data-key="t-analytics">Contract Registration</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li>
                         </ul>
@@ -189,12 +192,19 @@
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
                         <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                                <a href="{{route('admin.staff.index')}}" class="nav-link" data-key="t-analytics"> Staff </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.city.index')}}" class="nav-link" data-key="t-analytics"> City </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.area.index')}}" class="nav-link" data-key="t-analytics"> Area </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.nationality.index')}}" class="nav-link" data-key="t-analytics"> Nationality </a>
+                            </li>
+                           
                         </ul>
                     </div>
                 </li>

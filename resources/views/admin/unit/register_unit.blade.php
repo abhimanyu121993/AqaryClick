@@ -6,144 +6,166 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($buildingedit)? 'Update Unit' : 'Register Register' }}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($buildingedit)? 'Update Unit' : 'Unit Register' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{ isset($buildingedit) ? route('admin.unit.update', $buildingedit->id) : route('admin.unit.store') }}" method="POST">
+                        <form action="{{ isset($buildingedit) ? route('admin.unit.update', $buildingedit->id) : route('admin.unit.store') }}" method="POST" enctype="multipart/form-data">
                             @if (isset($buildingedit))
                             @method('patch')
                         @endif
                             @csrf
+                            @if ($errors->any())
+                         <div class="alert alert-danger alert-dismissible">{{ $errors }}</div>
+                    @endif
                             <div class="row gy-4 mb-3">
                             <div class="col-md-6 mb-1">
                     <label class="form-label" for="flag">Building Name</label>
 
-                    <select class="select2 form-select" id="flag" name='building_id' @if (isset($buildingedit)) disabled @endif required>
+                    <select class="select2 form-select" id="flag" name='building_name' @if (isset($buildingedit)) disabled @endif required>
                         @if (isset($buildingedit))
-                        <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->name}}</option>
+                        <option value="{{$buildingedit->name }}" selected>{{ $buildingedit->building_name}}</option>
                         @endif
                         @foreach($units as $unit)
+                        <option value="{{ $unit->name}}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-xxl-3 col-md-6">
+                                    <label for="lessor_name" class="form-label">Unit No </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="lessor_name" name="unit_no" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit No">
+                                    </div>
+                                </div>
+                               
+                                </div>
+                            <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-6">
+                                    <label for="unit_code" class="form-label">Unit code </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="unit_code" name="unit_code" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit No">
+                                    </div>
+                                </div>
+                            <div class="col-md-6 mb-1">
+                    <label class="form-label" for="flag">Unit Type</label>
+
+                    <select class="select2 form-select" id="flag" name='unit_type' @if (isset($buildingedit)) disabled @endif required>
+                        @if (isset($buildingedit))
+                        <option value="{{$buildingedit->name }}" selected>{{ $buildingedit->unit_type}}</option>
+                        @endif
+                        @foreach($units2 as $unit)
+                        <option value="{{ $unit->name}}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6 mb-1">
+                    <label class="form-label" for="flag">Unit Status</label>
+
+                    <select class="select2 form-select" id="flag" name='unit_status' @if (isset($buildingedit)) disabled @endif required>
+                        @if (isset($buildingedit))
+                        <option value="{{$buildingedit->name }}" selected>{{ $buildingedit->unit_status}}</option>
+                        @endif
+                        @foreach($units3 as $unit)
+                        <option value="{{ $unit->name}}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6 mb-1">
+                    <label class="form-label" for="flag">Unit Floor</label>
+
+                    <select class="select2 form-select" id="flag" name='unit_floor' @if (isset($buildingedit)) disabled @endif required>
+                        @if (isset($buildingedit))
+                        <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->unit_floor}}</option>
+                        @endif
+                        @foreach($units4 as $unit)
+                        <option value="{{ $unit->name}}">{{ $unit->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                            </div>
+                            <div class="row gy-4 mb-3">
+                      
+                                <div class="col-xxl-3 col-md-6">
+                                    <label for="building_location" class="form-label">Unit Size<sup class="text-danger"> *(in square meter)</sup></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="unit_size" name="unit_size" value="{{isset($buildingedit)? $buildingedit->unit_size: '' }}" placeholder="Enter Unit Size">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                    <label class="form-label" for="flag">Unit Feature</label>
+
+                    <select class="select2 form-select" id="flag" name='unit_feature' @if (isset($buildingedit)) disabled @endif required>
+                        @if (isset($buildingedit))
+                        <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->unit_feature}}</option>
+                        @endif
+                        @foreach($units5 as $unit)
                         <option value="{{ $unit->id}}">{{ $unit->name }}</option>
                         @endforeach
                     </select>
                 </div>
+                            </div>
+                            
+                            <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="owner_name" class="form-label">Owner Name</label>
+                                    <label for="contract_no" class="form-label">Electric No</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="owner_name" name="owner_name" value="{{isset($buildingedit)? $buildingedit->owner_name: '' }}" placeholder="Owner Name">
+                                        <input type="text" class="form-control" id="electric" name="electric_no" value="{{isset($buildingedit)? $buildingedit->electric_no: '' }}" placeholder="Enter electric Number">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-6">
+                                    <label for="pincode" class="form-label">Water</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="water" name="water_no" value="{{isset($buildingedit)? $buildingedit->water_no: '' }}" placeholder="Enter water no">
                                     </div>
                                 </div>
                             </div>
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="lessor_name" class="form-label">Lessor's Name</label>
+                                    <label for="country" class="form-label">Intial Rent</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="lessor_name" name="lessor_name" value="{{isset($buildingedit)? $buildingedit->lessor_name: '' }}" placeholder="Lessor's Name">
+                                        <input type="text" class="form-control" id="intial_rent" name="intial_rent" value="{{isset($buildingedit)? $buildingedit->intial_rent: '' }}" placeholder="Enter Intial Rent">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="incharge_name" class="form-label">Person In-Charge</label>
+                                    <label for="state" class="form-label">Actual Rent</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="incharge_name" name="incharge_name" value="{{isset($buildingedit)? $buildingedit->incharge_name: '' }}" placeholder="Person In-Charge">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="space" class="form-label">Building Area <sup>(In Sq.Meter)</sup></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="space" name="space" value="{{isset($buildingedit)? $buildingedit->space: '' }}" placeholder="Building Area (Sq.Meter)">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="building_location" class="form-label">Building Location Link</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="building_location" name="building_location" value="{{isset($buildingedit)? $buildingedit->building_location: '' }}" placeholder="Google Map Link">
+                                        <input type="text" class="form-control" id="actual_rent" name="actual_rent" value="{{isset($buildingedit)? $buildingedit->actual_rent: '' }}" placeholder="Enter Actual Rent">
                                     </div>
                                 </div>
                             </div>
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="space" class="form-label">Building Type</label>
-                                    <select class="form-control" id="building_type" name="building_type">
-                                        <option value="">--Select Builidng Type--</option>
-                                        {{-- @foreach ($building_types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                        @endforeach --}}
-                                    </select>
-                                </div>
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="space" class="form-label">Building Status</label>
-                                    <select class="form-control" id="building_type" name="building_type">
-                                        <option value="">--Select Builiding Status--</option>
-                                        {{-- @foreach ($building_statuses as $status)
-                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
-                                        @endforeach --}}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="contract_no" class="form-label">Contract No</label>
+                                    <label for="desc" class="form-label">Unit Discription</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="contract_no" name="contract_no" value="{{isset($buildingedit)? $buildingedit->contract_no: '' }}" placeholder="contract Number">
+                                        <input type="text" class="form-control" id="desc" name="unit_desc" value="{{isset($buildingedit)? $buildingedit->unit_desc: '' }}" placeholder="Enter Description">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="pincode" class="form-label">Pincode</label>
+                                    <label for="lessor_name" class="form-label">Unit Ref</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="pincode" name="pincode" value="{{isset($buildingedit)? $buildingedit->pincode: '' }}" placeholder="Pincode">
+                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($buildingedit)? $buildingedit->unit_ref: '' }}" placeholder="Enter Unit ref">
                                     </div>
                                 </div>
                             </div>
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="country" class="form-label">Country</label>
+                                    <label for="revenue" class="form-label">Revenue</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="country" name="country" value="{{isset($buildingedit)? $buildingedit->country: '' }}" placeholder="Country">
+                                        <input type="text" class="form-control" id="revenue" name="revenue" value="{{isset($buildingedit)? $buildingedit->revenue: '' }}" placeholder="Enter revenue">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="state" class="form-label">State</label>
+                                    <label for="building_pic" class="form-label">Attachment</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="state" name="state" value="{{isset($buildingedit)? $buildingedit->state: '' }}" placeholder="State">
+                                        <input type="file" class="form-control" id="file" name="attachment" multiple>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="city" class="form-label">City</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="city" name="city" value="{{isset($buildingedit)? $buildingedit->city: '' }}" placeholder="City">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="area" class="form-label">Area</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="area" name="area" value="{{isset($buildingedit)? $buildingedit->area: '' }}" placeholder="Area">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="building_pic" class="form-label">Building Photo</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="building_pic" name="building_pic">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="building_file" class="form-label">Building File</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="building_file" name="building_file" multiple>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
+                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-12">
                                     <label for="remark" class="form-label">Remark</label>
                                     <textarea class="form-control" name="remark">
-
+                                    {{isset($buildingedit)? $buildingedit->revenue: '' }}
                                     </textarea>
                                 </div>
                             </div>
