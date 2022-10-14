@@ -174,7 +174,7 @@ class UserController extends Controller
             if($user)
             {
 
-                Session::flash('success', 'User Upadated successfully');
+                Session::flash('success', 'User Upadated  successfully');
                 return redirect()->back();
             }
             else
