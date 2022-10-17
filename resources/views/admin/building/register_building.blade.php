@@ -69,7 +69,7 @@
                         </div>
                         <div class="row gy-4 mb-3">
                             <div class="col-xxl-3 col-md-6">
-                                <label for="space" class="form-label">Ownership</label>
+                                <label for="space" class="form-label">Ownership Type</label>
                                 <select class="form-control select2 form-select" id="flag" name="ownership_type" required>
                                 <option value="" selected>--Select Ownership--</option>   
                                 <option value="title_deed">Title Deed</option>
