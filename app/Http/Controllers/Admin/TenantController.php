@@ -48,6 +48,8 @@ class TenantController extends Controller
                 'email'=>'nullable',
                 'post_office'=>'nullable',
                 'address'=>'nullable',
+                'account_number'=>'nullable',
+
                 'tenant_status'=>'nullable',
                 'document_name'=>'nullable',
                 'total_unit'=>'nullable',

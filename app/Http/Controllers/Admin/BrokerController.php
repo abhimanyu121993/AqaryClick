@@ -38,17 +38,17 @@ class BrokerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       $request->validate([
             'name' => 'required',
         ]);
        $data= Broker::create([
             'name' => $request->name
         ]);
         if($data){
-        return redirect()->back()->with('success','Broker has been created successfully.');
+        return redirect()->back()->with('success','Agent has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Broker not created.');
+            return redirect()->back()->with('error','Agent not created.');
         }
     }
 

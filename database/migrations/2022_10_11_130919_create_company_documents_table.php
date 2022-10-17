@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('company_documents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
-            $table->string('document_name');
-            $table->string('serial_number');
-            $table->string('document_exp_date');
-            $table->string('document_file');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->string('document_name')->nullable();
+            $table->string('serial_number')->nullable();
+            $table->string('document_exp_date')->nullable();
+            $table->string('document_file')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

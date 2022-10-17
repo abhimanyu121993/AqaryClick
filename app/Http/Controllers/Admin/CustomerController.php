@@ -40,6 +40,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+
         //dd($request);
         // $request->validate([
         //     'first_name' => 'required',
@@ -114,7 +115,7 @@ class CustomerController extends Controller
         }
         else
         {
-            return redirect()->back()->with('success','ERROR');
+            return redirect()->back();
 
         }
     }
