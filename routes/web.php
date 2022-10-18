@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\admin\BrokerController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
 use App\Http\Controllers\admin\CityController;
@@ -90,9 +91,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
-
+    Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::resource('staff',StaffController::class);
+    Route::resource('broker',BrokerController::class);
+
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);

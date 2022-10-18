@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
 
+            $table->string('tenant_name')->nullable();
             $table->string('file_number')->nullable();
             $table->string('tenant_code')->nullable();
             $table->string('customer_type')->nullable();
@@ -34,7 +35,7 @@ return new class extends Migration
             $table->string('attachment_file')->nullable();
             $table->string('sponsor_phone')->nullable();
             $table->string('attachment_remark')->nullable();
-            $table->string('tenat_document')->nullable();
+            $table->string('tenant_document')->nullable();
             $table->string('oid_document')->nullable();
             $table->string('cr_document')->nullable();
             $table->string('passcode')->nullable();

@@ -26,6 +26,12 @@
                                     <input type="text" class="form-control" name="tenant_code" placeholder="Tenant Code">
                                 </div>
                             </div>
+                            <div class=" col-md-6">
+                                <label for="owner_name" class="form-label">Tenant Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="tenant_name" placeholder="Tenant Name">
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <label for="space" class="form-label">Tenant Type</label>
                                 <select class="form-control" id="customer" name="customer_type">
@@ -146,11 +152,11 @@
                     </div>
                     <div class="col-md-6">
                         <label for="space" class="form-label">Document Type</label>
-                        <select class="form-control" id="tenant_document_type" name="tenat_document">
+                        <select class="form-control" id="tenant_document_type" name="tenant_document">
                             <option value="">-----Select Document Type-----</option>
-                            <option value="oid_dcmnt">OID</option>
-                            <option value="cr_dcmnt">CR</option>
-                            <option value="passcode_dcmnt">Passcode</option>
+                            <option value="OID">OID</option>
+                            <option value="CR">CR</option>
+                            <option value="Passcode">Passcode</option>
                         </select>
                     </div><br>
                 <div class="row">

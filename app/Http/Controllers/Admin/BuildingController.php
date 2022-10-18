@@ -109,7 +109,7 @@ class BuildingController extends Controller
             'state'=>$request->state,
             'area'=>$request->area,
             'pincode'=>$request->pincode,
-            'building_pic'=>$request->building_pic,
+            'building_pic'=>$mainpic,
             'file' =>json_encode($otherpic),
             'remark'=>$request->remark,           
         ]);
