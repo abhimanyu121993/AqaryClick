@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('bank_name');
-            $table->string('account_number');
-            $table->string('ifsc');
+            $table->string('bank_name')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('ifsc')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -48,6 +48,8 @@ class TenantController extends Controller
                 'email'=>'nullable',
                 'post_office'=>'nullable',
                 'address'=>'nullable',
+                'account_number'=>'nullable',
+
                 'tenant_status'=>'nullable',
                 'document_name'=>'nullable',
                 'total_unit'=>'nullable',
@@ -74,7 +76,7 @@ class TenantController extends Controller
                         }
                     }
         $tenant=Tenant::create([
-
+            'tenant_name'=>$request->tenant_name,
             'file_number'=>$request->file_number,
             'tenant_code'=>$request->tenant_code,
             'customer_type'=>$request->customer_type,
@@ -92,7 +94,7 @@ class TenantController extends Controller
             'sponsor_phone'=>$request->sponsor_phone,
             'sponsor_oid'=>$request->sponsor_oid,
             'attachment_remark'=>$request->attachment_remark,
-            'tenat_document'=>$request->tenat_document,
+            'tenant_document'=>$request->tenant_document,
             'oid_document'=>$request->oid_document,
             'cr_document'=>$request->cr_document,
             'passcode'=>$request->passcode,

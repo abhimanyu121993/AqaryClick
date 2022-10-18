@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_documents', function (Blueprint $table) {
+        Schema::create('brokers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id')->nullable();
-            $table->string('document_name')->nullable();
-            $table->string('serial_number')->nullable();
-            $table->string('document_exp_date')->nullable();
-            $table->string('document_file')->nullable();
+            $table->string('name');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_documents');
+        Schema::dropIfExists('brokers');
     }
 };
