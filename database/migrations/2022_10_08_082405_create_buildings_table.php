@@ -43,7 +43,9 @@ return new class extends Migration
             $table->string('property_vlaue')->nullable();
             $table->string('person_mobile')->nullable();
             $table->string('building_receive_date')->nullable();
-            $table->boolean('building_status')->default(1);
+            $table->string('building_status')->nullable();
+            $table->string('building_desc')->nullable();
+            $table->string('appraise_date')->nullable();
             $table->boolean('status')->default(0);
             $table->string('space')->nullable()->comment('Area in Sq.Meter');
             $table->string('location')->nullable()->comment('Google map link');
