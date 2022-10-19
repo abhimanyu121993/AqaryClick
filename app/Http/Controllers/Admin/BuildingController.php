@@ -87,6 +87,9 @@ class BuildingController extends Controller
             'person_job'=>$request->person_job,
             'building_no'=>$request->building_no,
             'building_age'=>$request->building_age,
+            'building_desc'=>$request->building_desc,
+            'building_status'=>$request->building_status,
+            'appraise_date'=>$request->appraise_date,
             'land_size_foot'=>$request->land_size_foot,
             'price_foot'=>$request->price_foot,
             'total_land'=>$request->total_land,
@@ -157,7 +160,7 @@ class BuildingController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
+        dd($request->area);      
         $request->validate([
             'building_code'=>'required',
             'owner_name'=>'required',
@@ -197,6 +200,8 @@ class BuildingController extends Controller
             'landsize_meter'=>$request->landsize_meter,
             'cost_building'=>$request->cost_building,
             'building_value'=>$request->building_value,
+            'building_desc'=>$request->building_desc,
+            'appraise_date'=>$request->appraise_date,
             'monthly_income'=>$request->monthly_income,
             'annual_income'=>$request->annual_income,
             'payback'=>$request->payback,
@@ -210,6 +215,7 @@ class BuildingController extends Controller
             'person_job'=>$request->person_job,
             'street_no'=>$request->street_no,
             'building_age'=>$request->building_age,
+            'building_status'=>$request->building_status,
             'person_mobile'=>$request->person_mobile,
             'building_receive_date'=>$request->rdate,
             'space'=>$request->space,
