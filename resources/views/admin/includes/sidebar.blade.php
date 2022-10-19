@@ -190,8 +190,8 @@
                         </ul>
                     </div>
                 </li>
- <!-- Contract Settings Menu -->
- <li class="nav-item">
+                <!-- Contract Settings Menu -->
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                         <i data-feather="settings" class="icon-dual"></i> <span data-key="t-dashboards">Settings</span>
                     </a>
@@ -209,7 +209,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.nationality.index')}}" class="nav-link" data-key="t-analytics"> Nationality </a>
                             </li>
-                           
+
                         </ul>
                     </div>
                 </li>
