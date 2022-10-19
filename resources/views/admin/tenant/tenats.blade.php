@@ -13,28 +13,27 @@
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
-                                <th scope="col">File Number</th>
                                 <th scope="col">Tenant Code</th>
-                                <th scope="col">Customer Type</th>
-                                <th scope="col">primary Phone</th>
-                                <th scope="col">Secondary Phone</th>
-                                <th scope="col">Eamil</th>
-                                <th scope="col">Post Office Number</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Tenant Status</th>
-                                <th scope="col">Document Name</th>
-                                <th scope="col">Total Unit</th>
-                                <th scope="col">Customer Nationality</th>
-                                <th scope="col">Sponsor Name</th>
-                                <th scope="col">Sponsor Email</th>
-                                <th scope="col">Sponsor Phone</th>
-                                <th scope="col">Sponsor Oid</th>
-                                <th scope="col">Attachment File</th>
-                                <th scope="col">Attachment Remark</th>
+                                <th scope="col">Tenant Name Eglish</th>
+                                <th scope="col">Tenant Arabic Name</th>
                                 <th scope="col">Tenant Document</th>
-                                <th scope="col">OID</th>
+                                <th scope="col">Qid Document</th>
+                                <th scope="col">CR Document</th>
+                                <th scope="col">Passport</th>
+                                <th scope="col">Tenant Nationality</th>
+                                <th scope="col">Tenant Primary Number</th>
+                                <th scope="col">Tenant Secondary Number</th>
+                                <th scope="col">Email </th>
+                                <th scope="col">Post Office</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Tenant Type</th>
+                                <th scope="col">Unit Type</th>
+                                <th scope="col">Unit Address</th>
+                                <th scope="col">Rental Period</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Payment Receipt</th>
                                 <th scope="col">Attachment File</th>
-                                <th scope="col">Passcode</th>
+                                <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -42,30 +41,29 @@
                             @foreach ($all_tenant as $tenant)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{$tenant->file_number}}</td>
                                     <td>{{$tenant->tenant_code}}</td>
-                                    <td>{{$tenant->customer_type}}</td>
-                                    <td>{{$tenant->primary_phone}}</td>
-                                    <td>{{$tenant->secondary_phone}}</td>
+                                    <td>{{$tenant->tenant_english_name}}</td>
+                                    <td>{{$tenant->tenant_arabic_name}}</td>
+                                    <td>{{$tenant->tenant_document}}</td>
+                                    <td>{{$tenant->qid_document}}</td>
+                                    <td>{{$tenant->cr_document}}</td>
+                                    <td>{{$tenant->passport}}</td>
+                                    <td>{{$tenant->tenant_nationality}}</td>
+                                    <td>{{$tenant->tenant_primary_mobile}}</td>
+                                    <td>{{$tenant->tenant_secondary_mobile}}</td>
                                     <td>{{$tenant->email}}</td>
                                     <td>{{$tenant->post_office}}</td>
                                     <td>{{$tenant->address}}</td>
-                                    <td>{{$tenant->tenant_status}}</td>
-                                    <td>{{$tenant->document_name}}</td>
-                                    <td>{{$tenant->total_unit}}</td>
-                                    <td>{{$tenant->customer_nationality}}</td>
-                                    <td>{{$tenant->sponsor_name}}</td>
-                                    <td>{{$tenant->sponsor_email}}</td>
-                                    <td>{{$tenant->sponsor_phone}}</td>
-                                    <td>{{$tenant->sponsor_oid}}</td>
+                                    <td>{{$tenant->tenant_type}}</td>
+                                    <td>{{$tenant->unit_type}}</td>
+                                    <td>{{$tenant->unit_address}}</td>
+                                    <td>{{$tenant->rental_period }}</td>
+                                    <td>{{$tenant->payment_method}}</td>
+                                    <td>{{$tenant->payment_receipt}}</td>
                                     <td>
                                         <img src="{{asset('upload/tenant/'.$tenant->attachment_file)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>
                                     </td>
                                     <td>{{$tenant->attachment_remark}}</td>
-                                    <td>{{$tenant->tenat_document}}</td>
-                                    <td>{{$tenant->oid_document??''}}</td>
-                                    <td>{{$tenant->cr_document??''}}</td>
-                                    <td>{{$tenant->passcode??''}}</td>
                                     <td></td>
                                     <td>
                                         <div class="dropdown">
