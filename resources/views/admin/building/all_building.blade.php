@@ -17,7 +17,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Owner Name</th>
                                 <th scope="col">Image</th>
-                                <th scope="col">Created at</th>
+                                <th scope="col">Document</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -29,7 +29,9 @@
                                     <td>{{ $building->name}}</td>
                                     <td>{{ $building->owner_name}}</td>
                                     <td><img src="{{asset('upload/building/'.$building->building_pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
-                                    <td>{{ $building->created_at }}</td>
+                                    <td>
+                                    @php $bid=Crypt::encrypt($building->id); @endphp
+                                            <a href="{{route('admin.document',$bid)}}" >view</a></td>           
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

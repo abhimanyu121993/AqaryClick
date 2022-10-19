@@ -365,7 +365,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="building_file" class="form-label">Building File</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="building_file" name="building_file[]" multiple>
+                                    <input type="file" class="form-control"  id="building_file" name="building_file[]" multiple>
                                 </div>
                             </div>
                         </div>
@@ -474,7 +474,7 @@ else{
       var b= $('#annual_income').val();
       var c= $('#property_vlaue').val();
       
-      $('#payback').val((c/b).toFixed(1)+"Year");
+      $('#payback').val((c/b).toFixed(1)+"Years");
 
        });
     });
@@ -492,12 +492,16 @@ else{
 <!-- Net Property Value  -->
 <script>
     $(document).ready(function() {
-       $("#building_value").focusout(function(){
+       $("#space").focusout(function(){
         var a= $(this).val();
-        $("#total_land").focusout(function(){
+        $("#cost_building").focusout(function(){
         var b= $(this).val();
-        $('#property_vlaue').val(parseInt(a)+parseInt(b));
-
+        $('#building_value').val(parseInt(a)*parseInt(b));
+        $("#total_land").focusout(function(){
+        var c= $(this).val();
+        var d= parseInt(a)*parseInt(b);
+        $('#property_vlaue').val(parseInt(d)+parseInt(c));
+        });
         });
         });
     });
