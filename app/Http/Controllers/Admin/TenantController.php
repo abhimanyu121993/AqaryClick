@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
+
 
 class TenantController extends Controller
 {
@@ -26,6 +28,7 @@ class TenantController extends Controller
      */
     public function create()
     {
+
         $all_tenant=Tenant::get();
         return view('admin.tenant.tenats',compact('all_tenant'));
     }
@@ -62,16 +65,26 @@ class TenantController extends Controller
                 'attachment_remark'=>'nullable'
             ]);
 
-        $otherpic='[]';
+        $otherpic=[];
+
+        // if($request->hasFile('attachment_file'))
+        // {
+        //     foreach($request->file('attachment_file') as $file)
+        //     {
+        // $name='attachment-'.time().'-'.rand(0,99).'.'.$file->extension();
+        // $file->move(public_path('upload/tenant'),$name);
+        //         $otherpic[]=$name;
+        //     }
+        // }
         if($request->hasFile('attachment_file'))
-                    {
-                        foreach($request->file('attachment_file') as $file)
-                        {
-                            $name='attachment-'.time().'-'.rand(0,99).'.'.$file->extension();
-                            $file->move(public_path('upload/tenant'),$name);
-                            $otherpic=$name;
-                        }
-                    }
+        {
+            foreach($request->file('attachment_file') as $file)
+            {
+                $name='tenant-'.time().'-'.rand(0,99).'.'.$file->extension();
+                $file->move(public_path('upload/tenent'),$name);
+                $otherpic[]=$name;
+            }
+        }
         $tenant=Tenant::create([
 
             'tenant_code'=>$request->tenant_code,

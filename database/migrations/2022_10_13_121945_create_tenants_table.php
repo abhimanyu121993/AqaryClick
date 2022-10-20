@@ -35,7 +35,8 @@ return new class extends Migration
             $table->string('rental_period')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_receipt')->nullable();
-            $table->string('attachment_file')->nullable();
+            $table->json('attachment_file')->default(json_encode([]));
+            // $table->array('attachment_file')->nullable();
             $table->string('attachment_remark')->nullable();
 
             // $table->string('tenant_status')->nullable();

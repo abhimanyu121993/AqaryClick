@@ -61,7 +61,12 @@
                                     <td>{{$tenant->payment_method}}</td>
                                     <td>{{$tenant->payment_receipt}}</td>
                                     <td>
-                                        <img src="{{asset('upload/tenant/'.$tenant->attachment_file)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>
+
+                                        @php
+                                       $pic= json_decode($tenant->attachment_file)
+                                        @endphp
+                                        <img src="{{asset('upload/tenant/'.$pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>
+                                        {{-- <img src="{{asset('upload/tenant/'.$pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/> --}}
                                     </td>
                                     <td>{{$tenant->attachment_remark}}</td>
                                     <td></td>
