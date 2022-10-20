@@ -61,7 +61,7 @@
                                     <td><img src="{{asset('upload/building/'.$building->building_pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                                     <td>
                                     @php $bid=Crypt::encrypt($building->id); @endphp
-                                            <a href="{{route('admin.document',$bid)}}">view</a></td>           
+                                            <a href="{{route('admin.document',$bid)}}">View</a></td>           
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

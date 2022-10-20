@@ -16,7 +16,13 @@
                         @endif
                         @csrf
                         @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">{{ $errors }}</div>
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @endif
                         <div class="row gy-4 mb-3">
                             <div class="col-xxl-3 col-md-6">
@@ -51,9 +57,9 @@
 
                             <div class="col-xxl-3 col-md-6">
                                 <label for="space" class="form-label">Status</label>
-                                <select class="form-control" id="building_type" name="building_type" >
+                                <select class="form-control" id="building_status" name="status" >
                                 @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->building_type }}" selected>{{ $buildingedit->building_type}}</option>
+                                    <option value="{{ $buildingedit->status }}" selected>{{ $buildingedit->status}}</option>
                                     @else
                                     <option value="">--Select Status--</option>
                                     @foreach ($building_statuses as $status)
@@ -172,7 +178,7 @@
                             <div class="col-md-6 mb-1">
                                 <label class="form-label" for="flag">Zone Name</label>
 
-                                <select class="select2 form-select" id="zone" name='area'>
+                                <select class="select2 form-select" id="zone" name='zone_name'>
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->area }}" selected>{{ $buildingedit->area}}</option>
                                     @endif
@@ -220,13 +226,13 @@
                         <div class="col-xxl-3 col-md-6">
                                 <label for="name" class="form-label">Construction Date</label>
                                 <div class="input-group">
-                                    <input id="dateInput" type="date" class="form-control" id="building_cdate" name="cdate" value="{{isset($buildingedit)? $buildingedit->cdate: '' }}" placeholder="12-12-2022">
+                                    <input id="dateInput" type="date" class="form-control" id="building_cdate" name="construction_date" value="{{isset($buildingedit)? $buildingedit->construction_date: '' }}" placeholder="12-12-2022">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
                                 <label for="building_location" class="form-label">Building Age</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="building_age" name="building_age" value="{{isset($buildingedit)? $buildingedit->building_age: '' }}" placeholder="Building Age" disabled>
+                                    <input type="text" class="form-control" id="building_age" name="building_age" value="{{isset($buildingedit)? $buildingedit->building_age: '' }}" placeholder="Building Age">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
@@ -246,7 +252,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="space" class="form-label">Built Up Area <sup class="text-danger">(In Sq.Meter)</sup></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="space" name="space" value="{{isset($buildingedit)? $buildingedit->space: '' }}" placeholder="Built Up Area (Sq.Meter)">
+                                    <input type="text" class="form-control" id="space" name="built_up_area" value="{{isset($buildingedit)? $buildingedit->space: '' }}" placeholder="Built Up Area (Sq.Meter)">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
@@ -270,7 +276,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="incharge_name" class="form-label">Land Area <sup class="text-danger">(in square foot)</sup></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="land_size" name="land_size_foot" value="{{isset($buildingedit)? $buildingedit->land_size_foot: '' }}" placeholder="Enter Land Size(Sq.Foot)" disabled>
+                                    <input type="text" class="form-control" id="land_size" name="land_size_foot" value="{{isset($buildingedit)? $buildingedit->land_size_foot: '' }}" placeholder="Enter Land Size(Sq.Foot)">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
@@ -294,7 +300,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="name" class="form-label">Annual Income</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="annual_income" name="annual_income" value="{{isset($buildingedit)? $buildingedit->annual_income: '' }}" placeholder="Enter Annual Income" disabled>
+                                    <input type="text" class="form-control" id="annual_income" name="annual_income" value="{{isset($buildingedit)? $buildingedit->annual_income: '' }}" placeholder="Enter Annual Income">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
@@ -306,7 +312,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="name" class="form-label">Total Net Property</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="property_vlaue" name="property_vlaue" value="{{isset($buildingedit)? $buildingedit->property_vlaue: '' }}" placeholder="Enter Total Property Value" disabled>
+                                    <input type="text" class="form-control" id="property_vlaue" name="property_vlaue" value="{{isset($buildingedit)? $buildingedit->property_vlaue: '' }}" placeholder="Enter Total Property Value">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
@@ -346,7 +352,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="name" class="form-label">Building Recieve Date</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="building_rdate" name="rdate" value="{{isset($buildingedit)? $buildingedit->building_receive_date: '' }}" placeholder="12-12-2022">
+                                    <input type="date" class="form-control" id="building_rdate" name="building_receive_date" value="{{isset($buildingedit)? $buildingedit->building_receive_date: '' }}" placeholder="12-12-2022">
                                 </div>
                             </div>
                         </div>
@@ -373,7 +379,7 @@
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Remark</label>
                                 <textarea class="form-control" name="remark">
-
+                                {{isset($buildingedit)? $buildingedit->remark: '' }}
                                     </textarea>
                             </div>
                         </div>

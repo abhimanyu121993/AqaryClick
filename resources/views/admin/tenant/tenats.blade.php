@@ -33,6 +33,7 @@
                                 <th scope="col">Payment Method</th>
                                 <th scope="col">Payment Receipt</th>
                                 <th scope="col">Remark</th>
+                                <th scope="col">View Document</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -60,7 +61,8 @@
                                     <td>{{$tenant->payment_method}}</td>
                                     <td>{{$tenant->payment_receipt}}</td>
                                     <td>{{$tenant->attachment_remark}}</td>
-                                    <td></td>
+                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp
+                                        <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

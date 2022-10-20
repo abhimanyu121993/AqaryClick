@@ -86,7 +86,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('contract',ContractController::class);
-    
+
     Route::get('bank-details/{id}',[CustomerController::class,'showBankDetail'])->name('showBankDetail');
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
@@ -94,6 +94,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::get('document/{id}',[BuildingController::class,'document'])->name('document');
+    Route::get('tenant-document/{id}',[TenantController::class,'tenantdocument'])->name('tenantDocument');
     Route::resource('staff',StaffController::class);
     Route::resource('broker',BrokerController::class);
 
