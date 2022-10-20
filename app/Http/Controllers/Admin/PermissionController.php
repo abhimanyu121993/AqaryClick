@@ -122,7 +122,6 @@ class PermissionController extends Controller
             'roleid'=>'required',
             'rolepermissions'=>'required'
         ]);
-
         $role=Role::find($request->roleid);
         $role->syncPermissions($request->rolepermissions);
         return redirect()->route('admin.rolePermission')->with('success','Permission Assigned Successfully');
