@@ -20,7 +20,7 @@ class ContractController extends Controller
     public function index()
     {
         $contract=Contract::all();
-        $tenant=Tenant::pluck('tenant_name');
+        $tenant=Tenant::pluck('tenant_english_name');
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
 

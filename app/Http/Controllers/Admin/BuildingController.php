@@ -160,7 +160,6 @@ class BuildingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->area);      
         $request->validate([
             'building_code'=>'required',
             'owner_name'=>'required',
@@ -267,4 +266,10 @@ foreach($res as $r){
 }
 return response()->json($html);
 }
+public function document($id){
+    $id = Crypt::decrypt($id);
+    $document=Building::find($id); 
+    return view('admin.building.document',compact('document'));
+}
+
 }
