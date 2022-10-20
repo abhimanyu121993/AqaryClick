@@ -52,8 +52,41 @@ class BuildingController extends Controller
     {
         $request->validate([
             'building_code'=>'required',
+            'building_name'=>'required',
+            'building_type'=>'required',
+            'status'=>'required',
+            'ownership_type'=>'required',
+            'pincode'=>'required',
             'owner_name'=>'required',
             'lessor_name'=>'required',
+            'country'=>'required',
+            'city'=>'required',
+            'zone_name'=>'required',
+            'building_no'=>'required',
+            'street_no'=>'required',
+            'zone_no'=>'required',
+            'construction_date'=>'required',
+            'building_age'=>'required',
+            'building_status'=>'required',
+            'built_up_area'=>'required',
+            'cost_building'=>'required',
+            'building_value'=>'required',
+            'landsize_meter'=>'required',
+            'land_size_foot'=>'required',
+            'price_foot'=>'required',
+            'total_land'=>'required',
+            'monthly_income'=>'required',
+            'annual_income'=>'required',
+            'payback'=>'required',
+            'property_vlaue'=>'required',
+            'appraise_date'=>'required',
+            'incharge_name'=>'required',
+            'person_job'=>'required',
+            'person_mobile'=>'required',            
+            'building_receive_date'=>'required',
+
+
+            
             
         ]);
         $mainpic='';
@@ -80,7 +113,7 @@ class BuildingController extends Controller
             'person_incharge'=>$request->incharge_name,
             'total_unit'=>$request->total_unit,
             'building_type'=>$request->building_type,
-            'construction_date'=>$request->cdate,
+            'construction_date'=>$request->construction_date,
             'ownership_type'=>$request->ownership_type,
             'ownership_no'=>$request->ownership_no,
             'contract_exp'=>$request->contract_exp,
@@ -93,6 +126,7 @@ class BuildingController extends Controller
             'land_size_foot'=>$request->land_size_foot,
             'price_foot'=>$request->price_foot,
             'total_land'=>$request->total_land,
+            'status'=>$request->building_status,
             'landsize_meter'=>$request->landsize_meter,
             'cost_building'=>$request->cost_building,
             'building_value'=>$request->building_value,
@@ -103,14 +137,14 @@ class BuildingController extends Controller
             'zone_no'=>$request->zone_no,
             'street_no'=>$request->street_no,
             'person_mobile'=>$request->person_mobile,
-            'building_receive_date'=>$request->rdate,
-            'space'=>$request->space,
+            'building_receive_date'=>$request->building_receive_date,
+            'space'=>$request->built_up_area,
             'location'=>$request->building_location,
             'contract_no'=>$request->contract_no,
             'country'=>$request->country,
             'city'=>$request->city,
             'state'=>$request->state,
-            'area'=>$request->area,
+            'area'=>$request->zone_name,
             'pincode'=>$request->pincode,
             'building_pic'=>$mainpic,
             'file' =>json_encode($otherpic),
@@ -161,19 +195,49 @@ class BuildingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+           
             'building_code'=>'required',
+            'building_name'=>'required',
+            'building_type'=>'required',
+            'status'=>'required',
+            'ownership_type'=>'required',
+            'pincode'=>'required',
             'owner_name'=>'required',
             'lessor_name'=>'required',
+            'country'=>'required',
+            'city'=>'required',
+            'zone_name'=>'required',
+            'building_no'=>'required',
+            'street_no'=>'required',
+            'zone_no'=>'required',
+            'construction_date'=>'required',
+            'building_age'=>'required',
+            'building_status'=>'required',
+            'built_up_area'=>'required',
+            'cost_building'=>'required',
+            'building_value'=>'required',
+            'landsize_meter'=>'required',
+            'land_size_foot'=>'required',
+            'price_foot'=>'required',
+            'total_land'=>'required',
+            'monthly_income'=>'required',
+            'annual_income'=>'required',
+            'payback'=>'required',
+            'property_vlaue'=>'required',
+            'appraise_date'=>'required',
+            'incharge_name'=>'required',
+            'person_job'=>'required',
+            'person_mobile'=>'required',            
+            'building_receive_date'=>'required',
             
         ]);
-        $mainpic='';
-        $otherpic=[];
+        $mainpic=Building::find($id)->building_pic??'';
+        $otherpic=Building::find($id)->building_file??[];
         if($request->hasFile('building_pic')){
             $mainpic='build-'.time().'-'.rand(0,99).'.'.$request->building_pic->extension();
             $request->building_pic->move(public_path('upload/building'),$mainpic);
-            $oldpic = Building::find($id)->pluck('file')[0];
+            $oldpic = Building::find($id)->pluck('building_pic')[0];
             File::delete(public_path('upload/building/' . $oldpic));
-            Building::find($id)->update(['building_pic' => $mainpic]);
         }
 
         if($request->hasFile('building_file'))
@@ -185,6 +249,11 @@ class BuildingController extends Controller
                 $otherpic[]=$name;
             }
         }
+        if(count($otherpic)>0)
+                 {
+                    Building::find($id)->update(['pics'=>json_encode($otherpic)]);
+                    
+                 }
        $data= Building::find($id)->update([
             'building_code' => $request->building_code,
             'name' => $request->building_name,
@@ -193,6 +262,7 @@ class BuildingController extends Controller
             'person_incharge'=>$request->incharge_name,
             'total_unit'=>$request->total_unit,
             'building_no'=>$request->building_no,
+            'status'=>$request->building_status,
             'land_size_foot'=>$request->land_size_foot,
             'price_foot'=>$request->price_foot,
             'total_land'=>$request->total_land,
@@ -210,23 +280,22 @@ class BuildingController extends Controller
             'property_vlaue'=>$request->property_vlaue,
             'zone_no'=>$request->zone_no,
             'building_type'=>$request->building_type,
-            'construction_date'=>$request->cdate,
+            'construction_date'=>$request->construction_date,
             'person_job'=>$request->person_job,
             'street_no'=>$request->street_no,
             'building_age'=>$request->building_age,
             'building_status'=>$request->building_status,
             'person_mobile'=>$request->person_mobile,
-            'building_receive_date'=>$request->rdate,
-            'space'=>$request->space,
+            'building_receive_date'=>$request->building_receive_date,
+            'space'=>$request->built_up_area,
             'location'=>$request->building_location,
             'contract_no'=>$request->contract_no,
             'country'=>$request->country,
             'city'=>$request->city,
             'state'=>$request->state,
-            'area'=>$request->area,
+            'area'=>$request->zone_name,
             'pincode'=>$request->pincode,
-            'building_pic'=>$request->building_pic,
-            'file' =>json_encode($otherpic),
+            'building_pic'=>$mainpic,
             'remark'=>$request->remark,           
         ]);
         if($data){
@@ -269,7 +338,7 @@ return response()->json($html);
 public function document($id){
     $id = Crypt::decrypt($id);
     $document=Building::find($id); 
-    return view('admin.building.document',compact('document'));
+    return view('admin.building.document',compact('document')); 
 }
 
 }

@@ -67,15 +67,7 @@ class TenantController extends Controller
 
         $otherpic=[];
 
-        // if($request->hasFile('attachment_file'))
-        // {
-        //     foreach($request->file('attachment_file') as $file)
-        //     {
-        // $name='attachment-'.time().'-'.rand(0,99).'.'.$file->extension();
-        // $file->move(public_path('upload/tenant'),$name);
-        //         $otherpic[]=$name;
-        //     }
-        // }
+       
         if($request->hasFile('attachment_file'))
         {
             foreach($request->file('attachment_file') as $file)

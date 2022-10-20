@@ -46,7 +46,7 @@ return new class extends Migration
             $table->string('building_status')->nullable();
             $table->string('building_desc')->nullable();
             $table->string('appraise_date')->nullable();
-            $table->boolean('status')->default(0);
+            $table->string('status')->nullable();
             $table->string('space')->nullable()->comment('Area in Sq.Meter');
             $table->string('location')->nullable()->comment('Google map link');
             $table->string('contract_no')->nullable();

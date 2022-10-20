@@ -13,6 +13,15 @@
                         @method('patch')
                     @endif --}}
                         @csrf
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <div class="row gy-4 mb-3">
                             <div class=" col-md-6">
                                 <label for="name" class="form-label">Tenant Code</label>

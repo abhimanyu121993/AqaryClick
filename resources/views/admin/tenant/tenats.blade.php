@@ -33,7 +33,6 @@
                                 <th scope="col">Payment Method</th>
                                 <th scope="col">Payment Receipt</th>
                                 <th scope="col">Remark</th>
-                                <th scope="col">Remark</th>
                                 <th scope="col">View Document</th>
                                 <th scope="col">Action</th>
                             </tr>
