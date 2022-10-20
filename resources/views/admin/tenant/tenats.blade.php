@@ -34,6 +34,8 @@
                                 <th scope="col">Payment Receipt</th>
                                 {{-- <th scope="col">Attachment File</th> --}}
                                 <th scope="col">Remark</th>
+                                <th scope="col">Remark</th>
+                                <th scope="col">View Document</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -69,7 +71,8 @@
                                         <img src="{{asset('upload/tenant/'.$pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>
                                     </td> --}}
                                     <td>{{$tenant->attachment_remark}}</td>
-                                    <td></td>
+                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp
+                                        <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
