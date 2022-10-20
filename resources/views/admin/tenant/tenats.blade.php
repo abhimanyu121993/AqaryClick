@@ -59,7 +59,6 @@
                                     <td>{{$tenant->rental_period }}</td>
                                     <td>{{$tenant->payment_method}}</td>
                                     <td>{{$tenant->payment_receipt}}</td>
-                                    
                                     <td>{{$tenant->attachment_remark}}</td>
                                     <td></td>
                                     <td>
