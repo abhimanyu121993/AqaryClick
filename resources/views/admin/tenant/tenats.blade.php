@@ -32,7 +32,7 @@
                                 <th scope="col">Rental Period</th>
                                 <th scope="col">Payment Method</th>
                                 <th scope="col">Payment Receipt</th>
-                                <th scope="col">Attachment File</th>
+                                {{-- <th scope="col">Attachment File</th> --}}
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -60,14 +60,14 @@
                                     <td>{{$tenant->rental_period }}</td>
                                     <td>{{$tenant->payment_method}}</td>
                                     <td>{{$tenant->payment_receipt}}</td>
-                                    <td>
+                                    {{-- <td>
 
                                         @php
                                        $pic= json_decode($tenant->attachment_file)
                                         @endphp
                                         <img src="{{asset('upload/tenant/'.$pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>
-                                        {{-- <img src="{{asset('upload/tenant/'.$pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/> --}}
-                                    </td>
+                                        <img src="{{asset('upload/tenant/'.$pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>
+                                    </td> --}}
                                     <td>{{$tenant->attachment_remark}}</td>
                                     <td></td>
                                     <td>
