@@ -170,5 +170,13 @@ class TenantController extends Controller
             return redirect()->back()->with('error','Data not deleted.');
         }
     }
+
+    public function tenantdocument($id)
+    {
+        $id = Crypt::decrypt($id);
+        $document=Tenant::find($id);
+        return view('admin.tenant.tenantdocument',compact('document'));
+    }
+
     }
 
