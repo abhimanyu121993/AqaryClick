@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
+            $table->string('country_name')->nullable();
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

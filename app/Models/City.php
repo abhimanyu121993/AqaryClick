@@ -10,4 +10,8 @@ class City extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
+    public function nationality()
+    {
+      return $this->belongsTo(Nationality::class,'country_name','id');
+    }
 }
