@@ -190,6 +190,19 @@
                         </ul>
                     </div>
                 </li>
+                <!-- Contract Management Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Electricity Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards8">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.electricity.index')}}" class="nav-link" data-key="t-analytics">Electricity</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <!-- Contract Settings Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">

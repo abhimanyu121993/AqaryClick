@@ -56,10 +56,9 @@
                                 @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->status }}" selected>{{ $buildingedit->status}}</option>
                                     @else
-                                    <option value="">--Select Status--</option>
-                                    @foreach ($building_statuses as $status)
-                                    <option value="{{ $status->name }}">{{ $status->name }}</option>
-                                    @endforeach
+                                    <option value="" selected>--Select Status--</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
                                     @endif
                                 </select>
                             </div>

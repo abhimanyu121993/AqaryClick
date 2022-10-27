@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\admin\ElectricityController;
 use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
@@ -91,7 +92,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
     Route::resource('tenant',TenantController::class);
-
+    Route::get('fetchunit/{building_name}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
+    Route::get('fetch-qid/{name}',[ElectricityController::class,'fetchQid'])->name('fetchQid');
+    Route::get('fetch-tenant-name',[ElectricityController::class,'fetchTenantName'])->name('fetchTenantName');
+    Route::get('fetchContract',[ElectricityController::class,'fetchContract'])->name('fetchContract');
+    Route::get('electricity-download/{path}',[ElectricityController::class,'getDownload'])->name('getDownload');
+    Route::resource('electricity',ElectricityController::class);
 });
 
 

@@ -338,7 +338,7 @@ return response()->json($html);
 public function fetchCountry($country_id){
     $res=City::where('Country_name',$country_id)->get();
     $html=' <option value="">--Select City--</option>';
-    
+            
     foreach($res as $r){
         $html .='<option value="'.$r->id.'">'.$r->name.'</option>';
     }
