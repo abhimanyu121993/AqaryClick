@@ -183,6 +183,9 @@
                                 <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li> --}}
 
+                            <li class="nav-item">
+                                <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
+                            </li> 
                         </ul>
                     </div>
                 </li>
