@@ -39,7 +39,7 @@
 
                 <!-- Role/Permission Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1">
                         <i data-feather="lock" class="icon-dual"></i> <span data-key="t-dashboards">Roles/Permission</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards1">
@@ -59,10 +59,10 @@
 
                 <!-- Building Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards2" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards2">
                         <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Building Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards5">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
@@ -79,10 +79,10 @@
 
                 <!-- Unit Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards3" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards3">
                         <i data-feather="box" class="icon-dual"></i> <span data-key="t-dashboards">Unit Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards6">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{route('admin.unit.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
@@ -108,10 +108,10 @@
 
                 <!-- Tenant Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards7" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards4" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards4">
                         <i data-feather="briefcase" class="icon-dual"></i> <span data-key="t-dashboards">Tenant Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards7">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('admin.tenant.index') }}" class="nav-link" data-key="t-analytics"> Register </a>
@@ -125,10 +125,10 @@
 
                 <!-- Owner Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards2" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards5">
                         <i data-feather="user" class="icon-dual"></i> <span data-key="t-dashboards">Owner Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards2">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards5">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
@@ -142,10 +142,10 @@
 
                 <!-- Broker Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards3" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards6">
                         <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Broker Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards3">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards6">
                         <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
                                 <a href="{{route('admin.broker.index')}}" class="nav-link" data-key="t-analytics"> Registration </a>
@@ -161,10 +161,10 @@
 
                 <!-- Customer Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards4" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards7" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards7">
                         <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Customer Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards4">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('admin.customer.index') }}" class="nav-link" data-key="t-analytics">Customer Registration </a>
@@ -176,7 +176,7 @@
 
                 <!-- Contract Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards8">
                         <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Contract Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
@@ -190,12 +190,12 @@
                         </ul>
                     </div>
                 </li>
-                <!-- Contract Management Menu -->
+                <!-- Electricity Management Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards9" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
                         <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Electricity Management</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards8">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards9">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{route('admin.electricity.index')}}" class="nav-link" data-key="t-analytics">Electricity</a>
@@ -203,12 +203,12 @@
                         </ul>
                     </div>
                 </li>
-                <!-- Contract Settings Menu -->
+                <!-- Settings Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="#sidebarDashboards10" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards10">
                         <i data-feather="settings" class="icon-dual"></i> <span data-key="t-dashboards">Settings</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards8">
+                    <div class="collapse menu-dropdown" id="sidebarDashboards10">
                         <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
                                 <a href="{{route('admin.staff.index')}}" class="nav-link" data-key="t-analytics"> Staff </a>
