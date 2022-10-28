@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\ElectricityController;
+use App\Http\Controllers\admin\LegalController;
 use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
@@ -75,7 +76,6 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('owner',OwnerController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('contract',ContractController::class);
-
     Route::get('bank-details/{id}',[CustomerController::class,'showBankDetail'])->name('showBankDetail');
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
@@ -87,7 +87,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('tenant-document/{id}',[TenantController::class,'tenantdocument'])->name('tenantDocument');
     Route::resource('staff',StaffController::class);
     Route::resource('broker',BrokerController::class);
-
+    Route::resource('legal',LegalController::class);
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);

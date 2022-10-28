@@ -16,8 +16,14 @@
                         @endif
                             @csrf
                             @if ($errors->any())
-                         <div class="alert alert-danger alert-dismissible">{{ $errors }}</div>
-                    @endif
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                             <div class="row gy-4 mb-3">
                             <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Building Name</label>
