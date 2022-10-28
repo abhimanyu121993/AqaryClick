@@ -57,7 +57,9 @@ class ElectricityController extends Controller
             'electric_no'=>'required',
             'water_no'=>'required',
             'bill_amt'=>'required',
+            'last_payment'=>'required',
             'paid_by'=>'required',
+
             
         ]);
         $otherpic=[];
@@ -81,6 +83,7 @@ class ElectricityController extends Controller
         'electric_no'=>$request->electric_no,
         'water_no'=>$request->water_no,
         'bill_amt'=>$request->bill_amt,
+        'last_payment'=>$request->last_payment,
         'paid_by'=>$request->paid_by,
         'file'=>json_encode($otherpic),
         'auth_paid'=>$request->auth_paid,
@@ -137,6 +140,7 @@ class ElectricityController extends Controller
             'qid_no'=>'required',
             'reg_mobile'=>'required',
             'electric_no'=>'required',
+            'last_payment'=>'required',
             'water_no'=>'required',
             'bill_amt'=>'required',
             'paid_by'=>'required',
@@ -167,6 +171,7 @@ class ElectricityController extends Controller
             'electric_no'=>$request->electric_no,
             'water_no'=>$request->water_no,
             'bill_amt'=>$request->bill_amt,
+            'last_payment'=>$request->last_payment,
             'paid_by'=>$request->paid_by,
             'auth_paid'=>$request->auth_paid,
             'remark'=>$request->remark,
@@ -201,21 +206,24 @@ class ElectricityController extends Controller
         }
     }
 
-    public function fetchUnit($building_name){
-        $res=Unit::where('building_name',$building_name)->get();
+    public function fetchUnit($building_id){
+        $res=Unit::where('id',$building_id)->get();
         $html='<option value="">--Select Unit No--</option>';
         foreach($res as $r){
             $html .='<option value="'.$r->unit_no.'">'.$r->unit_no.'</option>';
         }
+
         $html1='<option value="">--Select Unit Type--</option>';
         foreach($res as $r){
             $html1 .='<option value="'.$r->unit_type.'">'.$r->unit_type.'</option>';
         }
-        $result=Electricity::where('building_name',$building_name)->first();
-        $result=Carbon::parse($result->created_at)->format('d-m-Y') ;
-        return response()->json(array('html'=>$html,'html1'=>$html1,'result'=>$result));
-        }
 
+        $result=Electricity::where('id',$building_id)->first();
+        if($result==!null){
+            $result=Carbon::parse($result->created_at)->format('d-m-Y') ;
+        }
+        return response()->json(array('html'=>$html,'html1'=>$html1,'result'=>$result));    
+}
         public function fetchTenantName(){
             $res=Tenant::pluck('tenant_english_name');
             $html='<option value="">--Select Tenant Name--</option>';
