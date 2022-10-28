@@ -70,9 +70,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.building.create')}}" class="nav-link" data-key="t-analytics"> All Buildings </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{route('admin.buildingtype.index')}}" class="nav-link" data-key="t-analytics"> Building Type </a>
-                            </li>
+
                         </ul>
                     </div>
                 </li>
@@ -222,6 +220,9 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.unit-feature.index')}}" class="nav-link" data-key="t-analytics"> Unit Feature </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.buildingtype.index')}}" class="nav-link" data-key="t-analytics"> Building Type </a>
                             </li>
                         </ul>
                     </div>

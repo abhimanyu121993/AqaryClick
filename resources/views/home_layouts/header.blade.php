@@ -36,10 +36,10 @@
                                         <a href="/contect-us">CONTACT US</a>
                                     </li>
                                     <li>
-                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login In</button>
+                                        <a href="{{ route('admin') }}" class="btn btn-sm login-btn" ><span  style="color: white;">Sign In</span></a>
                                     </li>
                                     <li>
-                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register</button>
+                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register Here</button>
                                     </li>
                                 </ul>
                             </div>

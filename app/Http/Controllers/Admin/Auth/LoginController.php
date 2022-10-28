@@ -22,7 +22,7 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember_me))
         {
             $role = Auth::user()->roles[0]->name;
-            session()->flash('success','Welcome'. $role .'!');
+            session()->flash('success','Welcome '. $role .' !');
             return redirect()->route('admin.dashboard');
         }
         else {
