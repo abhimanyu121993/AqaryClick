@@ -197,7 +197,10 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards9">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.electricity.index')}}" class="nav-link" data-key="t-analytics">Electricity</a>
+                                <a href="{{route('admin.electricity.index')}}" class="nav-link" data-key="t-analytics">Generate Bill</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.electricity.create')}}" class="nav-link" data-key="t-analytics">All Electricity</a>
                             </li>
                         </ul>
                     </div>
