@@ -111,7 +111,7 @@
                 </li>
 
                 <!-- Owner Management Menu -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards5">
                         <i data-feather="user" class="icon-dual"></i> <span data-key="t-dashboards">Owner Management</span>
                     </a>
@@ -125,7 +125,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <!-- Broker Management Menu -->
                 <li class="nav-item">

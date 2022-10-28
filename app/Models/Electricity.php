@@ -10,4 +10,9 @@ class Electricity extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
+
+    public function building()
+    {
+        return $this->belongsTo(Building::class, 'building_name', 'id');
+    }
 }
