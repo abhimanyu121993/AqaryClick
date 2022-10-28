@@ -22,7 +22,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 <!-- App js -->
 <script src="{{asset('assets/js/app.js')}}"></script>
-
+ <!--select2 cdn-->
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ <script src="{{ asset('assets/js/pages/select2.init.js')}}"></script>
 <script>
     $(document).ready(function() {
         toastr.options.timeOut = 10000;
