@@ -139,9 +139,9 @@
                             </li><li class="nav-item">
                                 <a href="{{route('admin.broker.create')}}" class="nav-link" data-key="t-analytics"> All Broker </a>
                             </li>
-                            {{-- <li class="nav-item">
+                              <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -174,9 +174,15 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.contract.index')}}" class="nav-link" data-key="t-analytics">Registration</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
+                            </li> 
+
                             {{-- <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li> --}}
+
                             <li class="nav-item">
                                 <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
                             </li> 
