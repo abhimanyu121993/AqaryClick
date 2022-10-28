@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -65,8 +66,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $id = Crypt::decrypt($id);
+        $RoleEdit=Role::find($id);
+        $Roles = Role::get()->all();
+        return view('admin.role',compact('Roles','RoleEdit'));    }
 
     /**
      * Update the specified resource in storage.
@@ -77,8 +80,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'role' => 'required',
+        ]);
+        Role::find($id)->update([
+            'name' => $request->role
+        ]);
+        return redirect()->back()->with('success','Role has been Updated successfully.');    }
 
     /**
      * Remove the specified resource from storage.
@@ -88,6 +96,14 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $id = Crypt::decrypt($id);
+        $data=Role::find($id);
+        if($data->delete())
+        {
+            return redirect()->back()->with('success','Data Deleted successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data not deleted.');
+        }    }
 }
