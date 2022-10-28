@@ -97,8 +97,8 @@
                                     <input type="text" class="form-control" id="contract_no" name="contract_no" value="{{isset($buildingedit)? $buildingedit->contract_no: '' }}" placeholder="Enter contract Number">
                                 </div>
                             </div>
-                            <div class="col-xxl-3 col-md-3" >
-                                <label for="owner_name" class="form-label" id="contract_exp">Usufruct Contract Expiry Date</label>
+                            <div class="col-xxl-3 col-md-3" id="contract_exp" >
+                                <label for="owner_name" class="form-label" >Usufruct Contract Expiry Date</label>
                                 <div class="input-group" id="contract">
                                     <input type="date" class="form-control" name="contract_exp" value="{{isset($buildingedit)? $buildingedit->contract_exp: '' }}">
                                 </div>
@@ -231,7 +231,7 @@
                             <div class="col-xxl-3 col-md-4">
                                 <label for="building_location" class="form-label">Building Age</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="building_age" name="building_age" value="{{isset($buildingedit)? $buildingedit->building_age: '' }}" placeholder="Building Age">
+                                    <input type="text" class="form-control" id="building_age" name="building_age" value="{{isset($buildingedit)? $buildingedit->building_age: '' }}" placeholder="Building Age" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-4">
@@ -263,7 +263,7 @@
                             <div class="col-xxl-3 col-md-4">
                                 <label for="country" class="form-label">Total Building Value</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="building_value" name="building_value" value="{{isset($buildingedit)? $buildingedit->building_value: '' }}" placeholder="Enter Building Value">
+                                    <input type="text" class="form-control" id="building_value" name="building_value" value="{{isset($buildingedit)? $buildingedit->building_value: '' }}" placeholder="Enter Building Value" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -275,7 +275,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="incharge_name" class="form-label">Land Area <sup class="text-danger">(in square foot)</sup></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="land_size" name="land_size_foot" value="{{isset($buildingedit)? $buildingedit->land_size_foot: '' }}" placeholder="Enter Land Size(Sq.Foot)">
+                                    <input type="text" class="form-control" id="land_size" name="land_size_foot" value="{{isset($buildingedit)? $buildingedit->land_size_foot: '' }}" placeholder="Enter Land Size(Sq.Foot)" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -287,7 +287,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="state" class="form-label">Total Land Value</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="total_land" name="total_land" value="{{isset($buildingedit)? $buildingedit->total_land: '' }}" placeholder="Enter Total Land">
+                                    <input type="text" class="form-control" id="total_land" name="total_land" value="{{isset($buildingedit)? $buildingedit->total_land: '' }}" placeholder="Enter Total Land" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -299,19 +299,19 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Annual Income</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="annual_income" name="annual_income" value="{{isset($buildingedit)? $buildingedit->annual_income: '' }}" placeholder="Enter Annual Income">
+                                    <input type="text" class="form-control" id="annual_income" name="annual_income" value="{{isset($buildingedit)? $buildingedit->annual_income: '' }}" placeholder="Enter Annual Income" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="state" class="form-label">Payback Period</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="payback" name="payback" value="{{isset($buildingedit)? $buildingedit->payback: '' }}" placeholder="Enter Payback ">
+                                    <input type="text" class="form-control" id="payback" name="payback" value="{{isset($buildingedit)? $buildingedit->payback: '' }}" placeholder="Enter Payback " readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Total Net Property</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="property_vlaue" name="property_vlaue" value="{{isset($buildingedit)? $buildingedit->property_vlaue: '' }}" placeholder="Enter Total Property Value">
+                                    <input type="text" class="form-control" id="property_vlaue" name="property_vlaue" value="{{isset($buildingedit)? $buildingedit->property_vlaue: '' }}" placeholder="Enter Total Property Value" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -330,25 +330,25 @@
                         </div>
 
                         <div class="row gy-4 mb-3">
-                            <div class="col-xxl-3 col-md-6">
+                            <div class="col-xxl-3 col-md-3">
                                 <label for="incharge_name" class="form-label">Person In-Charge</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="incharge_name" name="incharge_name" value="{{isset($buildingedit)? $buildingedit->person_incharge: '' }}" placeholder="Person In-Charge">
                                 </div>
                             </div>
-                            <div class="col-xxl-3 col-md-6">
+                            <div class="col-xxl-3 col-md-3">
                                 <label for="country" class="form-label">Job</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="country" name="person_job" value="{{isset($buildingedit)? $buildingedit->person_job: '' }}" placeholder="Enter job">
                                 </div>
                             </div>
-                            <div class="col-xxl-3 col-md-6">
+                            <div class="col-xxl-3 col-md-3">
                                 <label for="state" class="form-label">Mobile No.</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="mobile" name="person_mobile" value="{{isset($buildingedit)? $buildingedit->person_mobile: '' }}" placeholder="Enter mobile">
                                 </div>
                             </div>
-                            <div class="col-xxl-3 col-md-6">
+                            <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Building Recieve Date</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="building_rdate" name="building_receive_date" value="{{isset($buildingedit)? $buildingedit->building_receive_date: '' }}" placeholder="12-12-2022">
@@ -406,14 +406,14 @@
             $('#title_deed').hide();
             $('#contract').hide();
             $('#title').show();
-            $('#contract_exp').show();
+            $('#contract_exp').hide();
 
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
                 if (optionValue == 'title_deed') {
                     $('#contract').hide();
                     $('#title').show();
-                    $('#contract_exp').show();
+                    $('#contract_exp').hide();
 
 
 
