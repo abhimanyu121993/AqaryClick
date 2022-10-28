@@ -8,7 +8,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Unit</h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body  table-responsive">
                     <table class="table table-nowrap container">
                         <thead>
                             <tr>

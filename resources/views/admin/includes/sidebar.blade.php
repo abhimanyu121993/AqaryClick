@@ -178,6 +178,23 @@
                         </ul>
                     </div>
                 </li>
+                <!-- Legal Management Menu -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards11" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards11">
+                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Legal Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards11">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{route('admin.legal.index')}}" class="nav-link" data-key="t-analytics">Registration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.legal.create')}}" class="nav-link" data-key="t-analytics">All Legal</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
 
                 <!-- Electricity Management Menu -->
                 <li class="nav-item">

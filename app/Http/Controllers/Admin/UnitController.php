@@ -49,6 +49,22 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'building_name'=>'required',
+            'unit_no'=>'required',
+            'unit_code'=>'required',
+            'unit_type'=>'required',
+            'unit_size'=>'required',
+            'unit_floor'=>'required',
+            'unit_feature'=>'required',
+            'electric_no'=>'required',
+            'water_no'=>'required',
+            'intial_rent'=>'required',
+            'actual_rent'=>'required',
+            'unit_desc'=>'required',
+            'unit_ref'=>'required',
+            'revenue'=>'required',
+
+
         ]);
         $otherpic=[];
         if($request->hasFile('attachment'))
@@ -129,6 +145,20 @@ class UnitController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'building_name'=>'required',
+            'unit_code'=>'required',
+            'unit_no'=>'required',
+            'unit_type'=>'required',
+            'unit_size'=>'required',
+            'unit_floor'=>'required',
+            'unit_feature'=>'required',
+            'electric_no'=>'required',
+            'water_no'=>'required',
+            'intial_rent'=>'required',
+            'actual_rent'=>'required',
+            'unit_desc'=>'required',
+            'unit_ref'=>'required',
+            'revenue'=>'required',
         ]);
         $otherpic=[];
         if($request->hasFile('file'))

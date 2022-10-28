@@ -38,16 +38,6 @@ return new class extends Migration
             $table->string('attestation_expiry')->nullable();
             $table->string('contract_status')->nullable();
             $table->text('remark')->nullable();
-
-
-
-
-
-
-
-
-
-
             $table->softDeletes();
             $table->timestamps();
         });

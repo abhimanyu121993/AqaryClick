@@ -1,14 +1,14 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Customers'])
-@section('title', 'Manage Customers')
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Legal'])
+@section('title', 'Manage Legal')
 @section('main-content')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Customer's</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Manage Legal</h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body  table-responsive">
                     <table class="table table-nowrap container">
                         <thead>
                             <tr>
@@ -21,19 +21,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user as $usr)
+                            
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $usr->name }}</td>
-                                    <td>{{ $usr->email }}</td>
-                                    <td>{{ $usr->phone}}</td>
+                                    <th scope="row">1</th>
+                                    <td>abc</td>
+                                    <td>email</td>
+                                    <td>phone</td>
                                     <td>
                                         Show Company
                                     </td>
                                     <td>
-                                       Show Account's
+                                        Show Account's
                                     </td>
-                            @endforeach
+                           
                             </tr>
                         </tbody>
                     </table>

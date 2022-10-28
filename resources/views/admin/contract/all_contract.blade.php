@@ -8,15 +8,32 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Contract </h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body  table-responsive">
                     <table class="table table-nowrap container">
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Type</th>
+                                <th scope="col">Document Type</th>
+                                <th scope="col">Sponsor Id</th>
                                 <th scope="col">Sponsor Name</th>
+                                <th scope="col">Sponsor Nationality</th>
                                 <th scope="col">Tenant Mobile</th>
-                                <th scope="col">Created at</th>
+                                <th scope="col">Lessor's Name</th>
+                                <th scope="col">Release Date</th>
+                                <th scope="col">Lease Start Date</th>
+                                <th scope="col">Lease End Date</th>
+                                <th scope="col">Lease Period Month</th>
+                                <th scope="col">Lease Period Day</th>
+                                <th scope="col">Grace Start Date</th>
+                                <th scope="col">Grace End Date</th>
+                                <th scope="col">Grace Period Month</th>
+                                <th scope="col">Grace Period Day</th>
+                                <th scope="col">Approved By</th>
+                                <th scope="col">Attestation No</th>
+                                <th scope="col">Attestation Expiry</th>
+                                <th scope="col">Contract Status</th>
+                                <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -24,10 +41,27 @@
                             @foreach ($contract as $con)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $con->tenant_type }}</td>
-                                    <td>{{ $con->sponsor_name }}</td>
-                                    <td>{{ $con->sponsor_mobile }}</td>
-                                    <td>{{ $con->created_at }}</td>
+                                    <td>{{ $con->tenant_type??'' }}</td>
+                                    <td>{{ $con->document_type??'' }}</td>
+                                    <td>{{ $con->sponsor_id??''}}</td>
+                                    <td>{{ $con->sponsor_name??''}}</td>
+                                    <td>{{ $con->sponsor_nationality??''}}</td>
+                                    <td>{{ $con->sponsor_mobile??''}}</td>
+                                    <td>{{ $con->lessor??''}}</td>
+                                    <td>{{ $con->release_date??''}}</td>
+                                    <td>{{ $con->lease_start_date??''}}</td>
+                                    <td>{{ $con->lease_end_date??''}}</td>
+                                    <td>{{ $con->lease_period_month ??''}}</td>
+                                    <td>{{ $con->lease_period_day??''}}</td>
+                                    <td>{{ $con->grace_start_date ??''}}</td>
+                                    <td>{{ $con->grace_end_date ??''}}</td>
+                                    <td>{{ $con->grace_period_month ??''}}</td>
+                                    <td>{{ $con->grace_period_day ??''}}</td>
+                                    <td>{{ $con->approved_by ??''}}</td>
+                                    <td>{{ $con->attestation_no ??''}}</td>
+                                    <td>{{ $con->attestation_expiry ??''}}</td>
+                                    <td>{{ $con->contract_status ??''}}</td>
+                                    <td>{{ $con->remark ??''}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
