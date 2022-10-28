@@ -7,7 +7,7 @@
 <div class="row project-wrapper">
     <div class="col-xxl-8">
         <div class="row">
-            <div class="col-xl-4">
+            <div class="col-xl-3">
                 <div class="card card-animate">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -29,7 +29,7 @@
                 </div>
             </div><!-- end col -->
 
-            <div class="col-xl-4">
+            <div class="col-xl-3">
                 <div class="card card-animate">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -51,7 +51,7 @@
                 </div>
             </div><!-- end col -->
 
-            <div class="col-xl-4">
+            <div class="col-xl-3">
                 <div class="card card-animate">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -64,6 +64,28 @@
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Buildings</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h4>
+                                    {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>10.35 %</span> --}}
+                                </div>
+                                {{-- <p class="text-muted text-truncate mb-0">Work this month</p> --}}
+                            </div>
+                        </div>
+                    </div><!-- end card body -->
+                </div>
+            </div><!-- end col -->
+
+            <div class="col-xl-3">
+                <div class="card card-animate">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                    <i data-feather="home" class="text-info"></i>
+                                </span>
+                            </div>
+                            <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Tenants</p>
+                                <div class="d-flex align-items-center mb-3">
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\Tenant::count() }}">{{ App\Models\Tenant::count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>10.35 %</span> --}}
                                 </div>
                                 {{-- <p class="text-muted text-truncate mb-0">Work this month</p> --}}
