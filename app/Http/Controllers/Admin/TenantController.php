@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Nationality;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -18,7 +19,8 @@ class TenantController extends Controller
      */
     public function index()
     {
-        return view('admin.tenant.tenantregister');
+        $nation=Nationality::all();
+        return view('admin.tenant.tenantregister',compact('nation'));
     }
 
     /**

@@ -36,7 +36,7 @@
                                         <a href="/contect-us">CONTACT US</a>
                                     </li>
                                     <li>
-                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login In</button>
+                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign In</button>
                                     </li>
                                     <li>
                                         <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register</button>

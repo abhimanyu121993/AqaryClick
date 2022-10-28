@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
-                                    <label for="name" class="form-label">Bill Ammount</label>
+                                    <label for="name" class="form-label">Bill Amount</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="bill_amt" name="bill_amt" value="{{isset($electricity)? $electricity->bill_amt: '' }}" placeholder="Enter Ammount">
                                     </div>
@@ -181,7 +181,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Electric No</th>
                                 <th scope="col">Water No</th>
-                                <th scope="col">Bill Ammount</th>
+                                <th scope="col">Bill Amount</th>
                                 <th scope="col">Privious Payment</th>
                                 <th scope="col">Paid By</th>
                                 <th scope="col">Remark</th>

@@ -65,7 +65,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards5">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics">Registration</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.building.create')}}" class="nav-link" data-key="t-analytics"> All Buildings </a>
@@ -85,7 +85,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards6">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.unit.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.unit.index')}}" class="nav-link" data-key="t-analytics">Registration</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.unit.create')}}" class="nav-link" data-key="t-analytics"> All Units </a>
@@ -114,7 +114,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards7">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.tenant.index') }}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{ route('admin.tenant.index') }}" class="nav-link" data-key="t-analytics">Registration</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.tenant.create') }}" class="nav-link" data-key="t-analytics"> All Tenants </a>
@@ -131,7 +131,7 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics"> Register </a>
+                                <a href="{{route('admin.building.index')}}" class="nav-link" data-key="t-analytics">Registration</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{route('admin.owner.create')}}" class="nav-link" data-key="t-analytics"> All Owners </a>
@@ -152,9 +152,7 @@
                             </li><li class="nav-item">
                                 <a href="{{route('admin.broker.create')}}" class="nav-link" data-key="t-analytics"> All Broker </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li>
+                           
                         </ul>
                     </div>
                 </li>
@@ -167,9 +165,12 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.customer.index') }}" class="nav-link" data-key="t-analytics">Customer Registration </a>
-                                <a href="{{ route('admin.customer.create') }}" class="nav-link" data-key="t-analytics">Customer</a>
+                                <a href="{{ route('admin.customer.index') }}" class="nav-link" data-key="t-analytics">Registration </a>
                             </li>
+                            <li class="nav-item">
+                            <a href="{{ route('admin.customer.create') }}" class="nav-link" data-key="t-analytics">All Customer</a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
@@ -182,11 +183,11 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.contract.index')}}" class="nav-link" data-key="t-analytics">Contract Registration</a>
+                                <a href="{{route('admin.contract.index')}}" class="nav-link" data-key="t-analytics">Registration</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li>
+                                <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
+                            </li> 
                         </ul>
                     </div>
                 </li>
