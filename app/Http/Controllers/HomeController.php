@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nationality;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $nationality = Nationality::get();
+        return view('welcome', compact('nationality'));
     }
 
     public function about()
@@ -25,7 +27,7 @@ class HomeController extends Controller
     {
         return view('home.propertie-details');
     }
-    
+
     public function contect()
     {
         return view('home.contect');

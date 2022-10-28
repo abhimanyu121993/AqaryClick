@@ -87,12 +87,12 @@
     </div>
 
     <!-- register modal -->
-    @if (Session::has('success'))
+    {{-- @if (Session::has('success'))
         <p style="color:green">{{ Session::get('success') }}</p>
     @endif
     @if (Session::has('error'))
         <p style="color:red">{{ Session::get('error') }}</p>
-    @endif
+    @endif --}}
     <div class="modal fade" id="registerdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -205,9 +205,6 @@
 
                             <form action="{{ route('admin.broker.store') }}" id="form" method="POST"
                                 enctype="multipart/form-data">
-                                {{-- @if (isset($customer))
-                            @method('patch')
-                        @endif --}}
                                 @csrf
 
                                 <div class="row gy-4 mb-3 " id="agent_checker">
@@ -488,14 +485,12 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="space" class="form-label">Tenant Nationality</label>
+                                            <label for="space" class="form-label">Nationality</label>
                                             <select class="form-control" id="customer" name="customer_nationality">
-                                                <option value="">-----Select Tenant Nationality-----</option>
-                                                <option value="Indian">Indian</option>
-                                                <option value="Dubai">Dubai</option>
-                                                <option value="England">England</option>
-                                                <option value="Chinies">Chinies</option>
-                                                <option value="Russian">Russian</option>
+                                                <option value="">-----Select Nationality-----</option>
+                                                @foreach ($nationality as $nation)
+                                                <option value="{{ $nation->id }}">{{ $nation->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="card-header align-items-center d-flex">
@@ -711,9 +706,9 @@
     </div>
 
     <div class="page-wrapper">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+            <!--Toaster Js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <script>
             $(document).ready(function() {
                 // $("input[type='radio']").click(function(){
@@ -784,3 +779,15 @@
                 }).change();
             });
         </script>
+
+<script>
+    $(document).ready(function() {
+        toastr.options.timeOut = 10000;
+        @if (Session::has('error'))
+            toastr.error('{{ Session::get('error') }}');
+        @elseif(Session::has('success'))
+            toastr.success('{{ Session::get('success') }}');
+        @endif
+    });
+
+</script>

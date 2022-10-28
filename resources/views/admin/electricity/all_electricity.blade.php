@@ -31,8 +31,8 @@
                         <tbody>
                             @foreach ($electric as $el)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>                                    
-                                    <td>{{ $el->building_name ?? '' }}</td>
+                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td><i>{{ $el->building->name ?? '' }}</i></td>
                                     <td>{{ $el->unit_no ?? '' }}</td>
                                     <td>{{ $el->unit_type ?? '' }}</td>
                                     <td>{{ $el->electric_under ?? '' }}</td>
@@ -52,7 +52,7 @@
                                             @php $bid=Crypt::encrypt($el->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             @php $pics=json_decode($el->file); @endphp
-                                            @foreach ($pics as $pic) 
+                                            @foreach ($pics as $pic)
                                                 <li><a class="dropdown-item" href="{{route('admin.getDownload',$pic)}}">{{$pic??''}}</a></li>
                                             @endforeach
                                         </ul>

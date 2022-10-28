@@ -111,7 +111,7 @@
                 </li>
 
                 <!-- Owner Management Menu -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards5" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards5">
                         <i data-feather="user" class="icon-dual"></i> <span data-key="t-dashboards">Owner Management</span>
                     </a>
@@ -125,7 +125,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <!-- Broker Management Menu -->
                 <li class="nav-item">
@@ -138,9 +138,6 @@
                                 <a href="{{route('admin.broker.index')}}" class="nav-link" data-key="t-analytics"> Registration </a>
                             </li><li class="nav-item">
                                 <a href="{{route('admin.broker.create')}}" class="nav-link" data-key="t-analytics"> All Broker </a>
-                            </li>
-                              <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
                             </li>
                         </ul>
                     </div>
@@ -177,18 +174,11 @@
 
                             <li class="nav-item">
                                 <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
-                            </li> 
-
-                            {{-- <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li> --}}
-
-                            <li class="nav-item">
-                                <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
-                            </li> 
+                            </li>
                         </ul>
                     </div>
                 </li>
+
                 <!-- Electricity Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards9" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
@@ -200,11 +190,12 @@
                                 <a href="{{route('admin.electricity.index')}}" class="nav-link" data-key="t-analytics">Generate Bill</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.electricity.create')}}" class="nav-link" data-key="t-analytics">All Electricity</a>
+                                <a href="{{route('admin.electricity.create')}}" class="nav-link" data-key="t-analytics">All Electricity Bills</a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
                 <!-- Settings Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards10" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards10">

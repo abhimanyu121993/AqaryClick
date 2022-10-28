@@ -28,7 +28,7 @@
                             <div class="col-xxl-3 col-md-4">
                     <label class="form-label" for="flag">Building Name</label>
 
-                    <select class="select2 form-select" id="building_name" name='building_name'>
+                    <select class="form-select js-example-basic-single" id="building_name" name='building_name'>
                         @if (isset($electricity))
                         <option value="{{ $electricity->id}}" selected>{{ $electricity->building_name}}</option>
                         @else
@@ -45,7 +45,7 @@
                             @if (isset($electricity))
                            <option value="{{ $electricity->unit_no }}" selected>{{ $electricity->unit_no}}</option>
                            @else
-                           <option value="">--Select Unit No--</option>  
+                           <option value="">--Select Unit No--</option>
                              @endif
                               </select>
                                 </div>
@@ -56,7 +56,7 @@
                             @if (isset($electricity))
                            <option value="{{ $electricity->unit_type }}" selected>{{ $electricity->unit_type}}</option>
                            @else
-                           <option value="">--Select Unit Type--</option>  
+                           <option value="">--Select Unit Type--</option>
                              @endif
                               </select>
                                 </div>
@@ -66,7 +66,7 @@
                             @if (isset($electricity))
                            <option value="{{ $electricity->electric_under }}" selected>{{ $electricity->electric_under}}</option>
                            @else
-                           <option value="">--Select Electricity Under--</option>  
+                           <option value="">--Select Electricity Under--</option>
                            <option value="tenant">Tenant</option>
                                     <option value="lessor">Lessor</option>
                              @endif
@@ -78,7 +78,7 @@
                             @if (isset($electricity))
                            <option value="{{ $electricity->name }}" selected>{{ $electricity->name}}</option>
                            @else
-                           <option value="">--Select Name--</option>  
+                           <option value="">--Select Name--</option>
                              @endif
                               </select>
                                 </div>
@@ -106,7 +106,7 @@
                                         <input type="text" class="form-control" id="water_no" name="water_no" value="{{isset($electricity)? $electricity->water_no: '' }}" placeholder="Enter Water No">
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Last Paid Invoice date</label>
                                     <div class="input-group">
@@ -125,14 +125,14 @@
                             @if (isset($electricity))
                            <option value="{{ $electricity->paid_by }}" selected>{{ $electricity->paid_by}}</option>
                            @else
-                           <option value="">--Select--</option>  
+                           <option value="">--Select--</option>
                            <option value="tenant">Tenant</option>
                                     <option value="lessor">Lessor</option>
                              @endif
                               </select>
                                 </div>
                             </div>
-                           
+
                                 <div class="row gy-4">
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Remark</label>
@@ -163,7 +163,7 @@
         </div>
     </div>
 
-    
+
 
 
 
@@ -187,7 +187,7 @@
                         $("#unit_no").html(p.html);
                         $("#unit_type").html(p.html1);
                         $("#last_invoice_date").val(p.result)
-                       
+
 
 
                     }
