@@ -35,7 +35,9 @@ class ElectricityController extends Controller
      */
     public function create()
     {
-        //
+        $electric_invoice=Electricity::latest()->first();
+        $electric=Electricity::all();
+        return view('admin.electricity.all_electricity',compact('electric','electric_invoice'));  
     }
 
     /**
