@@ -139,9 +139,6 @@
                             </li><li class="nav-item">
                                 <a href="{{route('admin.broker.create')}}" class="nav-link" data-key="t-analytics"> All Broker </a>
                             </li>
-                              <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -177,18 +174,11 @@
 
                             <li class="nav-item">
                                 <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
-                            </li> 
-
-                            {{-- <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-analytics"> Role </a>
-                            </li> --}}
-
-                            <li class="nav-item">
-                                <a href="{{route('admin.contract.create')}}" class="nav-link" data-key="t-analytics">All Contract</a>
-                            </li> 
+                            </li>
                         </ul>
                     </div>
                 </li>
+
                 <!-- Electricity Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards9" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
@@ -205,6 +195,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <!-- Settings Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards10" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards10">
