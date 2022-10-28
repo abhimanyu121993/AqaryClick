@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\admin\ElectricityController;
 use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
@@ -44,18 +45,6 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/propertie-details','propertie_details');
     Route::get("/contect-us","contect");
 });
-
-
-
-
-
-
-
-
-
-
-
-
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
 Route::post('/login',[LoginController::class, 'store'])->name('login');
@@ -92,6 +81,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
+    Route::get('fetchCountry/{country_id}',[BuildingController::class,'fetchCountry'])->name('fetchCountry');
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::get('document/{id}',[BuildingController::class,'document'])->name('document');
     Route::get('tenant-document/{id}',[TenantController::class,'tenantdocument'])->name('tenantDocument');
@@ -102,7 +92,12 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
     Route::resource('tenant',TenantController::class);
-
+    Route::get('fetchunit/{building_name}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
+    Route::get('fetch-qid/{name}',[ElectricityController::class,'fetchQid'])->name('fetchQid');
+    Route::get('fetch-tenant-name',[ElectricityController::class,'fetchTenantName'])->name('fetchTenantName');
+    Route::get('fetchContract',[ElectricityController::class,'fetchContract'])->name('fetchContract');
+    Route::get('electricity-download/{path}',[ElectricityController::class,'getDownload'])->name('getDownload');
+    Route::resource('electricity',ElectricityController::class);
 });
 
 

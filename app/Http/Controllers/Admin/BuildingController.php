@@ -329,12 +329,21 @@ class BuildingController extends Controller
 public function fetchZone($city_id){
 
 $res=Area::where('city_id',$city_id)->get();
-$html='';
+$html='<option value="">--Select Zone--</option>';
 foreach($res as $r){
     $html .='<option value="'.$r->name.'">'.$r->name.'</option>';
 }
 return response()->json($html);
 }
+public function fetchCountry($country_id){
+    $res=City::where('Country_name',$country_id)->get();
+    $html=' <option value="">--Select City--</option>';
+            
+    foreach($res as $r){
+        $html .='<option value="'.$r->id.'">'.$r->name.'</option>';
+    }
+    return response()->json($html);
+    }
 public function document($id){
     $id = Crypt::decrypt($id);
     $document=Building::find($id); 

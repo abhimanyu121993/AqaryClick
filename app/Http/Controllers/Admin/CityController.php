@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\Models\Nationality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -17,7 +18,8 @@ class CityController extends Controller
     public function index()
     {
         $units=City::all();
-        return view('admin.settings.add_city',compact('units'));
+        $country=Nationality::all();
+        return view('admin.settings.add_city',compact('units','country'));
     }
 
     /**
@@ -40,9 +42,11 @@ class CityController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'country_name' => 'required',
         ]);
        $data= City::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'country_name'=>$request->country_name
         ]);
         if($data){
         return redirect()->back()->with('success','City has been created successfully.');
@@ -88,9 +92,13 @@ class CityController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'country_name' => 'required',
+
         ]);
         $data=City::find($id)->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'country_name'=>$request->country_name
+
         ]);
         if($data)
         {

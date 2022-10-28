@@ -16,6 +16,19 @@
                         @endif
                             @csrf
                             <div class="row gy-4">
+                            <div class="col-xxl-3 col-md-6">
+                                <label for="space" class="form-label">Select Country</label>
+                                <select class="form-control" id="country_name" name="country_name">
+                                @if (isset($city))
+                                    <option value="{{ $city->country_name }}" selected>{{ $city->country_name}}</option>
+                                    @else
+                                    <option value="">--Select Country--</option>
+                                    @foreach ($country as $count)
+                                    <option value="{{ $count->id }}">{{ $count->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="name" class="form-label">City Name</label>
                                     <div class="input-group">
@@ -43,7 +56,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
-                                <th scope="col">Name</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">City Name</th>
                                 <th scope="col">Created at</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -52,7 +66,8 @@
                             @foreach ($units as $unit)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $unit->name }}</td>
+                                    <td>{{ $unit->nationality->name??'' }}</td>
+                                    <td>{{ $unit->name??'' }}</td>
                                     <td>{{ $unit->created_at }}</td>
                                     <td>
                                         <div class="dropdown">
