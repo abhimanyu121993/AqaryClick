@@ -92,7 +92,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
     Route::resource('tenant',TenantController::class);
-    Route::get('fetchunit/{building_name}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
+    Route::get('fetchunit/{building_id}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
     Route::get('fetch-qid/{name}',[ElectricityController::class,'fetchQid'])->name('fetchQid');
     Route::get('fetch-tenant-name',[ElectricityController::class,'fetchTenantName'])->name('fetchTenantName');
     Route::get('fetchContract',[ElectricityController::class,'fetchContract'])->name('fetchContract');
