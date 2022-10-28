@@ -36,7 +36,7 @@
                                         <a href="/contect-us">CONTACT US</a>
                                     </li>
                                     <li>
-                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign In</button>
+                                        <a href="{{ route('admin') }}" class="btn btn-sm login-btn"><span style="color: white;">Sign In</span></a>
 
                                     </li>
                                     <li>
