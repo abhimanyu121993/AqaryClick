@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('water_no')->nullable();
             $table->string('bill_amt')->nullable();
             $table->string('paid_by')->nullable();
+            $table->string('last_payment')->default('No Records');
             $table->json('file')->default(json_encode([]));
             $table->text('auth_paid')->nullable();
             $table->text('remark')->nullable();

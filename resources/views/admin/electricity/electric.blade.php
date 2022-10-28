@@ -30,11 +30,11 @@
 
                     <select class="select2 form-select" id="building_name" name='building_name'>
                         @if (isset($electricity))
-                        <option value="{{ $electricity->building_name}}" selected>{{ $electricity->building_name}}</option>
+                        <option value="{{ $electricity->id}}" selected>{{ $electricity->building_name}}</option>
                         @else
                         <option value="">--Select Builidng Name--</option>
                         @foreach($build as $building)
-                        <option value="{{ $building->name}}">{{ $building->name }}</option>
+                        <option value="{{ $building->id}}">{{ $building->name }}</option>
                         @endforeach
                         @endif
                     </select>
@@ -110,7 +110,7 @@
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Last Paid Invoice date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="last_invoice_date" name="last_invoice_date" value="No Records" readonly>
+                                        <input type="text" class="form-control" id="last_payment" name="last_payment" value="No Records" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
@@ -182,6 +182,7 @@
                                 <th scope="col">Electric No</th>
                                 <th scope="col">Water No</th>
                                 <th scope="col">Bill Ammount</th>
+                                <th scope="col">Privious Payment</th>
                                 <th scope="col">Paid By</th>
                                 <th scope="col">Remark</th>
                                 <th scope="col">View</th>
@@ -200,6 +201,7 @@
                                     <td>{{ $el->electric_no ?? '' }}</td>
                                     <td>{{ $el->water_no ?? '' }}</td>
                                     <td>{{ $el->bill_amt ?? '' }}</td>
+                                    <td>{{ $el->last_payment ?? '' }}</td>
                                     <td>{{ $el->paid_by ??''}}</td>
                                     <td>{{ $el->remark ??''}}</td>
                                     <td>
