@@ -37,9 +37,10 @@
                                     </li>
                                     <li>
                                         <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign In</button>
+
                                     </li>
                                     <li>
-                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register</button>
+                                        <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register Here</button>
                                     </li>
                                 </ul>
                             </div>
