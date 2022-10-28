@@ -190,7 +190,7 @@
                                 <a href="{{route('admin.electricity.index')}}" class="nav-link" data-key="t-analytics">Generate Bill</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.electricity.create')}}" class="nav-link" data-key="t-analytics">All Electricity</a>
+                                <a href="{{route('admin.electricity.create')}}" class="nav-link" data-key="t-analytics">All Electricity Bills</a>
                             </li>
                         </ul>
                     </div>
