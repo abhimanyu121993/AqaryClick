@@ -34,8 +34,8 @@ class ContractController extends Controller
      */
     public function create()
     {
-        //
-    }
+        $contract=Contract::all();
+        return view('admin.contract.all_contract',compact('contract'));    }
 
     /**
      * Store a newly created resource in storage.
@@ -106,12 +106,11 @@ class ContractController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
-        $contractedit=Contract::find($id);
-        $contract=Contract::all();
-        $tenant=Tenant::pluck('customer_type');
-        $tenant_doc=Tenant::pluck('document_name');
+        $contractedit=Contract::find($id);        
+        $tenant=Tenant::pluck('tenant_english_name');
+        $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
-        return view('admin.contract.contract_registration',compact('contract','contractedit','tenant','tenant_doc','tenant_nation'));
+        return view('admin.contract.contract_registration',compact('contractedit','tenant','tenant_doc','tenant_nation'));
     }
 
     /**
