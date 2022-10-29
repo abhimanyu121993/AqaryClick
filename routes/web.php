@@ -98,6 +98,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetchContract',[ElectricityController::class,'fetchContract'])->name('fetchContract');
     Route::get('electricity-download/{path}',[ElectricityController::class,'getDownload'])->name('getDownload');
     Route::resource('electricity',ElectricityController::class);
+    Route::get('/isactive/{id}',[UserController::class,'isActive'])->name('activeUser');
+
 });
 
 

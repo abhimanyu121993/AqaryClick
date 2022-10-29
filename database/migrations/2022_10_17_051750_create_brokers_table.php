@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('brokers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('fname');
+            $table->string('lname');
+            $table->string('mobile');
+            $table->string('email');
             $table->softDeletes();
             $table->timestamps();
         });

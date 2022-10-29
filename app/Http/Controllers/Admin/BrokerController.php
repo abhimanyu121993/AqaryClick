@@ -39,16 +39,24 @@ class BrokerController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile' => 'required',
+            'email' => 'required',
+
         ]);
        $data= Broker::create([
-            'name' => $request->name
+            'fname' => $request->first_name,
+            'lname' => $request->last_name,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+
         ]);
         if($data){
-        return redirect()->back()->with('success','Agent has been created successfully.');
+        return redirect()->back()->with('success','Broker has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Agent not created.');
+            return redirect()->back()->with('error','Broker not created.');
         }
     }
 
@@ -87,10 +95,17 @@ class BrokerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile' => 'required',
+            'email' => 'required',
         ]);
         $data=Broker::find($id)->update([
-            'name' => $request->name
+            'fname' => $request->first_name,
+            'lname' => $request->last_name,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+
         ]);
         if($data)
         {
@@ -98,7 +113,7 @@ class BrokerController extends Controller
         }
         else
         {
-            return redirect()->back()->with('error','Broker not created.');
+            return redirect()->back()->with('error','Broker not Updated.');
         }
     }
 

@@ -16,14 +16,14 @@
                                     <i data-feather="users" class="text-primary"></i>
                                 </span>
                             </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
+                            <a href="{{ route('admin.customer.create') }}">  <div class="flex-grow-1 overflow-hidden ms-3">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Active Customer</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\User::count() }}">{{ App\Models\User::count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>5.02 %</span> --}}
                                 </div>
                                 {{-- <p class="text-muted text-truncate mb-0">Projects this month</p> --}}
-                            </div>
+                            </div></a>
                         </div>
                     </div><!-- end card body -->
                 </div>
@@ -38,14 +38,14 @@
                                     <i data-feather="users" class="text-warning"></i>
                                 </span>
                             </div>
-                            <div class="flex-grow-1 ms-3">
+                            <a href="{{ route('admin.customer.create') }}"><div class="flex-grow-1 ms-3">
                                 <p class="text-uppercase fw-medium text-muted mb-3">Registered Customers</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\User::count() }}">{{ App\Models\User::count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span> --}}
                                 </div>
                                 {{-- <p class="text-muted mb-0">Leads this month</p> --}}
-                            </div>
+                            </div></a>
                         </div>
                     </div><!-- end card body -->
                 </div>
@@ -60,14 +60,14 @@
                                     <i data-feather="home" class="text-info"></i>
                                 </span>
                             </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
+                            <a href="{{route('admin.building.create')}}"><div class="flex-grow-1 overflow-hidden ms-3">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Buildings</p>
                                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>10.35 %</span> --}}
                                 </div>
                                 {{-- <p class="text-muted text-truncate mb-0">Work this month</p> --}}
-                            </div>
+                            </div></a>
                         </div>
                     </div><!-- end card body -->
                 </div>
@@ -98,32 +98,32 @@
 
                     <div class="card-header p-0 border-0 bg-soft-light">
                         <div class="row g-0 text-center">
-                            <div class="col-6 col-sm-3">
+                        <a href="{{ route('admin.building.create') }}"><div class="col-6 col-sm-3">
                                 <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="0">0</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h5>
                                     <p class="text-muted mb-0">Number of Builidngs</p>
-                                </div>
+                                </div></a>
                             </div>
                             <!--end col-->
                             <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="0">0</span></h5>
+                            <a href="{{ route('admin.electricity.create') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Electricity::count() }}">{{ App\Models\Electricity::count() }}</span></h5>
                                     <p class="text-muted mb-0">Electricity Bill Generated</p>
-                                </div>
+                                </div></a>
                             </div>
                             <!--end col-->
                             <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="0">0</span></h5>
+                            <a href="{{ route('admin.tenant.create') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Tenant::count() }}">{{ App\Models\Tenant::count() }}</span></h5>
                                     <p class="text-muted mb-0">Total Tenants</p>
-                                </div>
+                                </div></a>
                             </div>
                             <!--end col-->
                             <div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                    <h5 class="mb-1 text-success"><span class="counter-value" data-target="0">0</span></h5>
+                            <a href="{{ route('admin.contract.create') }}"> <div class="p-3 border border-dashed border-start-0 border-end-0">
+                                    <h5 class="mb-1 text-success"><span class="counter-value" data-target="{{ App\Models\Contract::count() }}">{{ App\Models\Contract::count() }}</span></h5>
                                     <p class="text-muted mb-0">Contracts Created</p>
-                                </div>
+                                </div></a>
                             </div>
                             <!--end col-->
                         </div>
