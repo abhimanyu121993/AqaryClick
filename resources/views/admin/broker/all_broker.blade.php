@@ -13,17 +13,21 @@
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Created at</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($units as $unit)
                                 <tr>
+                                @foreach ($units as $unit)
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $unit->name }}</td>
-                                    <td>{{ $unit->created_at }}</td>
+                                    <td>{{ $unit->fname }}</td>
+                                    <td>{{ $unit->lname }}</td>
+                                    <td>{{ $unit->mobile }}</td>
+                                    <td>{{ $unit->email }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

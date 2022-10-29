@@ -8,10 +8,12 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -99,9 +101,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
+    {       
+        $id = Crypt::decrypt($id);
+        $userEdit=User::find($id);
+        $roles = Role::all();
+        $users = User::all();
+        return view('admin.user', compact('users', 'roles','userEdit'));    }
 
     /**
      * Show the form for editing the specified resource.
@@ -111,7 +116,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+
+        $userEdit=User::find($id);
+        dd($userEdit);
+        return view('admin.user', compact('userEdit'));
     }
 
     /**
@@ -123,7 +132,50 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'nullable',
+            'email' => 'required',
+            'roleid' => 'required',
+            'phone' => 'nullable',
+            'pic' => 'nullable|image'
+        ]);
+        try{
+            $default_password = '12345';
+            $pic_name = 'assets/images/default_user.png';
+            if($request->hasFile('pic'))
+            {
+                $upic='user-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/user/'),$upic);
+                $pic_name = 'upload/user/'.$upic;
+            }
+            $data = [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($default_password),
+                'pic' => $pic_name
+            ];
+            $user = User::find($id)->update($data);
+            $role_name = Role::find($request->roleid);
+            if($user)
+            {
+                $user->assignRole($role_name);
+                Session::flash('success', 'User Updated successfully');
+            }
+            else
+            {
+                Session::flash('error', 'User not Updated');
+            }
+        }
+        catch(Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+            Session::flash('error','Server Error ');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -134,8 +186,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+       
+           }
+
+    
     public function profile()
     {
 
@@ -231,5 +285,26 @@ class UserController extends Controller
             Session::flash('error','Server Error ');
         }
             return redirect()->back();
+    }
+
+    public function isActive($id)
+    {
+        $ass_active=User::find($id);
+   
+        if($ass_active->status==1)
+        {
+            $ass_active->status=0;
+        }else
+        {
+            $ass_active->status=true;
+        }
+        if($ass_active->update()){
+           return 1;
+        }
+        else
+        {
+           return 0;
+    
+        }
     }
 }
