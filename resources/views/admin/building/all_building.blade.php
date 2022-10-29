@@ -39,25 +39,25 @@
                             @foreach ($buildings as $building)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $building->building_no}}</td>
-                                    <td>{{ $building->building_code}}</td>
-                                    <td>{{ $building->building_type}}</td>
-                                    <td>{{ $building->name}}</td>
-                                    <td>{{ $building->cost_building}}</td>
-                                    <td>{{ $building->Construction_date}}</td>
-                                    <td>{{ $building->person_incharge}}</td>
-                                    <td>{{ $building->person_job}}</td>
-                                    <td>{{ $building->person_mobile}}</td>
-                                    <td>{{ $building->country}}</td>
-                                    <td>{{ $building->city}}</td>
-                                    <td>{{ $building->area}}</td>
-                                    <td>{{ $building->pincode}}</td>
+                                    <td>{{ $building->building_no??''}}</td>
+                                    <td>{{ $building->building_code??''}}</td>
+                                    <td>{{ $building->building_type??''}}</td>
+                                    <td>{{ $building->name??''}}</td>
+                                    <td>{{ $building->cost_building??''}}</td>
+                                    <td>{{ $building->Construction_date??''}}</td>
+                                    <td>{{ $building->person_incharge??''}}</td>
+                                    <td>{{ $building->person_job??''}}</td>
+                                    <td>{{ $building->person_mobile??''}}</td>
+                                    <td>{{ $building->nationality->name??''}}</td>
+                                    <td>{{ $building->cityDetails->name??''}}</td>
+                                    <td>{{ $building->area??''}}</td>
+                                    <td>{{ $building->pincode??''}}</td>
 
 
 
-                                    <td>{{ $building->building_receive_date}}</td>
-                                    <td>{{ $building->owner_name}}</td>
-                                    <td>{{ $building->lessor_name}}</td>
+                                    <td>{{ $building->building_receive_date??''}}</td>
+                                    <td>{{ $building->owner_name??''}}</td>
+                                    <td>{{ $building->lessor_name??''}}</td>
                                     <td><img src="{{asset('upload/building/'.$building->building_pic)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                                     <td>
                                     @php $bid=Crypt::encrypt($building->id); @endphp

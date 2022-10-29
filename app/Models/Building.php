@@ -10,4 +10,13 @@ class Building extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class, 'country', 'id');
+    }
+    public function cityDetails()
+    {
+        return $this->belongsTo(City::class, 'city', 'id');
+    }
 }

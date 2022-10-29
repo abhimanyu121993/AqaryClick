@@ -182,7 +182,8 @@ class BuildingController extends Controller
         $building_types=BuildingType::all();
         $building_statuses=BuildingStatus::all();
         $buildings=Building::all();
-        return view('admin.building.register_building',compact('buildingedit','buildings','building_types','building_statuses'));
+        $countryDetail=Nationality::all();
+        return view('admin.building.register_building',compact('buildingedit','buildings','building_types','building_statuses','countryDetail'));
     }
 
     /**

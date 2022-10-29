@@ -10,4 +10,6 @@ class Nationality extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
+
+    
 }
