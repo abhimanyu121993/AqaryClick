@@ -6,18 +6,21 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Create Role</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($RoleEdit)? 'Update Role' : 'Create Role' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{ route('admin.role.store') }}" method="POST">
-                            @csrf
+                        <form action="{{ isset($RoleEdit)? route('admin.role.update',$RoleEdit->id) : route('admin.role.store') }}" method="POST">
+                        @if (isset($RoleEdit))
+                        @method('patch')
+                        @endif   
+                        @csrf
                             <div class="row gy-4">
                                 <div class="col-xxl-3 col-md-6">
                                     <label for="role" class="form-label">Role Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="role" name="role" placeholder="Role Name">
-                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                        <input type="text" class="form-control" id="role" name="role" value="{{ isset($RoleEdit)? $RoleEdit->name : '' }}" placeholder="Role Name">
+                                        <button class="btn btn-primary" type="submit">{{ isset($RoleEdit)? 'Update' : 'Submit' }}</button>
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -57,10 +60,16 @@
                                                 aria-expanded="false">
                                                 <i class="ri-more-2-fill"></i>
                                             </a>
-
+                                            @php $bid=Crypt::encrypt($data->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                                <li><a class="dropdown-item" href="{{route('admin.role.edit',$bid)}}">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+
+                                                <form id="delete-form-{{ $bid }}" action="{{ route('admin.role.destroy', $bid) }}"
+                                                    method="post" style="display: none;">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
                                             </ul>
                                         </div>
                                     </td>
