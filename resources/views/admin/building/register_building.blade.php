@@ -153,12 +153,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <!-- <div class="col-xxl-3 col-md-6">
-                                <label for="state" class="form-label">State</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="state" name="state" value="{{isset($buildingedit)? $buildingedit->state: '' }}" placeholder="State">
-                                </div>
-                            </div> -->
+                            
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">City</label>
 

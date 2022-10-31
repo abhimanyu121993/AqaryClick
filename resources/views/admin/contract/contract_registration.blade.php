@@ -18,37 +18,47 @@
                                 @method('patch')
                             @endif
                             @csrf
+                            @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                             <div class="row gy-4">
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Tenant Name</label>
 
                                     <select class="select2 form-select" id="tenant_name" name='tenant_name'
-                                        @if (isset($contractedit)) disabled @endif required>
+                                        >
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->tenant_name }}" selected>
-                                                {{ $contractedit->tenant_name }}</option>
-                                        @endif
+                                            <option value="{{ $contractedit->tenant_type }}" selected>
+                                                {{ $contractedit->tenant_type }}</option>
+                                                @else
                                         <option value="">-----Select Type-----</option>
                                         @foreach ($tenant as $tent)
                                             <option value="{{ $tent }}">{{ $tent }}</option>
                                         @endforeach
+                                        @endif
+
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label class="form-label" for="flag">Document Type</label>
-
-                                    <select class="select2 form-select" id="flag" name='document_type'
-                                        @if (isset($contractedit)) disabled @endif required>
-                                        @if (isset($contractedit))
+                                <label for="space" class="form-label">Document Type</label>
+                                <select class="form-control" id="tenant_document_type" name="document_type">
+                                @if (isset($contractedit))
                                             <option value="{{ $contractedit->document_type }}" selected>
                                                 {{ $contractedit->document_type }}</option>
-                                        @endif
-                                        <option value="">----Select Document Type----</option>
-                                        @foreach ($tenant_doc as $tent)
-                                            <option value="{{ $tent }}">{{ $tent }}</option>
-                                        @endforeach>
-                                    </select>
-                                </div>
+                                        @else
+                                    <option value="">-----Select Type-----</option>
+                                    <option value="QID">QID</option>
+                                    <option value="CR">CR</option>
+                                    <option value="Passport">Passport</option>
+                                    @endif
+                                </select>
+                            </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Tenant Mobile</label>
                                     <div class="input-group">
@@ -60,9 +70,18 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Contract Status</label>
                                     <select class="form-control select2 form-select" name="contract_status">
+                                    @if (isset($contractedit))
+                                            <option value="{{ $contractedit->contract_status }}" selected>
+                                                {{ $contractedit->contract_status }}</option>
+                                        @else
                                         <option value="">-----Select Status-----</option>
                                         <option value="new">New</option>
-                                        <option value="old">Old</option>
+                                        <option value="renewed">Renewed</option>
+                                        <option value="auto renewed">Auto Renewed</option>
+                                        <option value="long term">Long Term</option>
+                                        <option value="releted parties">Releted Parties</option>
+
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -84,15 +103,16 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Sponsor Nationality</label>
                                     <select class="select2 form-select" name='sponsor_nationality'
-                                        @if (isset($contractedit)) disabled @endif required>
+                                        >
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->sponsor_nationality }}" selected>
                                                 {{ $contractedit->sponsor_nationality }}</option>
-                                        @endif
+                                       @else
                                         <option value="" id="sponsor_nationality">----Select Nationality----</option>
                                         @foreach ($tenant_nation as $tent)
                                             <option value="{{ $tent }}">{{ $tent }}</option>
                                         @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -104,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Lessor's Name</label>
+                                    <label for="name" class="form-label">Lessor's/Company Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="name" name="lessor"
                                             value="{{ isset($contractedit) ? $contractedit->lessor : '' }}"
@@ -112,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="lessor_sign" class="form-label">Lessor Sign</label>
+                                    <label for="lessor_sign" class="form-label">Authorized Person Sign</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control" id="lessor_sign" name="lessor_sign">
                                     </div>
@@ -146,11 +166,11 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Lease Period Month</label>
                                     <select class="select2 form-select" id="flag" name='lease_period_month'
-                                        @if (isset($contractedit)) disabled @endif required>
+                                        >
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->lease_period_month }}" selected>
                                                 {{ $contractedit->lease_period_month }}</option>
-                                        @endif
+                                        @else
                                         <option value="">-----Select Month-----</option>
                                         <option value="January">January</option>
                                         <option value="February">February</option>
@@ -165,7 +185,7 @@
                                         <option value="November">November</option>
                                         <option value="December">December</option>
 
-
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -178,6 +198,20 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Grace Period</label>
+                               
+                                <select class="select2 form-select" id="grace" name='grace'>  
+                                @if (isset($contractedit))
+                                    <option id="selectedOption" value="{{ $contractedit}}">{{ $contractedit->is_grace}}</option>
+                         @else
+                                    <option value="">--Select grace--</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                    @endif
+
+                                </select>
+                            </div>
+                                <div class="col-xxl-3 col-md-3" id="grace_start_date">
                                     <label for="name" class="form-label">Grace Start Date</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="name"
@@ -186,7 +220,7 @@
                                             placeholder="Enter Grace Start Date">
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-3" id="grace_end_date">
                                     <label for="name" class="form-label">Grace End Date</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="name" name="grace_end_date"
@@ -194,13 +228,13 @@
                                             placeholder="Enter Grace End Date">
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-3" id="grace_period_month">
                                     <label for="name" class="form-label">Grace Period Month</label>
                                     <!-- <div class="input-group">
                                             <input type="text" class="form-control" id="name" name="grace_period_month" value="{{ isset($contractedit) ? $contractedit->grace_period_month : '' }}" placeholder="Enter Grace Period Month">
                                         </div> -->
                                     <select class="select2 form-select" id="flag" name='grace_period_month'
-                                        @if (isset($contractedit)) disabled @endif required>
+                                         >
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->grace_period_month }}" selected>
                                                 {{ $contractedit->grace_period_month }}</option>
@@ -220,7 +254,7 @@
                                         <option value="December">December</option>
                                     </select>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-3" id="grace_period_day">
                                     <label for="name" class="form-label">Grace Period Day</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="name"
@@ -254,6 +288,20 @@
                                             placeholder="Enter Attestation Expiry">
                                     </div>
                                 </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Rent Amount</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="rent_amount" name="rent_amount"
+                                            value="{{ isset($contractedit) ? $contractedit->rent_amount : '' }}"
+                                            placeholder="Enter Rent Amount">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-12">
+                                <label for="building_pic" class="form-label">Tenant Sign</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="tenant_sign" name="tenant_sign">
+                                </div>
+                            </div>
 
                             </div>
                             <div class="row gy-4 mt-2">
@@ -307,4 +355,38 @@
             }).change();
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#grace_start_date').hide();
+            $('#grace_end_date').hide();
+            $('#grace_period_month').hide();
+            $('#grace_period_day').hide();
+       var selectValue= $("#selectedOption").text();
+if(selectValue=="Yes"){
+    $('#grace_start_date').show();
+            $('#grace_end_date').show();
+            $('#grace_period_month').show();
+            $('#grace_period_day').show();
+}
+     
+        $("#grace").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Yes') {
+                    $('#grace_start_date').show();
+                    $('#grace_end_date').show();
+                    $('#grace_period_month').show();
+                    $('#grace_period_day').show();
+                } else if (optionValue == 'No') {
+                    $('#grace_start_date').hide();
+                    $('#grace_end_date').hide();
+                    $('#grace_period_month').hide();
+                    $('#grace_period_day').hide();
+
+                }
+            });
+        }).change();
+    });
+</script>
 @endsection

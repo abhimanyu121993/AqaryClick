@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('legals', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->string('tenant_name')->nullable();
+            $table->string('tenant_mobile')->nullable();
+            $table->string('unit_ref')->nullable();
+            $table->string('status')->nullable();
+            $table->json('file')->default(json_encode([]));
+            $table->longText('remark')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -26,12 +26,12 @@ return new class extends Migration
             $table->string('electric_no')->nullable();
             $table->string('water_no')->nullable();
             $table->string('intial_rent')->nullable();
-            $table->string('actual_rent')->nullable();
+            $table->longText('actual_rent')->nullable();
             $table->string('unit_desc')->nullable();
             $table->string('unit_ref')->nullable();
             $table->string('revenue')->nullable();
             $table->json('attachment')->default(json_encode([]));
-            $table->text('remark')->nullable();
+            $table->longText('remark')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
-                                <th scope="col">Tenant Type</th>
+                                <th scope="col">Tenant Name</th>
                                 <th scope="col">Document Type</th>
                                 <th scope="col">Sponsor Id</th>
                                 <th scope="col">Sponsor Name</th>
@@ -33,6 +33,8 @@
                                 <th scope="col">Attestation No</th>
                                 <th scope="col">Attestation Expiry</th>
                                 <th scope="col">Contract Status</th>
+                                <th scope="col">Rent Ammount</th>
+                                <th scope="col">Tenant sign</th>
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -61,6 +63,8 @@
                                     <td>{{ $con->attestation_no ??''}}</td>
                                     <td>{{ $con->attestation_expiry ??''}}</td>
                                     <td>{{ $con->contract_status ??''}}</td>
+                                    <td>{{ $con->rent_amount ??''}}</td>
+                                    <td><img src="{{asset('upload/contract/signature'.$con->tenant_sign)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                                     <td>{{ $con->remark ??''}}</td>
                                     <td>
                                         <div class="dropdown">
