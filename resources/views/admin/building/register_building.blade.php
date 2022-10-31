@@ -140,17 +140,17 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Country</label>
 
-                                <select class="select2 form-select" id="country" name='country'>
-                                <option value="">--Select Country--</option>
+                                <select class="select2 form-select" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
 
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->country }}" selected hidden>{{ $buildingedit->country}}</option>
-                                    @endif
+                                    <option value="{{ $buildingedit->country }}" selected hidden>{{ $buildingedit->nationality->name}}</option>
                                     
+                                    @else
+                                    <option value="">--Select Country--</option>
                                     @foreach($countryDetail as $cd)
                                     <option value="{{ $cd->id}}">{{ $cd->name }}</option>
                                     @endforeach
-                                   
+                                    @endif
                                 </select>
                             </div>
                             <!-- <div class="col-xxl-3 col-md-6">
@@ -162,22 +162,18 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">City</label>
 
-                                <select class="select2 form-select" id="city" name='city'>
+                                <select class="select2 form-select" id="{{isset($buildingedit)? '': 'city' }}" name='city'>
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->city }}" selected>{{ $buildingedit->city}}</option>
-                                    @else
-                                    <option value="">--Select City--</option>
-                                  
+                                    <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name}}</option>
                                     @endif
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Zone Name</label>
 
-                                <select class="select2 form-select" id="zone" name='zone_name'>
-                                <option value="">--Select Zone--</option>
+                                <select class="select2 form-select" id="{{isset($buildingedit)? '': 'zone' }}" name='zone_name'>
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->area }}" selected>{{ $buildingedit->area}}</option>
+                                    <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->area}}</option>
                                     @endif
                                 </select>
                             </div>
@@ -521,7 +517,7 @@ else{
     $(document).ready(function() {
        $("#space").focusout(function(){
         var a= $(this).val();
-        $("#cost_building").focusout(function(){
+        $("#cost_building").change(function(){
         var b= $(this).val();
         $('#building_value').val(parseInt(a)*parseInt(b));
         var sum=parseInt(a)*parseInt(b);
@@ -531,7 +527,7 @@ else{
        $("#price_foot").focusout(function(){
        var f=$(this).val();         
       $('#total_land').val((e*10764)*f);
-        $('#property_vlaue').val((e*10764)+ sum);
+        $('#property_vlaue').val(((e*10764)*f)+ sum);
        });
        });
        
