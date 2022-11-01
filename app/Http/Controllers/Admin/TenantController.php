@@ -80,28 +80,34 @@ class TenantController extends Controller
             }
         }
         $tenant=Tenant::create([
-
+            'file_no'=>$request->file_no,
             'tenant_code'=>$request->tenant_code,
             'tenant_english_name'=>$request->tenant_english_name,
             'tenant_arabic_name'=>$request->tenant_arabic_name,
+            'tenant_type'=>$request->tenant_type,
             'tenant_document'=>$request->tenant_document,
             'qid_document'=>$request->qid_document,
             'cr_document'=>$request->cr_document,
             'passport'=>$request->passport,
-            'tenant_nationality'=>$request->tenant_nationality,
             'tenant_primary_mobile'=>$request->tenant_primary_mobile,
             'tenant_secondary_mobile'=>$request->tenant_secondary_mobile,
             'email'=>$request->email,
             'post_office'=>$request->post_office,
-            'address'=>$request->tenant_address,
-            'tenant_type'=>$request->tenant_type,
+            'tenant_nationality'=>$request->tenant_nationality,
+            'unit_address'=>$request->tenant_unit_address,
+            'account_no'=>$request->account_no,
+            'status'=>$request->status,
+            'total_unit'=>$request->total_unit,
             'unit_type'=>$request->unit_type,
-            'unit_address'=>$request->unit_address,
             'rental_period'=>$request->rental_period,
             'payment_method'=>$request->payment_method,
             'payment_receipt'=>$request->payment_receipt,
+            'sponsor_name'=>$request->sponsor_name,
+            'sponsor_oid'=>$request->payment_receipt,
+            'sponsor_email'=>$request->sponsor_email,
+            'sponsor_phone'=>$request->sponsor_phone,
+            'attachment_file'=>json_encode($otherpic),
             'attachment_remark'=>$request->attachment_remark,
-            'attachment_file'=>json_encode($otherpic)
         ]);
         if($tenant){
             return redirect()->back()->with('success','Tenant has been created successfully.');

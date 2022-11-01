@@ -252,7 +252,7 @@ class BuildingController extends Controller
         }
         if(count($otherpic)>0)
                  {
-                    Building::find($id)->update(['pics'=>json_encode($otherpic)]);
+                    Building::find($id)->update(['file'=>json_encode($otherpic)]);
                     
                  }
        $data= Building::find($id)->update([

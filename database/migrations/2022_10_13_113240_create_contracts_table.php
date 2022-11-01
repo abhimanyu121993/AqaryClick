@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('sponsor_mobile')->nullable();
             $table->string('tenant_mobile')->nullable();
             $table->string('lessor')->nullable();
+            $table->string('authorized_person')->nullable();
             $table->string('lessor_sign')->nullable();
             $table->string('release_date')->nullable();
             $table->string('lease_start_date')->nullable();

@@ -20,7 +20,7 @@ class ContractController extends Controller
     public function index()
     {
         $contract=Contract::all();
-        $tenant=Tenant::pluck('tenant_english_name');
+        $tenant=Tenant::all();
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
 
@@ -55,6 +55,7 @@ class ContractController extends Controller
             'sponsor_nationality'=>'required',
             'sponsor_mobile'=>'required',
             'lessor'=>'required',
+            'authorized_person'=>'required',
             'release_date'=>'required',
             'lease_start_date'=>'required',
             'lease_end_date'=>'required',
@@ -85,6 +86,7 @@ class ContractController extends Controller
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
             'lessor'=>$request->lessor,
+            'authorized_person'=>$request->authorized_person,
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
             'lease_start_date'=>$request->lease_start_date,
@@ -157,6 +159,7 @@ class ContractController extends Controller
             'sponsor_id'=>'required',
             'sponsor_nationality'=>'required',
             'sponsor_mobile'=>'required',
+            'authorized_person'=>'required',
             'lessor'=>'required',
             'release_date'=>'required',
             'lease_start_date'=>'required',
@@ -193,6 +196,8 @@ class ContractController extends Controller
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
             'lessor'=>$request->lessor,
+            'authorized_person'=>$request->authorized_person,
+
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
             'lease_start_date'=>$request->lease_start_date,
@@ -244,7 +249,8 @@ class ContractController extends Controller
     }
     public function fetchTenant($tenant_name){
 
-        $res=Tenant::where('tenant_name',$tenant_name)->where('customer_type','Company')->first();
+        $res=Tenant::where('id',$tenant_name)->where('customer_type','Company')->first();
         return response()->json($res);
         }
+
 }
