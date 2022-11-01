@@ -220,7 +220,7 @@ class ElectricityController extends Controller
             $html1 .='<option value="'.$r->unit_type.'">'.$r->unit_type.'</option>';
         }
 
-        $result=Electricity::where('id',$building_id)->first();
+        $result=Electricity::where('building_name',$building_id)->first();
         if($result==!null){
             $result=Carbon::parse($result->created_at)->format('d-m-Y') ;
         }

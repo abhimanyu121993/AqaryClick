@@ -176,7 +176,6 @@
     $(document).ready(function() {
         $("#building_name").change(function() {
             $(this).find("option:selected").each(function() {
-                $("#last_invoice_date").val('No Records');
 
                 var optionValue = $(this).attr("value");
                 var newurl = "{{ url('/admin/fetchunit') }}/" + optionValue;
@@ -186,7 +185,14 @@
                     success: function(p) {
                         $("#unit_no").html(p.html);
                         $("#unit_type").html(p.html1);
-                        $("#last_invoice_date").val(p.result)
+                        if(p.result==null){
+                            $("#last_payment").val("No Records");
+
+                        }
+                        else{
+                            $("#last_payment").val(p.result);
+
+                        }
 
 
 

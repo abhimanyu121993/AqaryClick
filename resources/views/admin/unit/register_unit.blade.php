@@ -139,26 +139,26 @@
                                 </div>
                             </div>
                             <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-3">
-                                    <label for="desc" class="form-label">Unit Discription</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="desc" name="unit_desc" value="{{isset($buildingedit)? $buildingedit->unit_desc: '' }}" placeholder="Enter Description">
-                                    </div>
+                                <div class="col-xxl-3 col-md-12">
+                                    <label for="remark" class="form-label">Unit Discription</label>
+                                    <textarea class="form-control" id="desc" name="unit_desc">
+                                    {{isset($buildingedit)? $buildingedit->unit_desc: '' }}
+                                    </textarea>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-4">
                                     <label for="lessor_name" class="form-label">Unit Ref</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($buildingedit)? $buildingedit->unit_ref: '' }}" placeholder="Enter Unit ref">
                                     </div>
                                 </div>
                             
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-4">
                                     <label for="revenue" class="form-label">Revenue Code</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="revenue" name="revenue" value="{{isset($buildingedit)? $buildingedit->revenue: '' }}" placeholder="Enter revenue">
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-4">
                                     <label for="building_pic" class="form-label">Attachment</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control" id="file" name="attachment" multiple>

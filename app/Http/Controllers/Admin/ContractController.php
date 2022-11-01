@@ -20,7 +20,7 @@ class ContractController extends Controller
     public function index()
     {
         $contract=Contract::all();
-        $tenant=Tenant::pluck('tenant_english_name');
+        $tenant=Tenant::all();
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
 
@@ -46,6 +46,25 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'tenant_name'=>'required',
+            'document_type'=>'required',
+            'tenant_mobile'=>'required',
+            'contract_status'=>'required',
+            'sponsor_name'=>'required',
+            'sponsor_id'=>'required',
+            'sponsor_nationality'=>'required',
+            'sponsor_mobile'=>'required',
+            'lessor'=>'required',
+            'authorized_person'=>'required',
+            'release_date'=>'required',
+            'lease_start_date'=>'required',
+            'lease_end_date'=>'required',
+            'lease_period_month'=>'required',
+            'lease_period_day'=>'required',
+            'approved_by'=>'required',
+            'attestation_no'=>'required',
+            'attestation_expiry'=>'required',
+            'rent_amount'=>'required'
 
         ]);
         $mainpic='';
@@ -53,8 +72,13 @@ class ContractController extends Controller
             $mainpic='contract-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
             $request->lessor_sign->move(public_path('upload/contract/signature'),$mainpic);
         }
+          $mainpic2='';
+        if($request->hasFile('tenant_sign')){
+            $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
+            $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
+        }
        $data= Contract::create([
-            'tenant_type' => $request->tenant_type,
+            'tenant_type' => $request->tenant_name,
             'document_type'=>$request->document_type,
             'sponsor_nationality'=>$request->sponsor_nationality,
             'sponsor_id'=>$request->sponsor_id,
@@ -62,12 +86,14 @@ class ContractController extends Controller
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
             'lessor'=>$request->lessor,
+            'authorized_person'=>$request->authorized_person,
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
             'lease_start_date'=>$request->lease_start_date,
             'lease_end_date'=>$request->lease_end_date,
             'lease_period_month'=>$request->lease_period_month,
             'lease_period_day'=>$request->lease_period_day,
+            'is_grace'=>$request->grace,
             'grace_start_date'=>$request->grace_start_date,
             'grace_end_date'=>$request->grace_end_date,
             'grace_period_month'=>$request->grace_period_month,
@@ -76,6 +102,8 @@ class ContractController extends Controller
             'attestation_no'=>$request->attestation_no,
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
+            'rent_amount' => $request->rent_amount,
+            'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,
         ]);
         if($data){
@@ -123,18 +151,44 @@ class ContractController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-
+            'tenant_name'=>'required',
+            'document_type'=>'required',
+            'tenant_mobile'=>'required',
+            'contract_status'=>'required',
+            'sponsor_name'=>'required',
+            'sponsor_id'=>'required',
+            'sponsor_nationality'=>'required',
+            'sponsor_mobile'=>'required',
+            'authorized_person'=>'required',
+            'lessor'=>'required',
+            'release_date'=>'required',
+            'lease_start_date'=>'required',
+            'lease_end_date'=>'required',
+            'lease_period_month'=>'required',
+            'lease_period_day'=>'required',
+            'approved_by'=>'required',
+            'attestation_no'=>'required',
+            'attestation_expiry'=>'required',
+            'rent_amount'=>'required'
         ]);
-        $mainpic='';
+        $mainpic=Contract::find($id)->lessor_sign??''; 
         if($request->hasFile('lessor_sign')){
             $mainpic='build-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
             $request->lessor_sign->move(public_path('upload/contract/signature'),$mainpic);
             $oldpic = Contract::find($id)->pluck('file')[0];
-            File::delete(public_path('upload/building/' . $oldpic));
+            File::delete(public_path('upload/contract/signature' . $oldpic));
             Contract::find($id)->update(['lessor_sign' => $mainpic]);
         }
+        $mainpic2=Contract::find($id)->tenant_sign??'';        
+        if($request->hasFile('tenant_sign')){
+            $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
+            $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
+            $oldpic = Contract::find($id)->pluck('file')[0];
+            File::delete(public_path('upload/contract/signature' . $oldpic));
+            Contract::find($id)->update(['tenant_sign' => $mainpic2]);
+        }
         $data=Contract::find($id)->update([
-            'tenant_type' => $request->tenant_type,
+            'tenant_type' => $request->tenant_name,
             'document_type'=>$request->document_type,
             'sponsor_nationality'=>$request->sponsor_nationality,
             'sponsor_id'=>$request->sponsor_id,
@@ -142,6 +196,8 @@ class ContractController extends Controller
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
             'lessor'=>$request->lessor,
+            'authorized_person'=>$request->authorized_person,
+
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
             'lease_start_date'=>$request->lease_start_date,
@@ -156,6 +212,8 @@ class ContractController extends Controller
             'attestation_no'=>$request->attestation_no,
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
+            'rent_amount' => $request->rent_amount,
+            'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,
 
 
@@ -191,7 +249,8 @@ class ContractController extends Controller
     }
     public function fetchTenant($tenant_name){
 
-        $res=Tenant::where('tenant_name',$tenant_name)->where('customer_type','Company')->first();
+        $res=Tenant::where('id',$tenant_name)->where('customer_type','Company')->first();
         return response()->json($res);
         }
+
 }

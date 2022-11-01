@@ -23,12 +23,14 @@ return new class extends Migration
             $table->string('sponsor_mobile')->nullable();
             $table->string('tenant_mobile')->nullable();
             $table->string('lessor')->nullable();
+            $table->string('authorized_person')->nullable();
             $table->string('lessor_sign')->nullable();
             $table->string('release_date')->nullable();
             $table->string('lease_start_date')->nullable();
             $table->string('lease_end_date')->nullable();
             $table->string('lease_period_month')->nullable();
             $table->string('lease_period_day')->nullable();
+            $table->string('is_grace')->nullable();
             $table->string('grace_start_date')->nullable();
             $table->string('grace_end_date')->nullable();
             $table->string('grace_period_month')->nullable();
@@ -37,6 +39,8 @@ return new class extends Migration
             $table->string('attestation_no')->nullable();
             $table->string('attestation_expiry')->nullable();
             $table->string('contract_status')->nullable();
+            $table->string('rent_amount')->nullable();
+            $table->string('tenant_sign')->nullable();
             $table->text('remark')->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -88,6 +88,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('staff',StaffController::class);
     Route::resource('broker',BrokerController::class);
     Route::resource('legal',LegalController::class);
+    Route::post('all-legal',[LegalController::class,'alllegal'])->name('alllegal');
+    Route::get('fetch-tenant/{tenant_id}',[LegalController::class,'fetchData'])->name('fetchData');
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
