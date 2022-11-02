@@ -106,6 +106,7 @@ class TenantController extends Controller
             'sponsor_oid'=>$request->payment_receipt,
             'sponsor_email'=>$request->sponsor_email,
             'sponsor_phone'=>$request->sponsor_phone,
+            'sponsor_nationality'=>$request->sponsor_nationality,
             'attachment_file'=>json_encode($otherpic),
             'attachment_remark'=>$request->attachment_remark,
         ]);

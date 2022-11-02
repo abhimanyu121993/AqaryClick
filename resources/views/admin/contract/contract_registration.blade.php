@@ -28,6 +28,14 @@
                         </div>
                         @endif
                             <div class="row gy-4">
+                            <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Contract Code</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="" name="contract_code"
+                                            value="{{ isset($contractedit) ? $contractedit->contract_code : '' }}"
+                                            placeholder="Enter Contract Code">
+                                    </div>
+                                </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Tenant Name</label>
 
@@ -46,6 +54,29 @@
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Tenant Mobile</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="tenant_primary_mobile" name="tenant_mobile"
+                                            value="{{ isset($contractedit) ? $contractedit->tenant_mobile : '' }}"
+                                            placeholder="Enter tenant mobile ">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Tenant Nationality</label>
+                                    <select class="form-select js-example-basic-single" name='tenant_nationality'
+                                        >
+                                        @if (isset($contractedit))
+                                            <option value="{{ $contractedit->tenant_nationality }}" selected>
+                                                {{ $contractedit->tenant_nationality }}</option>
+                                       @else
+                                        <option value="" id="tenant_nationality" selected hidden>----Select Nationality----</option>
+                                        @foreach ($tenant as $tent)
+                                            <option value="{{ $tent->tenant_nationality }}">{{ $tent->tenant_nationality }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Document Type</label>
                                 <select class="form-control" id="tenant_document_type" name="document_type">
                                 @if (isset($contractedit))
@@ -59,14 +90,7 @@
                                     @endif
                                 </select>
                             </div>
-                                <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Tenant Mobile</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="tenant_mobile" name="tenant_mobile"
-                                            value="{{ isset($contractedit) ? $contractedit->tenant_mobile : '' }}"
-                                            placeholder="Enter tenant mobile ">
-                                    </div>
-                                </div>
+                                
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Contract Status</label>
                                     <select class="form-control select2 form-select" name="contract_status">
@@ -93,11 +117,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Sponsor Id</label>
+                                    <label for="name" class="form-label">Sponsor Qid</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_id" name="sponsor_id"
                                             value="{{ isset($contractedit) ? $contractedit->sponsor_id : '' }}"
-                                            placeholder="Enter sponsor Id">
+                                            placeholder="Enter sponsor Qid">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -124,12 +148,20 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Lessor's/Company Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="name" name="lessor"
-                                            value="{{ isset($contractedit) ? $contractedit->lessor : '' }}"
-                                            placeholder="Enter Lessor name">
-                                    </div>
+                                    <label for="name" class="form-label">Lessor's Name</label>
+                                    <select class="select2 form-select js-example-basic-single" id="lessor" name='lessor'
+                                        >
+                                        @if (isset($contractedit))
+                                            <option value="{{ $contractedit->lessor }}" selected>
+                                                {{ $contractedit->lessor }}</option>
+                                                @else
+                                        <option value="" selected hidden>-----Select Lessor's-----</option>
+                                        @foreach ($lessor as $less)
+                                            <option value="{{ $less->id }}">{{ $less->first_name}} {{$less->last_name}}</option>
+                                        @endforeach
+                                        @endif
+
+                                    </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Authorized Person</label>
@@ -149,7 +181,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="lessor_sign" class="form-label">Authorized Person Sign</label>
+                                    <label for="lessor_sign" class="form-label">Lessor's Sign</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control" id="lessor_sign" name="lessor_sign">
                                     </div>
@@ -247,11 +279,19 @@
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Approved By</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="name" name="approved_by"
-                                            value="{{ isset($contractedit) ? $contractedit->approved_by : '' }}"
-                                            placeholder="Enter Approved By ">
-                                    </div>
+                                    <select class="select2 form-select js-example-basic-single" id="approved_by" name='approved_by'
+                                        >
+                                        @if (isset($contractedit))
+                                            <option value="{{ $contractedit->approved_by }}" selected>
+                                                {{ $contractedit->approved_by }}</option>
+                                                @else
+                                        <option value="" selected hidden>-----Select Person-----</option>
+                                        @foreach ($lessor as $less)
+                                            <option value="{{ $less->id }}">{{ $less->first_name}} {{$less->last_name}}</option>
+                                        @endforeach
+                                        @endif
+
+                                    </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Attestation No</label>
@@ -269,6 +309,22 @@
                                             value="{{ isset($contractedit) ? $contractedit->attestation_expiry : '' }}"
                                             placeholder="Enter Attestation Expiry">
                                     </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Attestation Status</label>
+                                    <select class="form-control select2 form-select" name="attestation_status">
+                                    @if (isset($contractedit))
+                                            <option value="{{ $contractedit->attestation_status }}" selected>
+                                                {{ $contractedit->attestation_status }}</option>
+                                        @else
+                                        <option value="" selected hidden>-----Select Status-----</option>
+                                        <option value="Done">Done</option>
+                                        <option value="Not Yet">Not Yet</option>
+                                        <option value="Under Process">Under Process</option>
+                                       
+
+                                        @endif
+                                    </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Rent Amount</label>
@@ -372,6 +428,8 @@
                         url: newurl,
                         method: 'get',
                         success: function(p) {
+                            console.log(p.tenant_primary_mobile);
+                            $("#tenant_mobile").val(p.tenant_primary_mobile);
                             $('#sponsor_name').val(p.sponsor_name);
                             $('#sponsor_id').val(p.sponsor_oid);
                             $('#sponsor_mobile').val(p.sponsor_phone);
@@ -471,24 +529,6 @@ $('#grace_day').val(daydiff);
 });
 });
 
-</script>
-<script>
-    $(document).ready(function() {
-        $("#tenant_name").change(function() {
-            $(this).find("option:selected").each(function() {
-                var optionValue = $(this).attr("value");
-                var newurl = "{{ url('/admin/fetch-tenant-details') }}/" + optionValue;
-                $.ajax({
-                    url: newurl,
-                    method: 'get',
-                    success: function(p) {
-                        $("#tenant_mobile").html(p);
-
-                    }
-                });
-            });
-        }).change();
-    });
 </script>
 <script>
         var addButton = $('.add_button'); //Add button selector
