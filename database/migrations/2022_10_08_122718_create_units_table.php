@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('building_name')->nullable();
+            $table->string('building_id')->nullable();
             $table->string('unit_no')->nullable();
             $table->string('unit_code')->nullable();
             $table->string('unit_type')->nullable();

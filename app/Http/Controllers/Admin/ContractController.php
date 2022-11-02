@@ -87,6 +87,9 @@ class ContractController extends Controller
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type'=>$request->document_type,
+            'qid_document'=>$request->qid_document,
+            'cr_document'=>$request->cr_document,
+            'passport_document'=>$request->passport_document,
             'sponsor_nationality'=>$request->sponsor_nationality,
             'sponsor_id'=>$request->sponsor_id,
             'sponsor_name'=>$request->sponsor_name,
@@ -200,6 +203,9 @@ class ContractController extends Controller
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type'=>$request->document_type,
+            'qid_document'=>$request->qid_document,
+            'cr_document'=>$request->cr_document,
+            'passport_document'=>$request->passport_document,
             'sponsor_nationality'=>$request->sponsor_nationality,
             'sponsor_id'=>$request->sponsor_id,
             'sponsor_name'=>$request->sponsor_name,
@@ -258,8 +264,17 @@ class ContractController extends Controller
             return redirect()->back()->with('error','Data not deleted.');
         }
     }
+    public function fetchTenantDetails($tenant_name){
+        $res=Tenant::where('tenant_type',$tenant_name)->get();
+        $html=' <option value="">--Select Tenant--</option>';
+                
+        foreach($res as $r){
+            $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
+        }
+        return response()->json($html);
+        }
     public function fetchTenant($tenant_name){
-        $res=Tenant::where('id',$tenant_name)->where('tenant_type','Company')->first();
+        $res=Tenant::where('id',$tenant_name)->first();
         return response()->json($res);
         }
 
