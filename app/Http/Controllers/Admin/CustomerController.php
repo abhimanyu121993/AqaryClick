@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BankDetail;
 use App\Models\CompanyDocument;
+use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class CustomerController extends Controller
         //     'customer_code'=>'required',
         //     'bank_name'=>'required',
         // ]);
-       $user= User::create([
+       $user= Owner::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'address' => $request->address,

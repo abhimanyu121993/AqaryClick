@@ -218,6 +218,15 @@
                             <input type="text" class="form-control" name="sponsor_phone" placeholder="sponsor Phone">
                         </div>
                     </div>
+                    <div class="col-xxl-3 col-md-3 mb-3">
+                            <label for="space" class="form-label">Sponsor Nationality</label>
+                            <select class="form-select js-example-basic-single" id="sponser_nationality" name="sponser_nationality">
+                                <option value="">---Select Sponsor Nationality---</option>
+                                @foreach($nation as $nationality)
+                                <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                               @endforeach
+                            </select>
+                        </div>
                             </div>
                     
                     <div class="col-xxl-3 col-md-12">

@@ -41,6 +41,7 @@ return new class extends Migration
             $table->string('sponsor_email')->nullable();
             $table->string('sponsor_oid')->nullable();
             $table->string('sponsor_phone')->nullable();
+            $table->string('sponsor_nationality')->nullable();
             $table->json('attachment_file')->default(json_encode([]));
             $table->string('attachment_remark')->nullable();           
             $table->softDeletes();
