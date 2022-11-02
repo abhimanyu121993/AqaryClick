@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('tenant_nationality')->nullable();
             $table->longText('unit_address')->nullable();
             $table->string('account_no')->nullable();
+            $table->string('building_name')->nullable();
             $table->string('status')->nullable();
             $table->string('total_unit')->nullable();
             $table->string('unit_type')->nullable();

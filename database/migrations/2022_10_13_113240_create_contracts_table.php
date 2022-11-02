@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('contract_code')->nullable();
             $table->string('tenant_name')->nullable();
             $table->string('document_type')->nullable();
+            $table->string('qid_document')->nullable();
+            $table->string('cr_document')->nullable();
+            $table->string('passport_document')->nullable();
             $table->string('tenant_mobile')->nullable();
             $table->string('tenant_nationality')->nullable();
             $table->string('sponsor_nationality')->nullable();

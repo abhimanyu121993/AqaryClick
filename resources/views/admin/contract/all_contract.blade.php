@@ -13,11 +13,17 @@
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
+                                <th scope="col">Contract Code</th>
                                 <th scope="col">Tenant Name</th>
                                 <th scope="col">Document Type</th>
+                                <th scope="col">Qid No</th>
+                                <th scope="col">CR No</th>
+                                <th scope="col">Passport No</th>
                                 <th scope="col">Sponsor Id</th>
                                 <th scope="col">Sponsor Name</th>
                                 <th scope="col">Sponsor Nationality</th>
+                                <th scope="col">Sponsor Mobile</th>
+                                <th scope="col">Tenant Nationality</th>
                                 <th scope="col">Tenant Mobile</th>
                                 <th scope="col">Lessor's Name</th>
                                 <th scope="col">Release Date</th>
@@ -31,6 +37,7 @@
                                 <th scope="col">Grace Period Day</th>
                                 <th scope="col">Approved By</th>
                                 <th scope="col">Attestation No</th>
+                                <th scope="col">Attestation Status</th>
                                 <th scope="col">Attestation Expiry</th>
                                 <th scope="col">Contract Status</th>
                                 <th scope="col">Rent Ammount</th>
@@ -43,12 +50,18 @@
                             @foreach ($contract as $con)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $con->tenant_type??'' }}</td>
+                                    <td>{{ $con->contract_code??'' }}</td>
+                                    <td>{{ $con->tenant_name??'' }}</td>
                                     <td>{{ $con->document_type??'' }}</td>
+                                    <td>{{ $con->qid_document??'' }}</td>
+                                    <td>{{ $con->cr_document??'' }}</td>
+                                    <td>{{ $con->passport_document??'' }}</td>
                                     <td>{{ $con->sponsor_id??''}}</td>
                                     <td>{{ $con->sponsor_name??''}}</td>
                                     <td>{{ $con->sponsor_nationality??''}}</td>
                                     <td>{{ $con->sponsor_mobile??''}}</td>
+                                    <td>{{ $con->tenant_nationality??''}}</td>
+                                    <td>{{ $con->tenant_mobile??''}}</td>
                                     <td>{{ $con->lessor??''}}</td>
                                     <td>{{ $con->release_date??''}}</td>
                                     <td>{{ $con->lease_start_date??''}}</td>
@@ -61,6 +74,7 @@
                                     <td>{{ $con->grace_period_day ??''}}</td>
                                     <td>{{ $con->approved_by ??''}}</td>
                                     <td>{{ $con->attestation_no ??''}}</td>
+                                    <td>{{ $con->attestation_status ??''}}</td>
                                     <td>{{ $con->attestation_expiry ??''}}</td>
                                     <td>{{ $con->contract_status ??''}}</td>
                                     <td>{{ $con->rent_amount ??''}}</td>

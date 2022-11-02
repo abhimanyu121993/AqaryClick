@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Building;
 use App\Models\Nationality;
 use App\Models\Tenant;
+use App\Models\Unit;
+use App\Models\UnitType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
@@ -19,8 +22,10 @@ class TenantController extends Controller
      */
     public function index()
     {
+        $unit=UnitType::all();
         $nation=Nationality::all();
-        return view('admin.tenant.tenantregister',compact('nation'));
+        $building=Building::all();
+        return view('admin.tenant.tenantregister',compact('nation','unit','building'));
     }
 
     /**
@@ -42,7 +47,7 @@ class TenantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         $request->validate([
                 'tenant_code' => 'nullable',
                 'tenant_english_name' => 'nullable',
@@ -96,6 +101,7 @@ class TenantController extends Controller
             'tenant_nationality'=>$request->tenant_nationality,
             'unit_address'=>$request->tenant_unit_address,
             'account_no'=>$request->account_no,
+            'building_name'=>$request->building_name,
             'status'=>$request->status,
             'total_unit'=>$request->total_unit,
             'unit_type'=>$request->unit_type,
@@ -103,7 +109,7 @@ class TenantController extends Controller
             'payment_method'=>$request->payment_method,
             'payment_receipt'=>$request->payment_receipt,
             'sponsor_name'=>$request->sponsor_name,
-            'sponsor_oid'=>$request->payment_receipt,
+            'sponsor_oid'=>$request->sponsor_oid,
             'sponsor_email'=>$request->sponsor_email,
             'sponsor_phone'=>$request->sponsor_phone,
             'sponsor_nationality'=>$request->sponsor_nationality,
@@ -178,6 +184,10 @@ class TenantController extends Controller
         $document=Tenant::find($id);
         return view('admin.tenant.tenantdocument',compact('document'));
     }
+    public function BuildingDetails($building_id){
+        $res=Unit::where('building_id',$building_id)->first();
+        return response()->json($res);
+        }
 
     }
 
