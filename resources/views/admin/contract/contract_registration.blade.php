@@ -37,18 +37,26 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Tenant Type</label>
+                                <select class="form-control" id="tenant_type" name="tenant_type">
+                                    <option value="" selected hidden>-----Select Tenant Type-----</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Company">Company</option>
+                                </select>
+                            </div>
+                                <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Tenant Name</label>
 
                                     <select class="select2 form-select js-example-basic-single" id="tenant_name" name='tenant_name'
                                         >
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->tenant_type }}" selected>
+                                            <option value="{{ $contractedit->tenant_name }}" selected>
                                                 {{ $contractedit->tenant_type }}</option>
-                                                @else
-                                        <option value="" selected hidden>-----Select Type-----</option>
+                                                <!-- @else
+                                        <option value="" selected hidden>-----Select Name-----</option>
                                         @foreach ($tenant as $tent)
                                             <option value="{{ $tent->id }}">{{ $tent->tenant_english_name }}</option>
-                                        @endforeach
+                                        @endforeach -->
                                         @endif
 
                                     </select>
@@ -58,37 +66,43 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="tenant_primary_mobile" name="tenant_mobile"
                                             value="{{ isset($contractedit) ? $contractedit->tenant_mobile : '' }}"
-                                            placeholder="Enter tenant mobile ">
+                                            placeholder="Enter tenant mobile " readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Tenant Nationality</label>
-                                    <select class="form-select js-example-basic-single" name='tenant_nationality'
-                                        >
-                                        @if (isset($contractedit))
-                                            <option value="{{ $contractedit->tenant_nationality }}" selected>
-                                                {{ $contractedit->tenant_nationality }}</option>
-                                       @else
-                                        <option value="" id="tenant_nationality" selected hidden>----Select Nationality----</option>
-                                        @foreach ($tenant as $tent)
-                                            <option value="{{ $tent->tenant_nationality }}">{{ $tent->tenant_nationality }}</option>
-                                        @endforeach
-                                        @endif
-                                    </select>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="tenant_nationality" name="tenant_nationality"
+                                            value="{{ isset($contractedit) ? $contractedit->tenant_nationality : '' }}"
+                                            placeholder="Enter Tenant Nationality " readonly>
+                                    </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Document Type</label>
-                                <select class="form-control" id="tenant_document_type" name="document_type">
-                                @if (isset($contractedit))
-                                            <option value="{{ $contractedit->document_type }}" selected>
-                                                {{ $contractedit->document_type }}</option>
-                                        @else
-                                    <option value="" selected hidden>-----Select Type-----</option>
-                                    <option value="QID">QID</option>
-                                    <option value="CR">CR</option>
-                                    <option value="Passport">Passport</option>
-                                    @endif
-                                </select>
+                                <div class="input-group">
+                                        <input type="text" class="form-control" id="document_type" name="document_type"
+                                            value="{{ isset($contractedit) ? $contractedit->document_type : '' }}"
+                                            placeholder="Enter Document Type" readonly>
+                                    </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3 mb-2" id="qid">
+                                <label for="country" class="form-label">QID</label>
+                                <div class="input-group">
+                                    <input type="text" id="qid_document"class="form-control" name="qid_document" placeholder="Qid Document Number" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3 mb-2" id="cr">
+                                <label for="state" class="form-label">CR</label>
+                                <div class="input-group">
+                                    <input type="text" id="cr_document" class="form-control" name="cr_document"
+                                        placeholder="CR Document" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3 mb-2" id="passport">
+                                <label for="country" class="form-label">Passport</label>
+                                <div class="input-group">
+                                    <input type="text" id="passport" class="form-control" name="passport_document" placeholder="Passport Document" readonly>
+                                </div>
                             </div>
                                 
                                 <div class="col-xxl-3 col-md-3">
@@ -108,43 +122,36 @@
                                         @endif
                                     </select>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-3 sponsor_hide" >
                                     <label for="name" class="form-label">Sponsor Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_name" name="sponsor_name"
                                             value="{{ isset($contractedit) ? $contractedit->sponsor_name : '' }}"
-                                            placeholder="Enter sponsor name">
+                                            placeholder="Enter sponsor name" readonly>
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-3 sponsor_hide">
                                     <label for="name" class="form-label">Sponsor Qid</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_id" name="sponsor_id"
                                             value="{{ isset($contractedit) ? $contractedit->sponsor_id : '' }}"
-                                            placeholder="Enter sponsor Qid">
+                                            placeholder="Enter sponsor Qid" readonly>
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Sponsor Nationality</label>
-                                    <select class="form-select js-example-basic-single" name='sponsor_nationality'
-                                        >
-                                        @if (isset($contractedit))
-                                            <option value="{{ $contractedit->sponsor_nationality }}" selected>
-                                                {{ $contractedit->sponsor_nationality }}</option>
-                                       @else
-                                        <option value="" id="sponsor_nationality" selected hidden>----Select Nationality----</option>
-                                        @foreach ($tenant_nation as $tent)
-                                            <option value="{{ $tent }}">{{ $tent }}</option>
-                                        @endforeach
-                                        @endif
-                                    </select>
+                                <div class="col-xxl-3 col-md-3 sponsor_hide">
+                                    <label for="name" class="form-label">Sponser Nationality</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="sponer_nationality" name="sponser_nationality"
+                                            value="{{ isset($contractedit) ? $contractedit->sponser_nationality : '' }}"
+                                            placeholder="Enter Sponser Nationality " readonly>
+                                    </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <div class="col-xxl-3 col-md-3 sponsor_hide">
                                     <label for="name" class="form-label">Sponsor Mobile</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_mobile" name="sponsor_mobile"
                                             value="{{ isset($contractedit) ? $contractedit->sponsor_mobile : '' }}"
-                                            placeholder="Enter sponsor mobile ">
+                                            placeholder="Enter sponsor mobile " readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -419,6 +426,9 @@
 @section('script-area')
     <script>
         $(document).ready(function() {
+            $('#qid').hide();
+$('#cr').hide();
+$('#passport').hide();
             $("#tenant_name").change(function() {
 
                 $(this).find("option:selected").each(function() {
@@ -428,13 +438,33 @@
                         url: newurl,
                         method: 'get',
                         success: function(p) {
-                            console.log(p.tenant_primary_mobile);
-                            $("#tenant_mobile").val(p.tenant_primary_mobile);
+                            $("#tenant_primary_mobile").val(p.tenant_primary_mobile);
+                            $('#tenant_nationality').val(p.tenant_nationality);
                             $('#sponsor_name').val(p.sponsor_name);
                             $('#sponsor_id').val(p.sponsor_oid);
                             $('#sponsor_mobile').val(p.sponsor_phone);
-                            $('#sponsor_nationality').val(p.customer_nationality);
+                            $('#document_type').val(p.tenant_document);
+                            $('#sponsor_nationality').val(p.sponser_nationality);
+                            $('#qid_document').val(p.qid_document);
+                            $('#cr_document').val(p.cr_document);
+                            $('#passport_document').val(p.passport_document);
 
+console.log(p.qid_document);
+if(p.tenant_document=='QID'){
+$('#qid').show();
+$('#cr').hide();
+$('#passport').hide();
+}
+else if(p.tenant_document=='CR'){
+$('#qid').hide();
+$('#cr').show();
+$('#passport').hide();
+}
+else if(p.tenant_document=='Passport'){
+$('#qid').hide();
+$('#cr').hide();
+$('#passport').show();
+}
                         }
                     });
                 });
@@ -539,13 +569,22 @@ $('#grace_day').val(daydiff);
                 </div></td>\<td><div class="col-sm-12">\
                 <input type="text" class="form-control" name="last_payment_date[]">\
                 </div></td>\ <td><div class="col-sm-12">\
-                <input type="text" class="form-control" name="total_amount_paid[]">\
-                </div></td>\
+                <select class="form-control select2 form-select" name="check_status[]">\
+                <option value="" selected hidden>Select</option>\
+                                        <option value="Done">Done</option>\
+                                        <option value="Not Yet">Not Yet</option>\
+                                        <option value="Under Process">Under Process</option>\</div></td>\
                 <td><div class="col-sm-12">\
                 <input type="text" class="form-control" name="cheque_or_bank_no[]">\
                 </div></td>\<td><div class="col-sm-12">\
-                <input type="text" class="form-control" name="cheque_status[]">\
-                </div></td>\
+                <select class="form-control select2 form-select" name="check_status[]">\
+                <option value="" selected hidden>Select</option>\
+                                        <option value="Valid">Valid</option>\
+                                        <option value="Expired">Expired</option>\
+                                        <option value="Bounced">Bounced</option>\
+                                        <option value="Postponed">Postponed</option>\
+                                        <option value="Cleared">Cleared</option>\
+                                        <option value="Security Cheque">Security Cheque</option>\</div></td>\
                 <td><div class="col-sm-12">\
                 <textarea type="text" class="form-control" name="cheque_status[]" rows="1" cols="10"></textarea>\
                 </div></td>\
@@ -567,5 +606,40 @@ $('#grace_day').val(daydiff);
 
         });
 
+</script>
+<script>
+$(document).ready(function() {
+    $('.sponsor_hide').hide();
+            $("#tenant_type").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'Company') {
+                        $('.sponsor_hide').show();
+
+                    } else if (optionValue == 'Personal') {
+                        $('.sponsor_hide').hide(); 
+                    }
+                });
+            }).change();
+        });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#tenant_type").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-tenant-details') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        console.log(p);
+                        $("#tenant_name").html(p);
+                    }
+                });
+            });
+        }).change();
+    });
 </script>
 @endsection

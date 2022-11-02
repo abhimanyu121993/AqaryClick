@@ -114,7 +114,7 @@
                             <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
                                 <option value="">---Select Tenant Nationality---</option>
                                 @foreach($nation as $nationality)
-                                <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                                <option value="{{$nationality->name}}">{{$nationality->name}}</option>
                                @endforeach
                             </select>
                         </div>                      
@@ -125,14 +125,21 @@
                                 </textarea>
                             </div>
                             
-                            <div class="col-xxl-3 col-md-3">
-                                <label for="space" class="form-label">Status</label>
-                                <select class="form-control" id="process" name="status">
-                                    <option value="" selected hidden>-----Select Status-----</option>
-                                    <option value="New Tenant">New Tenant</option>
-                                    <option value="Old Tenant">Old Tenant</option>
-                                    <option value="Related Party">Related Party</option>
-                                </select>
+                            <div class="col-xxl-3 col-md-3 mb-2">
+                            <label for="space" class="form-label">Building Name</label>
+                            <select class="form-select js-example-basic-single" id="building_name" name="building_name">
+                                <option value="">---Select Building---</option>
+                                @foreach($building as $buld)
+                                <option value="{{$buld->id}}">{{$buld->name}}</option>
+                               @endforeach
+                            </select>
+                        </div> 
+                        <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Unit Type</label>
+                                <div class="input-group">
+                            <input type="text" class="form-control" id="unit_type" name="unit_type"
+                                placeholder="Enter Unit Type" readonly>
+                        </div>
                             </div>
                             <div class="col-xxl-3 col-md-3" id="total_unit">
                         <label for="country" class="form-label">Total unit</label>
@@ -141,17 +148,16 @@
                                 placeholder=" Total Unit ">
                         </div>
                     </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label for="space" class="form-label">Unit Type</label>
-                                <select class="form-control" id="customer" name="unit_type">
-                                    <option value="">-----Select Unit Type-----</option>
-                                    <option value="Residental">Residental</option>
-                                    <option value="Office">Office</option>
-                                    <option value="Store">Store</option>
-                                    <option value="land">land</option>
-                                    <option value="Shop">Shop</option>
+                    <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Status</label>
+                                <select class="form-control" id="process" name="status">
+                                    <option value="" selected hidden>-----Select Status-----</option>
+                                    <option value="New Tenant">New Tenant</option>
+                                    <option value="Old Tenant">Old Tenant</option>
+                                    <option value="Related Party">Related Party</option>
                                 </select>
                             </div>
+                           
                             
                             <div class="col-xxl-3 col-md-3" id="authp">
                                 <label for="country" class="form-label">Rental Period</label>
@@ -220,7 +226,7 @@
                     </div>
                     <div class="col-xxl-3 col-md-3 mb-3">
                             <label for="space" class="form-label">Sponsor Nationality</label>
-                            <select class="form-select js-example-basic-single" id="sponser_nationality" name="sponser_nationality">
+                            <select class="form-select js-example-basic-single" id="sponser_nationality" name="sponsor_nationality">
                                 <option value="">---Select Sponsor Nationality---</option>
                                 @foreach($nation as $nationality)
                                 <option value="{{$nationality->id}}">{{$nationality->name}}</option>
@@ -328,5 +334,23 @@ $(document).ready(function() {
                 });
             }).change();
         });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#building_name").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-building-details') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        console.log(p);
+                  $('#unit_type').val(p.unit_type);
+                    }
+                });
+            });
+        }).change();
+    });
 </script>
 @endsection

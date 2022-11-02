@@ -28,12 +28,12 @@
                             <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Building Name</label>
 
-                    <select class="select2 form-select" id="flag" name='building_name' @if (isset($buildingedit)) disabled @endif required>
+                    <select class="select2 form-select" id="flag" name='building_name' @if (isset($buildingedit)) readonly @endif required>
                         @if (isset($buildingedit))
-                        <option value="{{$buildingedit->name }}" selected>{{ $buildingedit->building_name}}</option>
+                        <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->building_name}}</option>
                         @endif
                         @foreach($units as $unit)
-                        <option value="{{ $unit->name}}">{{ $unit->name }}</option>
+                        <option value="{{ $unit->id}}">{{ $unit->name }}</option>
                         @endforeach
                     </select>
                 </div>
