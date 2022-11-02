@@ -4,8 +4,12 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+use App\Models\Customer;
 use App\Models\Nationality;
+use App\Models\Owner;
+use App\Models\OwnerCompany;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
@@ -21,10 +25,11 @@ class ContractController extends Controller
     {
         $contract=Contract::all();
         $tenant=Tenant::all();
+        $lessor=Owner::all();
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
 
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation'));
+        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor'));
     }
 
     /**
@@ -46,6 +51,7 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'contract_code'=>'required',
             'tenant_name'=>'required',
             'document_type'=>'required',
             'tenant_mobile'=>'required',
@@ -78,13 +84,15 @@ class ContractController extends Controller
             $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
         }
        $data= Contract::create([
-            'tenant_type' => $request->tenant_name,
+            'contract_code' => $request->contract_code,
+            'tenant_name' => $request->tenant_name,
             'document_type'=>$request->document_type,
             'sponsor_nationality'=>$request->sponsor_nationality,
             'sponsor_id'=>$request->sponsor_id,
             'sponsor_name'=>$request->sponsor_name,
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
+            'tenant_nationality'=>$request->tenant_nationality,
             'lessor'=>$request->lessor,
             'authorized_person'=>$request->authorized_person,
             'lessor_sign'=>$mainpic,
@@ -100,6 +108,7 @@ class ContractController extends Controller
             'grace_period_day'=>$request->grace_period_day,
             'approved_by'=>$request->approved_by,
             'attestation_no'=>$request->attestation_no,
+            'attestation_status'=>$request->attestation_status,
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
             'rent_amount' => $request->rent_amount,
@@ -188,16 +197,17 @@ class ContractController extends Controller
             Contract::find($id)->update(['tenant_sign' => $mainpic2]);
         }
         $data=Contract::find($id)->update([
-            'tenant_type' => $request->tenant_name,
+            'contract_code' => $request->contract_code,
+            'tenant_name' => $request->tenant_name,
             'document_type'=>$request->document_type,
             'sponsor_nationality'=>$request->sponsor_nationality,
             'sponsor_id'=>$request->sponsor_id,
             'sponsor_name'=>$request->sponsor_name,
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
+            'tenant_nationality'=>$request->tenant_nationality,
             'lessor'=>$request->lessor,
             'authorized_person'=>$request->authorized_person,
-
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
             'lease_start_date'=>$request->lease_start_date,
@@ -210,6 +220,7 @@ class ContractController extends Controller
             'grace_period_day'=>$request->grace_period_day,
             'approved_by'=>$request->approved_by,
             'attestation_no'=>$request->attestation_no,
+            'attestation_status'=>$request->attestation_status,
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
             'rent_amount' => $request->rent_amount,
@@ -248,8 +259,7 @@ class ContractController extends Controller
         }
     }
     public function fetchTenant($tenant_name){
-
-        $res=Tenant::where('id',$tenant_name)->where('customer_type','Company')->first();
+        $res=Tenant::where('id',$tenant_name)->where('tenant_type','Company')->first();
         return response()->json($res);
         }
 

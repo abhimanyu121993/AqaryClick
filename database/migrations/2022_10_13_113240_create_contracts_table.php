@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_type')->nullable();
+            $table->string('contract_code')->nullable();
+            $table->string('tenant_name')->nullable();
             $table->string('document_type')->nullable();
+            $table->string('tenant_mobile')->nullable();
+            $table->string('tenant_nationality')->nullable();
             $table->string('sponsor_nationality')->nullable();
             $table->string('sponsor_id')->nullable();
             $table->string('sponsor_name')->nullable();
             $table->string('sponsor_mobile')->nullable();
-            $table->string('tenant_mobile')->nullable();
             $table->string('lessor')->nullable();
             $table->string('authorized_person')->nullable();
             $table->string('lessor_sign')->nullable();
@@ -37,6 +39,7 @@ return new class extends Migration
             $table->string('grace_period_day')->nullable();
             $table->string('approved_by')->nullable();
             $table->string('attestation_no')->nullable();
+            $table->string('attestation_status')->nullable();
             $table->string('attestation_expiry')->nullable();
             $table->string('contract_status')->nullable();
             $table->string('rent_amount')->nullable();
