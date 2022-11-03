@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\ElectricityController;
+use App\Http\Controllers\admin\InvoiceController;
 use App\Http\Controllers\admin\LegalController;
 use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -95,6 +96,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
+    Route::resource('invoice',InvoiceController::class);
     Route::resource('tenant',TenantController::class);
     Route::get('fetchunit/{building_id}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
     Route::get('fetch-qid/{name}',[ElectricityController::class,'fetchQid'])->name('fetchQid');

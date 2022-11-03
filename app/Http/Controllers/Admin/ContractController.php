@@ -70,8 +70,9 @@ class ContractController extends Controller
             'approved_by'=>'required',
             'attestation_no'=>'required',
             'attestation_expiry'=>'required',
-            'rent_amount'=>'required'
-
+            'rent_amount'=>'required',
+            'total_invoice'=>'required',
+            'guarantees'=>'required',
         ]);
         $mainpic='';
         if($request->hasFile('lessor_sign')){
@@ -116,6 +117,10 @@ class ContractController extends Controller
             'contract_status'=>$request->contract_status,
             'rent_amount' => $request->rent_amount,
             'tenant_sign' =>$mainpic2,
+            'total_invoice' => $request->total_invoice,
+            'guarantees' => $request->guarantees,
+            'guarantees_payment_method' => $request->guarantees_payment_method,
+
             'remark'=>$request->remark,
         ]);
         if($data){
@@ -181,7 +186,10 @@ class ContractController extends Controller
             'approved_by'=>'required',
             'attestation_no'=>'required',
             'attestation_expiry'=>'required',
-            'rent_amount'=>'required'
+            'total_invoice'=>'required',
+            'guarantees'=>'required',
+
+
         ]);
         $mainpic=Contract::find($id)->lessor_sign??''; 
         if($request->hasFile('lessor_sign')){
@@ -232,6 +240,9 @@ class ContractController extends Controller
             'rent_amount' => $request->rent_amount,
             'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,
+            'total_invoice' => $request->total_invoice,
+            'guarantees' => $request->guarantees,
+            'guarantees_payment_method' => $request->guarantees_payment_method,
 
 
         ]);

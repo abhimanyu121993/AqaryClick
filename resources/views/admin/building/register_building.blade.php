@@ -489,7 +489,7 @@ else{
 <!-- monthly income to annunal  -->
 <script>
     $(document).ready(function() {
-        $("#monthly_income").focusout(function(){
+        $("#monthly_income").keyup(function(){
        var a=$(this).val();
        $('#annual_income').val(a*12);
       var b= $('#annual_income').val();
@@ -512,14 +512,14 @@ else{
     $(document).ready(function() {
        $("#space").focusout(function(){
         var a= $(this).val();
-        $("#cost_building").change(function(){
+        $("#cost_building").keyup(function(){
         var b= $(this).val();
         $('#building_value').val(parseInt(a)*parseInt(b));
         var sum=parseInt(a)*parseInt(b);
-        $("#landsize_meter").focusout(function(){
+        $("#landsize_meter").keyup(function(){
        var e=$(this).val();
        $('#land_size').val(e*10764);
-       $("#price_foot").focusout(function(){
+       $("#price_foot").keyup(function(){
        var f=$(this).val();         
       $('#total_land').val((e*10764)*f);
         $('#property_vlaue').val(((e*10764)*f)+ sum);

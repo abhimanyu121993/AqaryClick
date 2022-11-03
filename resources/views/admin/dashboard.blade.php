@@ -98,34 +98,48 @@
 
                     <div class="card-header p-0 border-0 bg-soft-light">
                         <div class="row g-0 text-center">
-                        <a href="{{ route('admin.building.create') }}"><div class="col-6 col-sm-3">
-                                <div class="p-3 border border-dashed border-start-0">
+                        <div class="col-6 col-sm-3">
+                        <a href="{{ route('admin.building.create') }}"> <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h5>
                                     <p class="text-muted mb-0">Number of Builidngs</p>
                                 </div></a>
                             </div>
-                            <!--end col-->
+                            <div class="col-6 col-sm-3">
+                        <a href="{{ route('admin.unit.create') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::count() }}">{{ App\Models\Unit::count() }}</span></h5>
+                                    <p class="text-muted mb-0">Total unit</p>
+                                </div></a>
+                            </div>
                             <div class="col-6 col-sm-3">
                             <a href="{{ route('admin.electricity.create') }}"> <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Electricity::count() }}">{{ App\Models\Electricity::count() }}</span></h5>
                                     <p class="text-muted mb-0">Electricity Bill Generated</p>
                                 </div></a>
                             </div>
-                            <!--end col-->
                             <div class="col-6 col-sm-3">
                             <a href="{{ route('admin.tenant.create') }}"> <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Tenant::count() }}">{{ App\Models\Tenant::count() }}</span></h5>
                                     <p class="text-muted mb-0">Total Tenants</p>
                                 </div></a>
                             </div>
-                            <!--end col-->
-                            <div class="col-6 col-sm-3">
-                            <a href="{{ route('admin.contract.create') }}"> <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                    <h5 class="mb-1 text-success"><span class="counter-value" data-target="{{ App\Models\Contract::count() }}">{{ App\Models\Contract::count() }}</span></h5>
-                                    <p class="text-muted mb-0">Contracts Created</p>
+                                    <div class="col-6 col-sm-4">
+                                    <a href="{{route('admin.contract.create')}}">  <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Contract::count() }}">{{ App\Models\Contract::count() }}</span></h5>
+                                    <p class="text-muted mb-0">Total Contract</p>
                                 </div></a>
                             </div>
-                            <!--end col-->
+                            <div class="col-6 col-sm-4">
+                            <a href="{{route('admin.contract.create')}}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Contract::where('attestation_status','Done')->count() }}">{{ App\Models\Contract::where('attestation_status','Done')->count() }}</span></h5>
+                                    <p class="text-muted mb-0">Total Attestation Contract</p>
+                                </div></a>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                            <a href="{{route('admin.contract.create')}}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Contract::where('contract_status','renewed')->count() }}">{{ App\Models\Contract::where('contract_status','renewed')->count() }}</span></h5>
+                                    <p class="text-muted mb-0">Total Renewed Contract</p>
+                                </div></a>
+                            </div>
                         </div>
                     </div><!-- end card header -->
                     <div class="card-body p-0 pb-2">
@@ -135,7 +149,8 @@
                     </div><!-- end card body -->
                 </div><!-- end card -->
             </div><!-- end col -->
-        </div><!-- end row -->
+        </div>
+        <!-- end row -->
     </div><!-- end col -->
 
     {{-- <div class="col-xxl-4">

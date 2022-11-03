@@ -136,16 +136,17 @@
                         </div> 
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
-                                <div class="input-group">
-                            <input type="text" class="form-control" id="unit_type" name="unit_type"
-                                placeholder="Enter Unit Type" readonly>
+                            <div class="input-group">
+                                <select class="form-select js-example-basic-single" id="unit_type" name="unit_type">
+                                <option value="">--Select Unit--</option>
+                            </select>
                         </div>
                             </div>
-                            <div class="col-xxl-3 col-md-3" id="total_unit">
+                            <div class="col-xxl-3 col-md-3">
                         <label for="country" class="form-label">Total unit</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="total_unit"
-                                placeholder=" Total Unit ">
+                            <input type="text" class="form-control"  id="total_unit" name="total_unit"
+                                placeholder=" Total Unit " readonly>
                         </div>
                     </div>
                     <div class="col-xxl-3 col-md-3">
@@ -157,8 +158,6 @@
                                     <option value="Related Party">Related Party</option>
                                 </select>
                             </div>
-                           
-                            
                             <div class="col-xxl-3 col-md-3" id="authp">
                                 <label for="country" class="form-label">Rental Period</label>
                                 <div class="input-group">
@@ -346,7 +345,8 @@ $(document).ready(function() {
                     method: 'get',
                     success: function(p) {
                         console.log(p);
-                  $('#unit_type').val(p.unit_type);
+                  $('#unit_type').html(p.html);
+                  $('#total_unit').val(p.total_unit);
                     }
                 });
             });
