@@ -41,6 +41,9 @@
                                 <th scope="col">Attestation Expiry</th>
                                 <th scope="col">Contract Status</th>
                                 <th scope="col">Rent Ammount</th>
+                                <th scope="col">Total Invoice</th>
+                                <th scope="col">Guarantees</th>
+                                <th scope="col">Guarantees Payment Mode</th>
                                 <th scope="col">Tenant sign</th>
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
@@ -78,6 +81,10 @@
                                     <td>{{ $con->attestation_expiry ??''}}</td>
                                     <td>{{ $con->contract_status ??''}}</td>
                                     <td>{{ $con->rent_amount ??''}}</td>
+                                    <td>{{ $con->total_invoice ??''}}</td>
+                                    <td>{{ $con->guarantees ??''}}</td>
+                                    <td>{{ $con->guarantees_payment_method ??''}}</td>
+
                                     <td><img src="{{asset('upload/contract/signature'.$con->tenant_sign)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                                     <td>{{ $con->remark ??''}}</td>
                                     <td>

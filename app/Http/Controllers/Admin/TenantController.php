@@ -185,8 +185,14 @@ class TenantController extends Controller
         return view('admin.tenant.tenantdocument',compact('document'));
     }
     public function BuildingDetails($building_id){
-        $res=Unit::where('building_id',$building_id)->first();
-        return response()->json($res);
+        $res=Unit::where('building_id',$building_id)->get();
+        $total_unit =Unit::where('building_id',$building_id)->count();
+        $html=' <option value="">--Select Unit--</option>';
+            
+    foreach($res as $r){
+        $html .='<option value="'.$r->id.'">'.$r->unit_type.'</option>';
+    }
+    return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
         }
 
     }

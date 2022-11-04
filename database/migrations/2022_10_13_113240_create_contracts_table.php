@@ -47,6 +47,10 @@ return new class extends Migration
             $table->string('contract_status')->nullable();
             $table->string('rent_amount')->nullable();
             $table->string('tenant_sign')->nullable();
+            $table->string('total_invoice')->nullable();
+            $table->string('guarantees')->nullable();
+            $table->string('guarantees_payment_method')->nullable();
+
             $table->text('remark')->nullable();
             $table->softDeletes();
             $table->timestamps();
