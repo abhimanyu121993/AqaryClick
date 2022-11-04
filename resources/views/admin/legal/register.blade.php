@@ -41,7 +41,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Unit Ref</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="name" name="unit_ref" readonly>
+                                    <input type="text" class="form-control" id="unit_ref" name="unit_ref" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -97,7 +97,10 @@
                     url: newurl,
                     method: 'get',
                     success: function(p) {
+                        console.log(p);
                         $("#mobile_no").val(p.tenant_primary_mobile);
+                        $("#unit_ref").val(p.unit_ref);
+
                     }
                 });
             });

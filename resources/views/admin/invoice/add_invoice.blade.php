@@ -6,16 +6,58 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Tenant Details</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <div class="row">
+                <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Tenant Name</label>
+                                <select class="select2 form-select" id="tenant_name" name='tenant_name'>
+                                    <option value="">--Select Tenant--</option>
+                                    @foreach($tenantDetails as $td)
+                                    <option value="{{ $td->id}}">{{ $td->tenant_english_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Tenant Contract</label>
+                                <select class="select2 form-select" id="tenant_contract" name='tenant_contract'>
+                                    <option value="">--Select Contract--</option>
+                                   
+                                </select>
+                            </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">
-                    {{ isset($contractedit) ? 'Update Invoice' : 'Invoice Management' }}</h4>
+                    {{ isset($contractedit) ? 'Update Invoice' : 'Deposite Cheque' }}</h4>
             </div><!-- end card header -->
             <div class="card-body table-responsive">
                 <div class="live-preview">
+                <form action="{{route('admin.cheque.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf  
+                @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <div class="card-body field_wrapper -responsive">
                             <table class="table table-nowrap container table-responsive ">
-                            <form action="#" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" id='pid' name='pid' value="" hidden>
+                              
                                 <thead>
                                     <tr>
                                         <th scope="col">Sr.No.</th>
@@ -36,67 +78,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="field_table_wrapper">
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-body table-responsive">
-                <div class="live-preview">
-                    <form action="#" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" id='pid' name='pid' value="">
-                        <div class="card-body field_wrapper table-responsive">
-
-                            <table class="table table-nowrap container table-responsive ">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Sr.No.</th>
-                                        <th scope="col">Invoice Details</th>
-                                        <th scope="col">Due Date</th>
-                                        <th scope="col">Invoice Period</th>
-                                        <th scope="col">Amount Paid</th>
-                                        <th scope="col">Payment Method</th>
-                                        <th scope="col">Payment Status</th>
-                                        <th scope="col">Overdue Period</th>
-                                        <th scope="col">Attachment</th>
-                                        <th scope="col">Remark</th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                        <td>1</td>
-                                        <td><input type="text" class="form-control" name="invoice_details[]" readonly placeholder="Invoice No"></td>
-                                        <td><input type="text" class="form-control" name="due_date[]" readonly placeholder=" 01-02-2022"></td>
-                                        <td><input type="text" class="form-control" name="invoice_period[]"></td>
-                                        <td><input type="text" class="form-control" name="amount_paid[]"></td>
-                                        <td><div class="col-sm-12">
-                <select class="form-control select2 form-select" name="payment_method[]">
-                <option value="" selected hidden>Select</option>
-                                        <option value="Cash">Cash</option>
-                                        <option value="Cheque">Cheque</option>
-                                        <option value="Bank Transfer">Bank Transfer</option>
-                                         </div>
-                                        </td>
-                                        <td><div class="col-sm-12">
-                <select class="form-control select2 form-select" name="payment_status[]">
-                <option value="" selected hidden>Select</option>
-                                        <option value="Paid">Paid</option>
-                                        <option value="Not Paid">Not Paid</option>
-                                        <option value="Under Deposite">Under Deposite</option>
-                                        <option value="Deposited">Deposited</option>
-                                        <option value="Redeposite">Redeposite</option>
-                                        <option value="Cheque Without Balance Report">Cheque wWthout Balance Report</option>
-                                         </div></td>
-                                        <td><input type="text" class="form-control" name="overdue_period[]"></td>
-                                        <td> <input type="file" class="form-control" name="file[]"></td>
-                                        <td><div class="col-sm-12">
-                <textarea type="text" class="form-control" name="remark[]" rows="1" cols="10"></textarea>
-                </div></td>
+                                <input type="hidden" class="form-control" id="tid" value="" name="tenant_name" hidden>
 
                                 </tbody>
                             </table>
                         </div>
-                </div>
-                </div>
-
+                   
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -106,6 +93,128 @@
     </div>
 </div>
 <!-- Grids in modals -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Invoice Management</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="{{route('admin.invoice.store')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="row gy-4 mb-3">
+                        <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Invoice Details</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="invoice_no" name="invoice_no" placeholder="Invoice No" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Due Date</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Due Date" readonly>
+                                </div>
+                                </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="name" class="form-label">Invoice Period</label>
+                                <div class="row input-group m-0">
+    <div class="col-6">
+    <input type="text" class="form-control" id="due_date" name="invoice_period_start" readonly placeholder="Start Date">
+    </div>
+    <div class="col-6">
+    <input type="text" class="form-control" id="due_date" name="invoice_period_end" readonly placeholder="End Date">
+    </div>
+
+  </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Invoice Amount</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
+                                </div>
+                                </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Payment Method</label>
+                                <select class="select2 form-select" id="payment_method" name='payment_method'>
+                                <option  selected hidden>--Select Method--</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3" id="cheque">
+                                <label class="form-label" for="flag">Cheque No</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control"  name="cheque_no" placeholder="Enter Cheque No">
+                                </div>
+                                </div><div class="col-xxl-3 col-md-3" id="Bank">
+                                <label class="form-label" for="flag">Bank Name</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control"  name="bank_name" placeholder="Enter Bank Name">
+                                </div>
+                                </div><div class="col-xxl-3 col-md-3" id="account">
+                                <label class="form-label" for="flag">Account No</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control"  name="account_no" placeholder="Enter Account No">
+                                </div>
+                                </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Payment Status</label>
+                                <select class="select2 form-select" id="payment_status" name='payment_status'>
+                                <option selected hidden>--Select Status--</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Not Paid">Not Paid</option>
+                                <option value="Under Deposit">Under Deposit</option>
+                                <option value="Deposited">Deposited</option>
+                                <option value="Redeposited">Redeposited</option>
+                                <option value="Cheque Without Balance Report">Cheque Without Balance Report</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Overdue Period</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="overdue_period" name="overdue_period" placeholder="Overdue Period">
+                                </div>
+                                </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="attachment_file" class="form-label">Attachment File</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control"  id="attachment_file" name="attachment[]" multiple>
+                                </div>
+                        </div>
+                            </div>
+                            <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-12">
+                                <label for="remark" class="form-label">Remark</label>
+                                <textarea class="form-control" name="remark" >
+                                
+                                    </textarea>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-xxl-3 col-md-6">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 
@@ -116,7 +225,7 @@ var wrapper = $('.field_table_wrapper'); //Input field wrapper
 var fieldHTML = '<tr ><td id="sn"></td>\ <td><div class="col-sm-12">\
                 <input type="date" class="form-control" name="deposite_date[]">\
                 </div></td>\<td><div class="col-sm-12">\
-                <input type="text" class="form-control" name="last_payment_date[]">\
+                <input type="text" class="form-control" name="cheque_amt[]">\
                 </div></td>\<td><div class="col-sm-12">\
                 <input type="text" class="form-control" name="cheque_no[]">\
                 </div></td>\<td><div class="col-sm-12">\
@@ -126,7 +235,7 @@ var fieldHTML = '<tr ><td id="sn"></td>\ <td><div class="col-sm-12">\
                                         <option value="COMMERCIAL BANK">COMMERCIAL BANK</option>\
                                         <option value="Under Process">Under Process</option>\</div></td>\
                 <td><div class="col-sm-12">\
-                <select class="form-control select2 form-select" name="check_status[]">\
+                <select class="form-control select2 form-select" name="cheque_status[]">\
                 <option value="" selected hidden>Select</option>\
                                         <option value="Valid">Valid</option>\
                                         <option value="Expired">Expired</option>\
@@ -161,5 +270,51 @@ $(wrapper).on('click', '.remove_button', function(e) {
     $(this).closest('tr').remove(); //Remove field html
 
 });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#cheque').hide();
+            $('#Bank').hide();
+            $('#account').hide();
+        $("#payment_method").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Cash') {
+                    $('#cheque').hide();
+            $('#Bank').hide();
+            $('#account').hide();
+                } else if (optionValue == 'Cheque') {
+                    $('#cheque').show();
+            $('#Bank').show();
+            $('#account').hide();
+
+                }
+                else if (optionValue == 'Bank Transfer') {
+                    $('#cheque').hide();
+            $('#Bank').show();
+            $('#account').show();
+
+                }
+            });
+        }).change();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#tenant_name").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                $('#tid').val(optionValue);
+                var newurl = "{{ url('/admin/fetch-contract-details') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        $("#tenant_contract").html(p);
+                    }
+                });
+            });
+        }).change();
+    });
 </script>
 @endsection
