@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\admin\BrokerController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
+use App\Http\Controllers\admin\ChequeController;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\Admin\OwnerController;
@@ -96,6 +97,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
+    Route::resource('cheque',ChequeController::class);
+    Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
+
     Route::resource('invoice',InvoiceController::class);
     Route::resource('tenant',TenantController::class);
     Route::get('fetchunit/{building_id}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');

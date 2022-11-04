@@ -10,4 +10,9 @@ class Tenant extends Model
 {
     use HasFactory ,SoftDeletes;
     protected $guarded = [];
+
+    public function buildingDetails()
+    {
+        return $this->belongsTo(Building::class, 'building_name', 'id');
+    }
 }

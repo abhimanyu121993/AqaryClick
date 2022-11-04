@@ -56,10 +56,10 @@ class ContractController extends Controller
             'document_type'=>'required',
             'tenant_mobile'=>'required',
             'contract_status'=>'required',
-            'sponsor_name'=>'required',
-            'sponsor_id'=>'required',
-            'sponsor_nationality'=>'required',
-            'sponsor_mobile'=>'required',
+            'sponsor_name'=>'nullable',
+            'sponsor_id'=>'nullable',
+            'sponsor_nationality'=>'nullable',
+            'sponsor_mobile'=>'nullable',
             'lessor'=>'required',
             'authorized_person'=>'required',
             'release_date'=>'required',
@@ -172,10 +172,10 @@ class ContractController extends Controller
             'document_type'=>'required',
             'tenant_mobile'=>'required',
             'contract_status'=>'required',
-            'sponsor_name'=>'required',
-            'sponsor_id'=>'required',
-            'sponsor_nationality'=>'required',
-            'sponsor_mobile'=>'required',
+            'sponsor_name'=>'nullable',
+            'sponsor_id'=>'nullable',
+            'sponsor_nationality'=>'nullable',
+            'sponsor_mobile'=>'nullable',
             'authorized_person'=>'required',
             'lessor'=>'required',
             'release_date'=>'required',
@@ -188,8 +188,6 @@ class ContractController extends Controller
             'attestation_expiry'=>'required',
             'total_invoice'=>'required',
             'guarantees'=>'required',
-
-
         ]);
         $mainpic=Contract::find($id)->lessor_sign??''; 
         if($request->hasFile('lessor_sign')){

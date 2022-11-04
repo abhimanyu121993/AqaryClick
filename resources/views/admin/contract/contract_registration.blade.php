@@ -52,11 +52,6 @@
                                     @if (isset($contractedit))
                                     <option value="{{ $contractedit->tenant_name }}" selected>
                                         {{ $contractedit->tenant_type }}</option>
-                                    <!-- @else
-                                        <option value="" selected hidden>-----Select Name-----</option>
-                                        @foreach ($tenant as $tent)
-                                            <option value="{{ $tent->id }}">{{ $tent->tenant_english_name }}</option>
-                                        @endforeach -->
                                     @endif
 
                                 </select>
@@ -227,7 +222,7 @@
                                 <label for="name" class="form-label">Lease Period Month</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="lease_period_month"
-                                        name="lease_period_day"
+                                        name="lease_period_month"
                                         value="{{ isset($contractedit) ? $contractedit->lease_period_month : '' }}"
                                         placeholder="Enter Lease Period Month" readonly>
                                 </div>
@@ -560,6 +555,7 @@ $('#lease_start_date').change(function() {
         total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -
             start_date.getMonth())
         $('#lease_period_month').val(total_months);
+        $('#total_invoice').val(total_months);
 
         var d1 = new Date(date);
         var d2 = new Date(dateF);
