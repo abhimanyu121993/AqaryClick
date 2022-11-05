@@ -74,7 +74,6 @@
             </div><!-- end col -->
 
         </div><!-- end row -->
-
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -122,6 +121,85 @@
                                     <p class="text-muted mb-0">Total Tenants</p>
                                 </div></a>
                             </div>
+                        </div>
+                    </div><!-- end card header -->
+                    <div class="card-body p-0 pb-2">
+                        <div>
+                            <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' dir="ltr" class="apex-charts"></div>
+                        </div>
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header border-0 align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Unit Overview</h4>
+                        {{-- <div>
+                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                ALL
+                            </button>
+                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                1M
+                            </button>
+                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                6M
+                            </button>
+                            <button type="button" class="btn btn-soft-primary btn-sm">
+                                1Y
+                            </button>
+                        </div> --}}
+                    </div><!-- end card header -->
+
+                    <div class="card-header p-0 border-0 bg-soft-light">
+                        <div class="row g-0 text-center">
+                            <div class="col-6 col-sm-6">
+                        <a href="{{ route('admin.unit.create') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::count() }}">{{ App\Models\Unit::count() }}</span></h5>
+                                    <p class="text-muted mb-0">Total unit</p>
+                                </div></a>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                        <a href="{{ route('admin.unit.create') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','Vacant')->count() }}</span></h5>
+                                    <p class="text-muted mb-0">Vacant unit</p>
+                                </div></a>
+                            </div>
+                           
+                        </div>
+                    </div><!-- end card header -->
+                    <div class="card-body p-0 pb-2">
+                        <div>
+                            <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' dir="ltr" class="apex-charts"></div>
+                        </div>
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header border-0 align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Contract Overview</h4>
+                        {{-- <div>
+                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                ALL
+                            </button>
+                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                1M
+                            </button>
+                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                6M
+                            </button>
+                            <button type="button" class="btn btn-soft-primary btn-sm">
+                                1Y
+                            </button>
+                        </div> --}}
+                    </div><!-- end card header -->
+
+                    <div class="card-header p-0 border-0 bg-soft-light">
+                        <div class="row g-0 text-center">
                                     <div class="col-6 col-sm-4">
                                     <a href="{{route('admin.contract.create')}}">  <div class="p-3 border border-dashed border-start-0">
                                     <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Contract::count() }}">{{ App\Models\Contract::count() }}</span></h5>

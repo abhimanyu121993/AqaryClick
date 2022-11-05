@@ -55,9 +55,14 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
                 $file->move(public_path('upload/invoice_doc'),$name);
                 $otherpic[]=$name;
             }
+
         }
+        $invoice_no='inv-'.rand(0,99).'-'.rand(0,99);
+
        $data= Invoice::create([
-            'invoice_no' => $request->invoice_no,
+             'tenant_id' => $request->tenant_id,
+              'contract_id' => $request->contract_id,
+            'invoice_no' => $invoice_no,
             'due_date' => $request->due_date,
             'invoice_period_start' => $request->invoice_period_start,
             'invoice_period_end' => $request->invoice_period_end,
@@ -65,7 +70,7 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
             'payment_method' => $request->payment_method,
             'cheque_no' => $request->cheque_no,
             'account_no' => $request->payment_method,
-            'bank_no' => $request->payment_method,
+            'bank_name' => $request->bank_name,
             'payment_status' => $request->payment_status,
             'overdue_period'=>$request->overdue_period,
             'remark'=>$request->remark,
@@ -159,7 +164,7 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
         return redirect()->back();
     }
 
-    public function ContractDetails($tenant_id){
+    public function contractDetails($tenant_id){
         $res=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
         // dd($res->tenantDetails);
         $html=' <option value="">--Select Contract--</option>';
@@ -169,4 +174,8 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
         }
         return response()->json($html);
         }
+        public function invoiceDetails($contract_id){
+            $res=Contract::where('id',$contract_id)->get();
+            return response()->json($res);
+            }
 }
