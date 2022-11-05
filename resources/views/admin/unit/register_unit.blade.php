@@ -40,7 +40,7 @@
                 <div class="col-xxl-3 col-md-3">
                                     <label for="unit_code" class="form-label">Unit code </label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="unit_code" name="unit_code" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit No">
+                                        <input type="text" class="form-control" id="unit_code" name="unit_code" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit Code">
                                     </div>
                                 </div>
                 <div class="col-xxl-3 col-md-3">

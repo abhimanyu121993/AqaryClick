@@ -14,4 +14,10 @@ class Contract extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
+
+    public function getTotalContractAttribute(){   
+       $rent=$this->rent_amount;
+       $month=$this->lease_period_month;
+        return $rent*$month;
+    }
 }

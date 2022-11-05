@@ -98,8 +98,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
     Route::resource('cheque',ChequeController::class);
+    Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
-
     Route::resource('invoice',InvoiceController::class);
     Route::resource('tenant',TenantController::class);
     Route::get('fetchunit/{building_id}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
@@ -109,10 +109,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('electricity-download/{path}',[ElectricityController::class,'getDownload'])->name('getDownload');
     Route::resource('electricity',ElectricityController::class);
     Route::get('/isactive/{id}',[UserController::class,'isActive'])->name('activeUser');
-
 });
-
-
 Route::get('/optimize', function(){
     Artisan::call('optimize');
 });

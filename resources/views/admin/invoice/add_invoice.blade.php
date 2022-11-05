@@ -35,12 +35,13 @@
 </div>
 
 
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">
-                    {{ isset($contractedit) ? 'Update Invoice' : 'Deposite Cheque' }}</h4>
+                    {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management' }}</h4>
             </div><!-- end card header -->
             <div class="card-body table-responsive">
                 <div class="live-preview">
@@ -60,7 +61,6 @@
                               
                                 <thead>
                                     <tr>
-                                        <th scope="col">Sr.No.</th>
                                         <th scope="col">Deposite Date</th>
                                         <th scope="col">Cheque Amount</th>
                                         <th scope="col">Cheque No</th>
@@ -92,8 +92,6 @@
         </div>
     </div>
 </div>
-<!-- Grids in modals -->
-
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -113,28 +111,23 @@
                             </ul>
                         </div>
                         @endif
-                        <div class="row gy-4 mb-3">
-                        <div class="col-xxl-3 col-md-3">
-                                <label class="form-label" for="flag">Invoice Details</label>
-                                <div class="input-group">
-                                <input type="text" class="form-control" id="invoice_no" name="invoice_no" placeholder="Invoice No" readonly>
-                                </div>
-                            </div>
-                            
-                            <div class="col-xxl-3 col-md-3">
+                        <input type="hidden" class="form-control" id="tid" value="" name="tenant_id" hidden>
+                        <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
+                        <div class="row gy-4 mb-3">                            
+                            <div class="col-xxl-3 col-md-2">
                                 <label class="form-label" for="flag">Due Date</label>
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Due Date" readonly>
                                 </div>
                                 </div>
-                            <div class="col-xxl-3 col-md-3">
+                            <div class="col-xxl-3 col-md-4">
                                 <label for="name" class="form-label">Invoice Period</label>
                                 <div class="row input-group m-0">
     <div class="col-6">
-    <input type="text" class="form-control" id="due_date" name="invoice_period_start" readonly placeholder="Start Date">
+    <input type="text" class="form-control" id="invoice_period_start" name="invoice_period_start" readonly placeholder="Start Date">
     </div>
     <div class="col-6">
-    <input type="text" class="form-control" id="due_date" name="invoice_period_end" readonly placeholder="End Date">
+    <input type="text" class="form-control" id="invoice_period_end" name="invoice_period_end" readonly placeholder="End Date">
     </div>
 
   </div>
@@ -214,7 +207,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 
@@ -222,7 +214,7 @@
 <script>
 var addButton = $('.add_button'); //Add button selector
 var wrapper = $('.field_table_wrapper'); //Input field wrapper
-var fieldHTML = '<tr ><td id="sn"></td>\ <td><div class="col-sm-12">\
+var fieldHTML = '<tr ><td><div class="col-sm-12">\
                 <input type="date" class="form-control" name="deposite_date[]">\
                 </div></td>\<td><div class="col-sm-12">\
                 <input type="text" class="form-control" name="cheque_amt[]">\
@@ -311,6 +303,27 @@ $(wrapper).on('click', '.remove_button', function(e) {
                     method: 'get',
                     success: function(p) {
                         $("#tenant_contract").html(p);
+                    }
+                });
+            });
+        }).change();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#tenant_contract").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                $('#cid').val(optionValue);
+                var newurl = "{{ url('/admin/invoice-details') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+$('#due_date').val(p[0].lease_end_date);
+$('#invoice_period_start').val(p[0].lease_start_date);
+$('#invoice_period_end').val(p[0].lease_end_date);
+
                     }
                 });
             });

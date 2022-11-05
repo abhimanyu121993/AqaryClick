@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Nationality;
 use App\Models\Owner;
 use App\Models\OwnerCompany;
@@ -23,13 +24,14 @@ class ContractController extends Controller
      */
     public function index()
     {
+        $invoiceDetails=Invoice::where('payment_status','Paid')->get();
         $contract=Contract::all();
         $tenant=Tenant::all();
         $lessor=Owner::all();
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
 
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor'));
+        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails'));
     }
 
     /**

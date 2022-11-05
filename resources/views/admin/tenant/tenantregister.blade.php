@@ -36,15 +36,15 @@
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
-                                <label for="owner_name" class="form-label">Tenant Name In English</label>
+                                <label for="owner_name" class="form-label">Tenant Name <sup class="text-danger">(English)</sup> </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="tenant_english_name" placeholder="Enter Tenant Name In English">
+                                    <input type="text" class="form-control" name="tenant_english_name" placeholder="Enter Tenant Name (English)">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
-                                <label for="owner_name" class="form-label">Tenant Name In Arabic</label>
+                                <label for="owner_name" class="form-label">Tenant Name <sup class="text-danger">(Arabic)</sup></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="tenant_arabic_name" placeholder="Enter Tenant Name In Arabic">
+                                    <input type="text" class="form-control" name="tenant_arabic_name" placeholder="Enter Tenant Name (Arabic)">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -85,15 +85,15 @@
                                 </div>
                             </div>
                         <div class=" col-xxl-3 col-md-3">
-                            <label for="owner_name" class="form-label">Tenant Primary Mobile Number</label>
+                            <label for="owner_name" class="form-label">Tenant Primary Mobile No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile Number">
+                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
-                            <label for="owner_name" class="form-label">Tenant Secondary Mobile Number</label>
+                            <label for="owner_name" class="form-label">Tenant Secondary Mobile No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile Number">
+                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
@@ -142,13 +142,13 @@
                             </select>
                         </div>
                             </div>
-                            <div class="col-xxl-3 col-md-3">
+                            <!-- <div class="col-xxl-3 col-md-3">
                         <label for="country" class="form-label">Total unit</label>
                         <div class="input-group">
                             <input type="text" class="form-control"  id="total_unit" name="total_unit"
                                 placeholder=" Total Unit " readonly>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="process" name="status">
@@ -158,13 +158,22 @@
                                     <option value="Related Party">Related Party</option>
                                 </select>
                             </div>
-                            <div class="col-xxl-3 col-md-3" id="authp">
-                                <label for="country" class="form-label">Rental Period</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" name="rental_period"
-                                        placeholder="Rental Period">
-                                </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Rental Period</label>
+                                <select class="form-control" id="rental_period" name="rental_period">
+                                    <option value="" selected hidden>-----Select Type-----</option>
+                                    <option value="Days">Days</option>
+                                    <option value="Months">Months</option>
+                                    <option value="Years">Years</option>
+                                </select>
                             </div>
+                            <div class="col-xxl-3 col-md-3" id="rental_time">
+                        <label for="country" class="form-label" id="change_rental_time">Days</label>
+                        <div class="input-group">
+                            <input type="text" id="change_placeholder" class="form-control"   name="rental_time"
+                                placeholder=" Enter No of Days ">
+                        </div>
+                    </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Payment Method</label>
                                 <select class="form-control" id="payment_method" name="payment_method">
@@ -352,5 +361,31 @@ $(document).ready(function() {
             });
         }).change();
     });
+</script>
+<script>
+$(document).ready(function() {
+    $('#rental_time').hide(); 
+                $("#rental_period").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'Days') {
+                        $('#rental_time').show();
+                        $('#change_rental_time').text("Days") ;
+                        $('#change_placeholder').attr('placeholder','Enter No Of Days');
+                        } else if (optionValue == 'Months') {
+                        $('#rental_time').show(); 
+                        $('#change_rental_time').text("Months") ;
+                        $('#change_placeholder').attr('placeholder','Enter No Of Months');
+
+                    }
+                    else if (optionValue == 'Years') {
+                        $('#rental_time').show(); 
+                        $('#change_rental_time').text("Years");
+                        $('#change_placeholder').attr('placeholder','Enter No Of Years');
+
+                    }
+                });
+            }).change();
+        });
 </script>
 @endsection

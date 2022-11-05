@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('total_unit')->nullable();
             $table->string('unit_type')->nullable();
             $table->string('rental_period')->nullable();
+            $table->string('rental_time')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_receipt')->nullable();
             $table->string('sponsor_name')->nullable();
