@@ -7,7 +7,9 @@ use App\Models\Contract;
 use App\Models\Error;
 use App\Models\Invoice;
 use App\Models\Tenant;
+use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\DBAL\TimestampType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -57,7 +59,7 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
             }
 
         }
-        $invoice_no='inv-'.rand(0,99).'-'.rand(0,99);
+        $invoice_no='INV-'.rand(0,99).'-'.rand(0,99);
 
        $data= Invoice::create([
              'tenant_id' => $request->tenant_id,
@@ -175,7 +177,11 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
         return response()->json($html);
         }
         public function invoiceDetails($contract_id){
-            $res=Contract::where('id',$contract_id)->get();
-            return response()->json($res);
+            $res=Contract::where('id',$contract_id)->first();
+        //    $overdue=diffInDays(Carbon::now(),$res->lease_end_date);
+           $formatted_dt1=Carbon::now();
+$formatted_dt2=Carbon::parse($res->lease_end_date);
+$date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+            return response()->json(array('res'=>$res,'overdue'=>$date_diff));
             }
 }

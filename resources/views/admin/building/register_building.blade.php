@@ -161,6 +161,8 @@
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name}}</option>
                                     @endif
+                                    <option value="">--Select City--</option>
+
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
@@ -170,6 +172,7 @@
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->area}}</option>
                                     @endif
+                                    <option value="">--Select Zone--</option>
                                 </select>
                             </div>
                         </div>

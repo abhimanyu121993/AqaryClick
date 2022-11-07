@@ -178,7 +178,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Overdue Period</label>
                                 <div class="input-group">
-                                <input type="text" class="form-control" id="overdue_period" name="overdue_period" placeholder="Overdue Period">
+                                <input type="text" class="form-control" id="overdue_period" name="overdue_period" placeholder="Overdue Period" readonly>
                                 </div>
                                 </div>
                             <div class="col-xxl-3 col-md-3">
@@ -320,14 +320,15 @@ $(wrapper).on('click', '.remove_button', function(e) {
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-$('#due_date').val(p[0].lease_end_date);
-$('#invoice_period_start').val(p[0].lease_start_date);
-$('#invoice_period_end').val(p[0].lease_end_date);
-
+$('#due_date').val(p.res.lease_end_date);
+$('#invoice_period_start').val(p.res.lease_start_date);
+$('#invoice_period_end').val(p.res.lease_end_date);
+$('#overdue_period').val(p.overdue+'Days');
                     }
                 });
             });
         }).change();
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection

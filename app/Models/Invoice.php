@@ -22,4 +22,10 @@ class Invoice extends Model
         $paid_amt=$this->amt_paid;
          return $total_contract-(int)$paid_amt;
      }
+
+     public function getOverdueAmtAttribute(){   
+        $Odinvoice=$this->count();
+        $sum=$this->sum('overdue_period');
+         return $Odinvoice*(int)$sum;
+     }
 }
