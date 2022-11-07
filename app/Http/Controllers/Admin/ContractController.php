@@ -30,8 +30,17 @@ class ContractController extends Controller
         $lessor=Owner::all();
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
-
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails'));
+        $invoice=Invoice::all()->count();
+        $total_amount=Invoice::withSum('Contract','rent_amount')->get()->sum('contract_sum_rent_amount');
+        $total_amt=$invoice*$total_amount;
+        $not_paid_invoice=Invoice::where('payment_status','Not Paid')->count();
+        $delay_invoice=Invoice::whereNotNull('overdue_period')->count();
+        $total_delay_amt=Invoice::withSum('Contract','rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+        $total_delay=$delay_invoice*$total_delay_amt;
+        $invoice_balance=$delay_invoice+$not_paid_invoice;
+        $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
+$total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
+        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance'));
     }
 
     /**
@@ -70,8 +79,8 @@ class ContractController extends Controller
             'lease_period_month'=>'required',
             'lease_period_day'=>'required',
             'approved_by'=>'required',
-            'attestation_no'=>'required',
-            'attestation_expiry'=>'required',
+            'attestation_no'=>'nullable',
+            'attestation_expiry'=>'nullable',
             'rent_amount'=>'required',
             'total_invoice'=>'required',
             'guarantees'=>'required',
@@ -186,8 +195,8 @@ class ContractController extends Controller
             'lease_period_month'=>'required',
             'lease_period_day'=>'required',
             'approved_by'=>'required',
-            'attestation_no'=>'required',
-            'attestation_expiry'=>'required',
+            'attestation_no'=>'nullable',
+            'attestation_expiry'=>'nullable',
             'total_invoice'=>'required',
             'guarantees'=>'required',
         ]);

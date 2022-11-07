@@ -303,24 +303,8 @@
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
-                                <label for="name" class="form-label">Attestation No</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="name" name="attestation_no"
-                                        value="{{ isset($contractedit) ? $contractedit->attestation_no : '' }}"
-                                        placeholder="Enter Attestation No">
-                                </div>
-                            </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label for="name" class="form-label">Attestation Expiry</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" id="name" name="attestation_expiry"
-                                        value="{{ isset($contractedit) ? $contractedit->attestation_expiry : '' }}"
-                                        placeholder="Enter Attestation Expiry">
-                                </div>
-                            </div>
-                            <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Attestation Status</label>
-                                <select class="form-control select2 form-select" name="attestation_status">
+                                <select class="form-control select2 form-select" name="attestation_status" id="attestation_status">
                                     @if (isset($contractedit))
                                     <option value="{{ $contractedit->attestation_status }}" selected>
                                         {{ $contractedit->attestation_status }}</option>
@@ -334,6 +318,23 @@
                                     @endif
                                 </select>
                             </div>
+                            <div class="col-xxl-3 col-md-3" id="attestation_no">
+                                <label for="name" class="form-label">Attestation No</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="name" name="attestation_no"
+                                        value="{{ isset($contractedit) ? $contractedit->attestation_no : '' }}"
+                                        placeholder="Enter Attestation No">
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3" id="attestation_expiry">
+                                <label for="name" class="form-label">Attestation Expiry</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="name" name="attestation_expiry"
+                                        value="{{ isset($contractedit) ? $contractedit->attestation_expiry : '' }}"
+                                        placeholder="Enter Attestation Expiry">
+                                </div>
+                            </div>
+                          
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Rent Amount</label>
                                 <div class="input-group">
@@ -419,30 +420,45 @@
             </div><!-- end card header -->
             <div class="card-body table-responsive">
                 <div class="live-preview">
-                <form action="{{route('admin.cheque.store')}}" method="POST" enctype="multipart/form-data">
-                @csrf  
-                @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
+                <div class="card-body field_wrapper -responsive">
+                            <table class="table table-nowrap container table-responsive ">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Total Invoice</th>
+                                        <th scope="col">Total Amount</th>
+                                        <th scope="col">Delay Invoice</th>
+                                        <th scope="col">Total Delay Amount</th>
+                                        <th scope="col">Invoices Balance</th>
+                                        <th scope="col">Total Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>{{ App\Models\Invoice::count() }}</td>
+                                        <td>{{$total_amt??0}}</td>
+                                       <td>{{ App\Models\Invoice::whereNotNull('overdue_period')->count() }}</td>
+                                        <td>{{$total_delay??0}}</td>
+                                        <td>{{$invoice_balance??0}}</td>
+                                        <td>{{$total_balance??0}}</td>
+                                    </tr>
+                                </tbody>
+                    </table>
+                </div>
                         <div class="card-body field_wrapper -responsive">
                             <table class="table table-nowrap container table-responsive ">
-                              
                                 <thead>
                                     <tr>
                                         <th scope="col">Sr.No.</th>
-                                        <th scope="col">Total Contract</th>
-                                        <th scope="col">Payment Date</th>
-                                        <th scope="col">Amount Paid</th>
-                                        <th scope="col">Payment Status</th>
-                                        <th scope="col">Total Balance</th>
                                         <th scope="col">Invoice No</th>
-                                        <th scope="col">Remark</th>
+                                        <th scope="col">Payment Date</th>
+                                        <th scope="col">Due Amount</th>
+
+                                        <!-- <th scope="col">Total Contract</th> -->
+                                        <!-- <th scope="col">Amount Paid</th> -->
+                                        <th scope="col">Payment Status</th>
+                                        <th scope="col">Payment Method</th>
+                                        <th scope="col">Overdue Period </th>    
+                                     <th scope="col">Remark</th>
                                        
                                     </tr>
                                 </thead>
@@ -450,13 +466,14 @@
 @foreach($invoiceDetails as $inv)
                                 <tr>
                                         <td>{{$loop->index+1}}</td>
-                                        <td>
-                                            {{$inv->Contract->total_contract??''}}</td>
-                                        <td>{{ Carbon\Carbon::parse($inv->created_at)->format('d-m-Y')??'' }}</td>
-                                        <td>{{$inv->amt_paid??''}}</td>
-                                        <td>{{$inv->payment_status??''}}</td>
-                                        <td>{{$inv->total_balance??''}}</td>
                                         <td>{{$inv->invoice_no??''}}</td>
+                                        <td>{{ Carbon\Carbon::parse($inv->created_at)->format('d-m-Y')??'' }}</td>
+                                       <td>{{$inv->total_balance??''}}</td>
+                                        <!-- <td>{{$inv->Contract->total_contract??''}}</td> -->
+                                        <!-- <td>{{$inv->amt_paid??''}}</td> -->
+                                        <td>{{$inv->payment_status??''}}</td>
+                                        <td>{{$inv->payment_method??''}}</td>
+                                        <td>{{$inv->overdue_period??''}}</td>
                                         <td>{{$inv->remark??''}}</td>
 
                                     </tr>
@@ -464,11 +481,6 @@
                                 </tbody>
                             </table>
                         </div>
-                   
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
@@ -659,6 +671,27 @@ $(document).ready(function() {
         });
     }).change();
 });
-
+</script>
+<script>
+$(document).ready(function() {
+    $('#attestation_no').hide();
+    $('#attestation_expiry').hide();
+    $("#attestation_status").change(function() {
+        $(this).find("option:selected").each(function() {
+            var optionValue = $(this).attr("value");
+            if (optionValue == 'Done') {
+                $('#attestation_no').show();
+                $('#attestation_expiry').show();
+            } else if (optionValue == 'Not Yet') {
+                $('#attestation_no').hide();
+                $('#attestation_expiry').hide(); 
+                                  }
+                                  else if (optionValue == 'Under Process') {
+                $('#attestation_no').hide();
+                $('#attestation_expiry').hide(); 
+                                  }
+        });
+    }).change();
+});
 </script>
 @endsection
