@@ -16,7 +16,7 @@
                                 <select class="select2 form-select" id="tenant_name" name='tenant_name'>
                                     <option value="">--Select Tenant--</option>
                                     @foreach($tenantDetails as $td)
-                                    <option value="{{ $td->id}}">{{ $td->tenant_english_name }}</option>
+                                    <option value="{{ $td->tenant_name}}">{{ $td->tenantDetails->tenant_english_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

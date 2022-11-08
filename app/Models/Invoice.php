@@ -16,7 +16,6 @@ class Invoice extends Model
     {
         return $this->belongsTo(Contract::class, 'contract_id', 'id');
     }
-
     public function getTotalBalanceAttribute(){   
         $total_contract=$this->Contract->total_contract??0;
         $paid_amt=$this->amt_paid;
@@ -27,5 +26,9 @@ class Invoice extends Model
         $Odinvoice=$this->count();
         $sum=$this->sum('overdue_period');
          return $Odinvoice*(int)$sum;
+     }
+     public function TenantName()
+     {
+         return $this->belongsTo(Tenant::class, 'tenant_id', 'id');
      }
 }

@@ -32,8 +32,8 @@
                                 <label for="name" class="form-label">Contract Code</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="" name="contract_code"
-                                        value="{{ isset($contractedit) ? $contractedit->contract_code : '' }}"
-                                        placeholder="Enter Contract Code">
+                                        value="{{ isset($contractedit) ? $contractedit->contract_code : $CC }}"
+                                        placeholder="Enter Contract Code" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -101,14 +101,14 @@
                             <div class="col-xxl-3 col-md-3 mb-2" id="passport">
                                 <label for="country" class="form-label">Passport</label>
                                 <div class="input-group">
-                                    <input type="text" id="passport" class="form-control" name="passport_document"
+                                    <input type="text" id="passport_doc" class="form-control" name="passport_document"
                                         placeholder="Passport Document" readonly>
                                 </div>
                             </div>
 
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Contract Status</label>
-                                <select class="form-control select2 form-select" name="contract_status">
+                                <select class="form-control select2 form-select" id="contract_status" name="contract_status">
                                     @if (isset($contractedit))
                                     <option value="{{ $contractedit->contract_status }}" selected>
                                         {{ $contractedit->contract_status }}</option>
@@ -116,6 +116,7 @@
                                     <option value="" selected hidden>-----Select Status-----</option>
                                     <option value="new">New</option>
                                     <option value="renewed">Renewed</option>
+                                    <option value="not renewed">Not Renewed</option>
                                     <option value="auto renewed">Auto Renewed</option>
                                     <option value="long term">Long Term</option>
                                     <option value="releted parties">Releted Parties</option>
@@ -198,7 +199,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Release Date</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="name" name="release_date"
+                                    <input type="date" class="form-control" id="release_date" name="release_date"
                                         value="{{ isset($contractedit) ? $contractedit->release_date : '' }}"
                                         placeholder="Enter Release Date ">
                                 </div>
@@ -509,12 +510,10 @@ $(document).ready(function() {
                     $('#sponsor_id').val(p.sponsor_oid);
                     $('#sponsor_mobile').val(p.sponsor_phone);
                     $('#document_type').val(p.tenant_document);
-                    $('#sponsor_nationality').val(p.sponser_nationality);
+                    $('#sponer_nationality').val(p.sponsor_nationality);
                     $('#qid_document').val(p.qid_document);
                     $('#cr_document').val(p.cr_document);
-                    $('#passport').val(p.passport_document);
-
-                    console.log(p.qid_document);
+                    $('#passport_doc').val(p.passport);
                     if (p.tenant_document == 'QID') {
                         $('#qid').show();
                         $('#cr').hide();
@@ -530,6 +529,38 @@ $(document).ready(function() {
                     }
                 }
             });
+    $("#contract_status").change(function() {
+        $(this).find("option:selected").each(function() {
+            var StatusValue = $(this).attr("value");
+           if(StatusValue=='auto renewed'){
+            var leaseurl = "{{ url('/admin/fetch-contract-lease') }}/" + optionValue;
+            $.ajax({
+                url: leaseurl,
+                method: 'get',
+                success: function(p) {
+                    $('#rent_amount').val(p.res.rent_amount);
+                    $('#release_date').val(p.res.release_date);
+                    $('#lease_start_date').val(p.res.lease_end_date);
+                    $('#lease_end_date').val(p.date);   
+                    $('#lease_period_month').val(p.diff_in_months);
+                    $('#total_invoice').val(p.diff_in_months);
+                    $('#lease_period_day').val(p.diff_in_Days);
+                }  
+            });
+        }
+        else{
+                   $('#release_date').val('');
+                    $('#lease_start_date').val(''); 
+                    $('#lease_end_date').val('');
+                    $('#lease_period_month').val('');
+        $('#total_invoice').val('');
+        $('#lease_period_day').val('');
+        $('#rent_amount').val('');
+
+                }
+        });
+    }).change();
+            
         });
     }).change();
 });
@@ -593,6 +624,32 @@ $('#lease_start_date').change(function() {
         $('#lease_period_day').val(daydiff);
 
     });
+});
+
+$(document).on('change','#lease_end_date',function(){
+    var st=$('#lease_start_date').val();
+    var date = new Date(st);
+    var dayTo = date.getDate();
+    var monthTo = date.getMonth() + 1;
+    var yearTo = date.getFullYear();
+        var dateF = new Date($(this).val());
+        var dayFrom = dateF.getDate();
+        var monthFrom = dateF.getMonth() + 1;
+        var yearFrom = dateF.getFullYear();
+        start_date = new Date(yearTo, monthTo, dayTo);
+        end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
+        total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -
+            start_date.getMonth())
+        $('#lease_period_month').val(total_months);
+        $('#total_invoice').val(total_months);
+
+        var d1 = new Date(date);
+        var d2 = new Date(dateF);
+        var diff = d2.getTime() - d1.getTime();
+        var daydiff = diff / (1000 * 60 * 60 * 24);
+        $('#lease_period_day').val(daydiff);
+
+    
 });
 </script>
 <script>
@@ -693,5 +750,9 @@ $(document).ready(function() {
         });
     }).change();
 });
+</script>
+
+<script>
+
 </script>
 @endsection

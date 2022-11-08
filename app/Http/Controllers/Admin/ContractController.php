@@ -12,6 +12,7 @@ use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 
@@ -26,6 +27,8 @@ class ContractController extends Controller
     {
         $invoiceDetails=Invoice::where('payment_status','Paid')->get();
         $contract=Contract::all();
+        $max_id=Contract::max('id')+1;
+        $CC='CC'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $tenant=Tenant::all();
         $lessor=Owner::all();
         $tenant_doc=Tenant::pluck('tenant_document');
@@ -39,8 +42,8 @@ class ContractController extends Controller
         $total_delay=$delay_invoice*$total_delay_amt;
         $invoice_balance=$delay_invoice+$not_paid_invoice;
         $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
-$total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance'));
+        $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
+        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance','CC'));
     }
 
     /**
@@ -297,5 +300,14 @@ $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
         $res=Tenant::where('id',$tenant_name)->first();
         return response()->json($res);
         }
+    public function fetchContractLease($contract_id){
+            $res=Contract::where('id',$contract_id)->latest()->first();
+            $to=Carbon::parse($res->lease_end_date)->addYear(1);
+            $from=Carbon::parse($res->lease_end_date);
+            $diff_in_months = $to->diffInMonths($from);
+            $diff_in_Days = $to->diffInDays($from);
+            $formatted_dt=Carbon::parse($res->lease_end_date)->addYear(1)->format('Y-m-d');
+            return response()->json(array('res'=>$res,'date'=>$formatted_dt,'diff_in_months'=>$diff_in_months,'diff_in_Days'=>$diff_in_Days));
+            }
 
 }
