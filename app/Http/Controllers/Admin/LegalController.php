@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use App\Models\Legal;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
@@ -17,8 +18,10 @@ class LegalController extends Controller
      */
     public function index()
     {
-        $tenantDetail=Tenant::all();   
-return view ('admin.legal.register',compact('tenantDetail'));
+        $n=Invoice::pluck('overdue_period');
+        $int = (int) filter_var($n, FILTER_SANITIZE_NUMBER_INT);
+        $tenantDetail=Invoice::where('overdue_period','>=',$int)->get();
+         return view ('admin.legal.register',compact('tenantDetail'));
     }
 
     /**

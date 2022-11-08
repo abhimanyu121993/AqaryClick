@@ -11,8 +11,5 @@ class Legal extends Model
     use HasFactory,SoftDeletes;
     protected $guarded=[];
 
-    public function TenantName()
-    {
-        return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
-    }
+   
 }

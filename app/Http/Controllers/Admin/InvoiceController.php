@@ -23,7 +23,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $tenantDetails=Tenant::all();
+        $tenantDetails=Contract::where('status',0)->get();
 return view('admin.invoice.add_invoice',compact('tenantDetails'));  
  }
 
@@ -168,9 +168,7 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
 
     public function contractDetails($tenant_id){
         $res=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
-        // dd($res->tenantDetails);
-        $html=' <option value="">--Select Contract--</option>';
-                
+        $html=' <option value="">--Select Contract--</option>';   
         foreach($res as $r){
             $html .='<option value="'.$r->id.'">'.$r->contract_code.'('.$r->tenantDetails->buildingDetails->name.')'.'</option>';
         }
@@ -180,8 +178,8 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
             $res=Contract::where('id',$contract_id)->first();
         //    $overdue=diffInDays(Carbon::now(),$res->lease_end_date);
            $formatted_dt1=Carbon::now();
-$formatted_dt2=Carbon::parse($res->lease_end_date);
-$date_diff=$formatted_dt1->diffInDays($formatted_dt2);
-            return response()->json(array('res'=>$res,'overdue'=>$date_diff));
+           $formatted_dt2=Carbon::parse($res->lease_end_date);
+           $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
+           return response()->json(array('res'=>$res,'overdue'=>$date_diff));
             }
 }
