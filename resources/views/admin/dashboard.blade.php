@@ -115,6 +115,13 @@
                                     <p class="text-muted mb-0">Total Tenants</p>
                                 </div></a>
                             </div>
+                           @php $res=App\Models\Invoice::where('payment_status','Paid')->pluck('contract_id') @endphp
+                            <div class="col-6 col-sm-4">
+                            <a href="{{ route('admin.Overdue') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{  App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
+                                    <p class="text-muted mb-0">OverDue</p>
+                                </div></a>
+                            </div>
                         </div>
                     </div><!-- end card header -->
                     <div class="card-body p-0 pb-2">
@@ -156,7 +163,7 @@
                             </div>
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.unit.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','Vacant')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','vacant')->count() }}</span></h5>
                                     <p class="text-muted mb-0">Vacant unit</p>
                                 </div></a>
                             </div>

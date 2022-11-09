@@ -28,7 +28,7 @@
                                 <tr>
                                     @foreach($legalDetail as $legal)
                                     <th scope="row">1</th>
-                                    <td>{{ $legal->TenantName->tenant_english_name}}</td>
+                                    <td>{{ $legal->tenantName->tenant_english_name??''}}</td>
                                     <td>
                                         {{ $legal->tenant_mobile }}
                                     </td>
@@ -64,8 +64,8 @@
                                                        
                            </td>
                            </form>
-@endforeach
-                            </tr>
+
+                            </tr>@endforeach
                         </tbody>
                     </table>
                 </div>

@@ -44,7 +44,7 @@ class UnitStatusController extends Controller
             'name' => 'required',
         ]);
        $data= UnitStatus::create([
-            'name' => $request->name
+            'name' => strtolower($request->name)
         ]);
         if($data){
         return redirect()->back()->with('success','Unit Status has been created successfully.');
@@ -92,7 +92,7 @@ class UnitStatusController extends Controller
             'name' => 'required',
         ]);
         $data=UnitStatus::find($id)->update([
-            'name' => $request->name
+            'name' => strtolower($request->name)
         ]);
         if($data)
         {

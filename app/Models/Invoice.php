@@ -21,7 +21,6 @@ class Invoice extends Model
         $paid_amt=$this->amt_paid;
          return $total_contract-(int)$paid_amt;
      }
-
      public function getOverdueAmtAttribute(){   
         $Odinvoice=$this->count();
         $sum=$this->sum('overdue_period');
@@ -31,4 +30,6 @@ class Invoice extends Model
      {
          return $this->belongsTo(Tenant::class, 'tenant_id', 'id');
      }
+
+     
 }

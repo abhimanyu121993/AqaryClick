@@ -27,7 +27,7 @@
                                 <select class="select2 form-select" id="tenant_name" name='tenant_name'>
                                     <option value="">--Select Name--</option>
                                     @foreach($tenantDetail as $td)
-                                    <option value="{{ $td->tenant_id}}">{{ $td->TenantName->tenant_english_name }}</option>
+                                    <option value="{{ $td->tenant_name}}">{{ $td->tenantDetails->tenant_english_name??'' }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -97,9 +97,9 @@
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-                        console.log(p);
-                        $("#mobile_no").val(p.tenant_primary_mobile);
-                        $("#unit_ref").val(p.unit_ref);
+                        console.log(p.unit_ref);
+                        $("#mobile_no").val(p.res.tenant_primary_mobile);
+                        $("#unit_ref").val(p.unit_ref.unit_ref);
 
                     }
                 });

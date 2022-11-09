@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use App\Models\Invoice;
 use App\Models\Legal;
 use App\Models\Tenant;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -17,11 +19,10 @@ class LegalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $n=Invoice::pluck('overdue_period');
-        $int = (int) filter_var($n, FILTER_SANITIZE_NUMBER_INT);
-        $tenantDetail=Invoice::where('overdue_period','>=',$int)->get();
-         return view ('admin.legal.register',compact('tenantDetail'));
+    { 
+    $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
+    $tenantDetail=Contract::where('overdue','>=',90)->whereNotIn('id',$res)->get();
+    return view ('admin.legal.register',compact('tenantDetail'));
     }
 
     /**
@@ -67,8 +68,6 @@ class LegalController extends Controller
             'status' => $request->status,
             'file' =>json_encode($otherpic),
             'remark' => $request->remark,
-
-
         ]);
         if($data){
         return redirect()->back()->with('success','Legal has been created successfully.');
@@ -162,9 +161,10 @@ class LegalController extends Controller
         }    
     }
     public function fetchData($tenant_id){
-
+      
         $res=Tenant::where('id',$tenant_id)->first();
-        return response()->json($res);
+        $tenantDetail=Unit::where('building_id',$res->building_name)->where('unit_type',$res->unitType->name)->first();      
+        return response()->json(array('res'=>$res,'unit_ref'=>$tenantDetail));
         }
 
         public function alllegal(Request $request)

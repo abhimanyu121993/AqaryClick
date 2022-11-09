@@ -474,7 +474,7 @@
                                         <!-- <td>{{$inv->amt_paid??''}}</td> -->
                                         <td>{{$inv->payment_status??''}}</td>
                                         <td>{{$inv->payment_method??''}}</td>
-                                        <td>{{$inv->overdue_period??''}}</td>
+                                        <td>{{$inv->overdue_period??''}}Days</td>
                                         <td>{{$inv->remark??''}}</td>
 
                                     </tr>

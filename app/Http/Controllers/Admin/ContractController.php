@@ -310,4 +310,10 @@ class ContractController extends Controller
             return response()->json(array('res'=>$res,'date'=>$formatted_dt,'diff_in_months'=>$diff_in_months,'diff_in_Days'=>$diff_in_Days));
             }
 
+    public function Overdue(){
+        $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
+    $tenant=Contract::with('tenantDetails')->where('overdue','>=',90)->whereNotIn('id',$res)->get();
+    return view('admin.contract.overdue',compact('tenant'));
+    }
+
 }

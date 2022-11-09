@@ -82,6 +82,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
+    Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
     Route::get('fetch-contract-lease/{contract_id}',[ContractController::class,'fetchContractLeasefet'])->name('fetchContractLease');
     Route::get('fetch-tenant-details/{tenant_name}',[ContractController::class,'fetchTenantDetails'])->name('fetchTenantDetails');

@@ -16,7 +16,7 @@
                                 <select class="select2 form-select" id="tenant_name" name='tenant_name'>
                                     <option value="">--Select Tenant--</option>
                                     @foreach($tenantDetails as $td)
-                                    <option value="{{ $td->tenant_name}}">{{ $td->tenantDetails->tenant_english_name }}</option>
+                                    <option value="{{ $td->tenantDetails->id}}">{{ $td->tenantDetails->tenant_english_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -97,6 +97,7 @@
         <div class="card">
             <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">Invoice Management</h4>
+                <h4 class="card-title mb-0 flex-grow-1 text-end" id="payable_amt"></h4>
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
@@ -111,10 +112,16 @@
                             </ul>
                         </div>
                         @endif
-                        <input type="hidden" class="form-control" id="tid" value="" name="tenant_id" hidden>
+                        <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_id" hidden>
                         <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
                         <div class="row gy-4 mb-3">                            
                             <div class="col-xxl-3 col-md-2">
+                                <label class="form-label" for="flag">Invoice No</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no"  readonly>
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Due Date</label>
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Due Date" readonly>
@@ -296,7 +303,7 @@ $(wrapper).on('click', '.remove_button', function(e) {
         $("#tenant_name").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
-                $('#tid').val(optionValue);
+                $('#tenant_id').val(optionValue);
                 var newurl = "{{ url('/admin/fetch-contract-details') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
@@ -320,10 +327,11 @@ $(wrapper).on('click', '.remove_button', function(e) {
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-$('#due_date').val(p.res.lease_end_date);
-$('#invoice_period_start').val(p.res.lease_start_date);
-$('#invoice_period_end').val(p.res.lease_end_date);
+$('#due_date').val(p.lease_end_date);
+$('#invoice_period_start').val(p.lease_start_date);
+$('#invoice_period_end').val(p.lease_end_date);
 $('#overdue_period').val(p.overdue+'Days');
+$('#payable_amt').text('Total Payable Amount   '+p.rent_amount);
                     }
                 });
             });

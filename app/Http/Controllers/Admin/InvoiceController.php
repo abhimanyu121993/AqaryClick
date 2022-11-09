@@ -23,8 +23,11 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $tenantDetails=Contract::where('status',0)->get();
-return view('admin.invoice.add_invoice',compact('tenantDetails'));  
+        $a=invoice::pluck('contract_id');
+        $max_id=Invoice::max('id')+1;
+        $INV='INV'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
+        $tenantDetails=Contract::all();
+return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));  
  }
 
     /**
@@ -59,12 +62,11 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
             }
 
         }
-        $invoice_no='INV-'.rand(0,99).'-'.rand(0,99);
-
+        $overdue = (int) filter_var($request->overdue_period, FILTER_SANITIZE_NUMBER_INT);
        $data= Invoice::create([
              'tenant_id' => $request->tenant_id,
-              'contract_id' => $request->contract_id,
-            'invoice_no' => $invoice_no,
+             'contract_id' => $request->contract_id,
+            'invoice_no' => $request->invoice_no,
             'due_date' => $request->due_date,
             'invoice_period_start' => $request->invoice_period_start,
             'invoice_period_end' => $request->invoice_period_end,
@@ -74,7 +76,7 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
             'account_no' => $request->payment_method,
             'bank_name' => $request->bank_name,
             'payment_status' => $request->payment_status,
-            'overdue_period'=>$request->overdue_period,
+            'overdue_period'=>$overdue,
             'remark'=>$request->remark,
             'attachment'=>json_encode($otherpic),
             
@@ -176,10 +178,6 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
         }
         public function invoiceDetails($contract_id){
             $res=Contract::where('id',$contract_id)->first();
-        //    $overdue=diffInDays(Carbon::now(),$res->lease_end_date);
-           $formatted_dt1=Carbon::now();
-           $formatted_dt2=Carbon::parse($res->lease_end_date);
-           $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
-           return response()->json(array('res'=>$res,'overdue'=>$date_diff));
+           return response()->json($res );
             }
 }
