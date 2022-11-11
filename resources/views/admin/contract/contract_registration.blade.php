@@ -254,8 +254,10 @@
 
                                 </select>
                             </div>
+                        <div class="clone_grace row " style="display:none;">
+                            @if (isset($contractedit))
                             <div class="col-xxl-3 col-md-3" id="grace_start_date">
-                                <label for="name" class="form-label">Grace Start Date</label>
+                                <label for="name" class="form-label">Grace From</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="grace_start" name="grace_start_date"
                                         value="{{ isset($contractedit) ? $contractedit->grace_start_date : '' }}"
@@ -263,7 +265,7 @@
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3" id="grace_end_date">
-                                <label for="name" class="form-label">Grace End Date</label>
+                                <label for="name" class="form-label">Grace To</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="grace_end" name="grace_end_date"
                                         value="{{ isset($contractedit) ? $contractedit->grace_end_date : '' }}"
@@ -286,7 +288,10 @@
                                         value="{{ isset($contractedit) ? $contractedit->grace_period_day : '' }}"
                                         placeholder="Enter Grace Period Day" readonly>
                                 </div>
+                                @endif
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Approved By</label>
                                 <select class="select2 form-select js-example-basic-single" id="approved_by"
@@ -384,7 +389,7 @@
                                     @endif
                                 </select>
                             </div>
-
+                        </div>
                         </div>
                         <div class="row gy-4 mt-2">
                             <div class="col-xxl-3 col-md-12">
@@ -545,6 +550,35 @@ $(document).ready(function() {
                     $('#lease_period_month').val(p.diff_in_months);
                     $('#total_invoice').val(p.diff_in_months);
                     $('#lease_period_day').val(p.diff_in_Days);
+                 var total_years=p.diff_in_Years;
+                    var gracediv='';
+for(var i=1; i<=total_years;i++){
+    gracediv +=' <div class="col-xxl-3 col-md-3" id="grace_start_date">\
+                                <label for="name" class="form-label">Grace From</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_end_date">\
+                                <label for="name" class="form-label">Grace To</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_month">\
+                                <label for="name" class="form-label">Grace Period Month</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_day">\
+                                <label for="name" class="form-label">Grace Period Day</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
+                                </div>\
+                            </div>';
+}
+$('.clone_grace').html(gracediv);
                 }  
             });
         }
@@ -553,9 +587,9 @@ $(document).ready(function() {
                     $('#lease_start_date').val(''); 
                     $('#lease_end_date').val('');
                     $('#lease_period_month').val('');
-        $('#total_invoice').val('');
-        $('#lease_period_day').val('');
-        $('#rent_amount').val('');
+                    $('#total_invoice').val('');
+                    $('#lease_period_day').val('');
+                    $('#rent_amount').val('');
 
                 }
         });
@@ -568,32 +602,15 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
-    $('#grace_start_date').hide();
-    $('#grace_end_date').hide();
-    $('#grace_period_month').hide();
-    $('#grace_period_day').hide();
-    var selectValue = $("#selectedOption").text();
-    if (selectValue == "Yes") {
-        $('#grace_start_date').show();
-        $('#grace_end_date').show();
-        $('#grace_period_month').show();
-        $('#grace_period_day').show();
-    }
-
     $("#grace").change(function() {
         $(this).find("option:selected").each(function() {
             var optionValue = $(this).attr("value");
             if (optionValue == 'Yes') {
-                $('#grace_start_date').show();
-                $('#grace_end_date').show();
-                $('#grace_period_month').show();
-                $('#grace_period_day').show();
+                $('.clone_grace').show();
+              
             } else if (optionValue == 'No') {
-                $('#grace_start_date').hide();
-                $('#grace_end_date').hide();
-                $('#grace_period_month').hide();
-                $('#grace_period_day').hide();
-
+                $('.clone_grace').hide();
+             
             }
         });
     }).change();
@@ -622,6 +639,45 @@ $('#lease_start_date').change(function() {
         var diff = d2.getTime() - d1.getTime();
         var daydiff = diff / (1000 * 60 * 60 * 24);
         $('#lease_period_day').val(daydiff);
+
+        function diff_years(d2, d1) 
+ {
+
+  var diff =(d2.getTime() - d1.getTime()) / 1000;
+   diff /= (60 * 60 * 24);
+  return Math.abs(Math.round(diff/365.25));
+ }
+ 
+console.log(diff_years(d1, d2));
+var total_years=diff_years(d1, d2);
+var gracediv='';
+for(var i=1; i<=total_years;i++){
+    gracediv +=' <div class="col-xxl-3 col-md-3" id="grace_start_date">\
+                                <label for="name" class="form-label">Grace From</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_end_date">\
+                                <label for="name" class="form-label">Grace To</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_month">\
+                                <label for="name" class="form-label">Grace Period Month</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_day">\
+                                <label for="name" class="form-label">Grace Period Day</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
+                                </div>\
+                            </div>';
+}
+$('.clone_grace').html(gracediv);
 
     });
 });
@@ -706,7 +762,6 @@ $(document).ready(function() {
                 url: newurl,
                 method: 'get',
                 success: function(p) {
-                    console.log(p);
                     $("#tenant_name").html(p);
                 }
             });

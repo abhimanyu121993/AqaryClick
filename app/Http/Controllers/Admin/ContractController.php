@@ -120,10 +120,10 @@ class ContractController extends Controller
             'lease_period_month'=>$request->lease_period_month,
             'lease_period_day'=>$request->lease_period_day,
             'is_grace'=>$request->grace,
-            'grace_start_date'=>$request->grace_start_date,
-            'grace_end_date'=>$request->grace_end_date,
-            'grace_period_month'=>$request->grace_period_month,
-            'grace_period_day'=>$request->grace_period_day,
+            'grace_start_date'=>json_encode($request->grace_start_date),
+            'grace_end_date'=>json_encode($request->grace_end_date),
+            'grace_period_month'=>json_encode($request->grace_period_month),
+            'grace_period_day'=>json_encode($request->grace_period_day),
             'approved_by'=>$request->approved_by,
             'attestation_no'=>$request->attestation_no,
             'attestation_status'=>$request->attestation_status,
@@ -306,8 +306,9 @@ class ContractController extends Controller
             $from=Carbon::parse($res->lease_end_date);
             $diff_in_months = $to->diffInMonths($from);
             $diff_in_Days = $to->diffInDays($from);
+            $diff_in_Years = $to->diffInYears($from);
             $formatted_dt=Carbon::parse($res->lease_end_date)->addYear(1)->format('Y-m-d');
-            return response()->json(array('res'=>$res,'date'=>$formatted_dt,'diff_in_months'=>$diff_in_months,'diff_in_Days'=>$diff_in_Days));
+            return response()->json(array('res'=>$res,'date'=>$formatted_dt,'diff_in_months'=>$diff_in_months,'diff_in_Days'=>$diff_in_Days,'diff_in_Years'=>$diff_in_Years));
             }
 
     public function Overdue(){

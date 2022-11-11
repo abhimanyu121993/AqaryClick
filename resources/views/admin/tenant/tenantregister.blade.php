@@ -26,7 +26,7 @@
                         <div class=" col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">File No</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="file_no" placeholder="Enter File No">
+                                    <input type="text" class="form-control" name="file_no" value={{$TT}} placeholder="Enter File No">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">

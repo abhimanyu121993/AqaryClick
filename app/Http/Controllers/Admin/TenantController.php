@@ -8,6 +8,7 @@ use App\Models\Nationality;
 use App\Models\Tenant;
 use App\Models\Unit;
 use App\Models\UnitType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
@@ -22,10 +23,12 @@ class TenantController extends Controller
      */
     public function index()
     {
+        $max_id=Tenant::max('id')+1;
+        $TT='TT'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $unit=UnitType::all();
         $nation=Nationality::all();
         $building=Building::all();
-        return view('admin.tenant.tenantregister',compact('nation','unit','building'));
+        return view('admin.tenant.tenantregister',compact('nation','unit','building','TT'));
     }
 
     /**

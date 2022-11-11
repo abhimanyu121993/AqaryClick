@@ -18,6 +18,7 @@
                                 <th scope="col">Unit Ref</th>
                                 <th scope="col">File</th>                                
                                 <th scope="col">Status</th>
+                                <th scope="col">Current Status</th>
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
 
@@ -30,10 +31,10 @@
                                     <th scope="row">1</th>
                                     <td>{{ $legal->tenantName->tenant_english_name??''}}</td>
                                     <td>
-                                        {{ $legal->tenant_mobile }}
+                                        {{ $legal->tenant_mobile??''}}
                                     </td>
                                     <td>
-                                    {{ $legal->unit_ref }}
+                                    {{ $legal->unit_ref??''}}
 
                         </td>
                         <form action="{{ route('admin.alllegal') }}" method="POST" enctype="multipart/form-data">
@@ -54,6 +55,9 @@
                                 <option value="Settelment Done">Settelment Done</option>
                                 <option value="Exempt by the lessor">Exempt by the lessor</option>
                                 </select>
+                                    </td>
+                                    <td>
+                                        {{ $legal->status??'' }}
                                     </td>
                                     <td>
                                 <input type="text" class="form-control" name="remark" value="{{ isset($legal)? $legal->remark : '' }}" />                                

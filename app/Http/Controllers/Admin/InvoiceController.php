@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         $a=invoice::pluck('contract_id');
         $max_id=Invoice::max('id')+1;
         $INV='INV'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
-        $tenantDetails=Contract::all();
+        $tenantDetails=Tenant::all();
 return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));  
  }
 
@@ -62,15 +62,21 @@ return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));
             }
 
         }
+        (float)$amt_paid=$request->amt_paid;
         $overdue = (int) filter_var($request->overdue_period, FILTER_SANITIZE_NUMBER_INT);
-       $data= Invoice::create([
-             'tenant_id' => $request->tenant_id,
-             'contract_id' => $request->contract_id,
+           $due_amt=Contract::where('id',$request->contract_id)->first()->rent_amount;
+           $inv_due=Invoice::where('contract_id',$request->contract_id)->latest()->first()->due_amt;
+           $due_amt=$inv_due+$due_amt;
+           $due_amt=(float)$due_amt-$amt_paid; 
+           $data= Invoice::create([
+            'tenant_id' => $request->tenant_id,
+            'contract_id' => $request->contract_id,
             'invoice_no' => $request->invoice_no,
             'due_date' => $request->due_date,
             'invoice_period_start' => $request->invoice_period_start,
             'invoice_period_end' => $request->invoice_period_end,
             'amt_paid' => $request->amt_paid,
+            'due_amt'=>$due_amt,
             'payment_method' => $request->payment_method,
             'cheque_no' => $request->cheque_no,
             'account_no' => $request->payment_method,
@@ -79,8 +85,6 @@ return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));
             'overdue_period'=>$overdue,
             'remark'=>$request->remark,
             'attachment'=>json_encode($otherpic),
-            
-
         ]);
         if($data){
         return redirect()->back()->with('success','Invoice has been created successfully.');
@@ -178,6 +182,43 @@ return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));
         }
         public function invoiceDetails($contract_id){
             $res=Contract::where('id',$contract_id)->first();
-           return response()->json($res );
+            $inv=invoice::where('contract_id',$contract_id)->latest('invoice_period_end')->first();
+            $invoicedate=strtotime($inv->invoice_period_end??0);
+            $leaseEnddate=strtotime($res->lease_end_date);
+
+if($invoicedate > $leaseEnddate)
+{
+$msg="Sorry! This Contract has been Expire.";
+$invoiceEnd='';
+$invoiceStart='';
+$payable='';
+$due_amt='';
+$rent_amt='';
+$lastmonth='';
+}
+else{  
+$invoice=$inv->invoice_period_end??null;
+            if($invoice==!null){
+                $invoiceStart=$invoice;
+                $invoiceEnd=Carbon::parse($invoice)->addMonth(1)->addDay(-1)->format('Y-m-d');
+                $msg='';
+                $lastmonth=Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('Y-m-d');
+               
+                $payable=$res->rent_amount+$inv->due_amt;
+                $due_amt=$inv->due_amt;
+                $rent_amt=$res->rent_amount;
+            }else{
+                $invoiceStart=$res->lease_start_date;
+                $invoiceEnd=Carbon::parse($res->lease_start_date)->addMonth(1)->addDay(-1)->format('Y-m-d');
+                $lastmonth=Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('Y-m-d');
+                $msg='';
+                $payable=$res->rent_amount+$inv->due_amt;
+                $due_amt=$inv->due_amt;
+                $rent_amt=$res->rent_amount;
+
+
+            }
+        }
+           return response()->json(array('res'=>$res,'invoiceEnd'=>$invoiceEnd,'invoiceStart'=>$invoiceStart,'msg'=>$msg,'payable'=>$payable,'due_amt'=>$due_amt,'rent_amt'=>$rent_amt,'lastmonth'=>$lastmonth) );
             }
 }
