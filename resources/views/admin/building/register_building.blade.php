@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Building Type</label>
-                                <select class="form-control" id="building_type" name="building_type">
+                                <select class="select2  form-select js-example-basic-single" id="building_type" name="building_type">
                                 @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->building_type }}" selected>{{ $buildingedit->building_type}}</option>
                                     @else
@@ -140,7 +140,7 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Country</label>
 
-                                <select class="select2 form-select" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
+                                <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
 
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->country }}" selected hidden>{{ $buildingedit->nationality->name}}</option>
@@ -157,7 +157,7 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">City</label>
 
-                                <select class="select2 form-select" id="{{isset($buildingedit)? '': 'city' }}" name='city'>
+                                <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'city' }}" name='city'>
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name}}</option>
                                     @endif
@@ -168,7 +168,7 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Zone Name</label>
 
-                                <select class="select2 form-select" id="{{isset($buildingedit)? '': 'zone' }}" name='zone_name'>
+                                <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'zone' }}" name='zone_name'>
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->area}}</option>
                                     @endif
@@ -230,7 +230,7 @@
                             </div>
                             <div class="col-xxl-3 col-md-4">
                                 <label for="space" class="form-label">Building Status</label>
-                                <select class="form-control" id="building_status" name="building_status">
+                                <select class="select2  form-select js-example-basic-single" id="building_status" name="building_status">
                                 @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->building_status }}" selected>{{ $buildingedit->building_status }}</option>
                                     @else
@@ -534,5 +534,12 @@ else{
         
     });
 </script>
-
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 @endsection

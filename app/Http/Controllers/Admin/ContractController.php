@@ -316,5 +316,11 @@ class ContractController extends Controller
     $tenant=Contract::with('tenantDetails')->where('overdue','>=',90)->whereNotIn('id',$res)->get();
     return view('admin.contract.overdue',compact('tenant'));
     }
+ public function contractNumber($tenant_id){
+   $contract_code=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
+   dd($contract_code);
+    $CC='CC'.'-'.Carbon::now()->month.'-'.Carbon::now()->format('y');
+        return response()->json($CC);
 
+    }
 }

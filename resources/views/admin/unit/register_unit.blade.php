@@ -28,7 +28,7 @@
                             <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Building Name</label>
 
-                    <select class="select2 form-select" id="flag" name='building_name' @if (isset($buildingedit)) readonly @endif required>
+                    <select class="select2  form-select js-example-basic-single"  name='building_name' @if (isset($buildingedit)) readonly @endif required>
                         @if (isset($buildingedit))
                         <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->building_name}}</option>
                         @endif
@@ -54,7 +54,7 @@
                             <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Unit Type</label>
 
-                    <select class="select2 form-select" id="flag" name='unit_type' @if (isset($buildingedit)) disabled @endif required>
+                    <select class="select2  form-select js-example-basic-single" name='unit_type' @if (isset($buildingedit)) disabled @endif required>
                         @if (isset($buildingedit))
                         <option value="{{$buildingedit->name }}" selected>{{ $buildingedit->unit_type}}</option>
                         @endif
@@ -67,7 +67,7 @@
                 <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Unit Status</label>
 
-                    <select class="select2 form-select" id="flag" name='unit_status' @if (isset($buildingedit)) disabled @endif required>
+                    <select class="select2  form-select js-example-basic-single"  name='unit_status' @if (isset($buildingedit)) disabled @endif required>
                         @if (isset($buildingedit))
                         <option value="{{$buildingedit->name }}" selected>{{ $buildingedit->unit_status}}</option>
                         @endif
@@ -80,7 +80,7 @@
                 <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Unit Floor</label>
 
-                    <select class="select2 form-select" id="flag" name='unit_floor' @if (isset($buildingedit)) disabled @endif required>
+                    <select class="select2 select2  form-select js-example-basic-single"  name='unit_floor' @if (isset($buildingedit)) disabled @endif required>
                         @if (isset($buildingedit))
                         <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->unit_floor}}</option>
                         @endif
@@ -99,7 +99,7 @@
                                 <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Unit Feature</label>
 
-                    <select class="select2 form-select" id="flag" name='unit_feature' @if (isset($buildingedit)) disabled @endif required>
+                    <select class="select2  form-select js-example-basic-single"  name='unit_feature' @if (isset($buildingedit)) disabled @endif required>
                         @if (isset($buildingedit))
                         <option value="{{$buildingedit->id }}" selected>{{ $buildingedit->unit_feature}}</option>
                         @endif

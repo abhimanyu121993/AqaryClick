@@ -23,12 +23,10 @@ class TenantController extends Controller
      */
     public function index()
     {
-        $max_id=Tenant::max('id')+1;
-        $TT='TT'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $unit=UnitType::all();
         $nation=Nationality::all();
         $building=Building::all();
-        return view('admin.tenant.tenantregister',compact('nation','unit','building','TT'));
+        return view('admin.tenant.tenantregister',compact('nation','unit','building'));
     }
 
     /**
@@ -199,6 +197,13 @@ class TenantController extends Controller
     }
     return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
         }
+
+    public function fileNumber($file_no){
+        $max_id=Tenant::max('id')+1;
+        $TT=$file_no.'-'.Carbon::now()->month.'-'.Carbon::now()->format('y').'-'.str_pad($max_id,2,'0',STR_PAD_LEFT);
+        return response()->json($TT);
+
+    }
 
     }
 

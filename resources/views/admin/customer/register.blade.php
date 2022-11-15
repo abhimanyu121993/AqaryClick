@@ -15,44 +15,39 @@
                         @endif --}}
                             @csrf
                             <div class="row gy-4 mb-3">
-                                <div class=" col-md-6">
+                                <div class=" col-md-3">
                                     <label for="name" class="form-label">First Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="first_name" placeholder="First Name">
                                     </div>
                                 </div>
-                                <div class=" col-md-6">
+                                <div class=" col-md-3">
                                     <label for="owner_name" class="form-label">Last Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="last_name" placeholder="Last Name">
                                     </div>
                                 </div>
-                                <div class=" col-md-6">
+                                <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label"> Email </label>
                                     <div class="input-group">
                                         <input type="email" class="form-control" name="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <div class=" col-md-6">
+                                <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label">Phone number </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="phone"
                                             placeholder="Phone Number">
                                     </div>
                                 </div>
-                                <div class=" col-md-6">
+                                <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label">Customer Code</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="customer_code"
                                             placeholder="Customer Code">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="remark" class="form-label">Address</label>
-                                    <textarea class="form-control" name="address">
-                                    </textarea>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label for="space" class="form-label">Customer Type</label>
                                     <select class="form-control" id="customer" name="customer_type">
                                         <option value="">-----Select Customer-----</option>
@@ -60,6 +55,12 @@
                                         <option value="Company">Company</option>
                                     </select>
                                 </div>
+                                <div class="col-md-12">
+                                    <label for="remark" class="form-label">Address</label>
+                                    <textarea class="form-control" name="address">
+                                    </textarea>
+                                </div>
+                              
                             </div>
 
                     <div class="row gy-4 mb-3" id="cmpname">
@@ -67,66 +68,67 @@
                             <hr>
                             <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
                         </div>
-                        <div class="col-md-6" id="cname">
+                        <div class="col-md-3" id="fname">
+                            <label for="country" class="form-label">Serial Number</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="serial_number" placeholder="Serial No">
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="cname">
                             <label for="country" class="form-label">Company Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="company_name" placeholder="Company Name">
+                                <input type="text" class="form-control" name="company_name" placeholder="Enter Company Name">
                             </div>
                         </div>
-                        <div class="col-md-6" id="cadd">
+                        <div class="col-md-3" id="cadd">
                             <label for="state" class="form-label">Company Address</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="company_address" placeholder="Company Address">
+                                <input type="text" class="form-control" name="company_address" placeholder="Enter Company Address">
                             </div>
                         </div>
-                        <div class="col-md-6" id="authp">
+                        <div class="col-md-3" id="authp">
                             <label for="country" class="form-label">Authorized Person</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="authorised_manager"
-                                    placeholder="Authorized Person Name">
+                                    placeholder="Enter Authorized Person Name">
                             </div>
                         </div>
-                        <div class="col-md-6" id="cmplog">
+                        <div class="col-md-3" id="cmplog">
                             <label for="state" class="form-label">Company Logo</label>
                             <div class="input-group">
                                 <input type="file" class="form-control" name="company_logo" placeholder="Company Logo">
                             </div>
                         </div>
-                        <div class="col-md-6" id="fname">
+                        <div class="col-md-3" id="fname">
                             <label for="country" class="form-label">Document Name</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="document_name" placeholder="Document name">
                             </div>
                         </div>
-                        <div class="col-md-6" id="fname">
+                        <div class="col-md-3" id="fname">
                             <label for="country" class="form-label">Document</label>
                             <div class="input-group">
                                 <input type="file" class="form-control" name="document_file" placeholder="Upload File">
                             </div>
                         </div>
-                        <div class="col-md-6" id="fname">
-                            <label for="country" class="form-label">Serial Number</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="serial_number" placeholder="Upload File">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                       
+                        <div class="col-md-3">
                             <label for="city" class="form-label">Document Exipry Date</label>
                             <div class="input-group">
                                 <input type="date" class="form-control" name="document_exp_date" placeholder="Expiry Date">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="city" class="form-label">Company Reg. Num.</label>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Company Reg. No.</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="reg_num" placeholder="Enter Reg. Number">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label for="space" class="form-label">Company Activity</label>
                             <select class="form-control" id="building" name="company_activity">
-                                <option value="">-----Select Customer-----</option>
-                                <option value="Trading_in_Computer_Software">Trading in Computer Software</option>
+                                <option value="">-----Select Activity-----</option>
+                                <option value="ifsc">Trading in Computer Software</option>
                                 <option value="Real_Estate_Management">Real Estate Management</option>
                                 <option value="Car_Spare_Part_Trading">Car Spare Part Trading</option>
                             </select>
@@ -137,23 +139,44 @@
                     </div>
                     <div class="row">
                         <hr>
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-3 mb-2">
                             <label for="country" class="form-label">Bank Name</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="bank_name" placeholder="Bank Details">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-3 mb-2">
                             <label for="state" class="form-label">Account Number</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="account_number"
-                                    placeholder="Company Address">
+                                    placeholder="Enter Account No">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-3 mb-2">
+                            <label for="state" class="form-label">IBAN No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="iban_no"
+                                    placeholder="Enter IBAN No">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="space" class="form-label">Bank Code</label>
+                            <select class="form-control" id="bank_code" name="bankcode">
+                                <option value="">-----Select Code-----</option>
+                                <option value="ifsc">Ifsc Code</option>
+                                <option value="swift">Swift Code</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2" id="swift">
+                            <label for="country" class="form-label">Swift Code</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="swift" placeholder="Enter Swift Code">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2" id="ifsc">
                             <label for="country" class="form-label">IFSC Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="ifsc" placeholder="Company Name">
+                                <input type="text" class="form-control" name="ifsc" placeholder="Enter Ifsc Code">
                             </div>
                         </div>
                     </div>
@@ -188,6 +211,27 @@
                         $('#indi').show();
                     } else if (optionValue == 'Company') {
                         $('#cmpname').show();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script>
+        $(document).ready(function() {
+            $("#bank_code").change(function() {
+                $('#ifsc').hide();
+                $('#swift').hide();
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'ifsc') {
+                        $('#ifsc').show();
+                        $('#swift').hide();
+                    } else if (optionValue == 'swift') {
+                        $('#swift').show();
+                        $('#ifsc').hide();
+
+                        
                     }
                 });
             }).change();

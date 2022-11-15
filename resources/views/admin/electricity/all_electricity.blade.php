@@ -9,8 +9,7 @@
                     <h4 class="card-title mb-0 flex-grow-1">Manage Electricity</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
-                    <table class="table table-nowrap container">
-                        <thead>
+                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Building Name</th>
@@ -31,7 +30,7 @@
                         <tbody>
                             @foreach ($electric as $el)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td scope="row">{{ $loop->index + 1 }}</td>
                                     <td><i>{{ $el->building->name ?? '' }}</i></td>
                                     <td>{{ $el->unit_no ?? '' }}</td>
                                     <td>{{ $el->unit_type ?? '' }}</td>
@@ -92,4 +91,12 @@
 
 
 @section('script-area')
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 @endsection

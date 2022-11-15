@@ -12,19 +12,29 @@
                 <div class="live-preview">
                     <p id="msg" class="text-danger"></p>
                     <div class="row">
+                    <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Building Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Building--</option>
+                                    <option value="all">All Buildings</option>
+                                    @foreach($building as $build)
+                                    <option value="{{ $build->id}}">{{ $build->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                 <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Tenant Name</label>
-                                <select class="select2 form-select" id="tenant_name" name='tenant_name'>
-                                    <option value="">--Select Tenant--</option>
-                                    @foreach($tenantDetails as $td)
+                                <select class="select2 form-select js-example-basic-single" id="tenant_name" name='tenant_name'>
+                                    <option value="" selected hidden disabled>--Select Tenant--</option>
+                                    <!-- @foreach($tenantDetails as $td)
                                     <option value="{{ $td->id}}">{{ $td->tenant_english_name }}</option>
-                                    @endforeach
+                                    @endforeach -->
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Tenant Contract</label>
-                                <select class="select2 form-select" id="tenant_contract" name='tenant_contract'>
-                                    <option value="">--Select Contract--</option>
+                                <select class="select2 form-select js-example-basic-single" id="tenant_contract" name='tenant_contract'>
+                                    <option value="" selected hidden disabled>--Select Contract--</option>
                                    
                                 </select>
                             </div>
@@ -298,6 +308,23 @@ $(wrapper).on('click', '.remove_button', function(e) {
             $('#account').show();
 
                 }
+            });
+        }).change();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#building_name").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-building-tenant') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        $("#tenant_name").html(p);
+                    }
+                });
             });
         }).change();
     });

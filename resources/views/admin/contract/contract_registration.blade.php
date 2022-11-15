@@ -33,7 +33,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="" name="contract_code"
                                         value="{{ isset($contractedit) ? $contractedit->contract_code : $CC }}"
-                                        placeholder="Enter Contract Code" readonly>
+                                        placeholder="Enter Contract Code">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -425,8 +425,6 @@
                     {{ isset($contractedit) ? 'Update payment' : 'Payment Details' }}</h4>
             </div><!-- end card header -->
             <div class="card-body table-responsive">
-                <div class="live-preview">
-                <div class="card-body field_wrapper -responsive">
                             <table class="table table-nowrap container table-responsive ">
                                     <thead>
                                     <tr>
@@ -451,11 +449,11 @@
                     </table>
                 </div>
                         <div class="card-body field_wrapper -responsive">
-                            <table class="table table-nowrap container table-responsive ">
-                                <thead>
+                        <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                                     <tr>
                                         <th scope="col">Sr.No.</th>
                                         <th scope="col">Invoice No</th>
+                                        <th scope="col">Due Date</th>
                                         <th scope="col">Payment Date</th>
                                         <th scope="col">Due Amount</th>
 
@@ -469,10 +467,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-@foreach($invoiceDetails as $inv)
+                        @foreach($invoiceDetails as $inv)
                                 <tr>
                                         <td>{{$loop->index+1}}</td>
                                         <td>{{$inv->invoice_no??''}}</td>
+                                        <td>{{ Carbon\Carbon::parse($inv->due_date)->format('d-m-Y')??'' }}</td>
                                         <td>{{ Carbon\Carbon::parse($inv->created_at)->format('d-m-Y')??'' }}</td>
                                        <td>{{$inv->total_balance??''}}</td>
                                         <!-- <td>{{$inv->Contract->total_contract??''}}</td> -->
@@ -483,10 +482,11 @@
                                         <td>{{$inv->remark??''}}</td>
 
                                     </tr>
-@endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                   @endforeach
+                                 </tbody>
+                                  </table>
+                         </div>
+                </div>
             </div>
         </div>
     </div>
@@ -504,6 +504,7 @@ $(document).ready(function() {
 
         $(this).find("option:selected").each(function() {
             var optionValue = $(this).attr("value");
+            var newurl = "{{ url('/admin/fetch-tenant-contract-no') }}/" + optionValue;
             var newurl = "{{ url('/admin/fetchtenant') }}/" + optionValue;
             $.ajax({
                 url: newurl,
@@ -808,6 +809,21 @@ $(document).ready(function() {
 </script>
 
 <script>
-
+$(document).ready(function() {
+            $("#tenant_name").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    var newurl = "{{ url('/admin/fetch-tenant-contract-no') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+console.log(p);
+                    }
+                });
+                });
+            }).change();
+        });
 </script>
+
 @endsection

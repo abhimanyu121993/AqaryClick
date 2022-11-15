@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
+use App\Models\Building;
 use App\Models\Contract;
 use App\Models\Error;
 use App\Models\Invoice;
@@ -27,7 +29,9 @@ class InvoiceController extends Controller
         $max_id=Invoice::max('id')+1;
         $INV='INV'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $tenantDetails=Tenant::all();
-return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));  
+        $building=Building::all();
+        $bank=Bank::all();
+return view('admin.invoice.add_invoice',compact('tenantDetails','INV','building','bank'));  
  }
 
     /**
@@ -174,11 +178,28 @@ return view('admin.invoice.add_invoice',compact('tenantDetails','INV'));
 
     public function contractDetails($tenant_id){
         $res=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
-        $html=' <option value="">--Select Contract--</option>';   
+        $html=' <option value="" selected hidden disabled>--Select Contract--</option>';   
         foreach($res as $r){
             $html .='<option value="'.$r->id.'">'.$r->contract_code.'('.$r->tenantDetails->buildingDetails->name.')'.'</option>';
         }
         return response()->json($html);
+        }
+        public function tenantBuilding($building_id){
+            if($building_id=='all'){
+                $res=Tenant::all();
+                $html=' <option value=""selected hidden disabled> --Select Tenant--</option>';   
+                foreach($res as $r){
+                    $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
+                }
+            }
+            else{
+            $res=Tenant::where('building_name',$building_id)->get();
+            $html=' <option value=""selected hidden disabled>--Select Tenant--</option>';   
+            foreach($res as $r){
+                $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
+            }
+            }
+            return response()->json($html);
         }
         public function invoiceDetails($contract_id){
             $res=Contract::where('id',$contract_id)->first();

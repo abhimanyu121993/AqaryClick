@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bank_details', function (Blueprint $table) {
+        Schema::create('banks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('bank_name')->nullable();
-            $table->string('account_number')->nullable();
-            $table->string('iban_no')->nullable();
-            $table->string('ifsc')->nullable();
-            $table->string('swift')->nullable();
+            $table->string('name');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_details');
+        Schema::dropIfExists('banks');
     }
 };
