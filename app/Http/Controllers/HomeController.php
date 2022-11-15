@@ -17,7 +17,6 @@ class HomeController extends Controller
     {
         return view('home.about');
     }
-
     public function properties()
     {
         return view('home.properties');

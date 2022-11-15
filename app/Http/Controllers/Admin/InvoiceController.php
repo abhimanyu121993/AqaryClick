@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
+use App\Models\Building;
 use App\Models\Contract;
 use App\Models\Error;
 use App\Models\Invoice;
@@ -23,8 +25,13 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+        $a=invoice::pluck('contract_id');
+        $max_id=Invoice::max('id')+1;
+        $INV='INV'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $tenantDetails=Tenant::all();
-return view('admin.invoice.add_invoice',compact('tenantDetails'));  
+        $building=Building::all();
+        $bank=Bank::all();
+return view('admin.invoice.add_invoice',compact('tenantDetails','INV','building','bank'));  
  }
 
     /**
@@ -59,26 +66,29 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
             }
 
         }
-        $invoice_no='INV-'.rand(0,99).'-'.rand(0,99);
-
-       $data= Invoice::create([
-             'tenant_id' => $request->tenant_id,
-              'contract_id' => $request->contract_id,
-            'invoice_no' => $invoice_no,
+        (float)$amt_paid=$request->amt_paid;
+        $overdue = (int) filter_var($request->overdue_period, FILTER_SANITIZE_NUMBER_INT);
+           $due_amt=Contract::where('id',$request->contract_id)->first()->rent_amount;
+           $inv_due=Invoice::where('contract_id',$request->contract_id)->latest()->first()->due_amt;
+           $due_amt=$inv_due+$due_amt;
+           $due_amt=(float)$due_amt-$amt_paid; 
+           $data= Invoice::create([
+            'tenant_id' => $request->tenant_id,
+            'contract_id' => $request->contract_id,
+            'invoice_no' => $request->invoice_no,
             'due_date' => $request->due_date,
             'invoice_period_start' => $request->invoice_period_start,
             'invoice_period_end' => $request->invoice_period_end,
             'amt_paid' => $request->amt_paid,
+            'due_amt'=>$due_amt,
             'payment_method' => $request->payment_method,
             'cheque_no' => $request->cheque_no,
             'account_no' => $request->payment_method,
             'bank_name' => $request->bank_name,
             'payment_status' => $request->payment_status,
-            'overdue_period'=>$request->overdue_period,
+            'overdue_period'=>$overdue,
             'remark'=>$request->remark,
             'attachment'=>json_encode($otherpic),
-            
-
         ]);
         if($data){
         return redirect()->back()->with('success','Invoice has been created successfully.');
@@ -168,20 +178,68 @@ return view('admin.invoice.add_invoice',compact('tenantDetails'));
 
     public function contractDetails($tenant_id){
         $res=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
-        // dd($res->tenantDetails);
-        $html=' <option value="">--Select Contract--</option>';
-                
+        $html=' <option value="" selected hidden disabled>--Select Contract--</option>';   
         foreach($res as $r){
             $html .='<option value="'.$r->id.'">'.$r->contract_code.'('.$r->tenantDetails->buildingDetails->name.')'.'</option>';
         }
         return response()->json($html);
         }
+        public function tenantBuilding($building_id){
+            if($building_id=='all'){
+                $res=Tenant::all();
+                $html=' <option value=""selected hidden disabled> --Select Tenant--</option>';   
+                foreach($res as $r){
+                    $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
+                }
+            }
+            else{
+            $res=Tenant::where('building_name',$building_id)->get();
+            $html=' <option value=""selected hidden disabled>--Select Tenant--</option>';   
+            foreach($res as $r){
+                $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
+            }
+            }
+            return response()->json($html);
+        }
         public function invoiceDetails($contract_id){
             $res=Contract::where('id',$contract_id)->first();
-        //    $overdue=diffInDays(Carbon::now(),$res->lease_end_date);
-           $formatted_dt1=Carbon::now();
-$formatted_dt2=Carbon::parse($res->lease_end_date);
-$date_diff=$formatted_dt1->diffInDays($formatted_dt2);
-            return response()->json(array('res'=>$res,'overdue'=>$date_diff));
+            $inv=invoice::where('contract_id',$contract_id)->latest('invoice_period_end')->first();
+            $invoicedate=strtotime($inv->invoice_period_end??0);
+            $leaseEnddate=strtotime($res->lease_end_date);
+
+if($invoicedate > $leaseEnddate)
+{
+$msg="Sorry! This Contract has been Expire.";
+$invoiceEnd='';
+$invoiceStart='';
+$payable='';
+$due_amt='';
+$rent_amt='';
+$lastmonth='';
+}
+else{  
+$invoice=$inv->invoice_period_end??null;
+            if($invoice==!null){
+                $invoiceStart=$invoice;
+                $invoiceEnd=Carbon::parse($invoice)->addMonth(1)->addDay(-1)->format('Y-m-d');
+                $msg='';
+                $lastmonth=Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('Y-m-d');
+               
+                $payable=$res->rent_amount+$inv->due_amt;
+                $due_amt=$inv->due_amt;
+                $rent_amt=$res->rent_amount;
+            }else{
+                $invoiceStart=$res->lease_start_date;
+                $invoiceEnd=Carbon::parse($res->lease_start_date)->addMonth(1)->addDay(-1)->format('Y-m-d');
+                $lastmonth=Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('Y-m-d');
+                $msg='';
+                $payable=$res->rent_amount+$inv->due_amt;
+                $due_amt=$inv->due_amt;
+                $rent_amt=$res->rent_amount;
+
+
+            }
+        }
+           return response()->json(array('res'=>$res,'invoiceEnd'=>$invoiceEnd,'invoiceStart'=>$invoiceStart,'msg'=>$msg,'payable'=>$payable,'due_amt'=>$due_amt,'rent_amt'=>$rent_amt,'lastmonth'=>$lastmonth) );
             }
 }

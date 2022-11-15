@@ -12,6 +12,7 @@ use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 
@@ -26,6 +27,8 @@ class ContractController extends Controller
     {
         $invoiceDetails=Invoice::where('payment_status','Paid')->get();
         $contract=Contract::all();
+        $max_id=Contract::max('id')+1;
+        $CC='CC'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $tenant=Tenant::all();
         $lessor=Owner::all();
         $tenant_doc=Tenant::pluck('tenant_document');
@@ -39,8 +42,8 @@ class ContractController extends Controller
         $total_delay=$delay_invoice*$total_delay_amt;
         $invoice_balance=$delay_invoice+$not_paid_invoice;
         $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
-$total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance'));
+        $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
+        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance','CC'));
     }
 
     /**
@@ -117,10 +120,10 @@ $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
             'lease_period_month'=>$request->lease_period_month,
             'lease_period_day'=>$request->lease_period_day,
             'is_grace'=>$request->grace,
-            'grace_start_date'=>$request->grace_start_date,
-            'grace_end_date'=>$request->grace_end_date,
-            'grace_period_month'=>$request->grace_period_month,
-            'grace_period_day'=>$request->grace_period_day,
+            'grace_start_date'=>json_encode($request->grace_start_date),
+            'grace_end_date'=>json_encode($request->grace_end_date),
+            'grace_period_month'=>json_encode($request->grace_period_month),
+            'grace_period_day'=>json_encode($request->grace_period_day),
             'approved_by'=>$request->approved_by,
             'attestation_no'=>$request->attestation_no,
             'attestation_status'=>$request->attestation_status,
@@ -297,5 +300,27 @@ $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
         $res=Tenant::where('id',$tenant_name)->first();
         return response()->json($res);
         }
+    public function fetchContractLease($contract_id){
+            $res=Contract::where('id',$contract_id)->latest()->first();
+            $to=Carbon::parse($res->lease_end_date)->addYear(1);
+            $from=Carbon::parse($res->lease_end_date);
+            $diff_in_months = $to->diffInMonths($from);
+            $diff_in_Days = $to->diffInDays($from);
+            $diff_in_Years = $to->diffInYears($from);
+            $formatted_dt=Carbon::parse($res->lease_end_date)->addYear(1)->format('Y-m-d');
+            return response()->json(array('res'=>$res,'date'=>$formatted_dt,'diff_in_months'=>$diff_in_months,'diff_in_Days'=>$diff_in_Days,'diff_in_Years'=>$diff_in_Years));
+            }
 
+    public function Overdue(){
+        $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
+    $tenant=Contract::with('tenantDetails')->where('overdue','>=',90)->whereNotIn('id',$res)->get();
+    return view('admin.contract.overdue',compact('tenant'));
+    }
+ public function contractNumber($tenant_id){
+   $contract_code=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
+   dd($contract_code);
+    $CC='CC'.'-'.Carbon::now()->month.'-'.Carbon::now()->format('y');
+        return response()->json($CC);
+
+    }
 }

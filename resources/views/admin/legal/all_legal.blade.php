@@ -9,7 +9,7 @@
                     <h4 class="card-title mb-0 flex-grow-1">Manage Legal</h4>
                 </div><!-- end card header -->
                 <div class="card-body  table-responsive">
-                    <table class="table table-nowrap container">
+                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                         <thead>
                             <tr>
                      <th scope="col">Sr.No.</th>
@@ -18,6 +18,7 @@
                                 <th scope="col">Unit Ref</th>
                                 <th scope="col">File</th>                                
                                 <th scope="col">Status</th>
+                                <th scope="col">Current Status</th>
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
 
@@ -28,12 +29,12 @@
                                 <tr>
                                     @foreach($legalDetail as $legal)
                                     <th scope="row">1</th>
-                                    <td>{{ $legal->TenantName->tenant_english_name}}</td>
+                                    <td>{{ $legal->tenantName->tenant_english_name??''}}</td>
                                     <td>
-                                        {{ $legal->tenant_mobile }}
+                                        {{ $legal->tenant_mobile??''}}
                                     </td>
                                     <td>
-                                    {{ $legal->unit_ref }}
+                                    {{ $legal->unit_ref??''}}
 
                         </td>
                         <form action="{{ route('admin.alllegal') }}" method="POST" enctype="multipart/form-data">
@@ -56,6 +57,9 @@
                                 </select>
                                     </td>
                                     <td>
+                                        {{ $legal->status??'' }}
+                                    </td>
+                                    <td>
                                 <input type="text" class="form-control" name="remark" value="{{ isset($legal)? $legal->remark : '' }}" />                                
                                     </td>
                            <td>
@@ -64,8 +68,8 @@
                                                        
                            </td>
                            </form>
-@endforeach
-                            </tr>
+
+                            </tr>@endforeach
                         </tbody>
                     </table>
                 </div>
@@ -80,4 +84,13 @@
 
 
 @section('script-area')
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
 @endsection

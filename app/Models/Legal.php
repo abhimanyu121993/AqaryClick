@@ -10,9 +10,12 @@ class Legal extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
-
-    public function TenantName()
+    public function tenantName()
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
+    }
+    public function unitType()
+    {
+        return $this->belongsTo(Unit::class, 'unit_type', 'id');
     }
 }

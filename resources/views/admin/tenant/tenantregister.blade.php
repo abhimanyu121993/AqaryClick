@@ -23,10 +23,18 @@
                         </div>
                         @endif
                         <div class="row gy-4 mb-3">
+                        <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Tenant Type</label>
+                                <select class="form-control" id="tenant_type" name="tenant_type">
+                                    <option value="" selected hidden>-----Select Tenant Type-----</option>
+                                    <option value="TP">Personal</option>
+                                    <option value="TC">Company</option>
+                                </select>
+                            </div>
                         <div class=" col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">File No</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="file_no" placeholder="Enter File No">
+                                    <input type="text" class="form-control" id="file_no" name="file_no" value="" placeholder="Enter File No">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
@@ -46,14 +54,6 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="tenant_arabic_name" placeholder="Enter Tenant Name (Arabic)">
                                 </div>
-                            </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label for="space" class="form-label">Tenant Type</label>
-                                <select class="form-control" id="tenant_type" name="tenant_type">
-                                    <option value="" selected hidden>-----Select Tenant Type-----</option>
-                                    <option value="Personal">Personal</option>
-                                    <option value="Company">Company</option>
-                                </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Document Type</label>
@@ -308,12 +308,20 @@ $(document).ready(function() {
             $("#tenant_type").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
-                    if (optionValue == 'Company') {
+                    if (optionValue == 'TC') {
                         $('#sponser').show();
 
-                    } else if (optionValue == 'Personal') {
+                    } else if (optionValue == 'TP') {
                         $('#sponser').hide(); 
                     }
+                    var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                  $('#file_no').val(p);
+                    }
+                });
                 });
             }).change();
         });

@@ -7,7 +7,7 @@
 @yield('header-area')
 {{-- ===================== Head_end ================== --}}
 
-<body>
+<body style="background-color: #20428d1f;">
 
     <!-- Begin page -->
     <div id="layout-wrapper">

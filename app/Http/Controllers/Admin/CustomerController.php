@@ -42,7 +42,6 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request);
         // $request->validate([
         //     'first_name' => 'required',
         //     'last_name' => 'required',
@@ -88,7 +87,9 @@ class CustomerController extends Controller
             'company_id'=>$company->id,
             'bank_name'=>$request->bank_name,
             'account_number'=>$request->account_number,
-            'ifsc'=>$request->ifsc
+            'ifsc'=>$request->ifsc,
+            'swift'=>$request->swift,
+            'iban_no'=>$request->iban_no
         ]);
         $document='';
         if($request->hasFile('document_file'))

@@ -8,6 +8,7 @@ use App\Models\Nationality;
 use App\Models\Tenant;
 use App\Models\Unit;
 use App\Models\UnitType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
@@ -196,6 +197,13 @@ class TenantController extends Controller
     }
     return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
         }
+
+    public function fileNumber($file_no){
+        $max_id=Tenant::max('id')+1;
+        $TT=$file_no.'-'.Carbon::now()->month.'-'.Carbon::now()->format('y').'-'.str_pad($max_id,2,'0',STR_PAD_LEFT);
+        return response()->json($TT);
+
+    }
 
     }
 

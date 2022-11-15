@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\admin\AreaController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\admin\BankController;
 use App\Http\Controllers\admin\BrokerController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\admin\UnitStatusController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +84,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
     Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
+    Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
+    Route::get('fetch-contract-lease/{contract_id}',[ContractController::class,'fetchContractLease'])->name('fetchContractLease');
     Route::get('fetch-tenant-details/{tenant_name}',[ContractController::class,'fetchTenantDetails'])->name('fetchTenantDetails');
     Route::get('fetchCountry/{country_id}',[BuildingController::class,'fetchCountry'])->name('fetchCountry');
     Route::get('fetch-building-details/{building_id}',[TenantController::class,'BuildingDetails'])->name('BuildingDetails');
@@ -97,11 +101,16 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
+    Route::resource('bank',BankController::class);
     Route::resource('cheque',ChequeController::class);
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
+    Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
+
     Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
     Route::resource('invoice',InvoiceController::class);
     Route::resource('tenant',TenantController::class);
+    Route::get('fetch-tenant-file-no/{file_no}',[TenantController::class,'fileNumber'])->name('fileNumber');
+    Route::get('fetch-tenant-contract-no/{tenant_id}',[ContractController::class,'contractNumber'])->name('contractNumber');
     Route::get('fetchunit/{building_id}',[ElectricityController::class,'fetchUnit'])->name('fetchUnits');
     Route::get('fetch-qid/{name}',[ElectricityController::class,'fetchQid'])->name('fetchQid');
     Route::get('fetch-tenant-name',[ElectricityController::class,'fetchTenantName'])->name('fetchTenantName');
@@ -109,6 +118,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('electricity-download/{path}',[ElectricityController::class,'getDownload'])->name('getDownload');
     Route::resource('electricity',ElectricityController::class);
     Route::get('/isactive/{id}',[UserController::class,'isActive'])->name('activeUser');
+    Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
+
 });
 Route::get('/optimize', function(){
     Artisan::call('optimize');

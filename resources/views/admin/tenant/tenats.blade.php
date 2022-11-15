@@ -9,8 +9,7 @@
                     <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
-                    <table class="table table-nowrap container">
-                        <thead>
+                <table id="example2" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Code</th>
@@ -40,7 +39,7 @@
                         <tbody>
                             @foreach ($all_tenant as $tenant)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td scope="row">{{ $loop->index + 1 }}</td>
                                     <td>{{$tenant->tenant_code}}</td>
                                     <td>{{$tenant->tenant_english_name}}</td>
                                     <td>{{$tenant->tenant_arabic_name}}</td>
@@ -62,7 +61,8 @@
                                     <td>{{$tenant->payment_receipt}}</td>
                                     <td>{{$tenant->attachment_remark}}</td>
                                     <td> @php $tid=Crypt::encrypt($tenant->id); @endphp
-                                        <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
+                                        <a href="{{route('admin.tenantDocument',$tid)}}">view</a>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -98,4 +98,12 @@
 
 
 @section('script-area')
+<script>
+    $(document).ready(function () {
+    $('#example2').DataTable();
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 @endsection

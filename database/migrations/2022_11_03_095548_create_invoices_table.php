@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('invoice_period_start')->nullable();
             $table->string('invoice_period_end')->nullable();
             $table->string('amt_paid')->nullable();
+            $table->string('due_amt')->default(0);
             $table->string('payment_method')->nullable();
             $table->string('cheque_no')->nullable();
             $table->string('account_no')->nullable();

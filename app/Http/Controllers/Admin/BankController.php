@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\UnitStatus;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class UnitStatusController extends Controller
+class BankController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,9 @@ class UnitStatusController extends Controller
      */
     public function index()
     {
-        $units=UnitStatus::all();
-        return view('admin.unit.unit_status',compact('units'));
-        
-    }
+        $bank=Bank::all();
+        return view('admin.settings.bank',compact('bank'));  
+      }
 
     /**
      * Show the form for creating a new resource.
@@ -39,20 +38,19 @@ class UnitStatusController extends Controller
      */
     public function store(Request $request)
     {
-       
         $request->validate([
             'name' => 'required',
         ]);
-       $data= UnitStatus::create([
-            'name' => strtolower($request->name)
+       $data= Bank::create([
+            'name' => $request->name,
         ]);
         if($data){
-        return redirect()->back()->with('success','Unit Status has been created successfully.');
+        return redirect()->back()->with('success','Bank added successfully.');
         }
         else{
-            return redirect()->back()->with('error','Unit Status not created.');
+            return redirect()->back()->with('error','Bank not added.');
         }
-    }
+        }
 
     /**
      * Display the specified resource.
@@ -62,8 +60,8 @@ class UnitStatusController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -74,10 +72,10 @@ class UnitStatusController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
-        $unitstatus=UnitStatus::find($id);
-        $units=UnitStatus::all();
-        return view('admin.unit.unit_status',compact('unitstatus','units'));
-    }
+        $bank=Bank::all();
+        $bankedit=Bank::find($id);
+        return view('admin.settings.bank',compact('bank','bankedit'));   
+      }
 
     /**
      * Update the specified resource in storage.
@@ -91,18 +89,15 @@ class UnitStatusController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        $data=UnitStatus::find($id)->update([
-            'name' => strtolower($request->name)
+       $data= Bank::find($id)->update([
+            'name' => $request->name,
         ]);
-        if($data)
-        {
-        return redirect()->back()->with('success','Unit Status Updated successfully.');
+        if($data){
+        return redirect()->back()->with('success','Bank  Updated successfully.');
         }
-        else
-        {
-            return redirect()->back()->with('error','Unit Status not created.');
-        }
-    }
+        else{
+            return redirect()->back()->with('error','Bank not Updated.');
+        }    }
 
     /**
      * Remove the specified resource from storage.
@@ -113,7 +108,7 @@ class UnitStatusController extends Controller
     public function destroy($id)
     {
         $id = Crypt::decrypt($id);
-        $data=UnitStatus::find($id);
+        $data=Bank::find($id);
         if($data->delete())
         {
             return redirect()->back()->with('success','Data Deleted successfully.');
@@ -121,6 +116,5 @@ class UnitStatusController extends Controller
         else
         {
             return redirect()->back()->with('error','Data not deleted.');
-        }
-    }
+        }    }
 }

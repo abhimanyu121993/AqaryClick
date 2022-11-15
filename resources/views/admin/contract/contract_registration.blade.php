@@ -32,7 +32,7 @@
                                 <label for="name" class="form-label">Contract Code</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="" name="contract_code"
-                                        value="{{ isset($contractedit) ? $contractedit->contract_code : '' }}"
+                                        value="{{ isset($contractedit) ? $contractedit->contract_code : $CC }}"
                                         placeholder="Enter Contract Code">
                                 </div>
                             </div>
@@ -101,14 +101,14 @@
                             <div class="col-xxl-3 col-md-3 mb-2" id="passport">
                                 <label for="country" class="form-label">Passport</label>
                                 <div class="input-group">
-                                    <input type="text" id="passport" class="form-control" name="passport_document"
+                                    <input type="text" id="passport_doc" class="form-control" name="passport_document"
                                         placeholder="Passport Document" readonly>
                                 </div>
                             </div>
 
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Contract Status</label>
-                                <select class="form-control select2 form-select" name="contract_status">
+                                <select class="form-control select2 form-select" id="contract_status" name="contract_status">
                                     @if (isset($contractedit))
                                     <option value="{{ $contractedit->contract_status }}" selected>
                                         {{ $contractedit->contract_status }}</option>
@@ -116,6 +116,7 @@
                                     <option value="" selected hidden>-----Select Status-----</option>
                                     <option value="new">New</option>
                                     <option value="renewed">Renewed</option>
+                                    <option value="not renewed">Not Renewed</option>
                                     <option value="auto renewed">Auto Renewed</option>
                                     <option value="long term">Long Term</option>
                                     <option value="releted parties">Releted Parties</option>
@@ -198,7 +199,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Release Date</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="name" name="release_date"
+                                    <input type="date" class="form-control" id="release_date" name="release_date"
                                         value="{{ isset($contractedit) ? $contractedit->release_date : '' }}"
                                         placeholder="Enter Release Date ">
                                 </div>
@@ -253,8 +254,10 @@
 
                                 </select>
                             </div>
+                        <div class="clone_grace row " style="display:none;">
+                            @if (isset($contractedit))
                             <div class="col-xxl-3 col-md-3" id="grace_start_date">
-                                <label for="name" class="form-label">Grace Start Date</label>
+                                <label for="name" class="form-label">Grace From</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="grace_start" name="grace_start_date"
                                         value="{{ isset($contractedit) ? $contractedit->grace_start_date : '' }}"
@@ -262,7 +265,7 @@
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3" id="grace_end_date">
-                                <label for="name" class="form-label">Grace End Date</label>
+                                <label for="name" class="form-label">Grace To</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="grace_end" name="grace_end_date"
                                         value="{{ isset($contractedit) ? $contractedit->grace_end_date : '' }}"
@@ -285,7 +288,10 @@
                                         value="{{ isset($contractedit) ? $contractedit->grace_period_day : '' }}"
                                         placeholder="Enter Grace Period Day" readonly>
                                 </div>
+                                @endif
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Approved By</label>
                                 <select class="select2 form-select js-example-basic-single" id="approved_by"
@@ -383,7 +389,7 @@
                                     @endif
                                 </select>
                             </div>
-
+                        </div>
                         </div>
                         <div class="row gy-4 mt-2">
                             <div class="col-xxl-3 col-md-12">
@@ -419,8 +425,6 @@
                     {{ isset($contractedit) ? 'Update payment' : 'Payment Details' }}</h4>
             </div><!-- end card header -->
             <div class="card-body table-responsive">
-                <div class="live-preview">
-                <div class="card-body field_wrapper -responsive">
                             <table class="table table-nowrap container table-responsive ">
                                     <thead>
                                     <tr>
@@ -445,11 +449,11 @@
                     </table>
                 </div>
                         <div class="card-body field_wrapper -responsive">
-                            <table class="table table-nowrap container table-responsive ">
-                                <thead>
+                        <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                                     <tr>
                                         <th scope="col">Sr.No.</th>
                                         <th scope="col">Invoice No</th>
+                                        <th scope="col">Due Date</th>
                                         <th scope="col">Payment Date</th>
                                         <th scope="col">Due Amount</th>
 
@@ -463,24 +467,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-@foreach($invoiceDetails as $inv)
+                        @foreach($invoiceDetails as $inv)
                                 <tr>
                                         <td>{{$loop->index+1}}</td>
                                         <td>{{$inv->invoice_no??''}}</td>
+                                        <td>{{ Carbon\Carbon::parse($inv->due_date)->format('d-m-Y')??'' }}</td>
                                         <td>{{ Carbon\Carbon::parse($inv->created_at)->format('d-m-Y')??'' }}</td>
                                        <td>{{$inv->total_balance??''}}</td>
                                         <!-- <td>{{$inv->Contract->total_contract??''}}</td> -->
                                         <!-- <td>{{$inv->amt_paid??''}}</td> -->
                                         <td>{{$inv->payment_status??''}}</td>
                                         <td>{{$inv->payment_method??''}}</td>
-                                        <td>{{$inv->overdue_period??''}}</td>
+                                        <td>{{$inv->overdue_period??''}}Days</td>
                                         <td>{{$inv->remark??''}}</td>
 
                                     </tr>
-@endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                   @endforeach
+                                 </tbody>
+                                  </table>
+                         </div>
+                </div>
             </div>
         </div>
     </div>
@@ -498,6 +504,7 @@ $(document).ready(function() {
 
         $(this).find("option:selected").each(function() {
             var optionValue = $(this).attr("value");
+            var newurl = "{{ url('/admin/fetch-tenant-contract-no') }}/" + optionValue;
             var newurl = "{{ url('/admin/fetchtenant') }}/" + optionValue;
             $.ajax({
                 url: newurl,
@@ -509,12 +516,10 @@ $(document).ready(function() {
                     $('#sponsor_id').val(p.sponsor_oid);
                     $('#sponsor_mobile').val(p.sponsor_phone);
                     $('#document_type').val(p.tenant_document);
-                    $('#sponsor_nationality').val(p.sponser_nationality);
+                    $('#sponer_nationality').val(p.sponsor_nationality);
                     $('#qid_document').val(p.qid_document);
                     $('#cr_document').val(p.cr_document);
-                    $('#passport').val(p.passport_document);
-
-                    console.log(p.qid_document);
+                    $('#passport_doc').val(p.passport);
                     if (p.tenant_document == 'QID') {
                         $('#qid').show();
                         $('#cr').hide();
@@ -530,6 +535,67 @@ $(document).ready(function() {
                     }
                 }
             });
+    $("#contract_status").change(function() {
+        $(this).find("option:selected").each(function() {
+            var StatusValue = $(this).attr("value");
+           if(StatusValue=='auto renewed'){
+            var leaseurl = "{{ url('/admin/fetch-contract-lease') }}/" + optionValue;
+            $.ajax({
+                url: leaseurl,
+                method: 'get',
+                success: function(p) {
+                    $('#rent_amount').val(p.res.rent_amount);
+                    $('#release_date').val(p.res.release_date);
+                    $('#lease_start_date').val(p.res.lease_end_date);
+                    $('#lease_end_date').val(p.date);   
+                    $('#lease_period_month').val(p.diff_in_months);
+                    $('#total_invoice').val(p.diff_in_months);
+                    $('#lease_period_day').val(p.diff_in_Days);
+                 var total_years=p.diff_in_Years;
+                    var gracediv='';
+for(var i=1; i<=total_years;i++){
+    gracediv +=' <div class="col-xxl-3 col-md-3" id="grace_start_date">\
+                                <label for="name" class="form-label">Grace From</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_end_date">\
+                                <label for="name" class="form-label">Grace To</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_month">\
+                                <label for="name" class="form-label">Grace Period Month</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_day">\
+                                <label for="name" class="form-label">Grace Period Day</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
+                                </div>\
+                            </div>';
+}
+$('.clone_grace').html(gracediv);
+                }  
+            });
+        }
+        else{
+                   $('#release_date').val('');
+                    $('#lease_start_date').val(''); 
+                    $('#lease_end_date').val('');
+                    $('#lease_period_month').val('');
+                    $('#total_invoice').val('');
+                    $('#lease_period_day').val('');
+                    $('#rent_amount').val('');
+
+                }
+        });
+    }).change();
+            
         });
     }).change();
 });
@@ -537,32 +603,15 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
-    $('#grace_start_date').hide();
-    $('#grace_end_date').hide();
-    $('#grace_period_month').hide();
-    $('#grace_period_day').hide();
-    var selectValue = $("#selectedOption").text();
-    if (selectValue == "Yes") {
-        $('#grace_start_date').show();
-        $('#grace_end_date').show();
-        $('#grace_period_month').show();
-        $('#grace_period_day').show();
-    }
-
     $("#grace").change(function() {
         $(this).find("option:selected").each(function() {
             var optionValue = $(this).attr("value");
             if (optionValue == 'Yes') {
-                $('#grace_start_date').show();
-                $('#grace_end_date').show();
-                $('#grace_period_month').show();
-                $('#grace_period_day').show();
+                $('.clone_grace').show();
+              
             } else if (optionValue == 'No') {
-                $('#grace_start_date').hide();
-                $('#grace_end_date').hide();
-                $('#grace_period_month').hide();
-                $('#grace_period_day').hide();
-
+                $('.clone_grace').hide();
+             
             }
         });
     }).change();
@@ -592,7 +641,72 @@ $('#lease_start_date').change(function() {
         var daydiff = diff / (1000 * 60 * 60 * 24);
         $('#lease_period_day').val(daydiff);
 
+        function diff_years(d2, d1) 
+ {
+
+  var diff =(d2.getTime() - d1.getTime()) / 1000;
+   diff /= (60 * 60 * 24);
+  return Math.abs(Math.round(diff/365.25));
+ }
+ 
+console.log(diff_years(d1, d2));
+var total_years=diff_years(d1, d2);
+var gracediv='';
+for(var i=1; i<=total_years;i++){
+    gracediv +=' <div class="col-xxl-3 col-md-3" id="grace_start_date">\
+                                <label for="name" class="form-label">Grace From</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_end_date">\
+                                <label for="name" class="form-label">Grace To</label>\
+                                <div class="input-group">\
+                                    <input type="date" class="form-control" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_month">\
+                                <label for="name" class="form-label">Grace Period Month</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                </div>\
+                            </div>\
+                            <div class="col-xxl-3 col-md-3" id="grace_period_day">\
+                                <label for="name" class="form-label">Grace Period Day</label>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
+                                </div>\
+                            </div>';
+}
+$('.clone_grace').html(gracediv);
+
     });
+});
+
+$(document).on('change','#lease_end_date',function(){
+    var st=$('#lease_start_date').val();
+    var date = new Date(st);
+    var dayTo = date.getDate();
+    var monthTo = date.getMonth() + 1;
+    var yearTo = date.getFullYear();
+        var dateF = new Date($(this).val());
+        var dayFrom = dateF.getDate();
+        var monthFrom = dateF.getMonth() + 1;
+        var yearFrom = dateF.getFullYear();
+        start_date = new Date(yearTo, monthTo, dayTo);
+        end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
+        total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -
+            start_date.getMonth())
+        $('#lease_period_month').val(total_months);
+        $('#total_invoice').val(total_months);
+
+        var d1 = new Date(date);
+        var d2 = new Date(dateF);
+        var diff = d2.getTime() - d1.getTime();
+        var daydiff = diff / (1000 * 60 * 60 * 24);
+        $('#lease_period_day').val(daydiff);
+
+    
 });
 </script>
 <script>
@@ -649,7 +763,6 @@ $(document).ready(function() {
                 url: newurl,
                 method: 'get',
                 success: function(p) {
-                    console.log(p);
                     $("#tenant_name").html(p);
                 }
             });
@@ -694,4 +807,23 @@ $(document).ready(function() {
     }).change();
 });
 </script>
+
+<script>
+$(document).ready(function() {
+            $("#tenant_name").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    var newurl = "{{ url('/admin/fetch-tenant-contract-no') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+console.log(p);
+                    }
+                });
+                });
+            }).change();
+        });
+</script>
+
 @endsection

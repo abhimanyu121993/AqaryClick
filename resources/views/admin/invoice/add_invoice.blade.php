@@ -10,20 +10,31 @@
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
+                    <p id="msg" class="text-danger"></p>
                     <div class="row">
+                    <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Building Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Building--</option>
+                                    <option value="all">All Buildings</option>
+                                    @foreach($building as $build)
+                                    <option value="{{ $build->id}}">{{ $build->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                 <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Tenant Name</label>
-                                <select class="select2 form-select" id="tenant_name" name='tenant_name'>
-                                    <option value="">--Select Tenant--</option>
-                                    @foreach($tenantDetails as $td)
+                                <select class="select2 form-select js-example-basic-single" id="tenant_name" name='tenant_name'>
+                                    <option value="" selected hidden disabled>--Select Tenant--</option>
+                                    <!-- @foreach($tenantDetails as $td)
                                     <option value="{{ $td->id}}">{{ $td->tenant_english_name }}</option>
-                                    @endforeach
+                                    @endforeach -->
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Tenant Contract</label>
-                                <select class="select2 form-select" id="tenant_contract" name='tenant_contract'>
-                                    <option value="">--Select Contract--</option>
+                                <select class="select2 form-select js-example-basic-single" id="tenant_contract" name='tenant_contract'>
+                                    <option value="" selected hidden disabled>--Select Contract--</option>
                                    
                                 </select>
                             </div>
@@ -111,10 +122,19 @@
                             </ul>
                         </div>
                         @endif
-                        <input type="hidden" class="form-control" id="tid" value="" name="tenant_id" hidden>
+                        <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_id" hidden>
                         <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
+                        <p id="due_amt"></p>
+                        <p id="rent_amt"></p>
+                        <p id="payable_amt"></p>
                         <div class="row gy-4 mb-3">                            
                             <div class="col-xxl-3 col-md-2">
+                                <label class="form-label" for="flag">Invoice No</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no"  readonly>
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Due Date</label>
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Due Date" readonly>
@@ -136,7 +156,8 @@
                                 <label class="form-label" for="flag">Invoice Amount</label>
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
-                                </div>
+                                 <p id="msg_due" class="text-danger"></p>   
+                            </div>
                                 </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Payment Method</label>
@@ -198,7 +219,7 @@
                         </div>
                         <div class="row gy-4">
                             <div class="col-xxl-3 col-md-6">
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-primary" id="submit" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -293,10 +314,27 @@ $(wrapper).on('click', '.remove_button', function(e) {
 </script>
 <script>
     $(document).ready(function() {
+        $("#building_name").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-building-tenant') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        $("#tenant_name").html(p);
+                    }
+                });
+            });
+        }).change();
+    });
+</script>
+<script>
+    $(document).ready(function() {
         $("#tenant_name").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
-                $('#tid').val(optionValue);
+                $('#tenant_id').val(optionValue);
                 var newurl = "{{ url('/admin/fetch-contract-details') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
@@ -320,15 +358,37 @@ $(wrapper).on('click', '.remove_button', function(e) {
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-$('#due_date').val(p.res.lease_end_date);
-$('#invoice_period_start').val(p.res.lease_start_date);
-$('#invoice_period_end').val(p.res.lease_end_date);
-$('#overdue_period').val(p.overdue+'Days');
+                        if (new Date(p.invoiceStart) < new Date(p.lastmonth)) {
+    alert('hi');
+}
+$('#due_date').val(p.invoiceEnd);
+$('#invoice_period_start').val(p.invoiceStart);
+$('#invoice_period_end').val(p.invoiceEnd);
+$('#overdue_period').val(p.res.overdue+'Days');
+$('#msg').text(p.msg);
+$('#rent_amt').text('Rent Amount'+p.rent_amt);
+$('#due_amt').text('Due Amount'+p.due_amt);
+$('#payable_amt').text('Total Payable Amount   '+p.payable);
+
+$('#amt_paid').focusout(function(){
+    var amt=$(this).val();
+    if(amt<parseInt(p.due_amt)){
+        $('#msg_due').text("Amount must be greater than due amount");
+        $('#submit').attr("type","button");
+    }
+    else{
+        $('#msg_due').text('');
+        $('#submit').attr("type","submit");
+    }
+});
+
+
                     }
                 });
             });
         }).change();
     });
 </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection

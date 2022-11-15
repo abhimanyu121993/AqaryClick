@@ -50,8 +50,9 @@ return new class extends Migration
             $table->string('total_invoice')->nullable();
             $table->string('guarantees')->nullable();
             $table->string('guarantees_payment_method')->nullable();
-
             $table->text('remark')->nullable();
+            $table->string('status')->default(0);
+            $table->string('overdue')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

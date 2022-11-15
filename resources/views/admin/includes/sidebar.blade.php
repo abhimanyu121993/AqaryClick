@@ -250,6 +250,9 @@
                                 <a href="{{route('admin.nationality.index')}}" class="nav-link" data-key="t-analytics"> Nationality </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{route('admin.bank.index')}}" class="nav-link" data-key="t-analytics"> Bank </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{route('admin.unit-type.index')}}" class="nav-link" data-key="t-analytics"> Unit Type </a>
                             </li>
                             <li class="nav-item">
@@ -269,6 +272,8 @@
                 </li>
             </ul>
         </div>
+       <center><div id="translate"></div></center>
+
         <!-- Sidebar -->
     </div>
 
