@@ -424,7 +424,7 @@
                 <h4 class="card-title mb-0 flex-grow-1">
                     {{ isset($contractedit) ? 'Update payment' : 'Payment Details' }}</h4>
             </div><!-- end card header -->
-            <div class="card-body table-responsive">
+            <div class="card-body">
                             <table class="table table-nowrap container table-responsive ">
                                     <thead>
                                     <tr>
@@ -450,7 +450,8 @@
                 </div>
                         <div class="card-body field_wrapper -responsive">
                         <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                                    <tr>
+                        <thead>          
+                        <tr>
                                         <th scope="col">Sr.No.</th>
                                         <th scope="col">Invoice No</th>
                                         <th scope="col">Due Date</th>
@@ -825,5 +826,13 @@ console.log(p);
             }).change();
         });
 </script>
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
 
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 @endsection

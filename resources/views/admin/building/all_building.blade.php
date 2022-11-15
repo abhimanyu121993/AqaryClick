@@ -8,8 +8,8 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Building</h4>
                 </div><!-- end card header -->
-                <div class="card-body table-responsive">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">                        <thead>
+                <div class="card-body ">
+                <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col"> Building No</th>

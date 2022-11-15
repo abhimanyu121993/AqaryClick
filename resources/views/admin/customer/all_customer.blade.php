@@ -9,7 +9,7 @@
                     <h4 class="card-title mb-0 flex-grow-1">Customer's</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
-                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
+                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
                         <thead>
                             <tr>
                      <th scope="col">Sr.No.</th>

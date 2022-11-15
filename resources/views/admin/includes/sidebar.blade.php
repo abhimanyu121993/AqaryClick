@@ -74,7 +74,6 @@
                         </ul>
                     </div>
                 </li>
-
                 <!-- Unit Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards3" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards3">
@@ -194,12 +193,10 @@
                         </ul>
                     </div>
                 </li>
-
-
                 <!-- Electricity Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards9" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
-                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Electricity Management</span>
+                        <i data-feather="zap" class="icon-dual"></i> <span data-key="t-dashboards">Electricity Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards9">
                         <ul class="nav nav-sm flex-column">
@@ -216,7 +213,7 @@
                 <!-- Invoice Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards15" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
-                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Financial Management</span>
+                        <i data-feather="dollar-sign" class="icon-dual"></i> <span data-key="t-dashboards">Financial Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards15">
                         <ul class="nav nav-sm flex-column">
