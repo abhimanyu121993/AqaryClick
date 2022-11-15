@@ -39,7 +39,7 @@
                     <h4 class="card-title mb-0 flex-grow-1">Manage Building Type</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
-                    <table class="table table-nowrap container">
+                    <table class="table table-nowrap container table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>

@@ -16,7 +16,7 @@
                                 <label class="form-label" for="flag">Building Name</label>
                                 <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
                                     <option value="" selected hidden disabled>--Select Building--</option>
-                                    <option value="all">All Buildings</option>
+                                    <option value="all">All</option>
                                     @foreach($building as $build)
                                     <option value="{{ $build->id}}">{{ $build->name }}</option>
                                     @endforeach
@@ -217,7 +217,63 @@
                                     </textarea>
                             </div>
                         </div>
-                        <div class="row gy-4">
+                        <div class="card">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Tenant Account Details</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Account No.</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="account_no" name="account_no" placeholder="Enter Account No">
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Bank Name</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="tenant_bank_name" name="tenant_bank_name" placeholder="Enter Bank Name">
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Sender Name</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="sender_name" name="sender_name" placeholder="Enter Name">
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                <label class="form-label" for="flag">Attachment File</label>
+                                <div class="input-group">
+                                <input type="file" class="form-control" id="attachment_file" name="attachment_file" placeholder="Enter Account No">
+                                </div>
+                                </div>
+                        </div>
+                        <div class="card mt-5">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Benifitary Account Details</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-xxl-3 col-md-4">
+                                <label class="form-label" for="flag">Account No.</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="benifitary_account_no" name="benifitary_account_no" placeholder="Enter Account No">
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4">
+                                <label class="form-label" for="flag">Bank Name</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="benifitary_bank_name" name="benifitary_bank_name" placeholder="Enter Bank Name">
+                                </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4">
+                                <label class="form-label" for="flag">Benifitary Name</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="benifitary_name" name="benifitary_name" placeholder="Enter Benifitary Name">
+                                </div>
+                                </div>
+                        </div>
+                        <div class="row gy-4 m-2">
                             <div class="col-xxl-3 col-md-6">
                                 <button class="btn btn-primary" id="submit" type="submit">Submit</button>
                             </div>

@@ -9,8 +9,9 @@
                     <h4 class="card-title mb-0 flex-grow-1">Manage Electricity</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
-                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                            <tr>
+                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
+                <thead>            
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Building Name</th>
                                 <th scope="col">Unit No</th>
@@ -30,7 +31,7 @@
                         <tbody>
                             @foreach ($electric as $el)
                                 <tr>
-                                    <td scope="row">{{ $loop->index + 1 }}</td>
+                                    <td>{{ $loop->index + 1 }}</td>
                                     <td><i>{{ $el->building->name ?? '' }}</i></td>
                                     <td>{{ $el->unit_no ?? '' }}</td>
                                     <td>{{ $el->unit_type ?? '' }}</td>
@@ -76,8 +77,9 @@
                                             </ul>
                                         </div>
                                     </td>
-                            @endforeach
                             </tr>
+                                                        @endforeach
+
                         </tbody>
                     </table>
                 </div>

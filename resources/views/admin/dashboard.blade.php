@@ -139,11 +139,10 @@
                                     <p class="text-muted mb-0">OverDue</p>
                                 </div></a>
                             </div>
-                            @php $res=App\Models\Invoice::where('payment_status','Paid')->pluck('contract_id') @endphp
                             <div class="col-6 col-sm-4">
-                            <a href="{{ route('admin.Overdue') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{  App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
-                                    <p class="text-muted mb-0">OverDue</p>
+                            <a href="{{ route('admin.legal.create') }}"> <div class="p-3 border border-dashed border-start-0">
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{  App\Models\Legal::count() }}">{{  App\Models\Legal::count() }}</span></h5>
+                                    <p class="text-muted mb-0">Legal</p>
                                 </div></a>
                             </div>
                         </div>
@@ -262,13 +261,22 @@
                                 </div></a>
                             </div>
                         </div>
-                    </div><!-- end card header -->
-                    <div class="card-body p-0 pb-2">
-                        <div>
-                            <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' dir="ltr" class="apex-charts"></div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
+                    </div>
+                </div>
+                <!-- <div class="row mt-2">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title mb-0">Payment Details</h4>
+                                </div><!-- end card header -->
+
+                                <!-- <div class="card-body">
+                                    <div id="simple_pie_chart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div> -->
+                                </div><!-- end card-body -->
+                            </div><!-- end card -->
+                        </div> -->
+                       
+                    </div>
             </div><!-- end col -->
         </div>
         <!-- end row -->

@@ -8,9 +8,10 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Unit</h4>
                 </div><!-- end card header -->
-                <div class="card-body  table-responsive">
-                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                            <tr>
+                <div class="card-body">
+                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;">
+                <thead>            
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Building Name</th>
                                 <th scope="col">Unit No</th>
@@ -58,9 +59,10 @@
                                             </ul>
                                         </div>
                                     </td>
-                            @endforeach
-                            </tr>
-                        </tbody>
+                                                            </tr>
+                                                            @endforeach
+
+                                                        </tbody>
                     </table>
                 </div>
             </div>
