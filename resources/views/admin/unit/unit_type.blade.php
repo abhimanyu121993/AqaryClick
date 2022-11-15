@@ -49,7 +49,8 @@
                         </thead>
                         <tbody>
                             @foreach ($units as $unit)
-                                <tr>
+                            <thead>    
+                            <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $unit->name }}</td>
                                     <td>{{ $unit->created_at }}</td>
@@ -72,8 +73,8 @@
                                             </ul>
                                         </div>
                                     </td>
-                            @endforeach
-                            </tr>
+                            </tr>                            @endforeach
+
                         </tbody>
                     </table>
                 </div>

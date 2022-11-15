@@ -40,7 +40,8 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                            <tr>
+                <thead>           
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Created at</th>

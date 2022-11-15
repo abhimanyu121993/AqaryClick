@@ -39,8 +39,9 @@
                     <h4 class="card-title mb-0 flex-grow-1">Manage Unit Type</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
-                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                            <tr>
+                <table id="example2" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
+                <thead>            
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Created at</th>
@@ -50,7 +51,7 @@
                         <tbody>
                             @foreach ($units as $unit)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td scope="row">{{ $loop->index + 1 }}</td>
                                     <td>{{ $unit->name }}</td>
                                     <td>{{ $unit->created_at }}</td>
                                     <td>
@@ -72,8 +73,8 @@
                                             </ul>
                                         </div>
                                     </td>
-                            @endforeach
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -90,7 +91,7 @@
 @section('script-area')
 <script>
     $(document).ready(function () {
-    $('#example').DataTable();
+    $('#example2').DataTable();
 });
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

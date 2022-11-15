@@ -8,8 +8,8 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
                 </div><!-- end card header -->
-                <div class="card-body table-responsive">
-                <table id="example2" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
+                <div class="card-body">
+                <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Code</th>
@@ -60,14 +60,8 @@
                                     <td>{{$tenant->payment_method}}</td>
                                     <td>{{$tenant->payment_receipt}}</td>
                                     <td>{{$tenant->attachment_remark}}</td>
-                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp
-                                        <a href="{{route('admin.tenantDocument',$tid)}}">view</a>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                <i class="ri-more-2-fill"></i>
+                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
+                                    <td><div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
                                             </a>
                                             @php $tid=Crypt::encrypt($tenant->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -82,8 +76,8 @@
                                             </ul>
                                         </div>
                                     </td>
-                            @endforeach
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -100,7 +94,7 @@
 @section('script-area')
 <script>
     $(document).ready(function () {
-    $('#example2').DataTable();
+    $('#example').DataTable();
 });
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

@@ -41,7 +41,13 @@ return view('admin.invoice.add_invoice',compact('tenantDetails','INV','building'
      */
     public function create()
     {
-        return view('admin.invoice.show_invoice');  
+        $a=invoice::pluck('contract_id');
+        $max_id=Invoice::max('id')+1;
+        $INV='INV'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
+        $tenantDetails=Tenant::all();
+        $building=Building::all();
+        $bank=Bank::all();
+        return view('admin.invoice.show_invoice',compact('tenantDetails','INV','building','bank'));  
     }
 
     /**

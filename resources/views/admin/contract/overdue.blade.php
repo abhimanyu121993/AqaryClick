@@ -10,7 +10,8 @@
                 </div><!-- end card header -->
                 <div class="card-body  table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                            <tr>
+                <thead>           
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Name</th>
                                 <th scope="col">Tenant Mobile</th>
@@ -36,13 +37,6 @@
                                     <td>{{ $td->lease_start_date??''}}</td>
                                     <td>{{ $td->lease_end_date??''}}</td>
                                     <td>{{ $td->overdue??''}} Days</td>
-                                    
-
-
-
-
-
-                              
                             @endforeach
                             </tr>
                         </tbody>
