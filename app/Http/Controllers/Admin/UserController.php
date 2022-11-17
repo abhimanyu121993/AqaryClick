@@ -117,10 +117,12 @@ class UserController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
+        $roles = Role::all();
 
         $userEdit=User::find($id);
-        dd($userEdit);
-        return view('admin.user', compact('userEdit'));
+        $users = User::all();
+
+        return view('admin.user', compact('userEdit','roles','users'));
     }
 
     /**

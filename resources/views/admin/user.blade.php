@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Register User</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($userEdit)? 'Update User' : 'Register User' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -48,7 +48,7 @@
                                     <select name="roleid"  class="form-select">
                                         <option value="">--Select Role--</option>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            <option value="{{ $role->id ??'' }}">{{ $role->name ??''}}</option>
                                         @endforeach
                                     </select>
                                 </div>

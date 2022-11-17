@@ -152,3 +152,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+	<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+
+    <!-- dropzone min -->
+    <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
+
+    <!-- cleave.js -->
+    <script src="{{ asset('assets/libs/cleave.js/cleave.min.js') }}"></script>
+
+    <!--Invoice create init js-->
+    <script src="{{ asset('assets/js/pages/invoicecreate.init.js') }}"></script>
+    <!-- App js -->
