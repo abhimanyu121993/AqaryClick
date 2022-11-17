@@ -4,8 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Broker;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class BrokerController extends Controller
 {
@@ -45,6 +47,14 @@ class BrokerController extends Controller
             'email' => 'required',
 
         ]);
+        $nUser= User::create([
+            'first_name' =>$request->first_name,
+            'last_name' =>$request->last_name,
+            'email'=>$request->email,
+            'phone' =>$request->tenant_primary_mobile,
+            'password'=>Hash::make(123456),
+        ]);
+        $nUser->assignRole('Broker');
        $data= Broker::create([
             'fname' => $request->first_name,
             'lname' => $request->last_name,
