@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('owner_type')->nullable()->comment('individual or company');
             $table->string ('customer_code')->nullable();
             $table->string('customer_type')->nullable();
-
             $table->timestamps();
         });
     }

@@ -44,90 +44,93 @@
         </div>
     </div>
 </div>
-
-
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">
-                    {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management' }}</h4>
-            </div><!-- end card header -->
-            <div class="card-body table-responsive">
-                <div class="live-preview">
-                <form action="{{route('admin.cheque.store')}}" method="POST" enctype="multipart/form-data">
-                @csrf  
-                @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                        <div class="card-body field_wrapper -responsive">
-                            <table class="table table-nowrap container table-responsive ">
-                              
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Deposite Date</th>
-                                        <th scope="col">Cheque Amount</th>
-                                        <th scope="col">Cheque No</th>
-                                        <th scope="col">Bank Name</th>
-                                        <th scope="col">Cheque Status</th>
-                                        <th scope="col">Attachment</th>
-                                        <th scope="col">Remark</th>
-                                        <th colspan="4" scope="col">
-                                            <div class="col-sm-1">
-                                                <br />
-                                                <a href="javascript:void(0);" class="add_button btn btn-success"
-                                                    title="Add field">+</a>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="field_table_wrapper">
-                                <input type="hidden" class="form-control" id="tid" value="" name="tenant_name" hidden>
-
-                                </tbody>
-                            </table>
-                        </div>
-                   
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header align-items-center d-flex">
+<div class="row justify-content-center">
+                        <div class="col-xxl-9">
+                            <div class="card">
+                            <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">Invoice Management</h4>
-            </div><!-- end card header -->
-            <div class="card-body">
-                <div class="live-preview">
-                    <form action="{{route('admin.invoice.store')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
-                            <ul>
+            </div>
+                                <form class="needs-validation" novalidate id="invoice_form" action="{{route('admin.invoice.store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf  
+                                @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible">
+                                <ul>
                                 @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                        <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_id" hidden>
-                        <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
-                        <p id="due_amt"></p>
-                        <p id="rent_amt"></p>
-                        <p id="payable_amt"></p>
-                        <div class="row gy-4 mb-3">                            
+                                </ul>
+                                </div>
+                               @endif   
+                                <div class="card-body border-bottom border-bottom-dashed p-4">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="profile-user mx-auto  mb-3">
+                                                    <input id="profile-img-file-input" type="file" class="profile-img-file-input" />
+                                                    <label for="profile-img-file-input" class="d-block" tabindex="0">
+                                                        <span class="overflow-hidden border border-dashed d-flex align-items-center justify-content-center rounded" style="height: 60px; width: 256px;">
+                                                            <img src="{{ asset('assets/images/logo.png') }}" alt="" height="60"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <label for="companyAddress">Address</label>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <textarea class="form-control" id="companyAddress" rows="3" placeholder="Company Address" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please enter a address
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" class="form-control" id="companyaddpostalcode" minlength="5" maxlength="6" placeholder="Enter Postal Code" required />
+                                                        <div class="invalid-feedback">
+                                                            The US zip code must contain 5 digits, Ex. 45678
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-4 ms-auto">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control bg-light border-0" id="registrationNumber" maxlength="12" placeholder="Legal Registration No" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a registration no, Ex., 012345678912
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="email" class="form-control bg-light border-0" id="companyEmail" placeholder="Email Address" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid email, Ex., example@gamil.com
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control bg-light border-0" id="companyWebsite" placeholder="Website" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a website, Ex., www.example.com
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <input type="text" class="form-control bg-light border-0" data-plugin="cleave-phone" id="compnayContactno" placeholder="Contact No" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a contact number
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                 
+                                    <div class="card-body p-4">
+                                    <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <label class="form-check-label" for="inlineRadio1">Full Payment</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <label class="form-check-label" for="inlineRadio2">Due Payment</label>
+</div>
+                                    <div class="row gy-4 mb-3 mt-2">                            
                             <div class="col-xxl-3 col-md-2">
                                 <label class="form-label" for="flag">Invoice No</label>
                                 <div class="input-group">
@@ -152,72 +155,18 @@
 
   </div>
                             </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label class="form-label" for="flag">Invoice Amount</label>
-                                <div class="input-group">
-                                <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
-                                 <p id="msg_due" class="text-danger"></p>   
-                            </div>
-                                </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label class="form-label" for="flag">Payment Method</label>
-                                <select class="select2 form-select" id="payment_method" name='payment_method'>
-                                <option  selected hidden>--Select Method--</option>
-                                <option value="Cash">Cash</option>
-                                <option value="Cheque">Cheque</option>
-                                <option value="Bank Transfer">Bank Transfer</option>
-                                </select>
-                            </div>
-                            <div class="col-xxl-3 col-md-3" id="cheque">
-                                <label class="form-label" for="flag">Cheque No</label>
-                                <div class="input-group">
-                                <input type="text" class="form-control"  name="cheque_no" placeholder="Enter Cheque No">
-                                </div>
-                                </div><div class="col-xxl-3 col-md-3" id="Bank">
-                                <label class="form-label" for="flag">Bank Name</label>
-                                <div class="input-group">
-                                <input type="text" class="form-control"  name="bank_name" placeholder="Enter Bank Name">
-                                </div>
-                                </div><div class="col-xxl-3 col-md-3" id="account">
-                                <label class="form-label" for="flag">Account No</label>
-                                <div class="input-group">
-                                <input type="text" class="form-control"  name="account_no" placeholder="Enter Account No">
-                                </div>
-                                </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label class="form-label" for="flag">Payment Status</label>
-                                <select class="select2 form-select" id="payment_status" name='payment_status'>
-                                <option selected hidden>--Select Status--</option>
-                                <option value="Paid">Paid</option>
-                                <option value="Not Paid">Not Paid</option>
-                                <option value="Under Deposit">Under Deposit</option>
-                                <option value="Deposited">Deposited</option>
-                                <option value="Redeposited">Redeposited</option>
-                                <option value="Cheque Without Balance Report">Cheque Without Balance Report</option>
-                                </select>
-                            </div>
+                           
+                            
                             <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Overdue Period</label>
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="overdue_period" name="overdue_period" placeholder="Overdue Period" readonly>
                                 </div>
                                 </div>
-                            <div class="col-xxl-3 col-md-3">
-                                <label for="attachment_file" class="form-label">Attachment File</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control"  id="attachment_file" name="attachment[]" multiple>
-                                </div>
-                        </div>
+                            
                             </div>
-                            <div class="row gy-4 mb-3">
-                            <div class="col-xxl-3 col-md-12">
-                                <label for="remark" class="form-label">Remark</label>
-                                <textarea class="form-control" name="remark" >
-                                
-                                    </textarea>
-                            </div>
-                        </div>
-                        <div class="card">
+                           
+                                            <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Tenant Account Details</h4>
                             </div>
@@ -242,11 +191,11 @@
                                 </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                <label class="form-label" for="flag">Attachment File</label>
+                                <label for="attachment_file" class="form-label">Attachment File</label>
                                 <div class="input-group">
-                                <input type="file" class="form-control" id="attachment_file" name="attachment_file" placeholder="Enter Account No">
+                                    <input type="file" class="form-control"  id="attachment_file" name="attachment[]" multiple>
                                 </div>
-                                </div>
+                        </div>
                         </div>
                         <div class="card mt-5">
                             <div class="card-header align-items-center d-flex">
@@ -273,17 +222,241 @@
                                 </div>
                                 </div>
                         </div>
-                        <div class="row gy-4 m-2">
-                            <div class="col-xxl-3 col-md-6">
-                                <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+                        <div class="card mt-5">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Payment Details</h4>
                             </div>
                         </div>
-                    </form>
+                        <div class="row">
+                        <div class="col-xxl-3 col-md-4">
+                                <label class="form-label" for="flag">Invoice Amount</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
+                                 <p id="msg_due" class="text-danger"></p>   
+                            </div>
+                                </div>
+                            <div class="col-xxl-3 col-md-4">
+                                <label class="form-label" for="flag">Payment Status</label>
+                                <select class="select2 form-select" id="payment_status" name='payment_status'>
+                                <option selected hidden>--Select Status--</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Not Paid">Not Paid</option>
+                                <option value="Under Deposit">Under Deposit</option>
+                                <option value="Deposited">Deposited</option>
+                                <option value="Redeposited">Redeposited</option>
+                                <option value="Cheque Without Balance Report">Cheque Without Balance Report</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-4">
+                                <label class="form-label" for="flag">Payment Method</label>
+                                <select class="select2 form-select" id="payment_method" name='payment_method'>
+                                <option  selected hidden>--Select Method--</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                                            <!--end col-->
+                                        <!--end row-->
+                                    </div>
+                                    
+                                    <div class="card-body p-4 border-top border-top-dashed">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-6">
+                                                <div>
+                                                    <label for="billingName" class="text-muted text-uppercase fw-semibold">Tenant Address</label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control bg-light border-0" id="tenantName" placeholder="Full Name" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a full name
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <textarea class="form-control bg-light border-0" id="tenantAddress" rows="3" placeholder="Tenant Address" required></textarea>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a address
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control bg-light border-0" data-plugin="cleave-phone" id="TenantPhoneno" placeholder="(123)456-7890" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a phone number
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control bg-light border-0" id="billingTaxno" placeholder="Tax Number" required />
+                                                    <div class="invalid-feedback">
+                                                        Please enter a tax number
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                            
+                                            <!--end col-->
+                                            <div class="col-sm-6 ms-auto">
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <div>
+                                                            <label for="shippingName" class="text-muted text-uppercase fw-semibold">Lessor's Address</label>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <input type="text" class="form-control bg-light border-0" id="shippingName" placeholder="Full Name" required />
+                                                            <div class="invalid-feedback">
+                                                                Please enter a full name
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <textarea class="form-control bg-light border-0" id="shippingAddress" rows="3" placeholder="Address" required></textarea>
+                                                            <div class="invalid-feedback">
+                                                                Please enter a address
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <input type="text" class="form-control bg-light border-0" data-plugin="cleave-phone" id="shippingPhoneno" placeholder="(123)456-7890" required />
+                                                            <div class="invalid-feedback">
+                                                                Please enter a phone number
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <input type="text" class="form-control bg-light border-0" id="shippingTaxno" placeholder="Tax Number" required />
+                                                            <div class="invalid-feedback">
+                                                                Please enter a tax number
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                    
+                 <div class="card-body p-4">
+                       <h4 class="card-title mb-0 flex-grow-1 mb-2">
+                    {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management' }}</h4>
+                                     
+                                        <div class="table-responsive">
+                                            <table class="invoice-table table table-borderless table-nowrap mb-0">
+                                                <thead class="align-middle">
+                                                    <tr class="table-active">
+                                                        <th scope="col"style="width: 50px;">Sn.</th>
+                                                        <th scope="col" style="width: 150px;">
+                                                            Deposit Date
+                                                        </th>
+                                                        <th scope="col"style="width: 180px;">
+                                                           Cheque Amt
+                                                        </th>
+                                                        <th scope="col"style="width: 150px;">Cheque No</th>
+                                                        <th scope="col" style="width: 150px;">Bank Name</th>
+                                                        <th scope="col"  style="width: 50px;"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="newlink">
+                                                    <tr id="1" class="product">
+                                                        <th scope="row" class="product-id">1</th>
+                                                        <td>
+                                                            <div class="mb-1">
+                                                                <input type="date" class="form-control" id="productName-1" placeholder="Product Name" required />
+                                                                </div>
+                                                            <textarea class="form-control" id="productDetails-1" rows="3" cols="50" placeholder="Product Details"></textarea>
+                                                        <td>
+                                                                <input type="text" class="form-control" id="product-qty-1"  placeholder="Enter Cheque Amount" >
+                                                                <input type="file" class="form-control mt-1" id="product-qty-1">
+
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <div>
+                                                                <input type="text" class="form-control product-line-price" id="productPrice-1" placeholder="Check No" />
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <div>
+                                                                <input type="text" class="form-control product-line-price" id="productPrice-1" placeholder="Bank Name" readonly />
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-removal">
+                                                            <a href="javascript:void(0)" class="btn btn-danger">-</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tbody>
+                                                    <tr id="newForm" style="display: none;"><td class="d-none" colspan="5"><p>Add New Form</p></td></tr>
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            <a href="javascript:new_link()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr class="border-top border-top-dashed mt-2">
+                                                        <td colspan="3"></td>
+                                                        <td colspan="2" class="p-0">
+                                                        
+                                                            <table class="table table-borderless table-sm table-nowrap align-middle mb-0">
+                                                                <tbody>
+
+                                                                    <tr>
+                                                                        <th scope="row">Sub Total</th>
+                                                                        <td style="width:150px;">
+                                                                            <input type="text" class="form-control" id="cart-subtotal" placeholder="$0.00" readonly />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Estimated Tax (12.5%)</th>
+                                                                        <td>
+                                                                            <input type="text" class="form-control" id="cart-tax" placeholder="$0.00" readonly />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Discount <small class="text-muted">(VELZON15)</small></th>
+                                                                        <td>
+                                                                            <input type="text" class="form-control" id="cart-discount" placeholder="$0.00" readonly />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Shipping Charge</th>
+                                                                        <td>
+                                                                            <input type="text" class="form-control" id="cart-shipping" placeholder="$0.00" readonly />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="border-top border-top-dashed">
+                                                                        <th scope="row">Total Amount</th>
+                                                                        <td>
+                                                                            <input type="text" class="form-control" id="cart-total" placeholder="$0.00" readonly />
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <!--end table-->
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--end table-->
+                                        </div>
+                                        
+                                        <!--end row-->
+                                        <div class="mt-4">
+                                            <label for="exampleFormControlTextarea1" class="form-label text-muted text-uppercase fw-semibold">Remark</label>
+                                            <textarea class="form-control" name="remark" > </textarea>
+                                        </div>
+                                        <div class="hstack gap-2 justify-content-end d-print-none mt-4">
+                                            <button type="submit" class="btn btn-success"><i class="ri-rotete-line align-bottom me-1"></i>Submit</button>
+                                            <a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Download Invoice</a>
+                                            <a href="javascript:void(0);" class="btn btn-danger"><i class="ri-send-plane-fill align-bottom me-1"></i> Send Invoice</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 
@@ -390,6 +563,8 @@ $(wrapper).on('click', '.remove_button', function(e) {
         $("#tenant_name").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
+                var name=$(this).text();
+                $('#tenantName').val(name);
                 $('#tenant_id').val(optionValue);
                 var newurl = "{{ url('/admin/fetch-contract-details') }}/" + optionValue;
                 $.ajax({
