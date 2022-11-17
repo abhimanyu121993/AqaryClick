@@ -69,9 +69,11 @@
                                             </a>
                                             @php $bid=Crypt::encrypt($building->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="{{route('admin.register_building.edit',$bid)}}">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
-
+                                               @can('Building_edit') <li><a class="dropdown-item" href="{{route('admin.register_building.edit',$bid)}}">Edit</a></li>
+                                               @endcan
+                                               @can('Building_delete') 
+                                               <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+@endcan
                                                 <form id="delete-form-{{ $bid }}" action="{{ route('admin.register_building.destroy', $bid) }}"
                                                     method="post" style="display: none;">
                                                     @method('DELETE')

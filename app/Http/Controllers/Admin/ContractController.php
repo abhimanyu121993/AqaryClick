@@ -87,6 +87,8 @@ class ContractController extends Controller
             'rent_amount'=>'required',
             'total_invoice'=>'required',
             'guarantees'=>'required',
+            'contract_type'=>'required',
+
         ]);
         $mainpic='';
         if($request->hasFile('lessor_sign')){
@@ -133,6 +135,7 @@ class ContractController extends Controller
             'tenant_sign' =>$mainpic2,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
+            'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
 
             'remark'=>$request->remark,
@@ -163,13 +166,25 @@ class ContractController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {         $invoiceDetails=Invoice::where('payment_status','Paid')->get();
+      
+        $invoice=Invoice::all()->count();
+        $total_amount=Invoice::withSum('Contract','rent_amount')->get()->sum('contract_sum_rent_amount');
+        $total_amt=$invoice*$total_amount;
+        $not_paid_invoice=Invoice::where('payment_status','Not Paid')->count();
+        $delay_invoice=Invoice::whereNotNull('overdue_period')->count();
+        $total_delay_amt=Invoice::withSum('Contract','rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+        $total_delay=$delay_invoice*$total_delay_amt;
+        $invoice_balance=$delay_invoice+$not_paid_invoice;
+        $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
+        $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
+
         $id = Crypt::decrypt($id);
         $contractedit=Contract::find($id);        
         $tenant=Tenant::pluck('tenant_english_name');
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
-        return view('admin.contract.contract_registration',compact('contractedit','tenant','tenant_doc','tenant_nation'));
+        return view('admin.contract.contract_registration',compact('contractedit','tenant','tenant_doc','tenant_nation','invoiceDetails','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance'));
     }
 
     /**
@@ -202,6 +217,8 @@ class ContractController extends Controller
             'attestation_expiry'=>'nullable',
             'total_invoice'=>'required',
             'guarantees'=>'required',
+            'contract_type'=>'required',
+
         ]);
         $mainpic=Contract::find($id)->lessor_sign??''; 
         if($request->hasFile('lessor_sign')){
@@ -240,10 +257,10 @@ class ContractController extends Controller
             'lease_end_date'=>$request->lease_end_date,
             'lease_period_month'=>$request->lease_period_month,
             'lease_period_day'=>$request->lease_period_day,
-            'grace_start_date'=>$request->grace_start_date,
-            'grace_end_date'=>$request->grace_end_date,
-            'grace_period_month'=>$request->grace_period_month,
-            'grace_period_day'=>$request->grace_period_day,
+            'grace_start_date'=>json_encode($request->grace_start_date),
+            'grace_end_date'=>json_encode($request->grace_end_date),
+            'grace_period_month'=>json_encode($request->grace_period_month),
+            'grace_period_day'=>json_encode($request->grace_period_day),
             'approved_by'=>$request->approved_by,
             'attestation_no'=>$request->attestation_no,
             'attestation_status'=>$request->attestation_status,
@@ -254,6 +271,7 @@ class ContractController extends Controller
             'remark'=>$request->remark,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
+            'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
 
 
