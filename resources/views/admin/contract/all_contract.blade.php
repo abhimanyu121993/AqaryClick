@@ -85,7 +85,7 @@
                                     <td>{{ $con->guarantees ??''}}</td>
                                     <td>{{ $con->guarantees_payment_method ??''}}</td>
 
-                                    <td><img src="{{asset('upload/contract/signature'.$con->tenant_sign)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
+                                    <td><img src="{{asset('upload/contract/signature/'.$con->tenant_sign)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                                     <td>{{ $con->remark ??''}}</td>
                                     <td>
                                         <div class="dropdown">
@@ -95,7 +95,7 @@
                                             </a>
                                             @php $bid=Crypt::encrypt($con->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            @can('Contract_edit')    
+                                            @can('Contract_edit')
                                             <li><a class="dropdown-item" href="{{route('admin.contract.edit',$bid)}}">Edit</a></li>
                                                @endcan
                                                @can('Contract_delete')
