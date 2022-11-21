@@ -76,7 +76,7 @@
 <script src="/front/assets/gallery/lg-zoom.js"></script>
 <!--Toaster Js-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-<script>
+{{-- <script>
     $(document).ready(function() {
         toastr.options.timeOut = 10000;
         @if (Session::has('error'))
@@ -86,7 +86,7 @@
         @endif
     });
 
-</script>
+</script> --}}
 </body>
 
 </html>

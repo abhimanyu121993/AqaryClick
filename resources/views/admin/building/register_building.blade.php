@@ -65,9 +65,9 @@
 
                         </div>
                         <div class="row gy-4 mb-3">
-                           
-                           
-                          
+
+
+
                         </div>
                         <div class="row gy-4 mb-3">
                             <div class="col-xxl-3 col-md-3">
@@ -76,7 +76,7 @@
                                 @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->ownership_type }}" selected>{{ $buildingedit->ownership_type}}</option>
                                     @else
-                                <option value="" selected>--Select Ownership--</option>   
+                                <option value="" selected>--Select Ownership--</option>
                                 <option value="title_deed">Title Deed</option>
                                     <option value="Usufruct contract">Usufruct Contract</option>
                                     @endif
@@ -89,7 +89,7 @@
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="ownership_no" name="ownership_no" value="{{isset($buildingedit)? $buildingedit->ownership_no: '' }}" placeholder="Enter Title Deed No">
                                 </div>
-                                                            
+
                             </div>
                             <div class="col-xxl-3 col-md-3" id="contract">
                                 <label for="owner_name" class="form-label">Ownership No</label>
@@ -122,14 +122,14 @@
                                     <input type="text" class="form-control" id="owner_name" name="owner_name" value="{{isset($buildingedit)? $buildingedit->owner_name: '' }}" placeholder="Owner Name">
                                 </div>
                             </div>
-                                                    
+
                             <div class="col-xxl-3 col-md-3">
                                 <label for="lessor_name" class="form-label">Lessor's Name</label>
                                 <div class="input-group">
                                     <input type="name" class="form-control" id="lessor_name" name="lessor_name" value="{{isset($buildingedit)? $buildingedit->lessor_name: '' }}" placeholder="Lessor's Name">
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
@@ -143,23 +143,23 @@
                                 <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
 
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->country }}" selected hidden>{{ $buildingedit->nationality->name}}</option>
-                                    
+                                    <option value="{{ $buildingedit->country }}" selected hidden>{{ $buildingedit->nationality->name ?? ''}}</option>
+
                                     @else
                                     <option value="">--Select Country--</option>
                                     @foreach($countryDetail as $cd)
-                                    <option value="{{ $cd->id}}">{{ $cd->name }}</option>
+                                    <option value="{{ $cd->id}}">{{ $cd->name ?? '' }}</option>
                                     @endforeach
                                     @endif
                                 </select>
                             </div>
-                            
+
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">City</label>
 
                                 <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'city' }}" name='city'>
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name}}</option>
+                                    <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name ?? ''}}</option>
                                     @endif
                                     <option value="">--Select City--</option>
 
@@ -177,8 +177,8 @@
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
-                          
-                           
+
+
                             <div class="col-xxl-3 col-md-4">
                                 <label for="city" class="form-label">Building No</label>
                                 <div class="input-group">
@@ -198,10 +198,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row gy-4 mb-3">
-                           
-                            
+
+
                             <div class="col-xxl-3 col-md-12">
                                 <label for="building_location" class="form-label">Building Location Link</label>
                                 <div class="input-group">
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Building Appraisal</h4>
@@ -314,8 +314,8 @@
                                     <input type="date" class="form-control" id="appraise_date" name="appraise_date" value="{{isset($buildingedit)? $buildingedit->appraise_date: '' }}" placeholder="12-12-2022">
                                 </div>
                             </div>
-                                                   
-                                                      
+
+
                         </div>
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
@@ -432,6 +432,9 @@
                 $.ajax({
                     url: newurl,
                     method: 'get',
+                    beforeSend:function(){
+                        $('#city').html('<option selected hidden>Fetching.......</option>');
+                    },
                     success: function(p) {
                         $("#city").html(p);
                         $("#zone").val('');
@@ -451,6 +454,9 @@
                 $.ajax({
                     url: newurl,
                     method: 'get',
+                    beforeSend:function(){
+                        $('#zone').html('<option selected hidden>Fetching.......</option>');
+                    },
                     success: function(p) {
                         $("#zone").html(p);
                     }
@@ -465,7 +471,7 @@ $('#dateInput').change(function(){
   var day = date.getDate();
   var month = date.getMonth() + 1;
   var year = date.getFullYear();
-   
+
 let currentDate = new Date();
 let cDay = currentDate.getDate()
 let cMonth = currentDate.getMonth() + 1
@@ -486,7 +492,7 @@ else{
 <!-- monthly income to annunal  -->
 <script>
     $(document).ready(function() {
-      
+
     });
 </script>
 <!-- monthly income to annunal  -->
@@ -497,7 +503,7 @@ else{
        $('#annual_income').val(a*12);
       var b= $('#annual_income').val();
       var c= $('#property_vlaue').val();
-      
+
       $('#payback').val((c/b).toFixed(1)+"Years");
 
        });
@@ -507,7 +513,7 @@ else{
 <!-- Land meter to square foot  -->
 <script>
     $(document).ready(function() {
-       
+
     });
 </script>
 <!-- Net Property Value  -->
@@ -523,15 +529,15 @@ else{
        var e=$(this).val();
        $('#land_size').val(e*10764);
        $("#price_foot").keyup(function(){
-       var f=$(this).val();         
+       var f=$(this).val();
       $('#total_land').val((e*10764)*f);
         $('#property_vlaue').val(((e*10764)*f)+ sum);
        });
        });
-       
+
         });
         });
-        
+
     });
 </script>
 <script>

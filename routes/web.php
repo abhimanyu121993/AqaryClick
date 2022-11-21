@@ -49,6 +49,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get("/properties","properties");
     Route::get('/propertie-details','propertie_details');
     Route::get("/contect-us","contect");
+    Route::post("/contact","contactSubmit")->name('contactus');
 });
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
