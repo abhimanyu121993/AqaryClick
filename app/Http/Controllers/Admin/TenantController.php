@@ -87,12 +87,22 @@ class TenantController extends Controller
                 $otherpic[]=$name;
             }
         }
-        $nUser= User::create([
-            'first_name' => $request->tenant_english_name,
-            'email'=>$request->email,
-            'phone' =>$request->tenant_primary_mobile,
-            'password'=>Hash::make(123456),
-        ]);
+        if($request->password==null){
+            $nUser= User::create([
+                'first_name' => $request->tenant_english_name,
+                'email'=>$request->email,
+                'phone' =>$request->tenant_primary_mobile,
+                'password'=>Hash::make(123456),
+            ]);
+        }
+        else{
+            $nUser= User::create([
+                'first_name' => $request->tenant_english_name,
+                'email'=>$request->email,
+                'phone' =>$request->tenant_primary_mobile,
+                'password'=>Hash::make($request->password),
+            ]);
+        }
         $nUser->assignRole('Tenant');
         $tenant=Tenant::create([
             'file_no'=>$request->file_no,

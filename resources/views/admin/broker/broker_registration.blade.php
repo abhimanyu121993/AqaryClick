@@ -30,7 +30,7 @@
                                 <label for="space" class="form-label">Broker/Agent</label>
                                 <select class="form-control select2 form-select" id="flag" name="boker_agent">
                                 @if (isset($brokeredit))
-                                    <option value="{{ $brokeredit->broker_agent }}" selected>{{ $buildingedit->broker_agent}}</option>
+                                    <option value="{{ $brokeredit->broker_agent }}" selected>{{ $brokeredit->broker_agent}}</option>
                                     @else
                                 <option value="" selected hidden>--Select Type--</option>   
                                 <option value="broker">Broker</option>
@@ -42,13 +42,19 @@
                             <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Join Date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="join_date" name="join_date" value="{{Carbon\Carbon::now()->format('d-m-Y') }}" placeholder="Enter Join Date">
+                                        <input type="text" class="form-control" id="join_date" name="join_date" value="{{Carbon\Carbon::now()->format('d-m-Y') }}" placeholder="Enter Join Date " readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Broker Name</label>
+                                    <label for="name" class="form-label">Broker First Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_name" name="broker_name" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="Enter Broker Name">
+                                        <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="Enter Broker first Name">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Broker Last Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="broker_lname" name="broker_lname" value="{{isset($brokeredit)? $broker->broker_lname: '' }}" placeholder="Enter Broker Last Name">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -61,10 +67,17 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="mobile" name="mobile" value="{{isset($broker)? $broker->mobile: '' }}" placeholder="Enter Mobile No">
                                     </div>
-                                </div><div class="col-xxl-3 col-md-3">
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{isset($brokeredit)? $brokeredit->email: '' }}" placeholder="abc@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Broker Commission</label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control" id="commission" name="commission" value="{{isset($broker)? $broker->commission: '' }}" placeholder="Enter Broker Commission">
+                                        <input type="text" class="form-control" id="commission" name="commission" value="{{isset($broker)? $broker->commission: '' }}" placeholder="Enter Broker Commission">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -79,12 +92,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Commission</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="email" name="email" value="{{isset($brokeredit)? $brokeredit->commission: '' }}" placeholder="abc@gmail.com">
-                                    </div>
-                                </div>
+                          
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Property Type</label>
                                 <select class="form-control select2 form-select" id="broker_type" name="boker_type">

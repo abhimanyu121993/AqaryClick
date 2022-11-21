@@ -68,12 +68,6 @@
                             <hr>
                             <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
                         </div>
-                        <div class="col-md-3" id="fname">
-                            <label for="country" class="form-label">Serial Number</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="serial_number" placeholder="Serial No">
-                            </div>
-                        </div>
                         <div class="col-md-3" id="cname">
                             <label for="country" class="form-label">Company Name</label>
                             <div class="input-group">
@@ -124,15 +118,14 @@
                                 <input type="text" class="form-control" name="reg_num" placeholder="Enter Reg. Number">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <label for="space" class="form-label">Company Activity</label>
-                            <select class="form-control" id="building" name="company_activity">
-                                <option value="">-----Select Activity-----</option>
-                                <option value="ifsc">Trading in Computer Software</option>
-                                <option value="Real_Estate_Management">Real Estate Management</option>
-                                <option value="Car_Spare_Part_Trading">Car Spare Part Trading</option>
-                            </select>
-                        </div>
+                        <div class="col-md-6">
+                                        <label for="space" class="form-label">Company Activity</label>
+                                        <select class="form-control" id="building" name="company_activity">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="company_activity"
+                                                placeholder="Enter Activity">
+                                        </div>
+                                    </div>
                     </div>
                     <div class="card-header align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1"> Bank Detail</h4>

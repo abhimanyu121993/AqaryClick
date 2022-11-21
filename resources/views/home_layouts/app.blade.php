@@ -105,38 +105,6 @@
                         <div class="col-md-12 col-sm-12 col-lg-12">
                             <h4>Who You Are ? </h4>
                         </div>
-                        <!-- <div class="col-12 col-md-2" id="agent_check">
-              <div class="form-check">
-                <input class="form-check-input" name="form_radio" type="radio" value="" >
-                <label class="form-check-label" for="agent_check">
-                  Agent
-                </label>
-              </div>
-            </div>
-            <div class="col-md-3" id="owner_company_check" >
-              <div class="form-check" >
-                <input class="form-check-input" name="form_radio" type="radio" value="" >
-                <label class="form-check-label own_cmp" for="owner_company_check" id="">
-                  Owner Company
-                </label>
-              </div>
-            </div>
-            <div class="col-md-3" id="owner_individual_check">
-              <div class="form-check">
-                <input class="form-check-input" name="form_radio" type="radio" value="" >
-                <label class="form-check-label own_cmp" for="owner_individual_check" id="own_ind">
-                  Owner Individual
-                </label>
-              </div>
-            </div>
-            <div class="col-md-3" id="tnt_check">
-              <div class="form-check">
-                <input class="form-check-input" name="form_radio" type="radio" value="" >
-                <label class="form-check-label" for="tenant_check">
-                  Tenant
-                </label>
-              </div>
-            </div> -->
                         <div class="profile-header-nav ">
                             <!-- navbar -->
                             <nav
@@ -206,20 +174,112 @@
                             <form action="{{ route('admin.broker.store') }}" id="form" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                                 <div class="row gy-4 mb-3 " id="agent_checker">
                                     <div class="card-header align-items-center d-flex" id="ow">
                                         <hr>
                                         <h4 class="card-title mb-0 flex-grow-1">Agent</h4>
                                     </div>
-                                    <div class=" col-md-6">
-                                        <label for="name" class="form-label">Agent Name</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="name" name="name"
-                                                placeholder="Agent Name">
-                                        </div>
+                                    <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Broker/Agent</label>
+                                <select class="form-control select2 form-select" id="flag" name="boker_agent">
+                                @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->broker_agent }}" selected>{{ $brokeredit->broker_agent}}</option>
+                                    @else
+                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="broker">Broker</option>
+                                    <option value="agent">Agent</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Join Date</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="join_date" name="join_date" value="{{Carbon\Carbon::now()->format('d-m-Y') }}" placeholder="Enter Join Date " readonly>
                                     </div>
-                                    <!--end col-->
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Broker First Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="first Name">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Broker Last Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="broker_lname" name="broker_lname" value="{{isset($brokeredit)? $broker->broker_lname: '' }}" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Broker ID</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="broker_id" name="broker_id" value="{{isset($brokeredit)? $broker->broker_id: '' }}" placeholder="Broker Id">
+                                    </div>
+                                </div><div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Mobile</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{isset($broker)? $broker->mobile: '' }}" placeholder="Mobile No">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{isset($brokeredit)? $brokeredit->email: '' }}" placeholder="abc@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="password" name="password" value="" placeholder="Enter Password">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Broker Type</label>
+                                <select class="form-control select2 form-select" id="broker_type" name="boker_type">
+                                @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->broker_type }}" selected>{{ $brokeredit->broker_type}}</option>
+                                    @else
+                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="personal">Personal</option>
+                                    <option value="company">Company</option>
+                                    @endif
+                                </select>
+                            </div>
+                          
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Property Type</label>
+                                <select class="form-control select2 form-select" id="broker_type" name="boker_type">
+                                @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->property_type }}" selected>{{ $brokeredit->perperty_type}}</option>
+                                    @else
+                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="unit">Unit</option>
+                                    <option value="building">Building</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Unit Ref.</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($brokeredit)? $brokeredit->unit_ref: '' }}" placeholder="Enter Broker Commission">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Building Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="building_name" name="building_name" value="{{isset($brokeredit)? $brokeredit->building_name: '' }}" placeholder="Enter Building Name">
+                                    </div>
+                                </div>
+                                <!--end col-->
                                 </div>
 
                                 <div class="row gy-4 mb-3 individual">
@@ -282,6 +342,40 @@
                                         <hr>
                                         <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
                                     </div>
+                                    <div class=" col-md-6">
+                                        <label for="name" class="form-label">First Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="first_name"
+                                                placeholder="First Name">
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="owner_name" class="form-label">Last Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="last_name"
+                                                placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="incharge_name" class="form-label">Phone number </label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="phone"
+                                                placeholder="Phone Number">
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <label for="incharge_name" class="form-label"> Email </label>
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" name="email_company_ind"
+                                                placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-3 col-md-6">
+                                    <label for="name" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="password" name="password_company_ind" value="" placeholder="Enter Password">
+                                    </div>
+                                </div>
                                     <div class="col-md-6" id="cname">
                                         <label for="country" class="form-label">Company Name</label>
                                         <div class="input-group">
@@ -324,13 +418,6 @@
                                                 placeholder="Upload File">
                                         </div>
                                     </div>
-                                    <div class="col-md-6" id="fname">
-                                        <label for="country" class="form-label">Serial Number</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="serial_number"
-                                                placeholder="Upload File">
-                                        </div>
-                                    </div>
                                     <div class="col-md-6">
                                         <label for="city" class="form-label">Document Exipry Date</label>
                                         <div class="input-group">
@@ -347,13 +434,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="space" class="form-label">Company Activity</label>
-                                        <select class="form-control" id="building" name="company_activity">
-                                            <option value="">-----Select Customer-----</option>
-                                            <option value="Trading_in_Computer_Software">Trading in Computer Software
-                                            </option>
-                                            <option value="Real_Estate_Management">Real Estate Management</option>
-                                            <option value="Car_Spare_Part_Trading">Car Spare Part Trading</option>
-                                        </select>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="company_activity"
+                                                placeholder="Enter Activity">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row individual">
@@ -366,21 +450,21 @@
                                         <label for="country" class="form-label">Bank Name</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="bank_name"
-                                                placeholder="Bank Details">
+                                                placeholder="Bank Name">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="state" class="form-label">Account Number</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="account_number"
-                                                placeholder="Company Address">
+                                                placeholder="Account No">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="country" class="form-label">IFSC Code</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="ifsc"
-                                                placeholder="Company Name">
+                                                placeholder="Ifsc No    ">
                                         </div>
                                     </div>
                                 </div>
@@ -390,185 +474,253 @@
                                         <hr>
                                         <h4 class="card-title mb-0 flex-grow-1"> Tenant </h4>
                                     </div>
-                                    <div class=" col-md-6">
-                                        <label for="name" class="form-label">File number</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="file_number"
-                                                placeholder="File Number">
-                                        </div>
+                                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="row gy-4 mb-3">
+                        <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Tenant Type</label>
+                                <select class="form-control" id="tenant_type" name="tenant_type">
+                                    <option value="" selected hidden>--Select Tenant Type--</option>
+                                    <option value="TP">Personal</option>
+                                    <option value="TC">Company</option>
+                                </select>
+                            </div>
+                        <div class=" col-xxl-3 col-md-3">
+                                <label for="name" class="form-label">File No</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="file_no" name="file_no" value="" placeholder="Enter File No">
+                                </div>
+                            </div>
+                            <div class=" col-xxl-3 col-md-3">
+                                <label for="name" class="form-label">Tenant Code</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="tenant_code" placeholder="Enter Tenant Code">
+                                </div>
+                            </div>
+                            <div class=" col-xxl-3 col-md-3">
+                                <label for="owner_name" class="form-label">Tenant Name <sup class="text-danger">(English)</sup> </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="tenant_english_name" placeholder="Enter Tenant Name (English)">
+                                </div>
+                            </div>
+                            <div class=" col-xxl-3 col-md-3">
+                                <label for="owner_name" class="form-label">Tenant Name <sup class="text-danger">(Arabic)</sup></label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="tenant_arabic_name" placeholder="Enter Tenant Name (Arabic)">
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Document Type</label>
+                                <select class="form-control" id="tenant_document_type" name="tenant_document">
+                                    <option value="" selected hidden>--Select Document Type--</option>
+                                    <option value="QID">QID</option>
+                                    <option value="CR">CR</option>
+                                    <option value="Passport">Passport</option>
+                                </select>
+                            </div>
+                        
+                            <div class="col-xxl-3 col-md-3 mb-2" id="qid">
+                                <label for="country" class="form-label">QID</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="qid_document" placeholder="Qid Document Number">
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3 mb-2" id="cr">
+                                <label for="state" class="form-label">CR</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="cr_document"
+                                        placeholder="CR Document">
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3 mb-2" id="passport">
+                                <label for="country" class="form-label">Passport</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="passport" placeholder="Passport Document">
+                                </div>
+                            </div>
+                        <div class=" col-xxl-3 col-md-3">
+                            <label for="owner_name" class="form-label">Tenant Primary Mobile No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No">
+                            </div>
+                        </div>
+                        <div class=" col-xxl-3 col-md-3">
+                            <label for="owner_name" class="form-label">Tenant Secondary Mobile No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No">
+                            </div>
+                        </div>
+                        <div class=" col-xxl-3 col-md-3">
+                            <label for="incharge_name" class="form-label">Email </label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email"
+                                    placeholder="Enter Email">
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="password" name="password" value="" placeholder="Enter Password">
                                     </div>
-                                    <div class=" col-md-6">
-                                        <label for="owner_name" class="form-label">Tenant Code</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="tenant_code"
-                                                placeholder="Tenant Code">
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6">
-                                        <label for="owner_name" class="form-label">Tenant Name</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="tenant_name"
-                                                placeholder="Tenant Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="space" class="form-label">Tenant Type</label>
-                                        <select class="form-control" id="customer" name="customer_type">
-                                            <option value="">-----Select Tenant Type-----</option>
-                                            <option value="Personal">Personal</option>
-                                            <option value="Company">Company</option>
-                                        </select>
-                                    </div>
-                                    <div class=" col-md-6">
-                                        <label for="incharge_name" class="form-label">Primary Phone number </label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="primary_phone"
-                                                placeholder="Primary Phone Number">
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6">
-                                        <label for="incharge_name" class="form-label">Secondary Phone number </label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="secondary_phone"
-                                                placeholder="Secondary Phone Number">
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6">
-                                        <label for="incharge_name" class="form-label">Email </label>
-                                        <div class="input-group">
-                                            <input type="email" class="form-control" name="email"
-                                                placeholder="Enter Email">
-                                        </div>
-                                    </div>
-
-                                    <div class="row gy-4 mb-3" id="cmpname">
-                                        <div class="col-md-6" id="cname">
-                                            <label for="country" class="form-label">Post Office Box</label>
-                                            <div class="input-group">
-                                                <input type="number" class="form-control" name="post_office"
-                                                    placeholder="Post Office">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="remark" class="form-label">Unit Address</label>
-                                            <textarea class="form-control" name="address">
-                        </textarea>
-                                        </div>
-                                        <!-- <div class="col-md-6" id="authp">
-                        <label for="country" class="form-label">Account Number</label>
+                                </div>
+                            <div class="col-xxl-3 col-md-3" id="cname">
+                                <label for="country" class="form-label">Post Office Box</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="post_office" placeholder="Post Office">
+                                </div>
+                            </div>
+                        <div class="col-xxl-3 col-md-3 mb-2">
+                            <label for="space" class="form-label">Tenant Nationality</label>
+                            <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
+                                <option value="">--Select Tenant Nationality--</option>
+                                @foreach($nation as $nationality)
+                                <option value="{{$nationality->name}}">{{$nationality->name}}</option>
+                               @endforeach
+                            </select>
+                        </div>                      
+                                
+                            <div class="col-xxl-3 col-md-12">
+                                <label for="remark" class="form-label">Unit Address</label>
+                                <textarea class="form-control" name="unit_address">
+                                </textarea>
+                            </div>
+                            
+                            <div class="col-xxl-3 col-md-3 mb-2">
+                            <label for="space" class="form-label">Building Name</label>
+                            <select class="form-select js-example-basic-single" id="building_name" name="building_name">
+                                <option value="">--Select Building--</option>
+                                @foreach($building as $buld)
+                                <option value="{{$buld->id}}">{{$buld->name}}</option>
+                               @endforeach
+                            </select>
+                        </div> 
+                        <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Unit Type</label>
+                            <div class="input-group">
+                                <select class="form-select js-example-basic-single" id="unit_type" name="unit_type">
+                                <option value="">--Select Unit--</option>
+                            </select>
+                        </div>
+                            </div>
+                            <!-- <div class="col-xxl-3 col-md-3">
+                        <label for="country" class="form-label">Total unit</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="tenant_account_number"
-                                placeholder=" Account Number ">
+                            <input type="text" class="form-control"  id="total_unit" name="total_unit"
+                                placeholder=" Total Unit " readonly>
                         </div>
                     </div> -->
-                                        <div class="col-md-6">
-                                            <label for="space" class="form-label">Tenant Status</label>
-                                            <select class="form-control" name="tenant_status">
-                                                <option value="">-----Select Tenant Status-----</option>
-                                                <option value="new">New</option>
-                                                <option value="old">Old</option>
-                                                <option value="related">Related Party</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6" id="fname">
-                                            <label for="country" class="form-label">Document Name</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="document_name"
-                                                    placeholder="Document name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="fname">
-                                            <label for="country" class="form-label">Total Unit</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="total_unit"
-                                                    placeholder=" Total Unit">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="space" class="form-label">Nationality</label>
-                                            <select class="form-control" id="customer" name="customer_nationality">
-                                                <option value="">-----Select Nationality-----</option>
-                                                @foreach ($nationality as $nation)
-                                                <option value="{{ $nation->id }}">{{ $nation->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="card-header align-items-center d-flex">
-                                            <h4 class="card-title mb-0 flex-grow-1">Sponsor</h4>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="city" class="form-label">Sponsor Name</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="sponsor_name"
-                                                    placeholder="sponsor Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="city" class="form-label">Sponsor Email</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="sponsor_email"
-                                                    placeholder="Sponsor Email">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="city" class="form-label">Sponsor Phone</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="sponsor_phone"
-                                                    placeholder="sponsor Phone">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="city" class="form-label">Sponsor OID</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="sponsor_oid"
-                                                    placeholder="sponsor OID">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="city" class="form-label">File Attachment</label>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" name="attachment_file[]"
-                                                    placeholder="Attachment File" multiple>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="remark" class="form-label">Attachment Remark</label>
-                                            <textarea class="form-control" name="attachment_remark">
+                    <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Status</label>
+                                <select class="form-control" id="process" name="status">
+                                    <option value="" selected hidden>-----Select Status-----</option>
+                                    <option value="New Tenant">New Tenant</option>
+                                    <option value="Old Tenant">Old Tenant</option>
+                                    <option value="Related Party">Related Party</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Rental Period</label>
+                                <select class="form-control" id="rental_period" name="rental_period">
+                                    <option value="" selected hidden>-----Select Type-----</option>
+                                    <option value="Days">Days</option>
+                                    <option value="Months">Months</option>
+                                    <option value="Years">Years</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3" id="rental_time">
+                        <label for="country" class="form-label" id="change_rental_time">Days</label>
+                        <div class="input-group">
+                            <input type="text" id="change_placeholder" class="form-control"   name="rental_time"
+                                placeholder=" Enter No of Days ">
+                        </div>
+                    </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Payment Method</label>
+                                <select class="form-control" id="payment_method" name="payment_method">
+                                    <option value="" selected hidden>-----Select Payment Method-----</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Cheques">Cheques</option>
+                                    <option value="Transfer Bank">Transfer Bank</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3" id="account_no">
+                        <label for="country" class="form-label">Account Number</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="account_no"
+                                placeholder=" Account Number ">
+                        </div>
+                    </div>
+                            <div class="col-xxl-3 col-md-3" id="has_cheque">
+                                <label for="country" class="form-label">Receipt Of Cheques</label><br>
+                            <div class="form-check-inline ">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" value="yes" name="payment_receipt">Yes
+                                </label>
+                              </div>
+                              <div class="form-check-inline">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" value="no" name="payment_receipt">No
+                                </label>
+                              </div>
+
+                              <!-- test -->
+                            </div>
+                            <div id="sponser" class="row">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Sponsor</h4>
+                    </div>
+                    <div class="col-xxl-3 col-md-3">
+                        <label for="city" class="form-label">Sponsor Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="sponsor_name" placeholder="sponsor Name">
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-3">
+                        <label for="city" class="form-label">Sponsor OID</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="sponsor_oid" placeholder="sponsor OID">
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-3">
+                        <label for="city" class="form-label">Sponsor Email</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email">
+                        </div>
+                    </div><div class="col-xxl-3 col-md-3">
+                        <label for="city" class="form-label">Sponsor Phone</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="sponsor_phone" placeholder="sponsor Phone">
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-3 mb-3">
+                            <label for="space" class="form-label">Sponsor Nationality</label>
+                            <select class="form-select js-example-basic-single" id="sponser_nationality" name="sponsor_nationality">
+                                <option value="">---Select Sponsor Nationality---</option>
+                                @foreach($nation as $nationality)
+                                <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                               @endforeach
+                            </select>
+                        </div>
+                            </div>
+                    
+                    <div class="col-xxl-3 col-md-12">
+                        <label for="city" class="form-label">File Attachment</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File" multiple>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-12">
+                        <label for="remark" class="form-label">Remark</label>
+                        <textarea class="form-control" name="attachment_remark">
                         </textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="space" class="form-label">Document Type</label>
-                                        <select class="form-control" id="tenant_document_type"
-                                            name="tenant_document">
-                                            <option value="">-----Select Document Type-----</option>
-                                            <option value="OID">OID</option>
-                                            <option value="CR">CR</option>
-                                            <option value="Passcode">Passcode</option>
-                                        </select>
-                                    </div><br>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-2" id="oid">
-                                            <label for="country" class="form-label">OID</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="oid_document"
-                                                    placeholder="Oid Document Number">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-2" id="cr">
-                                            <label for="state" class="form-label">CR</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="cr_document"
-                                                    placeholder="CR Document">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-2" id="passcode">
-                                            <label for="country" class="form-label">Passcode</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="passcode"
-                                                    placeholder="Passcode Document">
-                                            </div>
-                                        </div>
+                    </div>
                                     </div>
                                 </div>
                                 <div>
@@ -731,7 +883,7 @@
                     $('.individual').hide();
                 });
                 $("#owner_individual_check").click(function() {
-                    var at = $('#form').attr('action', '/admin/customer');
+                    var at = $('#form').attr('action', '/owner-company');
 
                     $('.individual').show();
                     $('#agent_checker').hide();
@@ -740,7 +892,7 @@
 
                 });
                 $("#owner_company_check").click(function() {
-                    var at = $('#form').attr('action', '/admin/customer');
+                    var at = $('#form').attr('action', '/owner-company');
                     $('#compname').show();
                     $('#agent_checker').hide();
                     $('.individual').hide();
@@ -790,4 +942,128 @@
         @endif
     });
 
+</script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+
+<script>
+$(document).ready(function() {
+                $('#qid').hide();
+                $('#cr').hide();
+                $('#passport').hide();
+            $("#tenant_document_type").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'QID') {
+                        $('#qid').show();
+                        $('#cr').hide();
+                        $('#passport').hide();
+
+                    } else if (optionValue == 'CR') {
+                        $('#cr').show();
+                        $('#qid').hide();
+                        $('#passport').hide();
+ 
+                    }else if (optionValue == 'Passport') {
+                        $('#passport').show();
+                        $('#qid').hide();
+                        $('#cr').hide();
+
+                    }
+                });
+            }).change();
+        });
+</script>
+<script>
+$(document).ready(function() {
+    $('#sponser').hide();
+            $("#tenant_type").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'TC') {
+                        $('#sponser').show();
+
+                    } else if (optionValue == 'TP') {
+                        $('#sponser').hide(); 
+                    }
+                    var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                  $('#file_no').val(p);
+                    }
+                });
+                });
+            }).change();
+        });
+</script>
+<script>
+$(document).ready(function() {
+    $('#account_no').hide(); 
+    $('#has_cheque').hide(); 
+                $("#payment_method").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'Cash') {
+                        $('#has_cheque').hide(); 
+                        $('#account_no').hide(); 
+
+                    } else if (optionValue == 'Cheques') {
+                        $('#has_cheque').show();
+                        $('#account_no').hide();
+
+                    }
+                    else if (optionValue == 'Transfer Bank') {
+                        $('#has_cheque').hide(); 
+                        $('#account_no').show();
+
+                    }
+                });
+            }).change();
+        });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#building_name").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-building-details') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        console.log(p);
+                  $('#unit_type').html(p.html);
+                  $('#total_unit').val(p.total_unit);
+                    }
+                });
+            });
+        }).change();
+    });
+</script>
+<script>
+$(document).ready(function() {
+    $('#rental_time').hide(); 
+                $("#rental_period").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'Days') {
+                        $('#rental_time').show();
+                        $('#change_rental_time').text("Days") ;
+                        $('#change_placeholder').attr('placeholder','Enter No Of Days');
+                        } else if (optionValue == 'Months') {
+                        $('#rental_time').show(); 
+                        $('#change_rental_time').text("Months") ;
+                        $('#change_placeholder').attr('placeholder','Enter No Of Months');
+
+                    }
+                    else if (optionValue == 'Years') {
+                        $('#rental_time').show(); 
+                        $('#change_rental_time').text("Years");
+                        $('#change_placeholder').attr('placeholder','Enter No Of Years');
+
+                    }
+                });
+            }).change();
+        });
 </script>

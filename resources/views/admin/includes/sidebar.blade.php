@@ -87,6 +87,7 @@
                     </div>
                 </li>
                 @endcan
+                
                 <!-- Building Management Menu -->
                 @can('Building')
                     <li class="nav-item">

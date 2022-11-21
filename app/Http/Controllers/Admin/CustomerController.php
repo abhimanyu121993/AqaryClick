@@ -42,7 +42,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-
+dd($request);
         // $request->validate([
         //     'first_name' => 'required',
         //     'last_name' => 'required',
@@ -58,16 +58,24 @@ class CustomerController extends Controller
         //     'customer_code'=>'required',
         //     'bank_name'=>'required',
         // ]);
-        $nUser= User::create([
-            'first_name' => $request->first_name,
+        if($request->password==null){
+            $nUser= User::create([
+                'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'address' => $request->address,
             'email'=>$request->email,
             'phone' => $request->phone,
             'password'=>Hash::make(123456),
-            'customer_code' => $request->customer_code,
-            'customer_type'=>$request->customer_type
-        ]);
+            ]);
+        }
+        else{
+            $nUser= User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email'=>$request->email,
+                'phone' => $request->phone,
+                'password'=>Hash::make($request->password)
+            ]);
+        }
         $nUser->assignRole('Owner');
        $user= Owner::create([
             'first_name' => $request->first_name,

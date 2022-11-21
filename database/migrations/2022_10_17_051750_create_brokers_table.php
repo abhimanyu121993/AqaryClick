@@ -15,10 +15,19 @@ return new class extends Migration
     {
         Schema::create('brokers', function (Blueprint $table) {
             $table->id();
-            $table->string('fname');
-            $table->string('lname');
-            $table->string('mobile');
-            $table->string('email');
+            $table->string('broker_agent')->nullable();
+            $table->string('broker_fname')->nullable();
+            $table->string('broker_lname')->nullable();
+            $table->string('broker_id')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
+            $table->string('commission')->nullable();
+            $table->string('broker_type')->nullable();
+            $table->string('Property_type')->nullable();
+            $table->string('unit_ref')->nullable();
+            $table->string('building_name')->nullable();
+            $table->string('password')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });
