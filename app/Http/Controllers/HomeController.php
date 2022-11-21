@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\BankDetail;
 use App\Models\Building;
 use App\Models\CompanyDocument;
-use App\Models\Building;
 use App\Models\ContactUs;
 use App\Models\Nationality;
 use App\Models\Owner;
@@ -76,7 +75,7 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         // $request->validate([
-       
+
         // ]);
         if($request->password_company_ind==null){
             $nUser= User::create([
@@ -125,6 +124,6 @@ class HomeController extends Controller
         }
     }
 
-    
+
 
 }

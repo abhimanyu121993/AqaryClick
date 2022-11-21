@@ -195,7 +195,7 @@
                                 @if (isset($brokeredit))
                                     <option value="{{ $brokeredit->broker_agent }}" selected>{{ $brokeredit->broker_agent}}</option>
                                     @else
-                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="" selected hidden>--Select Type--</option>
                                 <option value="broker">Broker</option>
                                     <option value="agent">Agent</option>
                                     @endif
@@ -248,20 +248,20 @@
                                 @if (isset($brokeredit))
                                     <option value="{{ $brokeredit->broker_type }}" selected>{{ $brokeredit->broker_type}}</option>
                                     @else
-                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="" selected hidden>--Select Type--</option>
                                 <option value="personal">Personal</option>
                                     <option value="company">Company</option>
                                     @endif
                                 </select>
                             </div>
-                          
+
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Property Type</label>
                                 <select class="form-control select2 form-select" id="broker_type" name="boker_type">
                                 @if (isset($brokeredit))
                                     <option value="{{ $brokeredit->property_type }}" selected>{{ $brokeredit->perperty_type}}</option>
                                     @else
-                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="" selected hidden>--Select Type--</option>
                                 <option value="unit">Unit</option>
                                     <option value="building">Building</option>
                                     @endif
@@ -525,7 +525,7 @@
                                     <option value="Passport">Passport</option>
                                 </select>
                             </div>
-                        
+
                             <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                 <label for="country" class="form-label">QID</label>
                                 <div class="input-group">
@@ -584,23 +584,23 @@
                                 <option value="{{$nationality->name}}">{{$nationality->name}}</option>
                                @endforeach
                             </select>
-                        </div>                      
-                                
+                        </div>
+
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Unit Address</label>
                                 <textarea class="form-control" name="unit_address">
                                 </textarea>
                             </div>
-                            
+
                             <div class="col-xxl-3 col-md-3 mb-2">
                             <label for="space" class="form-label">Building Name</label>
                             <select class="form-select js-example-basic-single" id="building_name" name="building_name">
                                 <option value="">--Select Building--</option>
                                 @foreach($building as $buld)
-                                <option value="{{$buld->id}}">{{$buld->name}}</option>
+                                <option value="{{$buld->id ?? ''}}">{{$buld->name ?? ''}}</option>
                                @endforeach
                             </select>
-                        </div> 
+                        </div>
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
                             <div class="input-group">
@@ -709,7 +709,7 @@
                             </select>
                         </div>
                             </div>
-                    
+
                     <div class="col-xxl-3 col-md-12">
                         <label for="city" class="form-label">File Attachment</label>
                         <div class="input-group">
@@ -962,7 +962,7 @@ $(document).ready(function() {
                         $('#cr').show();
                         $('#qid').hide();
                         $('#passport').hide();
- 
+
                     }else if (optionValue == 'Passport') {
                         $('#passport').show();
                         $('#qid').hide();
@@ -983,7 +983,7 @@ $(document).ready(function() {
                         $('#sponser').show();
 
                     } else if (optionValue == 'TP') {
-                        $('#sponser').hide(); 
+                        $('#sponser').hide();
                     }
                     var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
                 $.ajax({
@@ -999,14 +999,14 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('#account_no').hide(); 
-    $('#has_cheque').hide(); 
+    $('#account_no').hide();
+    $('#has_cheque').hide();
                 $("#payment_method").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'Cash') {
-                        $('#has_cheque').hide(); 
-                        $('#account_no').hide(); 
+                        $('#has_cheque').hide();
+                        $('#account_no').hide();
 
                     } else if (optionValue == 'Cheques') {
                         $('#has_cheque').show();
@@ -1014,7 +1014,7 @@ $(document).ready(function() {
 
                     }
                     else if (optionValue == 'Transfer Bank') {
-                        $('#has_cheque').hide(); 
+                        $('#has_cheque').hide();
                         $('#account_no').show();
 
                     }
@@ -1043,7 +1043,7 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('#rental_time').hide(); 
+    $('#rental_time').hide();
                 $("#rental_period").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
@@ -1052,13 +1052,13 @@ $(document).ready(function() {
                         $('#change_rental_time').text("Days") ;
                         $('#change_placeholder').attr('placeholder','Enter No Of Days');
                         } else if (optionValue == 'Months') {
-                        $('#rental_time').show(); 
+                        $('#rental_time').show();
                         $('#change_rental_time').text("Months") ;
                         $('#change_placeholder').attr('placeholder','Enter No Of Months');
 
                     }
                     else if (optionValue == 'Years') {
-                        $('#rental_time').show(); 
+                        $('#rental_time').show();
                         $('#change_rental_time').text("Years");
                         $('#change_placeholder').attr('placeholder','Enter No Of Years');
 

@@ -40,7 +40,7 @@ class BrokerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
        $request->validate([
             // 'first_name' => 'required',
             // 'last_name' => 'required',
