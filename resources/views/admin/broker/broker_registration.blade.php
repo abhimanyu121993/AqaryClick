@@ -24,17 +24,37 @@
                             </ul>
                         </div>
                         @endif
+
                             <div class="row gy-4">
-                                <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">First Name</label>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Broker/Agent</label>
+                                <select class="form-control select2 form-select" id="flag" name="boker_agent">
+                                @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->broker_agent }}" selected>{{ $buildingedit->broker_agent}}</option>
+                                    @else
+                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="broker">Broker</option>
+                                    <option value="agent">Agent</option>
+                                    @endif
+                                </select>
+
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Join Date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="fname" name="first_name" value="{{isset($broker)? $broker->fname: '' }}" placeholder="Enter First Name">
+                                        <input type="text" class="form-control" id="join_date" name="join_date" value="{{Carbon\Carbon::now()->format('d-m-Y') }}" placeholder="Enter Join Date">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Last Name</label>
+                                    <label for="name" class="form-label">Broker Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="lname" name="last_name" value="{{isset($broker)? $broker->lname: '' }}" placeholder="Enter Last Name">
+                                        <input type="text" class="form-control" id="broker_name" name="broker_name" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="Enter Broker Name">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Broker ID</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="broker_id" name="broker_id" value="{{isset($brokeredit)? $broker->broker_id: '' }}" placeholder="Enter Broker Id">
                                     </div>
                                 </div><div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Mobile</label>
@@ -42,9 +62,57 @@
                                         <input type="text" class="form-control" id="mobile" name="mobile" value="{{isset($broker)? $broker->mobile: '' }}" placeholder="Enter Mobile No">
                                     </div>
                                 </div><div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Email</label>
+                                    <label for="name" class="form-label">Broker Commission</label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control" id="email" name="email" value="{{isset($broker)? $broker->email: '' }}" placeholder="abc@gmail.com">
+                                        <input type="email" class="form-control" id="commission" name="commission" value="{{isset($broker)? $broker->commission: '' }}" placeholder="Enter Broker Commission">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Broker Type</label>
+                                <select class="form-control select2 form-select" id="broker_type" name="boker_type">
+                                @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->broker_type }}" selected>{{ $brokeredit->broker_type}}</option>
+                                    @else
+                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="personal">Personal</option>
+                                    <option value="company">Company</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Commission</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{isset($brokeredit)? $brokeredit->commission: '' }}" placeholder="abc@gmail.com">
+                                    </div>
+                                </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="space" class="form-label">Property Type</label>
+                                <select class="form-control select2 form-select" id="broker_type" name="boker_type">
+                                @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->property_type }}" selected>{{ $brokeredit->perperty_type}}</option>
+                                    @else
+                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="unit">Unit</option>
+                                    <option value="building">Building</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Unit Ref.</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($brokeredit)? $brokeredit->unit_ref: '' }}" placeholder="Enter Broker Commission">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Building Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="building_name" name="building_name" value="{{isset($brokeredit)? $brokeredit->building_name: '' }}" placeholder="Enter Building Name">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-3">
+                                    <label for="name" class="form-label">Last Transaction Date</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="last_transaction" name="last_transaction" value="22-12-22" placeholder="Last Transaction Date">
                                     </div>
                                 </div>
                             </div>

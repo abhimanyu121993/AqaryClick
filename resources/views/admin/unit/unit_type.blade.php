@@ -40,7 +40,8 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                            <tr>
+                <thead>            
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Created at</th>
@@ -48,10 +49,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($units as $unit)
-                            <thead>    
+                            @foreach ($units as $unit)      
                             <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td scope="row">{{ $loop->index + 1 }}</td>
                                     <td>{{ $unit->name }}</td>
                                     <td>{{ $unit->created_at }}</td>
                                     <td>

@@ -56,6 +56,7 @@ Route::post('/login',[LoginController::class, 'store'])->name('login');
 
 Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function(){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
+    Route::get('/analytic-dashboard',[AdminController::class,'Analyticdashboard'])->name('analytic-dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     Route::resource('/user', UserController::class);
     Route::resource('/role', RoleController::class);
@@ -119,6 +120,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('electricity',ElectricityController::class);
     Route::get('/isactive/{id}',[UserController::class,'isActive'])->name('activeUser');
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
+    Route::get('receipt',[ContractController::class,'contractReceipt'])->name('Receipt');
+    Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
+
 
 });
 Route::get('/optimize', function(){

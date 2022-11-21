@@ -468,13 +468,14 @@
                 </div>
 
                 <div class="row">
-                        <div class="col-xl-12">
+                        <div class="col-xl-7">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
                                     <h4 class="card-title mb-0 flex-grow-1">Cheque Status</h4>
                                     <div class="flex-shrink-0">
                                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="cheque_status">
-                                            <option value=" " selected>Select Cheque</option>
+                                            <option value=" " selected>Sort By</option>
+                                            <option value="all">All</option>
                                             <option value="valid">Valid Cheque</option>
                                             <option value="bounced">Bounced Cheque</option>
                                             <option value="expired">Expired Cheque</option>
@@ -500,9 +501,9 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
+                                            <tbody id="valid_cheque">
                                             @foreach($cheque as $ch)
-                                                <tr id="valid_cheque" style="display:none;">
+                                                <tr>
                                                     <td>{{$ch->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$ch->cheque_no??''}}</td>
                                                     <td>{{ $ch->cheque_amt??''}} </td>
@@ -513,8 +514,10 @@
                                                     <td>2</td>
                                                 </tr>
                                                 @endforeach
+                                            </tbody>
+                                            <tbody id="postponed_cheque">
                                                 @foreach($postponed_cheque as $pc)
-                                                <tr id="postponed_cheque">
+                                                <tr >
                                                     <td>{{$pc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$pc->cheque_no??''}}</td>
                                                     <td>{{ $pc->cheque_amt??''}} </td>
@@ -524,9 +527,10 @@
                                                     </td>
                                                     <td>2</td>
                                                 </tr>
-                                                @endforeach
+                                                @endforeach</tbody>
+                                                <tbody id="bounced_cheque">
                                                 @foreach($bounce_cheque as $bc)
-                                                <tr id="bounced_cheque">
+                                                <tr>
                                                     <td>{{$bc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$bc->cheque_no??''}}</td>
                                                     <td>{{ $bc->cheque_amt ??''}} </td>
@@ -537,9 +541,10 @@
                                                     <td>2</td>
                                                 </tr>
                                                 @endforeach
-                                                
+                                                </tbody>
+                                                <tbody id="expired_cheque">
                                                 @foreach($expired_cheque as $ec)
-                                                <tr id="expired_cheque">
+                                                <tr>
                                                     <td>{{$ec->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$ec->cheque_no}}</td>
                                                     <td>{{ $ec->cheque_amt }} </td>
@@ -550,8 +555,10 @@
                                                     <td>2</td>
                                                 </tr>
                                                 @endforeach
+                                                </tbody>
+                                                <tbody id="cleared_cheque">
                                                 @foreach($cleared_cheque as $cc)
-                                                <tr id="cleared_cheque">
+                                                <tr >
                                                     <td>{{$cc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$cc->cheque_no??''}}</td>
                                                     <td>{{ $cc->cheque_amt ??''}} </td>
@@ -562,7 +569,8 @@
                                                     <td>2</td>
                                                 </tr>
                                                 @endforeach
-                                                @foreach($security_cheque as $sc)
+                                                </tbody>
+<tbody>                                               @foreach($security_cheque as $sc)
                                                 <tr id="security_cheque">
                                                     <td>{{$sc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$sc->cheque_no??''}}</td>
@@ -601,21 +609,21 @@
 
 </div><!-- end row -->
 
-@endsection
-
-@section('script-area')
 <script>
     $(document).ready(function() {
-        $('#valid_cheque').hide();
-            $('#bounced_cheque').hide();
-            $('#expired_cheque').hide();
-            $('#cleared_cheque').hide();
-            $('#security_cheque').hide();
-            $('#postponed_cheque').hide();
         $("#cheque_status").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
-                if (optionValue == 'valid') {
+                if (optionValue == 'all') {
+            $('#valid_cheque').show();
+            $('#bounced_cheque').show();
+            $('#expired_cheque').show();
+            $('#cleared_cheque').show();
+            $('#security_cheque').show();
+            $('#postponed_cheque').show();
+
+                }
+               else if (optionValue == 'valid') {
             $('#valid_cheque').show();
             $('#bounced_cheque').hide();
             $('#expired_cheque').hide();

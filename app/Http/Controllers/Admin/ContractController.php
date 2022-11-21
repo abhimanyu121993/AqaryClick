@@ -341,4 +341,28 @@ class ContractController extends Controller
         return response()->json($CC);
 
     }
+
+public function contractReceipt(){
+    return view('admin.contract.contract_receipt');
+}
+public function isReject($id)
+{
+    $ass_reject=Contract::find($id);
+
+    if($ass_reject->status==1)
+    {
+        $ass_reject->status=0;
+    }else
+    {
+        $ass_reject->status=true;
+    }
+    if($ass_reject->update()){
+       return 1;
+    }
+    else
+    {
+       return 0;
+
+    }
+}
 }
