@@ -386,6 +386,7 @@
             </div><!-- end col -->
         </div>
         </div>
+        @can('Roles')
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -468,7 +469,7 @@
                 </div>
 
                 <div class="row">
-                        <div class="col-xl-7">
+                        <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
                                     <h4 class="card-title mb-0 flex-grow-1">Cheque Status</h4>
@@ -570,7 +571,8 @@
                                                 </tr>
                                                 @endforeach
                                                 </tbody>
-<tbody>                                               @foreach($security_cheque as $sc)
+           <tbody>           
+                                                @foreach($security_cheque as $sc)
                                                 <tr id="security_cheque">
                                                     <td>{{$sc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$sc->cheque_no??''}}</td>
@@ -597,7 +599,9 @@
 
                                 <!-- <div class="card-body">
                                     <div id="simple_pie_chart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div> -->
-                                </div><!-- end card-body -->
+                                </div>
+                                @endcan
+                                <!-- end card-body -->
                             </div><!-- end card -->
                         </div>
                        

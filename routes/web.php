@@ -127,7 +127,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
 });
 
-Route::post('owner-company',[HomeController::class,'store'])->name('owner-company');
+Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');
 
 Route::get('/optimize', function(){
     Artisan::call('optimize');

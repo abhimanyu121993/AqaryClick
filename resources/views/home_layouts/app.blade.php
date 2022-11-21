@@ -119,18 +119,24 @@
                                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                                     <div class="profile-tabs d-flex justify-content-between mt-1 mt-md-0">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                            <li class="nav-item" role="presentation">
+                                            <!-- <li class="nav-item" role="presentation">
                                                 <button class="nav-link active" id="agent_check" data-bs-toggle="tab"
                                                     data-bs-target="#contact" type="button" role="tab"
                                                     aria-controls="contact" aria-selected="true">Agent</button>
+                                            </li> -->
+                                                <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="owner-customer"
+                                                    data-bs-toggle="tab" data-bs-target="#address" type="button"
+                                                    role="tab" aria-controls="address"
+                                                    aria-selected="false" style="border-bottom: 5px solid blue;">Owner</button>
                                             </li>
-                                            <li class="nav-item" role="presentation">
+                                            <!-- <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="owner_company_check"
                                                     data-bs-toggle="tab" data-bs-target="#address" type="button"
                                                     role="tab" aria-controls="address"
                                                     aria-selected="false">Owner Company</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
+                                            </li> -->
+                                            <!-- <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="owner_individual_check"
                                                     data-bs-toggle="tab" data-bs-target="#order" type="button"
                                                     role="tab" aria-controls="contact"
@@ -140,7 +146,7 @@
                                                 <button class="nav-link" id="tnt_check" data-bs-toggle="tab"
                                                     data-bs-target="#more" type="button" role="tab"
                                                     aria-controls="more" aria-selected="false">Tenant</button>
-                                            </li>
+                                            </li> -->
                                         </ul>
 
                                     </div>
@@ -171,7 +177,7 @@
                 </div>
               </div> -->
 
-                            <form action="{{ route('admin.broker.store') }}" id="form" method="POST"
+                            <form action="{{ route('owner-company') }}" id="form" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @if ($errors->any())
@@ -184,8 +190,8 @@
                         </div>
                         @endif
 
-                                <div class="row gy-4 mb-3 " id="agent_checker">
-                                    <div class="card-header align-items-center d-flex" id="ow">
+                                <!-- <div class="row gy-4 mb-3 " id="agent_checker"> -->
+                                    <!-- <div class="card-header align-items-center d-flex" id="ow">
                                         <hr>
                                         <h4 class="card-title mb-0 flex-grow-1">Agent</h4>
                                     </div>
@@ -280,7 +286,7 @@
                                     </div>
                                 </div>
                                 <!--end col-->
-                                </div>
+                                <!-- </div>
 
                                 <div class="row gy-4 mb-3 individual">
                                     <div class="card-header align-items-center d-flex" id="ow">
@@ -616,7 +622,7 @@
                                 placeholder=" Total Unit " readonly>
                         </div>
                     </div> -->
-                    <div class="col-xxl-3 col-md-3">
+                    <!-- <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="process" name="status">
                                     <option value="" selected hidden>-----Select Status-----</option>
@@ -671,7 +677,7 @@
                               </div>
 
                               <!-- test -->
-                            </div>
+                            <!-- </div>
                             <div id="sponser" class="row">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1">Sponsor</h4>
@@ -724,10 +730,10 @@
                                     </div>
                                 </div>
                                 <div>
-                                </div>
-                        </div>
+                                </div> 
+                        </div>  -->
 
-                    </div>
+                    </div> 
                     <!-- <div class="col-md-3 col-sm-12 col-lg-4 mt-3">
               <div class="justify-content-md-center">
                 <div class="profile-image">
@@ -738,6 +744,173 @@
               <button class="btn btn-primary show-btn">Show</button>
               <button class="btn btn-default hide-btn">Hide</button>
             </div> -->
+            <div class="row gy-4 mb-3">
+                                <div class=" col-md-3">
+                                    <label for="name" class="form-label">First Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label for="owner_name" class="form-label">Last Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label for="incharge_name" class="form-label">Phone number </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="phone"
+                                            placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label for="incharge_name" class="form-label"> Email </label>
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" name="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label for="incharge_name" class="form-label"> Password </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="password"
+                                            placeholder="Enter Password">
+                                    </div>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label for="incharge_name" class="form-label">Customer Code</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_code"
+                                            placeholder="Customer Code">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="space" class="form-label">Customer Type</label>
+                                    <select class="form-control" id="customer" name="customer_type">
+                                        <option value="">-----Select Customer-----</option>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Company">Company</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="remark" class="form-label">Address</label>
+                                    <textarea class="form-control" name="address">
+                                    </textarea>
+                                </div>
+                              
+                            </div>
+
+                    <div class="row gy-4 mb-3" id="cmpname">
+                        <div class="card-header align-items-center d-flex" id="company">
+                            <hr>
+                            <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
+                        </div>
+                        <div class="col-md-3" id="cname">
+                            <label for="country" class="form-label">Company Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="company_name" placeholder="Enter Company Name">
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="cadd">
+                            <label for="state" class="form-label">Company Address</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="company_address" placeholder="Enter Company Address">
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="authp">
+                            <label for="country" class="form-label">Authorized Person</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="authorised_manager"
+                                    placeholder="Enter Authorized Person Name">
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="cmplog">
+                            <label for="state" class="form-label">Company Logo</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="company_logo" placeholder="Company Logo">
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="fname">
+                            <label for="country" class="form-label">Document Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="document_name" placeholder="Document name">
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="fname">
+                            <label for="country" class="form-label">Document</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="document_file" placeholder="Upload File">
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Document Exipry Date</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" name="document_exp_date" placeholder="Expiry Date">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Company Reg. No.</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="reg_num" placeholder="Enter Reg. Number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                                        <label for="space" class="form-label">Company Activity</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="company_activity"
+                                                placeholder="Enter Activity">
+                                        </div>
+                                    </div>
+                    </div>
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1"> Bank Detail</h4>
+                    </div>
+                    <div class="row">
+                        <hr>
+                        <div class="col-md-3 mb-2">
+                            <label for="country" class="form-label">Bank Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="bank_name" placeholder="Bank Name">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="state" class="form-label">Account Number</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="account_number"
+                                    placeholder="Enter Account No">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="state" class="form-label">IBAN No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="iban_no"
+                                    placeholder="Enter IBAN No">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="space" class="form-label">Bank Code</label>
+                            <select class="form-control" id="bank_code" name="bankcode">
+                                <option value="">-----Select Code-----</option>
+                                <option value="ifsc">Ifsc Code</option>
+                                <option value="swift">Swift Code</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2" id="swift">
+                            <label for="country" class="form-label">Swift Code</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="swift" placeholder="Enter Swift Code">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2" id="ifsc">
+                            <label for="country" class="form-label">IFSC Code</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="ifsc" placeholder="Enter Ifsc Code">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
                     <div class="col-md-12 col-sm-12 col-lg-12 mt-3">
                         <div class="row justify-content-md-center">
                             <div class="col-md-2">
@@ -862,75 +1035,75 @@
             <!--Toaster Js-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <script>
-            $(document).ready(function() {
+            // $(document).ready(function() {
                 // $("input[type='radio']").click(function(){
                 //       var radioValue = $(".own_cmp").css('background-color','yellow');
 
                 //           alert(radioValue);
 
                 //   });
-                $('#compname').hide();
-                $('.individual').hide();
-                $('#tenant_check').hide();
-                $('#agent_checker').show();
+        //         $('#compname').hide();
+        //         $('.individual').hide();
+        //         $('#tenant_check').hide();
+        //         $('#agent_checker').show();
 
 
-                $("#tnt_check").click(function() {
-                    var at = $('#form').attr('action', '/admin/tenant');
-                    $('#tenant_check').show();
-                    $('#agent_checker').hide();
-                    $('#compname').hide();
-                    $('.individual').hide();
-                });
-                $("#owner_individual_check").click(function() {
-                    var at = $('#form').attr('action', '/owner-company');
+        //         $("#tnt_check").click(function() {
+        //             var at = $('#form').attr('action', '/admin/tenant');
+        //             $('#tenant_check').show();
+        //             $('#agent_checker').hide();
+        //             $('#compname').hide();
+        //             $('.individual').hide();
+        //         });
+        //         $("#owner_individual_check").click(function() {
+        //             var at = $('#form').attr('action', '/owner-company');
 
-                    $('.individual').show();
-                    $('#agent_checker').hide();
-                    $('#compname').hide();
-                    $('#tenant_check').hide();
+        //             $('.individual').show();
+        //             $('#agent_checker').hide();
+        //             $('#compname').hide();
+        //             $('#tenant_check').hide();
 
-                });
-                $("#owner_company_check").click(function() {
-                    var at = $('#form').attr('action', '/owner-company');
-                    $('#compname').show();
-                    $('#agent_checker').hide();
-                    $('.individual').hide();
-                    $('#tenant_check').hide();
+        //         });
+        //         $("#owner_company_check").click(function() {
+        //             var at = $('#form').attr('action', '/owner-company');
+        //             $('#compname').show();
+        //             $('#agent_checker').hide();
+        //             $('.individual').hide();
+        //             $('#tenant_check').hide();
 
-                    $("#agent_check").click(function() {
-                        $('#agent_checker').show();
-                        $('#compname').hide();
-                        $('#tenant_check').hide();
-                        $('.individual').hide();
-                    });
+        //             $("#agent_check").click(function() {
+        //                 $('#agent_checker').show();
+        //                 $('#compname').hide();
+        //                 $('#tenant_check').hide();
+        //                 $('.individual').hide();
+        //             });
 
 
-                });
-            });
-        </script>
+        //         });
+        //     });
+        // </script>
 
-        <script>
-            //    alert();
-            $(document).ready(function() {
-                // alert("jhgigygyugy");
-                $("#tenant_document_type").change(function() {
-                    $('#oid').hide();
-                    $('#cr').hide();
-                    $('#passcode').hide();
-                    $(this).find("option:selected").each(function() {
-                        var optionValue = $(this).attr("value");
-                        if (optionValue == 'OID') {
-                            $('#oid').show();
-                        } else if (optionValue == 'CR') {
-                            $('#cr').show();
-                        } else if (optionValue == 'Passcode') {
-                            $('#passcode').show();
-                        }
-                    });
-                }).change();
-            });
-        </script>
+        // <script>
+        //     //    alert();
+        //     $(document).ready(function() {
+        //         // alert("jhgigygyugy");
+        //         $("#tenant_document_type").change(function() {
+        //             $('#oid').hide();
+        //             $('#cr').hide();
+        //             $('#passcode').hide();
+        //             $(this).find("option:selected").each(function() {
+        //                 var optionValue = $(this).attr("value");
+        //                 if (optionValue == 'OID') {
+        //                     $('#oid').show();
+        //                 } else if (optionValue == 'CR') {
+        //                     $('#cr').show();
+        //                 } else if (optionValue == 'Passcode') {
+        //                     $('#passcode').show();
+        //                 }
+        //             });
+        //         }).change();
+        //     });
+        // </script>
 
 <script>
     $(document).ready(function() {
@@ -945,7 +1118,7 @@
 </script>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
 
-<script>
+<!-- <script>
 $(document).ready(function() {
                 $('#qid').hide();
                 $('#cr').hide();
@@ -1066,4 +1239,43 @@ $(document).ready(function() {
                 });
             }).change();
         });
-</script>
+</script> -->
+<script>
+        $(document).ready(function() {
+            // alert("jhgigygyugy");
+            $("#customer").change(function() {
+                $('#indi').hide();
+                $('#cmpname').hide();
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    // alert(optionValue);
+                    if (optionValue == 'Individual') {
+                        $('#indi').show();
+                    } else if (optionValue == 'Company') {
+                        $('#cmpname').show();
+                    }
+                });
+            }).change();
+        });
+    </script>
+
+<script>
+        $(document).ready(function() {
+            $("#bank_code").change(function() {
+                $('#ifsc').hide();
+                $('#swift').hide();
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'ifsc') {
+                        $('#ifsc').show();
+                        $('#swift').hide();
+                    } else if (optionValue == 'swift') {
+                        $('#swift').show();
+                        $('#ifsc').hide();
+
+                        
+                    }
+                });
+            }).change();
+        });
+    </script>
