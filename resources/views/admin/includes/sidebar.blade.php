@@ -61,6 +61,7 @@
                     @endcan
                 @endcan
                 <!-- Role/Permission Menu -->
+                @can('Roles')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarDashboards1">
@@ -85,6 +86,7 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
                 <!-- Building Management Menu -->
                 @can('Building')
                     <li class="nav-item">
