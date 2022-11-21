@@ -8,7 +8,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Contract </h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body  table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline  table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
                 <thead>
                             <tr>
@@ -40,6 +40,7 @@
                                 <th scope="col">Attestation Status</th>
                                 <th scope="col">Attestation Expiry</th>
                                 <th scope="col">Contract Status</th>
+                                <th scope="col">Approved/Reject</th>
                                 <th scope="col">Rent Ammount</th>
                                 <th scope="col">Total Invoice</th>
                                 <th scope="col">Guarantees</th>
@@ -80,6 +81,10 @@
                                     <td>{{ $con->attestation_status ??''}}</td>
                                     <td>{{ $con->attestation_expiry ??''}}</td>
                                     <td>{{ $con->contract_status ??''}}</td>
+                                    <td>
+<div class="form-check form-check-primary form-switch">
+                        <input type="checkbox" value="{{$con->id}}" class="form-check-input is_reject" id="is_reject" {{ $con->status==0?'':'checked' }} />
+                    </div></td>
                                     <td>{{ $con->rent_amount ??''}}</td>
                                     <td>{{ $con->total_invoice ??''}}</td>
                                     <td>{{ $con->guarantees ??''}}</td>
@@ -132,4 +137,23 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.10/sweetalert2.all.js" integrity="sha512-+QEgB4wm6Qoshtwrn0TqoNEuufvlGDpN36Ht5yicS4QMZolMZopGsfpMzf+ZaSUb3m7Fw3FwJ2Nu6TCgyuQ0qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('.is_reject').on('click', function() {
+        var id = $(this).val();
+        var newurl = "{{ url('admin/isreject') }}/" + id;
+        $.ajax({
+            url: newurl,
+            method: 'get',
+            beforeSend: function() {
+                $('.is_reject').attr('disabled', 'true');
+            },
+            success: function() {
+                
+                $('.is_reject').removeAttr('disabled')
+
+            }
+        });
+    });
+</script>
 @endsection

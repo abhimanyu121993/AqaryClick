@@ -8,11 +8,12 @@ use App\Models\Nationality;
 use App\Models\Tenant;
 use App\Models\Unit;
 use App\Models\UnitType;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Hash;
 
 class TenantController extends Controller
 {
@@ -86,6 +87,13 @@ class TenantController extends Controller
                 $otherpic[]=$name;
             }
         }
+        $nUser= User::create([
+            'first_name' => $request->tenant_english_name,
+            'email'=>$request->email,
+            'phone' =>$request->tenant_primary_mobile,
+            'password'=>Hash::make(123456),
+        ]);
+        $nUser->assignRole('Tenant');
         $tenant=Tenant::create([
             'file_no'=>$request->file_no,
             'tenant_code'=>$request->tenant_code,

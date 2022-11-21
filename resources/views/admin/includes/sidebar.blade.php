@@ -29,7 +29,12 @@
                         <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Dashboard</span>
                     </a>
                 </li>
-
+                <!-- Analytics Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('admin.analytic-dashboard') }}" role="button" aria-expanded="false">
+                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Analytics Dashboard</span>
+                    </a>
+                </li>
                 <!-- User Menu -->
                 @can('User')
                 @can('User_create')

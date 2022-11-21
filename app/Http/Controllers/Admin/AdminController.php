@@ -26,6 +26,10 @@ class AdminController extends Controller
         $security_cheque=Cheque::where('cheque_status','Security Cheque')->get();
         return view('admin.dashboard',compact('cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque'));
     }
+    public function Analyticdashboard()
+    {
+        return view('admin.analytic_dashboard');
+    }
 
     public function logout()
     {
