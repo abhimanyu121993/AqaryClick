@@ -115,24 +115,24 @@
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="team-member">
                     <div class="team-member-info">
-                        <h4>10K +</h4>
-                        <p>Premium Projects</p>
+                        <h4>{{ $buildings->count().' +' ?? '' }}</h4>
+                        <p>Premium Buildings</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="team-member">
                     <div class="team-member-info">
-                        <h4>4.5+</h4>
-                        <p>Happy Customers</p>
+                        <h4>{{ App\Models\Tenant::count().' +' ?? '' }}</h4>
+                        <p>Happy Tenants</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="team-member">
                     <div class="team-member-info">
-                        <h4>58+</h4>
-                        <p>Premium Projects</p>
+                        <h4>{{ App\Models\Unit::where('unit_status', 3)->count().' +' ?? '' }}</h4>
+                        <p>Vacant Units</p>
                     </div>
                 </div>
             </div>
@@ -169,7 +169,22 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row">
+                    @foreach ($buildings as $building)
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                        <div class="course-card style1">
+                            <div class="course-img">
+                                <a href="#"><img src="{{ asset('upload/building/'. $building->building_pic) }}" alt="Image" style="height: 200px;width:300px;"></a>
+                            </div>
+                            <div class="course-info">
+                                <i class="fa fa-usd ic"></i> <span>{{ $building->building_value ?? '' }}</span>
+                                <h3><a href="#">{{ $building->name ?? '' }}</a></h3>
+                                <p>{{ Illuminate\Support\Str::limit($building->remark ?? '', 40, ' ...')  }} </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @endforeach
+                    {{-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                         <div class="course-card style1">
                             <div class="course-img">
                                 <a href="#"><img src="/front/assets/img/course/course-1.jpg" alt="Image"></a>
@@ -204,22 +219,10 @@
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, ipsum dolor iste! </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                        <div class="course-card style1">
-                            <div class="course-img">
-                                <a href="#"><img src="/front/assets/img/course/course-1.jpg" alt="Image"></a>
-                            </div>
-                            <div class="course-info">
-                                <i class="fa fa-usd ic"></i> <span>2000</span>
-                                <h3><a href="#">Aliva Garden Jardin</a></h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, ipsum dolor iste! </p>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
-            <div class="carousel-item">
+            {{-- <div class="carousel-item">
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                         <div class="course-card style1">
@@ -270,9 +273,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
-        <div class="carousel-item">
+        {{-- <div class="carousel-item">
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                     <div class="course-card style1">
@@ -324,7 +327,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     </div>
     </div>
@@ -420,7 +423,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="row text-center mt-10 name-p">
-                            <small>Deepak</small>
+                            <small>Test Demo</small>
                         </div>
                     </div>
                 </div>
@@ -436,7 +439,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="row text-center name-p">
-                            <small class="">Deepak</small>
+                            <small class="">Test</small>
                         </div>
                     </div>
                 </div>
@@ -454,7 +457,7 @@
 
                     <div class="card-footer">
                         <div class="row text-center name-p">
-                            <small class="">Deepak</small>
+                            <small class="">Test</small>
                         </div>
                     </div>
                 </div>
@@ -475,25 +478,36 @@
         <div class="row justify-content-md-center">
         <div class="col-lg-10 col-md-12 col-sm-12">
                 <div class="team-member">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="contect-form">
                         <h4>Contact Form</h4>
+                        <form action="{{ route('contactus') }}" method="POST">
+                            @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="input-icons">
-                                    <label for="" class="form-label">Your Name</label>
+                                    <label for="name" class="form-label">Your Name</label>
                                     <div class="mb-3">
                                         <i class="fa fa-user icon"></i>
-                                        <input type="text" class="form-control input-field" id="">
+                                        <input type="text" class="form-control input-field" name="name" id="name">
                                     </div>
-                                    <label class="form-label">Contect No.</label>
+                                    <label class="form-label">Contact No.</label>
                                     <div class="mb-3">
                                         <i class="fa fa-phone icon"></i>
-                                        <input type="text" class="form-control input-field">
+                                        <input type="number" name="phone" class="form-control input-field">
                                     </div>
                                     <label class="form-label">Email</label>
                                     <div class="mb-3">
                                         <i class="fa fa-envelope icon"></i>
-                                        <input type="email" class="form-control input-field">
+                                        <input type="email" name="email" class="form-control input-field">
                                     </div>
                                 </div>
                             </div>
@@ -501,13 +515,15 @@
                             <div class="col-md-6">
                                 <div class="input-icons">
                                     <label class="form-label">Message</label>
-                                    <textarea class="form-control input-field" rows="9"></textarea>
+                                    <textarea class="form-control input-field" name="message" rows="9"></textarea>
                                 </div>
                             </div>
                             <div class="term-btn justify-content-md-center mt-2 mb-2">
-                                <button type="button" class="btn btn-primary accept">Send Message</button>
+                                <button type="submit" class="btn btn-primary accept">Send Message</button>
                             </div>
+
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
