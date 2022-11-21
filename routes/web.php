@@ -108,7 +108,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
 
     Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
-    Route::resource('invoice',InvoiceController::class);
+    Route::resource('invoice',InvoiceController::class); 
     Route::resource('tenant',TenantController::class);
     Route::get('fetch-tenant-file-no/{file_no}',[TenantController::class,'fileNumber'])->name('fileNumber');
     Route::get('fetch-tenant-contract-no/{tenant_id}',[ContractController::class,'contractNumber'])->name('contractNumber');
@@ -125,6 +125,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
 
 });
+
+Route::post('owner-company',[HomeController::class,'store'])->name('owner-company');
+
 Route::get('/optimize', function(){
     Artisan::call('optimize');
 });

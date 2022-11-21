@@ -10,4 +10,8 @@ class Unit extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
+    public function unitStatus()
+    {
+        return $this->belongsTo(unitStatus::class, 'unit_status', 'id');
+    }
 }

@@ -34,33 +34,51 @@ class BrokerController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     *by
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        dd($request);
        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'mobile' => 'required',
+            // 'first_name' => 'required',
+            // 'last_name' => 'required',
+            // 'mobile' => 'required',
             'email' => 'required',
 
         ]);
+        if($request->password==null){
         $nUser= User::create([
-            'first_name' =>$request->first_name,
-            'last_name' =>$request->last_name,
+            'first_name' =>$request->broker_fname,
+            'last_name' =>$request->broker_lname,
             'email'=>$request->email,
-            'phone' =>$request->tenant_primary_mobile,
+            'phone' =>$request->mobile,
             'password'=>Hash::make(123456),
         ]);
+    }
+    else{
+        $nUser= User::create([
+            'first_name' =>$request->broker_fname,
+            'last_name' =>$request->broker_lname,
+            'email'=>$request->email,
+            'phone' =>$request->mobile,
+            'password'=>Hash::make($request->password),
+        ]);
+    }
         $nUser->assignRole('Broker');
        $data= Broker::create([
-            'fname' => $request->first_name,
-            'lname' => $request->last_name,
+            'broker_agent' => $request->broker_agent,
+            'broker_fname' => $request->broker_fname,
+            'broker_lname' => $request->broker_lname,
+            'broker_id' => $request->broker_id,
             'mobile' => $request->mobile,
             'email' => $request->email,
-
+            'commission' => $request->commission,
+            'broker_type' => $request->broker_type,
+            'property_type' => $request->property_type,
+            'unit_ref' => $request->unit_ref,
+            'building_name' => $request->building_name,
         ]);
         if($data){
         return redirect()->back()->with('success','Broker has been created successfully.');
@@ -105,16 +123,31 @@ class BrokerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'mobile' => 'required',
+            // 'first_name' => 'required',
+            // 'last_name' => 'required',
+            // 'mobile' => 'required',
             'email' => 'required',
         ]);
+        $nUser= User::where('email',$request->email)->update([
+            'first_name' =>$request->broker_fname,
+            'last_name' =>$request->broker_lname,
+            'email'=>$request->email,
+            'phone' =>$request->mobile,
+            'password'=>Hash::make(123456),
+        ]);
+        $nUser->assignRole('Broker');
         $data=Broker::find($id)->update([
-            'fname' => $request->first_name,
-            'lname' => $request->last_name,
+            'broker_agent' => $request->broker_agent,
+            'broker_fname' => $request->broker_fname,
+            'broker_lname' => $request->broker_lname,
+            'broker_id' => $request->broker_id,
             'mobile' => $request->mobile,
             'email' => $request->email,
+            'commission' => $request->commission,
+            'broker_type' => $request->broker_type,
+            'property_type' => $request->property_type,
+            'unit_ref' => $request->unit_ref,
+            'building_name' => $request->building_name,
 
         ]);
         if($data)
