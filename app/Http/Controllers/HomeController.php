@@ -37,7 +37,11 @@ class HomeController extends Controller
         $nationality = Nationality::get();
         return view('home.properties', compact('nationality'));
     }
-
+    public function regOverView()
+    {
+        $nationality = Nationality::get();
+        return view('home.registration', compact('nationality'));
+    }
     public function propertie_details()
     {
         $nationality = Nationality::get();
@@ -97,6 +101,8 @@ class HomeController extends Controller
             'email'=>$request->email,
             'phone' => $request->phone,
             'password'=>Hash::make(123456),
+            'customer_code' => $request->customer_code,
+            'customer_type'=>$request->customer_type
             ]);
         }
         else{
@@ -105,7 +111,9 @@ class HomeController extends Controller
                 'last_name' => $request->last_name,
                 'email'=>$request->email,
                 'phone' => $request->phone,
-                'password'=>Hash::make($request->password)
+                'password'=>Hash::make($request->password),
+                'customer_code' => $request->customer_code,
+                'customer_type'=>$request->customer_type
             ]);
         }
         $nUser->assignRole('Owner');

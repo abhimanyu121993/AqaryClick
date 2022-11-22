@@ -16,16 +16,15 @@
                         @endif
                             @csrf
                             <div class="row gy-4">
-                            <div class="col-xxl-3 col-md-6">
+                            <!-- <div class="col-xxl-3 col-md-6">
+                                    <label for="name" class="form-label"></label>
+                                    <div class="input-group">
+                                    </div>
+                                </div> -->
+                                <div class="col-xxl-3 col-md-6">
                                     <label for="name" class="form-label">Nationality</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="name" name="name" value="{{isset($nationality)? $nationality->name: '' }}" placeholder="Enter Nationality">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-md-6">
-                                    <label for="name" class="form-label">Description</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="name" name="desc" value="{{isset($nationality)? $nationality->description: '' }}" placeholder="Enter Description">
+                                    <input type="text" class="form-control" id="name" name="name" value="{{isset($nationality)? $nationality->name: '' }}" placeholder="Enter Nationality">
                                         <button class="btn btn-primary" type="submit">{{isset($nationality) ? 'Update' : 'Submit'}}</button>
                                     </div>
                                 </div>
