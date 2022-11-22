@@ -36,10 +36,14 @@
                                         <a href="/contect-us">CONTACT US</a>
                                     </li>
                                     <li class="has-children">
-                                        <a href="/properties">Account</a>
+                                        <a href="#">Account</a>
                                         <ul class="sub-menu">
                                             <li><a href="{{ route('admin') }}">Login</a></li>
-                                            <li><a href="{{url('/registration')}}">Register</a></li>
+                                            <!-- <li><a href="{{url('/registration')}}">Register</a></li> -->
+                                            <li>
+                                            <a type="button"  data-bs-toggle="modal" data-bs-target="#registerdrop">Register Here</a>
+
+                                            </li>
                                             <li><a href="#">Forget Password</a></li>
 
                                         </ul>

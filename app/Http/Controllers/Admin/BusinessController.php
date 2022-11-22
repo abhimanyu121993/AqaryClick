@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\BankDetail;
 use App\Models\CompanyDocument;
-use App\Models\Customer;
 use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
 
-class CustomerController extends Controller
+class BusinessController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +18,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customerDetails=Customer::all();
-        return view('admin.all_customer',compact('customerDetails'));
+        // $customer=Customer::all();
+        return view('admin.business.register');
     }
 
     /**
@@ -32,7 +29,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-      
+        $user=User::get();
+        return view('admin.business.all_customer',compact('user'));
     }
 
     /**
@@ -163,36 +161,33 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $id = Crypt::decrypt($id);
-        $data=Customer::find($id);
-        if($data->delete())
-        {
-            return redirect()->back()->with('success','Data Deleted successfully.');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Data not deleted.');
-        }
-    }
-    public function isActiveCustomer($id)
-    {
-        $ass_active=Customer::find($id);
-   
-        if($ass_active->is_active==1)
-        {
-            $ass_active->is_active=0;
-        }else
-        {
-            $ass_active->is_active=true;
-        }
-        if($ass_active->update()){
-           return 1;
-        }
-        else
-        {
-           return 0;
-    
-        }
+        //
     }
 
+    public function companyOwnerDetail($id)
+    {
+        $company_details=User::find($id);
+        return view('admin.business.customer_company',compact('company_details'));
+    }
+    public function bankdetail()
+    {
+        return view('admin.business.customer_bank_detail');
+    }
+
+    public function showBankDetail($id)
+    {
+        $bank_details=User::find($id);
+        return view('admin.business.customer_bank_detail',compact('bank_details'));
+    }
+
+    public function usercompanydelete($id)
+    {
+        $companydel=OwnerCompany::find($id)->delete();
+        return redirect()->back();
+    }
+    public function userbankdelete($id)
+    {
+        $companydel=BankDetail::find($id)->delete();
+        return redirect()->back();
+    }
 }

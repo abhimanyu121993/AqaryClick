@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/toastr.min.css') }}">
 <style>
     .sub-menu li:hover{
-        background-color: yellow;
+        background-color: gold;
         color: white;
     }
 </style>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12">
-                            <h4>Who You Are ? </h4>
+                            <h4>Customer Registration </h4>
                         </div>
                         <div class="profile-header-nav ">
                             <!-- navbar -->
@@ -129,12 +129,12 @@
                                                     data-bs-target="#contact" type="button" role="tab"
                                                     aria-controls="contact" aria-selected="true">Agent</button>
                                             </li> -->
-                                                <li class="nav-item" role="presentation">
+                                                <!-- <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="owner-customer"
                                                     data-bs-toggle="tab" data-bs-target="#address" type="button"
                                                     role="tab" aria-controls="address"
-                                                    aria-selected="false" style="border-bottom: 5px solid blue;">Owner</button>
-                                            </li>
+                                                    aria-selected="false" style="border-bottom: 5px solid blue;">Customer</button>
+                                            </li> -->
                                             <!-- <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="owner_company_check"
                                                     data-bs-toggle="tab" data-bs-target="#address" type="button"
@@ -160,7 +160,7 @@
                             </nav>
                             <!--/ navbar -->
                         </div>
-                        <div class="col-md-12 mt-3">
+                        <div class="col-md-12 ">
                             <!-- <div class="register">
                 <div class="mb-3 row">
                   <label class="col-sm-4 col-form-label">My Full Name is</label>
@@ -724,54 +724,54 @@
               <button class="btn btn-primary show-btn">Show</button>
               <button class="btn btn-default hide-btn">Hide</button>
             </div> -->
-            <div class="row gy-4 mb-3">
-                                <div class=" col-md-3">
+            <div class="row gy-4 mb-4">
+                                <div class=" col-md-4">
                                     <label for="name" class="form-label">First Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="first_name" placeholder="First Name">
                                     </div>
                                 </div>
-                                <div class=" col-md-3">
+                                <div class=" col-md-4">
                                     <label for="owner_name" class="form-label">Last Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="last_name" placeholder="Last Name">
                                     </div>
                                 </div>
-                                <div class=" col-md-3">
+                                <div class=" col-md-4">
                                     <label for="incharge_name" class="form-label">Phone number </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="phone"
                                             placeholder="Phone Number">
                                     </div>
                                 </div>
-                                <div class=" col-md-3">
+                                <div class=" col-md-6">
                                     <label for="incharge_name" class="form-label"> Email </label>
                                     <div class="input-group">
                                         <input type="email" class="form-control" name="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <div class=" col-md-3">
+                                <div class=" col-md-6">
                                     <label for="incharge_name" class="form-label"> Password </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="password"
                                             placeholder="Enter Password">
                                     </div>
                                 </div>
-                                <div class=" col-md-3">
+                                <!-- <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label">Customer Code</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="customer_code"
                                             placeholder="Customer Code">
                                     </div>
-                                </div>
-                                <div class="col-md-3">
+                                </div> -->
+                                <!-- <div class="col-md-3">
                                     <label for="space" class="form-label">Customer Type</label>
                                     <select class="form-control" id="customer" name="customer_type">
                                         <option value="">-----Select Customer-----</option>
                                         <option value="Individual">Individual</option>
                                         <option value="Company">Company</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12">
                                     <label for="remark" class="form-label">Address</label>
                                     <textarea class="form-control" name="address">
@@ -780,7 +780,7 @@
                               
                             </div>
 
-                    <div class="row gy-4 mb-3" id="cmpname">
+                    <!-- <div class="row gy-4 mb-3" id="cmpname">
                         <div class="card-header align-items-center d-flex" id="company">
                             <hr>
                             <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
@@ -889,7 +889,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div> -->
                     </div>
                     <div class="col-md-12 col-sm-12 col-lg-12 mt-3">
                         <div class="row justify-content-md-center">

@@ -49,7 +49,6 @@
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">nationality</th>
-                                <th scope="col">Description</th>
                                 <th scope="col">Created at</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -59,7 +58,6 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $national->name ?? '' }}</td>
-                                    <td>{{ $national->description ?? '' }}</td>
                                     <td>{{ $national->created_at }}</td>
                                     <td>
                                         <div class="dropdown">

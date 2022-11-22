@@ -104,19 +104,10 @@ $(document).ready(function() {
   function dateTime() {
     var ndate = new Date();
     var hours = ndate.getHours();
-    var message = hours < 12 ? 'Good Morning!' : hours < 18 ? 'Good Afternoon' : 'Good Evening';
-    Swal.fire({
-        position: 'top-end',
-        timer: 5000,
-  title: message,
-  showConfirmButton: false,
-  showClass: {
-    popup: 'animate__animated animate__fadeInDown'
-  },
-  hideClass: {
-    popup: 'animate__animated animate__fadeOutUp'
-  }
-});
+    var message = hours < 12 ? 'Good Morning! ' : hours < 18 ? 'Good Afternoon! ' : 'Good Evening! ';
+toastr.options.timeOut = 10000;       
+            toastr.success(message+"Welcome to AqaryClick");
+     
   }
 
   setTimeout(dateTime, 2000);

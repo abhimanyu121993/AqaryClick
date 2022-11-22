@@ -11,7 +11,7 @@
     <title>Receipt</title>
   </head>
   <body>
-  <center><a href="{{ route('admin.receipt',$conn->contract_code)  }}.pdf" download><button type="button" class="btn btn-lg btn-outline-danger mt-2">Download Report</button></a>
+  <center><a href="{{route('admin.pdf', $conn->contract_code)}}"><button type="button" class="btn btn-lg btn-outline-danger mt-2">Download Report</button></a>
   </center>
     <h1 class="text-center">Lease Agreement (عقد الإيجار)</h1>
     <div class="container">

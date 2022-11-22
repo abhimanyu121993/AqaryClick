@@ -11,11 +11,12 @@ use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-use PDF;
+
 
 class ContractController extends Controller
 {
@@ -367,15 +368,11 @@ public function isReject($id)
 
     }
 }
-// public function generatePDF()
-// {
-//     $data = [
-//         'title' => 'Welcome to ItSolutionStuff.com',
-//         'date' => date('m/d/Y')
-//     ];
-      
-//     $pdf = ::loadView('myPDF', $data);
-
-//     return $pdf->download('itsolutionstuff.pdf');
-// }
+public function generatePDF($contract_code)
+{
+    $conn=Contract::where('contract_code',$contract_code)->first();
+    $pdf = app('dompdf.wrapper');
+    $pdf->loadView('admin.contract.contract_receipt',compact('conn'));
+    return $pdf->download('AqaryClick-Contract-'.$contract_code.'.pdf');
+}
 }
