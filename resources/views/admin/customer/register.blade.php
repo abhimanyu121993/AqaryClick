@@ -1,12 +1,11 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Register Customer'])
-@section('title', 'Register Customer')
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Welcome to AQARYCLICK '])
+@section('title', 'Business Details')
 @section('main-content')
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1"> Personal Detail</h4>
+                    <h4 class="card-title mb-0 flex-grow-1"> Business Details</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                         <form action="{{ route('admin.customer.store') }}" method="POST" enctype="multipart/form-data">
@@ -14,7 +13,7 @@
                             @method('patch')
                         @endif --}}
                             @csrf
-                            <div class="row gy-4 mb-3">
+                            <!-- <div class="row gy-4 mb-3">
                                 <div class=" col-md-3">
                                     <label for="name" class="form-label">First Name</label>
                                     <div class="input-group">
@@ -27,7 +26,59 @@
                                         <input type="text" class="form-control" name="last_name" placeholder="Last Name">
                                     </div>
                                 </div>
+                               
                                 <div class=" col-md-3">
+                                    <label for="incharge_name" class="form-label">Customer Code</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_code"
+                                            placeholder="Customer Code">
+                                    </div>
+                                </div>
+                                
+                               
+                              
+                            </div> -->
+
+                    <div class="row gy-4 mb-3" id="cmpname">
+                        <!-- <div class="card-header align-items-center d-flex" id="company">
+                            <hr>
+                            <h4 class="card-title mb-0 flex-grow-1"> Business Detail</h4>
+                        </div> -->
+                        <div class="col-md-3">
+                                    <label for="space" class="form-label">Customer Type</label>
+                                    <select class="form-control" id="customer" name="customer_type">
+                                        <option value="" selected hidden>-----Select Customer-----</option>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Company">Company</option>
+                                    </select>
+                                </div>
+                        <div class="col-md-3">
+                                    <label for="space" class="form-label">Business Type</label>
+                                    <select class="form-control" id="customer" name="business_type">
+                                        <option value="" selected hidden>-----Select Business-----</option>
+                                        <option value="Product">Product</option>
+                                        <option value="Service">Service</option>
+                                        <option value="Product-service">Both</option>
+                                    </select>
+                                </div>
+                        <div class="col-md-3" id="cname">
+                            <label for="country" class="form-label">Business Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="company_name" placeholder="Enter Business Name">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">CR Reg. No.</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="reg_num" placeholder="Enter CR Reg. Number">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                                    <label for="remark" class="form-label">Address</label>
+                                    <textarea class="form-control" name="address">
+                                    </textarea>
+                                </div>
+                        <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label"> Email </label>
                                     <div class="input-group">
                                         <input type="email" class="form-control" name="email" placeholder="Email">
@@ -40,46 +91,6 @@
                                             placeholder="Phone Number">
                                     </div>
                                 </div>
-                                <div class=" col-md-3">
-                                    <label for="incharge_name" class="form-label">Customer Code</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="customer_code"
-                                            placeholder="Customer Code">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="space" class="form-label">Customer Type</label>
-                                    <select class="form-control" id="customer" name="customer_type">
-                                        <option value="">-----Select Customer-----</option>
-                                        <option value="Individual">Individual</option>
-                                        <option value="Company">Company</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="remark" class="form-label">Address</label>
-                                    <textarea class="form-control" name="address">
-                                    </textarea>
-                                </div>
-                              
-                            </div>
-
-                    <div class="row gy-4 mb-3" id="cmpname">
-                        <div class="card-header align-items-center d-flex" id="company">
-                            <hr>
-                            <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
-                        </div>
-                        <div class="col-md-3" id="cname">
-                            <label for="country" class="form-label">Company Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="company_name" placeholder="Enter Company Name">
-                            </div>
-                        </div>
-                        <div class="col-md-3" id="cadd">
-                            <label for="state" class="form-label">Company Address</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="company_address" placeholder="Enter Company Address">
-                            </div>
-                        </div>
                         <div class="col-md-3" id="authp">
                             <label for="country" class="form-label">Authorized Person</label>
                             <div class="input-group">
@@ -88,7 +99,7 @@
                             </div>
                         </div>
                         <div class="col-md-3" id="cmplog">
-                            <label for="state" class="form-label">Company Logo</label>
+                            <label for="state" class="form-label">Image Logo</label>
                             <div class="input-group">
                                 <input type="file" class="form-control" name="company_logo" placeholder="Company Logo">
                             </div>
@@ -111,16 +122,10 @@
                             <div class="input-group">
                                 <input type="date" class="form-control" name="document_exp_date" placeholder="Expiry Date">
                             </div>
-                        </div>
+                        </div> 
+                       
                         <div class="col-md-3">
-                            <label for="city" class="form-label">Company Reg. No.</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="reg_num" placeholder="Enter Reg. Number">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
                                         <label for="space" class="form-label">Company Activity</label>
-                                        <select class="form-control" id="building" name="company_activity">
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="company_activity"
                                                 placeholder="Enter Activity">
@@ -191,7 +196,7 @@
     <!-- Grids in modals -->
 @endsection
 @section('script-area')
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             // alert("jhgigygyugy");
             $("#customer").change(function() {
@@ -208,7 +213,7 @@
                 });
             }).change();
         });
-    </script>
+    </script> -->
 
 <script>
         $(document).ready(function() {

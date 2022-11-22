@@ -87,6 +87,48 @@
     });
 
 </script> --}}
+<script>
+$(document).ready(function() {
+    $('.show_plan').hide();
+    $("#our_plan").click(function() {
+                $('.hide_reg').hide();
+                $('.show_plan').show();
+
+            
+    }).change();
+});
+</script>
+<script>
+    $(document).ready(function() {
+      
+  function dateTime() {
+    var ndate = new Date();
+    var hours = ndate.getHours();
+    var message = hours < 12 ? 'Good Morning!' : hours < 18 ? 'Good Afternoon' : 'Good Evening';
+    Swal.fire({
+        position: 'top-end',
+        timer: 5000,
+  title: message,
+  showConfirmButton: false,
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+  }
+});
+  }
+
+  setTimeout(dateTime, 2000);
+});
+
+Number.prototype.leadingZeroes = function(len) {
+  return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));
+}
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.10/sweetalert2.all.js" integrity="sha512-+QEgB4wm6Qoshtwrn0TqoNEuufvlGDpN36Ht5yicS4QMZolMZopGsfpMzf+ZaSUb3m7Fw3FwJ2Nu6TCgyuQ0qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 
 </html>

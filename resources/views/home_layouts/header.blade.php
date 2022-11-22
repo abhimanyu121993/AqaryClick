@@ -35,13 +35,23 @@
                                     <li>
                                         <a href="/contect-us">CONTACT US</a>
                                     </li>
-                                    <li>
+                                    <li class="has-children">
+                                        <a href="/properties">Account</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{ route('admin') }}">Login</a></li>
+                                            <li><a href="{{url('/registration')}}">Register</a></li>
+                                            <li><a href="#">Forget Password</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>  <h3 class="day-message"></h3>
+                                    <!-- <li>
                                         <a href="{{ route('admin') }}" class="btn btn-sm login-btn"><span style="color: white;">Sign In</span></a>
 
-                                    </li>
-                                    <li>
+                                    </li> -->
+                                    <!-- <li>
                                         <button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#registerdrop">Register Here</button>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>

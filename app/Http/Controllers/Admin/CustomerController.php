@@ -64,6 +64,8 @@ class CustomerController extends Controller
             'email'=>$request->email,
             'phone' => $request->phone,
             'password'=>Hash::make(123456),
+            'customer_code' => $request->customer_code,
+            'customer_type'=>$request->customer_type
             ]);
         }
         else{
@@ -72,7 +74,9 @@ class CustomerController extends Controller
                 'last_name' => $request->last_name,
                 'email'=>$request->email,
                 'phone' => $request->phone,
-                'password'=>Hash::make($request->password)
+                'password'=>Hash::make($request->password),
+                'customer_code' => $request->customer_code,
+                'customer_type'=>$request->customer_type,
             ]);
         }
         $nUser->assignRole('Owner');
