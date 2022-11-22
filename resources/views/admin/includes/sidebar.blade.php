@@ -326,27 +326,45 @@
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards10">
                             <ul class="nav nav-sm flex-column">
+                                 <!-- customer Management Menu -->
+                                 <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards12345" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="sidebarDashboards12345">
+                             <span
+                                data-key="t-dashboards">Customer Management</span>
+                        </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards12345">
+                                    <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                    <a href="{{ route('admin.customer.index') }}" class="nav-link" data-key="t-analytics">
+                                        Manage Customer </a>
+                                </li>
+                                    </ul>
+                                </div>
+                                </li>
+                                <!-- end customer Module -->
                                 <!-- Business Management Menu -->
                                 <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sidebarDashboards1222" data-bs-toggle="collapse"
                             role="button" aria-expanded="false" aria-controls="sidebarDashboards1222">
-                            <i data-feather="settings" class="icon-dual"></i> <span
+                             <span
                                 data-key="t-dashboards">Business Details</span>
                         </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards1222">
                                     <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.customer.index') }}" class="nav-link"
+                                        <a href="{{ route('admin.business.index') }}" class="nav-link"
                                             data-key="t-analytics">Registration </a>
                                     </li>
                                         <li class="nav-item">
-                                        <a href="{{ route('admin.customer.create') }}" class="nav-link"
+                                        <a href="{{ route('admin.business.create') }}" class="nav-link"
                                             data-key="t-analytics">All Business</a>
                                     </li>
                                     </ul>
                                 </div>
                                 </li>
                                 <!-- end business Module -->
+                               
                                 <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link" data-key="t-analytics">
                                         Staff </a>

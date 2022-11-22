@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\BankController;
 use App\Http\Controllers\admin\BrokerController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
+use App\Http\Controllers\admin\BusinessController;
 use App\Http\Controllers\admin\ChequeController;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ContractController;
@@ -81,12 +82,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('building',BuildingController::class);
     Route::resource('unit',UnitController::class);
     Route::resource('owner',OwnerController::class);
+    Route::resource('business',BusinessController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('contract',ContractController::class);
-    Route::get('bank-details/{id}',[CustomerController::class,'showBankDetail'])->name('showBankDetail');
-    Route::get('company-details/{id}',[CustomerController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
-    Route::get('delete-company-details/{id}',[CustomerController::class,'usercompanydelete'])->name('companydelete');
-    Route::get('delete-bank-details/{id}',[CustomerController::class,'userbankdelete'])->name('bankdelete');
+    Route::get('bank-details/{id}',[BusinessController::class,'showBankDetail'])->name('showBankDetail');
+    Route::get('company-details/{id}',[BusinessController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
+    Route::get('delete-company-details/{id}',[BusinessController::class,'usercompanydelete'])->name('companydelete');
+    Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
     Route::get('fetch-contract-lease/{contract_id}',[ContractController::class,'fetchContractLease'])->name('fetchContractLease');
@@ -121,10 +123,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('electricity-download/{path}',[ElectricityController::class,'getDownload'])->name('getDownload');
     Route::resource('electricity',ElectricityController::class);
     Route::get('/isactive/{id}',[UserController::class,'isActive'])->name('activeUser');
+    Route::get('/isactive-customer/{id}',[CustomerController::class,'isActiveCustomer'])->name('activeCustomer');
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
-    Route::get('generate-pdf', [ContractController::class, 'generatePDF'])->name('contract-pdf');
+    Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
 
 
 });

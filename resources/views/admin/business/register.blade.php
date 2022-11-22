@@ -8,7 +8,7 @@
                     <h4 class="card-title mb-0 flex-grow-1"> Business Details</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
-                        <form action="{{ route('admin.customer.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.business.store') }}" method="POST" enctype="multipart/form-data">
                             {{-- @if (isset($customer))
                             @method('patch')
                         @endif --}}
