@@ -11,7 +11,9 @@
     <title>Receipt</title>
   </head>
   <body>
-    <h1 class="text-center">Lease Agreement</h1>
+  <center><a href="{{ route('admin.receipt',$conn->contract_code)  }}.pdf" download><button type="button" class="btn btn-lg btn-outline-danger mt-2">Download Report</button></a>
+  </center>
+    <h1 class="text-center">Lease Agreement (عقد الإيجار)</h1>
     <div class="container">
   <div class="row">
   <table class="table table-bordered">
@@ -40,29 +42,30 @@
   </tbody> -->
   <thead>
     <tr>
-      <th>Contract No:RE/HTC/0005<br>
-      Customer No:MU/HTC/015</th>
+      <th>Contract No:{{$conn->contract_code }}<br>
+      Customer No:{{Auth::user()->customer_code??'' }}</th>
       <th class="text-right">RE / HTC / 0005:رقم العقد <br>
       MU / HTC / 015: رقم العميل </th>
     </tr>
   </thead>
   <tbody>
   <tr>
-      <td><p>This LEASE AGREEMENT is made as of September 12<sup>th</sup> by and between the following Parties</p><br><b>1. First Party <br>
-Mohamed Mounir</b><br>
+      <td><p>This LEASE AGREEMENT is made as of {{\Carbon\Carbon::parse($conn->created_at)->format('d F Y')}} by and between the following Parties</p><br><b>1. First Party <br>
+      {{ $conn->ownerDetails->first_name??'' }} </b><br>
 QID: 265235158985
-P.O. Box : , Salwa Road, Doha, Qatar<br>
-Tel: 232115012 Fax:2365210 <br>
+P.O. Box :{{ $conn->ownerDetails->pincode??'' }} , {{ $conn->ownerDetails->address??'' }}<br>
+Phone: {{ $conn->ownerDetails->phone??'' }}<br>
+Email:{{ $conn->ownerDetails->email??'' }}<br>
 Hereinafter referred to as (<b>The Lessor</b>)<br>
 <b class="text-center">And</b><br>
 <b>2. Second Party <br>
-M/s, /Mr. Karak Mqanes C. R. No (61446)</b><br>
+M/s, /Mr. {{ $conn->tenantDetails->tenant_english_name??'' }} C. R. No ({{ $conn->contract_code??'' }})</b><br>
 Represented by:<br>
-Mr:ahamad Khan<br>
+Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
 QID: 265235158985
-P.O. Box : , Salwa Road, Doha, Qatar<br>
-Tel: 232115012 mob:2365210 <br>
-Email:<br>
+P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
+phone1:{{ $conn->tenantDetails->tenant_primary_mobile??'' }} , phone2:{{ $conn->tenantDetails->tenant_secondary_mobile??'' }} <br>
+Email:{{ $conn->tenantDetails->email??'' }}<br>
 Hereinafter referred to as (<b>The Lessor</b> )
 
 </td>

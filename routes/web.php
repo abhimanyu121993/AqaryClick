@@ -47,6 +47,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get("/","index");
     Route::get("/about-us","about");
     Route::get("/properties","properties");
+    Route::get("/registration","regOverView");
     Route::get('/propertie-details','propertie_details');
     Route::get("/contect-us","contect");
     Route::post("/contact","contactSubmit")->name('contactus');
@@ -121,8 +122,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('electricity',ElectricityController::class);
     Route::get('/isactive/{id}',[UserController::class,'isActive'])->name('activeUser');
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
-    Route::get('receipt',[ContractController::class,'contractReceipt'])->name('Receipt');
+    Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
+    Route::get('generate-pdf', [ContractController::class, 'generatePDF'])->name('contract-pdf');
 
 
 });

@@ -1,22 +1,22 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Buildings'])
-@section('title', 'Manage Buildings')
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Manage Property'])
+@section('title', 'Manage Property')
 @section('main-content')
 
 <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Building</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
                 </div><!-- end card header -->
                 <div class="card-body ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
-                                <th scope="col"> Building No</th>
-                                <th scope="col"> Building Code</th>
-                                <th scope="col"> Building Type</th>
-                                <th scope="col">Building Name</th>
-                                <th scope="col">Building Cost</th>
+                                <th scope="col"> Property No</th>
+                                <th scope="col"> Property Code</th>
+                                <th scope="col"> Property Type</th>
+                                <th scope="col">Property Name</th>
+                                <th scope="col">Property Cost</th>
                                 <th scope="col">Construction Date</th>
                                 <th scope="col">Person Incharge</th>
                                 <th scope="col">Person Job</th>
@@ -26,7 +26,7 @@
                                 <th scope="col">Area</th>
                                 <th scope="col">Pincode</th>
 
-                                <th scope="col">Building Receiving Date</th>
+                                <th scope="col">Property Receiving Date</th>
                                 <th scope="col">Owner Name</th>
                                 <th scope="col">Lessor's Name</th>
                                 <th scope="col">Image</th>

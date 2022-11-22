@@ -209,32 +209,8 @@
                         </div>
                     </li>
                 @endcan
-                <!-- Customer Management Menu -->
-                @can('Customer')
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarDashboards7" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarDashboards7">
-                            <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Customer
-                                Management</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="sidebarDashboards7">
-                            <ul class="nav nav-sm flex-column">
-                                @can('Customer_create')
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.customer.index') }}" class="nav-link"
-                                            data-key="t-analytics">Registration </a>
-                                    </li>
-                                @endcan
-                                @can('Customer_read')
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.customer.create') }}" class="nav-link"
-                                            data-key="t-analytics">All Customer</a>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-                @endcan
+                
+                
                 <!-- Contract Management Menu -->
                 @can('Contract')
                     <li class="nav-item">
@@ -346,10 +322,31 @@
                         <a class="nav-link menu-link" href="#sidebarDashboards10" data-bs-toggle="collapse"
                             role="button" aria-expanded="false" aria-controls="sidebarDashboards10">
                             <i data-feather="settings" class="icon-dual"></i> <span
-                                data-key="t-dashboards">Settings</span>
+                                data-key="t-dashboards">AqaryClick Options</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards10">
                             <ul class="nav nav-sm flex-column">
+                                <!-- Business Management Menu -->
+                                <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards1222" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="sidebarDashboards1222">
+                            <i data-feather="settings" class="icon-dual"></i> <span
+                                data-key="t-dashboards">Business Details</span>
+                        </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards1222">
+                                    <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.customer.index') }}" class="nav-link"
+                                            data-key="t-analytics">Registration </a>
+                                    </li>
+                                        <li class="nav-item">
+                                        <a href="{{ route('admin.customer.create') }}" class="nav-link"
+                                            data-key="t-analytics">All Business</a>
+                                    </li>
+                                    </ul>
+                                </div>
+                                </li>
+                                <!-- end business Module -->
                                 <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link" data-key="t-analytics">
                                         Staff </a>

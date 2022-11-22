@@ -14,6 +14,14 @@ class Contract extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
+    public function ownerDetails()
+    {
+        return $this->belongsTo(Owner::class, 'lessor', 'id');
+    }
+    public function lessorDetails()
+    {
+        return $this->belongsTo(Owner::class, 'approved_by', 'id');
+    }
 
     public function getTotalContractAttribute(){   
        $rent=$this->rent_amount;

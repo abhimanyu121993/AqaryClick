@@ -36,7 +36,12 @@
     <!-- custom Css-->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/toastr.min.css') }}">
-
+<style>
+    .sub-menu li:hover{
+        background-color: yellow;
+        color: white;
+    }
+</style>
 </head>
 
 <body>
@@ -85,7 +90,7 @@
             </div>
         </div>
     </div>
-
+  
     <!-- register modal -->
     {{-- @if (Session::has('success'))
         <p style="color:green">{{ Session::get('success') }}</p>
@@ -582,15 +587,7 @@
                                     <input type="number" class="form-control" name="post_office" placeholder="Post Office">
                                 </div>
                             </div>
-                        <div class="col-xxl-3 col-md-3 mb-2">
-                            <label for="space" class="form-label">Tenant Nationality</label>
-                            <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
-                                <option value="">--Select Tenant Nationality--</option>
-                                @foreach($nation as $nationality)
-                                <option value="{{$nationality->name}}">{{$nationality->name}}</option>
-                               @endforeach
-                            </select>
-                        </div>
+                        
 
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Unit Address</label>
@@ -598,15 +595,7 @@
                                 </textarea>
                             </div>
 
-                            <div class="col-xxl-3 col-md-3 mb-2">
-                            <label for="space" class="form-label">Building Name</label>
-                            <select class="form-select js-example-basic-single" id="building_name" name="building_name">
-                                <option value="">--Select Building--</option>
-                                @foreach($building as $buld)
-                                <option value="{{$buld->id ?? ''}}">{{$buld->name ?? ''}}</option>
-                               @endforeach
-                            </select>
-                        </div>
+                            
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
                             <div class="input-group">
@@ -705,16 +694,7 @@
                             <input type="text" class="form-control" name="sponsor_phone" placeholder="sponsor Phone">
                         </div>
                     </div>
-                    <div class="col-xxl-3 col-md-3 mb-3">
-                            <label for="space" class="form-label">Sponsor Nationality</label>
-                            <select class="form-select js-example-basic-single" id="sponser_nationality" name="sponsor_nationality">
-                                <option value="">---Select Sponsor Nationality---</option>
-                                @foreach($nation as $nationality)
-                                <option value="{{$nationality->id}}">{{$nationality->name}}</option>
-                               @endforeach
-                            </select>
-                        </div>
-                            </div>
+                   
 
                     <div class="col-xxl-3 col-md-12">
                         <label for="city" class="form-label">File Attachment</label>

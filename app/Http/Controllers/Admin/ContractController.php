@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
+use PDF;
 
 class ContractController extends Controller
 {
@@ -141,7 +142,7 @@ class ContractController extends Controller
             'remark'=>$request->remark,
         ]);
         if($data){
-        return redirect()->back()->with('success','Contract Registration has been created successfully.');
+        return redirect(route('receipt',$request->contract_code))->with('success','Contract Registration has been created successfully.');
         }
         else{
             return redirect()->back()->with('error','Contract Registration not created.');
@@ -342,8 +343,9 @@ class ContractController extends Controller
 
     }
 
-public function contractReceipt(){
-    return view('admin.contract.contract_receipt');
+public function contractReceipt($contract_code){
+    $conn=Contract::where('contract_code',$contract_code)->first();
+    return view('admin.contract.contract_receipt',compact('conn'));
 }
 public function isReject($id)
 {
@@ -365,4 +367,15 @@ public function isReject($id)
 
     }
 }
+// public function generatePDF()
+// {
+//     $data = [
+//         'title' => 'Welcome to ItSolutionStuff.com',
+//         'date' => date('m/d/Y')
+//     ];
+      
+//     $pdf = ::loadView('myPDF', $data);
+
+//     return $pdf->download('itsolutionstuff.pdf');
+// }
 }
