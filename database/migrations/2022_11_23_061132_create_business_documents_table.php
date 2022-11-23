@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bank_details', function (Blueprint $table) {
+        Schema::create('business_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('business_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('bank_name')->nullable();
-            $table->string('account_number')->nullable();
-            $table->string('iban_no')->nullable();
-            $table->string('ifsc')->nullable();
-            $table->string('swift')->nullable();
-            $table->softDeletes();
+            $table->string('document_name')->nullable();
+            $table->string('file')->nullable();
+            $table->timestamp('expire_date')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_details');
+        Schema::dropIfExists('business_documents');
     }
 };

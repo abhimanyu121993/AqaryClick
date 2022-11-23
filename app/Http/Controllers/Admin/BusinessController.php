@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\BankDetail;
+use App\Models\BusinessDetail;
+use App\Models\BusinessDocument;
 use App\Models\CompanyDocument;
 use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessController extends Controller
 {
@@ -18,7 +21,6 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        // $customer=Customer::all();
         return view('admin.business.register');
     }
 
@@ -29,7 +31,13 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        $user=User::get();
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $user=BusinessDetail::all();
+        }
+        else{
+            $user=BusinessDetail::where('user_id',Auth::user()->id)->get();
+        }
         return view('admin.business.all_customer',compact('user'));
     }
 
@@ -56,15 +64,6 @@ class BusinessController extends Controller
         //     'customer_code'=>'required',
         //     'bank_name'=>'required',
         // ]);
-       $user= Owner::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'address' => $request->address,
-            'email'=>$request->email,
-            'phone' => $request->phone,
-            'customer_code' => $request->customer_code,
-            'customer_type'=>$request->customer_type
-        ]);
         $logo='';
         if($request->hasFile('company_logo'))
         {
@@ -72,17 +71,22 @@ class BusinessController extends Controller
             $request->company_logo->move(public_path('company/logo/'),$company);
             $logo = 'company/logo/'.$company;
         }
-        $company=OwnerCompany::create([
-            'user_id'=>$user->id,
-            'company_name'=>$request->company_name,
-            'company_address'=>$request->company_address,
-            'authorised_manager'=>$request->authorised_manager,
-            'company_activity'=>$request->company_activity,
-            'company_logo'=>$logo,
+       $business= BusinessDetail::create([
+            'customer_type' => $request->customer_type,
+            'business_type' => $request->business_type,
+            'business_name' => $request->business_name,
+            'cr_no'=>$request->cr_reg_no,
+            'address' => $request->address,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'authorized_person'=>$request->authorized_person,
+            'logo'=>$logo,
+            'activity'=>$request->company_activity,
+
         ]);
         $bankdata=BankDetail::create([
-            'user_id'=>$user->id,
-            'company_id'=>$company->id,
+            'user_id'=>Auth::user()->id,
+            'business_id'=>$business->id,
             'bank_name'=>$request->bank_name,
             'account_number'=>$request->account_number,
             'ifsc'=>$request->ifsc,
@@ -96,18 +100,17 @@ class BusinessController extends Controller
             $request->document_file->move(public_path('company/document/'),$document);
             $document_img= 'company/document/'.$document;
         }
-        $company_document=CompanyDocument::create([
-            'company_id'=>$company->id,
-            'document_file'=>$document,
-            'serial_number'=>$request->serial_number,
-            'document_exp_date'=>$request->document_exp_date,
-            'document_name'=>$request->document_name
+        $company_document=BusinessDocument::create([
+            'business_id'=>$business->id,
+            'document_name'=>$request->document_name,
+            'file'=>$document,
+            'expire_date'=>$request->document_exp_date,
         ]);
-        if($user){
-        return redirect()->back()->with('success','Customer has been created successfully.');
+        if($business){
+        return redirect()->back()->with('success','Business has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Customer not created.');
+            return redirect()->back()->with('error','Business not created.');
         }
         if($bankdata)
         {

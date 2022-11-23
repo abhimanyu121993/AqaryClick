@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name')->nullable();
             $table->string('building_code')->nullable();
             $table->string('owner_name')->nullable();
@@ -30,7 +31,6 @@ return new class extends Migration
             $table->string('building_age')->nullable();
             $table->string('ownership_type')->nullable();
             $table->string('ownership_no')->nullable();
-
             $table->string('land_size_foot')->nullable();
             $table->string('price_foot')->nullable();
             $table->string('total_land')->nullable();

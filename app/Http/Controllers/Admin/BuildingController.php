@@ -10,6 +10,7 @@ use App\Models\BuildingType;
 use App\Models\City;
 use App\Models\Nationality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 
@@ -38,7 +39,14 @@ class BuildingController extends Controller
      */
     public function create()
     {
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
         $buildings=Building::all();
+        }
+        else{
+            $buildings=Building::where('user_id',Auth::user()->id)->get();
+
+        }
         return view('admin.building.all_building',compact('buildings'));
     }
 
@@ -105,6 +113,7 @@ class BuildingController extends Controller
             }
         }
        $data= Building::create([
+            'user_id' => Auth::user()->id,
             'building_code' => $request->building_code,
             'name' => $request->building_name,
             'owner_name'=>$request->owner_name,
@@ -254,6 +263,7 @@ class BuildingController extends Controller
                     
                  }
        $data= Building::find($id)->update([
+            'user_id' => Auth::user()->id,
             'building_code' => $request->building_code,
             'name' => $request->building_name,
             'owner_name'=>$request->owner_name,
