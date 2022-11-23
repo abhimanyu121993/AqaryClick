@@ -14,4 +14,8 @@ class Unit extends Model
     {
         return $this->belongsTo(unitStatus::class, 'unit_status', 'id');
     }
+    public function buildingDetails()
+    {
+        return $this->belongsTo(Building::class, 'building_id', 'id');
+    }
 }

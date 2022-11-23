@@ -8,7 +8,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body table-responsive">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>

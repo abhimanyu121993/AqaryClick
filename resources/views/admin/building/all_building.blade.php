@@ -9,7 +9,8 @@
                     <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
                 </div><!-- end card header -->
                 <div class="card-body ">
-                <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
+                    <div class='table-responsive'>
+                <table id="example" class="table table-striped table-bordered " style="width:100%">                        <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col"> Property No</th>
@@ -25,7 +26,6 @@
                                 <th scope="col">City</th>
                                 <th scope="col">Area</th>
                                 <th scope="col">Pincode</th>
-
                                 <th scope="col">Property Receiving Date</th>
                                 <th scope="col">Owner Name</th>
                                 <th scope="col">Lessor's Name</th>
@@ -86,6 +86,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

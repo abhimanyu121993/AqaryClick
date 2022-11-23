@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('mobile');
             $table->string('email');
-            $table->string('is_active')->default(0);
+            $table->string('is_active')->default(1);
             $table->longText('address');
             $table->softDeletes();
             $table->timestamps();
