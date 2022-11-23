@@ -10,4 +10,8 @@ class UnitStatus extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+    public function unitStatusDetails()
+    {
+        return $this->hasMany(Unit::class, 'unit_status', 'id');
+    }
 }
