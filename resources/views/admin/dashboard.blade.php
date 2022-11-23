@@ -16,10 +16,10 @@
                                     <i data-feather="users" class="text-primary"></i>
                                 </span>
                             </div>
-                            <a href="{{ route('admin.customer.create') }}">  <div class="flex-grow-1 overflow-hidden ms-3">
+                            <a href="{{ route('admin.customer.index') }}">  <div class="flex-grow-1 overflow-hidden ms-3">
                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Active Customer</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\User::count() }}">{{ App\Models\User::count() }}</span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\Customer::where('is_active',1)->count() }}">{{ App\Models\Customer::where('is_active',1)->count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>5.02 %</span> --}}
                                 </div>
                                 {{-- <p class="text-muted text-truncate mb-0">Projects this month</p> --}}
@@ -55,10 +55,10 @@
                                     <i data-feather="users" class="text-warning"></i>
                                 </span>
                             </div>
-                            <a href="{{ route('admin.customer.create') }}"><div class="flex-grow-1 ms-3">
+                            <a href="{{ route('admin.customer.index') }}"><div class="flex-grow-1 ms-3">
                                 <p class="text-uppercase fw-medium text-muted mb-3">Registered Customers</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\User::count() }}">{{ App\Models\User::count() }}</span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="{{ App\Models\Customer::count() }}">{{ App\Models\Customer::count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span> --}}
                                 </div>
                                 {{-- <p class="text-muted mb-0">Leads this month</p> --}}
