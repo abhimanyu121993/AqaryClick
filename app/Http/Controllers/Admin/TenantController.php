@@ -11,6 +11,7 @@ use App\Models\UnitType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,7 @@ class TenantController extends Controller
     {
         $unit=UnitType::all();
         $nation=Nationality::all();
-        $building=Building::all();
+        $building=Building::where('user_id',Auth::user()->id)->get();
         return view('admin.tenant.tenantregister',compact('nation','unit','building'));
     }
 
@@ -37,8 +38,13 @@ class TenantController extends Controller
      */
     public function create()
     {
-
-        $all_tenant=Tenant::get();
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $all_tenant=Tenant::all();
+        }
+        else{
+            $all_tenant=Tenant::where('user_id',Auth::user()->id)->get();
+        }
         return view('admin.tenant.tenats',compact('all_tenant'));
     }
 
@@ -105,6 +111,7 @@ class TenantController extends Controller
         }
         $nUser->assignRole('Tenant');
         $tenant=Tenant::create([
+            'user_id'=>Auth::user()->id,
             'file_no'=>$request->file_no,
             'tenant_code'=>$request->tenant_code,
             'tenant_english_name'=>$request->tenant_english_name,

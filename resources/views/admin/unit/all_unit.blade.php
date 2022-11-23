@@ -8,7 +8,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Unit</h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;">
                 <thead>            
                 <tr>
@@ -30,7 +30,7 @@
                             @foreach ($units as $unit)
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $unit->building_name }}</td>
+                                    <td>{{ $unit->buildingDetails->name??'' }}</td>
                                     <td>{{ $unit->unit_no }}</td>
                                     <td>{{ $unit->unit_type }}</td>
                                     <td>{{ $unit->unit_status }}</td>

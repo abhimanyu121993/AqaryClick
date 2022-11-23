@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('file_no')->nullable();
             $table->string('tenant_code')->nullable();
             $table->string('tenant_english_name')->nullable();

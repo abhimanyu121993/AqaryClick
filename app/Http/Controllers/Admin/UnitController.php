@@ -11,6 +11,7 @@ use App\Models\UnitFloor;
 use App\Models\UnitStatus;
 use App\Models\UnitType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class UnitController extends Controller
@@ -22,7 +23,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units=Building::all();
+        $units=Building::where('user_id',Auth::user()->id)->get();
         $units2=UnitType::all();
         $units3=UnitStatus::all();
         $units4=UnitFloor::all();
@@ -36,8 +37,14 @@ class UnitController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $units=Unit::all();
+        {
+            $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $units=Unit::all();
+        }
+        else{
+        $units=Unit::where('user_id',Auth::user()->id)->get();
+        }
         return view('admin.unit.all_unit',compact('units'));    }
 
     /**

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('electricities', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('building_name')->nullable();
             $table->string('unit_no')->nullable();
             $table->string('unit_type')->nullable();

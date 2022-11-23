@@ -10,6 +10,7 @@ use App\Models\Tenant;
 use App\Models\Unit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Response;
 
@@ -22,7 +23,15 @@ class ElectricityController extends Controller
      */
     public function index()
     {
-        $build=Building::all();
+        
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $build=Building::all();
+        }
+        else{
+            $build=Building::where('user_id',Auth::user()->id)->get();
+
+        }
         $electric_invoice=Electricity::latest()->first();
         $electric=Electricity::all();
         return view('admin.electricity.electric',compact('electric','build','electric_invoice'));  
@@ -36,7 +45,15 @@ class ElectricityController extends Controller
     public function create()
     {
         $electric_invoice=Electricity::latest()->first();
-        $electric=Electricity::all();
+       
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $electric=Electricity::all();
+        }
+        else{
+            $electric=Electricity::where('user_id',Auth::user()->id)->get();
+
+        }
         return view('admin.electricity.all_electricity',compact('electric','electric_invoice'));  
     }
 

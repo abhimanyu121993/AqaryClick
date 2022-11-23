@@ -64,13 +64,13 @@
                         <div class="col-md-3" id="cname">
                             <label for="country" class="form-label">Business Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="company_name" placeholder="Enter Business Name">
+                                <input type="text" class="form-control" name="business_name" placeholder="Enter Business Name">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="city" class="form-label">CR Reg. No.</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="reg_num" placeholder="Enter CR Reg. Number">
+                                <input type="text" class="form-control" name="cr_reg_no" placeholder="Enter CR Reg. Number">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -94,7 +94,7 @@
                         <div class="col-md-3" id="authp">
                             <label for="country" class="form-label">Authorized Person</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="authorised_manager"
+                                <input type="text" class="form-control" name="authorized_person"
                                     placeholder="Enter Authorized Person Name">
                             </div>
                         </div>
