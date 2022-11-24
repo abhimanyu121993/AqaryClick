@@ -346,10 +346,23 @@
                                         placeholder="Enter Attestation Expiry">
                                 </div>
                             </div>
-                          
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="name" class="form-label">Currency</label>
+                                <select class="form-control select2 form-select" name="currency" id="currency">
+                                    @if (isset($contractedit))
+                                    <option value="{{ $contractedit->currency }}" selected>
+                                        {{ $contractedit->currency }}</option>
+                                    @else
+                                    <option value="" selected hidden>-----Select Currency-----</option>
+                                    @foreach($currency as $c)
+                                    <option value="{{$c->code}}">{{$c->code??''}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Rent Amount</label>
-                                <div class="input-group">
+                                 <div class="input-group">
                                     <input type="text" class="form-control" id="rent_amount" name="rent_amount"
                                         value="{{ isset($contractedit) ? $contractedit->rent_amount : '' }}"
                                         placeholder="Enter Rent Amount">

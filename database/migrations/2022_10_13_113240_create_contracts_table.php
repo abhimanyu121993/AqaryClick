@@ -55,6 +55,7 @@ return new class extends Migration
             $table->string('status')->default(0);
             $table->string('currency')->default();
             $table->string('overdue')->default(0);
+            $table->string('currency')->default('QAR');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,11 +2,11 @@ var paymentSign = "$";
 
 function otherPayment() {
     var e = document.getElementById("choices-payment-currency").value;
-    paymentSign = e, Array.from(document.getElementsByClassName("product-line-price")).forEach(function(e) {
+    paymentSign = e, Array.from(document.getElementsByClassName("product-line-price")).forEach(function (e) {
         isUpdate = e.value.slice(1), e.value = paymentSign + isUpdate
     }), recalculateCart()
 }
-Array.from(document.getElementsByClassName("product-line-price")).forEach(function(e) {
+Array.from(document.getElementsByClassName("product-line-price")).forEach(function (e) {
     e.value = paymentSign + "0.00"
 });
 var isPaymentEl = document.getElementById("choices-payment-currency"),
@@ -17,23 +17,23 @@ var isPaymentEl = document.getElementById("choices-payment-currency"),
 function isData() {
     var e = document.getElementsByClassName("plus"),
         t = document.getElementsByClassName("minus");
-    e && Array.from(e).forEach(function(n) {
-        n.onclick = function(e) {
+    e && Array.from(e).forEach(function (n) {
+        n.onclick = function (e) {
             var t;
             parseInt(n.previousElementSibling.value) < 10 && (e.target.previousElementSibling.value++, t = n.parentElement.parentElement.previousElementSibling.querySelector(".product-price").value, e = n.parentElement.parentElement.nextElementSibling.querySelector(".product-line-price"), updateQuantity(n.parentElement.querySelector(".product-quantity").value, t, e))
         }
-    }), t && Array.from(t).forEach(function(n) {
-        n.onclick = function(e) {
+    }), t && Array.from(t).forEach(function (n) {
+        n.onclick = function (e) {
             var t;
             1 < parseInt(n.nextElementSibling.value) && (e.target.nextElementSibling.value--, t = n.parentElement.parentElement.previousElementSibling.querySelector(".product-price").value, e = n.parentElement.parentElement.nextElementSibling.querySelector(".product-line-price"), updateQuantity(n.parentElement.querySelector(".product-quantity").value, t, e))
         }
     })
 }
-document.querySelector("#profile-img-file-input").addEventListener("change", function() {
+document.querySelector("#profile-img-file-input").addEventListener("change", function () {
     var e = document.querySelector(".user-profile-image"),
         t = document.querySelector(".profile-img-file-input").files[0],
         n = new FileReader;
-    n.addEventListener("load", function() {
+    n.addEventListener("load", function () {
         e.src = n.result
     }, !1), t && n.readAsDataURL(t)
 }), flatpickr("#date-field", {
@@ -46,14 +46,24 @@ function new_link() {
     count++;
     var e = document.createElement("tr");
     e.id = count, e.className = "product";
-    var t = '<tr><th scope="row" class="product-id">' + count + '</th><td class="text-start"><div class="mb-2"><input type="date" class="form-control" id="deposite_date-"'+ count +'" name="deposite_date[]"/>\
-    </div><textarea class="form-control" id="cheque_remark-"'+count+'" rows="3" cols="50" placeholder="Product Details" name="cheque_remark[]"></textarea>\
-    </div></td><td><input type="text" class="form-control" id="cheque_amt-"'+ count +'"  placeholder="Enter Cheque Amount"name="cheque_amt[]" >\<input type="file" class="form-control mt-1" id="file-"'+ count +'" name="file[]">\
-    </td><td><div class="input-step"><input type="text" class="form-control product-line-price" id="productPrice-"'+ count +'" placeholder="Check No" name="cheque_no[]" /></div></td><td class="text-end"><div><input type="text" class="form-control product-line-price" id="bank_name-"'+ count +'" placeholder="Bank Name" name="bank_name[]"  />\
+    var t = '<tr><th scope="row" class="product-id">' + count + '</th><td class="text-start"><div class="mb-2"><input type="date" class="form-control" id="deposite_date-"' + count + '" name="deposite_date[]"/>\
+    </div><textarea class="form-control" id="cheque_remark-"'+ count + '" rows="3" cols="50" placeholder="Product Details" name="cheque_remark[]"></textarea>\
+    </div></td><td class="text-end"><div>  <select class="form-control select2 form-select .currency" name="currency[]" id="currency">\
+    \<input type="file" class="form-control mt-1" id="file-"'+ count + '" name="file[]">\
+    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price cheque_amt" id="cheque_amt"" placeholder="Enter cheque Amount" name="cheque_no[]"  />\
+    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price sar_amt" id="sar_amt"" placeholder="Amount in SAR" name="cheque_no[]"  readonly/>\
+    </div></td><td class="text-end"><div>  <select class="form-control select2 form-select" name="cheque_status" id="currency"><option value="" selected hidden>Select Currency</option> <option value="Valid">Valid</option>\
+    <option value="Expired">Expired</option>\
+    <option value="Bounced">Bounced</option>\
+    <option value="Postponed">Postponed</option>\
+    <option value="Cleared">Cleared</option>\
+    <option value="Security Cheque">Security Cheque</option>/</select>\
+    </td><td class="text-end"><div><input type="text" class="form-control product-line-price" id="cheque_no-"'+ count + '" placeholder="Cheque No" name="cheque_no[]"  />\
+    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price" id="bank_name-"'+ count + '" placeholder="Bank Name" name="bank[]"/>\
     </div></td><td class="product-removal"><a class="btn btn-danger">-</a></td></tr>';
     e.innerHTML = document.getElementById("newForm").innerHTML + t, document.getElementById("newlink").appendChild(e);
     e = document.querySelectorAll("[data-trigger]");
-    Array.from(e).forEach(function(e) {
+    Array.from(e).forEach(function (e) {
         new Choices(e, {
             placeholderValue: "This is a placeholder set in the config",
             searchPlaceholderValue: "This is a search placeholder"
@@ -66,15 +76,15 @@ var taxRate = .125,
     discountRate = .15;
 
 function remove() {
-    Array.from(document.querySelectorAll(".product-removal a")).forEach(function(e) {
-        e.addEventListener("click", function(e) {
+    Array.from(document.querySelectorAll(".product-removal a")).forEach(function (e) {
+        e.addEventListener("click", function (e) {
             removeItem(e), resetRow()
         })
     })
 }
 
 function resetRow() {
-    Array.from(document.getElementById("newlink").querySelectorAll("tr")).forEach(function(e, t) {
+    Array.from(document.getElementById("newlink").querySelectorAll("tr")).forEach(function (e, t) {
         t += 1;
         e.querySelector(".product-id").innerHTML = t
     })
@@ -82,8 +92,8 @@ function resetRow() {
 
 function recalculateCart() {
     var t = 0;
-    Array.from(document.getElementsByClassName("product")).forEach(function(e) {
-        Array.from(e.getElementsByClassName("product-line-price")).forEach(function(e) {
+    Array.from(document.getElementsByClassName("product")).forEach(function (e) {
+        Array.from(e.getElementsByClassName("product-line-price")).forEach(function (e) {
             e.value && (t += parseFloat(e.value.slice(1)))
         })
     });
@@ -95,8 +105,8 @@ function recalculateCart() {
 }
 
 function amountKeyup() {
-    Array.from(document.getElementsByClassName("product-price")).forEach(function(n) {
-        n.addEventListener("keyup", function(e) {
+    Array.from(document.getElementsByClassName("product-price")).forEach(function (n) {
+        n.addEventListener("keyup", function (e) {
             var t = n.parentElement.nextElementSibling.nextElementSibling.querySelector(".product-line-price");
             updateQuantity(e.target.value, n.parentElement.nextElementSibling.querySelector(".product-quantity").value, t)
         })
@@ -117,18 +127,18 @@ var genericExamples = document.querySelectorAll("[data-trigger]");
 function billingFunction() {
     document.getElementById("same").checked ? (document.getElementById("TenantName").value = document.getElementById("billingName").value, document.getElementById("shippingAddress").value = document.getElementById("billingAddress").value, document.getElementById("shippingPhoneno").value = document.getElementById("billingPhoneno").value, document.getElementById("shippingTaxno").value = document.getElementById("billingTaxno").value) : (document.getElementById("shippingName").value = "", document.getElementById("shippingAddress").value = "", document.getElementById("shippingPhoneno").value = "", document.getElementById("shippingTaxno").value = "")
 }
-Array.from(genericExamples).forEach(function(e) {
+Array.from(genericExamples).forEach(function (e) {
     new Choices(e, {
         placeholderValue: "This is a placeholder set in the config",
         searchPlaceholderValue: "This is a search placeholder"
     })
 });
 var cleaveBlocks = new Cleave("#cardNumber", {
-        blocks: [4, 4, 4, 4],
-        uppercase: !0
-    }),
+    blocks: [4, 4, 4, 4],
+    uppercase: !0
+}),
     genericExamples = document.querySelectorAll('[data-plugin="cleave-phone"]');
-Array.from(genericExamples).forEach(function(e) {
+Array.from(genericExamples).forEach(function (e) {
     new Cleave(e, {
         delimiters: ["(", ")", "-"],
         blocks: [0, 3, 3, 4]
@@ -158,7 +168,7 @@ if (null === localStorage.getItem("invoice_no") && null === localStorage.getItem
     for (var paroducts_list = viewobj.prducts, counter = 1; counter++, 1 < paroducts_list.length && document.getElementById("add-item").click(), paroducts_list.length - 1 >= counter;);
     var counter_1 = 1;
     setTimeout(() => {
-        Array.from(paroducts_list).forEach(function(e) {
+        Array.from(paroducts_list).forEach(function (e) {
             document.getElementById("deposite_date-" + counter_1).value = e.product_name, document.getElementById("cheque_remark-" + counter_1).value = e.product_details, document.getElementById("productRate-" + counter_1).value = e.rates, document.getElementById("product-qty-" + counter_1).value = e.quantity, document.getElementById("productPrice-" + counter_1).value = "$" + e.rates * e.quantity, counter_1++
         })
     }, 300), document.getElementById("cart-subtotal").value = "$" + viewobj.order_summary.sub_total, document.getElementById("cart-tax").value = "$" + viewobj.order_summary.estimated_tex, document.getElementById("cart-discount").value = "$" + viewobj.order_summary.discount, document.getElementById("cart-shipping").value = "$" + viewobj.order_summary.shipping_charge, document.getElementById("cart-total").value = "$" + viewobj.order_summary.total_amount, document.getElementById("choices-payment-type").value = viewobj.payment_details.payment_method, document.getElementById("cardholderName").value = viewobj.payment_details.card_holder_name;
@@ -170,10 +180,10 @@ if (null === localStorage.getItem("invoice_no") && null === localStorage.getItem
     });
     document.getElementById("amountTotalPay").value = "$" + viewobj.order_summary.total_amount, document.getElementById("exampleFormControlTextarea1").value = viewobj.notes
 }
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var T = document.getElementById("invoice_form");
     document.getElementsByClassName("needs-validation");
-    T.addEventListener("submit", function(e) {
+    T.addEventListener("submit", function (e) {
         e.preventDefault();
         var t = document.getElementById("invoicenoInput").value.slice(4),
             n = document.getElementById("companyEmail").value,
@@ -294,4 +304,17 @@ document.addEventListener("DOMContentLoaded", function() {
             notes: A
         })), window.location.href = "apps-invoices-list.html")
     })
+});
+
+$(document).ready(function () {
+    var newurl = "{{ url('/admin/fetch-currency') }}";
+    $.ajax({
+        url: newurl,
+        method: 'get',
+        success: function (p) {
+            console.log(p);
+            $('.currency').html(p);
+
+        }
+    });
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+use App\Models\currency;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Nationality;
@@ -45,7 +46,8 @@ class ContractController extends Controller
         $invoice_balance=$delay_invoice+$not_paid_invoice;
         $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
         $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance','CC'));
+        $currency=currency::where('status',1)->get();
+        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance','CC','currency'));
     }
 
     /**
@@ -86,6 +88,7 @@ class ContractController extends Controller
             'approved_by'=>'required',
             'attestation_no'=>'nullable',
             'attestation_expiry'=>'nullable',
+            'currency'=>'required',
             'rent_amount'=>'required',
             'total_invoice'=>'required',
             'guarantees'=>'required',
@@ -134,6 +137,7 @@ class ContractController extends Controller
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
             'rent_amount' => $request->rent_amount,
+            'currency' => $request->currency,
             'tenant_sign' =>$mainpic2,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
@@ -219,6 +223,7 @@ class ContractController extends Controller
             'attestation_expiry'=>'nullable',
             'total_invoice'=>'required',
             'guarantees'=>'required',
+            'currency'=>'required',
             'contract_type'=>'required',
 
         ]);
@@ -268,6 +273,7 @@ class ContractController extends Controller
             'attestation_status'=>$request->attestation_status,
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
+            'currency' => $request->currency,
             'rent_amount' => $request->rent_amount,
             'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,

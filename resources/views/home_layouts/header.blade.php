@@ -28,13 +28,14 @@
                                     <li class="has-children">
                                         <a href="/properties">PROERTIES</a>
                                         <ul class="sub-menu">
-                                            <li><a href="events.html">EVENT</a></li>
-                                            <li><a href="event-details.html">EVENT DETAILS</a></li>
+                                            <li><a href="#">EVENT</a></li>
+                                            <li><a href="#">EVENT DETAILS</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="/contect-us">CONTACT US</a>
                                     </li>
+                                    <li></li>
                                     <li class="has-children">
                                         <a href="#">Account</a>
                                         <ul class="sub-menu">

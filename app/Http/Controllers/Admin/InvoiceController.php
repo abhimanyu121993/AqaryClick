@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\Building;
 use App\Models\Contract;
+use App\Models\currency;
 use App\Models\Error;
 use App\Models\Invoice;
 use App\Models\Tenant;
@@ -31,7 +32,8 @@ class InvoiceController extends Controller
         $tenantDetails=Tenant::all();
         $building=Building::all();
         $bank=Bank::all();
-return view('admin.invoice.add_invoice',compact('tenantDetails','INV','building','bank'));  
+        $currency=currency::where('status',1)->get();
+return view('admin.invoice.add_invoice',compact('tenantDetails','INV','building','bank','currency'));  
  }
 
     /**

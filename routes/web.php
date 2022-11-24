@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\BusinessController;
 use App\Http\Controllers\admin\ChequeController;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ContractController;
+use App\Http\Controllers\admin\CurrencyController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\ElectricityController;
@@ -81,6 +82,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
     Route::resource('building',BuildingController::class);
     Route::resource('unit',UnitController::class);
+    Route::resource('currency',CurrencyController::class);
+    Route::post('/convert-currency',[CurrencyController::class,'convertAmtInSar'])->name('convert-currency');
+    Route::get('/fetch-currency',[CurrencyController::class,'fetchCurrency'])->name('fetchCurrency');
+    Route::get('/isactive-currency/{id}',[CurrencyController::class,'isActiveCurrency'])->name('activeCurrency');
+
     Route::resource('owner',OwnerController::class);
     Route::resource('business',BusinessController::class);
     Route::resource('customer',CustomerController::class);
@@ -110,7 +116,6 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('cheque',ChequeController::class);
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
-
     Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
     Route::resource('invoice',InvoiceController::class); 
     Route::resource('tenant',TenantController::class);
@@ -128,8 +133,6 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
-
-
 });
 
 Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');
