@@ -41,7 +41,12 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a href="{{ route('admin') }}">Login</a></li>
-                                            <li><a href="{{ url('/registration') }}">Register</a></li>
+                                            <!-- <li><a href="{{ url('/registration') }}">Register</a></li> -->
+                                            <li>
+                                            <a type="button" data-bs-toggle="modal"
+                                                data-bs-target="#registerdrop">Register Here</a>
+
+                                        </li>
                                         </ul>
                                     </div>
                                 </li>

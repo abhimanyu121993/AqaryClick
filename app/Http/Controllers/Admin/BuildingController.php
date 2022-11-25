@@ -203,6 +203,7 @@ class BuildingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
         $request->validate([
            
             'building_code'=>'required',
@@ -239,6 +240,7 @@ class BuildingController extends Controller
             'building_receive_date'=>'required',
             
         ]);
+       
         $mainpic=Building::find($id)->building_pic??'';
         $otherpic=Building::find($id)->building_file??[];
         if($request->hasFile('building_pic')){
