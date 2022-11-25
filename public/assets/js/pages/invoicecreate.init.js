@@ -40,36 +40,7 @@ document.querySelector("#profile-img-file-input").addEventListener("change", fun
     enableTime: !0,
     dateFormat: "d M, Y, h:i K"
 }), isData();
-var count = 1;
 
-function new_link() {
-    count++;
-    var e = document.createElement("tr");
-    e.id = count, e.className = "product";
-    var t = '<tr><th scope="row" class="product-id">' + count + '</th><td class="text-start"><div class="mb-2"><input type="date" class="form-control" id="deposite_date-"' + count + '" name="deposite_date[]"/>\
-    </div><textarea class="form-control" id="cheque_remark-"'+ count + '" rows="3" cols="50" placeholder="Product Details" name="cheque_remark[]"></textarea>\
-    </div></td><td class="text-end"><div>  <select class="form-control select2 form-select .currency" name="currency[]" id="currency">\
-    \<input type="file" class="form-control mt-1" id="file-"'+ count + '" name="file[]">\
-    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price cheque_amt" id="cheque_amt"" placeholder="Enter cheque Amount" name="cheque_no[]"  />\
-    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price sar_amt" id="sar_amt"" placeholder="Amount in SAR" name="cheque_no[]"  readonly/>\
-    </div></td><td class="text-end"><div>  <select class="form-control select2 form-select" name="cheque_status" id="currency"><option value="" selected hidden>Select Currency</option> <option value="Valid">Valid</option>\
-    <option value="Expired">Expired</option>\
-    <option value="Bounced">Bounced</option>\
-    <option value="Postponed">Postponed</option>\
-    <option value="Cleared">Cleared</option>\
-    <option value="Security Cheque">Security Cheque</option>/</select>\
-    </td><td class="text-end"><div><input type="text" class="form-control product-line-price" id="cheque_no-"'+ count + '" placeholder="Cheque No" name="cheque_no[]"  />\
-    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price" id="bank_name-"'+ count + '" placeholder="Bank Name" name="bank[]"/>\
-    </div></td><td class="product-removal"><a class="btn btn-danger">-</a></td></tr>';
-    e.innerHTML = document.getElementById("newForm").innerHTML + t, document.getElementById("newlink").appendChild(e);
-    e = document.querySelectorAll("[data-trigger]");
-    Array.from(e).forEach(function (e) {
-        new Choices(e, {
-            placeholderValue: "This is a placeholder set in the config",
-            searchPlaceholderValue: "This is a search placeholder"
-        })
-    }), isData(), remove(), amountKeyup(), resetRow()
-}
 remove();
 var taxRate = .125,
     shippingRate = 65,
@@ -306,15 +277,4 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 });
 
-$(document).ready(function () {
-    var newurl = "{{ url('/admin/fetch-currency') }}";
-    $.ajax({
-        url: newurl,
-        method: 'get',
-        success: function (p) {
-            console.log(p);
-            $('.currency').html(p);
 
-        }
-    });
-});

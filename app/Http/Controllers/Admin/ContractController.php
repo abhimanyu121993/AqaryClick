@@ -11,6 +11,7 @@ use App\Models\Nationality;
 use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\Tenant;
+use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -88,7 +89,7 @@ class ContractController extends Controller
             'approved_by'=>'required',
             'attestation_no'=>'nullable',
             'attestation_expiry'=>'nullable',
-            'currency'=>'required',
+            'currency_type'=>'required',
             'rent_amount'=>'required',
             'total_invoice'=>'required',
             'guarantees'=>'required',
@@ -105,6 +106,7 @@ class ContractController extends Controller
             $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
             $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
         }
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount((float)$request->rent_amount)->get();
        $data= Contract::create([
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
@@ -137,7 +139,8 @@ class ContractController extends Controller
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
             'rent_amount' => $request->rent_amount,
-            'currency' => $request->currency,
+            'currency' => $request->currency_type,
+            'sar_amt'=>$sar_amt,
             'tenant_sign' =>$mainpic2,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
@@ -147,7 +150,7 @@ class ContractController extends Controller
             'remark'=>$request->remark,
         ]);
         if($data){
-        return redirect(route('receipt',$request->contract_code))->with('success','Contract Registration has been created successfully.');
+        return redirect(route('admin.receipt',$request->contract_code))->with('success','Contract Registration has been created successfully.');
         }
         else{
             return redirect()->back()->with('error','Contract Registration not created.');
@@ -223,10 +226,13 @@ class ContractController extends Controller
             'attestation_expiry'=>'nullable',
             'total_invoice'=>'required',
             'guarantees'=>'required',
-            'currency'=>'required',
+            'currency_type'=>'required',
             'contract_type'=>'required',
 
         ]);
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount($rent_amt)->get();
+
+
         $mainpic=Contract::find($id)->lessor_sign??''; 
         if($request->hasFile('lessor_sign')){
             $mainpic='build-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
@@ -275,6 +281,7 @@ class ContractController extends Controller
             'contract_status'=>$request->contract_status,
             'currency' => $request->currency,
             'rent_amount' => $request->rent_amount,
+            'sar_amt'=>$sar_amt,
             'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,
             'total_invoice' => $request->total_invoice,

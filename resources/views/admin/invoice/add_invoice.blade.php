@@ -1,6 +1,18 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Generate Invoice'])
 @section('title', 'Generate Invoice')
 @section('main-content')
+                                        @php
+                                            $currencyhtml='<option value="">--Select Cuurency</option>';
+                                            foreach($currency as $c){
+                                                $currencyhtml .='<option value="'.$c->code.'">'.$c->code??''.'</option>';
+                                            }
+                                        @endphp
+                                        @php
+                                            $bankhtml='<option value="">--Select Bank</option>';
+                                            foreach($bank as $b){
+                                                $bankhtml .='<option value="'.$b->id.'">'.$b->name??''.'</option>';
+                                            }
+                                        @endphp
 
 <div class="row">
     <div class="col-lg-12">
@@ -61,76 +73,21 @@
                     </ul>
                 </div>
                 @endif
-                <div class="card-body border-bottom border-bottom-dashed p-4">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="profile-user mx-auto  mb-3">
-                                <input id="profile-img-file-input" type="file" class="profile-img-file-input" />
-                                <label for="profile-img-file-input" class="d-block" tabindex="0">
-                                    <span class="overflow-hidden border border-dashed d-flex align-items-center justify-content-center rounded" style="height: 60px; width: 256px;">
-                                        <img src="{{ asset('assets/images/logo.png') }}" alt="" height="60"></span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div>
-                                <div>
-                                    <label for="companyAddress">Address</label>
-                                </div>
-                                <div class="mb-2">
-                                    <textarea class="form-control" id="companyAddress" rows="3" placeholder="Company Address" required></textarea>
-                                    <div class="invalid-feedback">
-                                        Please enter a address
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="text" class="form-control" id="companyaddpostalcode" minlength="5" maxlength="6" placeholder="Enter Postal Code" required />
-                                    <div class="invalid-feedback">
-                                        The US zip code must contain 5 digits, Ex. 45678
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg-4 ms-auto">
-                            <div class="mb-2">
-                                <input type="text" class="form-control bg-light border-0" id="registrationNumber" maxlength="12" placeholder="Legal Registration No" required />
-                                <div class="invalid-feedback">
-                                    Please enter a registration no, Ex., 012345678912
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <input type="email" class="form-control bg-light border-0" id="companyEmail" placeholder="Email Address" required />
-                                <div class="invalid-feedback">
-                                    Please enter a valid email, Ex., example@gamil.com
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <input type="text" class="form-control bg-light border-0" id="companyWebsite" placeholder="Website" required />
-                                <div class="invalid-feedback">
-                                    Please enter a website, Ex., www.example.com
-                                </div>
-                            </div>
-                            <div>
-                                <input type="text" class="form-control bg-light border-0" data-plugin="cleave-phone" id="compnayContactno" placeholder="Contact No" required />
-                                <div class="invalid-feedback">
-                                    Please enter a contact number
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end row-->
-                </div>
+                
 
                 <div class="card-body p-4">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <label class="form-check-label" for="inlineRadio1">Full Payment</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Due Payment</label>
-                    </div>
-                    <div class="row gy-4 mb-3 mt-2">
+
+                <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_id" hidden>
+                        <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
+                       <div class="msg"><p id="due_amt"></p>
+                        <p id="rent_amt"></p>
+                        <p id="payable_amt"></p></div>
+                <input type="radio" class="btn-check" name="options-outlined" id="full-payment-details" autocomplete="off" checked>
+<label class="btn btn-outline-success" for="full-payment-details">Full Payment</label>
+
+<input type="radio" class="btn-check" name="options-outlined" id="due-payment-details" autocomplete="off">
+<label class="btn btn-outline-danger" for="due-payment-details">Due Payment</label>
+                    <div class="row gy-4 mb-3 mt-5">
                         <div class="col-xxl-3 col-md-2">
                             <label class="form-label" for="flag">Invoice No</label>
                             <div class="input-group">
@@ -232,7 +189,7 @@
                             <label class="form-label" for="flag">Invoice Amount</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
-                                <p id="msg_due" class="text-danger"></p>
+                                <br><p id="msg_due" class="text-danger"></p>
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-4">
@@ -262,79 +219,6 @@
                     <!--end col-->
                     <!--end row-->
                 </div>
-
-                <div class="card-body p-4 border-top border-top-dashed">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6">
-                            <div>
-                                <label for="billingName" class="text-muted text-uppercase fw-semibold">Tenant Address</label>
-                            </div>
-                            <div class="mb-2">
-                                <input type="text" class="form-control bg-light border-0" id="tenantName" placeholder="Full Name" required />
-                                <div class="invalid-feedback">
-                                    Please enter a full name
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <textarea class="form-control bg-light border-0" id="tenantAddress" rows="3" placeholder="Tenant Address" required></textarea>
-                                <div class="invalid-feedback">
-                                    Please enter a address
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <input type="text" class="form-control bg-light border-0" data-plugin="cleave-phone" id="TenantPhoneno" placeholder="(123)456-7890" required />
-                                <div class="invalid-feedback">
-                                    Please enter a phone number
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" class="form-control bg-light border-0" id="billingTaxno" placeholder="Tax Number" required />
-                                <div class="invalid-feedback">
-                                    Please enter a tax number
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!--end col-->
-                        <div class="col-sm-6 ms-auto">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div>
-                                        <label for="shippingName" class="text-muted text-uppercase fw-semibold">Lessor's Address</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="text" class="form-control bg-light border-0" id="shippingName" placeholder="Full Name" required />
-                                        <div class="invalid-feedback">
-                                            Please enter a full name
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <textarea class="form-control bg-light border-0" id="shippingAddress" rows="3" placeholder="Address" required></textarea>
-                                        <div class="invalid-feedback">
-                                            Please enter a address
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="text" class="form-control bg-light border-0" data-plugin="cleave-phone" id="shippingPhoneno" placeholder="(123)456-7890" required />
-                                        <div class="invalid-feedback">
-                                            Please enter a phone number
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <input type="text" class="form-control bg-light border-0" id="shippingTaxno" placeholder="Tax Number" required />
-                                        <div class="invalid-feedback">
-                                            Please enter a tax number
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end col-->
-                    </div>
-                    <!--end row-->
-                </div>
-
                 <div class="card-body p-4">
                     <h4 class="card-title mb-0 flex-grow-1 mb-2">
                         {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management' }}
@@ -376,11 +260,10 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="mb-1">
+                                         
                                             <select class="form-control select2 form-select currency " name="currency" id="currency">
-                                                <option value="" selected hidden>Select Currency</option>
-                                                @foreach($currency as $c)
-                                                <option value="{{$c->code}}">{{$c->code??''}}</option>
-                                                @endforeach
+                                                {!! $currencyhtml !!}
+
                                             </select>
                                             <input type="file" class="form-control mt-1" id="product-qty-1">
                                         </div>
@@ -389,10 +272,10 @@
                                         <input type="text" class="form-control cheque_amt" id="product-qty-1" placeholder="Enter Cheque Amount">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control sar_amt" id="product-qty-1" placeholder="Amount in SAR" readonly/>
+                                        <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in SAR" readonly/>
                                     </td>
                                     <td class="text-end">
-                                        <div> <select class="form-control select2 form-select" name="cheque_status" id="currency">
+                                        <div> <select class="form-control select2 form-select" name="cheque_status[]" id="currency">
                                                 <option value="" selected hidden>Select Cheque</option>
                                                 <option value="Valid">Valid</option>
                                                 <option value="Expired">Expired</option>
@@ -408,9 +291,10 @@
                                         </div>
                                     </td>
                                     <td class="text-end">
-                                        <div>
-                                            <input type="text" class="form-control" id="productPrice-1" placeholder="Bank Name" readonly />
-                                        </div>
+                                    <select class="form-control select2 form-select currency " name="bank_name[]" id="bank">
+                                                {!! $bankhtml !!}
+
+                                            </select>
                                     </td>
                                     <td class="product-removal">
                                         <a href="javascript:void(0)" class="btn btn-danger">-</a>
@@ -428,50 +312,6 @@
                                         <a href="javascript:new_link()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
                                     </td>
                                 </tr>
-
-                                <tr class="border-top border-top-dashed mt-2">
-                                    <td colspan="3"></td>
-                                    <td colspan="2" class="p-0">
-
-                                        <table class="table table-borderless table-sm table-nowrap align-middle mb-0">
-                                            <tbody>
-
-                                                <tr>
-                                                    <th scope="row">Sub Total</th>
-                                                    <td style="width:150px;">
-                                                        <input type="text" class="form-control" id="cart-subtotal" placeholder="$0.00" readonly />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Estimated Tax (12.5%)</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" id="cart-tax" placeholder="$0.00" readonly />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Discount <small class="text-muted">(VELZON15)</small></th>
-                                                    <td>
-                                                        <input type="text" class="form-control" id="cart-discount" placeholder="$0.00" readonly />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Shipping Charge</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" id="cart-shipping" placeholder="$0.00" readonly />
-                                                    </td>
-                                                </tr>
-                                                <tr class="border-top border-top-dashed">
-                                                    <th scope="row">Total Amount</th>
-                                                    <td>
-                                                        <input type="text" class="form-control" id="cart-total" placeholder="$0.00" readonly />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <!--end table-->
-                                    </td>
-                                </tr>
-                            </tbody>
                         </table>
                         <!--end table-->
                     </div>
@@ -500,58 +340,6 @@
 
 
 @section('script-area')
-<script>
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.field_table_wrapper'); //Input field wrapper
-    var fieldHTML = '<tr ><td><div class="col-sm-12">\
-                <input type="date" class="form-control" name="deposite_date[]">\
-                </div></td>\<td><div class="col-sm-12">\
-                <input type="text" class="form-control" name="cheque_amt[]">\
-                </div></td>\<td><div class="col-sm-12">\
-                <input type="text" class="form-control" name="cheque_no[]">\
-                </div></td>\<td><div class="col-sm-12">\
-                <select class="form-control select2 form-select" name="bank_name[]">\
-                <option value="" selected hidden>Select</option>\
-                                        <option value="DOHA BANK">DOHA BANK</option>\
-                                        <option value="COMMERCIAL BANK">COMMERCIAL BANK</option>\
-                                        <option value="Under Process">Under Process</option>\</div></td>\
-                <td><div class="col-sm-12">\
-                <select class="form-control select2 form-select" name="cheque_status[]">\
-                <option value="" selected hidden>Select</option>\
-                                        <option value="Valid">Valid</option>\
-                                        <option value="Expired">Expired</option>\
-                                        <option value="Bounced">Bounced</option>\
-                                        <option value="Postponed">Postponed</option>\
-                                        <option value="Cleared">Cleared</option>\
-                                        <option value="Security Cheque">Security Cheque</option>\</div></td>\
-                                        <td><div class="col-sm-12">\
-                <input type="file" class="form-control" name="attachment[]">\
-                </div></td>\
-                <td colspan="4"><div class="col-sm-12">\
-                <textarea type="text" class="form-control" name="remark[]" rows="1" cols="10"></textarea>\
-                </div></td>\
-                <td><div class="col-sm-12">\
-                <a href="javascript:void(0);" class="add_button btn btn-danger remove_button" title=" field">-</a>\
-                </div></td>\
-                </tr>';
-    //Once add button is clicked
-    $(addButton).click(function() {
-        var a = ($('tr').length);
-        let sn = "";
-        for (let i = 1; i < a; i++) {
-            sn += i;
-        }
-        $(wrapper).append(fieldHTML);
-        $(fieldHTML).closest("tr").prev().find("td:first").val(sn);
-    });
-
-    //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e) {
-        e.preventDefault();
-        $(this).closest('tr').remove(); //Remove field html
-
-    });
-</script>
 <script>
     $(document).ready(function() {
         $('#cheque').hide();
@@ -622,42 +410,35 @@
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
                 $('#cid').val(optionValue);
+                $('#due-payment-details').val(optionValue);
+                $('#full-payment-details').val(optionValue);
+
                 var newurl = "{{ url('/admin/invoice-details') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-                        if (new Date(p.invoiceStart) < new Date(p.lastmonth)) {
-                            alert('hi');
-                        }
                         $('#due_date').val(p.invoiceEnd);
                         $('#invoice_period_start').val(p.invoiceStart);
                         $('#invoice_period_end').val(p.invoiceEnd);
-                        $('#overdue_period').val(p.res.overdue + 'Days');
+                        $('#overdue_period').val(p.overdue + 'Days');
                         $('#msg').text(p.msg);
-                        $('#rent_amt').text('Rent Amount' + p.rent_amt);
-                        $('#due_amt').text('Due Amount' + p.due_amt);
+                        $('#rent_amt').text('Rent Amount: ' + p.rent_amt);
+                        $('#due_amt').text('Due Amount: ' + p.due_amt);
                         $('#payable_amt').text('Total Payable Amount   ' + p.payable);
-
-                        $('#amt_paid').focusout(function() {
-                            var amt = $(this).val();
-                            if (amt < parseInt(p.due_amt)) {
-                                $('#msg_due').text("Amount must be greater than due amount");
-                                $('#submit').attr("type", "button");
-                            } else {
-                                $('#msg_due').text('');
-                                $('#submit').attr("type", "submit");
-                            }
-                        });
-
-
                     }
                 });
             });
         }).change();
     });
 </script>
+<script>
+var   currencyhtml='{!!   $currencyhtml !!}';
+var   bankhtml='{!!   $bankhtml !!}';
 
+var count = 1;
+
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function() {
@@ -685,5 +466,95 @@
                 });
               
             });   
+</script>
+<script>
+    $(document).ready(function () {
+        $('#add-item').on('click',function () { 
+            $(this).parent() 
+    var newurl = "{{ url('/admin/fetch-currency') }}";
+    $.ajax({
+        url: newurl,
+        method: 'get',
+        success: function (p) {
+            console.log(p);
+            $('.currency').html(p);
+
+        }
+    });
+});
+});
+
+
+function new_link() {
+    count++;
+    var e = document.createElement("tr");
+    e.id = count, e.className = "product";
+    var t = '<tr><th scope="row" class="product-id">' + count + '</th><td class="text-start"><div class="mb-2"><input type="date" class="form-control" id="deposite_date-"' + count + '" name="deposite_date[]"/>\
+    </div><textarea class="form-control" id="cheque_remark-"'+ count + '" rows="3" cols="50" placeholder="Product Details" name="cheque_remark[]"></textarea>\
+    </div></td><td class="text-end"><div>  <select class="form-control select2 form-select .currency" name="currency[]" id="currency">'+currencyhtml+'</select>\
+    \<input type="file" class="form-control mt-1" id="file-"'+ count + '" name="file[]">\
+    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price cheque_amt" id="cheque_amt"" placeholder="Enter cheque Amount" name="cheque_no[]"  />\
+    </div></td><td class="text-end"><div><input type="text" class="form-control product-line-price sar_amt" id="sar_amt"" placeholder="Amount in SAR" name="cheque_no[]"  readonly/>\
+    </div></td><td class="text-end"><div>  <select class="form-control select2 form-select" name="cheque_status" id="currency"><option value="" selected hidden>Select Currency</option> <option value="Valid">Valid</option>\
+    <option value="Expired">Expired</option>\
+    <option value="Bounced">Bounced</option>\
+    <option value="Postponed">Postponed</option>\
+    <option value="Cleared">Cleared</option>\
+    <option value="Security Cheque">Security Cheque</option>/</select>\
+    </td><td class="text-end"><div><input type="text" class="form-control product-line-price" id="cheque_no-"'+ count + '" placeholder="Cheque No" name="cheque_no[]"  />\
+    </div></td><td class="text-end"><div> <select class="form-control select2 form-select .bank" name="bank_name[]" id="bank">'+bankhtml+'</select>\
+    </div></td><td class="product-removal"><a class="btn btn-danger">-</a></td></tr>';
+    e.innerHTML = document.getElementById("newForm").innerHTML + t, document.getElementById("newlink").appendChild(e);
+    e = document.querySelectorAll("[data-trigger]");
+    Array.from(e).forEach(function (e) {
+        new Choices(e, {
+            placeholderValue: "This is a placeholder set in the config",
+            searchPlaceholderValue: "This is a search placeholder"
+        })
+    }), isData(), remove(), amountKeyup(), resetRow()
+}
+</script>
+<script>
+    $(document).ready(function() {
+        $("#due-payment-details").on('click',function() {
+                var contract_id = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-due-payment') }}/" + contract_id;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        console.log(p);
+                        $('#due_date').val(p.res.invoice_period_end);
+                        $('#invoice_period_start').val(p.res.invoice_period_start);
+                        $('#invoice_period_end').val(p.res.invoice_period_end);
+                        $('#overdue_period').val(p.overdue + 'Days');
+                        $('#due_amt').text('Due Amount: ' + p.res.due_amt);
+                        $('#rent_amt').text('');
+
+                        $('#payable_amt').text('Total Payable Amount   ' + p.res.due_amt);
+                    }
+                });
+        });
+        $("#full-payment-details").on('click',function() {
+
+            var contract_id = $(this).attr("value");
+
+            var newurl = "{{ url('/admin/invoice-details') }}/" + contract_id;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        $('#due_date').val(p.invoiceEnd);
+                        $('#invoice_period_start').val(p.invoiceStart);
+                        $('#invoice_period_end').val(p.invoiceEnd);
+                        $('#overdue_period').val(p.overdue + 'Days');
+                        $('#msg').text(p.msg);
+                        $('#rent_amt').text('Rent Amount: ' + p.rent_amt);
+                        $('#due_amt').text('Due Amount: ' + p.due_amt);
+                        $('#payable_amt').text('Total Payable Amount   ' + p.payable);
+                    }
+                });
+        });
+    });
 </script>
 @endsection

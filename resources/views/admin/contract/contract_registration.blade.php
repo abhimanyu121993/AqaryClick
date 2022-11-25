@@ -348,7 +348,7 @@
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Currency</label>
-                                <select class="form-control select2 form-select" name="currency" id="currency">
+                                <select class="form-control select2 form-select .currency" name="currency_type" id="currency">
                                     @if (isset($contractedit))
                                     <option value="{{ $contractedit->currency }}" selected>
                                         {{ $contractedit->currency }}</option>

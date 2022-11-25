@@ -188,7 +188,7 @@ return view('admin.invoice.add_invoice',compact('tenantDetails','INV','building'
         $res=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
         $html=' <option value="" selected hidden disabled>--Select Contract--</option>';   
         foreach($res as $r){
-            $html .='<option value="'.$r->id.'">'.$r->contract_code.'('.$r->tenantDetails->buildingDetails->name.')'.'</option>';
+            $html .='<option value="'.$r->id.'">'.$r->contract_code.'('.$r->tenantDetails->building_name.')'.'</option>';
         }
         return response()->json($html);
         }
@@ -248,6 +248,17 @@ $invoice=$inv->invoice_period_end??null;
 
             }
         }
-           return response()->json(array('res'=>$res,'invoiceEnd'=>$invoiceEnd,'invoiceStart'=>$invoiceStart,'msg'=>$msg,'payable'=>$payable,'due_amt'=>$due_amt,'rent_amt'=>$rent_amt,'lastmonth'=>$lastmonth) );
+        $overdue = Carbon::parse(Carbon::now())->diffInDays($invoiceEnd);
+
+           return response()->json(array('res'=>$res,'invoiceEnd'=>$invoiceEnd,'invoiceStart'=>$invoiceStart,'msg'=>$msg,'payable'=>$payable,'due_amt'=>$due_amt,'rent_amt'=>$rent_amt,'lastmonth'=>$lastmonth,'overdue'=>$overdue) );
             }
+
+            public function printInvoice(){
+                return view('admin.invoice.invoice_details');
+            }
+    public function duePayment($contract_id){
+        $res=invoice::where('contract_id',$contract_id)->latest()->first();
+        $overdue = Carbon::parse(Carbon::now())->diffInDays($res->invoice_period_end);
+        return response()->json(array('res'=>$res,'overdue'=>$overdue) );
+    }
 }
