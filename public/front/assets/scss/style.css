@@ -3954,10 +3954,10 @@ textarea:-ms-input-placeholder {
 }
 
 .hero-bg-1 {
-    background-image: url(/front/assets/img/slider/slider-1.jpg)
+    background-image: url(/front/assets/img/slider/aqaryclickgiffinal.gif);
 }
 
-.hero-bg-2 {
+/* .hero-bg-2 {
     background-image: url(/front/assets/img/slider/slider-2.jpg)
 }
 
@@ -3967,7 +3967,7 @@ textarea:-ms-input-placeholder {
 
 .hero-bg-4 {
     background-image: url(/front/assets/img/slider/slider-4.jpg)
-}
+} */
 
 .hero-bg-5 {
     background-image: url(/front/assets/img/slider/slider.jpg)
@@ -4106,6 +4106,7 @@ textarea:-ms-input-placeholder {
     right: 50px;
     z-index: 10
 }
+
 
 .hero-wrap.style3 .hero-shape-2 {
     position: absolute;
