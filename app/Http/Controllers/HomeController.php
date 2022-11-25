@@ -14,11 +14,13 @@ use App\Models\UnitType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use AmrShawky\LaravelCurrency\Facade\Currency;
 class HomeController extends Controller
 {
     public function index()
     {
+        // $res=Currency::convert()->from('SAR')->to('INR')->amount(1)->get();
+        // return $res;
         $nationality = Nationality::all();
         $unit=UnitType::all();
         $nation=Nationality::all();

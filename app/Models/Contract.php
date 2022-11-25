@@ -28,4 +28,5 @@ class Contract extends Model
        $month=$this->lease_period_month;
         return $rent*$month;
     }
+    
 }

@@ -364,7 +364,10 @@
                                 </div>
                                 </li>
                                 <!-- end business Module -->
-                               
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.currency.index') }}" class="nav-link" data-key="t-analytics">
+                                        Currency</a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link" data-key="t-analytics">
                                         Staff </a>

@@ -1,16 +1,18 @@
 </div>
-<footer class="footer-wrap style1 bg-heath footer-text">
-    <div class="footer-top pt-40">
+<footer class="footer-wrap style1 bg-heath footer-text" style="background:#20438e!important;">
+    <div class="footer-top pt-40" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
         <div class="container">
             <div class="row ">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-widget footer-footer">
                         <a href="/" class="footer-logo"><img src="/front/assets/img/logo2.png" alt="Image"></a>
-                        <div class="address">
-                            <p>Address : Vill and post jafarpur dist Azamgarh</p>
-                            <p>Email : deepak@gmail.com</p>
-                            <p>Phone : +91 9716332024</p>
-                        </div>
+                        <p style="color:#20438e;"><strong>Address :</strong> &nbsp; Gomtinager Lucknow</p>
+                        <p style="color:#20438e;"><strong>Email
+                                :</strong> &nbsp; &nbsp; &nbsp; &nbsp;Aqaryclick@gmail.com</p>
+
+                        <p style="color:#20438e;"><strong>Phone :</strong> &nbsp; &nbsp;+91 5656657677</p>
+
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6">
@@ -21,19 +23,27 @@
                             <li><a href="/about-us">About Us</a></li>
                             <li><a href="/properties">Properties</a></li>
                             <li><a href="/contect-us">Contact Us</a></li>
-                            <li><button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login In</button> </li>
+                            <li><button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">Login In</button> </li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-6 col-md-12 col-sm-12 ">
                     <div class="footer-box-layout">
-                        <div class="team-member box-footer img-thumbnail">
-                            <div class="footer-text">
-                                <h4 style="color:#fff;">Term & Conditions</h4>
-                                <p style="color:#fff;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    <button type="button" class="btn btn-primary btn-sm continue-btn" data-bs-toggle="modal" data-bs-target="#termModal">continue <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
+                        <div class=" box-footer img-thumbnail">
+                            <div class="footer-text p-3">
+                                <h4 style="color:#fff; pt-1">Term & Conditions</h4>
+                                <p class="pt-3" style="color:#fff;">Duis aute irure dolor in reprehenderit in
+                                    voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+
                                 </p>
+                                <button type="button" class="btn btn-primary btn-sm  pt-2" data-bs-toggle="modal"
+                                    data-bs-target="#termModal" style="background:#fff;color:#20438E;">continue <i
+                                        class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -88,37 +98,39 @@
 
 </script> --}}
 <script>
-$(document).ready(function() {
-    $('.show_plan').hide();
-    $("#our_plan").click(function() {
-                $('.hide_reg').hide();
-                $('.show_plan').show();
+    $(document).ready(function() {
+        $('.show_plan').hide();
+        $("#our_plan").click(function() {
+            $('.hide_reg').hide();
+            $('.show_plan').show();
 
-            
-    }).change();
-});
+
+        }).change();
+    });
 </script>
 <script>
     $(document).ready(function() {
-      
-  function dateTime() {
-    var ndate = new Date();
-    var hours = ndate.getHours();
-    var message = hours < 12 ? 'Good Morning! ' : hours < 18 ? 'Good Afternoon! ' : 'Good Evening! ';
-toastr.options.timeOut = 10000;       
-            toastr.success(message+"Welcome to AqaryClick");
-     
-  }
 
-  setTimeout(dateTime, 2000);
-});
+        function dateTime() {
+            var ndate = new Date();
+            var hours = ndate.getHours();
+            var message = hours < 12 ? 'Good Morning! ' : hours < 18 ? 'Good Afternoon! ' : 'Good Evening! ';
+            toastr.options.timeOut = 10000;
+            toastr.success(message + "Welcome to AqaryClick");
 
-Number.prototype.leadingZeroes = function(len) {
-  return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));
-}
+        }
+
+        setTimeout(dateTime, 2000);
+    });
+
+    Number.prototype.leadingZeroes = function(len) {
+        return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));
+    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.10/sweetalert2.all.js" integrity="sha512-+QEgB4wm6Qoshtwrn0TqoNEuufvlGDpN36Ht5yicS4QMZolMZopGsfpMzf+ZaSUb3m7Fw3FwJ2Nu6TCgyuQ0qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.10/sweetalert2.all.js"
+    integrity="sha512-+QEgB4wm6Qoshtwrn0TqoNEuufvlGDpN36Ht5yicS4QMZolMZopGsfpMzf+ZaSUb3m7Fw3FwJ2Nu6TCgyuQ0qA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 

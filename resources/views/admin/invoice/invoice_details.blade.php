@@ -1,30 +1,22 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Generate Invoice'])
-@section('title', 'Generate Invoice')
-@section('main-content')
 
-<div class="main-content">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1 class="text-center text-danger">Invoice</h1>
+    <div class="main-content">
 
 <div class="page-content">
-    <div class="container-fluid">
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Invoice Details</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Invoices</a></li>
-                            <li class="breadcrumb-item active">Invoice Details</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
-
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-xxl-9">
                 <div class="card" id="demo">
@@ -33,8 +25,7 @@
                             <div class="card-header border-bottom-dashed p-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <img src="assets/images/logo-dark.png" class="card-logo card-logo-dark" alt="logo dark" height="17">
-                                        <img src="assets/images/logo-light.png" class="card-logo card-logo-light" alt="logo light" height="17">
+                                        <img src="{{ asset('assets/images/logo.png') }}" class="card-logo card-logo-dark" alt="logo dark" height="150" width="200">
                                         <div class="mt-sm-5 mt-4">
                                             <h6 class="text-muted text-uppercase fw-semibold">Address</h6>
                                             <p class="text-muted mb-1" id="address-details">California, United States</p>
@@ -42,7 +33,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-shrink-0 mt-sm-0 mt-3">
-                                        <h6><span class="text-muted fw-normal">Legal Registration No:</span><span id="legal-register-no">987654</span></h6>
+                                        <h6><span class="text-muted fw-normal">Company Registration No:</span><span id="legal-register-no">987654</span></h6>
                                         <h6><span class="text-muted fw-normal">Email:</span><span id="email">velzon@themesbrand.com</span></h6>
                                         <h6><span class="text-muted fw-normal">Website:</span> <a href="https://themesbrand.com/" class="link-primary" target="_blank" id="website">www.themesbrand.com</a></h6>
                                         <h6 class="mb-0"><span class="text-muted fw-normal">Contact No: </span><span id="contact-no"> +(01) 234 6789</span></h6>
@@ -82,16 +73,16 @@
                         <div class="col-lg-12">
                             <div class="card-body p-4 border-top border-top-dashed">
                                 <div class="row g-3">
-                                    <div class="col-6">
-                                        <h6 class="text-muted text-uppercase fw-semibold mb-3">Billing Address</h6>
+                                    <div class="col-6 text-center">
+                                        <h6 class="text-muted text-uppercase fw-semibold mb-3">Lessor</h6>
                                         <p class="fw-medium mb-2" id="billing-name">David Nichols</p>
                                         <p class="text-muted mb-1" id="billing-address-line-1">305 S San Gabriel Blvd</p>
                                         <p class="text-muted mb-1"><span>Phone: +</span><span id="billing-phone-no">(123) 456-7890</span></p>
                                         <p class="text-muted mb-0"><span>Tax: </span><span id="billing-tax-no">12-3456789</span> </p>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-6">
-                                        <h6 class="text-muted text-uppercase fw-semibold mb-3">Shipping Address</h6>
+                                    <div class="col-6 text-center">
+                                        <h6 class="text-muted text-uppercase fw-semibold mb-3">Tenant</h6>
                                         <p class="fw-medium mb-2" id="shipping-name">David Nichols</p>
                                         <p class="text-muted mb-1" id="shipping-address-line-1">305 S San Gabriel Blvd</p>
                                         <p class="text-muted mb-1"><span>Phone: +</span><span id="shipping-phone-no">(123) 456-7890</span></p>
@@ -109,9 +100,9 @@
                                         <thead>
                                             <tr class="table-active">
                                                 <th scope="col" style="width: 50px;">#</th>
-                                                <th scope="col">Product Details</th>
-                                                <th scope="col">Rate</th>
-                                                <th scope="col">Quantity</th>
+                                                <th scope="col">unit ref</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Due Amount</th>
                                                 <th scope="col">Amount</th>
                                             </tr>
                                         </thead>
@@ -159,7 +150,7 @@
                                         </tbody>
                                     </table><!--end table-->
                                 </div>
-                                <div class="border-top border-top-dashed mt-2">
+                                <div class="border-top border-top-dashed mt-2" style="float: right;">
                                     <table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px">
                                         <tbody>
                                             <tr>
@@ -171,7 +162,7 @@
                                                 <td class="text-end">$44.99</td>
                                             </tr>
                                             <tr>
-                                                <td>Discount <small class="text-muted">(VELZON15)</small></td>
+                                                <td>Due Amount</td>
                                                 <td class="text-end">- $53.99</td>
                                             </tr>
                                             <tr>
@@ -188,18 +179,15 @@
                                 </div>
                                 <div class="mt-3">
                                     <h6 class="text-muted text-uppercase fw-semibold mb-3">Payment Details:</h6>
-                                    <p class="text-muted mb-1">Payment Method: <span class="fw-medium" id="payment-method">Mastercard</span></p>
+                                    <p class="text-muted mb-1">Payment Method: <span class="fw-medium" id="payment-method">Cheque</span></p>
                                     <p class="text-muted mb-1">Card Holder: <span class="fw-medium" id="card-holder-name">David Nichols</span></p>
                                     <p class="text-muted mb-1">Card Number: <span class="fw-medium" id="card-number">xxx xxxx xxxx 1234</span></p>
                                     <p class="text-muted">Total Amount: <span class="fw-medium" id="">$ </span><span id="card-total-amount">755.96</span></p>
                                 </div>
                                 <div class="mt-4">
                                     <div class="alert alert-info">
-                                        <p class="mb-0"><span class="fw-semibold">NOTES:</span>
-                                            <span id="note">All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or
-                                                credit card or direct payment online. If account is not paid within 7
-                                                days the credits details supplied as confirmation of work undertaken
-                                                will be charged the agreed quoted fee noted above.
+                                        <p class="mb-0"><span class="fw-semibold">PAYMENT TERMS:</span>
+                                            <span id="note">Payment of the invoice shall be made by the receipt voucher approved by the lessor.
                                             </span>
                                         </p>
                                     </div>
@@ -221,24 +209,15 @@
 
     </div><!-- container-fluid -->
 </div><!-- End Page-content -->
-
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <script>document.write(new Date().getFullYear())</script> © Velzon.
-            </div>
-            <div class="col-sm-6">
-                <div class="text-sm-end d-none d-sm-block">
-                    Design & Develop by Themesbrand
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 </div><!-- end main content-->
 
 </div>
-@endsection
-@section('script-area')
-@endsection
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
