@@ -491,7 +491,7 @@
                                  col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
-                                            <div class="icon-outer"><i class="fa fa-rocket"></i></div>
+                                            <div class="icon-outer"><i class="fa fa-bolt"></i></div>
                                         </div>
                                         <div class="price-box">
                                             <div class="title">Platinum User</div>
