@@ -495,7 +495,7 @@
                                         </div>
                                         <div class="price-box">
                                             <div class="title">Platinum User</div>
-                                            <h4 class="price">$199.99</h4>
+                                            <h4 class="price">$399.99</h4>
                                         </div>
                                         <ul class="features">
                                             <li class="true">4 User</li>
