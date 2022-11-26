@@ -1,4 +1,4 @@
-<header class="header-wrap style1" style="height:50px;">
+<header class="header-wrap style1" style="">
 
     <div class="header-bottom">
         <div class="container">
@@ -6,7 +6,8 @@
                 <div class="col-lg-5 col-md-4 col-5 order-lg-1 order-md-1 order-1">
                     <div class="logo">
                         <a href="/">
-                            <img class="logo-light" src="/front/assets/img/logo.png" alt="Image" style="height:50px;">
+                            <img class="logo-light" src="/front/assets/img/logo.png" alt="Image"
+                                style="min-height:60px;">
                         </a>
                     </div>
                 </div>
@@ -20,16 +21,32 @@
                                 <li>
                                     <a class="active" href="/">HOME</a>
                                 </li>
+                                {{-- <li>
+                                    <a href="/about-us">ABOUT US</a>
+                                </li> --}}
                                 <li>
                                     <a href="/about-us">ABOUT US</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="/properties">PROPERTIES</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="/contect-us">CONTACT US</a>
                                 </li>
-                                <li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link btn btn-light dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="background:#20438E; color:#fff !important;">
+                                        Account
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                                href="{{ route('admin') }}">Login</a></li>
+                                        <li><a href="{{ url('/registration') }}">Register</a></li>
+                                    </ul>
+                                </li>
+
+                                {{-- <li>
                                     <div class="dropdown mx-5">
                                         <button class="btn btn-light dropdown-toggle" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
@@ -38,15 +55,10 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a href="{{ route('admin') }}">Login</a></li>
-                                            <!-- <li><a href="{{ url('/registration') }}">Register</a></li> -->
-                                            <li>
-                                            <a type="button" data-bs-toggle="modal"
-                                                data-bs-target="#registerdrop">Register Here</a>
-
-                                        </li>
+                                            <li><a href="{{ url('/registration') }}">Register</a></li>
                                         </ul>
                                     </div>
-                                </li>
+                                </li> --}}
 
                                 {{-- <li class="has-children">
                                     <a href="#" class="btn btn-light pt-2 text-white text-center px-4"

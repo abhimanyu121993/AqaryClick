@@ -20,8 +20,9 @@
                                         <div class="hero-shape-4 md-none">
                                             <!-- <img src="/front/assets/img/hero/circle-shape-2.png" alt="Image"> -->
                                         </div>
-                                        <h2 class="mb-4" style="color:#dbcf90;font-size:45px;">Discover<br> Most Suitable
-                                            Property</h2>
+                                        <h1 class=" md-display" style="color:#dbcf90;">Discover<br> Most
+                                            Suitable
+                                            Property</h1>
                                     </div>
                                 </div>
                             </div>
@@ -51,22 +52,16 @@
                 </div> --}}
                 <div class="swiper-slide">
                     <div class="hero-slider-item bg-f hero-bg-1"
-                        style="padding: 601px 0 142px;
-                    position: relative;">
+                        style="padding: 524px 0 114px;
+                    position: relative;  min-height:100%">
                         <div class="container">
-                            <div class=" text-start ">
-                                {{-- <div class="hero-content d-flex justify-content-start align-content-center "> --}}
-                                {{-- <div class="hero-shape-2 md-none">
+                            <div class=" text-start">
+                                {{-- <source src="{{ asset('/front/assets/img/slider/hhhhh.Mp4') }}" type="video/.mp4"> --}}
 
-                                    </div>
-                                    <div class="hero-shape-3 md-none">
+                                {{-- <h1 class=" md-display" style="color:#dbcf90;">Discover<br> Most
+                                    Suitable
+                                    Property</h1> --}}
 
-                                    </div>
-                                    <div class="hero-shape-4 md-none">
-
-                                    </div> --}}
-                                <h2 style="color:#dbcf90;font-size:45px;"></h2>
-                                {{-- </div> --}}
                             </div>
                         </div>
                     </div>
@@ -75,10 +70,10 @@
             <div class="row justify-content-md-center ">
                 <div class="col-lg-8 col-md-8 col-sm-10">
 
-                    <div class="search-area">
+                    <div class="search-area d-sm-none d-md-block d-none d-sm-block">
                         <div class="form-search">
                             <form>
-                                <div class="row col-md-12" style="margin-left:12px;">
+                                <div class="row col-md-12">
 
                                     <div class="col-md-3 col-sm-4 col-12 ">
                                         <input type="text" class="form-control"
@@ -96,26 +91,111 @@
                                             <option value="Jafarpur">Jafarpur</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 col-sm-2 col-12 " style="background:white; height: 55px;">
-                                        <img src="{{ asset('front/assets/img/slider/11.png') }}" alt=""
-                                            srcset="" style="height:60px;">
-                                        {{-- <button class="btn btn-success login-btn">Search</button> --}}
+                                    <div class="col-md-3 col-sm-2 col-12 ">
+                                        <img src="{{ asset('front/assets/img/slider/Search-button.png') }}" alt=""
+                                            srcset="">
+
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    {{-- <section class="team-wrap pt-255">
+        <div class="container">
+            <div class="row">
+                <div class="search-area d-sm-block d-md-none">
+                    <div class="form-search" style="position:absolute; ">
+                        <form>
+                            <div class="row col-md-12">
+
+                                <div class="col-md-3 col-sm-4 col-12 ">
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Property, Location Landmark..">
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-12 ">
+                                    <select class="form-control">
+                                        <option value="">Select City</option>
+                                        <option value="Azamgarh">Azamgarh</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-12 ">
+                                    <select class="form-control">
+                                        <option value="">Select Area</option>
+                                        <option value="Jafarpur">Jafarpur</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-2 col-12 ">
+                                    <img src="{{ asset('front/assets/img/slider/Search-button.png') }}" alt=""
+                                        srcset="">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section> --}}
 
 
-    <section class="team-wrap pt-40 mb-3">
+    <section class="team-wrap pt-40 mb-3 pt-5">
+        <div class="container">
+            {{-- <div class="row"> --}}
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="d-sm-block d-md-none"
+                    style="background: rgb(255 255 255 / 45%);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    {{-- <div class="search-area d-sm-block d-md-none"> --}}
+                    {{-- <div class="form-search" style="position:absolute; "> --}}
+                    <form style="background: rgb(255 255 255 / 45%);">
+                        <div class="row col-md-12">
+
+                            <div class="col-md-3 col-sm-4 col-12 ">
+                                <input type="text" class="form-control"
+                                    placeholder="Enter Property, Location Landmark..">
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-12 ">
+                                <select class="form-control">
+                                    <option value="">Select City</option>
+                                    <option value="Azamgarh">Azamgarh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-12 ">
+                                <select class="form-control">
+                                    <option value="">Select Area</option>
+                                    <option value="Jafarpur">Jafarpur</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-12 ">
+                                <img src="{{ asset('front/assets/img/slider/Search-button.png') }}" alt=""
+                                    srcset="">
+
+                            </div>
+                        </div>
+                    </form>
+                    {{-- </div> --}}
+                    {{-- </div> --}}
+                </div>
+            </div>
+
+
+            {{-- </div> --}}
+        </div>
+    </section>
+
+
+    <section class="team-wrap pt-40 mb-3 pt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="team-member "
+                    <div class="team-member"
                         style="height:300px; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
                         <div class="team-member-info pt-5">
                             <h2 class="pt-3">{{ $buildings->count() . ' +' ?? '' }}</h2>
@@ -339,7 +419,7 @@
 
 
 
-    <section class="about-wrap style2 mb-3">
+    {{-- <section class="about-wrap style2 mb-3">
         <div class="container pt-4">
             <div class="row">
                 <div class="col-md-12">
@@ -492,7 +572,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="team-wrap mt-3 mb-5">
         <div class="container mb-5">

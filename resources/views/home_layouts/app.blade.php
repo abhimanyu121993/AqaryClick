@@ -36,13 +36,16 @@
     <!-- custom Css-->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/toastr.min.css') }}">
-<style>
-    .sub-menu li:hover{
+    <style>
+        /* .sub-menu li:hover{
         background-color: gold;
         color: white;
-    }
-</style>
-@yield('headerarea')
+    } */
+
+        .las la-angle-down {
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,23 +62,24 @@
                     <div class="login-img row justify-content-md-center">
                         <img src="/front/assets/img/logo2.png">
                     </div>
-                    <form>
+
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
                         <div class="login-icons">
                             <div class="mb-3">
                                 <i class="fa fa-user icon"></i>
-                                <input type="email" class="form-control input-field" id=""
-                                    placeholder="Enter Your User Name">
+                                <input type="email" class="form-control input-field" id="email"
+                                    placeholder="Enter Your User Name" name="email">
                             </div>
                             <div class="mb-3">
                                 <i class="fa fa-lock icon"></i>
-                                <input type="password" class="form-control input-field" id=""
+                                <input type="password" class="form-control input-field" id="password" name="password"
                                     placeholder="Enter Your Password">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="login-btn-f">
                                 <a href="">
-                                    Forgot your password?
                                 </a>
                                 <button type="submit" class="btn btn-primary">log in</button>
                             </div>
@@ -130,7 +134,7 @@
                                                     data-bs-target="#contact" type="button" role="tab"
                                                     aria-controls="contact" aria-selected="true">Agent</button>
                                             </li> -->
-                                                <!-- <li class="nav-item" role="presentation">
+                                            <!-- <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="owner-customer"
                                                     data-bs-toggle="tab" data-bs-target="#address" type="button"
                                                     role="tab" aria-controls="address"
@@ -187,17 +191,17 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
                                 <!-- <div class="row gy-4 mb-3 " id="agent_checker"> -->
-                                    <!-- <div class="card-header align-items-center d-flex" id="ow">
+                                <!-- <div class="card-header align-items-center d-flex" id="ow">
                                         <hr>
                                         <h4 class="card-title mb-0 flex-grow-1">Agent</h4>
                                     </div>
@@ -205,47 +209,47 @@
                                 <label for="space" class="form-label">Broker/Agent</label>
                                 <select class="form-control select2 form-select" id="flag" name="boker_agent">
                                 @if (isset($brokeredit))
-                                    <option value="{{ $brokeredit->broker_agent }}" selected>{{ $brokeredit->broker_agent}}</option>
-                                    @else
-                                <option value="" selected hidden>--Select Type--</option>
+<option value="{{ $brokeredit->broker_agent }}" selected>{{ $brokeredit->broker_agent }}</option>
+@else
+<option value="" selected hidden>--Select Type--</option>
                                 <option value="broker">Broker</option>
                                     <option value="agent">Agent</option>
-                                    @endif
+@endif
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Join Date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="join_date" name="join_date" value="{{Carbon\Carbon::now()->format('d-m-Y') }}" placeholder="Enter Join Date " readonly>
+                                        <input type="text" class="form-control" id="join_date" name="join_date" value="{{ Carbon\Carbon::now()->format('d-m-Y') }}" placeholder="Enter Join Date " readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Broker First Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="first Name">
+                                        <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{ isset($brokeredit) ? $broker->broker_name : '' }}" placeholder="first Name">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Broker Last Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_lname" name="broker_lname" value="{{isset($brokeredit)? $broker->broker_lname: '' }}" placeholder="Last Name">
+                                        <input type="text" class="form-control" id="broker_lname" name="broker_lname" value="{{ isset($brokeredit) ? $broker->broker_lname : '' }}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Broker ID</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_id" name="broker_id" value="{{isset($brokeredit)? $broker->broker_id: '' }}" placeholder="Broker Id">
+                                        <input type="text" class="form-control" id="broker_id" name="broker_id" value="{{ isset($brokeredit) ? $broker->broker_id : '' }}" placeholder="Broker Id">
                                     </div>
                                 </div><div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Mobile</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{isset($broker)? $broker->mobile: '' }}" placeholder="Mobile No">
+                                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{ isset($broker) ? $broker->mobile : '' }}" placeholder="Mobile No">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Email</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="email" name="email" value="{{isset($brokeredit)? $brokeredit->email: '' }}" placeholder="abc@gmail.com">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{ isset($brokeredit) ? $brokeredit->email : '' }}" placeholder="abc@gmail.com">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -258,12 +262,12 @@
                                 <label for="space" class="form-label">Broker Type</label>
                                 <select class="form-control select2 form-select" id="broker_type" name="boker_type">
                                 @if (isset($brokeredit))
-                                    <option value="{{ $brokeredit->broker_type }}" selected>{{ $brokeredit->broker_type}}</option>
-                                    @else
-                                <option value="" selected hidden>--Select Type--</option>
+<option value="{{ $brokeredit->broker_type }}" selected>{{ $brokeredit->broker_type }}</option>
+@else
+<option value="" selected hidden>--Select Type--</option>
                                 <option value="personal">Personal</option>
                                     <option value="company">Company</option>
-                                    @endif
+@endif
                                 </select>
                             </div>
 
@@ -271,24 +275,24 @@
                                 <label for="space" class="form-label">Property Type</label>
                                 <select class="form-control select2 form-select" id="broker_type" name="boker_type">
                                 @if (isset($brokeredit))
-                                    <option value="{{ $brokeredit->property_type }}" selected>{{ $brokeredit->perperty_type}}</option>
-                                    @else
-                                <option value="" selected hidden>--Select Type--</option>
+<option value="{{ $brokeredit->property_type }}" selected>{{ $brokeredit->perperty_type }}</option>
+@else
+<option value="" selected hidden>--Select Type--</option>
                                 <option value="unit">Unit</option>
                                     <option value="building">Building</option>
-                                    @endif
+@endif
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Unit Ref.</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($brokeredit)? $brokeredit->unit_ref: '' }}" placeholder="Enter Broker Commission">
+                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{ isset($brokeredit) ? $brokeredit->unit_ref : '' }}" placeholder="Enter Broker Commission">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Building Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="building_name" name="building_name" value="{{isset($brokeredit)? $brokeredit->building_name: '' }}" placeholder="Enter Building Name">
+                                        <input type="text" class="form-control" id="building_name" name="building_name" value="{{ isset($brokeredit) ? $brokeredit->building_name : '' }}" placeholder="Enter Building Name">
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -487,14 +491,14 @@
                                         <h4 class="card-title mb-0 flex-grow-1"> Tenant </h4>
                                     </div>
                                     @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
+<div class="alert alert-danger alert-dismissible">
                             <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
+                                @foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
                             </ul>
                         </div>
-                        @endif
+@endif
                         <div class="row gy-4 mb-3">
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Tenant Type</label>
@@ -612,7 +616,7 @@
                                 placeholder=" Total Unit " readonly>
                         </div>
                     </div> -->
-                    <!-- <div class="col-xxl-3 col-md-3">
+                                <!-- <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="process" name="status">
                                     <option value="" selected hidden>-----Select Status-----</option>
@@ -667,7 +671,7 @@
                               </div>
 
                               <!-- test -->
-                            <!-- </div>
+                                <!-- </div>
                             <div id="sponser" class="row">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1">Sponsor</h4>
@@ -714,8 +718,8 @@
                                 </div>
                         </div>  -->
 
-                    </div>
-                    <!-- <div class="col-md-3 col-sm-12 col-lg-4 mt-3">
+                        </div>
+                        <!-- <div class="col-md-3 col-sm-12 col-lg-4 mt-3">
               <div class="justify-content-md-center">
                 <div class="profile-image">
                   <img src="/front/assets/img/users/user.png">
@@ -725,47 +729,49 @@
               <button class="btn btn-primary show-btn">Show</button>
               <button class="btn btn-default hide-btn">Hide</button>
             </div> -->
-            <div class="row gy-4 mb-4">
-                                <div class=" col-md-4">
-                                    <label for="name" class="form-label">First Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="first_name" placeholder="First Name">
-                                    </div>
+                        <div class="row gy-4 mb-4">
+                            <div class=" col-md-4">
+                                <label for="name" class="form-label">First Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="first_name"
+                                        placeholder="First Name">
                                 </div>
-                                <div class=" col-md-4">
-                                    <label for="owner_name" class="form-label">Last Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name">
-                                    </div>
+                            </div>
+                            <div class=" col-md-4">
+                                <label for="owner_name" class="form-label">Last Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="last_name"
+                                        placeholder="Last Name">
                                 </div>
-                                <div class=" col-md-4">
-                                    <label for="incharge_name" class="form-label">Phone number </label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="phone"
-                                            placeholder="Phone Number">
-                                    </div>
+                            </div>
+                            <div class=" col-md-4">
+                                <label for="incharge_name" class="form-label">Phone number </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="phone"
+                                        placeholder="Phone Number">
                                 </div>
-                                <div class=" col-md-6">
-                                    <label for="incharge_name" class="form-label"> Email </label>
-                                    <div class="input-group">
-                                        <input type="email" class="form-control" name="email" placeholder="Email">
-                                    </div>
+                            </div>
+                            <div class=" col-md-6">
+                                <label for="incharge_name" class="form-label"> Email </label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Email">
                                 </div>
-                                <div class=" col-md-6">
-                                    <label for="incharge_name" class="form-label"> Password </label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="password"
-                                            placeholder="Enter Password">
-                                    </div>
+                            </div>
+                            <div class=" col-md-6">
+                                <label for="incharge_name" class="form-label"> Password </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="password"
+                                        placeholder="Enter Password">
                                 </div>
-                                <!-- <div class=" col-md-3">
+                            </div>
+                            <!-- <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label">Customer Code</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="customer_code"
                                             placeholder="Customer Code">
                                     </div>
                                 </div> -->
-                                <!-- <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                     <label for="space" class="form-label">Customer Type</label>
                                     <select class="form-control" id="customer" name="customer_type">
                                         <option value="">-----Select Customer-----</option>
@@ -773,15 +779,15 @@
                                         <option value="Company">Company</option>
                                     </select>
                                 </div> -->
-                                <div class="col-md-12">
-                                    <label for="remark" class="form-label">Address</label>
-                                    <textarea class="form-control" name="address">
+                            <div class="col-md-12">
+                                <label for="remark" class="form-label">Address</label>
+                                <textarea class="form-control" name="address">
                                     </textarea>
-                                </div>
-
                             </div>
 
-                    <!-- <div class="row gy-4 mb-3" id="cmpname">
+                        </div>
+
+                        <!-- <div class="row gy-4 mb-3" id="cmpname">
                         <div class="card-header align-items-center d-flex" id="company">
                             <hr>
                             <h4 class="card-title mb-0 flex-grow-1"> Company Detail</h4>
@@ -980,7 +986,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
-                <div class="modal-body term-body">
+                <div class="modal-body term-body" style="background-color: #20438e !important;">
                     <h5 class="modal-title" id="termModalLabel">Term & Conditions</h5>
                     <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet, pellentesque
                         bibendum vel amet, facilisi ac sem sem. Sem ipsum mauris, leo morbi eget morbi. Ipsum ut nullam
@@ -1003,7 +1009,7 @@
                         <div class="col-md-12 mb-10">
                             <button type="button" class="btn btn-secondary decline"
                                 data-bs-dismiss="modal">Decline</button>
-                            <button type="button" class="btn btn-primary accept">Accept</button>
+                            <button type="button" class="btn btn-secondary decline">Accept</button>
                         </div>
                     </div>
                 </div>
@@ -1013,168 +1019,169 @@
 
     <div class="page-wrapper">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-            <!--Toaster Js-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        <!--Toaster Js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <script>
             // $(document).ready(function() {
-                // $("input[type='radio']").click(function(){
-                //       var radioValue = $(".own_cmp").css('background-color','yellow');
+            // $("input[type='radio']").click(function(){
+            //       var radioValue = $(".own_cmp").css('background-color','yellow');
 
-                //           alert(radioValue);
+            //           alert(radioValue);
 
-                //   });
-        //         $('#compname').hide();
-        //         $('.individual').hide();
-        //         $('#tenant_check').hide();
-        //         $('#agent_checker').show();
-
-
-        //         $("#tnt_check").click(function() {
-        //             var at = $('#form').attr('action', '/admin/tenant');
-        //             $('#tenant_check').show();
-        //             $('#agent_checker').hide();
-        //             $('#compname').hide();
-        //             $('.individual').hide();
-        //         });
-        //         $("#owner_individual_check").click(function() {
-        //             var at = $('#form').attr('action', '/owner-company');
-
-        //             $('.individual').show();
-        //             $('#agent_checker').hide();
-        //             $('#compname').hide();
-        //             $('#tenant_check').hide();
-
-        //         });
-        //         $("#owner_company_check").click(function() {
-        //             var at = $('#form').attr('action', '/owner-company');
-        //             $('#compname').show();
-        //             $('#agent_checker').hide();
-        //             $('.individual').hide();
-        //             $('#tenant_check').hide();
-
-        //             $("#agent_check").click(function() {
-        //                 $('#agent_checker').show();
-        //                 $('#compname').hide();
-        //                 $('#tenant_check').hide();
-        //                 $('.individual').hide();
-        //             });
+            //   });
+            //         $('#compname').hide();
+            //         $('.individual').hide();
+            //         $('#tenant_check').hide();
+            //         $('#agent_checker').show();
 
 
-        //         });
-        //     });
-        // </script>
+            //         $("#tnt_check").click(function() {
+            //             var at = $('#form').attr('action', '/admin/tenant');
+            //             $('#tenant_check').show();
+            //             $('#agent_checker').hide();
+            //             $('#compname').hide();
+            //             $('.individual').hide();
+            //         });
+            //         $("#owner_individual_check").click(function() {
+            //             var at = $('#form').attr('action', '/owner-company');
 
-        // <script>
-        //     //    alert();
-        //     $(document).ready(function() {
-        //         // alert("jhgigygyugy");
-        //         $("#tenant_document_type").change(function() {
-        //             $('#oid').hide();
-        //             $('#cr').hide();
-        //             $('#passcode').hide();
-        //             $(this).find("option:selected").each(function() {
-        //                 var optionValue = $(this).attr("value");
-        //                 if (optionValue == 'OID') {
-        //                     $('#oid').show();
-        //                 } else if (optionValue == 'CR') {
-        //                     $('#cr').show();
-        //                 } else if (optionValue == 'Passcode') {
-        //                     $('#passcode').show();
-        //                 }
-        //             });
-        //         }).change();
-        //     });
-        // </script>
+            //             $('.individual').show();
+            //             $('#agent_checker').hide();
+            //             $('#compname').hide();
+            //             $('#tenant_check').hide();
 
-<script>
-    $(document).ready(function() {
-        toastr.options.timeOut = 10000;
-        @if (Session::has('error'))
-            toastr.error('{{ Session::get('error') }}');
-        @elseif(Session::has('success'))
-            toastr.success('{{ Session::get('success') }}');
-        @endif
-    });
+            //         });
+            //         $("#owner_company_check").click(function() {
+            //             var at = $('#form').attr('action', '/owner-company');
+            //             $('#compname').show();
+            //             $('#agent_checker').hide();
+            //             $('.individual').hide();
+            //             $('#tenant_check').hide();
 
-</script>
-<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+            //             $("#agent_check").click(function() {
+            //                 $('#agent_checker').show();
+            //                 $('#compname').hide();
+            //                 $('#tenant_check').hide();
+            //                 $('.individual').hide();
+            //             });
 
-<!-- <script>
-$(document).ready(function() {
+
+            //         });
+            //     });
+            //
+        </script>
+
+
+        <script>
+            //     //    alert();
+            //     $(document).ready(function() {
+            //         // alert("jhgigygyugy");
+            //         $("#tenant_document_type").change(function() {
+            //             $('#oid').hide();
+            //             $('#cr').hide();
+            //             $('#passcode').hide();
+            //             $(this).find("option:selected").each(function() {
+            //                 var optionValue = $(this).attr("value");
+            //                 if (optionValue == 'OID') {
+            //                     $('#oid').show();
+            //                 } else if (optionValue == 'CR') {
+            //                     $('#cr').show();
+            //                 } else if (optionValue == 'Passcode') {
+            //                     $('#passcode').show();
+            //                 }
+            //             });
+            //         }).change();
+            //     });
+            //
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                toastr.options.timeOut = 10000;
+                @if (Session::has('error'))
+                    toastr.error('{{ Session::get('error') }}');
+                @elseif (Session::has('success'))
+                    toastr.success('{{ Session::get('success') }}');
+                @endif
+            });
+        </script>
+        <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+
+        <!-- <script>
+            $(document).ready(function() {
                 $('#qid').hide();
                 $('#cr').hide();
                 $('#passport').hide();
-            $("#tenant_document_type").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue == 'QID') {
-                        $('#qid').show();
-                        $('#cr').hide();
-                        $('#passport').hide();
+                $("#tenant_document_type").change(function() {
+                    $(this).find("option:selected").each(function() {
+                        var optionValue = $(this).attr("value");
+                        if (optionValue == 'QID') {
+                            $('#qid').show();
+                            $('#cr').hide();
+                            $('#passport').hide();
 
-                    } else if (optionValue == 'CR') {
-                        $('#cr').show();
-                        $('#qid').hide();
-                        $('#passport').hide();
+                        } else if (optionValue == 'CR') {
+                            $('#cr').show();
+                            $('#qid').hide();
+                            $('#passport').hide();
 
-                    }else if (optionValue == 'Passport') {
-                        $('#passport').show();
-                        $('#qid').hide();
-                        $('#cr').hide();
+                        } else if (optionValue == 'Passport') {
+                            $('#passport').show();
+                            $('#qid').hide();
+                            $('#cr').hide();
 
-                    }
-                });
-            }).change();
-        });
-</script>
+                        }
+                    });
+                }).change();
+            });
+        </script>
 <script>
-$(document).ready(function() {
-    $('#sponser').hide();
-            $("#tenant_type").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue == 'TC') {
-                        $('#sponser').show();
+    $(document).ready(function() {
+        $('#sponser').hide();
+        $("#tenant_type").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'TC') {
+                    $('#sponser').show();
 
-                    } else if (optionValue == 'TP') {
-                        $('#sponser').hide();
-                    }
-                    var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
+                } else if (optionValue == 'TP') {
+                    $('#sponser').hide();
+                }
+                var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-                  $('#file_no').val(p);
+                        $('#file_no').val(p);
                     }
                 });
-                });
-            }).change();
-        });
+            });
+        }).change();
+    });
 </script>
 <script>
-$(document).ready(function() {
-    $('#account_no').hide();
-    $('#has_cheque').hide();
-                $("#payment_method").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue == 'Cash') {
-                        $('#has_cheque').hide();
-                        $('#account_no').hide();
+    $(document).ready(function() {
+        $('#account_no').hide();
+        $('#has_cheque').hide();
+        $("#payment_method").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Cash') {
+                    $('#has_cheque').hide();
+                    $('#account_no').hide();
 
-                    } else if (optionValue == 'Cheques') {
-                        $('#has_cheque').show();
-                        $('#account_no').hide();
+                } else if (optionValue == 'Cheques') {
+                    $('#has_cheque').show();
+                    $('#account_no').hide();
 
-                    }
-                    else if (optionValue == 'Transfer Bank') {
-                        $('#has_cheque').hide();
-                        $('#account_no').show();
+                } else if (optionValue == 'Transfer Bank') {
+                    $('#has_cheque').hide();
+                    $('#account_no').show();
 
-                    }
-                });
-            }).change();
-        });
+                }
+            });
+        }).change();
+    });
 </script>
 <script>
     $(document).ready(function() {
@@ -1187,8 +1194,8 @@ $(document).ready(function() {
                     method: 'get',
                     success: function(p) {
                         console.log(p);
-                  $('#unit_type').html(p.html);
-                  $('#total_unit').val(p.total_unit);
+                        $('#unit_type').html(p.html);
+                        $('#total_unit').val(p.total_unit);
                     }
                 });
             });
@@ -1196,68 +1203,66 @@ $(document).ready(function() {
     });
 </script>
 <script>
-$(document).ready(function() {
-    $('#rental_time').hide();
-                $("#rental_period").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue == 'Days') {
-                        $('#rental_time').show();
-                        $('#change_rental_time').text("Days") ;
-                        $('#change_placeholder').attr('placeholder','Enter No Of Days');
-                        } else if (optionValue == 'Months') {
-                        $('#rental_time').show();
-                        $('#change_rental_time').text("Months") ;
-                        $('#change_placeholder').attr('placeholder','Enter No Of Months');
+    $(document).ready(function() {
+        $('#rental_time').hide();
+        $("#rental_period").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Days') {
+                    $('#rental_time').show();
+                    $('#change_rental_time').text("Days");
+                    $('#change_placeholder').attr('placeholder', 'Enter No Of Days');
+                } else if (optionValue == 'Months') {
+                    $('#rental_time').show();
+                    $('#change_rental_time').text("Months");
+                    $('#change_placeholder').attr('placeholder', 'Enter No Of Months');
 
-                    }
-                    else if (optionValue == 'Years') {
-                        $('#rental_time').show();
-                        $('#change_rental_time').text("Years");
-                        $('#change_placeholder').attr('placeholder','Enter No Of Years');
+                } else if (optionValue == 'Years') {
+                    $('#rental_time').show();
+                    $('#change_rental_time').text("Years");
+                    $('#change_placeholder').attr('placeholder', 'Enter No Of Years');
 
-                    }
-                });
-            }).change();
-        });
+                }
+            });
+        }).change();
+    });
 </script> -->
-<script>
-        $(document).ready(function() {
-            // alert("jhgigygyugy");
-            $("#customer").change(function() {
-                $('#indi').hide();
-                $('#cmpname').hide();
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    // alert(optionValue);
-                    if (optionValue == 'Individual') {
-                        $('#indi').show();
-                    } else if (optionValue == 'Company') {
-                        $('#cmpname').show();
-                    }
-                });
-            }).change();
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                // alert("jhgigygyugy");
+                $("#customer").change(function() {
+                    $('#indi').hide();
+                    $('#cmpname').hide();
+                    $(this).find("option:selected").each(function() {
+                        var optionValue = $(this).attr("value");
+                        // alert(optionValue);
+                        if (optionValue == 'Individual') {
+                            $('#indi').show();
+                        } else if (optionValue == 'Company') {
+                            $('#cmpname').show();
+                        }
+                    });
+                }).change();
+            });
+        </script>
 
-<script>
-        $(document).ready(function() {
-            $("#bank_code").change(function() {
-                $('#ifsc').hide();
-                $('#swift').hide();
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue == 'ifsc') {
-                        $('#ifsc').show();
-                        $('#swift').hide();
-                    } else if (optionValue == 'swift') {
-                        $('#swift').show();
-                        $('#ifsc').hide();
+        <script>
+            $(document).ready(function() {
+                $("#bank_code").change(function() {
+                    $('#ifsc').hide();
+                    $('#swift').hide();
+                    $(this).find("option:selected").each(function() {
+                        var optionValue = $(this).attr("value");
+                        if (optionValue == 'ifsc') {
+                            $('#ifsc').show();
+                            $('#swift').hide();
+                        } else if (optionValue == 'swift') {
+                            $('#swift').show();
+                            $('#ifsc').hide();
 
 
-                    }
-                });
-            }).change();
-        });
-    </script>
-@yield('scriptarea')
+                        }
+                    });
+                }).change();
+            });
+        </script>
