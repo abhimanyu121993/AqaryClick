@@ -310,6 +310,7 @@
             background-color: #ffc20b;
         }
 
+
         .pricing-block:nth-child(3) .icon-box i,
         .pricing-block:nth-child(3) .price {
             color: #ffc20b;
