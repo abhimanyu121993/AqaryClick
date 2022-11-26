@@ -114,9 +114,9 @@
         function dateTime() {
             var ndate = new Date();
             var hours = ndate.getHours();
-            var message = hours < 12 ? 'Good Morning! ' : hours < 18 ? 'Good Afternoon! ' : 'Good Evening! ';
+            var message = hours < 12 ? '<b><span>Good Morning !</span></b>' : hours < 18 ? '<b><span class="text-center">Good Afternoon !</span></b>' : '<b><span class="text-center">Good Evening !</span></b>';
             toastr.options.timeOut = 10000;
-            toastr.success(message + "Welcome to AqaryClick");
+            toastr.success(message + "<br/><b>Welcome to AqaryClick</b>");
 
         }
 
