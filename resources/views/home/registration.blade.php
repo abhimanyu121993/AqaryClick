@@ -280,24 +280,24 @@
 
         .pricing-block:nth-child(2) .icon-box i,
         .pricing-block:nth-child(2) .inner-box {
-            border-color: #1d95d2;
+            border-color: #81808075;
         }
 
         .pricing-block:nth-child(2) .btn-box a,
         .pricing-block:nth-child(2) .icon-box {
-            background-color: #1d95d2;
+            background-color: #81808075;
         }
 
         .pricing-block:nth-child(2) .inner-box:hover .btn-box a {
-            color: #1d95d2;
+            color: #81808075;
             background: none;
             border-radius: 0px;
-            border-color: #1d95d2;
+            border-color: #81808075;
         }
 
         .pricing-block:nth-child(2) .icon-box i,
         .pricing-block:nth-child(2) .price {
-            color: #1d95d2;
+            color: #81808075;
         }
 
         .pricing-block:nth-child(3) .icon-box i,
@@ -321,6 +321,57 @@
             border-radius: 0px;
             border-color: #ffc20b;
         }
+        .pricing-block:nth-child(4) .icon-box i,
+        .pricing-block:nth-child(4) .inner-box {
+            border-color: #20438e;
+        }
+
+        .pricing-block:nth-child(4) .btn-box a,
+        .pricing-block:nth-child(4) .icon-box {
+            background-color: #20438e;
+        }
+
+        .pricing-block:nth-child(4) .icon-box i,
+        .pricing-block:nth-child(4) .price {
+            color: #20438e;
+        }
+
+        .pricing-block:nth-child(4) .inner-box:hover .btn-box a {
+            color: #20438e;
+            background: none;
+            border-radius: 0px;
+            border-color: #20438e;
+        }
+        .pricing1{
+            color: white !important;
+        }
+        .pricing1:hover{
+            color: #40cbb4 !important;
+        }
+        .pricing2{
+            color: white !important;
+        }
+        .pricing2:hover{
+            color: #81808075 !important;
+        }
+        .pricing3{
+            color: white !important;
+        }
+        .pricing3:hover{
+            color: #ffc20b !important;
+        }
+        .pricing4{
+            color: white !important;
+        }
+        .pricing4:hover{
+            color: #20438e !important;
+        }
+        .inner-box:hover .pricing1 .pricing2 .pricing3 .pricing4{
+            color: #f57e1a !important;
+        }
+        /* .inner-box:hover{
+            color: #ff4f1e !important;
+        } */
     </style>
 @endsection
 @section('content')
@@ -377,7 +428,7 @@
                         <div class="outer-box">
                             <div class="row">
                                 <!-- Pricing Block -->
-                                <div class="pricing-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp">
+                                <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-paper-plane"></i></div>
@@ -390,13 +441,13 @@
                                             <li class="true">1 User</li>
                                         </ul>
                                         <div class="btn-box">
-                                            <a href="#" class="theme-btn">SUBSCRIBE</a>
+                                            <a href="#" class="theme-btn pricing1">SUBSCRIBE</a>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Pricing Block -->
-                                <div class="pricing-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
+                                <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-gem"></i></div>
@@ -409,13 +460,13 @@
                                             <li class="true">2 User</li>
                                         </ul>
                                         <div class="btn-box">
-                                            <a href="#" class="theme-btn">SUBSCRIBE</a>
+                                            <a href="#" class="theme-btn pricing2">SUBSCRIBE</a>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Pricing Block -->
-                                <div class="pricing-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
+                                <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-rocket"></i></div>
@@ -428,13 +479,15 @@
                                             <li class="true">3 User</li>
                                         </ul>
                                         <div class="btn-box">
-                                            <a href="#" class="theme-btn" >SUBSCRIBE</a>
+                                            <a href="#" class="theme-btn pricing3" >SUBSCRIBE</a>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Pricing Block -->
-                                <div class="pricing-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
+                                <div class="pricing-block col-lg-3
+
+                                 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-rocket"></i></div>
@@ -447,7 +500,7 @@
                                             <li class="true">4 User</li>
                                         </ul>
                                         <div class="btn-box">
-                                            <a href="#" class="theme-btn">SUBSCRIBE</a>
+                                            <a href="#" class="theme-btn pricing4">SUBSCRIBE</a>
                                         </div>
                                     </div>
                                 </div>

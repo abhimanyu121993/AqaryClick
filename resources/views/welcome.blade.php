@@ -116,7 +116,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="team-member "
-                        style="height:300px; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                        style="height:250px; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
                         <div class="team-member-info pt-5">
                             <h2 class="pt-3">{{ $buildings->count() . ' +' ?? '' }}</h2>
                             <p style="font-size:20px; ">Premium Buildings</p>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="team-member"
-                        style="height:300px; background:white; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                        style="height:250px; background:white; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
                         <div class="team-member-info  pt-5">
                             <h2 class="pt-3">{{ App\Models\Tenant::count() . ' +' ?? '' }}</h2>
                             <p style="font-size:20px;">Happy Tenants</p>
@@ -135,7 +135,7 @@
                 <div class="col-lg-4
                                 col-md-12 col-sm-12">
                     <div class="team-member"
-                        style="height:300px;background:white;background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                        style="height:250px;background:white;background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
                         <div class="team-member-info  pt-5">
                             <h2 class="pt-3">{{ App\Models\Unit::where('unit_status', 3)->count() . ' +' ?? '' }}
                             </h2>
