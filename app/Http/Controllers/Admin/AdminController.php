@@ -19,7 +19,6 @@ use Spatie\Permission\Models\Permission;
 class AdminController extends Controller
 {
     public function dashboard()
-
     {
 
         $cheque=Cheque::where('cheque_status','Valid')->get();

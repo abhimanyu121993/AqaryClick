@@ -42,6 +42,7 @@
         color: white;
     }
 </style>
+@yield('headerarea')
 </head>
 
 <body>
@@ -90,7 +91,7 @@
             </div>
         </div>
     </div>
-  
+
     <!-- register modal -->
     {{-- @if (Session::has('success'))
         <p style="color:green">{{ Session::get('success') }}</p>
@@ -587,7 +588,7 @@
                                     <input type="number" class="form-control" name="post_office" placeholder="Post Office">
                                 </div>
                             </div>
-                        
+
 
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Unit Address</label>
@@ -595,7 +596,7 @@
                                 </textarea>
                             </div>
 
-                            
+
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
                             <div class="input-group">
@@ -694,7 +695,7 @@
                             <input type="text" class="form-control" name="sponsor_phone" placeholder="sponsor Phone">
                         </div>
                     </div>
-                   
+
 
                     <div class="col-xxl-3 col-md-12">
                         <label for="city" class="form-label">File Attachment</label>
@@ -710,10 +711,10 @@
                                     </div>
                                 </div>
                                 <div>
-                                </div> 
+                                </div>
                         </div>  -->
 
-                    </div> 
+                    </div>
                     <!-- <div class="col-md-3 col-sm-12 col-lg-4 mt-3">
               <div class="justify-content-md-center">
                 <div class="profile-image">
@@ -777,7 +778,7 @@
                                     <textarea class="form-control" name="address">
                                     </textarea>
                                 </div>
-                              
+
                             </div>
 
                     <!-- <div class="row gy-4 mb-3" id="cmpname">
@@ -822,7 +823,7 @@
                                 <input type="file" class="form-control" name="document_file" placeholder="Upload File">
                             </div>
                         </div>
-                       
+
                         <div class="col-md-3">
                             <label for="city" class="form-label">Document Exipry Date</label>
                             <div class="input-group">
@@ -1253,9 +1254,10 @@ $(document).ready(function() {
                         $('#swift').show();
                         $('#ifsc').hide();
 
-                        
+
                     }
                 });
             }).change();
         });
     </script>
+@yield('scriptarea')

@@ -20,9 +20,6 @@
                                 <li>
                                     <a class="active" href="/">HOME</a>
                                 </li>
-                                {{-- <li>
-                                    <a href="/about-us">ABOUT US</a>
-                                </li> --}}
                                 <li>
                                     <a href="/about-us">ABOUT US</a>
                                 </li>

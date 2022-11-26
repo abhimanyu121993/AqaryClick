@@ -54,6 +54,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get("/contect-us","contect");
     Route::post("/contact","contactSubmit")->name('contactus');
 });
+
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
 Route::post('/login',[LoginController::class, 'store'])->name('login');
@@ -119,7 +120,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
     Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
-    Route::resource('invoice',InvoiceController::class); 
+    Route::resource('invoice',InvoiceController::class);
     Route::resource('tenant',TenantController::class);
     Route::get('fetch-tenant-file-no/{file_no}',[TenantController::class,'fileNumber'])->name('fileNumber');
     Route::get('fetch-tenant-contract-no/{tenant_id}',[ContractController::class,'contractNumber'])->name('contractNumber');
