@@ -34,7 +34,7 @@ class ContractController extends Controller
         $max_id=Contract::max('id')+1;
         $CC='CC'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
         $tenant=Tenant::all();
-        $lessor=Owner::all();
+        $lessor=Customer::all();
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
         $invoice=Invoice::all()->count();
@@ -176,7 +176,7 @@ class ContractController extends Controller
      */
     public function edit($id)
     {         $invoiceDetails=Invoice::where('payment_status','Paid')->get();
-      
+
         $invoice=Invoice::all()->count();
         $total_amount=Invoice::withSum('Contract','rent_amount')->get()->sum('contract_sum_rent_amount');
         $total_amt=$invoice*$total_amount;
@@ -189,7 +189,7 @@ class ContractController extends Controller
         $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
 
         $id = Crypt::decrypt($id);
-        $contractedit=Contract::find($id);        
+        $contractedit=Contract::find($id);
         $tenant=Tenant::pluck('tenant_english_name');
         $tenant_doc=Tenant::pluck('tenant_document');
         $tenant_nation=Nationality::pluck('name');
@@ -233,7 +233,7 @@ class ContractController extends Controller
         $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount($rent_amt)->get();
 
 
-        $mainpic=Contract::find($id)->lessor_sign??''; 
+        $mainpic=Contract::find($id)->lessor_sign??'';
         if($request->hasFile('lessor_sign')){
             $mainpic='build-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
             $request->lessor_sign->move(public_path('upload/contract/signature'),$mainpic);
@@ -241,7 +241,7 @@ class ContractController extends Controller
             File::delete(public_path('upload/contract/signature' . $oldpic));
             Contract::find($id)->update(['lessor_sign' => $mainpic]);
         }
-        $mainpic2=Contract::find($id)->tenant_sign??'';        
+        $mainpic2=Contract::find($id)->tenant_sign??'';
         if($request->hasFile('tenant_sign')){
             $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
             $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
@@ -323,7 +323,7 @@ class ContractController extends Controller
     public function fetchTenantDetails($tenant_name){
         $res=Tenant::where('tenant_type',$tenant_name)->get();
         $html=' <option value="">--Select Tenant--</option>';
-                
+
         foreach($res as $r){
             $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
         }
