@@ -56,12 +56,6 @@
                     position: relative;  min-height:100%">
                         <div class="container">
                             <div class=" text-start">
-                                {{-- <source src="{{ asset('/front/assets/img/slider/hhhhh.Mp4') }}" type="video/.mp4"> --}}
-
-                                {{-- <h1 class=" md-display" style="color:#dbcf90;">Discover<br> Most
-                                    Suitable
-                                    Property</h1> --}}
-
                             </div>
                         </div>
                     </div>
@@ -91,9 +85,9 @@
                                             <option value="Jafarpur">Jafarpur</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 col-sm-2 col-12 ">
+                                    <div class="col-md-3 col-sm-2 col-12 " style="background:white;">
                                         <img src="{{ asset('front/assets/img/slider/Search-button.png') }}" alt=""
-                                            srcset="">
+                                            srcset="" class="p-2">
 
                                     </div>
                                 </div>
@@ -152,8 +146,7 @@
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="d-sm-block d-md-none"
                     style="background: rgb(255 255 255 / 45%);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    {{-- <div class="search-area d-sm-block d-md-none"> --}}
-                    {{-- <div class="form-search" style="position:absolute; "> --}}
+
                     <form style="background: rgb(255 255 255 / 45%);">
                         <div class="row col-md-12">
 
@@ -173,59 +166,70 @@
                                     <option value="Jafarpur">Jafarpur</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 col-sm-2 col-12 ">
+                            <div class="col-md-3 col-sm-2 col-12" style="background: white;">
                                 <img src="{{ asset('front/assets/img/slider/Search-button.png') }}" alt=""
-                                    srcset="">
+                                    srcset="" class="p-2">
 
                             </div>
                         </div>
                     </form>
-                    {{-- </div> --}}
-                    {{-- </div> --}}
+
                 </div>
             </div>
 
 
-            {{-- </div> --}}
+
         </div>
     </section>
 
 
-    <section class="team-wrap pt-40 mb-3 pt-5">
+    <section class="team-wrap pt-3 mb-3 ">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="team-member"
-                        style="height:300px; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
-                        <div class="team-member-info pt-5">
-                            <h2 class="pt-3">{{ $buildings->count() . ' +' ?? '' }}</h2>
-                            <p style="font-size:20px; ">Premium Buildings</p>
+            <div class="row col-md-10 d-flex justify-content-center offset-md-1">
+                <div class="col-lg-4 col-md-12 col-sm-12 p-5 ">
+                    <div class="team-member" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                        <div class="team-member-info pt-4 mb-4">
+                            <h2 class="">{{ $buildings->count() . ' +' ?? '' }}</h2>
+                            <h3 style="color:gray">Premium Buildings</h3>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="team-member"
-                        style="height:300px; background:white; background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
-                        <div class="team-member-info  pt-5">
-                            <h2 class="pt-3">{{ App\Models\Tenant::count() . ' +' ?? '' }}</h2>
-                            <p style="font-size:20px;">Happy Tenants</p>
+                <div class="col-lg-4 col-md-12 col-sm-12 p-5">
+                    <div class="team-member"style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                        <div class="team-member-info pt-4 mb-4">
+                            <h2 class="">{{ App\Models\Tenant::count() . ' +' ?? '' }}</h2>
+                            <h3 style="color:gray">Happy Tenants</h3>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4
-                                col-md-12 col-sm-12">
-                    <div class="team-member"
-                        style="height:300px;background:white;background:white; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
-                        <div class="team-member-info  pt-5">
-                            <h2 class="pt-3">{{ App\Models\Unit::where('unit_status', 3)->count() . ' +' ?? '' }}
+                                col-md-12 col-sm-12 p-5">
+                    <div class="team-member" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                        <div class="team-member-info pt-4 mb-4">
+                            <h2 class="">{{ App\Models\Unit::where('unit_status', 3)->count() . ' +' ?? '' }}
                             </h2>
-                            <p style="font-size:20px;">Vacant Units</p>
+                            <h3 style="color:gray">Vacant<br> Units</h3>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <section class="course-wrap mb-3">
@@ -265,6 +269,8 @@
                                     </div>
                                 </div>
                             @endforeach
+
+
                             {{-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                         <div class="course-card style1">
                             <div class="course-img">
@@ -419,7 +425,12 @@
 
 
 
-    {{-- <section class="about-wrap style2 mb-3">
+
+
+
+
+
+    <section class="about-wrap style2 mb-3">
         <div class="container pt-4">
             <div class="row">
                 <div class="col-md-12">
@@ -572,7 +583,7 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
 
     <section class="team-wrap mt-3 mb-5">
         <div class="container mb-5">
@@ -585,8 +596,7 @@
                 </div>
             </div>
             <div class="row justify-content-md-center mb-5">
-                <div class="col-lg-10 col-md-12 col-sm-12"
-                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
                     <div class="">
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible">

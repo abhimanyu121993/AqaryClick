@@ -27,8 +27,7 @@
             </div>
             <div class="row justify-content-md-center pt-5">
                 <div class="col-lg-4 col-md-6">
-                    <div class="contact-address"
-                        style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                    <div class="contact-address" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                         <div class="contact-icon">
                             <i class="ri-map-pin-fill"></i>
                         </div>
@@ -39,8 +38,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="contact-address"
-                        style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                    <div class="contact-address" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                         <div class="contact-icon">
                             <i class="ri-phone-line"></i>
                         </div>
@@ -52,8 +50,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div
-                        class="contact-address"style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                    <div class="contact-address"style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                         <div class="contact-icon">
                             <i class="ri-mail-send-line"></i>
                         </div>
@@ -77,53 +74,9 @@
                 </div>
             </div>
         </div>
-        {{-- <section class="team-wrap mt-3 mb-3">
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-lg-10 col-md-12 col-sm-12">
-                    <div class="team-member">
-                        <div class="contect-form">
-                            <h4>Contact Form</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="input-icons">
-                                        <label for="" class="form-label">Your Name</label>
-                                        <div class="mb-3">
-                                            <i class="fa fa-user icon"></i>
-                                            <input type="text" class="form-control input-field" id="">
-                                        </div>
-                                        <label class="form-label">Contect No.</label>
-                                        <div class="mb-3">
-                                            <i class="fa fa-phone icon"></i>
-                                            <input type="text" class="form-control input-field">
-                                        </div>
-                                        <label class="form-label">Email</label>
-                                        <div class="mb-3">
-                                            <i class="fa fa-envelope icon"></i>
-                                            <input type="email" class="form-control input-field">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <div class="input-icons">
-                                        <label class="form-label">Message</label>
-                                        <textarea class="form-control input-field" rows="9"></textarea>
-                                    </div>
-                                </div>
-                                <div class="term-btn justify-content-md-center mt-2 mb-2">
-                                    <button type="button" class="btn btn-primary accept">Send Message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
         <div class="row justify-content-md-center mb-5 pt-5">
-            <div class="col-lg-10 col-md-12 col-sm-12"
-                style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+            <div class="col-lg-10 col-md-12 col-sm-12" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
                 <div class="">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">

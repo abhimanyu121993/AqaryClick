@@ -4,14 +4,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-4 col-5 order-lg-1 order-md-1 order-1">
-                    <div class="logo">
+                    <div class="logo mx-2">
                         <a href="/">
                             <img class="logo-light" src="/front/assets/img/logo.png" alt="Image"
                                 style="min-height:60px;">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-5 col-7 order-lg-2 order-md-3 order-3">
+                <div class="col-lg-6 col-md-5 col-7 order-lg-2 order-md-3 order-3">
                     <div class="main-menu-wrap style1">
                         <div class="menu-close xl-none">
                             <a href="javascript:void(0)"><i class="las la-times"></i></a>
@@ -19,22 +19,22 @@
                         <div id="menu" class="text-center">
                             <ul class="main-menu ">
                                 <li>
-                                    <a class="active" href="/">HOME</a>
+                                    <a class="active mx-2" href="/">HOME</a>
                                 </li>
                                 {{-- <li>
                                     <a href="/about-us">ABOUT US</a>
                                 </li> --}}
                                 <li>
-                                    <a href="/about-us">ABOUT US</a>
+                                    <a href="/about-us" class="mx-2">ABOUT US</a>
                                 </li>
                                 {{-- <li>
                                     <a href="/properties">PROPERTIES</a>
                                 </li> --}}
                                 <li>
-                                    <a href="/contect-us">CONTACT US</a>
+                                    <a href="/contect-us" class="mx-2">CONTACT US</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link btn btn-light dropdown-toggle" href="#" role="button"
+                                    <a class="nav-link btn btn-light dropdown-toggle mx-2" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false"
                                         style="background:#20438E; color:#fff !important;">
                                         Account
