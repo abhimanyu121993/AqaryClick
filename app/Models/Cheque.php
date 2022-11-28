@@ -15,4 +15,9 @@ class Cheque extends Model
      {
          return $this->belongsTo(Tenant::class, 'tenant_id', 'id');
      }
+
+     public function bankDetails()
+    {
+        return $this->belongsTo(Bank::class, 'bank_name', 'id');
+    }
 }

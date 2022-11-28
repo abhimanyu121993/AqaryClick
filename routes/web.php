@@ -98,6 +98,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
+    Route::get('fetch-company/{lessor_id}',[ContractController::class,'fetchCompany'])->name('fetchCompany');
+    Route::get('fetch-authorized_person/{company_id}',[ContractController::class,'fetchAuthorizedPerson'])->name('fetchAuthorizedPerson');
+
     Route::get('fetch-contract-lease/{contract_id}',[ContractController::class,'fetchContractLease'])->name('fetchContractLease');
     Route::get('fetch-tenant-details/{tenant_name}',[ContractController::class,'fetchTenantDetails'])->name('fetchTenantDetails');
     Route::get('fetchCountry/{country_id}',[BuildingController::class,'fetchCountry'])->name('fetchCountry');
@@ -115,7 +118,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('nationality',NationalityController::class);
     Route::resource('bank',BankController::class);
     Route::resource('cheque',ChequeController::class);
-    Route::get('/invoice-print',[InvoiceController::class,'printInvoice'])->name('printInvoice');
+    Route::get('/receipt-vouchure/',[InvoiceController::class,'receiptVouchure'])->name('receiptVouchure');
+    Route::get('/invoice-print/{invoice_no}',[InvoiceController::class,'printInvoice'])->name('printInvoice');
     Route::get('fetch-due-payment/{contract_id}',[InvoiceController::class,'duePayment'])->name('duePayments');
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');

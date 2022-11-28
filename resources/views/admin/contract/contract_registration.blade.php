@@ -39,7 +39,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Tenant Type</label>
                                 <select class="form-control" id="tenant_type" name="tenant_type">
-                                    <option value="" selected hidden>-----Select Tenant Type-----</option>
+                                    <option value="" selected hidden>--Select Tenant Type--</option>
                                     <option value="Personal">Personal</option>
                                     <option value="Company">Company</option>
                                 </select>
@@ -53,7 +53,7 @@
                                     <option value="{{ $contractedit->tenant_name }}" selected>
                                         {{ $contractedit->tenant_type }}</option>
                                     @endif
-                                    <option value="" selected hidden>-----Select Tenant-----</option>
+                                    <option value="" selected hidden>--Select Tenant--</option>
 
 
                                 </select>
@@ -113,7 +113,7 @@
                                     <option value="{{ $contractedit->contract_status }}" selected>
                                         {{ $contractedit->contract_status }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Status-----</option>
+                                    <option value="" selected hidden>--Select Status--</option>
                                     <option value="new">New</option>
                                     <option value="renewed">Renewed</option>
                                     <option value="not renewed">Not Renewed</option>
@@ -164,7 +164,7 @@
                                     <option value="{{ $contractedit->lessor }}" selected>
                                         {{ $contractedit->lessor }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Lessor's-----</option>
+                                    <option value="" selected hidden>--Select Lessor's--</option>
                                     @foreach ($lessor as $less)
                                     <option value="{{ $less->id }}">{{ $less->first_name}} {{$less->last_name}}</option>
                                     @endforeach
@@ -173,22 +173,24 @@
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
-                                <label for="name" class="form-label">Authorized Person</label>
-                                <select class="form-control select2 form-select" name="authorized_person">
+                                <label for="name" class="form-label">Contract Under Company</label>
+                                <select class="form-control select2 form-select" id="company" name="company_id">
                                     @if (isset($contractedit))
-                                    <option value="{{ $contractedit->authorized_person }}" selected>
-                                        {{ $contractedit->contract_status }}</option>
-                                    @else
-                                    <option value="" selected hidden>-----Select Status-----</option>
-                                    <option value="Company Owner">Company Owner</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Employees">Employees</option>
-                                    <option value="Staff">Staff</option>
-                                    <option value="Others">Others</option>
-
+                                    <option value="{{ $contractedit->company_id }}" selected>
+                                        {{ $contractedit->company_id }}</option>
                                     @endif
+                                    <option value="" selected hidden>--Select Business--</option>
+
                                 </select>
                             </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <label for="name" class="form-label">Authorized Person</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="authorized_person" name="authorized_person"
+                                        value="{{ isset($contractedit) ? $contractedit->authorized_person : '' }}"
+                                        placeholder="Authorized Person ">
+                                </div>
+                            </div>                            
                             <div class="col-xxl-3 col-md-3">
                                 <label for="lessor_sign" class="form-label">Lessor's Sign</label>
                                 <div class="input-group">
@@ -306,7 +308,7 @@
                                     <option value="{{ $contractedit->approved_by }}" selected>
                                         {{ $contractedit->approved_by }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Person-----</option>
+                                    <option value="" selected hidden>--Select Person--</option>
                                     @foreach ($lessor as $less)
                                     <option value="{{ $less->id }}">{{ $less->first_name}} {{$less->last_name}}</option>
                                     @endforeach
@@ -321,7 +323,7 @@
                                     <option value="{{ $contractedit->attestation_status }}" selected>
                                         {{ $contractedit->attestation_status }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Status-----</option>
+                                    <option value="" selected hidden>--Select Status--</option>
                                     <option value="Done">Done</option>
                                     <option value="Not Yet">Not Yet</option>
                                     <option value="Under Process">Under Process</option>
@@ -353,7 +355,7 @@
                                     <option value="{{ $contractedit->currency }}" selected>
                                         {{ $contractedit->currency }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Currency-----</option>
+                                    <option value="" selected hidden>--Select Currency--</option>
                                     @foreach($currency as $c)
                                     <option value="{{$c->code}}">{{$c->code??''}}</option>
                                     @endforeach
@@ -389,7 +391,7 @@
                                     <option value="{{ $contractedit->Guarantees }}" selected>
                                         {{ $contractedit->Guarantees }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Guarantees-----</option>
+                                    <option value="" selected hidden>--Select Guarantees--</option>
                                     <option value="Available">Available</option>
                                     <option value="Not Available">Not Available</option>
                                     @endif
@@ -402,7 +404,7 @@
                                     <option value="{{ $contractedit->guarantees_payment_method }}" selected>
                                         {{ $contractedit->guarantees_payment_method }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Option-----</option>
+                                    <option value="" selected hidden>--Select Option--</option>
                                     <option value="Cheque">Cheque</option>
                                     <option value="Cash">Cash</option>
                                     @endif
@@ -415,7 +417,7 @@
                                     <option value="{{ $contractedit->contract_type }}" selected>
                                         {{ $contractedit->contract_type }}</option>
                                     @else
-                                    <option value="" selected hidden>-----Select Contract-----</option>
+                                    <option value="" selected hidden>--Select Contract--</option>
                                     <option value="Internal">Internal</option>
                                     <option value="External">External</option>
                                     @endif
@@ -797,6 +799,40 @@ $(document).ready(function() {
                 method: 'get',
                 success: function(p) {
                     $("#tenant_name").html(p);
+                }
+            });
+        });
+    }).change();
+});
+</script>
+<script>
+$(document).ready(function() {
+    $("#lessor").change(function() {
+        $(this).find("option:selected").each(function() {
+            var optionValue = $(this).attr("value");
+            var newurl = "{{ url('/admin/fetch-company') }}/" + optionValue;
+            $.ajax({
+                url: newurl,
+                method: 'get',
+                success: function(p) {
+                    $("#company").html(p);
+                }
+            });
+        });
+    }).change();
+});
+</script>
+<script>
+$(document).ready(function() {
+    $("#company").change(function() {
+        $(this).find("option:selected").each(function() {
+            var optionValue = $(this).attr("value");
+            var newurl = "{{ url('/admin/fetch-authorized_person') }}/" + optionValue;
+            $.ajax({
+                url: newurl,
+                method: 'get',
+                success: function(p) {
+                    $("#authorized_person").val(p.authorized_person);
                 }
             });
         });

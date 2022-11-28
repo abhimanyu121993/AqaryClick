@@ -34,5 +34,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Building::class, 'building_name', 'id');
     }
+    public function customerDetails()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id', 'id');
+    }
     
 }

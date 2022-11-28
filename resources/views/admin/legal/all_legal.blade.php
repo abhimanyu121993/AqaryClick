@@ -25,10 +25,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                        @foreach($legalDetail as $legal)
                                 <tr>
-                                    @foreach($legalDetail as $legal)
-                                    <th scope="row">1</th>
+                                    <th scope="row">{{ $loop->index+ 1 }}</th>
                                     <td>{{ $legal->tenantName->tenant_english_name??''}}</td>
                                     <td>
                                         {{ $legal->tenant_mobile??''}}

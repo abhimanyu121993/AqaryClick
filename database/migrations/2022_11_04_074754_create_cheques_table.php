@@ -16,8 +16,12 @@ return new class extends Migration
         Schema::create('cheques', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->unsignedBigInteger('contract_id')->nullable();
+            $table->string('invoice_no')->nullable();
+            $table->string('currency')->nullable();            
             $table->string('deposite_date')->nullable();
             $table->string('cheque_amt')->nullable();
+            $table->string('sar_amt')->nullable();
             $table->string('cheque_no')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('cheque_status')->nullable();

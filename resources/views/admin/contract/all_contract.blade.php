@@ -55,7 +55,7 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $con->contract_code??'' }}</td>
-                                    <td>{{ $con->tenant_name??'' }}</td>
+                                    <td>{{ $con->tenantDetails->tenant_english_name??'' }}</td>
                                     <td>{{ $con->document_type??'' }}</td>
                                     <td>{{ $con->qid_document??'' }}</td>
                                     <td>{{ $con->cr_document??'' }}</td>

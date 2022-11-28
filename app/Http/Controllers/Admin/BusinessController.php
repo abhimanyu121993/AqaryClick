@@ -67,11 +67,12 @@ class BusinessController extends Controller
         $logo='';
         if($request->hasFile('company_logo'))
         {
-            $company='Copnamy-logo-'.time().'-'.rand(0,99).'.'.$request->company_logo->extension();
-            $request->company_logo->move(public_path('company/logo/'),$company);
-            $logo = 'company/logo/'.$company;
+            $company='Company-logo-'.time().'-'.rand(0,99).'.'.$request->company_logo->extension();
+            $request->company_logo->move(public_path('upload/company/logo/'),$company);
+            $logo = $company;
         }
        $business= BusinessDetail::create([
+        'user_id'=>Auth::user()->id,
             'customer_type' => $request->customer_type,
             'business_type' => $request->business_type,
             'business_name' => $request->business_name,
