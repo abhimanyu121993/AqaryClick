@@ -491,11 +491,11 @@
                                  col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
-                                            <div class="icon-outer"><i class="fa fa-rocket"></i></div>
+                                            <div class="icon-outer"><i class="fa fa-bolt"></i></div>
                                         </div>
                                         <div class="price-box">
                                             <div class="title">Platinum User</div>
-                                            <h4 class="price">$199.99</h4>
+                                            <h4 class="price">$399.99</h4>
                                         </div>
                                         <ul class="features">
                                             <li class="true">4 User</li>
