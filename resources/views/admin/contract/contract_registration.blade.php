@@ -145,7 +145,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="sponer_nationality"
                                         name="sponser_nationality"
-                                        value="{{ isset($contractedit) ? $contractedit->sponser_nationality : '' }}"
+                                        value="{{ isset($contractedit) ? $contractedit->nationality : '' }}"
                                         placeholder="Enter Sponser Nationality " readonly>
                                 </div>
                             </div>
@@ -256,17 +256,23 @@
 
                                 </select>
                             </div>
-                        <div class="clone_grace  " {{ isset($contractedit) ? '' : 'style="display:none;"' }}>
+
+                         <div class="clone_grace  " {{ isset($contractedit) ? '' : 'style="display:none;"' }}>
                             @if (isset($contractedit))
-                            @php $pgrace=json_decode($contractedit->grace_start_date) @endphp
-                            @foreach($pgrace as $pg)
+                            @php
+                            $pgrace=json_decode($contractedit->grace_start_date);
+                            $graceto=json_decode($contractedit->grace_end_date);
+                            $gracem=json_decode($contractedit->grace_period_month);
+                            $graced=json_decode($contractedit->grace_period_day);
+                            @endphp
+                            @foreach($pgrace as $k=>$pg)
                             <div class="row pgrace">
                             <div class="col-xxl-3 col-md-3" id="grace_start_date">
 
                                 <label for="name" class="form-label">Grace From</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control grace_start" id="grace_start" name="grace_start_date[]"
-                                        value="{{ isset($contractedit) ? $contractedit->grace_start_date : '' }}"
+                                        value="{{ isset($pg) ? $pg : '' }}"
                                         placeholder="dd-mm-yyyy">
                                 </div>
                             </div>
@@ -274,7 +280,7 @@
                                 <label for="name" class="form-label">Grace To</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="grace_end" name="grace_end_date[]"
-                                        value="{{ isset($contractedit) ? $contractedit->grace_end_date : '' }}"
+                                        value="{{ isset($pg) ? $graceto[$k] : '' }}"
                                         placeholder="dd-mm-yyyy">
                                 </div>
                             </div>
@@ -282,7 +288,7 @@
                                 <label for="name" class="form-label">Grace Period Month</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="grace_month" name="grace_period_month[]"
-                                        value="{{ isset($contractedit) ? $contractedit->grace_period_month : '' }}"
+                                        value="{{ isset($gracem) ? $gracem[$k] : '' }}"
                                         placeholder="Grace Period Month" readonly>
                                 </div>
 
@@ -291,7 +297,7 @@
                                 <label for="name" class="form-label">Grace Period Day</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="grace_day" name="grace_period_day[]"
-                                        value="{{ isset($contractedit) ? $contractedit->grace_period_day : '' }}"
+                                        value="{{ isset($graced) ? $graced[$k] : '' }}"
                                         placeholder="Enter Grace Period Day" readonly>
                                 </div>
                             </div>
@@ -299,6 +305,7 @@
                             @endif
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Approved By</label>
@@ -396,7 +403,7 @@
                                     <option value="Not Available">Not Available</option>
                                     @endif
                                 </select>
-                            </div>     
+                            </div>
                               <div class="col-xxl-3 col-md-3" id="guarantees_pay">
                                 <label for="name" class="form-label">Payment Mode</label>
                                 <select class="form-control select2 form-select" name="guarantees_payment_method">
@@ -433,7 +440,7 @@
                                     </textarea>
                             </div>
                         </div>
-                       
+
 
                         <div class="row gy-4 mt-2">
                             <div class="col-xxl-3 col-md-3">
@@ -485,7 +492,7 @@
                 </div>
                         <div class="card-body field_wrapper -responsive">
                         <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                        <thead>          
+                        <thead>
                         <tr>
                                         <th scope="col">Sr.No.</th>
                                         <th scope="col">Invoice No</th>
@@ -497,9 +504,9 @@
                                         <!-- <th scope="col">Amount Paid</th> -->
                                         <th scope="col">Payment Status</th>
                                         <th scope="col">Payment Method</th>
-                                        <th scope="col">Overdue Period </th>    
+                                        <th scope="col">Overdue Period </th>
                                      <th scope="col">Remark</th>
-                                       
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -583,7 +590,7 @@ $(document).ready(function() {
                     $('#rent_amount').val(p.res.rent_amount);
                     $('#release_date').val(p.res.release_date);
                     $('#lease_start_date').val(p.res.lease_end_date);
-                    $('#lease_end_date').val(p.date);   
+                    $('#lease_end_date').val(p.date);
                     $('#lease_period_month').val(p.diff_in_months);
                     $('#total_invoice').val(p.diff_in_months);
                     $('#lease_period_day').val(p.diff_in_Days);
@@ -616,12 +623,12 @@ for(var i=1; i<=total_years;i++){
                             </div></div>';
 }
 $('.clone_grace').html(gracediv);
-                }  
+                }
             });
         }
         else{
                    $('#release_date').val('');
-                    $('#lease_start_date').val(''); 
+                    $('#lease_start_date').val('');
                     $('#lease_end_date').val('');
                     $('#lease_period_month').val('');
                     $('#total_invoice').val('');
@@ -631,7 +638,7 @@ $('.clone_grace').html(gracediv);
                 }
         });
     }).change();
-            
+
         });
     }).change();
 });
@@ -644,10 +651,10 @@ $(document).ready(function() {
             var optionValue = $(this).attr("value");
             if (optionValue == 'Yes') {
                 $('.clone_grace').show();
-              
+
             } else if (optionValue == 'No') {
                 $('.clone_grace').hide();
-             
+
             }
         });
     }).change();
@@ -677,14 +684,14 @@ $('#lease_start_date').change(function() {
         var daydiff = diff / (1000 * 60 * 60 * 24);
         $('#lease_period_day').val(daydiff);
 
-        function diff_years(d2, d1) 
+        function diff_years(d2, d1)
  {
 
   var diff =(d2.getTime() - d1.getTime()) / 1000;
    diff /= (60 * 60 * 24);
   return Math.abs(Math.round(diff/365.25));
  }
- 
+
 console.log(diff_years(d1, d2));
 var total_years=diff_years(d1, d2);
 var gracediv='';
@@ -742,7 +749,7 @@ $(document).on('change','#lease_end_date',function(){
         var daydiff = diff / (1000 * 60 * 60 * 24);
         $('#lease_period_day').val(daydiff);
 
-    
+
 });
 </script>
 <script>
@@ -866,11 +873,11 @@ $(document).ready(function() {
                 $('#attestation_expiry').show();
             } else if (optionValue == 'Not Yet') {
                 $('#attestation_no').hide();
-                $('#attestation_expiry').hide(); 
+                $('#attestation_expiry').hide();
                                   }
                                   else if (optionValue == 'Under Process') {
                 $('#attestation_no').hide();
-                $('#attestation_expiry').hide(); 
+                $('#attestation_expiry').hide();
                                   }
         });
     }).change();
