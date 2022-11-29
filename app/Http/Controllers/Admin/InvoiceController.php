@@ -49,13 +49,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $a = invoice::pluck('contract_id');
-        $max_id = Invoice::max('id') + 1;
-        $INV = 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . $max_id;
-        $tenantDetails = Tenant::all();
-        $building = Building::all();
-        $bank = Bank::all();
-        return view('admin.invoice.show_invoice', compact('tenantDetails', 'INV', 'building', 'bank'));
+      $invoice=Invoice::all();
+        return view('admin.invoice.show_invoice', compact('invoice'));
     }
 
     /**
@@ -67,7 +62,10 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'nullable',
+            'tenant_name' => 'required',
+            'contract' => 'required',
+            'invoice_no'=>'required',
+
         ]);
         $otherpic = [];
         if ($request->hasFile('attachment')) {
@@ -87,14 +85,14 @@ class InvoiceController extends Controller
         }
         (float)$amt_paid = $request->amt_paid;
         $overdue = (int) filter_var($request->overdue_period, FILTER_SANITIZE_NUMBER_INT);
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount((float)$request->amt_paid)->get();
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->amt_paid)->get();
         $due_amt = Contract::where('id', $request->contract_id)->first()->rent_amount;
         $inv_due = Invoice::where('contract_id', $request->contract_id)->latest()->first()->due_amt??0;
         $due_amt = $inv_due + $due_amt;
         $due_amt = (float)($due_amt - $amt_paid);
         $data = Invoice::create([
-            'tenant_id' => $request->tenant_id,
-            'contract_id' => $request->contract_id,
+            'tenant_id' => $request->tenant_name,
+            'contract_id' => $request->contract,
             'invoice_no' => $request->invoice_no,
             'due_date' => $request->due_date,
             'invoice_period_start' => $request->invoice_period_start,
@@ -259,7 +257,7 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::with('customerDetails')->with('TenantName')->where('invoice_no', $invoice_no)->first();
         $lessor=Customer::where('id',$invoice->customerDetails->lessor)->first();
-        $symbol=currency::where('code','SAR')->first()->symbol;
+        $symbol=currency::where('code','QAR')->first()->code;
         $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();      
         $cheque=Cheque::where('invoice_no',$invoice_no)->get();
         $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
@@ -271,7 +269,14 @@ class InvoiceController extends Controller
         $overdue = Carbon::parse(Carbon::now())->diffInDays($res->invoice_period_end);
         return response()->json(array('res' => $res, 'overdue' => $overdue));
     }
-public function receiptVouchure(){
-    return view('admin.invoice.receipt_vouchar');
+public function receiptVouchure($invoice_no){
+    $invoice = Invoice::with('customerDetails')->with('TenantName')->where('invoice_no', $invoice_no)->first();
+    $lessor=Customer::where('id',$invoice->customerDetails->lessor)->first();
+    $symbol=currency::where('code','QAR')->first()->symbol;
+    $cheque=Cheque::where('invoice_no',$invoice_no)->first();
+    $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();      
+    $cheque=Cheque::where('invoice_no',$invoice_no)->get();
+    $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
+    return view('admin.invoice.receipt_vouchar',compact('invoice','lessor','company','symbol','cheque','unit_ref','cheque'));
 }
 }

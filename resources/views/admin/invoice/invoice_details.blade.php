@@ -67,7 +67,7 @@
                                             <!--end col-->
                                             <div class="col-lg-3 col-6">
                                                 <p class="text-muted mb-2 text-uppercase fw-semibold">Total Amount</p>
-                                                <h5 class="fs-14 mb-0">{{ $symbol??'SAR' }}<span id="total-amount">{{ $invoice->amt_paid??'' }}</span></h5>
+                                                <h5 class="fs-14 mb-0">{{ $symbol??'QAR' }}<span id="total-amount">{{ $invoice->amt_paid??'' }}</span></h5>
                                             </div>
                                             <!--end col-->
                                         </div>
@@ -136,10 +136,10 @@
                                                         <td>Sub Total</td>
                                                         <td class="text-end">{{ $symbol??'SAR' }}{{ $invoice->amt_paid??0 }}</td>
                                                     </tr>
-                                                    <!-- <tr>
+                                                    <tr>
                                                 <td>Estimated Tax (0%)</td>
                                                 <td class="text-end">0</td>
-                                            </tr> -->
+                                            </tr>
                                                     <tr>
                                                         <td>Due Amount</td>
                                                         <td class="text-end"> <span>{{ $symbol??'SAR' }}</span>{{$invoice->due_amt??0}}</td>
@@ -162,7 +162,7 @@
                                                         <th scope="col" style="width: 50px;">#</th>
                                                         <th scope="col">Cheque No</th>
                                                         <th scope="col">Deposite Date</th>
-                                                        <th scope="col">Amount In SAR</th>
+                                                        <th scope="col">Amount</th>
                                                         <th scope="col">Bank Name</th>
                                                         <th scope="col">Cheque Status</th>
                                                     </tr>
@@ -196,7 +196,7 @@
                             <div class="mt-1">
                                 <div class="alert alert-info">
                                     <p class="mb-0"><span class="fw-semibold">PAYMENT TERMS:</span>
-                                        <span id="note">Payment of the invoice shall be made by the receipt voucher approved by the lessor.
+                                        <span id="note">Payment of the invoice shall be made by the receipt voucher.
                                         </span>
                                     </p>
                                 </div>
@@ -213,8 +213,10 @@
 
         </div><!-- End Page-content -->
        <center> <div class="hstack gap-2 justify-content-center d-print-none mt-4" style="margin-bottom: 5px;">
-            <a href="javascript:window.print()" class="btn btn-success"><i class="ri-printer-line align-bottom me-1"></i> Print</a>
-            <a href="javascript:void(0);" class="btn btn-primary" id="download"><i class="ri-download-2-line align-bottom me-1"></i> Download</a>
+            <a href="javascript:window.print()" class="btn btn-primary"><i class="ri-printer-line align-bottom me-1"></i> Print</a>
+            <a href="javascript:void(0);" class="btn btn-danger" id="download"><i class="ri-download-2-line align-bottom me-1"></i> Download</a>
+            <a href="{{route('admin.receiptVouchure',$invoice->invoice_no)}}" class="btn btn-success"><i class="ri-download-2-line align-bottom me-1"></i>Receipt</a>
+
         </div></center>
     </div><!-- end main content-->
 

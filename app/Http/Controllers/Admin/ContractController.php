@@ -108,7 +108,7 @@ class ContractController extends Controller
             $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
             $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
         }
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount((float)$request->rent_amount)->get();
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
        $data= Contract::create([
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
@@ -232,7 +232,7 @@ class ContractController extends Controller
             'currency_type'=>'required',
             'contract_type'=>'required',
         ]);
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount($request->rent_amount)->get();
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
 
 
         $mainpic=Contract::find($id)->lessor_sign??'';

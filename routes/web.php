@@ -118,7 +118,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('nationality',NationalityController::class);
     Route::resource('bank',BankController::class);
     Route::resource('cheque',ChequeController::class);
-    Route::get('/receipt-vouchure/',[InvoiceController::class,'receiptVouchure'])->name('receiptVouchure');
+    Route::get('/receipt-vouchure/{invoice_no}',[InvoiceController::class,'receiptVouchure'])->name('receiptVouchure');
     Route::get('/invoice-print/{invoice_no}',[InvoiceController::class,'printInvoice'])->name('printInvoice');
     Route::get('fetch-due-payment/{contract_id}',[InvoiceController::class,'duePayment'])->name('duePayments');
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');

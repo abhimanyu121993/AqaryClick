@@ -382,7 +382,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.nationality.index') }}" class="nav-link"
-                                        data-key="t-analytics"> Nationality </a>
+                                        data-key="t-analytics">Country</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.bank.index') }}" class="nav-link" data-key="t-analytics">

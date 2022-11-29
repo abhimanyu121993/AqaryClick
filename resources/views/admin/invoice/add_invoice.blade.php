@@ -13,6 +13,15 @@
                                                 $bankhtml .='<option value="'.$b->id.'">'.$b->name??''.'</option>';
                                             }
                                         @endphp
+                                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
 <div class="row">
     <div class="col-lg-12">
@@ -56,8 +65,8 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12" id="hide_check_details" style="">
+<div class="row" id="">
+    <div class="col-lg-12" id="cheque_management" >
         <div class="card">
             <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">
@@ -67,17 +76,8 @@
                 <div class="live-preview">
                 <form action="{{route('admin.cheque.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf  
-                @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                        <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_id" hidden>
-                        <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
+                        <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_name" hidden>
+                        <input type="hidden" class="form-control" id="cid" value="" name="contract" hidden>
                         <input type="hiden" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no" hidden>
 
                         <div class="table-responsive">
@@ -95,7 +95,7 @@
                                         Cheque Amt
                                     </th>
                                     <th scope="col" style="width: 180px;">
-                                        Cheque Amt in SAR
+                                        Cheque Amt in QAR
                                     </th>
                                     <th scope="col" style="width: 180px;">
                                         Status
@@ -182,20 +182,10 @@
             </div>
             <form class="needs-validation" novalidate id="invoice_form" action="{{route('admin.invoice.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif        
-
                 <div class="card-body p-4">
 
-                <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_id" hidden>
-                        <input type="hidden" class="form-control" id="cid" value="" name="contract_id" hidden>
+                <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_name" hidden>
+                        <input type="hidden" class="form-control" id="cid" value="" name="contract" hidden>
                        <div class="msg"><p id="due_amt"></p>
                         <p id="rent_amt"></p>
                         <p id="payable_amt"></p></div>
@@ -590,5 +580,22 @@ function new_link() {
                 });
         });
     });
+</script>
+<script>
+$(document).ready(function() {
+    $('#cheque_management').hide();
+    $("#payment_method").change(function() {
+        $(this).find("option:selected").each(function() {
+            var optionValue = $(this).attr("value");
+            if(optionValue=='Cheque'){
+                $('#cheque_management').show();
+            }
+            else{
+                $('#cheque_management').hide();
+
+            }
+        });
+    }).change();
+});
 </script>
 @endsection

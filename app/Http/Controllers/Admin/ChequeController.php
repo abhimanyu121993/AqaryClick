@@ -41,14 +41,10 @@ class ChequeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $request->validate([
-            // 'tenant_name' => 'required',
-            // 'deposite_date' => 'required',
-            // 'cheque_amt' => 'required',
-            // 'cheque_no' => 'required',
-            // 'bank_name' => 'required',
-            // 'cheque_status' => 'required',
+                'tenant_name' => 'required',
+                'contract' => 'required',
+                'invoice_no'=>'required',
         ]);
         try {
             for ($i = 0; $i < count($request->cheque_no); $i++) {
@@ -60,7 +56,7 @@ class ChequeController extends Controller
                         $mainpic[] = $name;
                     }
                 }
-                $res = Cheque::create(['invoice_no' => $request->invoice_no, 'tenant_id' => $request->tenant_id,'contract_id' => $request->contract_id, 'currency' => $request->currency[$i] ?? '', 'sar_amt' => $request->sar_amt[$i] ?? '', 'cheque_amt' => $request->cheque_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'cheque_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
+                $res = Cheque::create(['invoice_no' => $request->invoice_no, 'tenant_id' => $request->tenant_name,'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'sar_amt' => $request->sar_amt[$i] ?? '', 'cheque_amt' => $request->cheque_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'cheque_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
             }
             if ($res) {
                 Session::flash('success', 'Cheque Details Added Successfully');
