@@ -231,7 +231,6 @@
 
 
 
-
     <section class="course-wrap mb-3">
         <div class="container pt-3">
             <div class="row">

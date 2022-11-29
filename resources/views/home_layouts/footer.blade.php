@@ -21,7 +21,7 @@
                         <ul class="footer-menu ">
                             <li><a href="/">Home</a></li>
                             <li><a href="/about-us">About Us</a></li>
-                            <li><a href="/properties">Properties</a></li>
+                            {{-- <li><a href="/properties">Properties</a></li> --}}
                             <li><a href="/contect-us">Contact Us</a></li>
                             <li><button type="button" class="btn btn-primary btn-sm login-btn" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop">Login In</button> </li>
@@ -114,7 +114,9 @@
         function dateTime() {
             var ndate = new Date();
             var hours = ndate.getHours();
-            var message = hours < 12 ? '<b><span>Good Morning !</span></b>' : hours < 18 ? '<b><span class="text-center">Good Afternoon !</span></b>' : '<b><span class="text-center">Good Evening !</span></b>';
+            var message = hours < 12 ? '<b><span>Good Morning !</span></b>' : hours < 18 ?
+                '<b><span class="text-center">Good Afternoon !</span></b>' :
+                '<b><span class="text-center">Good Evening !</span></b>';
             toastr.options.timeOut = 10000;
             toastr.success(message + "<br/><b>Welcome to AqaryClick</b>");
 
