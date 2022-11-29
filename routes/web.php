@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MembershipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -140,7 +141,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
-    Route::view('membership','admin.member.membership');
+    Route::resource('membership',MembershipController::class);
 });
 
 Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');

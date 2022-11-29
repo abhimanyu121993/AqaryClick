@@ -19,10 +19,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('user_count');
             $table->string('icon');
-            $table->string('font_color');
             $table->string('text_color');
             $table->string('bgcolor');
-            $table->boolean('is_ative');
+            $table->boolean('is_active');
             $table->string('price');
             $table->timestamps();
         });
