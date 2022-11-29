@@ -12,10 +12,12 @@ use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
+use App\Models\BusinessDetail;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 
@@ -106,7 +108,7 @@ class ContractController extends Controller
             $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
             $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
         }
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount((float)$request->rent_amount)->get();
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
        $data= Contract::create([
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
@@ -121,6 +123,7 @@ class ContractController extends Controller
             'tenant_mobile'=>$request->tenant_mobile,
             'tenant_nationality'=>$request->tenant_nationality,
             'lessor'=>$request->lessor,
+            'company_id'=>$request->company_id,
             'authorized_person'=>$request->authorized_person,
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
@@ -138,9 +141,9 @@ class ContractController extends Controller
             'attestation_status'=>$request->attestation_status,
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
-            'rent_amount' => $request->rent_amount,
+            'rent_amount' => $sar_amt,
             'currency' => $request->currency_type,
-            'sar_amt'=>$sar_amt,
+            // 'sar_amt'=>$request->rent_amount,
             'tenant_sign' =>$mainpic2,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
@@ -228,9 +231,8 @@ class ContractController extends Controller
             'guarantees'=>'required',
             'currency_type'=>'required',
             'contract_type'=>'required',
-
         ]);
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('SAR')->amount($rent_amt)->get();
+        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
 
 
         $mainpic=Contract::find($id)->lessor_sign??'';
@@ -263,6 +265,7 @@ class ContractController extends Controller
             'tenant_mobile'=>$request->tenant_mobile,
             'tenant_nationality'=>$request->tenant_nationality,
             'lessor'=>$request->lessor,
+            'company_id'=>$request->company_id,
             'authorized_person'=>$request->authorized_person,
             'lessor_sign'=>$mainpic,
             'release_date'=>$request->release_date,
@@ -280,8 +283,8 @@ class ContractController extends Controller
             'attestation_expiry'=>$request->attestation_expiry,
             'contract_status'=>$request->contract_status,
             'currency' => $request->currency,
-            'rent_amount' => $request->rent_amount,
-            'sar_amt'=>$sar_amt,
+            'rent_amount' => $sar_amt,
+            // 'sar_amt'=>$sar_amt,
             'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,
             'total_invoice' => $request->total_invoice,
@@ -329,8 +332,21 @@ class ContractController extends Controller
         }
         return response()->json($html);
         }
+        public function fetchCompany($lessor_id){
+            $res=BusinessDetail::where('user_id',$lessor_id)->get();
+            $html=' <option value="" selected hidden>--Select Business--</option>';
+                    
+            foreach($res as $r){
+                $html .='<option value="'.$r->id.'">'.$r->business_name.'</option>';
+            }
+            return response()->json($html);
+            }
     public function fetchTenant($tenant_name){
         $res=Tenant::where('id',$tenant_name)->first();
+        return response()->json($res);
+        }
+        public function fetchAuthorizedPerson($company_id){
+            $res=BusinessDetail::where('id',$company_id)->first();
         return response()->json($res);
         }
     public function fetchContractLease($contract_id){

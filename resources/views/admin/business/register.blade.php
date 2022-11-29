@@ -1,4 +1,4 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Welcome to AQARYCLICK '])
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Business Details'])
 @section('title', 'Business Details')
 @section('main-content')
     <div class="row">

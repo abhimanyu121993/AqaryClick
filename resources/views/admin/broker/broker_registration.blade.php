@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($broker)? 'Update broker' : 'Create broker' }}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($broker)? 'Update Broker/Agent' : 'Create Broker/Agent' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -46,21 +46,21 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Broker First Name</label>
+                                    <label for="name" class="form-label">Full Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="Enter Broker first Name">
+                                        <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="Enter Name">
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-md-3">
+                                <!-- <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Broker Last Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="broker_lname" name="broker_lname" value="{{isset($brokeredit)? $broker->broker_lname: '' }}" placeholder="Enter Broker Last Name">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Broker ID</label>
+                                    <label for="name" class="form-label">ID</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_id" name="broker_id" value="{{isset($brokeredit)? $broker->broker_id: '' }}" placeholder="Enter Broker Id">
+                                        <input type="text" class="form-control" id="broker_id" name="broker_id" value="{{isset($brokeredit)? $broker->broker_id: '' }}" placeholder="Enter Id">
                                     </div>
                                 </div><div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Mobile</label>
@@ -75,9 +75,9 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Broker Commission</label>
+                                    <label for="name" class="form-label">Commission</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="commission" name="commission" value="{{isset($broker)? $broker->commission: '' }}" placeholder="Enter Broker Commission">
+                                        <input type="text" class="form-control" id="commission" name="commission" value="{{isset($broker)? $broker->commission: '' }}" placeholder="Enter Commission">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -108,7 +108,7 @@
                             <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Unit Ref.</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($brokeredit)? $brokeredit->unit_ref: '' }}" placeholder="Enter Broker Commission">
+                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($brokeredit)? $brokeredit->unit_ref: '' }}" placeholder="Enter Unit ref">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">

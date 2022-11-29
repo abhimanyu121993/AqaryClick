@@ -60,7 +60,7 @@
                         @endif
                         <option value="" selected>---Select Type---</option>
                         @foreach($units2 as $unit)
-                        <option value="{{ $unit->name}}">{{ $unit->name }}</option>
+                        <option value="{{ $unit->id}}">{{ $unit->name }}</option>
                         @endforeach
                     </select>
                 </div>

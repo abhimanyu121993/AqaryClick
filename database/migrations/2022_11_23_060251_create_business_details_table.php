@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('business_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('customer_type')->nullable();
             $table->string('business_type')->nullable();
             $table->string('business_name')->nullable();

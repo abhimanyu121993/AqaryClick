@@ -29,6 +29,8 @@
                                     <option value="" selected hidden>-----Select Tenant Type-----</option>
                                     <option value="TP">Personal</option>
                                     <option value="TC">Company</option>
+                                    <option value="TG">Government</option>
+
                                 </select>
                             </div>
                         <div class=" col-xxl-3 col-md-3">

@@ -31,15 +31,15 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $unit->buildingDetails->name??'' }}</td>
-                                    <td>{{ $unit->unit_no }}</td>
-                                    <td>{{ $unit->unit_type }}</td>
-                                    <td>{{ $unit->unit_status }}</td>
-                                    <td>{{ $unit->unit_floor }}</td>
-                                    <td>{{ $unit->unit_feature }}</td>
-                                    <td>{{ $unit->unit_size }}</td>
-                                    <td>{{ $unit->electric_no }}</td>
-                                    <td>{{ $unit->water_no }}</td>
-                                    <td>{{ $unit->unit_desc }}</td>
+                                    <td>{{ $unit->unit_no??''}}</td>
+                                    <td>{{ $unit->unitTD??'' }}</td>
+                                    <td>{{ $unit->unitStatus->name??'' }}</td>
+                                    <td>{{ $unit->unit_floor??'' }}</td>
+                                    <td>{{ $unit->unitFeature->name??''}}</td>
+                                    <td>{{ $unit->unit_size??''}}</td>
+                                    <td>{{ $unit->electric_no??''}}</td>
+                                    <td>{{ $unit->water_no??''}}</td>
+                                    <td>{{ $unit->unit_desc??''}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

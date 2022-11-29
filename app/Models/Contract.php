@@ -14,6 +14,7 @@ class Contract extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
+    
     public function ownerDetails()
     {
         return $this->belongsTo(Owner::class, 'lessor', 'id');
