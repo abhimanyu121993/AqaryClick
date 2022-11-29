@@ -1,12 +1,12 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Nationality'])
-@section('title', 'Nationality')
+@extends('admin.includes.layout', ['breadcrumb_title' => 'Country'])
+@section('title', 'Country')
 @section('main-content')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($nationality)? 'Update Nationality' : 'Create Nationality' }}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($nationality)? 'Update Country' : 'Create Country' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -22,9 +22,9 @@
                                     </div>
                                 </div> -->
                                 <div class="col-xxl-3 col-md-6">
-                                    <label for="name" class="form-label">Nationality</label>
+                                    <label for="name" class="form-label">Country</label>
                                     <div class="input-group">
-                                    <input type="text" class="form-control" id="name" name="name" value="{{isset($nationality)? $nationality->name: '' }}" placeholder="Enter Nationality">
+                                    <input type="text" class="form-control" id="name" name="name" value="{{isset($nationality)? $nationality->name: '' }}" placeholder="Enter Country">
                                         <button class="btn btn-primary" type="submit">{{isset($nationality) ? 'Update' : 'Submit'}}</button>
                                     </div>
                                 </div>
@@ -41,14 +41,14 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Nationality</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Manage Country</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No.</th>
-                                <th scope="col">nationality</th>
+                                <th scope="col">Country</th>
                                 <th scope="col">Created at</th>
                                 <th scope="col">Action</th>
                             </tr>

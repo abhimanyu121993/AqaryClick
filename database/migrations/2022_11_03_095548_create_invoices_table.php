@@ -24,13 +24,22 @@ return new class extends Migration
             $table->string('amt_paid')->nullable();
             $table->string('due_amt')->default(0);
             $table->string('payment_method')->nullable();
-            $table->string('cheque_no')->nullable();
             $table->string('account_no')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('overdue_period')->nullable();
             $table->json('attachment')->default(json_encode([]));
             $table->string('remark')->nullable();
+            $table->string('tenant_account')->nullable();
+            $table->string('tenant_bank')->nullable();
+            $table->string('tenant_sender')->nullable();
+            $table->json('tenant_attachment')->default(json_encode([]));
+            $table->string('benifitary_account')->nullable();
+            $table->string('benifitary_bank')->nullable();
+            $table->string('benifitary_name')->nullable();
+
+
+
             $table->softDeletes();
             $table->timestamps();
         });

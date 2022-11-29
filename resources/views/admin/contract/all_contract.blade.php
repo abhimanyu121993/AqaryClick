@@ -47,6 +47,7 @@
                                 <th scope="col">Guarantees Payment Mode</th>
                                 <th scope="col">Tenant sign</th>
                                 <th scope="col">Remark</th>
+                                <th scope="col">Receipt</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -55,7 +56,7 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $con->contract_code??'' }}</td>
-                                    <td>{{ $con->tenant_name??'' }}</td>
+                                    <td>{{ $con->tenantDetails->tenant_english_name??'' }}</td>
                                     <td>{{ $con->document_type??'' }}</td>
                                     <td>{{ $con->qid_document??'' }}</td>
                                     <td>{{ $con->cr_document??'' }}</td>
@@ -92,6 +93,7 @@
 
                                     <td><img src="{{asset('upload/contract/signature/'.$con->tenant_sign)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                                     <td>{{ $con->remark ??''}}</td>
+                                    <td><a class="dropdown-item" href="{{route('admin.receipt',$con->contract_code)}}">view</a></td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

@@ -42,34 +42,32 @@ class ChequeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tenant_name' => 'required',
-            'deposite_date' => 'required',
-            'cheque_amt' => 'required',
-            'cheque_no' => 'required',
-            'bank_name' => 'required',
-            'cheque_status' => 'required',
+                'tenant_name' => 'required',
+                'contract' => 'required',
+                'invoice_no'=>'required',
         ]);
-            try{
-                for($i=0;$i<count($request->cheque_no);$i++)
-                {    
-                                      $res=Cheque::create(['tenant_id'=>$request->tenant_name,'deposite_date'=>$request->deposite_date[$i] ?? '','cheque_amt'=>$request->cheque_amt[$i] ?? '','cheque_no'=>$request->cheque_no[$i] ?? '','bank_name'=>$request->bank_name[$i] ?? '','cheque_status'=>$request->cheque_status[$i] ?? '','attachment'=>$request->attachment[$i] ?? '','remark'=>$request->remark[$i] ?? '' ]);
+        try {
+            for ($i = 0; $i < count($request->cheque_no); $i++) {
+                $mainpic = [];
+                if ($request->hasFile('file')) {
+                    foreach ($request->file('file') as $file) {
+                        $name = $request->invoice_no . '-' . time() . '-' . rand(0, 99) . '.' . $file->extension();
+                        $file->move(public_path('upload/cheque_doc/file'), $name);
+                        $mainpic[] = $name;
+                    }
                 }
-                if($res)
-                {
-                    Session::flash('success','Cheque Details Added Successfully');
-                }
-                else
-                {
-                    Session::flash('error','Something Went Wrong');
-                }
+                $res = Cheque::create(['invoice_no' => $request->invoice_no, 'tenant_id' => $request->tenant_name,'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'sar_amt' => $request->sar_amt[$i] ?? '', 'cheque_amt' => $request->cheque_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'cheque_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
             }
-            catch(Exception $ex)
-            {
-                Session::flash('error','Server Error');
-                $url=URL::current();
-                Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
-    
+            if ($res) {
+                Session::flash('success', 'Cheque Details Added Successfully');
+            } else {
+                Session::flash('error', 'Something Went Wrong');
             }
+        } catch (Exception $ex) {
+            Session::flash('error', 'Server Error');
+            $url = URL::current();
+            Error::create(['url' => $url, 'message' => $ex->getMessage()]);
+        }
             return redirect()->back();
     }
 

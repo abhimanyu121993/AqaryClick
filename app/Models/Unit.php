@@ -12,10 +12,18 @@ class Unit extends Model
     protected $guarded=[];
     public function unitStatus()
     {
-        return $this->belongsTo(unitStatus::class, 'unit_status', 'id');
+        return $this->belongsTo(UnitStatus::class, 'unit_status', 'id');
+    }
+    public function unitTD()
+    {
+        return $this->belongsTo(UnitType::class, 'unit_type', 'id');
     }
     public function buildingDetails()
     {
         return $this->belongsTo(Building::class, 'building_id', 'id');
+    }
+    public function unitFeature()
+    {
+        return $this->belongsTo(UnitStatus::class, 'unit_feature', 'id');
     }
 }

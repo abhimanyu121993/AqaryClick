@@ -46,6 +46,7 @@
             color: blue;
         }
     </style>
+    @yield('headerarea')
 </head>
 
 <body>

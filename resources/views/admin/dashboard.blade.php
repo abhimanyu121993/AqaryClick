@@ -497,7 +497,7 @@
                                                     <th scope="col">Cheque Amt</th>
                                                     <th scope="col" style="width: 16%;">Status</th>
                                                     <th scope="col" style="width: 12%;">Deposited Date</th>
-                                                    <th scope="col" style="width: 12%;">Delay Time</th>
+                                                    <!-- <th scope="col" style="width: 12%;">Delay Time</th> -->
 
                                                 </tr>
                                             </thead>
@@ -512,7 +512,7 @@
                                                     <td>
                                                         <div class="text-nowrap">{{$ch->created_at}}</div>
                                                     </td>
-                                                    <td>2</td>
+                                                    <!-- <td>2</td> -->
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -526,7 +526,7 @@
                                                     <td>
                                                         <div class="text-nowrap">{{$pc->created_at??''}}</div>
                                                     </td>
-                                                    <td>2</td>
+                                                    <!-- <td>2</td> -->
                                                 </tr>
                                                 @endforeach</tbody>
                                                 <tbody id="bounced_cheque">
@@ -539,7 +539,7 @@
                                                     <td>
                                                         <div class="text-nowrap">{{$bc->created_at}}</div>
                                                     </td>
-                                                    <td>2</td>
+                                                    <!-- <td>2</td> -->
                                                 </tr>
                                                 @endforeach
                                                 </tbody>
@@ -549,11 +549,11 @@
                                                     <td>{{$ec->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$ec->cheque_no}}</td>
                                                     <td>{{ $ec->cheque_amt }} </td>
-                                                    <td><span class="badge badge-soft-success p-2">{{$ec->cheque_status}}</span></td>
+                                                    <td><span class="badge badge-soft-danger p-2">{{$ec->cheque_status}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$ec->created_at}}</div>
                                                     </td>
-                                                    <td>2</td>
+                                                    <!-- <td>2</td> -->
                                                 </tr>
                                                 @endforeach
                                                 </tbody>
@@ -567,7 +567,7 @@
                                                     <td>
                                                         <div class="text-nowrap">{{$cc->created_at??''}}</div>
                                                     </td>
-                                                    <td>2</td>
+                                                    <!-- <td>2</td> -->
                                                 </tr>
                                                 @endforeach
                                                 </tbody>
@@ -581,7 +581,7 @@
                                                     <td>
                                                         <div class="text-nowrap">{{$sc->created_at??''}}</div>
                                                     </td>
-                                                    <td>2</td>
+                                                    <!-- <td>2</td> -->
                                                 </tr>
                                                 @endforeach
                                             </tbody><!-- end tbody -->

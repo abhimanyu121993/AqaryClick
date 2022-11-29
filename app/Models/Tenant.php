@@ -13,7 +13,7 @@ class Tenant extends Model
 
     public function buildingDetails()
     {
-        return $this->belongsTo(Building::class, 'building_name', 'id');
+        return $this->belongsTo(Building::class, 'building_name');
     }
  
 
