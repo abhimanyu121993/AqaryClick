@@ -13,6 +13,7 @@ use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
 use App\Models\BusinessDetail;
+use App\Models\ContractRecipt;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -375,7 +376,8 @@ class ContractController extends Controller
 
 public function contractReceipt($contract_code){
     $conn=Contract::where('contract_code',$contract_code)->first();
-    return view('admin.contract.contract_receipt',compact('conn'));
+    $contract=ContractRecipt::first();
+    return view('admin.contract.contract_receipt',compact('conn','contract'));
 }
 public function isReject($id)
 {
