@@ -87,7 +87,7 @@
                     </div>
                 </li>
                 @endcan
-                
+
                 <!-- Building Management Menu -->
                 @can('Building')
                     <li class="nav-item">
@@ -209,8 +209,8 @@
                         </div>
                     </li>
                 @endcan
-                
-                
+
+
                 <!-- Contract Management Menu -->
                 @can('Contract')
                     <li class="nav-item">
@@ -403,6 +403,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.unit-feature.index') }}" class="nav-link"
                                         data-key="t-analytics"> Unit Feature </a>
+                                </li><li class="nav-item">
+                                    <a href="{{ route('admin.contract-recipt.index') }}" class="nav-link"
+                                        data-key="t-analytics"> Edit  </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.buildingtype.index') }}" class="nav-link"

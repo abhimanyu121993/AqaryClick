@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,6 +149,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('contract-recipt',ContractReciptController::class);
 });
 
+//  Payment
+Route::group(['prefix'=>'paypal','as'=>'paypal.'],function(){
+Route::get('payment',[PaymentController::class,'index'])->name('create');
+Route::get('charge/{id}',[PaymentController::class,'charge'])->name('pay');
+Route::get('success',[PaymentController::class,'success'])->name('success');
+Route::get('error',[PaymentController::class,'error'])->name('error');
+});
 Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');
 
 Route::get('/optimize', function(){
