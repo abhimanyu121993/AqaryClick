@@ -172,7 +172,10 @@
 
 <!-- cleave.js -->
 <script src="{{ asset('assets/libs/cleave.js/cleave.min.js') }}"></script>
-
+{{-- dataTables --}}
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+{{-- dataTables --}}
 <!--Invoice create init js-->
 <script src="{{ asset('assets/js/pages/invoicecreate.init.js') }}"></script>
 <!-- App js -->

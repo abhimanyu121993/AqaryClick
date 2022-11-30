@@ -47,7 +47,7 @@ return new class extends Migration
             $table->string('attestation_expiry')->nullable();
             $table->string('contract_status')->nullable();
             $table->string('rent_amount')->nullable();
-            $table->string('sar_amt')->nullable();
+            $table->string('user_amt')->nullable();
             $table->string('tenant_sign')->nullable();
             $table->string('total_invoice')->nullable();
             $table->string('contract_type')->nullable();
