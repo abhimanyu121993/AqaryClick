@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\BusinessController;
 use App\Http\Controllers\admin\ChequeController;
 use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ContractController;
+use App\Http\Controllers\Admin\ContractReciptController;
 use App\Http\Controllers\admin\CurrencyController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -142,6 +143,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
+    Route::resource('contract-recipt',ContractReciptController::class);
 });
 
 Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');
