@@ -180,3 +180,10 @@
 <script src="{{ asset('assets/js/pages/invoicecreate.init.js') }}"></script>
 <!-- App js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.10/sweetalert2.min.js" integrity="sha512-3SfkrboI1MpqQsuXTRkQO2W/PXvhnbWraSnLH2+/1yFPclTSbZ+5J8rkgLTQOOmVEYbhQff+cQlm8Qbl04CokA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
