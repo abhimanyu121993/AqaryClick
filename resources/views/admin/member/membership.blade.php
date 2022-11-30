@@ -36,13 +36,14 @@
                             <textarea class="form-control"  name="desc">{!!isset($edit)? $edit->description:'' !!}
                                 </textarea>
                         </div>
-                        <div class=" col-xxl-3 col-md-3">
+                        <div class="row col-md-12">
+                        <div class=" col-md-4">
                             <label for="owner_name" class="form-label">User Count</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" value="{{isset($edit)? $edit->user_count:'' }}" name="user_count" placeholder="Counts">
                             </div>
                         </div>
-                        <div class=" col-xxl-3 col-md-3">
+                        <div class="col-md-4">
                             <label for="owner_name" class="form-label">Icon</label>
                             <div class="input-group">
                                 @isset($edit)
@@ -51,43 +52,37 @@
                                 <input type="file" class="form-control" name="icon" placeholder="Enter icon">
                             </div>
                         </div>
-                        {{-- <div class="col-xxl-3 col-md-3">
-                                <label for="space" class="form-label">Document Type</label>
-                                <select class="form-control" id="tenant_document_type" name="tenant_document">
-                                    <option value="" selected hidden>-----Select Document Type-----</option>
-                                    <option value="QID">QID</option>
-                                    <option value="CR">CR</option>
-                                    <option value="Passport">Passport</option>
-                                </select>
-                            </div> --}}
-                        <div class="col-xxl-3 col-md-3 mb-2">
+                        <div class=" col-md-4">
                             <label for="state" class="form-label">Text Color</label>
                             <div class="input-group">
                                 <input type="color" class="form-control" value="{{isset($edit)?$edit->text_color:'' }}" name="txt_color" placeholder="CR Document">
                             </div>
                         </div>
-                        <div class="col-xxl-3 col-md-3 mb-2" id="passport">
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-4 ">
                             <label for="country" class="form-label">Background Color</label>
                             <div class="input-group">
                                 <input type="color" class="form-control" value="{{isset($edit)?$edit->bgcolor:'' }}" name="bg_color" placeholder="Passport Document">
                             </div>
                         </div>
-                        <div class="col-xxl-3 col-md-3">
+                        <div class="col-md-4">
                             <label for="space" class="form-label">Is Active</label>
-
                             <select class="form-control" id="tenant_document_type" name="is_active">
                                 <option selected hidden>-----Is Active-----</option>
                                 <option value="1" @if(isset($edit)){{ $edit->is_active==1?'selected': '' }}@endif>True</option>
                                 <option value="0" @if(isset($edit)){{ $edit->is_active==0?'selected': '' }} @endif>False</option>
                             </select>
                         </div>
-                        <div class=" col-xxl-3 col-md-3">
+                        <div class="col-md-4">
                             <label for="owner_name" class="form-label">Price</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="price"
+                                <input type="text" class="form-control" name="price"
                                   value="{{isset($edit)? $edit->price :''}}"  placeholder="Tenant Secondary Mobile No">
                             </div>
-                        </div><br>
+                        </div>
+                    </div>
+                    <br>
                         <div class="row gy-4">
                             <div class="col-xxl-3 col-md-3">
                                 <button class="btn btn-primary" type="submit">Save</button>

@@ -105,8 +105,8 @@ class MembershipController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $mainpic=Membership::find($id)->building_pic??'';
-        if($request->hasFile('building_pic')){
+        $mainpic=Membership::find($id)->icon??'';
+        if($request->hasFile('icon')){
             $mainpic='membership-'.time().'-'.rand(0,99).'.'.$request->icon->extension();
             $request->icon->move(public_path('upload/membership'),$mainpic);
             $oldpic = Membership::find($id)->pluck('icon')[0];
