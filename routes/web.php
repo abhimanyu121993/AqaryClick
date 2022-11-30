@@ -156,3 +156,5 @@ Route::get('/optimize', function(){
 Route::get('/optimize-clear', function(){
     Artisan::call('optimize:clear');
 });
+
+Route::view('payment-success','home.paymentsuccess');
