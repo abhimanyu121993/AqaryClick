@@ -428,30 +428,8 @@
 
                         <div class="outer-box">
                             <div class="row">
-                          
-                         @foreach ($membership as $member)                       
-                            <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
-                                    <div class="inner-box">
-                                        <div class="icon-box">
-                                            <div class="icon-outer"><img src="{{ asset($member->icon) }}" height="50%" width="50%" style=" border-radius:25%; margin-top:30px"/></div>
-                                        </div>
-                                        <div class="price-box">
-                                            <div class="title">{{$member->title}}</div>
-                                            <h4 class="price">{{$member->price}}</h4>
-                                        </div>
-                                        <ul class="features">
-                                            <li class="true">{{$member->user_count}}</li>
-                                        </ul>
-                                        <div class="btn-box">
-                                            <a href="#" class="theme-btn pricing1">SUBSCRIBE</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @endforeach
-
                                 <!-- Pricing Block -->
-                                <!-- <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
+                                <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-paper-plane"></i></div>
@@ -467,10 +445,10 @@
                                             <a href="#" class="theme-btn pricing1">SUBSCRIBE</a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <!-- Pricing Block -->
-                                <!-- <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
+                                <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-gem"></i></div>
@@ -486,10 +464,10 @@
                                             <a href="#" class="theme-btn pricing2">SUBSCRIBE</a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <!-- Pricing Block -->
-                                <!-- <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
+                                <div class="pricing-block col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
                                     <div class="inner-box">
                                         <div class="icon-box">
                                             <div class="icon-outer"><i class="fa fa-rocket"></i></div>
@@ -505,10 +483,10 @@
                                             <a href="#" class="theme-btn pricing3" >SUBSCRIBE</a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <!-- Pricing Block -->
-                                <!-- <div class="pricing-block col-lg-3
+                                <div class="pricing-block col-lg-3
 
                                  col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
                                     <div class="inner-box">
@@ -526,7 +504,7 @@
                                             <a href="#" class="theme-btn pricing4">SUBSCRIBE</a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>

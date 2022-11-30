@@ -47,7 +47,7 @@
                             <label for="owner_name" class="form-label">Icon</label>
                             <div class="input-group">
                                 @isset($edit)
-                                <img src="{{ asset($edit->icon) }}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>&nbsp;
+                                <img src="{{asset('upload/membership/'.$edit->icon)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/>&nbsp;
                                 @endisset
                                 <input type="file" class="form-control" name="icon" placeholder="Enter icon">
                             </div>
@@ -116,7 +116,7 @@
                             <td>{{ $data->title ?? '' }}</td>
                             <td>{!! $data->description ?? '' !!}</td>
                             <td>{{ $data->user_count ?? '' }}</td>
-                            <td><img src="{{asset($data->icon)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
+                            <td><img src="{{asset('upload/membership/'.$data->icon)}}" class="me-75 bg-light-danger" style="height:35px;width:35px;"/></td>
                             <td>{{ $data->text_color ?? '' }}</td>
                             <td>{{ $data->bgcolor ?? '' }}</td>
                             <td>{{ $data->price?? '' }}</td>

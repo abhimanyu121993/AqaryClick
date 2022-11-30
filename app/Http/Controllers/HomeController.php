@@ -15,8 +15,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use AmrShawky\LaravelCurrency\Facade\Currency;
-use App\Models\Membership;
-
 class HomeController extends Controller
 {
     public function index()
@@ -45,8 +43,7 @@ class HomeController extends Controller
     public function regOverView()
     {
         $nationality = Nationality::get();
-        $membership=Membership::get();
-        return view('home.registration', compact('nationality','membership'));
+        return view('home.registration', compact('nationality'));
     }
     public function propertie_details()
     {

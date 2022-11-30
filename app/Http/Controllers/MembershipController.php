@@ -51,9 +51,9 @@ class MembershipController extends Controller
         $mainpic='';
         if($req->hasFile('icon')){
             $mainpic='membership-'.time().'-'.rand(0,99).'.'.$req->icon->extension();
-            $req->icon->move(public_path('upload/membership/'),$mainpic);
+            $req->icon->move(public_path('upload/membership'),$mainpic);
         }
-        $con = Membership::create([ 'title' => $req->title, 'icon' =>'upload/membership/'.$mainpic,
+        $con = Membership::create([ 'title' => $req->title, 'icon' =>$mainpic,
             'description' => $req->desc,
             'user_count' => $req->user_count,
             'text_color' => $req->txt_color,
@@ -108,12 +108,12 @@ class MembershipController extends Controller
         $mainpic=Membership::find($id)->icon??'';
         if($request->hasFile('icon')){
             $mainpic='membership-'.time().'-'.rand(0,99).'.'.$request->icon->extension();
-            $request->icon->move(public_path('upload/membership/'),$mainpic);
+            $request->icon->move(public_path('upload/membership'),$mainpic);
             $oldpic = Membership::find($id)->pluck('icon')[0];
             File::delete(public_path('upload/membership/' . $oldpic));
         }
         $data= Membership::find($id)->update([
-            'title' => $request->title, 'icon' =>'upload/membership/'.$mainpic,
+            'title' => $request->title, 'icon' =>$mainpic,
             'description' => $request->desc,
             'user_count' => $request->user_count,
             'text_color' => $request->txt_color,
