@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
+use Yajra\DataTables\Facades\DataTables;
 
 class BuildingController extends Controller
 {
@@ -47,9 +48,76 @@ class BuildingController extends Controller
             $buildings=Building::where('user_id',Auth::user()->id)->get();
 
         }
+
         return view('admin.building.all_building',compact('buildings'));
     }
 
+    public function get_buildings(Request $req){
+        $role=Auth::user()->roles[0]->name;
+        $query=Building::query()->with(['nationality','cityDetails']);
+        if($role=='superadmin'){
+        }
+        else{
+            $query->where('user_id',Auth::user()->id);
+
+        }
+        $buildings=$query->get();
+        //  dd($buildings);
+        // if ($req->ajax()) {
+            return DataTables::of($buildings)->addIndexColumn()
+            ->addColumn('image',function($raw){
+                $imgtag="<img src='".asset("upload/building/".$raw->building_pic)."' class='me-75 bg-light-danger' style='height:35px;width:35px;'>";
+                return $imgtag;
+            })
+            ->addColumn('document',function($doc){
+                $bid=Crypt::encrypt($doc->id);
+            $do='<a href="';
+            $do .=route('admin.document', $bid);
+            $do .='">View</a>';
+            return $do;
+            })
+            ->addColumn('action',function($doc){
+                $d='  <div class="dropdown">
+                <a href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ri-more-2-fill"></i>
+                </a>';
+                $bid=Crypt::encrypt($doc->id);
+                $d .='<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
+
+                    if(Auth::user()->hasPermissionTo('Building_edit'))
+                    {
+                    $d .='<li><a class="dropdown-item" href="';
+                    $d .= route('admin.register_building.edit', $bid);
+                    $d .='">Edit</a>
+                        </li>';
+                    }
+                    if(Auth::user()->hasPermissionTo('Building_delete'))
+                    {
+                        $d .='
+                        <li><a class="dropdown-item" href="#"';
+                        $d .='
+                                onclick="event.preventDefault();document.getElementById(\'delete-form-{{ $bid }}\').submit();">';
+                        $d .="Delete</a>
+                        </li>";
+                    }
+                    $d .='
+                    <form id="delete-form-{{ $bid }}"
+                        action="';
+                        $d .= route('admin.register_building.destroy', $bid);
+                        $d .='" method="post" style="display: none;">';
+
+                        // @method('DELETE')
+                      $d .=' <input type="hidden" name="_token" value="'.csrf_token().'">';
+                    $d .='</form>
+                </ul>
+            </div>';
+            return $d;
+            })
+            ->rawColumns(['image','document','action'])
+            ->make(true);
+        // }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -89,12 +157,12 @@ class BuildingController extends Controller
             'property_vlaue'=>'required',
             'incharge_name'=>'required',
             'person_job'=>'required',
-            'person_mobile'=>'required',            
+            'person_mobile'=>'required',
             'building_receive_date'=>'required',
 
 
-            
-            
+
+
         ]);
         $mainpic='';
         $otherpic=[];
@@ -156,7 +224,7 @@ class BuildingController extends Controller
             'pincode'=>$request->pincode,
             'building_pic'=>$mainpic,
             'file' =>json_encode($otherpic),
-            'remark'=>$request->remark,           
+            'remark'=>$request->remark,
         ]);
         if($data){
         return redirect()->back()->with('success','Building Registration has been created successfully.');
@@ -205,7 +273,7 @@ class BuildingController extends Controller
     {
         dd($request);
         $request->validate([
-           
+
             'building_code'=>'required',
             'building_name'=>'required',
             'building_type'=>'required',
@@ -236,11 +304,11 @@ class BuildingController extends Controller
             'property_vlaue'=>'required',
             'incharge_name'=>'required',
             'person_job'=>'required',
-            'person_mobile'=>'required',            
+            'person_mobile'=>'required',
             'building_receive_date'=>'required',
-            
+
         ]);
-       
+
         $mainpic=Building::find($id)->building_pic??'';
         $otherpic=Building::find($id)->building_file??[];
         if($request->hasFile('building_pic')){
@@ -262,7 +330,7 @@ class BuildingController extends Controller
         if(count($otherpic)>0)
                  {
                     Building::find($id)->update(['file'=>json_encode($otherpic)]);
-                    
+
                  }
        $data= Building::find($id)->update([
             'user_id' => Auth::user()->id,
@@ -307,7 +375,7 @@ class BuildingController extends Controller
             'area'=>$request->zone_name,
             'pincode'=>$request->pincode,
             'building_pic'=>$mainpic,
-            'remark'=>$request->remark,           
+            'remark'=>$request->remark,
         ]);
         if($data){
         return redirect()->back()->with('success','Building Registration has been Updated successfully.');
@@ -349,7 +417,7 @@ return response()->json($html);
 public function fetchCountry($country_id){
     $res=City::where('Country_name',$country_id)->get();
     $html=' <option value="">--Select City--</option>';
-            
+
     foreach($res as $r){
         $html .='<option value="'.$r->id.'">'.$r->name.'</option>';
     }
@@ -357,8 +425,8 @@ public function fetchCountry($country_id){
     }
 public function document($id){
     $id = Crypt::decrypt($id);
-    $document=Building::find($id); 
-    return view('admin.building.document',compact('document')); 
+    $document=Building::find($id);
+    return view('admin.building.document',compact('document'));
 }
 
 }

@@ -143,7 +143,7 @@ class ContractController extends Controller
             'contract_status'=>$request->contract_status,
             'rent_amount' => $sar_amt,
             'currency' => $request->currency_type,
-            // 'sar_amt'=>$request->rent_amount,
+            'user_amt'=>$request->rent_amount,
             'tenant_sign' =>$mainpic2,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
@@ -284,7 +284,7 @@ class ContractController extends Controller
             'contract_status'=>$request->contract_status,
             'currency' => $request->currency,
             'rent_amount' => $sar_amt,
-            // 'sar_amt'=>$sar_amt,
+            'user_amt'=>$request->rent_amount,
             'tenant_sign' =>$mainpic2,
             'remark'=>$request->remark,
             'total_invoice' => $request->total_invoice,
@@ -335,7 +335,7 @@ class ContractController extends Controller
         public function fetchCompany($lessor_id){
             $res=BusinessDetail::where('user_id',$lessor_id)->get();
             $html=' <option value="" selected hidden>--Select Business--</option>';
-                    
+
             foreach($res as $r){
                 $html .='<option value="'.$r->id.'">'.$r->business_name.'</option>';
             }

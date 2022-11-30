@@ -4,9 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\currency;
+use Yajra\DataTables\Facades\DataTables;
 use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
 
 use Illuminate\Http\Request;
+use Yajra\DataTables\Contracts\DataTable;
 
 class CurrencyController extends Controller
 {
@@ -20,7 +22,29 @@ class CurrencyController extends Controller
         $currencyDetails=Currency::all();
         return view('admin.settings.currency',compact('currencyDetails'));
     }
+    public function getCurrency(Request $request)
+    {
 
+
+        if ($request->ajax()) {
+            $data = Currency::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('statuscontrol',function($row){
+                    $acb="<div class='form-check form-check-primary form-switch'><input type='checkbox' id='is_active' class='form-check-input is_active' ";
+                    $acb .=$row->status?'checked ':'';
+                    $acb .="value='$row->id'";
+                    $acb .="></div>";
+                    return $acb;
+                })
+                // ->addColumn('action', function($row){
+                //     $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                //     return $actionBtn;
+                // })
+                ->rawColumns(['action','statuscontrol'])
+                ->make(true);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -86,11 +110,11 @@ class CurrencyController extends Controller
     {
         //
     }
-    
+
     public function isActiveCurrency($id)
     {
         $ass_active=Currency::find($id);
-   
+
         if($ass_active->status==1)
         {
             $ass_active->status=0;
@@ -104,7 +128,7 @@ class CurrencyController extends Controller
         else
         {
            return 0;
-    
+
         }
     }
 
@@ -113,13 +137,13 @@ class CurrencyController extends Controller
             $code= $request->currency_code;
             $amt=$request->cheque_amt;
      $res=amcurrency::convert()->from($code)->to('SAR')->amount($amt)->get();
-     
+
      return response()->json($res);
     }
     public function fetchCurrency(){
         $res=Currency::where('status',1)->get();
         $html=' <option value="">Select Currency</option>';
-                
+
         foreach($res as $r){
             $html .='<option value="'.$r->code.'">'.$r->code.'</option>';
         }

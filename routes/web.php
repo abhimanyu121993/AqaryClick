@@ -82,8 +82,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('user-pass-update',[UserController::class,'updatePassword'])->name('uppass');
 
     Route::resource('building',BuildingController::class);
+    Route::get('get-buildings',[BuildingController::class,'get_buildings'])->name('get-buildings');
     Route::resource('unit',UnitController::class);
     Route::resource('currency',CurrencyController::class);
+    Route::get('getCurrency',[CurrencyController::class,'getCurrency'])->name('getCurrency');
     Route::post('/convert-currency',[CurrencyController::class,'convertAmtInSar'])->name('convert-currency');
     Route::get('/fetch-currency',[CurrencyController::class,'fetchCurrency'])->name('fetchCurrency');
     Route::get('/isactive-currency/{id}',[CurrencyController::class,'isActiveCurrency'])->name('activeCurrency');
