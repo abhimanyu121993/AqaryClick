@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class BuildingController extends Controller
@@ -428,5 +429,107 @@ public function document($id){
     $document=Building::find($id);
     return view('admin.building.document',compact('document'));
 }
+
+    public function bulkUpload(Request $request)
+    {
+        if($request->hasFile('bulk_upload')){
+            $file = $request->bulk_upload;
+            $filename = time() . $file->getClientOriginalName();
+            // dd($filename);
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $valid_extension = array("csv");
+            $maxFileSize = 2097152;
+            if (in_array(strtolower($extension), $valid_extension)) {
+                // Check file size
+                if ($fileSize <= $maxFileSize) {
+                    // File upload location
+                    $location = 'uploads';
+                    // Upload file
+                    $file->move($location, $filename);
+                    // Import CSV to Database
+                    $filepath = public_path($location . "/" . $filename);
+                    // Reading file
+                    $file = fopen($filepath, "r");
+                    $importData_arr = array();
+                    $i = 0;
+                    while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                        $num = count($filedata);
+                        // Skip first row (Remove below comment if you want to skip the first row)
+                        if ($i == 0) {
+                            $i++;
+                            continue;
+                        }
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                    }
+                    fclose($file);
+                    dd($importData_arr);
+                    // Insert to MySQL database
+                    foreach ($importData_arr as $importData) {
+                        $insertData = array(
+                            "building_code" => $importData[0],
+                            "building_name" => $importData[1],
+                        );
+                        if(!empty($insertData['email'])){
+                            $exist_user = User::where('email', $insertData['email'])->first();
+                            if(isset($exist_user)){
+                                User::where('email', $insertData['email'])->update([
+                                    'first_name' => $insertData['first_name'],
+                                    'last_name' => $insertData['last_name'],
+                                ]);
+                            }else{
+                                $license = getCorpLicense($corp->idt_corporate_id);
+                                if($license->totalUsersCreated >= $license->num_game_players_max){
+                                    Session::flash('error', 'You cannot add more users!');
+                                    return redirect()->back();
+                                }
+                                $createdata = [
+                                    'email' => $insertData['email'],
+                                    'first_name' => $insertData['first_name'],
+                                    'last_name' => $insertData['last_name'],
+                                    'username'      => $data['username'] ?? unique_username($insertData['first_name'], $insertData['last_name']),
+                                    'forget_password_token'=> Str::random(60),
+                                ];
+                                User::create($createdata);
+                                $user = User::where('email', $insertData['email'])->first();
+                                $sub_corp = DB::table('subs_corporates')->where('txt_corporate_uniq_key', $request->unique_key)->first();
+                                if($sub_corp){
+                                    $sub_corp_user_id = DB::table('subs_corporates_users')->insertGetId([
+                                        'idt_corporate_id'          => $sub_corp->id,
+                                        'idt_user_id'               => $user->id,
+                                        'enu_corporate_user_status' => 'P',
+                                        'dat_employee_start'        => Carbon::now()->isoFormat('YYYY-MM-DD'),
+                                        'created_at'                => Carbon::now(),
+                                        'updated_at'                => Carbon::now(),
+                                    ]);
+                                }
+                                $link = url('reset-member-password').'/'.$user->forget_password_token;
+                                $mailData = [
+                                    'first_name' => $insertData['first_name'],
+                                    'email' => $insertData['email'],
+                                    'link' => $link,
+                                    'username' => $user->username
+                                ];
+                                Mail::to($insertData['email'])->send(new MemberRegisterMail($mailData));
+                            }
+                        }
+                    }
+                    Session::flash('success', 'Import Successful.');
+                    return redirect()->back();
+                } else {
+                    Session::flash('error', 'File too large. File must be less than 2MB.');
+                    return redirect()->back();
+                }
+            }
+        }else{
+            Session::flash('error', 'Please upload a valid .csv file only');
+            return redirect()->back();
+        }
+    }
 
 }
