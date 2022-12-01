@@ -40,16 +40,18 @@ class NationalityController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'currency_code'=>'required',
         ]);
        $data= Nationality::create([
             'name' => $request->name,
-            'description'=>$request->desc,
+            'currency_code' => strtoupper($request->currency_code),
+            'percentage'=>$request->percentage,
         ]);
         if($data){
-        return redirect()->back()->with('success','Nationality has been created successfully.');
+        return redirect()->back()->with('success','Country has been created successfully.');
         }
         else{
-            return redirect()->back()->with('error','Nationality not created.');
+            return redirect()->back()->with('error','Country not created.');
         }
         }
 
@@ -89,10 +91,12 @@ class NationalityController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'currency_code'=>'required',
         ]);
        $data= Nationality::find($id)->update([
-            'name' => $request->name,
-            'description'=>$request->desc,
+        'name' => $request->name,
+        'currency_code' => strtoupper($request->currency_code),
+        'percentage'=>$request->percentage,
         ]);
         if($data){
         return redirect()->back()->with('success','Nationality has been Updated successfully.');

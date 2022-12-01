@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('invoice_no')->nullable();
             $table->string('currency')->nullable();            
             $table->string('deposite_date')->nullable();
-            $table->string('cheque_amt')->nullable();
-            $table->string('sar_amt')->nullable();
+            $table->string('user_amt')->nullable();
+            $table->string('qar_amt')->nullable();
             $table->string('cheque_no')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('cheque_status')->nullable();

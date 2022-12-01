@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Invoice Receipt</title>
 </head>
@@ -39,8 +40,10 @@
                                             </div>
                                             <div class="flex-shrink-0 mt-sm-0 mt-3">
                                                 <h6><span class="text-muted fw-normal">Company Registration No:</span><span id="legal-register-no">{{ $company->cr_no??'' }}</span></h6>
-                                                <h6><span class="text-muted fw-normal">Email:</span><span id="email">{{ $company->email??'' }}</span></h6>
-                                                <h6 class="mb-0"><span class="text-muted fw-normal">Contact No: </span><span id="contact-no"> {{ $company->phone??'' }}</span></h6>
+                                                <h6><span class="text-muted fw-normal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;</span><span id="email">{{ $company->email??'' }}</span></h6>
+                                                <h6><span class="text-muted fw-normal"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;</span><span id="contact-no"> {{ $company->phone??'' }}</span></h6>
+                                                <h6><span class="text-muted fw-normal">Post Box:&nbsp;<span id="contact-no"> {{ $company->post_box??'' }}</span></h6>
+
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +58,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $symbol??'SAR' }} {{ $invoice->amt_paid??'' }}</td>
+                                <td>{{ $symbol??'' }} {{ round($amt_paid??'',2) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,7 +68,7 @@
                         <thead>
                             <tr>
                             <th scope="col">Receipt No</th>
-                            <th class="text-danger">1001</th>
+                            <th class="text-danger">{{ $invoice->receipt_no }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,7 +92,12 @@
             <tbody>
                 <tr>
                     <td>Amount</td>
-                    <td>{{ $symbol??'SAR' }} {{ $invoice->amt_paid??'' }}</td>
+                    <td>{{ $symbol??'' }} {{ $amt_paid??'' }}</td>
+                    <td>مبلغ وقدره :</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>{{ $symbol??'' }} {{ $tax_amt??'' }}</td>
                     <td>مبلغ وقدره :</td>
                 </tr>
                 <tr>

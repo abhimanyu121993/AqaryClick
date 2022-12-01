@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('nationalities', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('currency_code')->nullable();
+            $table->string('percentage')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

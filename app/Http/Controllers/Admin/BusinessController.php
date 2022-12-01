@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\BankDetail;
 use App\Models\BusinessDetail;
@@ -11,6 +12,7 @@ use App\Models\OwnerCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class BusinessController extends Controller
 {
@@ -31,14 +33,17 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        $role=Auth::user()->roles[0]->name;
-        if($role=='superadmin'){
-            $user=BusinessDetail::all();
+        $role = Auth::user()->roles[0]->name;
+        if ($role == 'superadmin') {
+            $business = BusinessDetail::all();
+
+        } else {
+            $business = BusinessDetail::where('user_id', Auth::user()->id)->get();
+            // $bank=BankDetail::where('user_id', Auth::user()->id)->get();
+
+
         }
-        else{
-            $user=BusinessDetail::where('user_id',Auth::user()->id)->get();
-        }
-        return view('admin.business.all_customer',compact('user'));
+        return view('admin.business.all_business', compact('business'));
     }
 
     /**
@@ -64,63 +69,64 @@ class BusinessController extends Controller
         //     'customer_code'=>'required',
         //     'bank_name'=>'required',
         // ]);
-        $logo='';
-        if($request->hasFile('company_logo'))
-        {
-            $company='Company-logo-'.time().'-'.rand(0,99).'.'.$request->company_logo->extension();
-            $request->company_logo->move(public_path('upload/company/logo/'),$company);
+        $logo = '';
+        if ($request->hasFile('company_logo')) {
+            $company = 'Company-logo-' . time() . '-' . rand(0, 99) . '.' . $request->company_logo->extension();
+            $request->company_logo->move(public_path('upload/company/logo/'), $company);
             $logo = $company;
         }
-       $business= BusinessDetail::create([
-        'user_id'=>Auth::user()->id,
+        $business = BusinessDetail::create([
+            'user_id' => Auth::user()->id,
             'customer_type' => $request->customer_type,
             'business_type' => $request->business_type,
             'business_name' => $request->business_name,
-            'cr_no'=>$request->cr_reg_no,
+            'cr_no' => $request->cr_reg_no,
             'address' => $request->address,
             'email' => $request->email,
             'phone' => $request->phone,
-            'authorized_person'=>$request->authorized_person,
-            'logo'=>$logo,
-            'activity'=>$request->company_activity,
+            'post_box' => $request->post_box,
+            'authorized_person' => $request->authorized_person,
+            'logo' => $logo,
+            'activity' => $request->company_activity,
 
         ]);
-        $bankdata=BankDetail::create([
-            'user_id'=>Auth::user()->id,
-            'business_id'=>$business->id,
-            'bank_name'=>$request->bank_name,
-            'account_number'=>$request->account_number,
-            'ifsc'=>$request->ifsc,
-            'swift'=>$request->swift,
-            'iban_no'=>$request->iban_no
-        ]);
-        $document='';
-        if($request->hasFile('document_file'))
-        {
-            $document='Copnamy-logo-'.time().'-'.rand(0,99).'.'.$request->document_file->extension();
-            $request->document_file->move(public_path('company/document/'),$document);
-            $document_img= 'company/document/'.$document;
+        if ($request->bank_name == !null) {
+            for ($i = 0; $i < count($request->bank_name); $i++) {
+
+                $bankdata = BankDetail::create([
+                    'user_id' => Auth::user()->id,
+                    'business_id' => $business->id,
+                    'bank_name' => $request->bank_name[$i],
+                    'account_number' => $request->account_number[$i],
+                    'ifsc' => $request->ifsc[$i],
+                    'swift' => $request->swift[$i],
+                    'iban_no' => $request->iban_no[$i]
+                ]);
+            }
         }
-        $company_document=BusinessDocument::create([
-            'business_id'=>$business->id,
-            'document_name'=>$request->document_name,
-            'file'=>$document,
-            'expire_date'=>$request->document_exp_date,
-        ]);
-        if($business){
-        return redirect()->back()->with('success','Business has been created successfully.');
+        if ($request->document_name != null) {
+            $file = $request->file('docfile');
+            foreach ($request->document_name as $k => $doc) {
+                $name = 'logo-' . time() . '-' . rand(0, 99) . '.' . $file[$k]->extension();
+                $file[$k]->move(public_path('company/document'), $name);
+                $otherpic[] = $name;
+                $company_document = BusinessDocument::create([
+                    'business_id' => $business->id,
+                    'document_name' => $request->document_name[$k],
+                    'file' => $otherpic[$k],
+                    'expire_date' => $request->document_exp_date[$k],
+                ]);
+            }
         }
-        else{
-            return redirect()->back()->with('error','Business not created.');
+        if ($business) {
+            return redirect()->back()->with('success', 'Business has been created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Business not created.');
         }
-        if($bankdata)
-        {
-            return redirect()->back()->with('success','Bank Detail has been  Entered.');
-        }
-        else
-        {
+        if ($bankdata) {
+            return redirect()->back()->with('success', 'Bank Detail has been  Entered.');
+        } else {
             return redirect()->back();
-
         }
     }
 
@@ -143,7 +149,9 @@ class BusinessController extends Controller
      */
     public function edit($id)
     {
-
+        $id = Crypt::decrypt($id);
+        $business = BusinessDetail::find($id);
+        return view('admin.business.register', compact('business'));
     }
     /**
      * Update the specified resource in storage.
@@ -168,30 +176,49 @@ class BusinessController extends Controller
         //
     }
 
-    public function companyOwnerDetail($id)
+    public function businessDocumentDetail($id)
     {
-        $company_details=User::find($id);
-        return view('admin.business.customer_company',compact('company_details'));
+        $id = Crypt::decrypt($id);
+        $document = BusinessDocument::where('id',$id)->get();
+        return view('admin.business.business_document', compact('document'));
     }
-    public function bankdetail()
-    {
-        return view('admin.business.customer_bank_detail');
-    }
-
     public function showBankDetail($id)
     {
-        $bank_details=User::find($id);
-        return view('admin.business.customer_bank_detail',compact('bank_details'));
+        $id = Crypt::decrypt($id);
+        $bank = BankDetail::where('id',$id)->get();
+        return view('admin.business.customer_bank_detail', compact('bank'));
     }
+    public function updateBankDetails(Request $request)
+    {
+        dd($request);
+        $request->validate([
+            // 'name' => 'required',
+            // 'currency_code'=>'required',
+        ]);
+       $data= BankDetail::find($id)->update([
+        'business_id' => $request->business_id,
+        'user_id'=>Auth::user()->id,
+        'bank_name' => $request->bank_name,
+        'account_number' => $request->account_number,
+        'iban_no'=>$request->iban_no,
+        'ifsc'=>$request->ifsc,
+        'swift'=>$request->swift,
 
+        ]);
+        if($data){
+        return redirect()->back()->with('success','Bank Details Updated successfully.');
+        }
+        else{
+            return redirect()->back()->with('error','Bank Details not Updated.');
+        }    }
     public function usercompanydelete($id)
     {
-        $companydel=OwnerCompany::find($id)->delete();
+        $companydel = OwnerCompany::find($id)->delete();
         return redirect()->back();
     }
     public function userbankdelete($id)
     {
-        $companydel=BankDetail::find($id)->delete();
+        $companydel = BankDetail::find($id)->delete();
         return redirect()->back();
     }
 }
