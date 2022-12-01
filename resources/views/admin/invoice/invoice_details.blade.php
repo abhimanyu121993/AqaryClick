@@ -13,7 +13,6 @@
           left: 0;
           right: 0;
           z-index: -1;
-
           font-size: 100px;
           font-weight:500px;
           display: grid;
@@ -28,15 +27,16 @@
             width: 100%;
             position: relative;
             z-index: 10000;
+            overflow: hidden;
         }
         #img
         {
-            height: 1000px;
-            width: 100%;
+            height: 1100px;
+            width: 70%;
             top: -100px;
             position: absolute;
             opacity: .1;
-            left: 60px;
+            left: 240px;
             z-index: 1000;
         }
         </style>
@@ -55,10 +55,10 @@
 <div class="background" id='background'>
 
                 @if ($company->customer_type == 'Indivisual')
-                <img src="{{ asset("upload/building/building.png") }}" id="img" alt="img" style="height:100%;width:100%;">
+                <img src="{{ asset("upload/building/building.png") }}" id="img" alt="img">
                 @else
                 <img src="{{ asset('upload/company/logo/' . $company->logo) }}"
-                    class="card-logo card-logo-dark" alt="logo dark" id="img" style="height:100%;width:90%;">
+                    class="card-logo card-logo-dark" alt="logo dark" id="img">
             @endif
 
     <div class="main-content" >
