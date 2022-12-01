@@ -1,12 +1,13 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Contract Reciept Edit'])
 @section('title', 'Contract Reciept Edit')
 @section('main-content')
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    
+    <script src="https://cdn.ckeditor.com/4.20.0/full/ckeditor.js"></script>
     <div class="row">
         <form action="{{ route('admin.contract-recipt.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
         <div class="row col-lg-12">
-            <div class="col-md-6">
+            <div class="col-md-6" id="p1">
                 <label for="remark" class="form-label">Preamble </label>
                 <textarea class="form-control" name="clause_one_english">
                         </textarea>
@@ -287,4 +288,7 @@
         CKEDITOR.replace('clause_nineteen_english');
         CKEDITOR.replace('clause_nineteen_arabic');
     </script>
+
+
+
 @endsection
