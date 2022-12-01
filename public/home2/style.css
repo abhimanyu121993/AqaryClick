@@ -3386,6 +3386,7 @@ footer .copyright .mdc-button{
   width: 32px;
   height: 32px;
   padding: 0;
+  margin-top: 2px;
   overflow: hidden;            
   cursor: pointer; 
 }
@@ -3415,6 +3416,10 @@ footer .copyright .mdc-button{
 .options .skin-primary.purple{
   background-color: #7b1fa2;
   border: 1px solid #7b1fa2;
+}
+.options .skin-primary.orange{
+  background-color: #FF8C00;
+  border: 1px solid #FF8C00;
 }
 .options .skin-primary.grey{
   background-color: #455a64;
