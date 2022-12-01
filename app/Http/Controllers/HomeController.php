@@ -123,7 +123,9 @@ class HomeController extends Controller
             return redirect()->back()->with('error','Something went wrong!please try again.');
         }
     }
-
+    public function home(){
+        return view('frontend.home');
+    }
 
 
 }
