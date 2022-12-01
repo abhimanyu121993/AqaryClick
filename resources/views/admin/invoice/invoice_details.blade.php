@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Invoice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -88,13 +89,12 @@
                                             </div>
 
                                             <div class="flex-shrink-0 mt-sm-0 mt-3">
-                                                <h6><span class="text-muted fw-normal">Company Registration
-                                                        No:</span><span
-                                                        id="legal-register-no">{{ $company->cr_no ?? '' }}</span></h6>
-                                                <h6><span class="text-muted fw-normal">Email:</span><span
-                                                        id="email">{{ $company->email ?? '' }}</span></h6>
-                                                <h6 class="mb-0"><span class="text-muted fw-normal">Contact No:
-                                                    </span><span id="contact-no"> {{ $company->phone ?? '' }}</span></h6>
+                                                
+                                                <h6><span class="text-muted fw-normal">Company Registration No:</span><span id="legal-register-no">{{ $company->cr_no??'' }}</span></h6>
+                                                <h6><span class="text-muted fw-normal"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;</span><span id="email">{{ $company->email??'' }}</span></h6>
+                                                <h6 class="mb-0"><span class="text-muted fw-normal"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;</span><span id="contact-no"> {{ $company->phone??'' }}</span></h6>
+                                                <h6 class="mb-0"><span class="text-muted fw-normal">Post Box:&nbsp;<span id="contact-no"> {{ $company->post_box??'' }}</span></h6>
+
                                             </div>
                                         </div>
                                     </div>
@@ -125,8 +125,7 @@
                                             <!--end col-->
                                             <div class="col-lg-3 col-6">
                                                 <p class="text-muted mb-2 text-uppercase fw-semibold">Total Amount</p>
-                                                <h5 class="fs-14 mb-0">{{ $symbol ?? 'QAR' }}<span
-                                                        id="total-amount">{{ $invoice->amt_paid ?? '' }}</span></h5>
+                                                <h5 class="fs-14 mb-0">{{ $symbol??'' }}&nbsp;<span id="total-amount">{{ round($amt_paid??'',2) }}</span></h5>
                                             </div>
                                             <!--end col-->
                                         </div>
@@ -153,7 +152,7 @@
                                             <div class="col-6 text-center">
                                                 <h6 class="text-muted text-uppercase fw-semibold mb-3">Tenant</h6>
                                                 <p class="fw-medium mb-2" id="shipping-name">
-                                                    {{ $invoice->TenantName->tenant_english_name ?? '' }}</p>
+                                                    {{ $invoice->TenantName->tenant_english_name ?? '' }} ({{ $invoice->TenantName->file_no ?? '' }})</p>
                                                 <p class="text-muted mb-1" id="shipping-address-line-1">Address:
                                                     <br>{{ $invoice->TenantName->unit_address ?? '' }} </p>
                                                 <p class="text-muted mb-1"><span>Phone:</span><span
@@ -189,9 +188,8 @@
                                                         <td class="text-start">
                                                             <p class="text-muted mb-0">{{ $invoice->remark ?? '' }}</p>
                                                         </td>
-                                                        <td>{{ $symbol ?? 'SAR' }}{{ $invoice->due_amt ?? 0 }}</td>
-                                                        <td class="text-end">
-                                                            {{ $symbol ?? 'SAR' }}{{ $invoice->amt_paid ?? 0 }}</td>
+                                                        <td>{{ $symbol??'SAR' }}&nbsp;{{round($due_amt,2)}}</</td>
+                                                        <td class="text-end">{{ $symbol??'' }}&nbsp;{{ round($amt_paid??0 ,2) }}</td>
                                                     </tr>
 
                                                 </tbody>
@@ -204,35 +202,30 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Sub Total</td>
-                                                        <td class="text-end">
-                                                            {{ $symbol ?? 'SAR' }}{{ $invoice->amt_paid ?? 0 }}</td>
+                                                        <td class="text-end">{{ $symbol??'' }}&nbsp;{{ round($amt_paid??0 ,2) }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Estimated Tax (0%)</td>
-                                                        <td class="text-end">0</td>
-                                                    </tr>
+                                                <td>Estimated Tax ({{ $invoice->tax_per??0 }}%)</td>
+                                                <td class="text-end">{{ $symbol??'' }}&nbsp;{{ round($tax_amt??0,2) }}</td>
+                                            </tr>
                                                     <tr>
                                                         <td>Due Amount</td>
-                                                        <td class="text-end">
-                                                            <span>{{ $symbol ?? 'SAR' }}</span>{{ $invoice->due_amt ?? 0 }}
-                                                        </td>
+                                                        <td class="text-end"> <span>{{ $symbol??'' }}&nbsp;</span>{{round($due_amt??0, 2)}}</td>
                                                     </tr>
 
                                                     <tr class="border-top border-top-dashed fs-15">
                                                         <th scope="row">Total Amount</th>
-                                                        <th class="text-end">{{ $invoice->amt_paid ?? 0 }}</th>
+                                                        <th class="text-end">{{ $symbol??'' }}&nbsp;{{ $total_amt??0 }}</th>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             <!--end table-->
                                         </div>
                                         <div class="mt-3 col-9">
-                                            <h6 class="text-muted text-uppercase fw-semibold mb-3">Payment Details:
-                                            </h6>
-                                            <p class="text-muted mb-1">Payment Method: <span class="fw-medium"
-                                                    id="payment-method">{{ $invoice->payment_method ?? '' }}</span></p>
-                                            <table
-                                                class="table table-borderless text-center table-nowrap align-middle mb-0">
+                                            <h6 class="text-muted text-uppercase fw-semibold mb-3">Payment Details:</h6>
+                                            <p class="text-muted mb-1">Payment Method: <span class="fw-medium" id="payment-method">{{ $invoice->payment_method??''}}</span></p>
+                                            @if($invoice->payment_method=='Cheque')
+                                            <table class="table table-borderless text-center table-nowrap align-middle mb-0">
                                                 <thead>
                                                     <tr class="table-active">
                                                         <th scope="col" style="width: 50px;">#</th>
@@ -258,6 +251,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
+                                            @endif
                                             <!--end table-->
                                         </div>
 
@@ -279,6 +273,7 @@
                                 </div>
 
                             </div>
+                            <h5 class="text-center">Thank You For Your Business.</h5>
                         </div>
                         <!--end card-->
                     </div>

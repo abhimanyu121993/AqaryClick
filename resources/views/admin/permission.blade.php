@@ -46,7 +46,7 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <table class="table table-nowrap container">
-                        <thead>
+                        <thead class="thead-color">
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>

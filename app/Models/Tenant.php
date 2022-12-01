@@ -15,14 +15,13 @@ class Tenant extends Model
     {
         return $this->belongsTo(Building::class, 'building_name');
     }
- 
+    public function tenantNationality()
+    {
+        return $this->belongsTo(Nationality::class, 'tenant_nationality', 'id');
+    }
 
     public function nationality()
     {
         return $this->belongsTo(Nationality::class, 'sponser_nationality', 'id');
-    }
-    public function unitType()
-    {
-        return $this->belongsTo(UnitType::class, 'unit_type', 'id');
     }
 }

@@ -35,12 +35,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header align-items-center d-flex">
+                <div class="card-header align-items-center d-flex table-main-heading">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Roles</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <table class="table table-nowrap container">
-                        <thead>
+                        <thead class="thead-color">
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Role Name</th>

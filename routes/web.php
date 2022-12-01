@@ -101,9 +101,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('customer',CustomerController::class);
     Route::resource('contract',ContractController::class);
     Route::get('bank-details/{id}',[BusinessController::class,'showBankDetail'])->name('showBankDetail');
-    Route::get('company-details/{id}',[BusinessController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
+    Route::get('business-document/{id}',[BusinessController::class,'businessDocumentDetail'])->name('businessDocument');
     Route::get('delete-company-details/{id}',[BusinessController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
+    Route::post('update-bank-details',[BusinessController::class,'updateBankDetails'])->name('updateBank');
+
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
     Route::get('fetch-company/{lessor_id}',[ContractController::class,'fetchCompany'])->name('fetchCompany');
@@ -153,7 +155,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('bulk-upload-building',[BuildingController::class,'bulkUpload'])->name('bulkUploadBuilding');
     Route::post('bulk-upload-unit',[UnitController::class,'bulkUpload'])->name('bulkUploadUnit');
     Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
-    Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadBuilding');
+    Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
 
 
 

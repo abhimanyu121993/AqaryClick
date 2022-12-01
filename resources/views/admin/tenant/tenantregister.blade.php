@@ -116,13 +116,13 @@
                             <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
                                 <option value="">---Select Tenant Nationality---</option>
                                 @foreach($nation as $nationality)
-                                <option value="{{$nationality->name}}">{{$nationality->name}}</option>
+                                <option value="{{$nationality->id}}">{{$nationality->name}}</option>
                                @endforeach
                             </select>
                         </div>                      
                                 
                             <div class="col-xxl-3 col-md-12">
-                                <label for="remark" class="form-label">Unit Address</label>
+                                <label for="remark" class="form-label">Address</label>
                                 <textarea class="form-control" name="unit_address">
                                 </textarea>
                             </div>
@@ -245,12 +245,22 @@
                         </div>
                             </div>
                     
-                    <div class="col-xxl-3 col-md-12">
+                            <div class="row">
+                        <div class="card-body field_wrapper4">
+                <div class="row clone4">
+                <div class="col-xxl-3 col-md-11">
                         <label for="city" class="form-label">File Attachment</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File" multiple>
+                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">
                         </div>
                     </div>
+                    
+                    <div class="col-sm-1">
+                        <br />
+                        <a href="javascript:void(0);" class="add_button4 btn btn-success" title="Add field">+</a>
+                    </div>
+                </div>
+                        </div>
                     <div class="col-xxl-3 col-md-12">
                         <label for="remark" class="form-label">Remark</label>
                         <textarea class="form-control" name="attachment_remark">
@@ -275,7 +285,35 @@
 @endsection
 @section('script-area')
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+          // product detail
+        var addButton4 = $('.add_button4'); //Add button selector
+        var wrapper4 = $('.field_wrapper4'); //Input field wrapper
+        var fieldHTML4 = '<div class="row">\
+                <div class="col-sm-11">\
+                    <label for="" class="form-label">File Attachment</label>\
+                    <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">\
+                </div>\
+                <div class="col-sm-1">\
+                    <br/>\
+                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
+                </div></div>';
 
+        //Once add button is clicked
+        $(addButton4).click(function() {
+
+            $(wrapper4).append(fieldHTML4); //Add field html
+
+        });
+
+        //Once remove button is clicked
+        $(wrapper4).on('click', '.remove_button4', function(e) {
+            e.preventDefault();
+            $(this).closest('.row').remove(); //Remove field html
+
+        });
+
+</script>
 <script>
 $(document).ready(function() {
                 $('#qid').hide();

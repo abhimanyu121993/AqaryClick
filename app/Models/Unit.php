@@ -14,10 +14,6 @@ class Unit extends Model
     {
         return $this->belongsTo(UnitStatus::class, 'unit_status', 'id');
     }
-    public function unitTD()
-    {
-        return $this->belongsTo(UnitType::class, 'unit_type', 'id');
-    }
     public function buildingDetails()
     {
         return $this->belongsTo(Building::class, 'building_id', 'id');
@@ -25,5 +21,10 @@ class Unit extends Model
     public function unitFeature()
     {
         return $this->belongsTo(UnitStatus::class, 'unit_feature', 'id');
+    }
+
+    public function unitTypeDetails()
+    {
+        return $this->belongsTo(UnitType::class, 'unit_type','id');
     }
 }

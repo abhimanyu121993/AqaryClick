@@ -15,7 +15,8 @@ class ContractReciptController extends Controller
      */
     public function index()
     {
-        return view('admin.contractRecipt.contract_recipt');
+        $contract=ContractRecipt::first();
+        return view('admin.contractRecipt.contract_recipt',compact('contract'));
     }
 
     /**
@@ -36,7 +37,7 @@ class ContractReciptController extends Controller
      */
     public function store(Request $request)
     {
-        $data= ContractRecipt::updateOrCreate([
+        $data= ContractRecipt::first()->update([
             'clause_one_english' => $request->clause_one_english,
             'clause_one_arabic' => $request->clause_one_arabic,
             'clause_two_english'=>$request->clause_two_english,
