@@ -10,7 +10,7 @@
                 </div><!-- end card header -->
                 <div class="card-body ">
                     <div class='table-responsive'>
-                        <table id="example" class="table table-striped table-bordered " style="width:100%">
+                        <table id="example" class="table table-striped table-bordered  " style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">Sr.No.</th>
@@ -120,6 +120,7 @@
                 processing: true,
                 serverSide: true,
                 searchable: true,
+                scrollX: true,
                 ajax: '{!! route('admin.get-buildings') !!}',
                 columns: [{
                         data: 'id',
@@ -204,7 +205,11 @@
                 ]
             });
         });
+
+
     </script>
+
+
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script> --}}
