@@ -58,6 +58,9 @@ Route::controller(HomeController::class)->group(function(){
     Route::post("/contact","contactSubmit")->name('contactus');
 });
 
+Route::group(['prefix'=>'home','as'=>'home.'],function(){
+    Route::get('/',[HomeController::class,'home']);
+});
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
 Route::post('/login',[LoginController::class, 'store'])->name('login');
@@ -147,6 +150,14 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);
+    Route::post('bulk-upload-building',[BuildingController::class,'bulkUpload'])->name('bulkUploadBuilding');
+    Route::post('bulk-upload-unit',[UnitController::class,'bulkUpload'])->name('bulkUploadUnit');
+    Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
+    Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadBuilding');
+
+
+
+
 });
 
 //  Payment

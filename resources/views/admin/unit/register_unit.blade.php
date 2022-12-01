@@ -3,6 +3,47 @@
 @section('main-content')
 
     <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Unit</h4>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="live-preview">
+                        <form action="{{ route('admin.bulkUploadUnit') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <div class="row gy-4 mb-3">
+                                <div class="col-xxl-6 col-md-6">
+                                    <label for="name" class="form-label">Upload File</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="bulk_upload" name="bulk_upload" >
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-6 pt-4">
+                                    <button class="btn btn-primary" type="submit">Upload</button>
+                                </div>
+                            </div>
+                            <div class="row gy-4 mb-3">
+                                <div class="col-xxl-3 col-md-6">
+                                    <a href="{{ asset('assets/excel_format/unit_format.csv') }}" target="_blank">Example format</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
@@ -49,8 +90,8 @@
                                         <input type="text" class="form-control" id="lessor_name" name="unit_no" value="{{isset($buildingedit)? $buildingedit->unit_no: '' }}" placeholder="Enter Unit No">
                                     </div>
                                 </div>
-                               
-                            
+
+
                             <div class="col-xxl-3 col-md-3">
                     <label class="form-label" for="flag">Unit Type</label>
 
@@ -89,7 +130,7 @@
                         <option value="{{ $unit->name}}">{{ $unit->name }}</option>
                         @endforeach
                     </select>
-                </div>                     
+                </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="building_location" class="form-label">Unit Size<sup class="text-danger"> *(in square meter)</sup></label>
                                     <div class="input-group">
@@ -110,7 +151,7 @@
                     </select>
                 </div>
                             </div>
-                            
+
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="contract_no" class="form-label">Electric No</label>
@@ -124,7 +165,7 @@
                                         <input type="text" class="form-control" id="water" name="water_no" value="{{isset($buildingedit)? $buildingedit->water_no: '' }}" placeholder="Enter water no">
                                     </div>
                                 </div>
-                           
+
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="country" class="form-label">Intial Rent</label>
                                     <div class="input-group">
@@ -151,7 +192,7 @@
                                         <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($buildingedit)? $buildingedit->unit_ref: '' }}" placeholder="Enter Unit ref">
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="revenue" class="form-label">Revenue Code</label>
                                     <div class="input-group">
