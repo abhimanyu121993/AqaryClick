@@ -153,7 +153,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('bulk-upload-building',[BuildingController::class,'bulkUpload'])->name('bulkUploadBuilding');
     Route::post('bulk-upload-unit',[UnitController::class,'bulkUpload'])->name('bulkUploadUnit');
     Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
-    Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadBuilding');
+    Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
 
 
 
