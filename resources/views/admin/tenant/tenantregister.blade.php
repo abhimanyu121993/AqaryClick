@@ -2,6 +2,47 @@
 @section('title', 'Register Tenant')
 @section('main-content')
 <div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Tenant</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="{{ route('admin.bulkUploadTenant') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="row gy-4 mb-3">
+                            <div class="col-xxl-6 col-md-6">
+                                <label for="name" class="form-label">Upload File</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="bulk_upload" name="bulk_upload" >
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-6 pt-4">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-6">
+                                <a href="{{ asset('assets/excel_format/tenant_format.csv') }}" target="_blank">Example format</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
@@ -66,7 +107,7 @@
                                     <option value="Passport">Passport</option>
                                 </select>
                             </div>
-                        
+
                             <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                 <label for="country" class="form-label">QID</label>
                                 <div class="input-group">
@@ -119,14 +160,14 @@
                                 <option value="{{$nationality->name}}">{{$nationality->name}}</option>
                                @endforeach
                             </select>
-                        </div>                      
-                                
+                        </div>
+
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Unit Address</label>
                                 <textarea class="form-control" name="unit_address">
                                 </textarea>
                             </div>
-                            
+
                             <div class="col-xxl-3 col-md-3 mb-2">
                             <label for="space" class="form-label">Building Name</label>
                             <select class="form-select js-example-basic-single" id="building_name" name="building_name">
@@ -135,7 +176,7 @@
                                 <option value="{{$buld->id}}">{{$buld->name}}</option>
                                @endforeach
                             </select>
-                        </div> 
+                        </div>
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
                             <div class="input-group">
@@ -244,7 +285,7 @@
                             </select>
                         </div>
                             </div>
-                    
+
                     <div class="col-xxl-3 col-md-12">
                         <label for="city" class="form-label">File Attachment</label>
                         <div class="input-group">
@@ -293,7 +334,7 @@ $(document).ready(function() {
                         $('#cr').show();
                         $('#qid').hide();
                         $('#passport').hide();
- 
+
                     }else if (optionValue == 'Passport') {
                         $('#passport').show();
                         $('#qid').hide();
@@ -314,7 +355,7 @@ $(document).ready(function() {
                         $('#sponser').show();
 
                     } else if (optionValue == 'TP') {
-                        $('#sponser').hide(); 
+                        $('#sponser').hide();
                     }
                     var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
                 $.ajax({
@@ -330,14 +371,14 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('#account_no').hide(); 
-    $('#has_cheque').hide(); 
+    $('#account_no').hide();
+    $('#has_cheque').hide();
                 $("#payment_method").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'Cash') {
-                        $('#has_cheque').hide(); 
-                        $('#account_no').hide(); 
+                        $('#has_cheque').hide();
+                        $('#account_no').hide();
 
                     } else if (optionValue == 'Cheques') {
                         $('#has_cheque').show();
@@ -345,7 +386,7 @@ $(document).ready(function() {
 
                     }
                     else if (optionValue == 'Transfer Bank') {
-                        $('#has_cheque').hide(); 
+                        $('#has_cheque').hide();
                         $('#account_no').show();
 
                     }
@@ -374,7 +415,7 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('#rental_time').hide(); 
+    $('#rental_time').hide();
                 $("#rental_period").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
@@ -383,13 +424,13 @@ $(document).ready(function() {
                         $('#change_rental_time').text("Days") ;
                         $('#change_placeholder').attr('placeholder','Enter No Of Days');
                         } else if (optionValue == 'Months') {
-                        $('#rental_time').show(); 
+                        $('#rental_time').show();
                         $('#change_rental_time').text("Months") ;
                         $('#change_placeholder').attr('placeholder','Enter No Of Months');
 
                     }
                     else if (optionValue == 'Years') {
-                        $('#rental_time').show(); 
+                        $('#rental_time').show();
                         $('#change_rental_time').text("Years");
                         $('#change_placeholder').attr('placeholder','Enter No Of Years');
 
