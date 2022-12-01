@@ -58,25 +58,6 @@ Route::controller(HomeController::class)->group(function(){
     Route::post("/contact","contactSubmit")->name('contactus');
 });
 
-<<<<<<< Updated upstream
-=======
-// FrontEnd Routes
-// Route::get('/', function(){
-//     return view('welcome');
-// });
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
 Route::post('/login',[LoginController::class, 'store'])->name('login');
