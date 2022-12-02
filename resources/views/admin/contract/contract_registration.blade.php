@@ -3,6 +3,47 @@
 @section('main-content')
 
 <div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Contract</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="{{ route('admin.bulkUploadContract') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="row gy-4 mb-3">
+                            <div class="col-xxl-6 col-md-6">
+                                <label for="name" class="form-label">Upload File</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="bulk_upload" name="bulk_upload" >
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-6 pt-4">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-6">
+                                <a href="{{ asset('assets/excel_format/contract_format.csv') }}" target="_blank">Example format</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
@@ -42,6 +83,8 @@
                                     <option value="" selected hidden>--Select Tenant Type--</option>
                                     <option value="Personal">Personal</option>
                                     <option value="Company">Company</option>
+                                    <option value="Government">Government</option>
+
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -69,7 +112,7 @@
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Tenant Nationality</label>
-                                <div class="input-group">
+                                <div class="input-group" id"tenantInput">
                                     <input type="text" class="form-control" id="tenant_nationality"
                                         name="tenant_nationality"
                                         value="{{ isset($contractedit) ? $contractedit->tenant_nationality : '' }}"
@@ -85,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2" id="qid">
-                                <label for="country" class="form-label">QID</label>
+                                <label for="country" class="form-label">ID</label>
                                 <div class="input-group">
                                     <input type="text" id="qid_document" class="form-control" name="qid_document"
                                         placeholder="Qid Document Number" readonly>
@@ -119,7 +162,7 @@
                                     <option value="not renewed">Not Renewed</option>
                                     <option value="auto renewed">Auto Renewed</option>
                                     <option value="long term">Long Term</option>
-                                    <option value="releted parties">Releted Parties</option>
+                                    <option value="releted parties">Related Parties</option>
 
                                     @endif
                                 </select>
@@ -133,7 +176,7 @@
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 sponsor_hide">
-                                <label for="name" class="form-label">Sponsor Qid</label>
+                                <label for="name" class="form-label">Sponsor id</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="sponsor_id" name="sponsor_id"
                                         value="{{ isset($contractedit) ? $contractedit->sponsor_id : '' }}"
@@ -173,7 +216,7 @@
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
-                                <label for="name" class="form-label">Contract Under Company</label>
+                                <label for="name" class="form-label">Company</label>
                                 <select class="form-control select2 form-select" id="company" name="company_id">
                                     @if (isset($contractedit))
                                     <option value="{{ $contractedit->company_id }}" selected>
@@ -188,11 +231,11 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="authorized_person" name="authorized_person"
                                         value="{{ isset($contractedit) ? $contractedit->authorized_person : '' }}"
-                                        placeholder="Authorized Person ">
+                                        placeholder="Authorized Person " readonly>
                                 </div>
                             </div>                            
-                            <div class="col-xxl-3 col-md-3">
-                                <label for="lessor_sign" class="form-label">Lessor's Sign</label>
+                            <div class="col-xxl-3 col-md-3" id="hide_sign">
+                                <label for="lessor_sign" class="form-label" id="d-sing">Lessor's Sign</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" id="lessor_sign" name="lessor_sign">
                                 </div>
@@ -266,7 +309,7 @@
                             $graced=json_decode($contractedit->grace_period_day);
                             @endphp
                             @foreach($pgrace as $k=>$pg)
-                            <div class="row pgrace">
+                            <div class="row pgrace" {{ isset($contractedit) ? '' : 'style="display:none;"' }}>
                             <div class="col-xxl-3 col-md-3" id="grace_start_date">
 
                                 <label for="name" class="form-label">Grace From</label>
@@ -462,7 +505,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header align-items-center d-flex">
+            <div class="card-header align-items-center d-flex table-main-heading">
                 <h4 class="card-title mb-0 flex-grow-1">
                     {{ isset($contractedit) ? 'Update payment' : 'Payment Details' }}</h4>
             </div><!-- end card header -->
@@ -491,8 +534,8 @@
                     </table>
                 </div>
                         <div class="card-body field_wrapper -responsive">
-                        <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                        <thead>
+                        <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-hover" style="width: 100%;" aria-describedby="ajax-datatables_info">
+                        <thead class="thead-color">
                         <tr>
                                         <th scope="col">Sr.No.</th>
                                         <th scope="col">Invoice No</th>
@@ -553,8 +596,9 @@ $(document).ready(function() {
                 url: newurl,
                 method: 'get',
                 success: function(p) {
+                    console.log(p);
                     $("#tenant_primary_mobile").val(p.tenant_primary_mobile);
-                    $('#tenant_nationality').val(p.tenant_nationality);
+                    $('#tenant_nationality').val(p.tenant_nationality.name);
                     $('#sponsor_name').val(p.sponsor_name);
                     $('#sponsor_id').val(p.sponsor_oid);
                     $('#sponsor_mobile').val(p.sponsor_phone);
@@ -696,7 +740,7 @@ console.log(diff_years(d1, d2));
 var total_years=diff_years(d1, d2);
 var gracediv='';
 for(var i=1; i<=total_years;i++){
-    gracediv +='<div class="row pgrace"><div class="col-xxl-3 col-md-3 grace_start_date">\
+    gracediv +='<div class="row pgrace "><div class="col-xxl-3 col-md-3 grace_start_date">\
                                 <label for="name" class="form-label">Grace From</label>\
                                 <div class="input-group">\
                                     <input type="date" class="form-control grace_start" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
@@ -831,6 +875,7 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
+    $('#hide_sign').hide();
     $("#company").change(function() {
         $(this).find("option:selected").each(function() {
             var optionValue = $(this).attr("value");
@@ -839,7 +884,9 @@ $(document).ready(function() {
                 url: newurl,
                 method: 'get',
                 success: function(p) {
+                    $('#hide_sign').show();
                     $("#authorized_person").val(p.authorized_person);
+                    $('#d-sing').text(p.authorized_person +"'s sign")
                 }
             });
         });
@@ -878,7 +925,7 @@ $(document).ready(function() {
                                   else if (optionValue == 'Under Process') {
                 $('#attestation_no').hide();
                 $('#attestation_expiry').hide();
-                                  }
+ }
         });
     }).change();
 });

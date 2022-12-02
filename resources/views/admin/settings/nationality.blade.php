@@ -16,19 +16,33 @@
                         @endif
                             @csrf
                             <div class="row gy-4">
-                            <!-- <div class="col-xxl-3 col-md-6">
-                                    <label for="name" class="form-label"></label>
-                                    <div class="input-group">
-                                    </div>
-                                </div> -->
-                                <div class="col-xxl-3 col-md-6">
+                            <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Country</label>
                                     <div class="input-group">
                                     <input type="text" class="form-control" id="name" name="name" value="{{isset($nationality)? $nationality->name: '' }}" placeholder="Enter Country">
-                                        <button class="btn btn-primary" type="submit">{{isset($nationality) ? 'Update' : 'Submit'}}</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-xxl-3 col-md-4">
+                                    <label for="name" class="form-label">Currency Code</label>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" id="currency_code" name="currency_code" value="{{isset($nationality)? $nationality->currency_code: '' }}" placeholder="Enter Currency Code">
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4">
+                                    <label for="name" class="form-label">Tax in Percentange</label>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" id="percentage" name="percentage" value="{{isset($nationality)? $nationality->percentage: '' }}" placeholder="Enter Percentage">
                                     </div>
                                 </div>
                                 <!--end col-->
+                            </div>
+                            <div class="row mt-2">
+                            <div class="col-xxl-3 col-md-6">
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" type="submit">{{isset($nationality) ? 'Update' : 'Submit'}}</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -49,6 +63,8 @@
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Country</th>
+                                <th scope="col">Currency Code</th>
+                                <th scope="col">Tax Percentage</th>
                                 <th scope="col">Created at</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -58,6 +74,8 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $national->name ?? '' }}</td>
+                                    <td>{{ $national->currency_code ?? '' }}</td>
+                                    <td>{{ $national->percentage ?? '0' }}%</td>
                                     <td>{{ $national->created_at }}</td>
                                     <td>
                                         <div class="dropdown">

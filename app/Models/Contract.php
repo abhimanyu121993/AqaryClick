@@ -14,10 +14,18 @@ class Contract extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
+    public function countryDetails()
+    {
+        return $this->belongsTo(Nationality::class, 'tenant_nationality', 'id');
+    }
     
     public function ownerDetails()
     {
-        return $this->belongsTo(Owner::class, 'lessor', 'id');
+        return $this->belongsTo(User::class, 'lessor', 'id');
+    }
+    public function businessDetails()
+    {
+        return $this->belongsTo(BusinessDetail::class, 'lessor', 'user_id');
     }
     public function lessorDetails()
     {

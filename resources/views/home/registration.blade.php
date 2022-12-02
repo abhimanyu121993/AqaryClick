@@ -523,7 +523,7 @@
                                             <li class="true">4 User</li>
                                         </ul>
                                         <div class="btn-box">
-                                            <a href="#" class="theme-btn pricing4">SUBSCRIBE</a>
+                                            <a href="{{route('paypal.pay',1)}}" class="theme-btn pricing4">SUBSCRIBE</a>
                                         </div>
                                     </div>
                                 </div> -->

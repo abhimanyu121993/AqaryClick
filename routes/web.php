@@ -20,6 +20,7 @@ use App\Http\Controllers\admin\InvoiceController;
 use App\Http\Controllers\admin\LegalController;
 use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\admin\StaffController;
 use App\Http\Controllers\Admin\UnitController;
@@ -29,11 +30,13 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UnitFeatureController;
 use App\Http\Controllers\admin\UnitFloorController;
 use App\Http\Controllers\admin\UnitStatusController;
+use App\Http\Controllers\Admin\WebsiteController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +60,9 @@ Route::controller(HomeController::class)->group(function(){
     Route::post("/contact","contactSubmit")->name('contactus');
 });
 
+Route::group(['prefix'=>'home','as'=>'home.'],function(){
+    Route::get('/',[HomeController::class,'home']);
+});
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
 Route::post('/login',[LoginController::class, 'store'])->name('login');
@@ -97,9 +103,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('customer',CustomerController::class);
     Route::resource('contract',ContractController::class);
     Route::get('bank-details/{id}',[BusinessController::class,'showBankDetail'])->name('showBankDetail');
-    Route::get('company-details/{id}',[BusinessController::class,'companyOwnerDetail'])->name('companyOwnerDetail');
+    Route::get('business-document/{id}',[BusinessController::class,'businessDocumentDetail'])->name('businessDocument');
     Route::get('delete-company-details/{id}',[BusinessController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
+    Route::post('update-bank-details',[BusinessController::class,'updateBankDetails'])->name('updateBank');
+
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
     Route::get('fetch-company/{lessor_id}',[ContractController::class,'fetchCompany'])->name('fetchCompany');
@@ -146,8 +154,26 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);
+    Route::post('bulk-upload-building',[BuildingController::class,'bulkUpload'])->name('bulkUploadBuilding');
+    Route::post('bulk-upload-unit',[UnitController::class,'bulkUpload'])->name('bulkUploadUnit');
+    Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
+    Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
+
+    Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
+    Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
+    Route::get('report',[ReportController::class,'report'])->name('report');
+
+
+
 });
 
+//  Payment
+Route::group(['prefix'=>'paypal','as'=>'paypal.'],function(){
+Route::get('payment',[PaymentController::class,'index'])->name('create');
+Route::get('charge/{id}',[PaymentController::class,'charge'])->name('pay');
+Route::get('success',[PaymentController::class,'success'])->name('success');
+Route::get('error',[PaymentController::class,'error'])->name('error');
+});
 Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');
 
 Route::get('/optimize', function(){

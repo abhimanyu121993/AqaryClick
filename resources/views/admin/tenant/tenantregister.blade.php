@@ -2,6 +2,47 @@
 @section('title', 'Register Tenant')
 @section('main-content')
 <div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Tenant</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="{{ route('admin.bulkUploadTenant') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="row gy-4 mb-3">
+                            <div class="col-xxl-6 col-md-6">
+                                <label for="name" class="form-label">Upload File</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="bulk_upload" name="bulk_upload" >
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-6 pt-4">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row gy-4 mb-3">
+                            <div class="col-xxl-3 col-md-6">
+                                <a href="{{ asset('assets/excel_format/tenant_format.csv') }}" target="_blank">Example format</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
@@ -66,7 +107,7 @@
                                     <option value="Passport">Passport</option>
                                 </select>
                             </div>
-                        
+
                             <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                 <label for="country" class="form-label">QID</label>
                                 <div class="input-group">
@@ -104,6 +145,12 @@
                                 <input type="email" class="form-control" name="email"
                                     placeholder="Enter Email">
                             </div>
+                        </div><div class=" col-xxl-3 col-md-3">
+                            <label for="incharge_name" class="form-label">Alternate Email </label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="alternate_email"
+                                    placeholder="Enter Alternate Email">
+                            </div>
                         </div>
                             <div class="col-xxl-3 col-md-3" id="cname">
                                 <label for="country" class="form-label">Post Office Box</label>
@@ -116,17 +163,17 @@
                             <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
                                 <option value="">---Select Tenant Nationality---</option>
                                 @foreach($nation as $nationality)
-                                <option value="{{$nationality->name}}">{{$nationality->name}}</option>
+                                <option value="{{$nationality->id}}">{{$nationality->name}}</option>
                                @endforeach
                             </select>
-                        </div>                      
-                                
+                        </div>
+
                             <div class="col-xxl-3 col-md-12">
-                                <label for="remark" class="form-label">Unit Address</label>
+                                <label for="remark" class="form-label">Address</label>
                                 <textarea class="form-control" name="unit_address">
                                 </textarea>
                             </div>
-                            
+
                             <div class="col-xxl-3 col-md-3 mb-2">
                             <label for="space" class="form-label">Building Name</label>
                             <select class="form-select js-example-basic-single" id="building_name" name="building_name">
@@ -135,7 +182,7 @@
                                 <option value="{{$buld->id}}">{{$buld->name}}</option>
                                @endforeach
                             </select>
-                        </div> 
+                        </div>
                         <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
                             <div class="input-group">
@@ -245,12 +292,22 @@
                         </div>
                             </div>
                     
-                    <div class="col-xxl-3 col-md-12">
+                            <div class="row">
+                        <div class="card-body field_wrapper4">
+                <div class="row clone4">
+                <div class="col-xxl-3 col-md-11">
                         <label for="city" class="form-label">File Attachment</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File" multiple>
+                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">
                         </div>
                     </div>
+                    
+                    <div class="col-sm-1">
+                        <br />
+                        <a href="javascript:void(0);" class="add_button4 btn btn-success" title="Add field">+</a>
+                    </div>
+                </div>
+                        </div>
                     <div class="col-xxl-3 col-md-12">
                         <label for="remark" class="form-label">Remark</label>
                         <textarea class="form-control" name="attachment_remark">
@@ -275,7 +332,35 @@
 @endsection
 @section('script-area')
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+          // product detail
+        var addButton4 = $('.add_button4'); //Add button selector
+        var wrapper4 = $('.field_wrapper4'); //Input field wrapper
+        var fieldHTML4 = '<div class="row">\
+                <div class="col-sm-11">\
+                    <label for="" class="form-label">File Attachment</label>\
+                    <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">\
+                </div>\
+                <div class="col-sm-1">\
+                    <br/>\
+                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
+                </div></div>';
 
+        //Once add button is clicked
+        $(addButton4).click(function() {
+
+            $(wrapper4).append(fieldHTML4); //Add field html
+
+        });
+
+        //Once remove button is clicked
+        $(wrapper4).on('click', '.remove_button4', function(e) {
+            e.preventDefault();
+            $(this).closest('.row').remove(); //Remove field html
+
+        });
+
+</script>
 <script>
 $(document).ready(function() {
                 $('#qid').hide();
@@ -293,7 +378,7 @@ $(document).ready(function() {
                         $('#cr').show();
                         $('#qid').hide();
                         $('#passport').hide();
- 
+
                     }else if (optionValue == 'Passport') {
                         $('#passport').show();
                         $('#qid').hide();
@@ -314,7 +399,7 @@ $(document).ready(function() {
                         $('#sponser').show();
 
                     } else if (optionValue == 'TP') {
-                        $('#sponser').hide(); 
+                        $('#sponser').hide();
                     }
                     var newurl = "{{ url('/admin/fetch-tenant-file-no') }}/" + optionValue;
                 $.ajax({
@@ -330,14 +415,14 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('#account_no').hide(); 
-    $('#has_cheque').hide(); 
+    $('#account_no').hide();
+    $('#has_cheque').hide();
                 $("#payment_method").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'Cash') {
-                        $('#has_cheque').hide(); 
-                        $('#account_no').hide(); 
+                        $('#has_cheque').hide();
+                        $('#account_no').hide();
 
                     } else if (optionValue == 'Cheques') {
                         $('#has_cheque').show();
@@ -345,7 +430,7 @@ $(document).ready(function() {
 
                     }
                     else if (optionValue == 'Transfer Bank') {
-                        $('#has_cheque').hide(); 
+                        $('#has_cheque').hide();
                         $('#account_no').show();
 
                     }
@@ -374,7 +459,7 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('#rental_time').hide(); 
+    $('#rental_time').hide();
                 $("#rental_period").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
@@ -383,13 +468,13 @@ $(document).ready(function() {
                         $('#change_rental_time').text("Days") ;
                         $('#change_placeholder').attr('placeholder','Enter No Of Days');
                         } else if (optionValue == 'Months') {
-                        $('#rental_time').show(); 
+                        $('#rental_time').show();
                         $('#change_rental_time').text("Months") ;
                         $('#change_placeholder').attr('placeholder','Enter No Of Months');
 
                     }
                     else if (optionValue == 'Years') {
-                        $('#rental_time').show(); 
+                        $('#rental_time').show();
                         $('#change_rental_time').text("Years");
                         $('#change_placeholder').attr('placeholder','Enter No Of Years');
 

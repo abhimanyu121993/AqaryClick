@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('tenant_primary_mobile')->nullable();
             $table->string('tenant_secondary_mobile')->nullable();
             $table->string('email')->nullable();
+            $table->string('alternate_email')->nullable();
             $table->string('post_office')->nullable();
             $table->string('tenant_nationality')->nullable();
             $table->longText('unit_address')->nullable();
@@ -46,7 +47,7 @@ return new class extends Migration
             $table->string('sponsor_phone')->nullable();
             $table->string('sponsor_nationality')->nullable();
             $table->json('attachment_file')->default(json_encode([]));
-            $table->string('attachment_remark')->nullable();           
+            $table->string('attachment_remark')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

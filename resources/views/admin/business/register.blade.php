@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1"> Business Details</h4>
+                    <h4 class="card-title mb-0 flex-grow-1"> {{ isset($business)? 'Update Business Details' : 'Business Details' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                         <form action="{{ route('admin.business.store') }}" method="POST" enctype="multipart/form-data">
@@ -13,88 +13,78 @@
                             @method('patch')
                         @endif --}}
                             @csrf
-                            <!-- <div class="row gy-4 mb-3">
-                                <div class=" col-md-3">
-                                    <label for="name" class="form-label">First Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="first_name" placeholder="First Name">
-                                    </div>
-                                </div>
-                                <div class=" col-md-3">
-                                    <label for="owner_name" class="form-label">Last Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name">
-                                    </div>
-                                </div>
-                               
-                                <div class=" col-md-3">
-                                    <label for="incharge_name" class="form-label">Customer Code</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="customer_code"
-                                            placeholder="Customer Code">
-                                    </div>
-                                </div>
-                                
-                               
-                              
-                            </div> -->
+                            
 
                     <div class="row gy-4 mb-3" id="cmpname">
-                        <!-- <div class="card-header align-items-center d-flex" id="company">
-                            <hr>
-                            <h4 class="card-title mb-0 flex-grow-1"> Business Detail</h4>
-                        </div> -->
+                        
                         <div class="col-md-3">
                                     <label for="space" class="form-label">Customer Type</label>
-                                    <select class="form-control" id="customer" name="customer_type">
-                                        <option value="" selected hidden>-----Select Customer-----</option>
+                                    <select class="form-control" name="customer_type">
+                                    @if (isset($business))
+                                    <option value="{{ $business->customer_type }}" selected>{{ $business->customer_type}}</option>
+                                    @else   
+                                    <option value="" selected hidden>--Select Customer--</option>
                                         <option value="Individual">Individual</option>
                                         <option value="Company">Company</option>
+                                        @endif
                                     </select>
+                                   
                                 </div>
                         <div class="col-md-3">
                                     <label for="space" class="form-label">Business Type</label>
                                     <select class="form-control" id="customer" name="business_type">
-                                        <option value="" selected hidden>-----Select Business-----</option>
+                                    @if (isset($business))
+                                    <option value="{{ $business->business_type }}" selected>{{ $business->business_type}}</option>
+                                    @else   
+                                    <option value="" selected hidden>-----Select Business-----</option>
                                         <option value="Product">Product</option>
                                         <option value="Service">Service</option>
                                         <option value="Product-service">Both</option>
+                                        @endif
+
                                     </select>
                                 </div>
                         <div class="col-md-3" id="cname">
                             <label for="country" class="form-label">Business Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="business_name" placeholder="Enter Business Name">
+                                <input type="text" class="form-control" value="{{isset($business)? $business->business_name: '' }}" name="business_name" placeholder="Enter Business Name">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="city" class="form-label">CR Reg. No.</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cr_reg_no" placeholder="Enter CR Reg. Number">
+                                <input type="text" class="form-control" name="cr_reg_no" value="{{isset($business)? $business->cr_no: '' }}" placeholder="Enter CR Reg. Number">
                             </div>
                         </div>
                         <div class="col-md-12">
                                     <label for="remark" class="form-label">Address</label>
-                                    <textarea class="form-control" name="address">
+                                    <textarea class="form-control" name="address">{{isset($business)? $business->address: '' }}
                                     </textarea>
                                 </div>
                         <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label"> Email </label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control" name="email" placeholder="Email">
+                                        <input type="email" class="form-control" value="{{isset($business)? $business->email: '' }}" name="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class=" col-md-3">
                                     <label for="incharge_name" class="form-label">Phone number </label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="phone"
+                                        <input type="text" class="form-control" value="{{isset($business)? $business->phone: '' }}" name="phone"
                                             placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label for="incharge_name" class="form-label">Post Box </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" value="{{isset($business)? $business->post_box: '' }}" name="post_box"
+                                            placeholder="Enter Post Box No">
                                     </div>
                                 </div>
                         <div class="col-md-3" id="authp">
                             <label for="country" class="form-label">Authorized Person</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="authorized_person"
+                                <input type="text" class="form-control" value="{{isset($business)? $business->authorized_person: '' }}" name="authorized_person"
                                     placeholder="Enter Authorized Person Name">
                             </div>
                         </div>
@@ -104,56 +94,65 @@
                                 <input type="file" class="form-control" name="company_logo" placeholder="Company Logo">
                             </div>
                         </div>
-                        <div class="col-md-3" id="fname">
-                            <label for="country" class="form-label">Document Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="document_name" placeholder="Document name">
-                            </div>
-                        </div>
-                        <div class="col-md-3" id="fname">
-                            <label for="country" class="form-label">Document</label>
-                            <div class="input-group">
-                                <input type="file" class="form-control" name="document_file" placeholder="Upload File">
-                            </div>
-                        </div>
-                       
-                        <div class="col-md-3">
-                            <label for="city" class="form-label">Document Exipry Date</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control" name="document_exp_date" placeholder="Expiry Date">
-                            </div>
-                        </div> 
-                       
                         <div class="col-md-3">
                                         <label for="space" class="form-label">Company Activity</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="company_activity"
+                                            <input type="text" class="form-control" value="{{isset($business)? $business->company_activity: '' }}" name="company_activity"
                                                 placeholder="Enter Activity">
                                         </div>
                                     </div>
+                        <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1"> Document Detail</h4>
+                    </div>
+                        <div class="row">
+                        <div class="card-body field_wrapper4">
+                <div class="row clone4">
+                    <div class="col-sm-3">
+                        <label for="" class="form-label">Document Name</label>
+                        <input type="text" class="form-control" name="document_name[]" placeholder="Enter Document Name" required>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="" class="form-label">Document File</label>
+                        <input type="file" class="form-control" name="docfile[]" required>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="" class="form-label">Document Expiry</label>
+                        <input type="date" class="form-control" name="document_exp_date[]">
+                    </div>
+                    
+                    <div class="col-sm-1">
+                        <br />
+                        <a href="javascript:void(0);" class="add_button4 btn btn-success" title="Add field">+</a>
+                    </div>
+                </div>
+                        </div>
+                        </div>
+                       
                     </div>
                     <div class="card-header align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1"> Bank Detail</h4>
                     </div>
+               
                     <div class="row">
-                        <hr>
-                        <div class="col-md-3 mb-2">
+                        <div class="card-body field_wrapper5">
+                <div class="row clone5">
+                <div class="col-md-3 mb-2">
                             <label for="country" class="form-label">Bank Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="bank_name" placeholder="Bank Details">
+                                <input type="text" class="form-control" name="bank_name[]" placeholder="Enter Bank Name">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="state" class="form-label">Account Number</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="account_number"
+                                <input type="text" class="form-control" name="account_number[]"
                                     placeholder="Enter Account No">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="state" class="form-label">IBAN No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="iban_no"
+                                <input type="text" class="form-control" name="iban_no[]"
                                     placeholder="Enter IBAN No">
                             </div>
                         </div>
@@ -165,24 +164,31 @@
                                 <option value="swift">Swift Code</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-2" id="swift">
+                        <div class="col-md-4 mb-2 swift" id="swift">
                             <label for="country" class="form-label">Swift Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="swift" placeholder="Enter Swift Code">
+                                <input type="text" class="form-control" name="swift[]" placeholder="Enter Swift Code">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-2" id="ifsc">
+                        <div class="col-md-4 mb-2 ifsc" id="ifsc">
                             <label for="country" class="form-label">IFSC Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="ifsc" placeholder="Enter Ifsc Code">
+                                <input type="text" class="form-control" name="ifsc[]" placeholder="Enter Ifsc Code">
                             </div>
                         </div>
+                    
+                    <div class="col-sm-1">
+                        <br />
+                        <a href="javascript:void(0);" class="add_button5 btn btn-success" title="Add field">+</a>
                     </div>
+                </div>
+                        </div>
+                        </div>
                     <div>
                     </div>
                     <div class="row gy-4">
                         <div class="col-md-6">
-                            <button class="btn btn-primary" type="submit">Save</button>
+                            <button class="btn btn-primary" type="submit">{{ isset($business)? 'Update' : 'Save' }}</button>
                         </div>
                     </div>
                     </form>
@@ -191,43 +197,123 @@
         </div>
     </div>
     </div>
-
-
     <!-- Grids in modals -->
 @endsection
 @section('script-area')
-    <!-- <script>
-        $(document).ready(function() {
-            // alert("jhgigygyugy");
-            $("#customer").change(function() {
-                $('#indi').hide();
-                $('#cmpname').hide();
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    // alert(optionValue);
-                    if (optionValue == 'Individual') {
-                        $('#indi').show();
-                    } else if (optionValue == 'Company') {
-                        $('#cmpname').show();
-                    }
-                });
-            }).change();
+    <script>
+          // product detail
+        var addButton4 = $('.add_button4'); //Add button selector
+        var wrapper4 = $('.field_wrapper4'); //Input field wrapper
+        var fieldHTML4 = '<div class="row"><div class="col-sm-3">\
+                    <label for="" class="form-label">Document Name</label>\
+                    <input type="text" class="form-control"  name="document_name[]" required>\
+                </div>\
+                <div class="col-sm-4">\
+                    <label for="" class="form-label">Document File</label>\
+                    <input type="file" class="form-control" name="docfile[]" required>\
+                </div>\
+                <div class="col-sm-4">\
+                    <label for="" class="form-label">Document Expiry</label>\
+                    <input type="date" class="form-control" name="document_exp_date[]">\
+                </div>\
+                <div class="col-sm-1">\
+                    <br/>\
+                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
+                </div></div>';
+
+        //Once add button is clicked
+        $(addButton4).click(function() {
+
+            $(wrapper4).append(fieldHTML4); //Add field html
+
         });
-    </script> -->
+
+        //Once remove button is clicked
+        $(wrapper4).on('click', '.remove_button4', function(e) {
+            e.preventDefault();
+            $(this).closest('.row').remove(); //Remove field html
+
+        });
+
+</script>
+<script>
+          // product detail
+        var addButton5 = $('.add_button5'); //Add button selector
+        var wrapper5 = $('.field_wrapper5'); //Input field wrapper
+        var fieldHTML5 = '<div class="row"><div class="col-md-3 mb-2">\
+                            <label for="country" class="form-label">Bank Name</label>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control" name="bank_name[]" placeholder="Enter Bank Name">\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3 mb-2">\
+                            <label for="state" class="form-label">Account Number</label>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control" name="account_number[]" placeholder="Enter Account No">\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3 mb-2">\
+                            <label for="state" class="form-label">IBAN No</label>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control" name="iban_no[]"placeholder="Enter IBAN No">\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3">\
+                            <label for="space" class="form-label">Bank Code</label>\
+                            <select class="form-control" id="bank_code" name="bankcode">\
+                                <option value="">-----Select Code-----</option>\
+                                <option value="ifsc">Ifsc Code</option>\
+                                <option value="swift">Swift Code</option>\
+                            </select>\
+                        </div>\
+                        <div class="col-md-3 mb-2 swift" id="swift">\
+                            <label for="country" class="form-label">Swift Code</label>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control" name="swift[]" placeholder="Enter Swift Code">\
+                            </div>\
+                        </div>\
+                        <div class="col-md-3 mb-2 ifsc" id="ifsc">\
+                            <label for="country" class="form-label">IFSC Code</label>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control" name="ifsc[]" placeholder="Enter Ifsc Code">\
+                            </div>\
+                        </div>\
+                <div class="col-sm-1">\
+                    <br/>\
+                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button5" title=" field">-</a>\
+                </div></div>';
+
+        //Once add button is clicked
+        $(addButton5).click(function() {
+
+            $(wrapper5).append(fieldHTML5); //Add field html
+
+        });
+
+        //Once remove button is clicked
+        $(wrapper5).on('click', '.remove_button5', function(e) {
+            e.preventDefault();
+            $(this).closest('.row').remove(); //Remove field html
+
+        });
+
+</script>
 
 <script>
         $(document).ready(function() {
+            $('.ifsc').hide();
+                $('.swift').hide();
             $("#bank_code").change(function() {
-                $('#ifsc').hide();
-                $('#swift').hide();
+                $('.ifsc').hide();
+                $('.swift').hide();
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'ifsc') {
-                        $('#ifsc').show();
-                        $('#swift').hide();
+                        $('.ifsc').show();
+                        $('.swift').hide();
                     } else if (optionValue == 'swift') {
-                        $('#swift').show();
-                        $('#ifsc').hide();
+                        $('.swift').show();
+                        $('.ifsc').hide();
 
                         
                     }

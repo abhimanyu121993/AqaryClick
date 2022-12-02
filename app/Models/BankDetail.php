@@ -10,5 +10,8 @@ class BankDetail extends Model
 {
     use HasFactory ,SoftDeletes;
     protected $guarded = [];
-
+    public function businessbank()
+    {
+        return $this->belongsTo(BusinessDetail::class, 'business_id', 'id');
+    } 
 }

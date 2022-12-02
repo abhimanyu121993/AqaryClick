@@ -123,7 +123,10 @@ class HomeController extends Controller
             return redirect()->back()->with('error','Something went wrong!please try again.');
         }
     }
-
+    public function home(){
+        $buildings=Building::get();
+        return view('frontend.home',compact('buildings'));
+    }
 
 
 }

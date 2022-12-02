@@ -55,7 +55,7 @@ class TenantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         $request->validate([
                 'tenant_code' => 'nullable',
                 'tenant_english_name' => 'nullable',
@@ -68,6 +68,7 @@ class TenantController extends Controller
                 'tenant_primary_mobie'=>'nullable',
                 'tenant_secondary_mobile'=>'nullable',
                 'email'=>'nullable',
+                'alternate_email'=>'nullable',
                 'post_office'=>'nullable',
                 'address'=>'nullable',
                 'tenant_type'=>'nullable',
@@ -83,7 +84,7 @@ class TenantController extends Controller
 
         $otherpic=[];
 
-       
+
         if($request->hasFile('attachment_file'))
         {
             foreach($request->file('attachment_file') as $file)
@@ -124,6 +125,7 @@ class TenantController extends Controller
             'tenant_primary_mobile'=>$request->tenant_primary_mobile,
             'tenant_secondary_mobile'=>$request->tenant_secondary_mobile,
             'email'=>$request->email,
+            'alternate_email'=>$request->alternate_email,
             'post_office'=>$request->post_office,
             'tenant_nationality'=>$request->tenant_nationality,
             'unit_address'=>$request->tenant_unit_address,
@@ -213,10 +215,10 @@ class TenantController extends Controller
         return view('admin.tenant.tenantdocument',compact('document'));
     }
     public function BuildingDetails($building_id){
+
         $res=Unit::where('building_id',$building_id)->get();
         $total_unit =Unit::where('building_id',$building_id)->count();
         $html=' <option value="">--Select Unit--</option>';
-            
     foreach($res as $r){
         $html .='<option value="'.$r->id.'">'.$r->unit_type.'</option>';
     }

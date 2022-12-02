@@ -87,7 +87,7 @@
                     </div>
                 </li>
                 @endcan
-                
+
                 <!-- Building Management Menu -->
                 @can('Building')
                     <li class="nav-item">
@@ -209,8 +209,8 @@
                         </div>
                     </li>
                 @endcan
-                
-                
+
+
                 <!-- Contract Management Menu -->
                 @can('Contract')
                     <li class="nav-item">
@@ -369,6 +369,10 @@
                                         Currency</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('admin.report') }}" class="nav-link" data-key="t-analytics">
+                                        Report </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link" data-key="t-analytics">
                                         Staff </a>
                                 </li>
@@ -403,6 +407,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.unit-feature.index') }}" class="nav-link"
                                         data-key="t-analytics"> Unit Feature </a>
+                                </li><li class="nav-item">
+                                    <a href="{{ route('admin.contract-recipt.index') }}" class="nav-link"
+                                        data-key="t-analytics"> Edit  </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.buildingtype.index') }}" class="nav-link"
@@ -410,6 +417,10 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link menu-link' href=''>
+                            <i class="feather-globe"></i> <span data-key="t-dashboards">Website Setting</span></a>
                     </li>
                 @endcan
             </ul>
