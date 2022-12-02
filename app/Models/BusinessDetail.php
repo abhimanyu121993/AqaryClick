@@ -9,5 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BusinessDetail extends Model
 { use HasFactory,SoftDeletes;
     protected $guarded=[];
-   
+    public function businessOwner()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }   
 }

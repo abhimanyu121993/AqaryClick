@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('contract_code')->nullable();
             $table->string('tenant_name')->nullable();
             $table->string('document_type')->nullable();
@@ -56,7 +57,7 @@ return new class extends Migration
             $table->text('remark')->nullable();
             $table->string('status')->default(0);
             $table->string('overdue')->default(0);
-            $table->string('currency')->default('SAR');
+            $table->string('currency')->default('QAR');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -61,7 +61,14 @@ class ContractController extends Controller
      */
     public function create()
     {
-        $contract=Contract::all();
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $contract=Contract::all();
+        }
+        else{
+            $contract=Contract::where('user_id',Auth::user()->id)->get();
+        }
+
         return view('admin.contract.all_contract',compact('contract'));    }
 
     /**
@@ -110,7 +117,10 @@ class ContractController extends Controller
             $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
         }
         $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
+        $tnationlity=Tenant::where('id',$request->tenant_nationality)->first()->tenant_nationality;
+
        $data= Contract::create([
+        'user_id'=>Auth::user()->id,
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type'=>$request->document_type,
@@ -122,7 +132,7 @@ class ContractController extends Controller
             'sponsor_name'=>$request->sponsor_name,
             'sponsor_mobile'=>$request->sponsor_mobile,
             'tenant_mobile'=>$request->tenant_mobile,
-            'tenant_nationality'=>$request->tenant_nationality,
+            'tenant_nationality'=>$tnationlity,
             'lessor'=>$request->lessor,
             'company_id'=>$request->company_id,
             'authorized_person'=>$request->authorized_person,
@@ -253,6 +263,7 @@ class ContractController extends Controller
             Contract::find($id)->update(['tenant_sign' => $mainpic2]);
         }
         $data=Contract::find($id)->update([
+            'user'=>Auth::user()->id,
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type'=>$request->document_type,
@@ -343,7 +354,7 @@ class ContractController extends Controller
             return response()->json($html);
             }
     public function fetchTenant($tenant_name){
-        $res=Tenant::where('id',$tenant_name)->first();
+        $res=Tenant::with('nationality')->with('tenantNationality')->where('id',$tenant_name)->first();
         return response()->json($res);
         }
         public function fetchAuthorizedPerson($company_id){
@@ -375,7 +386,7 @@ class ContractController extends Controller
     }
 
 public function contractReceipt($contract_code){
-    $conn=Contract::where('contract_code',$contract_code)->first();
+    $conn=Contract::with('tenantDetails')->where('contract_code',$contract_code)->first();
     $contract=ContractRecipt::first();
     return view('admin.contract.contract_receipt',compact('conn','contract'));
 }

@@ -494,7 +494,7 @@
                                                 <tr class="text-muted">
                                                     <th scope="col">Tenant Name</th>
                                                     <th scope="col" style="width: 20%;">Cheque No</th>
-                                                    <th scope="col">Cheque Amt</th>
+                                                    <th scope="col">Amount in QAR</th>
                                                     <th scope="col" style="width: 16%;">Status</th>
                                                     <th scope="col" style="width: 12%;">Deposited Date</th>
                                                     <!-- <th scope="col" style="width: 12%;">Delay Time</th> -->
@@ -507,7 +507,7 @@
                                                 <tr>
                                                     <td>{{$ch->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$ch->cheque_no??''}}</td>
-                                                    <td>{{ $ch->cheque_amt??''}} </td>
+                                                    <td>{{ $ch->qar_amt??''}} </td>
                                                     <td><span class="badge badge-soft-success p-2">{{$ch->cheque_status}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$ch->created_at}}</div>
@@ -521,7 +521,7 @@
                                                 <tr >
                                                     <td>{{$pc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$pc->cheque_no??''}}</td>
-                                                    <td>{{ $pc->cheque_amt??''}} </td>
+                                                    <td>{{ $pc->qar_amt??''}} </td>
                                                     <td><span class="badge badge-soft-danger p-2">{{$pc->cheque_status}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$pc->created_at??''}}</div>
@@ -534,7 +534,7 @@
                                                 <tr>
                                                     <td>{{$bc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$bc->cheque_no??''}}</td>
-                                                    <td>{{ $bc->cheque_amt ??''}} </td>
+                                                    <td>{{ $bc->qar_amt ??''}} </td>
                                                     <td><span class="badge badge-soft-success p-2">{{$bc->cheque_status}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$bc->created_at}}</div>
@@ -548,7 +548,7 @@
                                                 <tr>
                                                     <td>{{$ec->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$ec->cheque_no}}</td>
-                                                    <td>{{ $ec->cheque_amt }} </td>
+                                                    <td>{{ $ec->qar_amt }} </td>
                                                     <td><span class="badge badge-soft-danger p-2">{{$ec->cheque_status}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$ec->created_at}}</div>
@@ -562,7 +562,7 @@
                                                 <tr >
                                                     <td>{{$cc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$cc->cheque_no??''}}</td>
-                                                    <td>{{ $cc->cheque_amt ??''}} </td>
+                                                    <td>{{ $cc->qar_amt ??''}} </td>
                                                     <td><span class="badge badge-soft-success p-2">{{$cc->cheque_status??''}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$cc->created_at??''}}</div>
@@ -576,7 +576,7 @@
                                                 <tr id="security_cheque">
                                                     <td>{{$sc->TenantName->tenant_english_name??''}}</td>
                                                     <td>{{$sc->cheque_no??''}}</td>
-                                                    <td>{{ $sc->cheque_amt??'' }} </td>
+                                                    <td>{{ $sc->qar_amt??'' }} </td>
                                                     <td><span class="badge badge-soft-success p-2">{{$sc->cheque_status??''}}</span></td>
                                                     <td>
                                                         <div class="text-nowrap">{{$sc->created_at??''}}</div>

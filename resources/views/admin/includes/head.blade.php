@@ -48,6 +48,26 @@
 .goog-te-combo{
 background-color: transparent;
 }
+.goog-logo-link {
+    display:none !important;
+} 
+    
+.goog-te-gadget{
+    color: transparent !important;
+}
+.thead-color{
+background-color: #274890;
+color:white;
+}
+.table-main-heading{
+    background-color: #f08a48;
+}
+.table-main-heading h4{
+color:white
+}
+table tbody tr:hover{
+    background-color:#dbeaf9;
+}
 </style>
 
 <link rel="shortcut icon" href="assets/images/favicon.ico">

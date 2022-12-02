@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('post_box')->nullable();
             $table->string('authorized_person')->nullable();
             $table->string('logo')->nullable();
             $table->string('activity')->nullable();

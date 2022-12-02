@@ -76,8 +76,8 @@
                 <div class="live-preview">
                 <form action="{{route('admin.cheque.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf  
-                        <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_name" hidden>
-                        <input type="hidden" class="form-control" id="cid" value="" name="contract" hidden>
+                        <input type="hidden" class="form-control tenant_id" id="tenant_id" value="" name="tenant_name" hidden>
+                        <input type="hidden" class="form-control cid" id="cid" value="" name="contract" hidden>
                         <input type="hiden" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no" hidden>
 
                         <div class="table-responsive">
@@ -123,7 +123,7 @@
                                         <input type="text" class="form-control cheque_amt" name="cheque_amt[]" id="product-qty-1" placeholder="Enter Cheque Amount">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in SAR" readonly/>
+                                        <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in QAR" readonly/>
                                     </td>
                                     <td class="text-end">
                                         <select class="form-control select2 form-select" name="cheque_status[]" id="currency">
@@ -184,10 +184,12 @@
                 @csrf
                 <div class="card-body p-4">
 
-                <input type="hidden" class="form-control" id="tenant_id" value="" name="tenant_name" hidden>
-                        <input type="hidden" class="form-control" id="cid" value="" name="contract" hidden>
-                       <div class="msg"><p id="due_amt"></p>
+                <input type="hidden" class="form-control tenant_id" id="tenant_id" value="" name="tenant_name" hidden>
+                        <input type="hidden" class="form-control cid" id="cid" value="" name="contract" hidden>
+                       <div class="msg">
+                        <p id="due_amt"></p>
                         <p id="rent_amt"></p>
+                        <p id="tax_amount"></p>
                         <p id="payable_amt"></p></div>
                 <input type="radio" class="btn-check" name="options-outlined" id="full-payment-details" autocomplete="off" checked>
 <label class="btn btn-outline-success" for="full-payment-details">Full Payment</label>
@@ -243,11 +245,14 @@
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3">
-                            <label class="form-label" for="flag">Bank Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="tenant_bank_name" name="tenant_bank" placeholder="Enter Bank Name">
+                                <label for="name" class="form-label">Bank Name</label>
+                                <select class="form-control select2 form-select" name="tenant_bank">
+                                    <option value="" selected hidden>--Select Bank--</option>
+                                    @foreach($bank as $b)
+                                    <option value="{{$b->name}}">{{$b->name??''}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div>
                         <div class="col-xxl-3 col-md-3">
                             <label class="form-label" for="flag">Sender Name</label>
                             <div class="input-group">
@@ -274,11 +279,14 @@
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-4">
-                            <label class="form-label" for="flag">Bank Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="benifitary_bank_name" name="benifitary_bank" placeholder="Enter Bank Name">
+                                <label for="name" class="form-label">Bank Name</label>
+                                <select class="form-control select2 form-select" name="benifitary_bank">
+                                    <option value="" selected hidden>--Select Bank--</option>
+                                    @foreach($bank as $b)
+                                    <option value="{{$b->name}}">{{$b->name??''}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div>
                         <div class="col-xxl-3 col-md-4">
                             <label class="form-label" for="flag">Benifitary Name</label>
                             <div class="input-group">
@@ -305,9 +313,19 @@
                         <div class="col-xxl-3 col-md-3">
                             <label class="form-label" for="flag">Invoice Amount</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
+                                    <input type="text" class="form-control" id="amt_paid" name="amt_paid" placeholder="Enter Amount">
                                 <br><p id="msg_due" class="text-danger"></p>
                             </div>
+                        </div>
+                        <input type="hidden" class="form-control" id="istax" name="istax" hidden>
+
+                        <div class="col-xxl-3 col-md-3">
+                            <label class="form-label" for="flag">Include Tax</label>
+                            <select class="select2 form-select" id="include_tax" name='include_tax'>
+                                <option selected hidden>--Select Tax--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                </select>
                         </div>
                         <div class="col-xxl-3 col-md-3">
                             <label class="form-label" for="flag">Payment Status</label>
@@ -333,17 +351,14 @@
                         </div>
 
                     </div>
-                </div>
                 <div class="card-body p-4">               
                     <!--end row-->
                     <div class="mt-4">
                         <label for="exampleFormControlTextarea1" class="form-label text-muted text-uppercase fw-semibold">Remark</label>
                         <textarea class="form-control" name="remark"> </textarea>
                     </div>
-                    <div class="hstack gap-2 justify-content-end d-print-none mt-4">
-                        <button type="submit" class="btn btn-success"><i class="ri-rotete-line align-bottom me-1"></i>Submit</button>
-                        <a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Download Invoice</a>
-                        <a href="javascript:void(0);" class="btn btn-danger"><i class="ri-send-plane-fill align-bottom me-1"></i> Send Invoice</a>
+                    <div class="hstack gap-2 justify-content-start d-print-none mt-4">
+                        <button type="submit" class="btn btn-primary"><i class="ri-rotete-line align-bottom me-1"></i>Submit</button>
                     </div>
                 </div>
             </form>
@@ -403,6 +418,7 @@
         }).change();
     });
 </script>
+
 <script>
     $(document).ready(function() {
         $("#tenant_name").change(function() {
@@ -410,7 +426,7 @@
                 var optionValue = $(this).attr("value");
                 var name = $(this).text();
                 $('#tenantName').val(name);
-                $('#tenant_id').val(optionValue);
+                $('.tenant_id').val(optionValue);
                 var newurl = "{{ url('/admin/fetch-contract-details') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
@@ -428,7 +444,7 @@
         $("#tenant_contract").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
-                $('#cid').val(optionValue);
+                $('.cid').val(optionValue);
                 $('#due-payment-details').val(optionValue);
                 $('#full-payment-details').val(optionValue);
 
@@ -444,6 +460,9 @@
                         $('#msg').text(p.msg);
                         $('#rent_amt').text('Rent Amount: ' + p.rent_amt);
                         $('#due_amt').text('Due Amount: ' + p.due_amt);
+                        // var a=((p.rent_amt*p.per)%100)
+                        // $('#tax_amount').text('Tax Amount: ' + a);
+
                         $('#payable_amt').text('Total Payable Amount   ' + p.payable);
                     }
                 });
@@ -555,6 +574,7 @@ function new_link() {
                         $('#overdue_period').val(p.overdue + 'Days');
                         $('#due_amt').text('Due Amount: ' + p.res.due_amt);
                         $('#rent_amt').text('');
+                        // $('#tax_amount').text('Tax Amount: ' + p.per);
                         $('#payable_amt').text('Total Payable Amount   ' + p.res.due_amt);
                     }
                 });
@@ -574,6 +594,7 @@ function new_link() {
                         $('#overdue_period').val(p.overdue + 'Days');
                         $('#msg').text(p.msg);
                         $('#rent_amt').text('Rent Amount: ' + p.rent_amt);
+                        // $('#tax_amount').text('Tax Amount: ' + p.per);
                         $('#due_amt').text('Due Amount: ' + p.due_amt);
                         $('#payable_amt').text('Total Payable Amount   ' + p.payable);
                     }
@@ -592,6 +613,22 @@ $(document).ready(function() {
             }
             else{
                 $('#cheque_management').hide();
+
+            }
+        });
+    }).change();
+});
+</script>
+<script>
+$(document).ready(function() {
+    $("#include_tax").change(function() {
+        $(this).find("option:selected").each(function() {
+            var optionValue = $(this).attr("value");
+            if(optionValue=='Yes'){
+                $('#istax').val(1);
+            }
+            else{
+                $('#istax').val(0);
 
             }
         });

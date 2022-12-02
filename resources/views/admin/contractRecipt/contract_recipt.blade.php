@@ -9,12 +9,14 @@
         <div class="row col-lg-12">
             <div class="col-md-6" id="p1">
                 <label for="remark" class="form-label">Preamble </label>
-                <textarea class="form-control" name="clause_one_english">
+                <textarea class="form-control" name="clause_one_english"> 
+                       {!!$contract->clause_one_english!!}
+
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Preamble Arabic</label>
-                <textarea class="form-control" name="clause_one_arabic">
+                <textarea class="form-control" name="clause_one_arabic"> {!!$contract->clause_one_arabic!!}
                     </textarea>
             </div>
         </div>
@@ -22,11 +24,13 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause One English</label>
                 <textarea class="form-control" name="clause_two_english">
+                {!!$contract->clause_two_english!!}
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause One Arabic</label>
                 <textarea class="form-control" name="clause_two_arabic">
+                {!!$contract->clause_two_arabic!!}
                     </textarea>
             </div>
         </div>
@@ -34,11 +38,13 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Two English</label>
                 <textarea class="form-control" name="clause_three_english">
+                {!!$contract->clause_three_english!!}
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Two Arabic</label>
                 <textarea class="form-control" name="clause_three_arabic">
+                {!!$contract->clause_three_arabic!!}
                     </textarea>
             </div>
         </div>
@@ -46,11 +52,13 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Three English</label>
                 <textarea class="form-control" name="clause_four_english">
+                {!!$contract->clause_four_english!!}
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Three Arabic</label>
                 <textarea class="form-control" name="clause_four_arabic">
+                {!!$contract->clause_four_arabic!!}
                     </textarea>
             </div>
         </div>
@@ -58,11 +66,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Four English</label>
                 <textarea class="form-control" name="clause_five_english">
+                {!!$contract->clause_five_english!!}
+
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Four Arabic</label>
                 <textarea class="form-control" name="clause_five_arabic">
+                {!!$contract->clause_five_arabic!!}
+
                     </textarea>
             </div>
         </div>
@@ -70,11 +82,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Five English</label>
                 <textarea class="form-control" name="clause_six_english">
+                {!!$contract->clause_six_english!!}
+
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Five Arabic</label>
                 <textarea class="form-control" name="clause_six_arabic">
+                {!!$contract->clause_six_arabic!!}
+
                     </textarea>
             </div>
         </div>
@@ -82,11 +98,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Six English</label>
                 <textarea class="form-control" name="clause_seven_english">
+                {!!$contract->clause_seven_english!!}
+
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Six Arabic</label>
                 <textarea class="form-control" name="clause_seven_arabic">
+                {!!$contract->clause_seven_arabic!!}
+
                     </textarea>
             </div>
         </div>
@@ -94,11 +114,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Seven English</label>
                 <textarea class="form-control" name="clause_eight_english">
+                {!!$contract->clause_eight_english!!}
+
                         </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Seven Arabic</label>
                 <textarea class="form-control" name="clause_eight_arabic">
+                {!!$contract->clause_eight_arabic!!}
+
                     </textarea>
             </div>
         </div>
@@ -106,11 +130,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eight English</label>
                 <textarea class="form-control" name="clause_nine_english">
+                {!!$contract->clause_nine_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eight Arabic</label>
                 <textarea class="form-control" name="clause_nine_arabic">
+                {!!$contract->clause_nine_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -118,11 +146,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Nine English</label>
                 <textarea class="form-control" name="clause_ten_english">
+                {!!$contract->clause_ten_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Nine Arabic</label>
                 <textarea class="form-control" name="clause_ten_arabic">
+                {!!$contract->clause_ten_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -130,11 +162,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Ten English</label>
                 <textarea class="form-control" name="clause_eleven_english">
+                {!!$contract->clause_eleven_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Ten Arabic</label>
                 <textarea class="form-control" name="clause_eleven_arabic">
+                {!!$contract->clause_eleven_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -142,11 +178,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eleven English</label>
                 <textarea class="form-control" name="clause_twelve_english">
+                {!!$contract->clause_twelve_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eleven Arabic</label>
                 <textarea class="form-control" name="clause_twelve_arabic">
+                {!!$contract->clause_twelve_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -154,11 +194,14 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Twelve English</label>
                 <textarea class="form-control" name="clause_therteen_english">
+                {!!$contract->clause_therteen_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Twelve Arabic</label>
                 <textarea class="form-control" name="clause_therteen_arabic">
+                {!!$contract->clause_therteen_arabic!!}
                             </textarea>
             </div>
         </div>
@@ -166,11 +209,14 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Thirteen English</label>
                 <textarea class="form-control" name="clause_fourteen_english">
+                {!!$contract->clause_fourteen_english!!}
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Thirteen Arabic</label>
                 <textarea class="form-control" name="clause_fourteen_arabic">
+                {!!$contract->clause_fourteen_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -178,11 +224,14 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Fourteen English</label>
                 <textarea class="form-control" name="clause_fiftyteen_english">
+                {!!$contract->clause_fiftyteen_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Fourteen Arabic</label>
                 <textarea class="form-control" name="clause_fiftyteen_arabic">
+                {!!$contract->clause_fiftyteen_arabic!!}
                             </textarea>
             </div>
         </div>
@@ -190,11 +239,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Fifteen English</label>
                 <textarea class="form-control" name="clause_sixteen_english">
+                {!!$contract->clause_sixteen_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Fifteen Arabic</label>
                 <textarea class="form-control" name="clause_sixteen_arabic">
+                {!!$contract->clause_sixteen_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -202,11 +255,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Sixteen English</label>
                 <textarea class="form-control" name="clause_seventeen_english">
+                {!!$contract->clause_seventeen_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Sixteen Arabic</label>
                 <textarea class="form-control" name="clause_seventeen_arabic">
+                {!!$contract->clause_seventeen_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -214,11 +271,15 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Seventeen Arabic</label>
                 <textarea class="form-control" name="clause_eighteen_english">
+                {!!$contract->clause_eighteen_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Seventeen Arabic</label>
                 <textarea class="form-control" name="clause_eighteen_arabic">
+                {!!$contract->clause_eighteen_arabic!!}
+
                             </textarea>
             </div>
         </div>
@@ -226,11 +287,14 @@
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eighteen English</label>
                 <textarea class="form-control" name="clause_nineteen_english">
+                {!!$contract->clause_nineteen_english!!}
+
                                 </textarea>
             </div>
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eighteen Arabic</label>
                 <textarea class="form-control" name="clause_nineteen_arabic">
+                {!!$contract->clause_nineteen_arabic!!}
                             </textarea>
             </div>
         </div>

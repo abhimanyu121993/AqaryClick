@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header align-items-center d-flex">
+                <div class="card-header align-items-center d-flex table-main-heading">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
                 </div><!-- end card header -->
                 <div class="card-body ">
@@ -47,7 +47,7 @@
                                         <td>{{ $building->building_type ?? '' }}</td>
                                         <td>{{ $building->name ?? '' }}</td>
                                         <td>{{ $building->cost_building ?? '' }}</td>
-                                        <td>{{ $building->Construction_date ?? '' }}</td>
+                                        <td>{{ $building->construction_date ?? '' }}</td>
                                         <td>{{ $building->person_incharge ?? '' }}</td>
                                         <td>{{ $building->person_job ?? '' }}</td>
                                         <td>{{ $building->person_mobile ?? '' }}</td>
@@ -55,9 +55,6 @@
                                         <td>{{ $building->cityDetails->name ?? '' }}</td>
                                         <td>{{ $building->area ?? '' }}</td>
                                         <td>{{ $building->pincode ?? '' }}</td>
-
-
-
                                         <td>{{ $building->building_receive_date ?? '' }}</td>
                                         <td>{{ $building->owner_name ?? '' }}</td>
                                         <td>{{ $building->lessor_name ?? '' }}</td>
@@ -147,8 +144,8 @@
                         name:'cost_building'
                     },
                     {
-                        data:'Construction_date',
-                        name:'Construction_date'
+                        data:'construction_date',
+                        name:'construction_date'
                     },
                     {
                         data:'person_incharge',

@@ -5,12 +5,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header align-items-center d-flex">
+                <div class="card-header align-items-center d-flex table-main-heading">
                     <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
                 </div><!-- end card header -->
-                <div class="card-body table-responsive">
+                <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
-                            <tr>
+                <thead class="thead-color">           
+                <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Code</th>
                                 <th scope="col">Tenant Name Eglish</th>

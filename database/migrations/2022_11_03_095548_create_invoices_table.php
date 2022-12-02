@@ -15,14 +15,22 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();  
             $table->string('tenant_id')->nullable();
             $table->string('contract_id')->nullable();
             $table->string('invoice_no')->nullable();
+            $table->string('receipt_no')->nullable();
             $table->string('due_date')->nullable();
             $table->string('invoice_period_start')->nullable();
             $table->string('invoice_period_end')->nullable();
+            $table->string('currency_type')->nullable();
             $table->string('amt_paid')->nullable();
+            $table->string('user_amt');
             $table->string('due_amt')->default(0);
+            $table->string('istax')->default(0);
+            $table->string('tax_amt')->default(0);
+            $table->string('tax_per')->default(0);
+            $table->string('total_amt')->default(0);
             $table->string('payment_method')->nullable();
             $table->string('account_no')->nullable();
             $table->string('bank_name')->nullable();

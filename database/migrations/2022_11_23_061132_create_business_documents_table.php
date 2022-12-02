@@ -18,8 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('business_id');
             $table->string('document_name')->nullable();
             $table->string('file')->nullable();
-            $table->timestamp('expire_date')->nullable();
+            $table->string('expire_date')->nullable();
             $table->longText('description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

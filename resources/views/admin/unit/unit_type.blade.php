@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header align-items-center d-flex">
+                <div class="card-header align-items-center d-flex table-main-heading">
                     <h4 class="card-title mb-0 flex-grow-1">{{ isset($unitedit)? 'Update Unit Type' : 'Create Unit Type' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
@@ -40,7 +40,7 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                <thead>            
+                <thead class="thead-color">            
                 <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>

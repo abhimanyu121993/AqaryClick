@@ -92,8 +92,13 @@ jQuery(document).ready(function($){
         $(".options").toggleClass("show");
     });
     $('.options .skin-primary').on("click", function() {  
-        var skinurl = 'css/skins/'+ $(this).attr('data-name')+'.css';
-        $('link[rel="stylesheet"][href^="css/skins/"]').attr('href', skinurl); 
+        var base_url = window.location.origin;
+         
+        var skinurl = base_url+'/home2/css/skins/'+ $(this).attr('data-name')+'.css';
+        // alert(skinurl);
+        // var skinurl = 'css/skins/'+ $(this).attr('data-name')+'.css';
+        // $('link[rel="stylesheet"][href^="'+base_url+'css/skins/"]').attr('href', skinurl);
+        $('#style').attr('href',skinurl);
         $(".options").removeClass("show"); 
     });
  

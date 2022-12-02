@@ -10,4 +10,8 @@ class BusinessDocument extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
+    public function businessDocument()
+    {
+        return $this->belongsTo(BusinessDetail::class, 'business_id', 'id');
+    }   
 }

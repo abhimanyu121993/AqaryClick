@@ -22,188 +22,193 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Contract No:{{$conn->contract_code }}<br>
-              Customer No:{{Auth::user()->customer_code??'' }}</th>
-            <th class="text-right">RE / HTC / 0005:رقم العقد <br>
-              MU / HTC / 015: رقم العميل </th>
+            <th>Contract No:{{$conn->contract_code??'' }}<br>
+              Customer No:{{ str_pad($conn->lessor??'',3,'0' ,STR_PAD_LEFT) }}</th>
+            <th class="text-right">{{$conn->contract_code??'' }}:رقم العقد <br>
+            {{ str_pad($conn->lessor??'',3,'0' ,STR_PAD_LEFT) }}: رقم العميل </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
+            <td style="width: 50%;">
               <p>This LEASE AGREEMENT is made as of {{\Carbon\Carbon::parse($conn->created_at)->format('d F Y')}} by and between the following Parties</p><br><b>1. First Party <br>
-                {{ $conn->ownerDetails->first_name??'' }} </b><br>
-              QID: 265235158985
-              P.O. Box :{{ $conn->ownerDetails->pincode??'' }} , {{ $conn->ownerDetails->address??'' }}<br>
-              Phone: {{ $conn->ownerDetails->phone??'' }}<br>
-              Email:{{ $conn->ownerDetails->email??'' }}<br>
+                {{ $conn->tenantDetails->tenant_english_name??'' }} </b><br>
+              @if($conn->tenantDetails->qid_document==!null)
+                QID: {{ $conn->tenantDetails->qid_document??'' }}
+              @elseif($conn->tenantDetails->cr_document==!null)
+              CR: {{ $conn->tenantDetails->cr_document??'' }}
+              @else 
+              Passport: {{ $conn->tenantDetails->passport??'' }}
+              @endif
+              P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
+              Phone: {{ $conn->tenantDetails->tenant_primary_mobile??'' }}<br>
+              Email:{{ $conn->tenantDetails->email??'' }}<br>
               Hereinafter referred to as (<b>The Lessor</b>)<br>
               <b class="text-center">And</b><br>
               <b>2. Second Party <br>
-                M/s, /Mr. {{ $conn->tenantDetails->tenant_english_name??'' }} C. R. No ({{ $conn->contract_code??'' }})</b><br>
+                M/s, /Mr. {{ $conn->ownerDetails->name??'' }} C. R. No ({{ $conn->businessDetails->cr_no??'' }})</b><br>
               Represented by:<br>
               Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
               QID: 265235158985
-              P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
-              phone1:{{ $conn->tenantDetails->tenant_primary_mobile??'' }} , phone2:{{ $conn->tenantDetails->tenant_secondary_mobile??'' }} <br>
-              Email:{{ $conn->tenantDetails->email??'' }}<br>
+              P.O. Box :{{ $conn->businessDetails->post_box??'' }} , {{ $conn->businessDetails->address??'' }}<br>
+              phone1:{{ $conn->businessDetails->phone??'' }}<br>
+              Email:{{ $conn->businessDetails->email??'' }}<br>
               Hereinafter referred to as (<b>The Lessor</b> )
 
             </td>
-            <td>Contract No:RE/HTC/0005<br>
-              Customer No:MU/HTC/015</td>
+            <td style="width: 50%;" >
+            <p>This LEASE AGREEMENT is made as of {{\Carbon\Carbon::parse($conn->created_at)->format('d F Y')}} by and between the following Parties</p><br><b>1. First Party <br>
+                {{ $conn->tenantDetails->tenant_arabic_name??'' }} </b><br>
+              @if($conn->tenantDetails->qid_document==!null)
+                QID: {{ $conn->tenantDetails->qid_document??'' }}
+              @elseif($conn->tenantDetails->cr_document==!null)
+              CR: {{ $conn->tenantDetails->cr_document??'' }}
+              @else 
+              Passport: {{ $conn->tenantDetails->passport??'' }}
+              @endif
+              P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
+              Phone: {{ $conn->tenantDetails->tenant_primary_mobile??'' }}<br>
+              Email:{{ $conn->tenantDetails->email??'' }}<br>
+              Hereinafter referred to as (<b>The Lessor</b>)<br>
+              <b class="text-center">And</b><br>
+              <b>2. Second Party <br>
+                M/s, /Mr. {{ $conn->ownerDetails->name??'' }} C. R. No ({{ $conn->businessDetails->cr_no??'' }})</b><br>
+              Represented by:<br>
+              Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
+              QID: 265235158985
+              P.O. Box :{{ $conn->businessDetails->post_box??'' }} , {{ $conn->businessDetails->address??'' }}<br>
+              phone1:{{ $conn->businessDetails->phone??'' }}<br>
+              Email:{{ $conn->businessDetails->email??'' }}<br>
+              Hereinafter referred to as (<b>The Lessor</b> )
+            </td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">Preamble</h3>
+            <td style="width:50%"> 
               {!!$contract->clause_one_english!!}
             </td>
-            <td>
-              <h3>
-                <center><input type="text" name="" id=""></center>
-                "المقدمة "
-              </h3>
+            <td style="width:50%">
               {!!$contract->clause_one_arabic!!}
             </td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause One”</h3>
+            <td style="width:50%">
               {!!$contract->clause_two_english!!}
             </td>
-            <td> {!!$contract->clause_two_arabic!!}</td>
+            <td style="width:50%"> {!!$contract->clause_two_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Two”</h3>
+            <td style="width:50%">
               {!!$contract->clause_three_english!!}
             </td>
-            <td>{!!$contract->clause_three_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_three_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Three”</h3>
+            <td style="width:50%">
               {!!$contract->clause_four_english!!}
             </td>
-            <td>{!!$contract->clause_four_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_four_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Four”</h3>
+            <td style="width:50%">
               {!!$contract->clause_five_english!!}
             </td>
-            <td>{!!$contract->clause_five_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_five_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Five”</h3>
+            <td style="width:50%">
               {!!$contract->clause_six_english!!}
             </td>
-            <td>{!!$contract->clause_six_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_six_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Six”</h3>
+            <td style="width:50%">
               {!!$contract->clause_seven_english!!}
             </td>
-            <td>{!!$contract->clause_seven_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_seven_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Seven”</h3>
+            <td style="width:50%">
               {!!$contract->clause_eight_english!!}
 
             </td>
-            <td>{!!$contract->clause_eight_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_eight_arabic!!}</td>
           </tr>
 
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Eight”</h3>
+            <td style="width:50%">
               {!!$contract->clause_nine_english!!}
             </td>
-            <td>{!!$contract->clause_nine_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_nine_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Nine”</h3>
+            <td style="width:50%">
               {!!$contract->clause_ten_english!!}
             </td>
-            <td>{!!$contract->clause_ten_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_ten_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Ten”</h3>
+            <td style="width:50%">
               {!!$contract->clause_eleven_english!!}
             </td>
-            <td>{!!$contract->clause_eleven_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_eleven_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Eleven”</h3>
+            <td style="width:50%">
               {!!$contract->clause_twelve_english!!}
             </td>
-            <td>{!!$contract->clause_twelve_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_twelve_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Twelve”</h3>
+            <td style="width:50%">
               {!!$contract->clause_therteen_english!!}
             </td>
-            <td>{!! $contract->clause_therteen_arabic !!}</td>
+            <td style="width:50%">{!! $contract->clause_therteen_arabic !!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Thirteen”</h3>
+            <td style="width:50%">
               {!!$contract->clause_fourteen_english!!}
             </td>
-            <td>
-              <h1 class="text-center">"البند الثالث عشر"</h1>
+            <td style="width:50%">
               {!!$contract->clause_fourteen_arabic!!}
             </td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Fourteen”</h3>
+            <td style="width:50%">
               {!!$contract->clause_fifteen_english!!}
             </td>
-            <td> {!!$contract->clause_fifteen_arabic!!}</td>
+            <td style="width:50%"> {!!$contract->clause_fifteen_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Fifteen”</h3>
+            <td style="width:50%">
               {!!$contract->clause_sixteen_english!!}
             </td>
-            <td> {!!$contract->clause_sixteen_arabic!!}</td>
+            <td style="width:50%"> {!!$contract->clause_sixteen_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Sixteen”</h3>
+            <td style="width:50%">
               {!!$contract->clause_seventeen_english!!}
             </td>
-            <td>{!!$contract->clause_seventeen_arabic!!}</td>
+            <td style="width:50%">{!!$contract->clause_seventeen_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Seventeen”</h3>
+            <td style="width:50%">
               {!!$contract->clause_eighteen_english!!}
             </td>
-            <td> {!!$contract->clause_eighteen_arabic!!}</td>
+            <td style="width:50%"> {!!$contract->clause_eighteen_arabic!!}</td>
           </tr>
           <tr>
-            <td>
-              <h3 class="text-center">“Clause Eighteen”</h3>
+            <td style="width:50%">
               {!!$contract->clause_nineteen_english!!}
             </td>
-            <td> {!!$contract->clause_nineteen_arabic!!}</td>
+            <td style="width:50%"> {!!$contract->clause_nineteen_arabic!!}</td>
           </tr>
           <tr>
-            <td>
+            <td style="width:50%">
               <p><b><u>First Party (The Lessor)</u></b></p><br>
               <p><b><u>Second Party (The Lessor)</u></b></p><br>
               <p><b><u>The Guarantor</u></b></p><br>
             </td>
-            <td>
+            <td style="width:50%">
               <p><b><u>الطرف الأول "المؤجر"
                   </u></b></p><br>
               <p><b><u>الطرف الثاني "المستأجر"

@@ -414,6 +414,10 @@
                             </ul>
                         </div>
                     </li>
+                    <li class='nav-item'>
+                        <a class='nav-link menu-link' href=''>
+                            <i class="feather-globe"></i> <span data-key="t-dashboards">Website Setting</span></a>
+                    </li>
                 @endcan
             </ul>
         </div>
