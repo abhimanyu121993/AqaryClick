@@ -149,7 +149,7 @@
                             <label for="incharge_name" class="form-label">Alternate Email </label>
                             <div class="input-group">
                                 <input type="email" class="form-control" name="alternate_email"
-                                    placeholder="Enter Email">
+                                    placeholder="Enter Alternate Email">
                             </div>
                         </div>
                             <div class="col-xxl-3 col-md-3" id="cname">
