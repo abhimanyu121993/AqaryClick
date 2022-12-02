@@ -163,13 +163,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
     Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
     Route::get('report',[ReportController::class,'report'])->name('report');
-<<<<<<< Updated upstream
     Route::get('fetch-building-tenant-unit/{building_id}',[ReportController::class,'tenantUnitBuilding'])->name('tenantUnitBuilding');
-=======
     Route::get('edit-document/{id}',[BusinessController::class,'editDocument'])->name('editDocument');
     Route::post('update-document/{id}',[BusinessController::class,'updateDocuments'])->name('updateDocument');
     Route::get('document-download/{path}',[BusinessController::class,'DocumentDownload'])->name('documentDownload');
->>>>>>> Stashed changes
 });
 
 //  Payment
