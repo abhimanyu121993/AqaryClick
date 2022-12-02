@@ -24,4 +24,9 @@ class Tenant extends Model
     {
         return $this->belongsTo(Nationality::class, 'sponser_nationality', 'id');
     }
+    public function unitTypeInfo()
+    {
+        return $this->belongsTo(UnitType::class, 'unit_type', 'id');
+
+    }
 }
