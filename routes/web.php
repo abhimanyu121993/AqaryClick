@@ -162,9 +162,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
     Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
     Route::get('report',[ReportController::class,'report'])->name('report');
-
-
-
+    Route::get('fetch-building-tenant-unit/{building_id}',[ReportController::class,'tenantUnitBuilding'])->name('tenantUnitBuilding');
 });
 
 //  Payment

@@ -27,16 +27,25 @@
                             <label class="form-label" for="flag">Tenant Name</label>
                             <select class="select2 form-select js-example-basic-single" id="tenant_name" name='tenant_name'>
                                 <option value="" selected hidden disabled>--Select Tenant--</option>
-                                
                             </select>
                         </div>
-                                
-                                <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Tenant Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter Bank Name">
-                                    </div>
-                                </div>
+                        <div class="col-xxl-3 col-md-3">
+                                <label for="name" class="form-label">Contract Status</label>
+                                <select class="select2 form-select js-example-basic-single" id="contract_status" name="contract_status">
+                                    @if (isset($contractedit))
+                                    <option value="{{ $contractedit->contract_status }}" selected>
+                                        {{ $contractedit->contract_status }}</option>
+                                    @else
+                                    <option value="" selected hidden>--Select Status--</option>
+                                    <option value="File">File</option>
+                                    <option value="Document">Document</option>
+                                    <option value="Contract Reciept">Contract Reciept</option>
+                                    <option value="Invoice">Invoice</option>
+                                    <option value="Receipt Vouchure">Receipt Vouchure</option>
+                                    @endif
+                                </select>
+                            </div>                        
+                       
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">File</label>
                                     <div class="input-group">
@@ -73,4 +82,21 @@
 
 
 @section('script-area')
+<script>
+    $(document).ready(function() {
+        $("#building_name").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                var newurl = "{{ url('/admin/fetch-building-tenant-unit') }}/" + optionValue;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(p) {
+                        $("#tenant_name").html(p);
+                    }
+                });
+            });
+        }).change();
+    });
+</script>
 @endsection
