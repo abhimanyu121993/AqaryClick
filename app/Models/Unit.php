@@ -27,4 +27,9 @@ class Unit extends Model
     {
         return $this->belongsTo(UnitType::class, 'unit_type','id');
     }
+    public function unittypeinfo()
+    {
+        return $this->belongsTo(UnitType::class, 'unit_type', 'id');
+
+    }
 }

@@ -45,9 +45,13 @@ class TenantController extends Controller
             $all_tenant = Tenant::all();
         } else {
             $all_tenant = Tenant::where('user_id', Auth::user()->id)->get();
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $all_tenant=Tenant::get();
         }
         return view('admin.tenant.tenats', compact('all_tenant'));
     }
+}
 
     /**
      * Store a newly created resource in storage.
@@ -212,13 +216,13 @@ class TenantController extends Controller
     }
 
     public function BuildingDetails($building_id){
-        $res=Unit::where('building_id',$building_id)->get();
+        $res=Unit::with('unittypeinfo')->where('building_id',$building_id)->get();
         $total_unit =Unit::where('building_id',$building_id)->count();
         $html=' <option value="">--Select Unit--</option>';
-
-        foreach($res as $r){
-            $html .='<option value="'.$r->id.'">'.$r->unit_type.'</option>';
-        }
+    foreach($res as $r){
+        $html .='<option value="'.$r->unittypeinfo->id.'">'.$r->unittypeinfo->name.'</option>';
+    }
+        
         return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
     }
 
