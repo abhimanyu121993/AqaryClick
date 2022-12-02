@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Response;
 
 class BusinessController extends Controller
 {
@@ -36,7 +37,6 @@ class BusinessController extends Controller
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $business = BusinessDetail::all();
-
         } else {
             $business = BusinessDetail::where('user_id', Auth::user()->id)->get();
             // $bank=BankDetail::where('user_id', Auth::user()->id)->get();
@@ -108,7 +108,7 @@ class BusinessController extends Controller
             $file = $request->file('docfile');
             foreach ($request->document_name as $k => $doc) {
                 $name = 'logo-' . time() . '-' . rand(0, 99) . '.' . $file[$k]->extension();
-                $file[$k]->move(public_path('company/document'), $name);
+                $file[$k]->move(public_path('upload/company/document'), $name);
                 $otherpic[] = $name;
                 $company_document = BusinessDocument::create([
                     'business_id' => $business->id,
@@ -179,7 +179,7 @@ class BusinessController extends Controller
     public function businessDocumentDetail($id)
     {
         $id = Crypt::decrypt($id);
-        $document = BusinessDocument::where('id',$id)->get();
+        $document = BusinessDocument::where('id', $id)->get();
         return view('admin.business.business_document', compact('document'));
     }
     public function showBankDetail($id)
@@ -223,5 +223,37 @@ class BusinessController extends Controller
     {
         $companydel = BankDetail::find($id)->delete();
         return redirect()->back();
+    }
+
+    public function editDocument($id)
+    {
+        $id = Crypt::decrypt($id);
+        $document = BusinessDocument::where('id', $id)->get();
+        $editdocument = BusinessDocument::find($id);
+        return view('admin.business.business_document', compact('editdocument', 'document'));
+    }
+    public function updateDocuments(Request $request,$id)
+    {
+        // dd($id);
+        $file = $request->file('docfile');
+        foreach ($request->document_name as $k => $doc) {
+            $name = 'logo-' . time() . '-' . rand(0, 99) . '.' . $file[$k]->extension();
+            $file[$k]->move(public_path('upload/company/document'), $name);
+            $otherpic[] = $name;
+            $company_document = BusinessDocument::find($id)->update([
+                'document_name' => $request->document_name[$k],
+                'file' => $otherpic[$k],
+                'expire_date' => $request->document_exp_date[$k],
+            ]);
+        }
+        if ( $company_document) {
+            return redirect()->back()->with('success', 'Business has been updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Something Went Wron .');
+        }
+    }
+    public function DocumentDownload($path){
+        $filePath = public_path('upload/company/document/'.$path);
+       return Response::download($filePath);
     }
 }

@@ -2574,7 +2574,7 @@
                             <i class="material-icons mat-icon-xlg mx-2">call</i>
                             <div class="column">
                                 <p class="mb-0">CALL US NOW</p>
-                                <h2 class="ws-nowrap">(+100) 123 456 7890</h2>
+                                <h2 class="ws-nowrap">{!! $websiteSetting->where('name','mobile')->pluck('value')[0]??'Mobile Not Set' !!}</h2>
                             </div>
                         </div>
                         <div class="p-3">

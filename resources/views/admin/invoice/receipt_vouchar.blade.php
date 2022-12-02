@@ -2,6 +2,44 @@
 <html lang="en">
 
 <head>
+    <style>
+        .card{
+            background: transparent !important;
+        }
+        #watermark{
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: -1;
+          font-size: 100px;
+          font-weight:500px;
+          display: grid;
+          justify-content: center;
+          align-content: center;
+          opacity: 0.1;
+          transform: (180deg);
+        }
+        .background
+        {
+            height: auto;
+            width: 100%;
+            position: relative;
+            z-index: 10000;
+            overflow: hidden;
+        }
+        #img
+        {
+            height: 1100px;
+            width: 70%;
+            top: -100px;
+            position: absolute;
+            opacity: .1;
+            left: 240px;
+            z-index: 1000;
+        }
+        </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,6 +54,14 @@
 <body>
 <center><button type="button" class="btn btn-lg btn-outline-danger mt-2" id="download">Download Receipt</button></a>
   </center>
+  <div class="background" id='background'>
+
+    @if ($company->customer_type == 'Indivisual')
+    <img src="{{ asset("upload/building/building.png") }}" id="img" alt="img">
+    @else
+    <img src="{{ asset('upload/company/logo/' . $company->logo) }}"
+        class="card-logo card-logo-dark" alt="logo dark" id="img">
+@endif
   <div id="receipt-download">
     <h1 class="text-danger text-center">سند استلام</h1><br>
     <h1 class="text-danger text-center">Receipt Voucher</h1>
@@ -140,6 +186,7 @@
         </div>
     </div>
 </div>
+  </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

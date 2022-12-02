@@ -10,7 +10,7 @@
                 </div><!-- end card header -->
                 <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
-                <thead class="thead-color">           
+                <thead class="thead-color">
                 <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Code</th>
@@ -61,7 +61,21 @@
                                     <td>{{$tenant->payment_method}}</td>
                                     <td>{{$tenant->payment_receipt}}</td>
                                     <td>{{$tenant->attachment_remark}}</td>
-                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="ri-eye-2-fill"></i>
+                                            </a>
+                                            @php $bid=Crypt::encrypt($tenant->id); @endphp
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            @php $pics=json_decode($tenant->attachment_file); @endphp
+                                            @foreach ($pics as $pic)
+                                                <li><a class="dropdown-item" href="{{route('admin.TenantsDownloadDocument',$pic)}}">{{$pic??''}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                        </div>
+                                    </td>
                                     <td><div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
                                             </a>
                                             @php $tid=Crypt::encrypt($tenant->id); @endphp
