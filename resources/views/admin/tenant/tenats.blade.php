@@ -17,7 +17,7 @@
                                 <th scope="col">Tenant Name Eglish</th>
                                 <th scope="col">Tenant Arabic Name</th>
                                 <th scope="col">Tenant Document</th>
-                                <th scope="col">Qid Document</th>
+                                <th scope="col">QID Document</th>
                                 <th scope="col">CR Document</th>
                                 <th scope="col">Passport</th>
                                 <th scope="col">Tenant Nationality</th>

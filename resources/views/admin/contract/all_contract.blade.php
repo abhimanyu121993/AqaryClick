@@ -16,7 +16,7 @@
                                 <th scope="col">Contract Code</th>
                                 <th scope="col">Tenant Name</th>
                                 <th scope="col">Document Type</th>
-                                <th scope="col">Qid No</th>
+                                <th scope="col">QID No</th>
                                 <th scope="col">CR No</th>
                                 <th scope="col">Passport No</th>
                                 <th scope="col">Sponsor Id</th>
@@ -151,7 +151,7 @@
                 $('.is_reject').attr('disabled', 'true');
             },
             success: function() {
-                
+
                 $('.is_reject').removeAttr('disabled')
 
             }
