@@ -158,19 +158,19 @@
                         </div>
                         <div class="col-md-3">
                             <label for="space" class="form-label">Bank Code</label>
-                            <select class="form-control" id="bank_code" name="bankcode">
+                            <select class="form-control bank_code" id="bank_code" name="bankcode">
                                 <option value="">-----Select Code-----</option>
                                 <option value="ifsc">Ifsc Code</option>
                                 <option value="swift">Swift Code</option>
                             </select>
                         </div>
-                        <div class="col-md-4 mb-2 swift" id="swift">
+                        <div class="col-md-4 mb-2 swift" id="swift" style="display: none">
                             <label for="country" class="form-label">Swift Code</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="swift[]" placeholder="Enter Swift Code">
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2 ifsc" id="ifsc">
+                        <div class="col-md-4 mb-2 ifsc" id="ifsc" style="display:none">
                             <label for="country" class="form-label">IFSC Code</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="ifsc[]" placeholder="Enter Ifsc Code">
@@ -260,19 +260,19 @@
                         </div>\
                         <div class="col-md-3">\
                             <label for="space" class="form-label">Bank Code</label>\
-                            <select class="form-control" id="bank_code" name="bankcode">\
+                            <select class="form-control bank_code" id="bank_code" name="bankcode">\
                                 <option value="">-----Select Code-----</option>\
                                 <option value="ifsc">Ifsc Code</option>\
                                 <option value="swift">Swift Code</option>\
                             </select>\
                         </div>\
-                        <div class="col-md-3 mb-2 swift" id="swift">\
+                        <div class="col-md-3 mb-2 swift" id="swift" style="display:none">\
                             <label for="country" class="form-label">Swift Code</label>\
                             <div class="input-group">\
                                 <input type="text" class="form-control" name="swift[]" placeholder="Enter Swift Code">\
                             </div>\
                         </div>\
-                        <div class="col-md-3 mb-2 ifsc" id="ifsc">\
+                        <div class="col-md-3 mb-2 ifsc" id="ifsc" style="display:none">\
                             <label for="country" class="form-label">IFSC Code</label>\
                             <div class="input-group">\
                                 <input type="text" class="form-control" name="ifsc[]" placeholder="Enter Ifsc Code">\
@@ -301,24 +301,19 @@
 
 <script>
         $(document).ready(function() {
-            $('.ifsc').hide();
-                $('.swift').hide();
-            $("#bank_code").change(function() {
-                $('.ifsc').hide();
-                $('.swift').hide();
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue == 'ifsc') {
-                        $('.ifsc').show();
-                        $('.swift').hide();
-                    } else if (optionValue == 'swift') {
-                        $('.swift').show();
-                        $('.ifsc').hide();
-
-                        
-                    }
-                });
-            }).change();
+         $(document).on('change','.bank_code',function(){
+            $(this).closest('.row').find('.swift').hide();
+            $(this).closest('.row').find('.ifsc').hide();
+            var v=$(this).val();
+            if(v=='swift'){
+                
+            $(this).closest('.row').find('.swift').show();
+            }
+            else{
+                
+            $(this).closest('.row').find('.ifsc').show();
+            }
+         });
         });
     </script>
 @endsection

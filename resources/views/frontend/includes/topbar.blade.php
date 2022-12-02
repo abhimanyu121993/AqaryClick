@@ -95,6 +95,7 @@
                         </ul>
                     </div> 
                 </div>  
+                @if(Auth::user())
                 <div class="mdc-menu-surface--anchor"> 
                     <button class="mdc-button mdc-ripple-surface"> 
                         <span class="mdc-button__ripple"></span>
@@ -106,7 +107,7 @@
                         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
                             <li class="user-info row start-xs middle-xs">                   
                                 <img src="{{asset('home2/assets/images/others/user.jpg')}}" alt="user-image" width="50">
-                                <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
+                                <p class="m-0">{{Auth::user()->name}} <br> <small><i> </i></small></p>
                             </li>
                             <li role="separator" class="mdc-list-divider m-0"></li> 
                             <li>
@@ -163,7 +164,7 @@
                             </li>
                             <li role="separator" class="mdc-list-divider m-0"></li>
                             <li>
-                                <a href="login.html" class="mdc-list-item" role="menuitem">
+                                <a href="{{route('home.logout')}}" class="mdc-list-item" role="menuitem">
                                     <i class="material-icons mat-icon-sm text-muted">power_settings_new</i> 
                                     <span class="mdc-list-item__text px-3">Sign Out</span>
                                 </a>
@@ -171,6 +172,10 @@
                         </ul>
                     </div> 
                 </div> 
+                @else
+                <div> <a href="{{route('home.login')}}">Login</a></div>
+                @endif
+
             </div> 
         </div> 
     </div>  
