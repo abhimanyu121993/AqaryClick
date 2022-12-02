@@ -218,7 +218,6 @@ class TenantController extends Controller
 
         $res=Unit::where('building_id',$building_id)->get();
         $total_unit =Unit::where('building_id',$building_id)->count();
-        dd($res);
         $html=' <option value="">--Select Unit--</option>';
     foreach($res as $r){
         $html .='<option value="'.$r->id.'">'.$r->unit_type.'</option>';

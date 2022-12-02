@@ -20,6 +20,7 @@ use App\Http\Controllers\admin\InvoiceController;
 use App\Http\Controllers\admin\LegalController;
 use App\Http\Controllers\admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\admin\StaffController;
 use App\Http\Controllers\Admin\UnitController;
@@ -160,6 +161,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
     Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
+    Route::get('report',[ReportController::class,'report'])->name('report');
 
 
 

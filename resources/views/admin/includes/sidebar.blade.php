@@ -369,6 +369,10 @@
                                         Currency</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('admin.report') }}" class="nav-link" data-key="t-analytics">
+                                        Report </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link" data-key="t-analytics">
                                         Staff </a>
                                 </li>
