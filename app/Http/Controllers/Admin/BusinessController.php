@@ -186,31 +186,34 @@ class BusinessController extends Controller
     {
         $id = Crypt::decrypt($id);
         $bank = BankDetail::where('id',$id)->get();
-        return view('admin.business.customer_bank_detail', compact('bank'));
+        $editbank=BankDetail::find($id);
+        return view('admin.business.customer_bank_detail', compact('bank','editbank'));
     }
-    public function updateBankDetails(Request $request)
-    {
-        dd($request);
-        $request->validate([
-            // 'name' => 'required',
-            // 'currency_code'=>'required',
-        ]);
-       $data= BankDetail::find($id)->update([
-        'business_id' => $request->business_id,
+
+    public function editBankDetails($id){
+        $id = Crypt::decrypt($id);
+        $bank = BankDetail::where('id',$id)->get();
+        $editbank=BankDetail::find($id);
+        return view('admin.business.customer_bank_detail', compact('bank','editbank'));
+    }
+
+    public function updateBankDetails(Request $request,$id){
+        $data=BankDetail::find($id)->update([
         'user_id'=>Auth::user()->id,
         'bank_name' => $request->bank_name,
         'account_number' => $request->account_number,
         'iban_no'=>$request->iban_no,
         'ifsc'=>$request->ifsc,
         'swift'=>$request->swift,
-
         ]);
-        if($data){
-        return redirect()->back()->with('success','Bank Details Updated successfully.');
-        }
-        else{
-            return redirect()->back()->with('error','Bank Details not Updated.');
-        }    }
+         if($data){
+               return redirect()->back()->with('success','Bank Details Updated successfully.');
+            }
+            else{
+                return redirect()->back()->with('error','Bank Details not Updated.');
+           }  
+    }
+
     public function usercompanydelete($id)
     {
         $companydel = OwnerCompany::find($id)->delete();
