@@ -39,7 +39,7 @@
                                             </a>
                                             @php $bid=Crypt::encrypt($bn->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                               <li><a class="dropdown-item" href="" value="{{$bid}}" id="edit-bank" data-bs-toggle="modal" data-bs-target="#exampleModalgrid">Edit</a></li>
+                                            <li><a class="dropdown-item" href="{{route('admin.editBank',$bid)}}" value="{{$bid}}" id="edit-bank" data-bs-toggle="modal" data-bs-target="#exampleModalgrid" >Edit</a></li>
                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
                                                 <form id="delete-form-{{ $bid }}" action="{{ route('admin.business.destroy', $bid) }}"
                                                     method="post" style="display: none;">
@@ -68,29 +68,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.updateBank') }}" method="post">
+                <form action="{{route('admin.updateBank',$editbank->id)}}" method="post">
                     @csrf
-                <input type="text" class="form-control" id="bid" name="bid" hidden>
+                <input type="text" class="form-control" id="bid" name="bid" value="{{$editbank->id ??''}}" hidden>
 
                     <div class="row g-3">
                         <div class="col-xxl-12">
                             <div>
                                 <label for="firstName" class="form-label">Bank Name</label>
 
-                                <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter firstname">
+                                <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter firstname" value="{{$editbank->bank_name ??''}}" >
                             </div>
                         </div><!--end col-->
                         <div class="col-xxl-12">
                             <div>
                                 <label for="lastName" class="form-label">Account No</label>
-                                <input type="text" class="form-control" id="" Name="account_number" placeholder="Enter Account No">
+                                <input type="text" class="form-control" id="" Name="account_number" placeholder="Enter Account No" value="{{$editbank->account_number ??''}}">
                             </div>
                         </div>
                         <!--end col-->
                         <div class="col-xxl-12">
                             <div>
                                 <label for="lastName" class="form-label">IBAN No</label>
-                                <input type="text" class="form-control" id="" Name="iban_no" placeholder="Enter Iban No">
+                                <input type="text" class="form-control" id="" Name="iban_no" placeholder="Enter Iban No" value="{{$editbank->iban_no ??''}}">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -104,13 +104,13 @@
                         <div class="col-md-12 swift" id="swift">
                             <label for="country" class="form-label">Swift Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="swift" placeholder="Enter Swift Code">
+                                <input type="text" class="form-control" name="swift" placeholder="Enter Swift Code" value="{{$editbank->swift ?? ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 ifsc" id="ifsc">
                             <label for="country" class="form-label">IFSC Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="ifsc" placeholder="Enter Ifsc Code">
+                                <input type="text" class="form-control" name="ifsc" placeholder="Enter Ifsc Code" value="{{$editbank->ifsc ?? ''}}">
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -135,6 +135,28 @@
     $('#example').DataTable();
 });
 </script>
+<script>
+        $(document).ready(function() {
+            $('.ifsc').hide();
+                $('.swift').hide();
+            $("#bank_code").change(function() {
+                $('.ifsc').hide();
+                $('.swift').hide();
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'ifsc') {
+                        $('.ifsc').show();
+                        $('.swift').hide();
+                    } else if (optionValue == 'swift') {
+                        $('.swift').show();
+                        $('.ifsc').hide();
+
+                        
+                    }
+                });
+            }).change();
+        });
+    </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>

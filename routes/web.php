@@ -106,7 +106,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('business-document/{id}',[BusinessController::class,'businessDocumentDetail'])->name('businessDocument');
     Route::get('delete-company-details/{id}',[BusinessController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
-    Route::post('update-bank-details',[BusinessController::class,'updateBankDetails'])->name('updateBank');
+    Route::get('edit-bank-details/{id}',[BusinessController::class,'editBankDetails'])->name('editBank');
+    Route::post('update-bank-details/{id}',[BusinessController::class,'updateBankDetails'])->name('updateBank');
 
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
@@ -184,3 +185,5 @@ Route::get('/optimize', function(){
 Route::get('/optimize-clear', function(){
     Artisan::call('optimize:clear');
 });
+
+Route::view('payment-success','home.paymentsuccess');
