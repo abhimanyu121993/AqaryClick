@@ -65,7 +65,7 @@
                                     <td>{{ $con->sponsor_name??''}}</td>
                                     <td>{{ $con->sponsor_nationality??''}}</td>
                                     <td>{{ $con->sponsor_mobile??''}}</td>
-                                    <td>{{ $con->tenant_nationality??''}}</td>
+                                    <td>{{ $con->countryDetails->name??''}}</td>
                                     <td>{{ $con->tenant_mobile??''}}</td>
                                     <td>{{ $con->lessor??''}}</td>
                                     <td>{{ $con->release_date??''}}</td>
@@ -77,7 +77,7 @@
                                     <td>{{ $con->grace_end_date ??''}}</td>
                                     <td>{{ $con->grace_period_month ??''}}</td>
                                     <td>{{ $con->grace_period_day ??''}}</td>
-                                    <td>{{ $con->approved_by ??''}}</td>
+                                    <td>{{ $con->lessorDetails->name??''}}</td>
                                     <td>{{ $con->attestation_no ??''}}</td>
                                     <td>{{ $con->attestation_status ??''}}</td>
                                     <td>{{ $con->attestation_expiry ??''}}</td>
