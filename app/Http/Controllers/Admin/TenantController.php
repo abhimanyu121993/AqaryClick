@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 
 class TenantController extends Controller
 {
@@ -230,6 +231,12 @@ class TenantController extends Controller
         $TT=$file_no.'-'.Carbon::now()->month.'-'.Carbon::now()->format('y').'-'.str_pad($max_id,2,'0',STR_PAD_LEFT);
         return response()->json($TT);
 
+    }
+
+    public function tenantsDownloadDocument($path)
+    {
+        $filePath = public_path('upload/tenent/'.$path);
+                       return Response::download($filePath);
     }
 
     }
