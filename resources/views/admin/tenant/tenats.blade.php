@@ -17,13 +17,15 @@
                                 <th scope="col">Tenant Name Eglish</th>
                                 <th scope="col">Tenant Arabic Name</th>
                                 <th scope="col">Tenant Document</th>
-                                <th scope="col">Qid Document</th>
+                                <th scope="col">QID Document</th>
                                 <th scope="col">CR Document</th>
                                 <th scope="col">Passport</th>
                                 <th scope="col">Tenant Nationality</th>
                                 <th scope="col">Tenant Primary Number</th>
                                 <th scope="col">Tenant Secondary Number</th>
-                                <th scope="col">Email </th>
+                                <th scope="col">Primary Email </th>
+                                <th scope="col">Alternative Email </th>
+
                                 <th scope="col">Post Office</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Tenant Type</th>
@@ -41,6 +43,7 @@
                             @foreach ($all_tenant as $tenant)
                                 <tr>
                                     <td scope="row">{{ $loop->index + 1 }}</td>
+<<<<<<< Updated upstream
                                     <td>{{$tenant->tenant_code}}</td>
                                     <td>{{$tenant->tenant_english_name}}</td>
                                     <td>{{$tenant->tenant_arabic_name}}</td>
@@ -76,6 +79,31 @@
                                         </ul>
                                         </div>
                                     </td>
+=======
+                                    <td>{{$tenant->tenant_code??''}}</td>
+                                    <td>{{$tenant->tenant_english_name??''}}</td>
+                                    <td>{{$tenant->tenant_arabic_name??''}}</td>
+                                    <td>{{$tenant->tenant_document??''}}</td>
+                                    <td>{{$tenant->qid_document??''}}</td>
+                                    <td>{{$tenant->cr_document??''}}</td>
+                                    <td>{{$tenant->passport??''}}</td>
+                                    <td>{{$tenant->tenantNationality->name??''}}</td>
+                                    <td>{{$tenant->tenant_primary_mobile??''}}</td>
+                                    <td>{{$tenant->tenant_secondary_mobile??''}}</td>
+                                    <td>{{$tenant->email??''}}</td>
+                                    <td>{{$tenant->alternate_email??''}}</td>
+
+                                    <td>{{$tenant->post_office??''}}</td>
+                                    <td>{{$tenant->address??''}}</td>
+                                    <td>{{$tenant->tenant_type??''}}</td>
+                                    <td>{{$tenant->unittypeinfo->name??''}}</td>
+                                    <td>{{$tenant->unit_address??''}}</td>
+                                    <td>{{$tenant->rental_period??''}}</td>
+                                    <td>{{$tenant->payment_method??''}}</td>
+                                    <td>{{$tenant->payment_receipt??''}}</td>
+                                    <td>{{$tenant->attachment_remark??''}}</td>
+                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
+>>>>>>> Stashed changes
                                     <td><div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
                                             </a>
                                             @php $tid=Crypt::encrypt($tenant->id); @endphp
@@ -107,12 +135,5 @@
 
 
 @section('script-area')
-<script>
-    $(document).ready(function () {
-    $('#example').DataTable();
-});
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
 @endsection

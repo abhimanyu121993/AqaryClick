@@ -29,7 +29,7 @@ class Contract extends Model
     }
     public function lessorDetails()
     {
-        return $this->belongsTo(Owner::class, 'approved_by', 'id');
+        return $this->belongsTo(User::class, 'approved_by', 'id');
     }
 
     public function getTotalContractAttribute(){   

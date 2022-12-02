@@ -131,14 +131,14 @@
                                 <label for="country" class="form-label">ID</label>
                                 <div class="input-group">
                                     <input type="text" id="qid_document" class="form-control" name="qid_document"
-                                        placeholder="Qid Document Number" readonly>
+                                        placeholder="QID Document Number" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2" id="cr">
                                 <label for="state" class="form-label">CR</label>
                                 <div class="input-group">
                                     <input type="text" id="cr_document" class="form-control" name="cr_document"
-                                        placeholder="CR Document" readonly>
+                                        placeholder="Enter CR No" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2" id="passport">
@@ -180,7 +180,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="sponsor_id" name="sponsor_id"
                                         value="{{ isset($contractedit) ? $contractedit->sponsor_id : '' }}"
-                                        placeholder="Enter sponsor Qid" readonly>
+                                        placeholder="Enter sponsor id" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 sponsor_hide">
@@ -233,7 +233,7 @@
                                         value="{{ isset($contractedit) ? $contractedit->authorized_person : '' }}"
                                         placeholder="Authorized Person " readonly>
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="col-xxl-3 col-md-3" id="hide_sign">
                                 <label for="lessor_sign" class="form-label" id="d-sing">Lessor's Sign</label>
                                 <div class="input-group">

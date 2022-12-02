@@ -85,7 +85,7 @@
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">QID</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="qid_no" name="qid_no" value="{{isset($electricity)? $electricity->qid_no: '' }}" placeholder="Enter Qid No">
+                                        <input type="text" class="form-control" id="qid_no" name="qid_no" value="{{isset($electricity)? $electricity->qid_no: '' }}" placeholder="Enter QID No">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">

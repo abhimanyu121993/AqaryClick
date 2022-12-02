@@ -111,7 +111,7 @@
                             <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                 <label for="country" class="form-label">QID</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="qid_document" placeholder="Qid Document Number">
+                                    <input type="text" class="form-control" name="qid_document" placeholder="QID Document Number">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2" id="cr">
@@ -291,7 +291,7 @@
                             </select>
                         </div>
                             </div>
-                    
+
                             <div class="row">
                         <div class="card-body field_wrapper4">
                 <div class="row clone4">
@@ -301,7 +301,7 @@
                             <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-1">
                         <br />
                         <a href="javascript:void(0);" class="add_button4 btn btn-success" title="Add field">+</a>

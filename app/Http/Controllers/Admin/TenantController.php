@@ -45,9 +45,13 @@ class TenantController extends Controller
             $all_tenant = Tenant::all();
         } else {
             $all_tenant = Tenant::where('user_id', Auth::user()->id)->get();
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+            $all_tenant=Tenant::get();
         }
         return view('admin.tenant.tenats', compact('all_tenant'));
     }
+}
 
     /**
      * Store a newly created resource in storage.
@@ -212,13 +216,13 @@ class TenantController extends Controller
     }
 
     public function BuildingDetails($building_id){
-        $res=Unit::where('building_id',$building_id)->get();
+        $res=Unit::with('unittypeinfo')->where('building_id',$building_id)->get();
         $total_unit =Unit::where('building_id',$building_id)->count();
         $html=' <option value="">--Select Unit--</option>';
-
-        foreach($res as $r){
-            $html .='<option value="'.$r->id.'">'.$r->unit_type.'</option>';
-        }
+    foreach($res as $r){
+        $html .='<option value="'.$r->unittypeinfo->id.'">'.$r->unittypeinfo->name.'</option>';
+    }
+        
         return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
     }
 
@@ -279,17 +283,17 @@ class TenantController extends Controller
                         $insertData = array(
                             "tenant_type" => $importData[0],
                             "file_no" => $importData[1],
-                            "unit_no" => $importData[2],
-                            "unit_type" => $importData[3],
-                            "unit_status" => $importData[4],
-                            "unit_floor" => $importData[5],
-                            "unit_size" => $importData[6],
-                            "unit_feature" => $importData[7],
-                            "electric_no" => $importData[8],
-                            "water_no" => $importData[9],
-                            "initial_rent" => $importData[10],
-                            "actual_rent" => $importData[11],
-                            "unit_description" => $importData[12],
+                            "tenant_code" => $importData[2],
+                            "tenant_name_english" => $importData[3],
+                            "tenant_name_arabic" => $importData[4],
+                            "document_type" => $importData[5],
+                            "document_no" => $importData[6],
+                            "tenant_primary_no" => $importData[7],
+                            "tenant_secondary_no" => $importData[8],
+                            "email" => $importData[9],
+                            "post_office" => $importData[10],
+                            "tenant_nationality" => $importData[11],
+                            "unit_address" => $importData[12],
                             "unit_ref" => $importData[13],
                             "revenue_code" => $importData[14],
                             "remark" => $importData[15],
