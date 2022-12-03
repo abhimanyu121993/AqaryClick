@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\UnitFeatureController;
 use App\Http\Controllers\admin\UnitFloorController;
 use App\Http\Controllers\admin\UnitStatusController;
 use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -62,6 +63,13 @@ Route::controller(HomeController::class)->group(function(){
 
 Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/',[HomeController::class,'home']);
+    Route::get('/login', [AuthLoginController::class, 'index'])->name('login');
+    Route::post('/login', [AuthLoginController::class, 'login'])->name('login-post');
+    Route::get('/forget-password', [AuthLoginController::class, 'showForgetPasswordForm'])->name('forget-password');
+    Route::post('/forget-password', [AuthLoginController::class, 'submitForgetPasswordForm'])->name('forget-password-post');
+    Route::get('/reset-password/{id}', [AuthLoginController::class, 'showResetPasswordForm'])->name('reset-password');
+    Route::post('/reset-password', [AuthLoginController::class, 'submitResetPasswordForm'])->name('reset-password-post');
+    Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
 });
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
