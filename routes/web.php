@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\CurrencyController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\ElectricityController;
+use App\Http\Controllers\Admin\ExcellController;
 use App\Http\Controllers\admin\InvoiceController;
 use App\Http\Controllers\admin\LegalController;
 use App\Http\Controllers\admin\NationalityController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Admin\UnitFeatureController;
 use App\Http\Controllers\admin\UnitFloorController;
 use App\Http\Controllers\admin\UnitStatusController;
 use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -62,6 +64,13 @@ Route::controller(HomeController::class)->group(function(){
 
 Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/',[HomeController::class,'home']);
+    Route::get('/login', [AuthLoginController::class, 'index'])->name('login');
+    Route::post('/login', [AuthLoginController::class, 'login'])->name('login-post');
+    Route::get('/forget-password', [AuthLoginController::class, 'showForgetPasswordForm'])->name('forget-password');
+    Route::post('/forget-password', [AuthLoginController::class, 'submitForgetPasswordForm'])->name('forget-password-post');
+    Route::get('/reset-password/{id}', [AuthLoginController::class, 'showResetPasswordForm'])->name('reset-password');
+    Route::post('/reset-password', [AuthLoginController::class, 'submitResetPasswordForm'])->name('reset-password-post');
+    Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
 });
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
@@ -118,6 +127,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetch-tenant-details/{tenant_name}',[ContractController::class,'fetchTenantDetails'])->name('fetchTenantDetails');
     Route::get('fetchCountry/{country_id}',[BuildingController::class,'fetchCountry'])->name('fetchCountry');
     Route::get('fetch-building-details/{building_id}',[TenantController::class,'BuildingDetails'])->name('BuildingDetails');
+    Route::get('fetch-unit-by-building/{id}',[UnitController::class,'fetch_unit_by_building']);
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::get('document/{id}',[BuildingController::class,'document'])->name('document');
     Route::get('tenant-document/{id}',[TenantController::class,'tenantdocument'])->name('tenantDocument');
@@ -164,10 +174,21 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
     Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
     Route::get('report',[ReportController::class,'report'])->name('report');
+    Route::get('master-report/{tenant_id}',[ReportController::class,'masterReport'])->name('masterReport');
     Route::get('fetch-building-tenant-unit/{building_id}',[ReportController::class,'tenantUnitBuilding'])->name('tenantUnitBuilding');
     Route::get('edit-document/{id}',[BusinessController::class,'editDocument'])->name('editDocument');
     Route::post('update-document/{id}',[BusinessController::class,'updateDocuments'])->name('updateDocument');
     Route::get('document-download/{path}',[BusinessController::class,'DocumentDownload'])->name('documentDownload');
+    Route::post('tenant-report/{value}',[ReportController::class,'tenantReport'])->name('tenantReport');
+    Route::get('tenant-file-download/{path}',[ReportController::class,'getFileDownload'])->name('getFileDownload');
+
+    //Excell Export
+    Route::group(['prefix' => 'excel-export', 'as' => 'excel-export.'], function () {
+        Route::get('building', [ExcellController::class, 'building_export'])->name('building');
+        Route::get('unit', [ExcellController::class, 'unit_export'])->name('unit');
+        Route::get('tenant', [ExcellController::class, 'tenant_export'])->name('tenant');
+     });
+
 });
 
 //  Payment

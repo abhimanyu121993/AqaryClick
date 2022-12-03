@@ -6,7 +6,18 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex table-main-heading">
-                    <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
+                   
+                        <div class="col-4">
+                            <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                        <div class="col-4">
+                            <a class="btn btn-primary" href="{{Route('admin.excel-export.tenant')}}">Export</a>
+                        </div>
+                   
+                   
                 </div><!-- end card header -->
                 <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
@@ -17,13 +28,15 @@
                                 <th scope="col">Tenant Name Eglish</th>
                                 <th scope="col">Tenant Arabic Name</th>
                                 <th scope="col">Tenant Document</th>
-                                <th scope="col">Qid Document</th>
+                                <th scope="col">QID Document</th>
                                 <th scope="col">CR Document</th>
                                 <th scope="col">Passport</th>
                                 <th scope="col">Tenant Nationality</th>
                                 <th scope="col">Tenant Primary Number</th>
                                 <th scope="col">Tenant Secondary Number</th>
-                                <th scope="col">Email </th>
+                                <th scope="col">Primary Email </th>
+                                <th scope="col">Alternative Email </th>
+
                                 <th scope="col">Post Office</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Tenant Type</th>
@@ -107,12 +120,5 @@
 
 
 @section('script-area')
-<script>
-    $(document).ready(function () {
-    $('#example').DataTable();
-});
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+
 @endsection

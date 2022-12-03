@@ -321,4 +321,12 @@ class UnitController extends Controller
             return redirect()->back();
         }
     }
+
+    public function fetch_unit_by_building($building_id)
+    {
+        $building = Building::find($building_id)->Units;
+        return response()->json($building);
+      
+       
+    }
 }

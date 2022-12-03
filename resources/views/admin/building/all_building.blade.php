@@ -2,13 +2,25 @@
 @section('title', 'Manage Property')
 @section('main-content')
 
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex table-main-heading">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                        <div class="col-4">
+                            <a class="btn btn-primary" href="{{Route('admin.excel-export.building')}}">Export</a>
+                        </div>
+                    </div>
                 </div><!-- end card header -->
                 <div class="card-body ">
+                  
                     <div class='table-responsive'>
                         <table id="example" class="table table-striped table-bordered  " style="width:100%">
                             <thead>

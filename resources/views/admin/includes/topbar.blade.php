@@ -1,3 +1,13 @@
+<style>
+    #translate select{
+        height: 30px;
+        width: 150px;
+        background-color: #f7901c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+</style>
 <header id="page-topbar">
     <div class="layout-width">
         <div class="navbar-header">
@@ -144,6 +154,7 @@
 
                 <div class="dropdown ms-1 topbar-head-dropdown header-item">
                     <center>
+                        <label style="margin: 0;padding: 0;">Choose your language</label>
                         <div id="translate"></div>
                     </center>
                     {{-- <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tenant extends Model
@@ -24,9 +25,12 @@ class Tenant extends Model
     {
         return $this->belongsTo(Nationality::class, 'sponser_nationality', 'id');
     }
-    public function unitTypeInfo()
+    public function unittypeinfo()
     {
         return $this->belongsTo(UnitType::class, 'unit_type', 'id');
 
+    }
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
 }
