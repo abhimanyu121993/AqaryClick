@@ -6,7 +6,18 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex table-main-heading">
-                    <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
+                   
+                        <div class="col-4">
+                            <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                        <div class="col-4">
+                            <a class="btn btn-primary" href="{{Route('admin.excel-export.tenant')}}">Export</a>
+                        </div>
+                   
+                   
                 </div><!-- end card header -->
                 <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">                        <thead>
@@ -43,7 +54,6 @@
                             @foreach ($all_tenant as $tenant)
                                 <tr>
                                     <td scope="row">{{ $loop->index + 1 }}</td>
-<<<<<<< Updated upstream
                                     <td>{{$tenant->tenant_code}}</td>
                                     <td>{{$tenant->tenant_english_name}}</td>
                                     <td>{{$tenant->tenant_arabic_name}}</td>
@@ -79,31 +89,6 @@
                                         </ul>
                                         </div>
                                     </td>
-=======
-                                    <td>{{$tenant->tenant_code??''}}</td>
-                                    <td>{{$tenant->tenant_english_name??''}}</td>
-                                    <td>{{$tenant->tenant_arabic_name??''}}</td>
-                                    <td>{{$tenant->tenant_document??''}}</td>
-                                    <td>{{$tenant->qid_document??''}}</td>
-                                    <td>{{$tenant->cr_document??''}}</td>
-                                    <td>{{$tenant->passport??''}}</td>
-                                    <td>{{$tenant->tenantNationality->name??''}}</td>
-                                    <td>{{$tenant->tenant_primary_mobile??''}}</td>
-                                    <td>{{$tenant->tenant_secondary_mobile??''}}</td>
-                                    <td>{{$tenant->email??''}}</td>
-                                    <td>{{$tenant->alternate_email??''}}</td>
-
-                                    <td>{{$tenant->post_office??''}}</td>
-                                    <td>{{$tenant->address??''}}</td>
-                                    <td>{{$tenant->tenant_type??''}}</td>
-                                    <td>{{$tenant->unittypeinfo->name??''}}</td>
-                                    <td>{{$tenant->unit_address??''}}</td>
-                                    <td>{{$tenant->rental_period??''}}</td>
-                                    <td>{{$tenant->payment_method??''}}</td>
-                                    <td>{{$tenant->payment_receipt??''}}</td>
-                                    <td>{{$tenant->attachment_remark??''}}</td>
-                                    <td> @php $tid=Crypt::encrypt($tenant->id); @endphp <a href="{{route('admin.tenantDocument',$tid)}}">view</a></td>
->>>>>>> Stashed changes
                                     <td><div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
                                             </a>
                                             @php $tid=Crypt::encrypt($tenant->id); @endphp

@@ -24,6 +24,12 @@
                             </select>
                         </div>
                         <div class="col-md-4 mb-1">
+                            <label class="form-label" for="flag">Unit Type</label>
+                            <select class="select2 form-select js-example-basic-single" id="unit_type" name='unit_type'>
+                               <option value="">--Select Unit</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-1">
                             <label class="form-label" for="flag">Tenant Name</label>
                             <select class="select2 form-select js-example-basic-single" id="tenant_name" name='tenant_name'>
                                 <option value="" selected hidden disabled>--Select Tenant--</option>

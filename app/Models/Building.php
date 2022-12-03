@@ -19,4 +19,11 @@ class Building extends Model
     {
         return $this->belongsTo(City::class, 'city', 'id');
     }
+    public function Units()
+    {
+        return $this->hasMany(Unit::class, 'building_id');
+    }
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }

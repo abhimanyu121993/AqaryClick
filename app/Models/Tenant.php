@@ -30,5 +30,7 @@ class Tenant extends Model
         return $this->belongsTo(UnitType::class, 'unit_type', 'id');
 
     }
- 
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }
