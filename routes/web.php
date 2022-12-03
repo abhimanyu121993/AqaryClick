@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\CurrencyController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\ElectricityController;
+use App\Http\Controllers\Admin\ExcellController;
 use App\Http\Controllers\admin\InvoiceController;
 use App\Http\Controllers\admin\LegalController;
 use App\Http\Controllers\admin\NationalityController;
@@ -125,6 +126,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetch-tenant-details/{tenant_name}',[ContractController::class,'fetchTenantDetails'])->name('fetchTenantDetails');
     Route::get('fetchCountry/{country_id}',[BuildingController::class,'fetchCountry'])->name('fetchCountry');
     Route::get('fetch-building-details/{building_id}',[TenantController::class,'BuildingDetails'])->name('BuildingDetails');
+    Route::get('fetch-unit-by-building/{id}',[UnitController::class,'fetch_unit_by_building']);
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::get('document/{id}',[BuildingController::class,'document'])->name('document');
     Route::get('tenant-document/{id}',[TenantController::class,'tenantdocument'])->name('tenantDocument');
@@ -178,6 +180,13 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('document-download/{path}',[BusinessController::class,'DocumentDownload'])->name('documentDownload');
     Route::post('tenant-report/{value}',[ReportController::class,'tenantReport'])->name('tenantReport');
     Route::get('tenant-file-download/{path}',[ReportController::class,'getFileDownload'])->name('getFileDownload');
+
+    //Excell Export
+    Route::group(['prefix' => 'excel-export', 'as' => 'excel-export.'], function () {
+        Route::get('building', [ExcellController::class, 'building_export'])->name('building');
+        Route::get('unit', [ExcellController::class, 'unit_export'])->name('unit');
+        Route::get('tenant', [ExcellController::class, 'tenant_export'])->name('tenant');
+     });
 
 });
 

@@ -40,18 +40,17 @@ class TenantController extends Controller
      */
     public function create()
     {
+        
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $all_tenant = Tenant::all();
         } else {
             $all_tenant = Tenant::where('user_id', Auth::user()->id)->get();
         $role=Auth::user()->roles[0]->name;
-        if($role=='superadmin'){
-            $all_tenant=Tenant::get();
         }
         return view('admin.tenant.tenats', compact('all_tenant'));
     }
-}
+
 
     /**
      * Store a newly created resource in storage.
