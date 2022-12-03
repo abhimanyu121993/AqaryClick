@@ -349,4 +349,21 @@ class TenantController extends Controller
         }
     }
 
+
+    public function fileDetails($id)
+    {  
+        $html = "";
+        $fileDetails = Tenant::find($id);
+        $name_file = json_decode($fileDetails->file_name);
+        
+        $file_attachment = json_decode($fileDetails->attachment_file);
+        
+    foreach($name_file as $k=>$files){
+        $html .="
+        <tr><td>$files</td><td>$file_attachment[$k]</td></tr>
+        ";
+    }
+      return $html;
+    }
+
 }

@@ -20,6 +20,7 @@ class Tenant extends Model
     {
         return $this->belongsTo(Nationality::class, 'tenant_nationality', 'id');
     }
+    
 
     public function nationality()
     {
