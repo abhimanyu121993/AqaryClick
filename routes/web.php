@@ -162,6 +162,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
+    Route::get('/all-grace/{id}',[ContractController::class,'graceDetails'])->name('graceDetails');
+    
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);
