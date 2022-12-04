@@ -191,7 +191,7 @@
                                                         <td class="text-start">
                                                             <p class="text-muted mb-0">{{ $invoice->remark ?? '' }}</p>
                                                         </td>
-                                                        <td>{{ $symbol??'SAR' }}&nbsp;{{round($due_amt,2)}}</</td>
+                                                        <td>{{ $symbol??'' }}&nbsp;{{round($due_amt,2)}}</</td>
                                                         <td class="text-end">{{ $symbol??'' }}&nbsp;{{ round($amt_paid??0 ,2) }}</td>
                                                     </tr>
 

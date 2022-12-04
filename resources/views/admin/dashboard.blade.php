@@ -6,6 +6,7 @@
 
 <div class="row project-wrapper">
     <div class="col-xxl-8">
+        @role('superadmin')
         <div class="row">
             <div class="col-xl-4">
                 <div class="card card-animate">
@@ -91,6 +92,7 @@
             </div><!-- end col -->
 
         </div><!-- end row -->
+        @endrole
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -116,13 +118,13 @@
                         <div class="row g-0 text-center">
                         <div class="col-6 col-sm-4">
                         <a href="{{ route('admin.building.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ $buildings }}">{{ $buildings }}</span></h5>
                                     <p class="text-muted mb-0">Number of Builidngs</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{ route('admin.electricity.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Electricity::count() }}">{{ App\Models\Electricity::count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{$electricity??'0'}}">{{$electricity??'0' }}</span></h5>
                                     <p class="text-muted mb-0">Electricity Bill Generated</p>
                                 </div></a>
                             </div>
@@ -170,13 +172,13 @@
                         <div class="row g-0 text-center">
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.unit.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::count() }}">{{ App\Models\Unit::count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{$unit??'0' }}">{{$unit??'0' }}</span></h5>
                                     <p class="text-muted mb-0">Total unit</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.unit.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','vacant')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ $vacant??'0'}}">{{ $vacant??'0'}}</span></h5>
                                     <p class="text-muted mb-0">Vacant unit</p>
                                 </div></a>
                             </div>
@@ -216,13 +218,13 @@
                         <div class="row g-0 text-center">
                         <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.tenant.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Tenant::count() }}">{{ App\Models\Tenant::count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span></h5>
                                     <p class="text-muted mb-0">Total Tenants</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.contract.create') }}"> <div class="p-3 border border-dashed border-start-0">
-                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ App\Models\Contract::where('lessor',null)->count() }}">{{ App\Models\Contract::where('lessor_sign',null)->count() }}</span></h5>
+                                    <h5 class="mb-1"><span class="counter-value" data-target="{{ $tenant_not_sign??'0' }}">{{$tenant_not_sign}}</span></h5>
                                     <p class="text-muted mb-0">Tenant Not Signature</p>
                                 </div></a>
                             </div>

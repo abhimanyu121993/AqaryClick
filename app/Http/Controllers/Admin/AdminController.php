@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Building;
 use App\Models\Cheque;
+use App\Models\Contract;
 use App\Models\Customer;
+use App\Models\Electricity;
 use App\Models\Invoice;
 use App\Models\PermissionName;
+use App\Models\Tenant;
+use App\Models\Unit;
 use App\Models\UnitStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,14 +25,36 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
+        $role=Auth::user()->roles[0]->name;
+        if($role=='superadmin'){
+        $buildings=Building::count();
+        $unit=Unit::count();
+        $tenant=Tenant::count();
+        $vacant=Unit::where('unit_status','vacant')->count() ;
+        $tenant_not_sign=Contract::where('lessor_sign',null)->count();
 
+        $electricity=Electricity::count();
+        }
+        else{
+            $buildings=Building::where('user_id',Auth::user()->id)->count();
+            $electricity=Electricity::where('user_id',Auth::user()->id)->count();
+            $unit=Unit::where('user_id',Auth::user()->id)->count();
+            $tenant=Tenant::where('user_id',Auth::user()->id)->count();
+            $tenant_not_sign=Contract::where('user_id',Auth::user()->id)->where('lessor_sign',null)->count();
+
+            $vacant=Unit::where('user_id',Auth::user()->id)->where('unit_status','vacant')->count() ;
+
+
+
+
+        }
         $cheque=Cheque::where('cheque_status','Valid')->get();
         $bounce_cheque=Cheque::where('cheque_status','Bounced')->get();
         $expired_cheque=Cheque::where('cheque_status','Expired')->get();
         $postponed_cheque=Cheque::where('cheque_status','Postponed')->get();
         $cleared_cheque=Cheque::where('cheque_status','Cleared')->get();
         $security_cheque=Cheque::where('cheque_status','Security Cheque')->get();
-        return view('admin.dashboard',compact('cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque'));
+        return view('admin.dashboard',compact('cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque','buildings','electricity','tenant','tenant_not_sign'));
     }
     public function Analyticdashboard()
     {

@@ -17,9 +17,10 @@ class ElectricityExcel implements FromCollection,WithHeadings,WithStyles, WithEv
     public function collection()
     {
         $data = collect();
+        $d=collect();
         $electricities = Electricity::get();
         foreach($electricities as $e){
-            $data->put('unit_ref', $e->unit->unit_ref);
+            $data->put('unit_ref', $e->unit->unit_ref??'');
             $data->put('zone_name', '');
             $data->put('elec_no', $e->electric_no);
             $data->put('water_no' ,$e->water_no);
@@ -36,15 +37,31 @@ class ElectricityExcel implements FromCollection,WithHeadings,WithStyles, WithEv
             $data->put('Status', '');
             $data->put('Remark', $e->remark);
 
-
+            $d->push($data);
         }
-        return $data;
+        
+        return $d;
     }
 
     public function headings():array
     {
         return [
-            ''
+            'Unit Ref',
+            'Zone Name',
+            'Elect No',
+            'Water no',
+            'Customer No',
+            'Customer Name',
+            'Landloard QID',
+            'Tenant QID',
+            'Tenant ESt card',
+            'Reg Mobile',
+            'Email',
+            'Average/M',
+            'Last Paid Invoice',
+            'Amount',
+            'Status',
+            'Remark',
         ];
     }
     public function styles(Worksheet $sheet)
