@@ -1,0 +1,7 @@
+﻿Building Name,UNIT REF,REVNUE CODE ,unit type,UNIT NO ,floor,Area / m2,"Unit Rental 
+Rate",STATUS ,Remarks
+RajMahal,B0010-GS1,40042701,Shop,1,G ,106,"25,000.00",Occupied,
+RajMahal,B0010-GS2,40042702,Shop,2,G ,120.23,"36,000.00",Occupied,
+RajMahal,B0010-GS3,40042703,Shop,3,G ,99.45,"25,000.00",Occupied,
+RajMahal,B0010-GS4,40042704,Shop,4,G ,113.15,"32,400.00",Occupied,
+RajMahal,B0010-FO1,40042706,Office,1,1st Floor,70.83,"5,000.00",Occupied,
