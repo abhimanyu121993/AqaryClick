@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('value');
             $table->boolean('is_active')->default(true);
-            $table->string('type')->default('text')
+            $table->string('type')->default('text');
             $table->softDeletes();
             $table->timestamps();
         });

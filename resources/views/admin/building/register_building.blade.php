@@ -126,14 +126,14 @@
                             </div>
 
                             <div class="col-xxl-3 col-md-3" id="title">
-                                <label for="owner_name" class="form-label">Ownership No</label>
+                                <label for="owner_name" class="form-label">Title Deed</label>
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="ownership_no" name="ownership_no" value="{{isset($buildingedit)? $buildingedit->ownership_no: '' }}" placeholder="Enter Title Deed No">
                                 </div>
 
                             </div>
                             <div class="col-xxl-3 col-md-3" id="contract">
-                                <label for="owner_name" class="form-label">Ownership No</label>
+                                <label for="owner_name" class="form-label">Usufruct Contract No</label>
                                 <div class="input-group" id="contract">
                                     <input type="text" class="form-control" id="contract_no" name="contract_no" value="{{isset($buildingedit)? $buildingedit->contract_no: '' }}" placeholder="Enter contract Number">
                                 </div>

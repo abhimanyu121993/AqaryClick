@@ -76,7 +76,6 @@ class InvoiceController extends Controller
         $request->validate([
             'tenant_name' => 'required',
             'contract' => 'required',
-            'invoice_no'=>'required',
             'currency_type'=>'required',
 
         ]);
@@ -115,11 +114,13 @@ class InvoiceController extends Controller
         $totle_amt=$qar_amt+$due_amt;
         $receipt_count=Invoice::where('user_id',Auth::user()->id)->where('tenant_id',$request->tenant_name)->count()??0;
         $receipt=str_pad($receipt_count+1, 3, '0', STR_PAD_LEFT);
+        $invoice_no=Invoice::where('user_id',Auth::user()->id)->where('tenant_id',$request->tenant_name)->count()??0;
+        $invoice_no= 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-'.str_pad($invoice_no+1, 3, '0', STR_PAD_LEFT);
         $data = Invoice::create([
             'user_id'=>Auth::user()->id,
             'tenant_id' => $request->tenant_name,
             'contract_id' => $request->contract,
-            'invoice_no' => $request->invoice_no,
+            'invoice_no' => $invoice_no,
             'receipt_no'=>$receipt,
             'due_date' => $request->due_date,
             'invoice_period_start' => $request->invoice_period_start,
@@ -136,6 +137,7 @@ class InvoiceController extends Controller
             'tenant_bank' => $request->tenant_bank,
             'tenant_sender' => $request->tenant_sender,
             'tenant_attachment' => json_encode($otherpic2),
+            'tax_no' => $request->tax_no,
             'benifitary_account' => $request->benifitary_account,
             'benifitary_bank' => $request->benifitary_bank,
             'benifitary_name' => $request->benifitary_name,
@@ -144,8 +146,25 @@ class InvoiceController extends Controller
             'remark' => $request->remark,
             'attachment' => json_encode($otherpic),
         ]);
+       
+     
+        for ($i = 0; $i < count($request->cheque_no); $i++) {
+            if($request->cheque_no[$i]!= null){ 
+            $mainpic = [];
+            if ($request->hasFile('file')) {
+                foreach ($request->file('file') as $file) {
+                    $name = $request->invoice_no . '-' . time() . '-' . rand(0, 99) . '.' . $file->extension();
+                    $file->move(public_path('upload/cheque_doc/file'), $name);
+                    $mainpic[] = $name;
+                }
+            }
+            $res = Cheque::create(['invoice_no' => $invoice_no, 'tenant_id' => $request->tenant_name,'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'qar_amt' => $request->sar_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'user_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
+        }
+    }
         if ($data) {
-            return redirect(url('admin/invoice-print', $request->invoice_no))->with('success', 'Invoice has been created successfully.');
+            $invoice_status=invoice::where('invoice_no',$invoice_no)->where('due_amt','null')->exists();
+            dd($invoice_status);
+            return redirect(url('admin/invoice-print', $invoice_no))->with('success', 'Invoice has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Invoice not created.');
         }
