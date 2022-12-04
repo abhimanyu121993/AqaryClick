@@ -158,6 +158,9 @@
                                                 <p class="text-muted mb-1"><span>Phone:</span><span
                                                         id="shipping-phone-no">{{ $invoice->TenantName->tenant_primary_mobile ?? '' }},{{ $invoice->TenantName->tenant_secondry_mobile ?? '' }}</span>
                                                 </p>
+                                                <p class="text-muted mb-1"><span>Tax No:</span><span
+                                                        id="shipping-phone-no">{{ $invoice->tax_no?? '' }}</span>
+                                                </p>
                                             </div>
                                             <!--end col-->
                                         </div>

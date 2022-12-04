@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('tenant_bank')->nullable();
             $table->string('tenant_sender')->nullable();
             $table->json('tenant_attachment')->default(json_encode([]));
+            $table->string('tax_no')->nullable();
             $table->string('benifitary_account')->nullable();
             $table->string('benifitary_bank')->nullable();
             $table->string('benifitary_name')->nullable();
