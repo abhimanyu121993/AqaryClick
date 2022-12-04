@@ -73,11 +73,20 @@
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
                 var newurl = "{{ url('/admin/fetch-building-tenant-unit') }}/" + optionValue;
+                var newurl2="{{url('/admin/fetch-unit-by-building')}}/"+optionValue;
+
                 $.ajax({
                     url: newurl,
                     method: 'get',
                     success: function(p) {
                         $("#tenant_name").html(p);
+                    }
+                });
+                $.ajax({
+                    url:newurl2,
+                    method:'get',
+                    success:function(a){
+                        $('#unit_type').html(a);
                     }
                 });
             });

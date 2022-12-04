@@ -325,7 +325,11 @@ class UnitController extends Controller
     public function fetch_unit_by_building($building_id)
     {
         $building = Building::find($building_id)->Units;
-        return response()->json($building);
+        $html = '<option value="">--select Unit--</option>';
+        foreach($building as $b){
+            $html .= '<option value="' . $b->id . '">' .$b->unit_ref.' ('.$b->unittypeinfo->name.') '. '</option>';
+        }
+        return response()->json($html);
       
        
     }

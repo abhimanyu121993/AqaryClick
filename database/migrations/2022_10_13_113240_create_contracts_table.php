@@ -56,7 +56,9 @@ return new class extends Migration
             $table->string('guarantees_payment_method')->nullable();
             $table->text('remark')->nullable();
             $table->string('status')->default(0);
+            $table->string('expire')->default(0);
             $table->string('overdue')->default(0);
+            $table->boolean('overdue_status')->default(0);
             $table->string('currency')->default('QAR');
             $table->softDeletes();
             $table->timestamps();

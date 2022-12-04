@@ -23,6 +23,10 @@ class Building extends Model
     {
         return $this->hasMany(Unit::class, 'building_id');
     }
+    public function UnitsUnique()
+    {
+        return $this->hasMany(Unit::class, 'building_id')->distinct('unit_type');
+    }
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
