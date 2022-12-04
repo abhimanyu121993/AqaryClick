@@ -1,36 +1,36 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\admin\AreaController;
+use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\admin\BankController;
-use App\Http\Controllers\admin\BrokerController;
+use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\BrokerController;
 use App\Http\Controllers\Admin\BuildingController;
 use App\Http\Controllers\Admin\BuildingTypeController;
-use App\Http\Controllers\admin\BusinessController;
-use App\Http\Controllers\admin\ChequeController;
-use App\Http\Controllers\admin\CityController;
-use App\Http\Controllers\admin\ContractController;
+use App\Http\Controllers\Admin\BusinessController;
+use App\Http\Controllers\Admin\ChequeController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ContractController;
 use App\Http\Controllers\Admin\ContractReciptController;
-use App\Http\Controllers\admin\CurrencyController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\admin\ElectricityController;
+use App\Http\Controllers\Admin\ElectricityController;
 use App\Http\Controllers\Admin\ExcellController;
-use App\Http\Controllers\admin\InvoiceController;
-use App\Http\Controllers\admin\LegalController;
-use App\Http\Controllers\admin\NationalityController;
+use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\LegalController;
+use App\Http\Controllers\Admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\admin\ReportController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\admin\StaffController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UnitTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UnitFeatureController;
-use App\Http\Controllers\admin\UnitFloorController;
-use App\Http\Controllers\admin\UnitStatusController;
+use App\Http\Controllers\Admin\UnitFloorController;
+use App\Http\Controllers\Admin\UnitStatusController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use Illuminate\Support\Facades\Artisan;
@@ -115,7 +115,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('business-document/{id}',[BusinessController::class,'businessDocumentDetail'])->name('businessDocument');
     Route::get('delete-company-details/{id}',[BusinessController::class,'usercompanydelete'])->name('companydelete');
     Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
-    Route::post('update-bank-details',[BusinessController::class,'updateBankDetails'])->name('updateBank');
+    Route::get('edit-bank-details/{id}',[BusinessController::class,'editBankDetails'])->name('editBank');
+    Route::post('update-bank-details/{id}',[BusinessController::class,'updateBankDetails'])->name('updateBank');
 
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
@@ -161,6 +162,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
+    Route::get('/all-grace/{id}',[ContractController::class,'graceDetails'])->name('graceDetails');
+    
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);
@@ -168,6 +171,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('bulk-upload-unit',[UnitController::class,'bulkUpload'])->name('bulkUploadUnit');
     Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
     Route::get('tenant-download-document/{path}',[TenantController::class,'tenantsDownloadDocument'])->name('TenantsDownloadDocument');
+
+    Route::get('/all-files/{id}',[TenantController::class,'fileDetails'])->name('fileDetails');
     Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
 
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
@@ -205,3 +210,5 @@ Route::get('/optimize', function(){
 Route::get('/optimize-clear', function(){
     Artisan::call('optimize:clear');
 });
+
+Route::view('payment-success','home.paymentsuccess');

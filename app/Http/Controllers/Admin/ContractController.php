@@ -32,26 +32,26 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $invoiceDetails=Invoice::where('payment_status','Paid')->get();
-        $contract=Contract::all();
-        $max_id=Contract::max('id')+1;
-        $CC='CC'.'-'.Carbon::now()->day.Carbon::now()->month.Carbon::now()->format('y').'-'.$max_id;
-        $tenant=Tenant::all();
-        $lessor=Customer::all();
-        $tenant_doc=Tenant::pluck('tenant_document');
-        $tenant_nation=Nationality::pluck('name');
-        $invoice=Invoice::all()->count();
-        $total_amount=Invoice::withSum('Contract','rent_amount')->get()->sum('contract_sum_rent_amount');
-        $total_amt=$invoice*$total_amount;
-        $not_paid_invoice=Invoice::where('payment_status','Not Paid')->count();
-        $delay_invoice=Invoice::whereNotNull('overdue_period')->count();
-        $total_delay_amt=Invoice::withSum('Contract','rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
-        $total_delay=$delay_invoice*$total_delay_amt;
-        $invoice_balance=$delay_invoice+$not_paid_invoice;
-        $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
-        $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
-        $currency=currency::where('status',1)->get();
-        return view('admin.contract.contract_registration',compact('contract','tenant','tenant_doc','tenant_nation','lessor','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance','CC','currency'));
+        $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
+        $contract = Contract::all();
+        $max_id = Contract::max('id') + 1;
+        $CC = 'CC' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . $max_id;
+        $tenant = Tenant::all();
+        $lessor = Customer::all();
+        $tenant_doc = Tenant::pluck('tenant_document');
+        $tenant_nation = Nationality::pluck('name');
+        $invoice = Invoice::all()->count();
+        $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
+        $total_amt = $invoice * $total_amount;
+        $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
+        $delay_invoice = Invoice::whereNotNull('overdue_period')->count();
+        $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+        $total_delay = $delay_invoice * $total_delay_amt;
+        $invoice_balance = $delay_invoice + $not_paid_invoice;
+        $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+        $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
+        $currency = currency::where('status', 1)->get();
+        return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'CC', 'currency'));
     }
 
     /**
@@ -61,15 +61,15 @@ class ContractController extends Controller
      */
     public function create()
     {
-        $role=Auth::user()->roles[0]->name;
-        if($role=='superadmin'){
-            $contract=Contract::all();
-        }
-        else{
-            $contract=Contract::where('user_id',Auth::user()->id)->get();
+        $role = Auth::user()->roles[0]->name;
+        if ($role == 'superadmin') {
+            $contract = Contract::all();
+        } else {
+            $contract = Contract::where('user_id', Auth::user()->id)->get();
         }
 
-        return view('admin.contract.all_contract',compact('contract'));    }
+        return view('admin.contract.all_contract', compact('contract'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -80,94 +80,93 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'contract_code'=>'required',
-            'tenant_name'=>'required',
-            'document_type'=>'required',
-            'tenant_mobile'=>'required',
-            'contract_status'=>'required',
-            'sponsor_name'=>'nullable',
-            'sponsor_id'=>'nullable',
-            'sponsor_nationality'=>'nullable',
-            'sponsor_mobile'=>'nullable',
-            'lessor'=>'required',
-            'authorized_person'=>'required',
-            'release_date'=>'required',
-            'lease_start_date'=>'required',
-            'lease_end_date'=>'required',
-            'lease_period_month'=>'required',
-            'lease_period_day'=>'required',
-            'approved_by'=>'required',
-            'attestation_no'=>'nullable',
-            'attestation_expiry'=>'nullable',
-            'currency_type'=>'required',
-            'rent_amount'=>'required',
-            'total_invoice'=>'required',
-            'guarantees'=>'required',
-            'contract_type'=>'required',
+            'contract_code' => 'required',
+            'tenant_name' => 'required',
+            'document_type' => 'required',
+            'tenant_mobile' => 'required',
+            'contract_status' => 'required',
+            'sponsor_name' => 'nullable',
+            'sponsor_id' => 'nullable',
+            'sponsor_nationality' => 'nullable',
+            'sponsor_mobile' => 'nullable',
+            'lessor' => 'required',
+            'authorized_person' => 'required',
+            'release_date' => 'required',
+            'lease_start_date' => 'required',
+            'lease_end_date' => 'required',
+            'lease_period_month' => 'required',
+            'lease_period_day' => 'required',
+            'approved_by' => 'required',
+            'attestation_no' => 'nullable',
+            'attestation_expiry' => 'nullable',
+            'currency_type' => 'required',
+            'rent_amount' => 'required',
+            'total_invoice' => 'required',
+            'guarantees' => 'required',
+            'contract_type' => 'required',
 
         ]);
-        $mainpic='';
-        if($request->hasFile('lessor_sign')){
-            $mainpic='contract-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
-            $request->lessor_sign->move(public_path('upload/contract/signature'),$mainpic);
+        $mainpic = '';
+        if ($request->hasFile('lessor_sign')) {
+            $mainpic = 'contract-' . time() . '-' . rand(0, 99) . '.' . $request->lessor_sign->extension();
+            $request->lessor_sign->move(public_path('upload/contract/signature'), $mainpic);
         }
-          $mainpic2='';
-        if($request->hasFile('tenant_sign')){
-            $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
-            $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
+        $mainpic2 = '';
+        if ($request->hasFile('tenant_sign')) {
+            $mainpic2 = 'tenant-' . time() . '-' . rand(0, 99) . '.' . $request->tenant_sign->extension();
+            $request->tenant_sign->move(public_path('upload/contract/signature'), $mainpic2);
         }
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
-        $tnationlity=Tenant::where('id',$request->tenant_nationality)->first()->tenant_nationality;
+        $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
+        $tnationlity = Tenant::where('id', $request->tenant_nationality)->first()->tenant_nationality;
 
-       $data= Contract::create([
-        'user_id'=>Auth::user()->id,
+        $data = Contract::create([
+            'user_id' => Auth::user()->id,
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
-            'document_type'=>$request->document_type,
-            'qid_document'=>$request->qid_document,
-            'cr_document'=>$request->cr_document,
-            'passport_document'=>$request->passport_document,
-            'sponsor_nationality'=>$request->sponsor_nationality,
-            'sponsor_id'=>$request->sponsor_id,
-            'sponsor_name'=>$request->sponsor_name,
-            'sponsor_mobile'=>$request->sponsor_mobile,
-            'tenant_mobile'=>$request->tenant_mobile,
-            'tenant_nationality'=>$tnationlity,
-            'lessor'=>$request->lessor,
-            'company_id'=>$request->company_id,
-            'authorized_person'=>$request->authorized_person,
-            'lessor_sign'=>$mainpic,
-            'release_date'=>$request->release_date,
-            'lease_start_date'=>$request->lease_start_date,
-            'lease_end_date'=>$request->lease_end_date,
-            'lease_period_month'=>$request->lease_period_month,
-            'lease_period_day'=>$request->lease_period_day,
-            'is_grace'=>$request->grace,
-            'grace_start_date'=>json_encode($request->grace_start_date),
-            'grace_end_date'=>json_encode($request->grace_end_date),
-            'grace_period_month'=>json_encode($request->grace_period_month),
-            'grace_period_day'=>json_encode($request->grace_period_day),
-            'approved_by'=>$request->approved_by,
-            'attestation_no'=>$request->attestation_no,
-            'attestation_status'=>$request->attestation_status,
-            'attestation_expiry'=>$request->attestation_expiry,
-            'contract_status'=>$request->contract_status,
+            'document_type' => $request->document_type,
+            'qid_document' => $request->qid_document,
+            'cr_document' => $request->cr_document,
+            'passport_document' => $request->passport_document,
+            'sponsor_nationality' => $request->sponsor_nationality,
+            'sponsor_id' => $request->sponsor_id,
+            'sponsor_name' => $request->sponsor_name,
+            'sponsor_mobile' => $request->sponsor_mobile,
+            'tenant_mobile' => $request->tenant_mobile,
+            'tenant_nationality' => $tnationlity,
+            'lessor' => $request->lessor,
+            'company_id' => $request->company_id,
+            'authorized_person' => $request->authorized_person,
+            'lessor_sign' => $mainpic,
+            'release_date' => $request->release_date,
+            'lease_start_date' => $request->lease_start_date,
+            'lease_end_date' => $request->lease_end_date,
+            'lease_period_month' => $request->lease_period_month,
+            'lease_period_day' => $request->lease_period_day,
+            'is_grace' => $request->grace,
+            'grace_start_date' => json_encode($request->grace_start_date),
+            'grace_end_date' => json_encode($request->grace_end_date),
+            'grace_period_month' => json_encode($request->grace_period_month),
+            'grace_period_day' => json_encode($request->grace_period_day),
+            'approved_by' => $request->approved_by,
+            'attestation_no' => $request->attestation_no,
+            'attestation_status' => $request->attestation_status,
+            'attestation_expiry' => $request->attestation_expiry,
+            'contract_status' => $request->contract_status,
             'rent_amount' => $sar_amt,
             'currency' => $request->currency_type,
-            'user_amt'=>$request->rent_amount,
-            'tenant_sign' =>$mainpic2,
+            'user_amt' => $request->rent_amount,
+            'tenant_sign' => $mainpic2,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
 
-            'remark'=>$request->remark,
+            'remark' => $request->remark,
         ]);
-        if($data){
-        return redirect(route('admin.receipt',$request->contract_code))->with('success','Contract Registration has been created successfully.');
-        }
-        else{
-            return redirect()->back()->with('error','Contract Registration not created.');
+        if ($data) {
+            return redirect(route('admin.receipt', $request->contract_code))->with('success', 'Contract Registration has been created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Contract Registration not created.');
         }
     }
 
@@ -189,25 +188,26 @@ class ContractController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {         $invoiceDetails=Invoice::where('payment_status','Paid')->get();
+    {
+        $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
 
-        $invoice=Invoice::all()->count();
-        $total_amount=Invoice::withSum('Contract','rent_amount')->get()->sum('contract_sum_rent_amount');
-        $total_amt=$invoice*$total_amount;
-        $not_paid_invoice=Invoice::where('payment_status','Not Paid')->count();
-        $delay_invoice=Invoice::whereNotNull('overdue_period')->count();
-        $total_delay_amt=Invoice::withSum('Contract','rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
-        $total_delay=$delay_invoice*$total_delay_amt;
-        $invoice_balance=$delay_invoice+$not_paid_invoice;
-        $invoice_not_paid_amt=Invoice::withSum('Contract','rent_amount')->where('payment_status','Not Paid')->get()->sum('contract_sum_rent_amount');
-        $total_balance=$total_delay+($not_paid_invoice*$invoice_not_paid_amt);
+        $invoice = Invoice::all()->count();
+        $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
+        $total_amt = $invoice * $total_amount;
+        $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
+        $delay_invoice = Invoice::whereNotNull('overdue_period')->count();
+        $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+        $total_delay = $delay_invoice * $total_delay_amt;
+        $invoice_balance = $delay_invoice + $not_paid_invoice;
+        $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+        $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
 
         $id = Crypt::decrypt($id);
-        $contractedit=Contract::find($id);
-        $tenant=Tenant::pluck('tenant_english_name');
-        $tenant_doc=Tenant::pluck('tenant_document');
-        $tenant_nation=Nationality::pluck('name');
-        return view('admin.contract.contract_registration',compact('contractedit','tenant','tenant_doc','tenant_nation','invoiceDetails','invoiceDetails','total_amt','total_delay','invoice_balance','total_balance'));
+        $contractedit = Contract::find($id);
+        $tenant = Tenant::pluck('tenant_english_name');
+        $tenant_doc = Tenant::pluck('tenant_document');
+        $tenant_nation = Nationality::pluck('name');
+        return view('admin.contract.contract_registration', compact('contractedit', 'tenant', 'tenant_doc', 'tenant_nation', 'invoiceDetails', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance'));
     }
 
     /**
@@ -220,85 +220,85 @@ class ContractController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tenant_name'=>'required',
-            'document_type'=>'required',
-            'tenant_mobile'=>'required',
-            'contract_status'=>'required',
-            'sponsor_name'=>'nullable',
-            'sponsor_id'=>'nullable',
-            'sponsor_nationality'=>'nullable',
-            'sponsor_mobile'=>'nullable',
-            'authorized_person'=>'required',
-            'lessor'=>'required',
-            'release_date'=>'required',
-            'lease_start_date'=>'required',
-            'lease_end_date'=>'required',
-            'lease_period_month'=>'required',
-            'lease_period_day'=>'required',
-            'approved_by'=>'required',
-            'attestation_no'=>'nullable',
-            'attestation_expiry'=>'nullable',
-            'total_invoice'=>'required',
-            'guarantees'=>'required',
-            'currency_type'=>'required',
-            'contract_type'=>'required',
+            'tenant_name' => 'required',
+            'document_type' => 'required',
+            'tenant_mobile' => 'required',
+            'contract_status' => 'required',
+            'sponsor_name' => 'nullable',
+            'sponsor_id' => 'nullable',
+            'sponsor_nationality' => 'nullable',
+            'sponsor_mobile' => 'nullable',
+            'authorized_person' => 'required',
+            'lessor' => 'required',
+            'release_date' => 'required',
+            'lease_start_date' => 'required',
+            'lease_end_date' => 'required',
+            'lease_period_month' => 'required',
+            'lease_period_day' => 'required',
+            'approved_by' => 'required',
+            'attestation_no' => 'nullable',
+            'attestation_expiry' => 'nullable',
+            'total_invoice' => 'required',
+            'guarantees' => 'required',
+            'currency_type' => 'required',
+            'contract_type' => 'required',
         ]);
-        $sar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
+        $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
 
 
-        $mainpic=Contract::find($id)->lessor_sign??'';
-        if($request->hasFile('lessor_sign')){
-            $mainpic='build-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
-            $request->lessor_sign->move(public_path('upload/contract/signature'),$mainpic);
+        $mainpic = Contract::find($id)->lessor_sign ?? '';
+        if ($request->hasFile('lessor_sign')) {
+            $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->lessor_sign->extension();
+            $request->lessor_sign->move(public_path('upload/contract/signature'), $mainpic);
             $oldpic = Contract::find($id)->pluck('file')[0];
             File::delete(public_path('upload/contract/signature' . $oldpic));
             Contract::find($id)->update(['lessor_sign' => $mainpic]);
         }
-        $mainpic2=Contract::find($id)->tenant_sign??'';
-        if($request->hasFile('tenant_sign')){
-            $mainpic2='tenant-'.time().'-'.rand(0,99).'.'.$request->tenant_sign->extension();
-            $request->tenant_sign->move(public_path('upload/contract/signature'),$mainpic2);
+        $mainpic2 = Contract::find($id)->tenant_sign ?? '';
+        if ($request->hasFile('tenant_sign')) {
+            $mainpic2 = 'tenant-' . time() . '-' . rand(0, 99) . '.' . $request->tenant_sign->extension();
+            $request->tenant_sign->move(public_path('upload/contract/signature'), $mainpic2);
             $oldpic = Contract::find($id)->pluck('file')[0];
             File::delete(public_path('upload/contract/signature' . $oldpic));
             Contract::find($id)->update(['tenant_sign' => $mainpic2]);
         }
-        $data=Contract::find($id)->update([
-            'user'=>Auth::user()->id,
+        $data = Contract::find($id)->update([
+            'user' => Auth::user()->id,
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
-            'document_type'=>$request->document_type,
-            'qid_document'=>$request->qid_document,
-            'cr_document'=>$request->cr_document,
-            'passport_document'=>$request->passport_document,
-            'sponsor_nationality'=>$request->sponsor_nationality,
-            'sponsor_id'=>$request->sponsor_id,
-            'sponsor_name'=>$request->sponsor_name,
-            'sponsor_mobile'=>$request->sponsor_mobile,
-            'tenant_mobile'=>$request->tenant_mobile,
-            'tenant_nationality'=>$request->tenant_nationality,
-            'lessor'=>$request->lessor,
-            'company_id'=>$request->company_id,
-            'authorized_person'=>$request->authorized_person,
-            'lessor_sign'=>$mainpic,
-            'release_date'=>$request->release_date,
-            'lease_start_date'=>$request->lease_start_date,
-            'lease_end_date'=>$request->lease_end_date,
-            'lease_period_month'=>$request->lease_period_month,
-            'lease_period_day'=>$request->lease_period_day,
-            'grace_start_date'=>json_encode($request->grace_start_date),
-            'grace_end_date'=>json_encode($request->grace_end_date),
-            'grace_period_month'=>json_encode($request->grace_period_month),
-            'grace_period_day'=>json_encode($request->grace_period_day),
-            'approved_by'=>$request->approved_by,
-            'attestation_no'=>$request->attestation_no,
-            'attestation_status'=>$request->attestation_status,
-            'attestation_expiry'=>$request->attestation_expiry,
-            'contract_status'=>$request->contract_status,
+            'document_type' => $request->document_type,
+            'qid_document' => $request->qid_document,
+            'cr_document' => $request->cr_document,
+            'passport_document' => $request->passport_document,
+            'sponsor_nationality' => $request->sponsor_nationality,
+            'sponsor_id' => $request->sponsor_id,
+            'sponsor_name' => $request->sponsor_name,
+            'sponsor_mobile' => $request->sponsor_mobile,
+            'tenant_mobile' => $request->tenant_mobile,
+            'tenant_nationality' => $request->tenant_nationality,
+            'lessor' => $request->lessor,
+            'company_id' => $request->company_id,
+            'authorized_person' => $request->authorized_person,
+            'lessor_sign' => $mainpic,
+            'release_date' => $request->release_date,
+            'lease_start_date' => $request->lease_start_date,
+            'lease_end_date' => $request->lease_end_date,
+            'lease_period_month' => $request->lease_period_month,
+            'lease_period_day' => $request->lease_period_day,
+            'grace_start_date' => json_encode($request->grace_start_date),
+            'grace_end_date' => json_encode($request->grace_end_date),
+            'grace_period_month' => json_encode($request->grace_period_month),
+            'grace_period_day' => json_encode($request->grace_period_day),
+            'approved_by' => $request->approved_by,
+            'attestation_no' => $request->attestation_no,
+            'attestation_status' => $request->attestation_status,
+            'attestation_expiry' => $request->attestation_expiry,
+            'contract_status' => $request->contract_status,
             'currency' => $request->currency,
             'rent_amount' => $sar_amt,
-            'user_amt'=>$request->rent_amount,
-            'tenant_sign' =>$mainpic2,
-            'remark'=>$request->remark,
+            'user_amt' => $request->rent_amount,
+            'tenant_sign' => $mainpic2,
+            'remark' => $request->remark,
             'total_invoice' => $request->total_invoice,
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
@@ -306,13 +306,10 @@ class ContractController extends Controller
 
 
         ]);
-        if($data)
-        {
-        return redirect()->back()->with('success','Contract Updated successfully.');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Contract not created.');
+        if ($data) {
+            return redirect()->back()->with('success', 'Contract Updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Contract not created.');
         }
     }
 
@@ -325,96 +322,111 @@ class ContractController extends Controller
     public function destroy($id)
     {
         $id = Crypt::decrypt($id);
-        $data=Contract::find($id);
-        if($data->delete())
-        {
-            return redirect()->back()->with('success','Data Deleted successfully.');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Data not deleted.');
+        $data = Contract::find($id);
+        if ($data->delete()) {
+            return redirect()->back()->with('success', 'Data Deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Data not deleted.');
         }
     }
-    public function fetchTenantDetails($tenant_name){
-        $res=Tenant::where('tenant_type',$tenant_name)->get();
-        $html=' <option value="">--Select Tenant--</option>';
+    public function fetchTenantDetails($tenant_name)
+    {
+        $res = Tenant::where('tenant_type', $tenant_name)->get();
+        $html = ' <option value="">--Select Tenant--</option>';
 
-        foreach($res as $r){
-            $html .='<option value="'.$r->id.'">'.$r->tenant_english_name.'</option>';
+        foreach ($res as $r) {
+            $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
         }
         return response()->json($html);
-        }
-        public function fetchCompany($lessor_id){
-            $res=BusinessDetail::where('user_id',$lessor_id)->get();
-            $html=' <option value="" selected hidden>--Select Business--</option>';
-
-            foreach($res as $r){
-                $html .='<option value="'.$r->id.'">'.$r->business_name.'</option>';
-            }
-            return response()->json($html);
-            }
-    public function fetchTenant($tenant_name){
-        $res=Tenant::with('nationality')->with('tenantNationality')->where('id',$tenant_name)->first();
-        return response()->json($res);
-        }
-        public function fetchAuthorizedPerson($company_id){
-            $res=BusinessDetail::where('id',$company_id)->first();
-        return response()->json($res);
-        }
-    public function fetchContractLease($contract_id){
-            $res=Contract::where('id',$contract_id)->latest()->first();
-            $to=Carbon::parse($res->lease_end_date)->addYear(1);
-            $from=Carbon::parse($res->lease_end_date);
-            $diff_in_months = $to->diffInMonths($from);
-            $diff_in_Days = $to->diffInDays($from);
-            $diff_in_Years = $to->diffInYears($from);
-            $formatted_dt=Carbon::parse($res->lease_end_date)->addYear(1)->format('Y-m-d');
-            return response()->json(array('res'=>$res,'date'=>$formatted_dt,'diff_in_months'=>$diff_in_months,'diff_in_Days'=>$diff_in_Days,'diff_in_Years'=>$diff_in_Years));
-            }
-
-    public function Overdue(){
-        $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
-    $tenant=Contract::with('tenantDetails')->where('overdue','>=',90)->whereNotIn('id',$res)->get();
-    return view('admin.contract.overdue',compact('tenant'));
     }
- public function contractNumber($tenant_id){
-   $contract_code=Contract::with('tenantDetails')->where('tenant_name',$tenant_id)->get();
-   dd($contract_code);
-    $CC='CC'.'-'.Carbon::now()->month.'-'.Carbon::now()->format('y');
+    public function fetchCompany($lessor_id)
+    {
+        $res = BusinessDetail::where('user_id', $lessor_id)->get();
+        $html = ' <option value="" selected hidden>--Select Business--</option>';
+
+        foreach ($res as $r) {
+            $html .= '<option value="' . $r->id . '">' . $r->business_name . '</option>';
+        }
+        return response()->json($html);
+    }
+    public function fetchTenant($tenant_name)
+    {
+        $res = Tenant::with('nationality')->with('tenantNationality')->where('id', $tenant_name)->first();
+        return response()->json($res);
+    }
+    public function fetchAuthorizedPerson($company_id)
+    {
+        $res = BusinessDetail::where('id', $company_id)->first();
+        return response()->json($res);
+    }
+    public function fetchContractLease($contract_id)
+    {
+        $res = Contract::where('id', $contract_id)->latest()->first();
+        $to = Carbon::parse($res->lease_end_date)->addYear(1);
+        $from = Carbon::parse($res->lease_end_date);
+        $diff_in_months = $to->diffInMonths($from);
+        $diff_in_Days = $to->diffInDays($from);
+        $diff_in_Years = $to->diffInYears($from);
+        $formatted_dt = Carbon::parse($res->lease_end_date)->addYear(1)->format('Y-m-d');
+        return response()->json(array('res' => $res, 'date' => $formatted_dt, 'diff_in_months' => $diff_in_months, 'diff_in_Days' => $diff_in_Days, 'diff_in_Years' => $diff_in_Years));
+    }
+
+    public function Overdue()
+    {
+        $res = Invoice::where('payment_status', 'Paid')->pluck('contract_id');
+        $tenant = Contract::with('tenantDetails')->where('overdue', '>=', 90)->whereNotIn('id', $res)->get();
+        return view('admin.contract.overdue', compact('tenant'));
+    }
+    public function contractNumber($tenant_id)
+    {
+        $contract_code = Contract::with('tenantDetails')->where('tenant_name', $tenant_id)->get();
+        dd($contract_code);
+        $CC = 'CC' . '-' . Carbon::now()->month . '-' . Carbon::now()->format('y');
         return response()->json($CC);
-
     }
 
-public function contractReceipt($contract_code){
-    $conn=Contract::with('tenantDetails')->where('contract_code',$contract_code)->first();
-    $contract=ContractRecipt::first();
-    return view('admin.contract.contract_receipt',compact('conn','contract'));
-}
-public function isReject($id)
-{
-    $ass_reject=Contract::find($id);
-
-    if($ass_reject->status==1)
+    public function contractReceipt($contract_code)
     {
-        $ass_reject->status=0;
-    }else
-    {
-        $ass_reject->status=true;
+        $conn = Contract::with('tenantDetails')->where('contract_code', $contract_code)->first();
+        $contract = ContractRecipt::first();
+        return view('admin.contract.contract_receipt', compact('conn', 'contract'));
     }
-    if($ass_reject->update()){
-       return 1;
-    }
-    else
+    public function isReject($id)
     {
-       return 0;
+        $ass_reject = Contract::find($id);
 
+        if ($ass_reject->status == 1) {
+            $ass_reject->status = 0;
+        } else {
+            $ass_reject->status = true;
+        }
+        if ($ass_reject->update()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
-}
-public function generatePDF($contract_code)
-{
-    $conn=Contract::where('contract_code',$contract_code)->first();
-    $pdf = app('dompdf.wrapper');
-    $pdf->loadView('admin.contract.contract_receipt',compact('conn'));
-    return $pdf->download('AqaryClick-Contract-'.$contract_code.'.pdf');
-}
+    public function generatePDF($contract_code)
+    {
+        $conn = Contract::where('contract_code', $contract_code)->first();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('admin.contract.contract_receipt', compact('conn'));
+        return $pdf->download('AqaryClick-Contract-' . $contract_code . '.pdf');
+    }
+
+    public function graceDetails($id)
+    {
+        $html = "";
+        $graceDetails = Contract::find($id);
+        $grace_start = json_decode($graceDetails->grace_start_date);
+        $grace_end = json_decode($graceDetails->grace_end_date);
+        $grace_day = json_decode($graceDetails->grace_period_day);
+        $grace_month= json_decode($graceDetails->grace_period_month);
+    foreach($grace_start as $k=>$grace){
+        $html .="
+        <tr><td>$grace</td><td>$grace_end[$k]</td><td> $grace_day[$k]</td><td>$grace_month[$k]</td></tr>
+        ";
+    }
+      return $html;
+    }
 }

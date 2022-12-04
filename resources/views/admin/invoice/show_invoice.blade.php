@@ -39,8 +39,8 @@
                                     <td>{{ $inv->amt_paid??''}}</td>
                                     <td>{{ $inv->due_amt??''}}</td>
                                     <td>{{ $inv->payment_method??''}}</td>
-<td><a class="dropdown-item" href="{{route('admin.receiptVouchure',$inv->invoice_no)}}">view</a></td>
- <td><a class="dropdown-item" href="{{url('admin/invoice-print', $inv->invoice_no)}}">view</a></td>
+<td><a class="dropdown-item" target="blank" href="{{route('admin.receiptVouchure',$inv->invoice_no)}}">view</a></td>
+ <td><a class="dropdown-item" target="blank" href="{{url('admin/invoice-print', $inv->invoice_no)}}">view</a></td>
                                      </tr>
                                                             @endforeach
 
