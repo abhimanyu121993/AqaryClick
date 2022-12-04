@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\BuildingExport;
 use App\Exports\ElectricityExcel;
 use App\Exports\TenantExcel;
+use App\Exports\TenantStatementExcel;
 use App\Exports\UnitExcel;
 use App\Http\Controllers\Controller;
 use App\Models\Tenant;
@@ -27,5 +28,9 @@ class ExcellController extends Controller
     public function electric_export()
     {
         return Excel::download(new ElectricityExcel, 'Electric-' . time() . '.xlsx');
+    }
+    public function tenant_statement()
+    {
+        return Excel::download(new TenantStatementExcel, 'tenant-stement' . time() . '.xlsx');
     }
 }

@@ -2,6 +2,11 @@
 @section('title', 'Report')
 @section('main-content')
 
+<div class="row statement mb-3">
+    <div class="col-sm-12">
+        <a class="btn btn-primary" href="{{route('admin.excel-export.tenant-statement')}}">Export All Tenant Statement</a>
+    </div>
+</div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">

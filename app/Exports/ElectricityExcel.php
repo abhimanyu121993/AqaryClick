@@ -19,7 +19,7 @@ class ElectricityExcel implements FromCollection,WithHeadings,WithStyles, WithEv
         $data = collect();
         $electricities = Electricity::get();
         foreach($electricities as $e){
-            $data->put('unit_ref', $e->unit->unit_ref);
+            $data->put('unit_ref', $e->unit->unit_ref??'');
             $data->put('zone_name', '');
             $data->put('elec_no', $e->electric_no);
             $data->put('water_no' ,$e->water_no);
