@@ -172,12 +172,12 @@
                         name:'person_mobile'
                     },
                     {
-                        data:'nationality',
-                        name:'nationality'
+                        data:'nationality.name',
+                        name:'nationality.name'
                     },
                     {
                         data:'city_details.name',
-                        name:'city_details'
+                        name:'city_details.name'
                     },
                     {
                         data:'area',

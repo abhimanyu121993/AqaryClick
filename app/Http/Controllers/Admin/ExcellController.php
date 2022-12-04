@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\BuildingExport;
+use App\Exports\ElectricityExcel;
 use App\Exports\TenantExcel;
 use App\Exports\UnitExcel;
 use App\Http\Controllers\Controller;
@@ -22,5 +23,9 @@ class ExcellController extends Controller
     public function tenant_export()
     {
         return Excel::download(new TenantExcel, 'Tenant' . time() . '.xlsx');
+    }
+    public function electric_export()
+    {
+        return Excel::download(new ElectricityExcel, 'Electric-' . time() . '.xlsx');
     }
 }

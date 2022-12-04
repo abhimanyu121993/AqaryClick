@@ -15,12 +15,25 @@ class TenantExcel implements FromCollection,WithHeadings,WithStyles
     */
     public function collection()
     {
-        return Tenant::all();
+        return Tenant::select('file_no','tenant_code','qid_document','cr_document','passport','tenant_english_name','tenant_primary_mobile','tenant_secondary_mobile','email','post_office','status')->get();
     }
     public function headings():array
     {
-       $building= new Tenant;
-        return $building->getTableColumns();
+    //    $building= new Tenant;
+    //     return $building->getTableColumns();
+        return [
+            'File No',
+            'Tenant Code',
+            'Qid No',
+            'Cr No',
+            'Passport',
+            'Tenant Name',
+            'Mobile (Primary)',
+            'Mobile (Secondary)',
+            'Email',
+            'P.O. Box',
+            'Status'
+        ];
     }
     public function styles(Worksheet $sheet)
     {

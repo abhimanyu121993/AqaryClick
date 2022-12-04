@@ -15,4 +15,8 @@ class Electricity extends Model
     {
         return $this->belongsTo(Building::class, 'building_name', 'id');
     }
+  public function unit()
+  {
+        return $this->belongsTo(Unit::class, 'unit_no','unit_no');
+  }
 }

@@ -38,7 +38,7 @@ class UnitController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-        {
+    {
             $role=Auth::user()->roles[0]->name;
         if($role=='superadmin'){
             $units=Unit::all();

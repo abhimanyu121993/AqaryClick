@@ -25,6 +25,7 @@ class BuildingController extends Controller
      */
     public function index()
     {
+
         $buildings=Building::all();
         $building_types=BuildingType::all();
         $building_statuses=BuildingStatus::all();
@@ -41,6 +42,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
+        
         $role=Auth::user()->roles[0]->name;
         if($role=='superadmin'){
         $buildings=Building::all();
@@ -63,7 +65,6 @@ class BuildingController extends Controller
 
         }
         $buildings=$query->get();
-        //  dd($buildings);
         // if ($req->ajax()) {
             return DataTables::of($buildings)->addIndexColumn()
             ->addColumn('image',function($raw){

@@ -36,4 +36,14 @@ class Unit extends Model
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
+
+    public function getUnitTypeNameAttribute()
+    {
+        return $this->unittypeinfo?$this->unittypeinfo->name:'';
+    }
+    public function getUnitStatusNameAttribute()
+    {
+        return $this->unitStatus?$this->unitStatus->name:'';
+    }
+
 }

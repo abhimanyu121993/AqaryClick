@@ -191,6 +191,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('building', [ExcellController::class, 'building_export'])->name('building');
         Route::get('unit', [ExcellController::class, 'unit_export'])->name('unit');
         Route::get('tenant', [ExcellController::class, 'tenant_export'])->name('tenant');
+        Route::get('electricity', [ExcellController::class, 'electric_export']);
      });
 
 });
