@@ -27,6 +27,7 @@ class ExcellController extends Controller
     }
     public function electric_export()
     {
+        
         return Excel::download(new ElectricityExcel, 'Electric-' . time() . '.xlsx');
     }
     public function tenant_statement()
