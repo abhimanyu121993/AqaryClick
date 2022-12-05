@@ -32,6 +32,7 @@ class ContractController extends Controller
      */
     public function index()
     {
+      
         $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
         $contract = Contract::all();
         $max_id = Contract::max('id') + 1;
@@ -61,6 +62,7 @@ class ContractController extends Controller
      */
     public function create()
     {
+       
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $contract = Contract::all();

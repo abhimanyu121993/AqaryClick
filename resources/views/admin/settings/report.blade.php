@@ -5,6 +5,7 @@
 <div class="row statement mb-3">
     <div class="col-sm-12">
         <a class="btn btn-primary" href="{{route('admin.excel-export.tenant-statement')}}">Export All Tenant Statement</a>
+        <a class="btn btn-primary"  href="{{route('admin.excel-export.tenant-units')}}">Export All Unit Statement</a>
     </div>
 </div>
     <div class="row">

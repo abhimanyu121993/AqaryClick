@@ -193,6 +193,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('tenant', [ExcellController::class, 'tenant_export'])->name('tenant');
         Route::get('electricity', [ExcellController::class, 'electric_export']);
         Route::get('tenant-statement', [ExcellController::class, 'tenant_statement'])->name('tenant-statement');
+        Route::get('grace-export', [ExcellController::class, 'grace_export'])->name('grace-export');
+        Route::get('tenant-unit', [ExcellController::class, 'tenant_unit'])->name('tenant-units');
+        Route::get('master', [ExcellController::class, 'master']);
      });
 
 });
