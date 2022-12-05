@@ -4,11 +4,12 @@ namespace App\Exports;
 
 use App\Models\Contract;
 use App\Models\Tenant;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class TenantStatementExcel implements FromCollection,WithHeadings
+class TenantUnitsExcel implements FromCollection,WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -26,6 +27,20 @@ class TenantStatementExcel implements FromCollection,WithHeadings
             $data->put('Cr No',$c->tenantDetails->cr_document??'');
             $data->put('Passport',$c->tenantDetails->passport??'');
             $data->put('Tenant Name',$c->tenantDetails->tenant_english_name??'');
+            $data->put('Building Name', $c->tenantDetails->buildingDetails->name ?? '');
+            $building = $c->tenantDetails->buildingDetails->id;
+            $nit_no = $c->tenantDetails->unit_no;
+            $units=Unit::where('building_id', $building)->where('unit_no', $nit_no)->pluck('unit_ref');
+            for ($i = 0; $i < 18;$i++){
+                if(isset($units[$i])){
+                    $data->put('Unit Ref ' . $i + 1, $units[$i]);
+                }
+                else
+                {
+                    $data->put('Unit Ref ' . $i + 1, '');
+                }
+                
+            }
             $gracet=json_decode($c->grace_period_month);
             if(is_array($gracet) and count($gracet)>0){
                 $t=array_sum($gracet);
@@ -77,6 +92,25 @@ class TenantStatementExcel implements FromCollection,WithHeadings
             'Cr No',
             'Passport',
             'Tenant Name',
+            'Building Name',
+             'Unit Ref 1',
+             'Unit Ref 2',
+             'Unit Ref 3',
+             'Unit Ref 4',
+             'Unit Ref 5',
+             'Unit Ref 6',
+             'Unit Ref 7',
+             'Unit Ref 8',
+             'Unit Ref 9',
+             'Unit Ref 10',
+             'Unit Ref 11',
+             'Unit Ref 12',
+             'Unit Ref 13',
+             'Unit Ref 14',
+             'Unit Ref 15',
+             'Unit Ref 16',
+             'Unit Ref 17',
+             'Unit Ref 18',
             'Grace Period',
             'Total Contract Period',
             'Total Due Invoice',
