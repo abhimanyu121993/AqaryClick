@@ -100,23 +100,7 @@ class TenantController extends Controller
                 $otherpic[]=$name;
             }
         }
-        if ($request->password == null) {
-            $nUser = User::create([
-                'first_name' => $request->tenant_english_name,
-                'email' => $request->email,
-                'phone' => $request->tenant_primary_mobile,
-                'password' => Hash::make(123456),
-            ]);
-        } else {
-            $nUser = User::create([
-                'first_name' => $request->tenant_english_name,
-                'email' => $request->email,
-                'phone' => $request->tenant_primary_mobile,
-                'password' => Hash::make($request->password),
-            ]);
-        }
-        $nUser->assignRole('Tenant');
-        $tenant = Tenant::create([
+             $tenant = Tenant::create([
             'user_id' => Auth::user()->id,
             'file_no' => $request->file_no,
             'tenant_code' => $request->tenant_code,
@@ -149,6 +133,7 @@ class TenantController extends Controller
             'sponsor_email' => $request->sponsor_email,
             'sponsor_phone' => $request->sponsor_phone,
             'sponsor_nationality' => $request->sponsor_nationality,
+            'file_name' => json_encode($request->file_name),
             'attachment_file' => json_encode($otherpic),
             'attachment_remark' => $request->attachment_remark,
         ]);

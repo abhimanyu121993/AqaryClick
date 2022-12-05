@@ -85,8 +85,7 @@
                             <div class=" col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Tenant Code</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="tenant_code"
-                                        placeholder="Enter Tenant Code">
+                                    <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
@@ -136,19 +135,16 @@
                                         placeholder="Passport Document">
                                 </div>
                             </div>
-                            <div class=" col-xxl-3 col-md-3">
-                                <label for="owner_name" class="form-label">Tenant Primary Mobile No</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="tenant_primary_mobile"
-                                        placeholder="Tenant Priamry Mobile No">
-                                </div>
+                        <div class=" col-xxl-3 col-md-3">
+                            <label for="owner_name" class="form-label">Primary Mobile No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No">
                             </div>
-                            <div class=" col-xxl-3 col-md-3">
-                                <label for="owner_name" class="form-label">Tenant Secondary Mobile No</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="tenant_secondary_mobile"
-                                        placeholder="Tenant Secondary Mobile No">
-                                </div>
+                        </div>
+                        <div class=" col-xxl-3 col-md-3">
+                            <label for="owner_name" class="form-label">Secondary Mobile No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No">
                             </div>
                             <div class=" col-xxl-3 col-md-3">
                                 <label for="incharge_name" class="form-label">Email </label>
@@ -156,12 +152,11 @@
                                     <input type="email" class="form-control" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
-                            <div class=" col-xxl-3 col-md-3">
-                                <label for="incharge_name" class="form-label">Alternate Email </label>
-                                <div class="input-group">
-                                    <input type="email" class="form-control" name="alternate_email"
-                                        placeholder="Enter Alternate Email">
-                                </div>
+                        </div><div class=" col-xxl-3 col-md-3">
+                            <label for="incharge_name" class="form-label">Alternative Email </label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="alternate_email"
+                                    placeholder="Enter Alternate Email">
                             </div>
                             <div class="col-xxl-3 col-md-3" id="cname">
                                 <label for="country" class="form-label">Post Office Box</label>
@@ -326,15 +321,21 @@
                             </div>
 
                             <div class="row">
-                                <div class="card-body field_wrapper4">
-                                    <div class="row clone4">
-                                        <div class="col-xxl-3 col-md-11">
-                                            <label for="city" class="form-label">File Attachment</label>
-                                            <div class="input-group">
-                                                <input type="file" class="form-control" name="attachment_file[]"
-                                                    placeholder="Attachment File">
-                                            </div>
-                                        </div>
+                        <div class="card-body field_wrapper4">
+                <div class="row clone4">
+
+                <div class="col-xxl-3 col-md-6">
+                        <label for="city" class="form-label">File Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="file_name[]" placeholder="File Name">
+                        </div>
+                    </div>
+                <div class="col-xxl-3 col-md-5">
+                        <label for="city" class="form-label">File Attachment</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">
+                        </div>
+                    </div>
 
                                         <div class="col-sm-1">
                                             <br />
@@ -372,14 +373,18 @@
         var addButton4 = $('.add_button4'); //Add button selector
         var wrapper4 = $('.field_wrapper4'); //Input field wrapper
         var fieldHTML4 = '<div class="row">\
-                    <div class="col-sm-11">\
-                        <label for="" class="form-label">File Attachment</label>\
-                        <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">\
-                    </div>\
-                    <div class="col-sm-1">\
-                        <br/>\
-                        <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
-                    </div></div>';
+        <div class="col-sm-6">\
+                    <label for="" class="form-label">File Name</label>\
+                    <input type="text" class="form-control" name="file_name[]" placeholder="File Name">\
+                </div>\
+                <div class="col-sm-5">\
+                    <label for="" class="form-label">File Attachment</label>\
+                    <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">\
+                </div>\
+                <div class="col-sm-1">\
+                    <br/>\
+                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
+                </div></div>';
 
         //Once add button is clicked
         $(addButton4).click(function() {

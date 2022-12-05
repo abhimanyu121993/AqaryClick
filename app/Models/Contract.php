@@ -37,5 +37,8 @@ class Contract extends Model
        $month=$this->lease_period_month;
         return $rent*$month;
     }
-    
+    public function cheques()
+    {
+        return $this->hasMany(Cheque::class, 'contract_id');
+    }
 }

@@ -158,6 +158,9 @@
                                                 <p class="text-muted mb-1"><span>Phone:</span><span
                                                         id="shipping-phone-no">{{ $invoice->TenantName->tenant_primary_mobile ?? '' }},{{ $invoice->TenantName->tenant_secondry_mobile ?? '' }}</span>
                                                 </p>
+                                                <p class="text-muted mb-1"><span>Tax No:</span><span
+                                                        id="shipping-phone-no">{{ $invoice->tax_no?? '' }}</span>
+                                                </p>
                                             </div>
                                             <!--end col-->
                                         </div>
@@ -188,7 +191,7 @@
                                                         <td class="text-start">
                                                             <p class="text-muted mb-0">{{ $invoice->remark ?? '' }}</p>
                                                         </td>
-                                                        <td>{{ $symbol??'SAR' }}&nbsp;{{round($due_amt,2)}}</</td>
+                                                        <td>{{ $symbol??'' }}&nbsp;{{round($due_amt,2)}}</</td>
                                                         <td class="text-end">{{ $symbol??'' }}&nbsp;{{ round($amt_paid??0 ,2) }}</td>
                                                     </tr>
 

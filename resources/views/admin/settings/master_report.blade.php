@@ -6,14 +6,14 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <ul>
-                @foreach($tenant as $r)
-               @php $d=json_decode($r->attachment_file); @endphp
+               
+               @php $d=json_decode($tenant->attachment_file); @endphp
                @if(count($d)>0)
                @foreach($d as $file)
             <li><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<a href="{{ route('admin.getFileDownload',$file) }}">{{ $file??'' }}</a></li>
                 @endforeach
                 @endif
-                @endforeach
+               
                 </ul>
                 </div>
             </div>
@@ -54,3 +54,4 @@
             </div>
         </div>
     </div>
+ 

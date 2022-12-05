@@ -65,115 +65,7 @@
         </div>
     </div>
 </div>
-<div class="row" id="">
-    <div class="col-lg-12" id="cheque_management" >
-        <div class="card">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">
-                    {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management  '.'('.$INV.')' }}</h4>
-            </div><!-- end card header -->
-            <div class="card-body table-responsive">
-                <div class="live-preview">
-                <form action="{{route('admin.cheque.store')}}" method="POST" enctype="multipart/form-data">
-                @csrf  
-                        <input type="hidden" class="form-control tenant_id" id="tenant_id" value="" name="tenant_name" hidden>
-                        <input type="hidden" class="form-control cid" id="cid" value="" name="contract" hidden>
-                        <input type="hiden" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no" hidden>
 
-                        <div class="table-responsive">
-                        <table class="invoice-table table table-borderless table-nowrap mb-0 table-responsive">
-                            <thead class="align-middle">
-                                <tr class="table-active">
-                                    <th scope="col" style="width: 50px;">Sn.</th>
-                                    <th scope="col" style="width: 150px;">
-                                        Deposit Date
-                                    </th>
-                                    <th scope="col" style="width: 180px;">
-                                        Currency
-                                    </th>
-                                    <th scope="col" style="width: 180px;">
-                                        Cheque Amt
-                                    </th>
-                                    <th scope="col" style="width: 180px;">
-                                        Cheque Amt in QAR
-                                    </th>
-                                    <th scope="col" style="width: 180px;">
-                                        Status
-                                    </th>
-                                    <th scope="col" style="width: 150px;">Cheque No</th>
-                                    <th scope="col" style="width: 150px;">Bank Name</th>
-                                    <th scope="col" style="width: 50px;"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="newlink">
-                                <tr id="1" class="product parent_cheque">
-                                    <th scope="row" class="product-id">1</th>
-                                    <td>
-                                        
-                                            <input type="date" class="form-control" id="productName-1" name="deposite_date[]" placeholder="Product Name" required />
-                                        <textarea class="form-control" id="productDetails-1" name="cheque_remark[]" rows="3" cols="50" placeholder="Enter Remark"></textarea>
-                                    </td>
-                                    <td class="text-end">   
-                                            <select class="form-control select2 form-select currency " name="currency[]" id="currency">
-                                                {!! $currencyhtml !!}
-                                            </select>
-                                            <input type="file" class="form-control mt-1" name="file[]" id="product-qty-1" multiple>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control cheque_amt" name="cheque_amt[]" id="product-qty-1" placeholder="Enter Cheque Amount">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in QAR" readonly/>
-                                    </td>
-                                    <td class="text-end">
-                                        <select class="form-control select2 form-select" name="cheque_status[]" id="currency">
-                                                <option value="" selected hidden>Select Cheque</option>
-                                                <option value="Valid">Valid</option>
-                                                <option value="Expired">Expired</option>
-                                                <option value="Bounced">Bounced</option>
-                                                <option value="Postponed">Postponed</option>
-                                                <option value="Cleared">Cleared</option>
-                                                <option value="Security Cheque">Security Cheque</option>
-                                            </select>
-                                    </td>
-                                    <td class="text-end">
-                                            <input type="text" class="form-control" id="productPrice-1" name="cheque_no[]" placeholder="Cheque No" />
-                                        
-                                    </td>
-                                    <td class="text-end">
-                                    <select class="form-control select2 form-select " name="cheque_bank_name[]" id="bank">
-                                                {!! $bankhtml !!}
-
-                                            </select>
-                                    </td>
-                                    <td class="product-removal">
-                                        <a href="javascript:void(0)" class="btn btn-danger">-</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr id="newForm" style="display: none;">
-                                    <td class="d-none" colspan="5">
-                                        <p>Add New Form</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5">
-                                        <a href="javascript:new_link()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
-                                    </td>
-                                </tr>
-                        </table>
-                        <!--end table-->
-                    </div>
-                   
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row justify-content-center">
     <div class="col-xxl-9">
         <div class="card">
@@ -197,12 +89,12 @@
 <input type="radio" class="btn-check" name="options-outlined" id="due-payment-details" autocomplete="off">
 <label class="btn btn-outline-danger" for="due-payment-details">Due Payment</label>
                     <div class="row gy-4 mb-3 mt-5">
-                        <div class="col-xxl-3 col-md-2">
+                        <!-- <div class="col-xxl-3 col-md-2">
                             <label class="form-label" for="flag">Invoice No</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no" readonly>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-xxl-3 col-md-3">
                             <label class="form-label" for="flag">Due Date</label>
                             <div class="input-group">
@@ -263,6 +155,12 @@
                             <label for="attachment_file" class="form-label">Attachment File</label>
                             <div class="input-group">
                                 <input type="file" class="form-control" id="attachment_file" name="tenant_attachment[]" multiple>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-3">
+                            <label class="form-label" for="flag">Tax No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="tax_no" name="tax_no" placeholder="Enter Tax Name">
                             </div>
                         </div>
                     </div>
@@ -350,6 +248,105 @@
                             </select>
                         </div>
 
+                    </div>
+                    <div class="row mt-2" id="">
+    <div class="col-lg-12" id="cheque_management" >
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">
+                    {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management' }}</h4>
+            </div><!-- end card header -->
+            <div class="card-body table-responsive">
+                <div class="live-preview">
+                        <div class="table-responsive">
+                        <table class="invoice-table table table-borderless table-nowrap mb-0 table-responsive">
+                            <thead class="align-middle">
+                                <tr class="table-active">
+                                    <th scope="col" style="width: 50px;">Sn.</th>
+                                    <th scope="col" style="width: 150px;">
+                                        Deposit Date
+                                    </th>
+                                    <th scope="col" style="width: 180px;">
+                                        Currency
+                                    </th>
+                                    <th scope="col" style="width: 180px;">
+                                        Cheque Amt
+                                    </th>
+                                    <th scope="col" style="width: 180px;">
+                                        Cheque Amt in QAR
+                                    </th>
+                                    <th scope="col" style="width: 180px;">
+                                        Status
+                                    </th>
+                                    <th scope="col" style="width: 150px;">Cheque No</th>
+                                    <th scope="col" style="width: 150px;">Bank Name</th>
+                                    <th scope="col" style="width: 50px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="newlink">
+                                <tr id="1" class="product parent_cheque">
+                                    <th scope="row" class="product-id">1</th>
+                                    <td>
+                                        
+                                            <input type="date" class="form-control" id="productName-1" name="deposite_date[]" placeholder="Product Name" required />
+                                        <textarea class="form-control" id="productDetails-1" name="cheque_remark[]" rows="3" cols="50" placeholder="Enter Remark"></textarea>
+                                    </td>
+                                    <td class="text-end">   
+                                            <select class="form-control select2 form-select currency " name="currency[]" id="currency">
+                                                {!! $currencyhtml !!}
+                                            </select>
+                                            <input type="file" class="form-control mt-1" name="file[]" id="product-qty-1" multiple>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control cheque_amt" name="cheque_amt[]" id="product-qty-1" placeholder="Enter Cheque Amount">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in QAR" readonly/>
+                                    </td>
+                                    <td class="text-end">
+                                        <select class="form-control select2 form-select" name="cheque_status[]" id="currency">
+                                                <option value="" selected hidden>Select Cheque</option>
+                                                <option value="Valid">Valid</option>
+                                                <option value="Expired">Expired</option>
+                                                <option value="Bounced">Bounced</option>
+                                                <option value="Postponed">Postponed</option>
+                                                <option value="Cleared">Cleared</option>
+                                                <option value="Security Cheque">Security Cheque</option>
+                                            </select>
+                                    </td>
+                                    <td class="text-end">
+                                            <input type="text" class="form-control" id="productPrice-1" name="cheque_no[]" placeholder="Cheque No" />
+                                        
+                                    </td>
+                                    <td class="text-end">
+                                    <select class="form-control select2 form-select " name="cheque_bank_name[]" id="bank">
+                                                {!! $bankhtml !!}
+
+                                            </select>
+                                    </td>
+                                    <td class="product-removal">
+                                        <a href="javascript:void(0)" class="btn btn-danger">-</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr id="newForm" style="display: none;">
+                                    <td class="d-none" colspan="5">
+                                        <p>Add New Form</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <a href="javascript:new_link()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
+                                    </td>
+                                </tr>
+                        </table>
+                        <!--end table-->
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
                     </div>
                 <div class="card-body p-4">               
                     <!--end row-->
