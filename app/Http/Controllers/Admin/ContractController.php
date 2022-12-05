@@ -431,4 +431,130 @@ class ContractController extends Controller
     }
       return $html;
     }
+
+    public function bulkUpload(Request $request)
+    {
+        return "Under maintenance";
+        // if($request->hasFile('bulk_upload')){
+        //     $file = $request->bulk_upload;
+        //     $filename = time() . $file->getClientOriginalName();
+        //     // dd($filename);
+        //     $extension = $file->getClientOriginalExtension();
+        //     $tempPath = $file->getRealPath();
+        //     $fileSize = $file->getSize();
+        //     $mimeType = $file->getMimeType();
+        //     $valid_extension = array("csv");
+        //     $maxFileSize = 2097152;
+        //     if (in_array(strtolower($extension), $valid_extension)) {
+        //         // Check file size
+        //         if ($fileSize <= $maxFileSize) {
+        //             // File upload location
+        //             $location = 'uploads/contract';
+        //             // Upload file
+        //             $file->move($location, $filename);
+        //             // Import CSV to Database
+        //             $filepath = public_path($location . "/" . $filename);
+        //             // Reading file
+        //             $file = fopen($filepath, "r");
+        //             $importData_arr = array();
+        //             $i = 0;
+        //             while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+        //                 $num = count($filedata);
+        //                 // Skip first row (Remove below comment if you want to skip the first row)
+        //                 if ($i == 0) {
+        //                     $i++;
+        //                     continue;
+        //                 }
+        //                 for ($c = 0; $c < $num; $c++) {
+        //                     $importData_arr[$i][] = $filedata[$c];
+        //                 }
+        //                 $i++;
+        //             }
+        //             fclose($file);
+        //             // dd($importData_arr);
+        //             // Insert to MySQL database
+        //             foreach ($importData_arr as $importData) {
+        //                 $insertData = array(
+        //                     "tenant_name" => $importData[0],
+        //                     "customer_name" => $importData[1],
+        //                     "building_type" => $importData[2],
+        //                     "building_status" => $importData[3],
+        //                     "ownership_type" => $importData[4],
+        //                     "ownership_no" => $importData[5],
+        //                     "pin_no" => $importData[6],
+        //                     "owner_name" => $importData[7],
+        //                     "country" => $importData[8],
+        //                     "city" => $importData[9],
+        //                     "zone" => $importData[10],
+        //                     "building_no" => $importData[11],
+        //                     "street_no" => $importData[12],
+        //                     "zone_no" => $importData[13],
+        //                     "building_location_link" => $importData[14],
+        //                     "person_incharge" => $importData[15],
+        //                     "job" => $importData[16],
+        //                     "mobile" => $importData[17],
+        //                     "remark" => $importData[18],
+        //                     "building_description" => $importData[19],
+        //                 );
+        //                 // dd($insertData);
+        //                 if(!empty($insertData['building_code'])){
+        //                      Contract::create([
+        //                         'user_id' => Auth::user()->id,
+        //                         'building_code' =>$insertData['building_code'],
+        //                         'name' => $insertData['building_name'],
+        //                         'owner_name'=>$insertData['owner_name'],
+        //                         'person_incharge'=>$insertData['person_incharge'],
+        //                         'total_unit'=>0,
+        //                         'building_type'=>$insertData['building_type'],
+        //                         'construction_date'=>$insertData['construction_date'] ?? '',
+        //                         'ownership_type'=>$insertData['ownership_type'],
+        //                         'ownership_no'=>$insertData['ownership_no'],
+        //                         'contract_exp'=>$insertData['contract_exp'] ?? '',
+        //                         'person_job'=>$insertData['job'],
+        //                         'building_no'=>$insertData['building_no'],
+        //                         'building_age'=>$insertData['building_age'] ?? '',
+        //                         'building_desc'=>$insertData['building_description'],
+        //                         'building_status'=>$insertData['building_status'],
+        //                         'appraise_date'=>$insertData['appraise_date'] ?? '',
+        //                         'land_size_foot'=>$insertData['land_size_foot'] ?? '',
+        //                         'price_foot'=>$insertData['price_foot'] ?? '',
+        //                         'total_land'=>$insertData['status'] ?? '',
+        //                         'status'=>$insertData['building_name'] ?? '',
+        //                         'landsize_meter'=>$insertData['landsize_meter'] ?? '',
+        //                         'cost_building'=>$insertData['cost_building'] ?? '',
+        //                         'building_value'=>$insertData['building_value'] ?? '',
+        //                         'monthly_income'=>$insertData['monthly_income'] ?? '',
+        //                         'annual_income'=>$insertData['annual_income'] ?? '',
+        //                         'payback'=>$insertData['payback'] ?? '',
+        //                         'property_vlaue'=>$insertData['property_vlaue'] ?? '',
+        //                         'zone_no'=>$insertData['zone_no'] ?? '',
+        //                         'street_no'=>$insertData['street_no'] ?? '',
+        //                         'person_mobile'=>$insertData['mobile'] ?? '',
+        //                         'building_receive_date'=>$insertData['building_receive_date'] ?? '',
+        //                         'space'=>$insertData['space'] ?? '',
+        //                         'location'=>$insertData['building_location_link'] ?? '',
+        //                         'contract_no'=>$insertData['contract_no'] ?? '',
+        //                         'country'=>$insertData['country'] ?? '',
+        //                         'city'=>$insertData['city'] ?? '',
+        //                         'area'=>$insertData['area'] ?? '',
+        //                         'pincode'=>$insertData['pin_no'] ?? '',
+        //                         // 'building_pic'=>$mainpic,
+        //                         // 'file' =>json_encode($otherpic),
+        //                         'remark'=>$insertData['remark'] ?? '',
+        //                     ]);
+
+        //                 }
+        //             }
+        //             Session::flash('success', 'Import Successful.');
+        //             return redirect()->back();
+        //         } else {
+        //             Session::flash('error', 'File too large. File must be less than 2MB.');
+        //             return redirect()->back();
+        //         }
+        //     }
+        // }else{
+        //     Session::flash('error', 'Please upload a valid .csv file only');
+        //     return redirect()->back();
+        // }
+    }
 }
