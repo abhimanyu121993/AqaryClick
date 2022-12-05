@@ -9,6 +9,7 @@ use App\Models\BuildingStatus;
 use App\Models\BuildingType;
 use App\Models\City;
 use App\Models\Nationality;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -43,7 +44,8 @@ class BuildingController extends Controller
     {
         $role=Auth::user()->roles[0]->name;
         if($role=='superadmin'){
-        $buildings=Building::all();
+            $buildings=Building::all();
+        // dd($buildings);
         }
         else{
             $buildings=Building::where('user_id',Auth::user()->id)->get();
@@ -115,7 +117,13 @@ class BuildingController extends Controller
             </div>';
             return $d;
             })
-            ->rawColumns(['image','document','action'])
+            ->addColumn('updated',function($c){
+                return Carbon::parse($c->updated_at)->format('d-m-Y H:i A');
+            })
+            ->addColumn('deleted',function($c){
+                return Carbon::parse($c->deleted_at)->format('d-m-Y H:i A');
+            })
+            ->rawColumns(['image','document','action','created'])
             ->make(true);
         // }
     }
@@ -446,7 +454,7 @@ public function document($id){
                 // Check file size
                 if ($fileSize <= $maxFileSize) {
                     // File upload location
-                    $location = 'uploads';
+                    $location = 'uploads/building';
                     // Upload file
                     $file->move($location, $filename);
                     // Import CSV to Database

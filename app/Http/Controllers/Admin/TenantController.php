@@ -29,8 +29,9 @@ class TenantController extends Controller
     {
         $unit = UnitType::all();
         $nation = Nationality::all();
+        $unitType = UnitType::all();
         $building = Building::where('user_id', Auth::user()->id)->get();
-        return view('admin.tenant.tenantregister', compact('nation', 'unit', 'building'));
+        return view('admin.tenant.tenantregister', compact('nation', 'unit', 'building', 'unitType'));
     }
 
     /**
@@ -77,6 +78,7 @@ class TenantController extends Controller
             'address' => 'nullable',
             'tenant_type' => 'nullable',
             'unit_type' => 'nullable',
+            'unit_no' => 'nullable',
             'unit_address' => 'nullable',
             'rental_period' => 'nullable',
             'rental_time' => 'nullable',
@@ -134,6 +136,7 @@ class TenantController extends Controller
             'unit_address' => $request->tenant_unit_address,
             'account_no' => $request->account_no,
             'building_name' => $request->building_name,
+            'unit_no' => $request->unit_no,
             'status' => $request->status,
             'total_unit' => $request->total_unit,
             'unit_type' => $request->unit_type,
@@ -221,7 +224,7 @@ class TenantController extends Controller
     foreach($res as $r){
         $html .='<option value="'.$r->unittypeinfo->id.'">'.$r->unittypeinfo->name.'</option>';
     }
-        
+
         return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
     }
 
@@ -254,7 +257,7 @@ class TenantController extends Controller
                 // Check file size
                 if ($fileSize <= $maxFileSize) {
                     // File upload location
-                    $location = 'uploads';
+                    $location = 'uploads/tenant';
                     // Upload file
                     $file->move($location, $filename);
                     // Import CSV to Database
@@ -283,55 +286,56 @@ class TenantController extends Controller
                             "tenant_type" => $importData[0],
                             "file_no" => $importData[1],
                             "tenant_code" => $importData[2],
-                            "tenant_name_english" => $importData[3],
-                            "tenant_name_arabic" => $importData[4],
-                            "document_type" => $importData[5],
-                            "document_no" => $importData[6],
-                            "tenant_primary_no" => $importData[7],
-                            "tenant_secondary_no" => $importData[8],
-                            "email" => $importData[9],
-                            "post_office" => $importData[10],
-                            "tenant_nationality" => $importData[11],
-                            "unit_address" => $importData[12],
-                            "unit_ref" => $importData[13],
-                            "revenue_code" => $importData[14],
-                            "remark" => $importData[15],
+                            // "tenant_name_arabic" => $importData[4],
+                            "document_no" => $importData[3],
+                            "document_type" => $importData[4],
+                            "tenant_name_english" => $importData[5],
+                            "tenant_primary_no" => $importData[6],
+                            "tenant_secondary_no" => $importData[7],
+                            "email" => $importData[8],
+                            "post_office" => $importData[9],
+                            "tenant_status" => $importData[10],
+                            // "tenant_nationality" => $importData[11],
+                            // "unit_address" => $importData[12],
+                            // "unit_ref" => $importData[13],
+                            // "revenue_code" => $importData[14],
+                            // "remark" => $importData[15],
                         );
-                        // dd($insertData);
-                        if(!empty($insertData['unit_code'])){
+                        // dd($insertData['unit_type']);
+                        if(!empty($insertData['file_no'])){
                             Tenant::create([
-                                'user_id' => Auth::user()->id,
-                                'file_no' => $request->file_no,
-                                'tenant_code' => $request->tenant_code,
-                                'tenant_english_name' => $request->tenant_english_name,
-                                'tenant_arabic_name' => $request->tenant_arabic_name,
-                                'tenant_type' => $request->tenant_type,
-                                'tenant_document' => $request->tenant_document,
-                                'qid_document' => $request->qid_document,
-                                'cr_document' => $request->cr_document,
-                                'passport' => $request->passport,
-                                'tenant_primary_mobile' => $request->tenant_primary_mobile,
-                                'tenant_secondary_mobile' => $request->tenant_secondary_mobile,
-                                'email' => $request->email,
-                                'alternate_email'=>$request->alternate_email,
-                                'post_office' => $request->post_office,
-                                'tenant_nationality' => $request->tenant_nationality,
-                                'unit_address' => $request->tenant_unit_address,
-                                'account_no' => $request->account_no,
-                                'building_name' => $request->building_name,
-                                'status' => $request->status,
-                                'total_unit' => $request->total_unit,
-                                'unit_type' => $request->unit_type,
-                                'rental_period' => $request->rental_period,
-                                'rental_time' => $request->rental_time,
-                                'payment_method' => $request->payment_method,
-                                'payment_receipt' => $request->payment_receipt,
-                                'sponsor_name' => $request->sponsor_name,
-                                'sponsor_oid' => $request->sponsor_oid,
-                                'sponsor_email' => $request->sponsor_email,
-                                'sponsor_phone' => $request->sponsor_phone,
-                                'sponsor_nationality' => $request->sponsor_nationality,
-                                'attachment_remark' => $request->attachment_remark,
+                                'user_id' => Auth::user()->id ?? '',
+                                'file_no' => $insertData['file_no'] ?? '',
+                                'tenant_code' => $insertData['tenant_code'] ?? '',
+                                'tenant_english_name' => $insertData['tenant_name_english'] ?? '',
+                                // 'tenant_arabic_name' => $request->tenant_arabic_name,
+                                'tenant_type' => $insertData['tenant_type'] ?? '',
+                                'tenant_document' => $insertData['document_type'] ?? '',
+                                'qid_document' => strtolower(trim($insertData['document_type'])) == 'qid' ? $insertData['document_no'] : '',
+                                'cr_document' => strtolower(trim($insertData['document_type'])) == 'cr' ? $insertData['document_no'] : '',
+                                'passport' => strtolower(trim($insertData['document_type'])) == 'passport' ? $insertData['document_no'] : '',
+                                'tenant_primary_mobile' => $insertData['tenant_primary_no'] ?? '',
+                                'tenant_secondary_mobile' => $insertData['tenant_secondary_no'] ?? '',
+                                'email' => $insertData['email'] ?? '',
+                                'alternate_email'=>$insertData['alternate_email'] ?? '',
+                                'post_office' => $insertData['post_office'] ?? '',
+                                'tenant_nationality' => $insertData['tenant_nationality'] ?? '',
+                                'unit_address' => $insertData['unit_address'] ?? '',
+                                'account_no' => $insertData['account_no'] ?? '',
+                                'building_name' => $insertData['tenant_type'],
+                                'status' => $insertData['tenant_status'] ?? '',
+                                // 'total_unit' => $insertData['total_unit'] ?? '',
+                                // 'unit_type' => $insertData['unit_type'] ?? '',
+                                // 'rental_period' => $insertData['rental_period'] ?? '',
+                                // 'rental_time' => $insertData['rental_time'] ?? '',
+                                // 'payment_method' => $insertData['payment_method'] ?? '',
+                                // 'payment_receipt' => $insertData['payment_receipt'] ?? '',
+                                // 'sponsor_name' => $insertData['sponsor_name'] ?? '',
+                                // 'sponsor_oid' => $insertData['sponsor_oid'] ?? '',
+                                // 'sponsor_email' => $insertData['sponsor_email'] ?? '',
+                                // 'sponsor_phone' => $insertData['sponsor_phone'] ?? '',
+                                // 'sponsor_nationality' => $insertData['sponsor_nationality'] ?? '',
+                                // 'attachment_remark' => $insertData['attachment_remark'] ?? '',
                             ]);
 
                         }

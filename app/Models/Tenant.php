@@ -24,7 +24,7 @@ class Tenant extends Model
 
     public function nationality()
     {
-        return $this->belongsTo(Nationality::class, 'sponser_nationality', 'id');
+        return $this->belongsTo(Nationality::class, 'sponsor_nationality', 'id');
     }
     public function unittypeinfo()
     {

@@ -6,153 +6,179 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($electricity)? 'Update Electricity Bill' : 'Electricity Bill ' }}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">
+                        {{ isset($electricity) ? 'Update Electricity Bill' : 'Electricity Bill ' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{ isset($electricity) ? route('admin.electricity.update', $electricity->id) : route('admin.electricity.store') }}" method="POST" enctype="multipart/form-data">
+                        <form
+                            action="{{ isset($electricity) ? route('admin.electricity.update', $electricity->id) : route('admin.electricity.store') }}"
+                            method="POST" enctype="multipart/form-data">
                             @if (isset($electricity))
-                            @method('patch')
-                        @endif
+                                @method('patch')
+                            @endif
                             @csrf
                             @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
+                                <div class="alert alert-danger alert-dismissible">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="row gy-4">
-                            <div class="col-xxl-3 col-md-4">
-                    <label class="form-label" for="flag">Building Name</label>
+                                <div class="col-xxl-3 col-md-4">
+                                    <label class="form-label" for="flag">Building Name</label>
 
-                    <select class="form-select js-example-basic-single" id="building_name" name='building_name'>
-                        @if (isset($electricity))
-                        <option value="{{ $electricity->id}}" selected>{{ $electricity->building_name}}</option>
-                        @else
-                        <option value="">--Select Builidng Name--</option>
-                        @foreach($build as $building)
-                        <option value="{{ $building->id}}">{{ $building->name }}</option>
-                        @endforeach
-                        @endif
-                    </select>
-                </div>
-                            <div class="col-xxl-3 col-md-4">
-                            <label class="form-label" for="flag">Unit No</label>
-                            <select class="select2 form-select"  id="{{!isset($electricity)? 'unit_no': '' }}" name='unit_no'>
-                            @if (isset($electricity))
-                           <option value="{{ $electricity->unit_no }}" selected>{{ $electricity->unit_no}}</option>
-                           @else
-                           <option value="">--Select Unit No--</option>
-                             @endif
-                              </select>
+                                    <select class="form-select js-example-basic-single" id="building_name"
+                                        name='building_name'>
+                                        @if (isset($electricity))
+                                            <option value="{{ $electricity->id }}" selected>
+                                                {{ $electricity->building_name }}</option>
+                                        @else
+                                            <option value="">--Select Builidng Name--</option>
+                                            @foreach ($build as $building)
+                                                <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-xxl-3 col-md-4">
+                                    <label class="form-label" for="flag">Unit No</label>
+                                    <select class="select2 form-select" id="{{ !isset($electricity) ? 'unit_no' : '' }}"
+                                        name='unit_no'>
+                                        @if (isset($electricity))
+                                            <option value="{{ $electricity->unit_no }}" selected>{{ $electricity->unit_no }}
+                                            </option>
+                                        @else
+                                            <option value="">--Select Unit No--</option>
+                                        @endif
+                                    </select>
                                 </div>
 
                                 <div class="col-xxl-3 col-md-4">
-                            <label class="form-label" for="flag">Unit Type</label>
-                            <select class="select2 form-select" id="{{!isset($electricity)? 'unit_type': '' }}" name='unit_type'>
-                            @if (isset($electricity))
-                           <option value="{{ $electricity->unit_type }}" selected>{{ $electricity->unit_type}}</option>
-                           @else
-                           <option value="">--Select Unit Type--</option>
-                             @endif
-                              </select>
+                                    <label class="form-label" for="flag">Unit Type</label>
+                                    <select class="select2 form-select" id="{{ !isset($electricity) ? 'unit_type' : '' }}"
+                                        name='unit_type'>
+                                        @if (isset($electricity))
+                                            <option value="{{ $electricity->unit_type }}" selected>
+                                                {{ $electricity->unit_type }}</option>
+                                        @else
+                                            <option value="">--Select Unit Type--</option>
+                                        @endif
+                                    </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Electricity Account Under</label>
                                     <select class="select2 form-select" id="electric_under" name='electric_under'>
-                            @if (isset($electricity))
-                           <option value="{{ $electricity->electric_under }}" selected>{{ $electricity->electric_under}}</option>
-                           @else
-                           <option value="">--Select Electricity Under--</option>
-                           <option value="tenant">Tenant</option>
-                                    <option value="lessor">Lessor</option>
-                             @endif
-                              </select>
+                                        @if (isset($electricity))
+                                            <option value="{{ $electricity->electric_under }}" selected>
+                                                {{ $electricity->electric_under }}</option>
+                                        @else
+                                            <option value="">--Select Electricity Under--</option>
+                                            <option value="tenant">Tenant</option>
+                                            <option value="lessor">Lessor</option>
+                                        @endif
+                                    </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
-                            <label class="form-label" for="flag">Name</label>
-                            <select class="select2 form-select" id="{{!isset($electricity)? 'name': '' }}" name='name'>
-                            @if (isset($electricity))
-                           <option value="{{ $electricity->name }}" selected>{{ $electricity->name}}</option>
-                           @else
-                           <option value="">--Select Name--</option>
-                             @endif
-                              </select>
+                                    <label class="form-label" for="flag">Name</label>
+                                    <select class="select2 form-select" id="{{ !isset($electricity) ? 'name' : '' }}"
+                                        name='name'>
+                                        @if (isset($electricity))
+                                            <option value="{{ $electricity->name }}" selected>{{ $electricity->name }}
+                                            </option>
+                                        @else
+                                            <option value="">--Select Name--</option>
+                                        @endif
+                                    </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">QID</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="qid_no" name="qid_no" value="{{isset($electricity)? $electricity->qid_no: '' }}" placeholder="Enter QID No">
+                                        <input type="text" class="form-control" id="qid_no" name="qid_no"
+                                            value="{{ isset($electricity) ? $electricity->qid_no : '' }}"
+                                            placeholder="Enter QID No">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Register Mobile</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="reg_mobile" name="reg_mobile" value="{{isset($electricity)? $electricity->reg_mobile: '' }}" placeholder="Enter Mobile No">
+                                        <input type="text" class="form-control" id="reg_mobile" name="reg_mobile"
+                                            value="{{ isset($electricity) ? $electricity->reg_mobile : '' }}"
+                                            placeholder="Enter Mobile No">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Electric No</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="electric_no" name="electric_no" value="{{isset($electricity)? $electricity->electric_no: '' }}" placeholder="Enter Electric No">
+                                        <input type="text" class="form-control" id="electric_no" name="electric_no"
+                                            value="{{ isset($electricity) ? $electricity->electric_no : '' }}"
+                                            placeholder="Enter Electric No">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Water No</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="water_no" name="water_no" value="{{isset($electricity)? $electricity->water_no: '' }}" placeholder="Enter Water No">
+                                        <input type="text" class="form-control" id="water_no" name="water_no"
+                                            value="{{ isset($electricity) ? $electricity->water_no : '' }}"
+                                            placeholder="Enter Water No">
                                     </div>
                                 </div>
 
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Last Paid Invoice date</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="last_payment" name="last_payment" value="No Records" readonly>
+                                        <input type="text" class="form-control" id="last_payment" name="last_payment"
+                                            value="No Records" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Bill Amount</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="bill_amt" name="bill_amt" value="{{isset($electricity)? $electricity->bill_amt: '' }}" placeholder="Enter Ammount">
+                                        <input type="text" class="form-control" id="bill_amt" name="bill_amt"
+                                            value="{{ isset($electricity) ? $electricity->bill_amt : '' }}"
+                                            placeholder="Enter Ammount">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Paid By</label>
                                     <select class="select2 form-select" id="paid_by" name='paid_by'>
-                            @if (isset($electricity))
-                           <option value="{{ $electricity->paid_by }}" selected>{{ $electricity->paid_by}}</option>
-                           @else
-                           <option value="">--Select--</option>
-                           <option value="tenant">Tenant</option>
-                                    <option value="lessor">Lessor</option>
-                             @endif
-                              </select>
+                                        @if (isset($electricity))
+                                            <option value="{{ $electricity->paid_by }}" selected>
+                                                {{ $electricity->paid_by }}</option>
+                                        @else
+                                            <option value="">--Select--</option>
+                                            <option value="tenant">Tenant</option>
+                                            <option value="lessor">Lessor</option>
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
 
-                                <div class="row gy-4">
-                            <div class="col-xxl-3 col-md-12">
-                                <label for="remark" class="form-label">Remark</label>
-                                <textarea class="form-control" name="remark">
-                                {{isset($electricity)? $electricity->remark: '' }}
+                            <div class="row gy-4">
+                                <div class="col-xxl-3 col-md-12">
+                                    <label for="remark" class="form-label">Remark</label>
+                                    <textarea class="form-control" name="remark">
+                                {{ isset($electricity) ? $electricity->remark : '' }}
                                     </textarea>
-                            </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                            <div class="col-xxl-3 col-md-12">
-                                <label for="building_file" class="form-label">Attachment</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control"  id="attachment" name="attachment[]" multiple>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row gy-4 mb-3">
+                                <div class="col-xxl-3 col-md-12">
+                                    <label for="building_file" class="form-label">Attachment</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="attachment" name="attachment[]"
+                                            multiple>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row gy-4 mt-2">
                                 <div class="col-xxl-3 col-md-6">
                                     <div class="input-group">
-                                        <button class="btn btn-primary" type="submit">{{isset($electricity) ? 'Update' : 'Submit'}}</button>
+                                        <button class="btn btn-primary"
+                                            type="submit">{{ isset($electricity) ? 'Update' : 'Submit' }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -172,84 +198,81 @@
 
 
 @section('script-area')
-<script>
-    $(document).ready(function() {
-        $("#building_name").change(function() {
-            $(this).find("option:selected").each(function() {
+    <script>
+        $(document).ready(function() {
+            $("#building_name").change(function() {
+                $(this).find("option:selected").each(function() {
 
-                var optionValue = $(this).attr("value");
-                var newurl = "{{ url('/admin/fetchunit') }}/" + optionValue;
-                $.ajax({
-                    url: newurl,
-                    method: 'get',
-                    success: function(p) {
-                        $("#unit_no").html(p.html);
-                        $("#unit_type").html(p.html1);
-                        if(p.result==null){
-                            $("#last_payment").val("No Records");
+                    var optionValue = $(this).attr("value");
+                    var newurl = "{{ url('/admin/fetchunit') }}/" + optionValue;
+                    $.ajax({
+                        url: newurl,
+                        method: 'get',
+                        success: function(p) {
+                            $("#unit_no").html(p.html);
+                            $("#unit_type").html(p.html1);
+                            if (p.result == null) {
+                                $("#last_payment").val("No Records");
+
+                            } else {
+                                $("#last_payment").val(p.result);
+
+                            }
+
+
 
                         }
-                        else{
-                            $("#last_payment").val(p.result);
+                    });
+                });
+            }).change();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#electric_under").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'tenant') {
+                        var newurl = "{{ url('/admin/fetch-tenant-name') }}";
+                        $.ajax({
+                            url: newurl,
+                            method: 'get',
+                            success: function(p) {
+                                $("#name").html(p);
+                            }
+                        });
+                    } else if (optionValue == 'lessor') {
+                        var newurl = "{{ url('/admin/fetchContract') }}";
+                        $.ajax({
+                            url: newurl,
+                            method: 'get',
+                            success: function(p) {
+                                $("#name").html(p);
+                            }
+                        });
+                    } else {
+
+                    }
+                });
+            }).change();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#name").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    var newurl = "{{ url('/admin/fetch-qid') }}/" + optionValue;
+                    $.ajax({
+                        url: newurl,
+                        method: 'get',
+                        success: function(p) {
+                            $("#qid_no").val(p.qid_document);
 
                         }
-
-
-
-                    }
+                    });
                 });
-            });
-        }).change();
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $("#electric_under").change(function() {
-            $(this).find("option:selected").each(function() {
-                var optionValue = $(this).attr("value");
-                if(optionValue=='tenant'){
-                var newurl = "{{ url('/admin/fetch-tenant-name')}}";
-                $.ajax({
-                    url: newurl,
-                    method: 'get',
-                    success: function(p) {
-                        $("#name").html(p);
-                    }
-                });
-            }
-            else if(optionValue=='lessor'){
-                var newurl = "{{ url('/admin/fetchContract') }}";
-                $.ajax({
-                    url: newurl,
-                    method: 'get',
-                    success: function(p) {
-                        $("#name").html(p);
-                    }
-                });
-            }
-            else{
-
-            }
-            });
-        }).change();
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $("#name").change(function() {
-            $(this).find("option:selected").each(function() {
-                var optionValue = $(this).attr("value");
-                var newurl = "{{ url('/admin/fetch-qid') }}/" + optionValue;
-                $.ajax({
-                    url: newurl,
-                    method: 'get',
-                    success: function(p) {
-                        $("#qid_no").val(p.qid_document);
-
-                    }
-                });
-            });
-        }).change();
-    });
-</script>
+            }).change();
+        });
+    </script>
 @endsection

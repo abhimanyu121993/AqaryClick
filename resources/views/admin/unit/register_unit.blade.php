@@ -34,7 +34,7 @@
                             </div>
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-6">
-                                    <a href="{{ asset('assets/excel_format/unit_format.csv') }}" target="_blank">Example format</a>
+                                    <a href="{{ asset('assets/excel_format/newunitformat.csv') }}" target="_blank">Example format</a>
                                 </div>
                             </div>
 

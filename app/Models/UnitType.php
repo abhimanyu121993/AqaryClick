@@ -11,6 +11,7 @@ class UnitType extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
     public function tenants()
     {
         return $this->hasMany(Tenant::class,'unit_type');

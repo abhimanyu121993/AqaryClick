@@ -20,7 +20,7 @@
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body ">
-                  
+
                     <div class='table-responsive'>
                         <table id="example" class="table table-striped table-bordered  " style="width:100%">
                             <thead>
@@ -44,6 +44,10 @@
                                     <th scope="col">Lessor's Name</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Document</th>
+                                    @role('superadmin')
+                                    <th scope="col">Created at</th>
+                                    <th scope="col">Updated at</th>
+                                    @endrole
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -207,6 +211,16 @@
                         data:'document',
                         name:'document'
                     },
+                    @role('superadmin')
+                    {
+                        data:'updated',
+                        name:'updated'
+                    },
+                    {
+                        data:'deleted',
+                        name:'deleted'
+                    },
+                    @endrole
                     {
                         data:'action',
                         name:'action'

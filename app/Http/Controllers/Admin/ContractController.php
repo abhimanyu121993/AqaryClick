@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Session;
 
 class ContractController extends Controller
 {
@@ -118,16 +118,18 @@ class ContractController extends Controller
         }
         $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
         $tnationlity = Tenant::where('id', $request->tenant_nationality)->first()->tenant_nationality;
+        $snationlity = Tenant::where('id', $request->tenant_nationality)->first()->sponser_nationality;
 
+        $tenant = Tenant::find($request->tenant_name);
         $data = Contract::create([
             'user_id' => Auth::user()->id,
-            'contract_code' => $request->contract_code,
+            'contract_code' => 'CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y'),
             'tenant_name' => $request->tenant_name,
             'document_type' => $request->document_type,
             'qid_document' => $request->qid_document,
             'cr_document' => $request->cr_document,
             'passport_document' => $request->passport_document,
-            'sponsor_nationality' => $request->sponsor_nationality,
+            'sponsor_nationality' =>$snationlity,
             'sponsor_id' => $request->sponsor_id,
             'sponsor_name' => $request->sponsor_name,
             'sponsor_mobile' => $request->sponsor_mobile,
@@ -351,7 +353,7 @@ class ContractController extends Controller
     }
     public function fetchTenant($tenant_name)
     {
-        $res = Tenant::with('nationality')->with('tenantNationality')->where('id', $tenant_name)->first();
+        $res = Tenant::with('tenantNationality')->with('nationality')->where('id', $tenant_name)->first();
         return response()->json($res);
     }
     public function fetchAuthorizedPerson($company_id)

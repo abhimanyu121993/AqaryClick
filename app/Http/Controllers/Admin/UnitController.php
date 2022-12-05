@@ -243,7 +243,7 @@ class UnitController extends Controller
                 // Check file size
                 if ($fileSize <= $maxFileSize) {
                     // File upload location
-                    $location = 'uploads';
+                    $location = 'uploads/units';
                     // Upload file
                     $file->move($location, $filename);
                     // Import CSV to Database
@@ -270,43 +270,48 @@ class UnitController extends Controller
                     foreach ($importData_arr as $importData) {
                         $insertData = array(
                             "building_name" => $importData[0],
-                            "unit_code" => $importData[1],
-                            "unit_no" => $importData[2],
+                            "unit_ref" => $importData[1],
+                            "revenue_code" => $importData[2],
                             "unit_type" => $importData[3],
-                            "unit_status" => $importData[4],
+                            "unit_no" => $importData[4],
                             "unit_floor" => $importData[5],
                             "unit_size" => $importData[6],
-                            "unit_feature" => $importData[7],
-                            "electric_no" => $importData[8],
-                            "water_no" => $importData[9],
-                            "initial_rent" => $importData[10],
-                            "actual_rent" => $importData[11],
-                            "unit_description" => $importData[12],
-                            "unit_ref" => $importData[13],
-                            "revenue_code" => $importData[14],
-                            "remark" => $importData[15],
+                            "actual_rent" => $importData[7],
+                            "unit_status" => $importData[8],
+                            "remark" => $importData[9],
+                            // "building_name" => $importData[0],
+                            // "unit_code" => $importData[1],
+                            // "unit_feature" => $importData[7],
+                            // "electric_no" => $importData[8],
+                            // "water_no" => $importData[9],
+                            // "initial_rent" => $importData[10],
+                            // "unit_description" => $importData[12],
                         );
                         // dd($insertData);
-                        if(!empty($insertData['unit_code'])){
+                        if(!empty($insertData['unit_ref'])){
+                            $unitType = UnitType::where('name', strtolower(trim($insertData['unit_type'] ?? '')))->first();
+                            $unitStatus = UnitStatus::where('name', strtolower(trim($insertData['unit_status'] ?? '')))->first();
+                            $building = Building::where('name', strtolower(trim($insertData['building_name'] ?? '')))->first();
+                            // dd($building);
                             Unit::create([
-                                'building_id' => $insertData['building_name'],
-                                'unit_no'=>$insertData['unit_no'],
-                                'unit_code'=>$insertData['unit_code'],
-                                'unit_type'=>$insertData['unit_type'],
-                                'unit_size'=>$insertData['unit_size'],
-                                'unit_status'=>$insertData['unit_status'],
-                                'unit_floor'=>$insertData['unit_floor'],
-                                'unit_feature'=>$insertData['unit_feature'],
-                                'electric_no'=>$insertData['electric_no'],
-                                'water_no'=>$insertData['water_no'],
-                                'intial_rent'=>$insertData['initial_rent'],
-                                'actual_rent'=>$insertData['actual_rent'],
-                                'unit_desc'=>$insertData['unit_description'],
-                                'unit_ref'=>$insertData['unit_ref'],
-                                'revenue'=>$insertData['revenue_code'],
-                                'remark'=>$insertData['remark'],
+                                'user_id' => Auth::user()->id ?? '',
+                                'building_id' => $building->id ?? '',
+                                'unit_no'=>$insertData['unit_no'] ?? '',
+                                'unit_code'=>$insertData['unit_code'] ?? '',
+                                'unit_type'=>$unitType->id ?? '',
+                                'unit_size'=>$insertData['unit_size'] ?? '',
+                                'unit_status'=>$unitStatus->id ?? '',
+                                'unit_floor'=>$insertData['unit_floor'] ?? '',
+                                'unit_feature'=>$insertData['unit_feature'] ?? '',
+                                'electric_no'=>$insertData['electric_no'] ?? '',
+                                'water_no'=>$insertData['water_no'] ?? '',
+                                'intial_rent'=>$insertData['initial_rent'] ?? '',
+                                'actual_rent'=>$insertData['actual_rent'] ?? '',
+                                'unit_desc'=>$insertData['unit_description'] ?? '',
+                                'unit_ref'=>$insertData['unit_ref'] ?? '',
+                                'revenue'=>$insertData['revenue_code'] ?? '',
+                                'remark'=>$insertData['remark'] ?? '',
                             ]);
-
                         }
                     }
                     Session::flash('success', 'Import Successful.');

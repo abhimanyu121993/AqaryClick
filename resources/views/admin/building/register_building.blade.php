@@ -181,7 +181,7 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Country</label>
 
-                                <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
+                                <select class="select2 form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
 
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->country }}" selected hidden>{{ $buildingedit->nationality->name ?? ''}}</option>
