@@ -146,18 +146,21 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No">
                             </div>
+                        </div>
                             <div class=" col-xxl-3 col-md-3">
                                 <label for="incharge_name" class="form-label">Email </label>
                                 <div class="input-group">
                                     <input type="email" class="form-control" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
-                        </div><div class=" col-xxl-3 col-md-3">
+                        
+                        <div class=" col-xxl-3 col-md-3">
                             <label for="incharge_name" class="form-label">Alternative Email </label>
                             <div class="input-group">
                                 <input type="email" class="form-control" name="alternate_email"
                                     placeholder="Enter Alternate Email">
                             </div>
+                        </div>
                             <div class="col-xxl-3 col-md-3" id="cname">
                                 <label for="country" class="form-label">Post Office Box</label>
                                 <div class="input-group">
