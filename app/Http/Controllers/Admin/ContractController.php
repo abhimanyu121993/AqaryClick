@@ -418,20 +418,16 @@ class ContractController extends Controller
         return $pdf->download('AqaryClick-Contract-' . $contract_code . '.pdf');
     }
 
+
     public function graceDetails($id)
     {
-        $html = "";
         $graceDetails = Contract::find($id);
         $grace_start = json_decode($graceDetails->grace_start_date);
         $grace_end = json_decode($graceDetails->grace_end_date);
         $grace_day = json_decode($graceDetails->grace_period_day);
-        $grace_month= json_decode($graceDetails->grace_period_month);
-    foreach($grace_start as $k=>$grace){
-        $html .="
-        <tr><td>$grace</td><td>$grace_end[$k]</td><td> $grace_day[$k]</td><td>$grace_month[$k]</td></tr>
-        ";
-    }
-      return $html;
+        $grace_month = json_decode($graceDetails->grace_period_month);
+
+        return view('admin.contract.grace_contract', compact('grace_start','grace_end','grace_day','grace_month'));
     }
 
     public function bulkUpload(Request $request)

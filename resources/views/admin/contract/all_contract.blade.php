@@ -76,42 +76,7 @@
                             <td>{{ $con->lease_period_month ??''}}</td>
                             <td>{{ $con->lease_period_day??''}}</td>
                             <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn-sm btn-primary  graceBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{$con->id}}">
-                                    View 
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">All Grace Details</h1>
-                                                <button type="button" class="btn-close refreshButton" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="card-body  table-responsive">
-                                                    <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline  table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                                                        <thead class="thead-color">
-                                                            <tr>
-                                                                <th scope="col">Grace Start Date</th>
-                                                                <th scope="col">Grace End Date</th>
-                                                                <th scope="col">Grace Period Month</th>
-                                                                <th scope="col">Grace Period Day</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="grace_loop">
-                                                           
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary refreshButton" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <a href="{{route('admin.graceDetails',$con->id)}}" class="graceBtn" data-id="{{$con->id}}" >View</a>
                             </td>
                             <td>{{ $con->lessorDetails->name??''}}</td>
                             <td>{{ $con->attestation_no ??''}}</td>
@@ -194,31 +159,4 @@
     });
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('.graceBtn').click(function() {
-            var id = $(this).val();
-            var newurl = "{{ url('admin/all-grace') }}/" + id;
-
-            $.ajax({
-                url: newurl,
-                method: 'get',
-                beforeSend: function() {
-                    $('.graceBtn').attr('disabled', 'true');
-                },
-                success: function(p) {
-                    $("#grace_loop").html(p);
-
-                }
-            });
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $('.refreshButton').click(function() {
-        // window.setTimeout('location.reload()', 1000); 
-        location.reload();
-    }); 
-</script>
 @endsection
