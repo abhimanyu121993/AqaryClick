@@ -86,10 +86,11 @@
                                         name='tenant_name'>
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->tenant_name }}" selected>
-                                                {{ $contractedit->tenant_type }}</option>
-                                        @endif
+                                                {{ $contractedit->tenantDetails->tenant_english_name }}</option>
+                                        
+                                        @else
                                         <option value="" selected hidden>--Select Tenant--</option>
-
+                                        @endif
 
                                     </select>
                                 </div>
@@ -104,7 +105,7 @@
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Tenant Nationality</label>
-                                    <div class="input-group" id"tenantInput">
+                                    <div class="input-group" id="tenantInput">
                                         <input type="text" class="form-control" id="tenant_nationality"
                                             name="tenant_nationality"
                                             value="{{ isset($contractedit) ? $contractedit->tenant_nationality : '' }}"
@@ -306,6 +307,7 @@
                                             $gracem = json_decode($contractedit->grace_period_month);
                                             $graced = json_decode($contractedit->grace_period_day);
                                         @endphp
+                                        @if(is_array($pgrace) and is_array($graceto) and is_array($gracem) and count($pgrace)>0 and count($graceto)>0 and count($gracem)>0 and count($graced)>0)
                                         @foreach ($pgrace as $k => $pg)
                                             <div class="row pgrace"
                                                 {{ isset($contractedit) ? '' : 'style="display:none;"' }}>
@@ -347,6 +349,9 @@
                                                     </div>
                                                 </div>
                                         @endforeach
+                                        @else
+                                       <h6 class="text-danger">  Some data are mission ... so this block not created Or this is import via excel</h6>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
