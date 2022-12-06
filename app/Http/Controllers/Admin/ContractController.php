@@ -476,7 +476,6 @@ class ContractController extends Controller
                     fclose($file);
                     // dd($importData_arr);
                     // Insert to MySQL database
-                   
                     foreach ($importData_arr as $importData) {
                         $tenant_id = '';
                         $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->first();
@@ -498,8 +497,8 @@ class ContractController extends Controller
                                 "sponsor_name" =>$tenant->sponsor_name,
                                 "sponsor_mobile" =>$tenant->sponsor_phone,
                                 "lessor" =>Auth::user()->id,
-                                "company_id" =>"",
-                                "authrized_person" =>"",
+                                "company_id" =>0,
+                                "authorized_person" =>"",
                                 "lessor_sign" =>'',
                                 "release_date" => $importData[9],
                                 "lease_start_date" => $importData[10],
@@ -529,10 +528,11 @@ class ContractController extends Controller
                                 "status"=>''
                             );
                             // dd($insertData);
-                            if (!empty($insertData['building_code'])) {
-                                Contract::create([$insertData]);
+                            if (count($insertData)>0) {
+                                Contract::create($insertData);
 
                             }
+                        
                         }
                         else{
                             Session::flash('error', 'Importing Cancelled Tenant not found');

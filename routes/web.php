@@ -207,6 +207,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('grace-export', [ExcellController::class, 'grace_export'])->name('grace-export');
         Route::get('tenant-unit', [ExcellController::class, 'tenant_unit'])->name('tenant-units');
         Route::get('master', [ExcellController::class, 'master']);
+        Route::get('contract', [ExcellController::class, 'contract']);
      });
 
 });
