@@ -167,7 +167,7 @@ class InvoiceController extends Controller
     }
         if ($data) {
             Mail::to($data->TenantName->email)->send(new InvoiceClickMail($data));
-            return redirect(url('admin/invoice-print', $request->invoice_no))->with('success', 'Invoice has been created successfully.');
+            return redirect(url('admin/invoice-print',$invoice_no))->with('success', 'Invoice has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Invoice not created.');
         }
