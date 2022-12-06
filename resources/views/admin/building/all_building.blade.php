@@ -117,8 +117,9 @@
         </div>
     </div>
 
-
-
+<script>
+    $.fn.dataTable.ext.errMode = 'none'; $('#example').on('error.dt', function(e, settings, techNote, message) { console.log( 'An error occurred: ', message); });
+</script>
     <!-- Grids in modals -->
 @endsection
 
@@ -129,6 +130,7 @@
         //     $('#example').DataTable();
         // });
         $(document).ready(function() {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#example').DataTable({
                 processing: true,
                 serverSide: true,
