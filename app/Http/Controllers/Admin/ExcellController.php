@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\BuildingExport;
+use App\Exports\ContractExcel;
 use App\Exports\ElectricityExcel;
 use App\Exports\GracePeriodExcel;
 use App\Exports\MasterExcel;
@@ -11,6 +12,7 @@ use App\Exports\TenantStatementExcel;
 use App\Exports\TenantUnitsExcel;
 use App\Exports\UnitExcel;
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -49,5 +51,9 @@ class ExcellController extends Controller
 
     public function master(){
         return Excel::download(new MasterExcel, 'master'.time().'.xlsx');
+    }
+    public function contract()
+    {
+        return Excel::download(new ContractExcel,'contract-'.time().'.xlsx');
     }
 }

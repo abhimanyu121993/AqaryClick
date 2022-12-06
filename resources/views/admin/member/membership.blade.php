@@ -1,7 +1,7 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Membership'])
 @section('title', 'Membership')
 @section('main-content')
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.20.0/full/ckeditor.js"></script>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
