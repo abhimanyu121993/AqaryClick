@@ -5,10 +5,11 @@ namespace App\Exports;
 use App\Models\Tenant;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-
-class TenantExcel implements FromCollection,WithHeadings,WithStyles
+class TenantExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -41,4 +42,21 @@ class TenantExcel implements FromCollection,WithHeadings,WithStyles
        1    => ['font' => ['bold' => true]],
     ];
     }
+
+
+public function registerEvents(): array
+{
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+
+                $event->sheet->getDelegate()->getStyle('A1:J1')
+                    ->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('F4B084');
+
+
+        },
+    ];
+}
 }
