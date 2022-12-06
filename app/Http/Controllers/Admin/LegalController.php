@@ -47,9 +47,9 @@ class LegalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // 'tenant_name' => 'required',
+            'contract_id' => 'required',
             // 'mobile_no' => 'required',
-            // 'unit_ref' => 'required',
+            'unit_ref' => 'required',
 
 
         ]);
@@ -64,6 +64,7 @@ class LegalController extends Controller
             }
         }
        $data= Legal::create([
+            'contract_id'=>$request->contract_id,
             'tenant_name' => $request->tenant_name,
             'tenant_mobile' => $request->mobile_no,
             'unit_ref' => $request->unit_ref,
@@ -87,7 +88,10 @@ class LegalController extends Controller
      */
     public function show($id)
     {
-        
+       
+        $legalDetail=Legal::all();
+    
+        return view ('admin.legal.register',compact('tenantDetail','legalDetail'));
         }
 
     /**
@@ -98,7 +102,14 @@ class LegalController extends Controller
      */
     public function edit($id)
     {
-         
+        $id = Crypt::decrypt($id);
+        $data=Legal::find($id);  
+        $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
+        $tenantDetail=Contract::where('overdue','>=',90)->whereNotIn('id',$res)->get();
+        $legalDetail=Legal::all();
+
+        return view ('admin.legal.register',compact('data','tenantDetail','legalDetail'));
+
       }
 
     /**
@@ -111,7 +122,6 @@ class LegalController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
         ]);
         $otherpic=Legal::find($id)->file??[];
         if($request->hasFile('attachment_file'))
@@ -123,18 +133,18 @@ class LegalController extends Controller
                 $otherpic[]=$name;
             }
         }
-        if(count($otherpic)>0)
+        if(is_array($otherpic) and count($otherpic)>0)
                  {
                     Legal::find($id)->update(['file'=>json_encode($otherpic)]);
                     
                  }
        $data= Legal::find($id)->update([
+        'contract_id'=>$request->contract_id,
         'tenant_name' => $request->tenant_name,
         'tenant_mobile' => $request->mobile_no,
         'unit_ref' => $request->unit_ref,
-        'remark' => $request->remark,
         'status' => $request->status,
-        'file' =>json_encode($otherpic),
+        'remark' => $request->remark,
         ]);
         if($data){
         return redirect()->back()->with('success','Legal has been Updated successfully.');

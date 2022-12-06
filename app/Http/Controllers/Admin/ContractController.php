@@ -551,4 +551,8 @@ class ContractController extends Controller
             return redirect()->back();
         }
     }
+
+    public function ImportExportContract(){
+        return view('admin.contract.import_export');
+    }
 }

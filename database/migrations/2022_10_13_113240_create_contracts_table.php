@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('sponsor_name')->nullable();
             $table->string('sponsor_mobile')->nullable();
             $table->string('lessor')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->string('authorized_person')->nullable();
             $table->string('lessor_sign')->nullable();
             $table->string('release_date')->nullable();

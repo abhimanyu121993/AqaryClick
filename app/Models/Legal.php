@@ -14,6 +14,10 @@ class Legal extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
+    public function contractDetails()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id', 'id');
+    }
     public function unitType()
     {
         return $this->belongsTo(Unit::class, 'unit_type', 'id');
