@@ -16,6 +16,8 @@ use App\Models\Invoice;
 use App\Models\Tenant;
 use Carbon\Carbon;
 use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
+use App\Mail\InvoiceClickMail;
+use App\Mail\InvoiceMail;
 use App\Models\Nationality;
 use App\Models\Unit;
 use Exception;
@@ -23,8 +25,12 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Database\DBAL\TimestampType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Response;
+
 
 class InvoiceController extends Controller
 {
@@ -100,9 +106,9 @@ class InvoiceController extends Controller
         $qar_amt=amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->amt_paid??0)->get();
         $data = Contract::where('id', $request->contract)->first();
         if($request->istax==1){
-            $per= $data->countryDetails->percentage; 
+            $per= $data->countryDetails->percentage;
             $tax_amt=($qar_amt*$per)/100;
-        } 
+        }
         else{
             $per=0;
             $tax_amt=0;
@@ -130,7 +136,7 @@ class InvoiceController extends Controller
             'tax_amt'=>$tax_amt??0,
             'tax_per'=>$per??0,
             'total_amt'=>$totle_amt??0,
-            'currency_type' => $request->currency_type,          
+            'currency_type' => $request->currency_type,
             'due_amt' => $due_amt,
             'payment_method' => $request->payment_method,
             'tenant_account' => $request->tenant_account,
@@ -141,15 +147,13 @@ class InvoiceController extends Controller
             'benifitary_account' => $request->benifitary_account,
             'benifitary_bank' => $request->benifitary_bank,
             'benifitary_name' => $request->benifitary_name,
-            'payment_status' => $request->payment_status, 
+            'payment_status' => $request->payment_status,
             'overdue_period' => $overdue,
             'remark' => $request->remark,
             'attachment' => json_encode($otherpic),
         ]);
-       
-     
         for ($i = 0; $i < count($request->cheque_no); $i++) {
-            if($request->cheque_no[$i]!= null){ 
+            if($request->cheque_no[$i]!= null){
             $mainpic = [];
             if ($request->hasFile('file')) {
                 foreach ($request->file('file') as $file) {
@@ -162,8 +166,8 @@ class InvoiceController extends Controller
         }
     }
         if ($data) {
-$this->OverdueUpdate($data);
-            return redirect(url('admin/invoice-print', $invoice_no))->with('success', 'Invoice has been created successfully.');
+            Mail::to($data->TenantName->email)->send(new InvoiceClickMail($data));
+            return redirect(url('admin/invoice-print', $request->invoice_no))->with('success', 'Invoice has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Invoice not created.');
         }
@@ -240,7 +244,7 @@ $this->OverdueUpdate($data);
             else{
                 $res = Tenant::where('user_id',Auth::user()->id)->get();
             }
-            
+
             $html = ' <option value=""selected hidden disabled> --Select Tenant--</option>';
             foreach ($res as $r) {
                 $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
@@ -253,7 +257,7 @@ $this->OverdueUpdate($data);
             else{
                 $res = Tenant::where('user_id',Auth::user()->id)->where('building_name', $building_id)->get();
             }
-            
+
             $html = ' <option value=""selected hidden disabled>--Select Tenant--</option>';
             foreach ($res as $r) {
                 $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
@@ -272,13 +276,13 @@ $this->OverdueUpdate($data);
         }
 
         $country_code=$res->countryDetails->currency_code;
-        $percent=$res->countryDetails->percentage??0;        
+        $percent=$res->countryDetails->percentage??0;
         $inv = invoice::where('contract_id', $contract_id)->latest()->first();
         $invoicedate = strtotime($inv->invoice_period_end ?? 0);
         $leaseEnddate = strtotime($res->lease_end_date);
         if ($invoicedate > $leaseEnddate) {
             $res = invoice::where('contract_id', $contract_id)->latest()->first();
-            
+
             if($res->due_amt==0){
                 $msg = "Sorry! This Contract has been Expired.";
                 $invoiceEnd = '';
@@ -301,7 +305,7 @@ $this->OverdueUpdate($data);
                 $per=$percent;
 
             }
-           
+
         } else {
             $invoice = $inv->invoice_period_end ?? null;
             if ($invoice == !null) {
@@ -350,9 +354,14 @@ $this->OverdueUpdate($data);
         $total_amt=amcurrency::convert()->from('QAR')->to( $symbol)->amount((float)($invoice->total_amt??0))->get();
         $tax_amt=amcurrency::convert()->from('QAR')->to( $symbol)->amount((float)($invoice->tax_amt??0))->get();
         $lessor=Customer::where('id',$invoice->customerDetails->lessor)->first();
-        $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();      
+        $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();
         $cheque=Cheque::where('invoice_no',$invoice_no)->get();
         $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
+
+        $invoice->TenantName->email='o6323756@gmail.com';
+        //**MAIL CODE HERE**//
+
+        Mail::to($invoice->TenantName->email)->send(new InvoiceMail($invoice));
 
         return view('admin.invoice.invoice_details', compact('invoice','lessor','company','symbol','cheque','unit_ref','due_amt','amt_paid','total_amt','tax_amt'));
     }
@@ -372,36 +381,11 @@ public function receiptVouchure($invoice_no){
     $tax_amt=amcurrency::convert()->from('QAR')->to( $symbol)->amount((float)($invoice->tax_amt??0))->get();
     $lessor=Customer::where('id',$invoice->customerDetails->lessor)->first();
     $cheque=Cheque::where('invoice_no',$invoice_no)->first();
-    $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();      
+    $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();
     $cheque=Cheque::where('invoice_no',$invoice_no)->get();
     $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
     return view('admin.invoice.receipt_vouchar',compact('invoice','lessor','company','symbol','cheque','unit_ref','cheque','due_amt','amt_paid','total_amt','tax_amt'));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public function OverdueUpdate($invoice){
-   if($invoice->payment_status=='Paid') {
-    $diff_days=Carbon::parse(Carbon::now())->diffInDays($invoice->invoice_period_end);
-    if($diff_days>30){
- $result=Contract::find($invoice->contract_id)->update(['overdue'=>0]);
-
-    }
-
-
-   }
-
 }
-}
+
