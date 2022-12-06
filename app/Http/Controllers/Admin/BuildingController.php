@@ -563,5 +563,7 @@ public function document($id){
             return redirect()->back();
         }
     }
-
+public function ImportExportBuilding(){
+    return view('admin.building.import_export');
+}
 }

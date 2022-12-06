@@ -40,6 +40,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TenantFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
     Route::resource('building',BuildingController::class);
     Route::get('get-buildings',[BuildingController::class,'get_buildings'])->name('get-buildings');
+    Route::get('import-export-building',[BuildingController::class,'ImportExportBuilding'])->name('ImportExportBuilding');
+    Route::get('import-export-unit',[UnitController::class,'ImportExportUnit'])->name('ImportExportUnit');
+
+
     Route::resource('unit',UnitController::class);
     Route::resource('currency',CurrencyController::class);
     Route::get('getCurrency',[CurrencyController::class,'getCurrency'])->name('getCurrency');
@@ -135,12 +140,18 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('staff',StaffController::class);
     Route::resource('broker',BrokerController::class);
     Route::resource('legal',LegalController::class);
+    Route::resource('tenant-files',TenantFileController::class);
+    Route::get('fetch-legal-contract/{contract_id}',[LegalController::class,'legalContract'])->name('legalContract');
+
     Route::post('all-legal',[LegalController::class,'alllegal'])->name('alllegal');
-    Route::get('fetch-tenant/{tenant_id}',[LegalController::class,'fetchData'])->name('fetchData');
     Route::resource('city',CityController::class);
     Route::resource('area',AreaController::class);
     Route::resource('nationality',NationalityController::class);
     Route::resource('bank',BankController::class);
+    Route::get('fetch-broker-unit',[BrokerController::class,'fetchBrokerUnitDetails'])->name('fetchBrokerUnitDetails');
+    Route::get('fetch-broker-building',[BrokerController::class,'fetchBrokerBuildingDetails'])->name('fetchBrokerBuildingDetails');
+
+
     Route::resource('cheque',ChequeController::class);
     Route::get('/receipt-vouchure/{invoice_no}',[InvoiceController::class,'receiptVouchure'])->name('receiptVouchure');
     Route::get('/invoice-print/{invoice_no}',[InvoiceController::class,'printInvoice'])->name('printInvoice');

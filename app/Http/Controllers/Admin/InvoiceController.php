@@ -141,7 +141,7 @@ class InvoiceController extends Controller
             'benifitary_account' => $request->benifitary_account,
             'benifitary_bank' => $request->benifitary_bank,
             'benifitary_name' => $request->benifitary_name,
-            'payment_status' => $request->payment_status,
+            'payment_status' => $request->payment_status, 
             'overdue_period' => $overdue,
             'remark' => $request->remark,
             'attachment' => json_encode($otherpic),
@@ -162,8 +162,7 @@ class InvoiceController extends Controller
         }
     }
         if ($data) {
-            $invoice_status=invoice::where('invoice_no',$invoice_no)->where('due_amt','null')->exists();
-            dd($invoice_status);
+$this->OverdueUpdate($data);
             return redirect(url('admin/invoice-print', $invoice_no))->with('success', 'Invoice has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Invoice not created.');
@@ -295,7 +294,6 @@ class InvoiceController extends Controller
                 $invoiceEnd = $res->invoice_period_end??'';
                 $invoiceStart = $res->invoice_period_start??'';
                 $qar_amt=amcurrency::convert()->from('QAR')->to($country_code)->amount((float)$res->due_amt)->get();
-
                 $payable = round($qar_amt??'',2);
                 $due_amt = round($qar_amt??'',2);
                 $rent_amt = 'No Rent Amount';
@@ -378,5 +376,32 @@ public function receiptVouchure($invoice_no){
     $cheque=Cheque::where('invoice_no',$invoice_no)->get();
     $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
     return view('admin.invoice.receipt_vouchar',compact('invoice','lessor','company','symbol','cheque','unit_ref','cheque','due_amt','amt_paid','total_amt','tax_amt'));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function OverdueUpdate($invoice){
+   if($invoice->payment_status=='Paid') {
+    $diff_days=Carbon::parse(Carbon::now())->diffInDays($invoice->invoice_period_end);
+    if($diff_days>30){
+ $result=Contract::find($invoice->contract_id)->update(['overdue'=>0]);
+
+    }
+
+
+   }
+
 }
 }

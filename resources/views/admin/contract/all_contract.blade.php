@@ -13,8 +13,9 @@
                     <a href="{{route('admin.excel-export.grace-export')}}" class="btn btn-primary">Export Graces</a>
                 </div>
             </div><!-- end card header -->
-            <div class="card-body  table-responsive">
-                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline  table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
+            <div class="card-body  ">
+                <div class="col-sm-12">
+                <table id="example" class="table table-bordered " >
                     <thead class="thead-color">
                         <tr>
                             <th scope="col">Sr.No.</th>
@@ -121,6 +122,7 @@
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
     </div>
 </div>
@@ -133,7 +135,7 @@
 @section('script-area')
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({scrollX: true,});
     });
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

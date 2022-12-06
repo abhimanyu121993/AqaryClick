@@ -22,7 +22,9 @@ class LegalController extends Controller
     { 
     $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
     $tenantDetail=Contract::where('overdue','>=',90)->whereNotIn('id',$res)->get();
-    return view ('admin.legal.register',compact('tenantDetail'));
+    $legalDetail=Legal::all();
+
+    return view ('admin.legal.register',compact('tenantDetail','legalDetail'));
     }
 
     /**
@@ -160,39 +162,12 @@ class LegalController extends Controller
             return redirect()->back()->with('error','Data not deleted.');
         }    
     }
-    public function fetchData($tenant_id){
-      
-        $res=Tenant::where('id',$tenant_id)->first();
-        $tenantDetail=Unit::where('building_id',$res->building_name)->where('unit_type',$res->unitType->name)->first();      
-        return response()->json(array('res'=>$res,'unit_ref'=>$tenantDetail));
-        }
-
-        public function alllegal(Request $request)
-        {
-            // $otherpic=Legal::find($request->lid)->file??'';
-            // {
-            //     foreach($request->file('attachment_file') as $file)
-            //     {
-            //         $name='legal-'.time().'-'.rand(0,99).'.'.$file->extension();
-            //         $file->move(public_path('upload/legal_doc'),$name);
-            //         $otherpic[]=$name;
-            //     }
-            //     dd($otherpic);
-            // }
-            // if(count($otherpic) > 0)
-            //          {
-            //             Legal::find($request->lid)->update(['file'=>json_encode($otherpic)]);
-                        
-            //          }
-            $res = Legal::find($request->lid)->update([
-                'status' => $request->status,
-                'remark' => $request->remark,
+    public function legalContract($contract_id){
+        $res=Contract::with('tenantDetails')->where('id',$contract_id)->first();
+        $unit_no=Tenant::where('id',$res->tenant_name)->first()->unit_no;
+        $unit_ref=Unit::where('id',$unit_no)->first()->unit_ref; 
+        $last_payment=Invoice::where('contract_id',$contract_id)->latest()->first()->invoice_end_period??'No Record';    
+        return response()->json(array('res'=>$res,'unit_ref'=>$unit_ref,'last_payment'=>$last_payment));
         
-        ]);
-            if($res){
-                session()->flash('success','Legal Updated sucessfully');
-                return redirect()->back();
-            }
-
 }
         }

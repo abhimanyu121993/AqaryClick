@@ -50,7 +50,7 @@ class ContractController extends Controller
         $total_delay = $delay_invoice * $total_delay_amt;
         $invoice_balance = $delay_invoice + $not_paid_invoice;
         $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
-        $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
+        $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);     
         $currency = currency::where('status', 1)->get();
         return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'CC', 'currency'));
     }
@@ -82,7 +82,6 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'contract_code' => 'required',
             'tenant_name' => 'required',
             'document_type' => 'required',
             'tenant_mobile' => 'required',
@@ -119,13 +118,14 @@ class ContractController extends Controller
             $request->tenant_sign->move(public_path('upload/contract/signature'), $mainpic2);
         }
         $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount((float)$request->rent_amount)->get();
-        $tnationlity = Tenant::where('id', $request->tenant_nationality)->first()->tenant_nationality;
-        $snationlity = Tenant::where('id', $request->tenant_nationality)->first()->sponser_nationality;
+        $tnationlity = Tenant::where('id', $request->tenant_name)->first()->tenant_nationality;
+        $snationlity = Tenant::where('id', $request->tenant_name)->first()->sponser_nationality;
 
         $tenant = Tenant::find($request->tenant_name);
+        $contract_code='CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
         $data = Contract::create([
             'user_id' => Auth::user()->id,
-            'contract_code' => 'CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y'),
+            'contract_code' => $contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type' => $request->document_type,
             'qid_document' => $request->qid_document,
@@ -168,7 +168,7 @@ class ContractController extends Controller
             'remark' => $request->remark,
         ]);
         if ($data) {
-            return redirect(route('admin.receipt', $request->contract_code))->with('success', 'Contract Registration has been created successfully.');
+            return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
         }

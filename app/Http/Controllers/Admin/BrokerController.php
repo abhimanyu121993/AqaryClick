@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Broker;
+use App\Models\Building;
+use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -48,37 +50,17 @@ class BrokerController extends Controller
             'email' => 'required',
 
         ]);
-        if($request->password==null){
-        $nUser= User::create([
-            'first_name' =>$request->broker_fname,
-            'last_name' =>$request->broker_lname,
-            'email'=>$request->email,
-            'phone' =>$request->mobile,
-            'password'=>Hash::make(123456),
-        ]);
-    }
-    else{
-        $nUser= User::create([
-            'first_name' =>$request->broker_fname,
-            'last_name' =>$request->broker_lname,
-            'email'=>$request->email,
-            'phone' =>$request->mobile,
-            'password'=>Hash::make($request->password),
-        ]);
-    }
-        $nUser->assignRole('Broker');
        $data= Broker::create([
             'broker_agent' => $request->broker_agent,
-            'broker_fname' => $request->broker_fname,
-            'broker_lname' => $request->broker_lname,
+            'broker_name' => $request->broker_fname,
             'broker_id' => $request->broker_id,
             'mobile' => $request->mobile,
             'email' => $request->email,
             'commission' => $request->commission,
             'broker_type' => $request->broker_type,
             'property_type' => $request->property_type,
-            'unit_ref' => $request->unit_ref,
-            'building_name' => $request->building_name,
+            'unit_id' => $request->unit_ref,
+            'building_id' => $request->building_name,
         ]);
         if($data){
         return redirect()->back()->with('success','Broker has been created successfully.');
@@ -128,26 +110,17 @@ class BrokerController extends Controller
             // 'mobile' => 'required',
             'email' => 'required',
         ]);
-        $nUser= User::where('email',$request->email)->update([
-            'first_name' =>$request->broker_fname,
-            'last_name' =>$request->broker_lname,
-            'email'=>$request->email,
-            'phone' =>$request->mobile,
-            'password'=>Hash::make(123456),
-        ]);
-        $nUser->assignRole('Broker');
         $data=Broker::find($id)->update([
             'broker_agent' => $request->broker_agent,
-            'broker_fname' => $request->broker_fname,
-            'broker_lname' => $request->broker_lname,
+            'broker_name' => $request->broker_fname,
             'broker_id' => $request->broker_id,
             'mobile' => $request->mobile,
             'email' => $request->email,
             'commission' => $request->commission,
             'broker_type' => $request->broker_type,
             'property_type' => $request->property_type,
-            'unit_ref' => $request->unit_ref,
-            'building_name' => $request->building_name,
+            'unit_id' => $request->unit_ref,
+            'building_id' => $request->building_name,
 
         ]);
         if($data)
@@ -179,4 +152,25 @@ class BrokerController extends Controller
             return redirect()->back()->with('error','Data not deleted.');
         }
     }
+    public function fetchBrokerUnitDetails(){
+        $res=Unit::all();
+        $html=' <option value="">--Select Unit--</option>';
+
+        foreach($res as $r){
+            $html .='<option value="'.$r->id.'">'.$r->unit_ref.'</option>';
+        }
+    
+        return response()->json($html);
+        }
+
+        public function fetchBrokerBuildingDetails(){
+                           $res=Building::all();
+                $html=' <option value="">--Select Building--</option>';
+    
+                foreach($res as $r){
+                    $html .='<option value="'.$r->id.'">'.$r->name.'</option>';
+            }
+            return response()->json($html);
+    
+}
 }

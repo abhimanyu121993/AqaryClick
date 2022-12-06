@@ -11,12 +11,6 @@
                         <div class="col-4">
                             <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
                         </div>
-                        <div class="col-4">
-
-                        </div>
-                        <div class="col-4">
-                            <a class="btn btn-primary" href="{{Route('admin.excel-export.building')}}">Export</a>
-                        </div>
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body ">
@@ -117,8 +111,9 @@
         </div>
     </div>
 
-
-
+<script>
+    $.fn.dataTable.ext.errMode = 'none'; $('#example').on('error.dt', function(e, settings, techNote, message) { console.log( 'An error occurred: ', message); });
+</script>
     <!-- Grids in modals -->
 @endsection
 
@@ -129,6 +124,7 @@
         //     $('#example').DataTable();
         // });
         $(document).ready(function() {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#example').DataTable({
                 processing: true,
                 serverSide: true,

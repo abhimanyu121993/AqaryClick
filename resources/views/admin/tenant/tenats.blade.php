@@ -21,7 +21,7 @@
             </div><!-- end card header -->
             <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">
-                    <thead>
+                   
                         <thead class="thead-color">
                             <tr>
                                 <th scope="col">Sr.No.</th>
@@ -37,7 +37,6 @@
                                 <th scope="col">Tenant Secondary Number</th>
                                 <th scope="col">Primary Email </th>
                                 <th scope="col">Alternative Email </th>
-
                                 <th scope="col">Files</th>
                                 <th scope="col">Post Office</th>
                                 <th scope="col">Address</th>

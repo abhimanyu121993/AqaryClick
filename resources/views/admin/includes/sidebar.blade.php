@@ -103,11 +103,16 @@
                                         <a href="{{ route('admin.building.index') }}" class="nav-link"
                                             data-key="t-analytics">Registration</a>
                                     </li>
+                                    
                                 @endcan
                                 @can('Building_read')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.building.create') }}" class="nav-link" data-key="t-analytics">
                                             All Buildings </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.ImportExportBuilding') }}" class="nav-link"
+                                            data-key="t-analytics">Import/Export</a>
                                     </li>
                                 @endcan
                             </ul>
@@ -135,6 +140,10 @@
                                         <a href="{{ route('admin.unit.create') }}" class="nav-link" data-key="t-analytics">
                                             All Units </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.ImportExportUnit') }}" class="nav-link"
+                                            data-key="t-analytics">Import/Export</a>
+                                    </li>
                                 @endcan
                             </ul>
                         </div>
@@ -154,6 +163,10 @@
                                     <li class="nav-item">
                                         <a href="{{ route('admin.tenant.index') }}" class="nav-link"
                                             data-key="t-analytics">Registration</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.tenant-files.index') }}" class="nav-link"
+                                            data-key="t-analytics">Add Files</a>
                                     </li>
                                 @endcan
                                 @can('Tenant_read')
@@ -247,12 +260,12 @@
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards11">
                             <ul class="nav nav-sm flex-column">
-                                @can('Lagal_create')
+                                
                                     <li class="nav-item">
                                         <a href="{{ route('admin.legal.index') }}" class="nav-link"
                                             data-key="t-analytics">Registration</a>
                                     </li>
-                                @endcan
+                               
                                 @can('Legal_read')
                                     <li class="nav-item">
                                         <a href="{{ route('admin.legal.create') }}" class="nav-link"
@@ -409,7 +422,7 @@
                                         data-key="t-analytics"> Unit Feature </a>
                                 </li><li class="nav-item">
                                     <a href="{{ route('admin.contract-recipt.index') }}" class="nav-link"
-                                        data-key="t-analytics"> Edit  </a>
+                                        data-key="t-analytics">Contract Receipt Update </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.buildingtype.index') }}" class="nav-link"
