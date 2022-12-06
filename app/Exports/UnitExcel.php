@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
 {
@@ -33,14 +34,16 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
             'Status',
         ];
     }
+
+    
     public function styles(Worksheet $sheet)
-    {
+{
     return [
        1    => ['font' => ['bold' => true]],
     ];
-    }
+}
 
-    public function registerEvents(): array
+public function registerEvents(): array
 {
         return [
             AfterSheet::class => function (AfterSheet $event) {
