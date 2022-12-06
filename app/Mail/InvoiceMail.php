@@ -19,9 +19,18 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct(Invoice $invoice)
+    public function __construct($invoice,$lessor,$company,$symbol,$cheque,$unit_ref,$due_amt,$amt_paid,$total_amt,$tax_amt)
     {
         $this->invoice=$invoice;
+        $this->company=$company;
+        $this->lessor=$lessor;
+        $this->symbol=$symbol;
+        $this->cheque=$cheque;
+        $this->unit_ref=$unit_ref;
+        $this->due_amt=$due_amt;
+        $this->amt_paid=$amt_paid;
+        $this->total_amt=$total_amt;
+        $this->tax_amt = $tax_amt;
     }
 
     /**
@@ -44,9 +53,18 @@ class InvoiceMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'admin.invoice.send_invoice',
+            view: 'admin.invoice.invoice_details',
             with: [
                 'invoice' => $this->invoice,
+                'company'=>$this->company,
+                'lessor'=>$this->lessor,
+                'symbol'=>$this->symbol,
+                'cheque'=>$this->cheque,
+                'unit_ref'=>$this->unit_ref,
+                'due_amt'=>$this->due_amt,
+                'amt_paid'=>$this->amt_paid,
+                'total_amt'=>$this->total_amt,
+                'tax_amt'=>$this->tax_amt,
             ],
 
         );
