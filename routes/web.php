@@ -132,6 +132,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('cheque',ChequeController::class);
     Route::get('/receipt-vouchure/{invoice_no}',[InvoiceController::class,'receiptVouchure'])->name('receiptVouchure');
     Route::get('/invoice-print/{invoice_no}',[InvoiceController::class,'printInvoice'])->name('printInvoice');
+    Route::get('/invoice-send/{invoice_no}',[InvoiceController::class,'sendInvoice'])->name('sendInvoice');
     Route::get('fetch-due-payment/{contract_id}',[InvoiceController::class,'duePayment'])->name('duePayments');
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
@@ -167,6 +168,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('edit-document/{id}',[BusinessController::class,'editDocument'])->name('editDocument');
     Route::post('update-document/{id}',[BusinessController::class,'updateDocuments'])->name('updateDocument');
     Route::get('document-download/{path}',[BusinessController::class,'DocumentDownload'])->name('documentDownload');
+
 });
 
 //  Payment

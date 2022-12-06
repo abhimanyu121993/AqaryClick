@@ -106,6 +106,7 @@ class ContractController extends Controller
             'contract_type'=>'required',
 
         ]);
+        dd($request->tenant_name);
         $mainpic='';
         if($request->hasFile('lessor_sign')){
             $mainpic='contract-'.time().'-'.rand(0,99).'.'.$request->lessor_sign->extension();
@@ -160,9 +161,9 @@ class ContractController extends Controller
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
-
             'remark'=>$request->remark,
         ]);
+
         if($data){
         return redirect(route('admin.receipt',$request->contract_code))->with('success','Contract Registration has been created successfully.');
         }

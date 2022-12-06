@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TenantMail;
 use App\Models\Building;
 use App\Models\Nationality;
 use App\Models\Tenant;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 
 class TenantController extends Controller
@@ -147,6 +149,9 @@ class TenantController extends Controller
             'attachment_file'=>json_encode($otherpic),
             'attachment_remark'=>$request->attachment_remark,
         ]);
+
+        Mail::to($request->email)->send(new TenantMail($tenant));
+
         if($tenant){
             return redirect()->back()->with('success','Tenant has been created successfully.');
             }

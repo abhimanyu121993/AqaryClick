@@ -414,6 +414,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.buildingtype.index') }}" class="nav-link"
                                         data-key="t-analytics"> Building Type </a>
+                                </li><li class="nav-item">
+                                    <a href="{{ route('admin.membership.index') }}" class="nav-link"
+                                        data-key="t-analytics"> Membership </a>
                                 </li>
                             </ul>
                         </div>
