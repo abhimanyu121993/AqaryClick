@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Nationality;
 use App\Models\Tenant;
+use App\Models\TenantFile;
 use App\Models\Unit;
 use App\Models\UnitType;
 use App\Models\User;
@@ -62,7 +63,7 @@ class TenantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tenant_code' => 'nullable',
+            'tenant_code' => 'required',
             'tenant_english_name' => 'nullable',
             'tenant_arabic_name' => 'nullable',
             'tenant_document' => 'nullable',
@@ -91,15 +92,15 @@ class TenantController extends Controller
         $otherpic = [];
 
 
-        if($request->hasFile('attachment_file'))
-        {
-            foreach($request->file('attachment_file') as $file)
-            {
-                $name='tenant-'.time().'-'.rand(0,99).'.'.$file->extension();
-                $file->move(public_path('upload/tenent'),$name);
-                $otherpic[]=$name;
-            }
-        }
+        // if($request->hasFile('attachment_file'))
+        // {
+        //     foreach($request->file('attachment_file') as $file)
+        //     {
+        //         $name='tenant-'.time().'-'.rand(0,99).'.'.$file->extension();
+        //         $file->move(public_path('upload/tenent'),$name);
+        //         $otherpic[]=$name;
+        //     }
+        // }
              $tenant = Tenant::create([
             'user_id' => Auth::user()->id,
             'file_no' => $request->file_no,
@@ -133,12 +134,11 @@ class TenantController extends Controller
             'sponsor_email' => $request->sponsor_email,
             'sponsor_phone' => $request->sponsor_phone,
             'sponsor_nationality' => $request->sponsor_nationality,
-            'file_name' => json_encode($request->file_name),
-            'attachment_file' => json_encode($otherpic),
             'attachment_remark' => $request->attachment_remark,
         ]);
+       
         if ($tenant) {
-            return redirect()->back()->with('success', 'Tenant has been created successfully.');
+            return redirect()->back()->with('success', 'Tenant created successfully.');
         } else {
             return redirect()->back()->with('error', 'Tenant not created.');
         }
@@ -354,5 +354,4 @@ class TenantController extends Controller
     }
       return $html;
     }
-
 }

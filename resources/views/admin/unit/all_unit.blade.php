@@ -9,9 +9,6 @@
                         <div class="col-lg-6">
                             <h4 class="card-title mb-0 flex-grow-1">Manage Unit</h4>
                         </div>
-                        <div class="col-lg-4">
-                            <a class="btn btn-primary" href="{{Route('admin.excel-export.unit')}}">Export</a>
-                        </div>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;">

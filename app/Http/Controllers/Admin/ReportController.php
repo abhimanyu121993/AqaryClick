@@ -59,7 +59,7 @@ class ReportController extends Controller
     }
 
 public function masterReport($tenant_id){
-$tenant=Tenant::where('id',$tenant_id)->get(); 
+$tenant=Tenant::find($tenant_id); 
 $contract=Contract::where('tenant_name',$tenant_id)->get();  
 $invoice=Invoice::where('tenant_id',$tenant_id)->get();  
 

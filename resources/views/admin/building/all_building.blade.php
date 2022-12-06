@@ -11,12 +11,6 @@
                         <div class="col-4">
                             <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
                         </div>
-                        <div class="col-4">
-
-                        </div>
-                        <div class="col-4">
-                            <a class="btn btn-primary" href="{{Route('admin.excel-export.building')}}">Export</a>
-                        </div>
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body ">

@@ -51,12 +51,6 @@
                                         <input type="text" class="form-control" id="broker_fname" name="broker_fname" value="{{isset($brokeredit)? $broker->broker_name: '' }}" placeholder="Enter Name">
                                     </div>
                                 </div>
-                                <!-- <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Broker Last Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="broker_lname" name="broker_lname" value="{{isset($brokeredit)? $broker->broker_lname: '' }}" placeholder="Enter Broker Last Name">
-                                    </div>
-                                </div> -->
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">ID</label>
                                     <div class="input-group">
@@ -105,18 +99,29 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Unit Ref.</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="unit_ref" name="unit_ref" value="{{isset($brokeredit)? $brokeredit->unit_ref: '' }}" placeholder="Enter Unit ref">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Building Name</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="building_name" name="building_name" value="{{isset($brokeredit)? $brokeredit->building_name: '' }}" placeholder="Enter Building Name">
-                                    </div>
-                                </div>
+                                
+                            <div class="col-md-3 mb-1" id="unit_ref_hide">
+                                <label class="form-label" for="flag">Unit Ref</label>
+
+                                <select class="select2  form-select js-example-basic-single" id="{{isset($brokeredit)? '': 'unit_ref' }}" name='unit_ref'>
+                                    @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->unit_ref }}" selected hidden>{{ $brokeredit->unit_ref ?? ''}}</option>
+                                    @endif
+                                    <option value="">--Select Unit--</option>
+
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-1" id="unit_building_hide">
+                                <label class="form-label" for="flag">Building Name</label>
+
+                                <select class="select2  form-select js-example-basic-single" id="{{isset($brokeredit)? '': 'building_name' }}" name='building_name'>
+                                    @if (isset($brokeredit))
+                                    <option value="{{ $brokeredit->building_name }}" selected hidden>{{ $brokeredit->building_name ?? ''}}</option>
+                                    @endif
+                                    <option value="">--Select Unit--</option>
+
+                                </select>
+                            </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Last Transaction Date</label>
                                     <div class="input-group">
@@ -145,4 +150,45 @@
 
 
 @section('script-area')
+<script>
+    $(document).ready(function() {
+        $('#unit_ref_hide').hide();
+        $('#unit_building_hide').hide();
+        $(document).on('change','#broker_type',function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if(optionValue=='unit'){
+                    $('#unit_ref_hide').show();
+                    $('#unit_building_hide').hide();  
+                    var newurl = "{{ url('/admin/fetch-broker-unit') }}" ;
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    beforeSend:function(){
+                        $('#unit_ref').html('<option selected hidden>Fetching.......</option>');
+                    },
+                    success: function(p) {
+                        $("#unit_ref").html(p);
+                    }
+                });
+                }
+                else if(optionValue=='building'){
+                    $('#unit_ref_hide').hide();
+                    $('#unit_building_hide').show();
+                }
+                var newurl = "{{ url('/admin/fetch-broker-building') }}";
+                $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    beforeSend:function(){
+                        $('#building_name').html('<option selected hidden>Fetching.......</option>');
+                    },
+                    success: function(p) {
+                        $("#building_name").html(p);
+                    }
+                });
+            });
+        }).change();
+    });
+</script>
 @endsection
