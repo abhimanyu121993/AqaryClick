@@ -21,35 +21,35 @@
             </div><!-- end card header -->
             <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">
-                   
-                        <thead class="thead-color">
-                            <tr>
-                                <th scope="col">Sr.No.</th>
-                                <th scope="col">Tenant Code</th>
-                                <th scope="col">Tenant Name Eglish</th>
-                                <th scope="col">Tenant Arabic Name</th>
-                                <th scope="col">Tenant Document</th>
-                                <th scope="col">QID Document</th>
-                                <th scope="col">CR Document</th>
-                                <th scope="col">Passport</th>
-                                <th scope="col">Tenant Nationality</th>
-                                <th scope="col">Tenant Primary Number</th>
-                                <th scope="col">Tenant Secondary Number</th>
-                                <th scope="col">Primary Email </th>
-                                <th scope="col">Alternative Email </th>
-                                <th scope="col">Post Office</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Tenant Type</th>
-                                <th scope="col">Unit Type</th>
-                                <th scope="col">Unit Address</th>
-                                <th scope="col">Rental Period</th>
-                                <th scope="col">Payment Method</th>
-                                <th scope="col">Payment Receipt</th>
-                                <th scope="col">Remark</th>
-                                <th scope="col">View Document</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
+
+                    <thead class="thead-color">
+                        <tr>
+                            <th scope="col">Sr.No.</th>
+                            <th scope="col">Tenant Code</th>
+                            <th scope="col">Tenant Name Eglish</th>
+                            <th scope="col">Tenant Arabic Name</th>
+                            <th scope="col">Tenant Document</th>
+                            <th scope="col">QID Document</th>
+                            <th scope="col">CR Document</th>
+                            <th scope="col">Passport</th>
+                            <th scope="col">Tenant Nationality</th>
+                            <th scope="col">Tenant Primary Number</th>
+                            <th scope="col">Tenant Secondary Number</th>
+                            <th scope="col">Primary Email </th>
+                            <th scope="col">Alternative Email </th>
+                            <th scope="col">Post Office</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Tenant Type</th>
+                            <th scope="col">Unit Type</th>
+                            <th scope="col">Unit Address</th>
+                            <th scope="col">Rental Period</th>
+                            <th scope="col">Payment Method</th>
+                            <th scope="col">Payment Receipt</th>
+                            <th scope="col">Remark</th>
+                            <th scope="col">View Document</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @foreach ($all_tenant as $tenant)
                         <tr>
@@ -68,7 +68,10 @@
                             <td>{{$tenant->alternate_email}}</td>
                             <td>{{$tenant->post_office}}</td>
                             <td>{{$tenant->address}}</td>
-                            <td>{{$tenant->tenant_type}}</td>
+                            <td>{{isset($tenant)? ($tenant->tenant_type =='TC'?'Company':''):''}}
+                                {{isset($tenant)? ($tenant->tenant_type =='TP'?'Personal':''):''}}
+                                {{isset($tenant)? ($tenant->tenant_type =='TG'?'Government':''):''}}
+                            </td>
                             <td>{{$tenant->unittypeinfo->name??''}}</td>
                             <td>{{$tenant->unit_address}}</td>
                             <td>{{$tenant->rental_period }}</td>
