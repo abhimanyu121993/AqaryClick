@@ -3,38 +3,7 @@
 @section('main-content')
 
     <div class="row">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Contract</h4>
-                </div><!-- end card header -->
-                <div class="card-body">
-                    <div class="live-preview">
-                        <form action="{{ route('admin.bulkUploadContract') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row gy-4 mb-3">
-                                <div class="col-xxl-6 col-md-6">
-                                    <label for="name" class="form-label">Upload File</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="bulk_upload" name="bulk_upload">
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-md-6 pt-4">
-                                    <button class="btn btn-primary" type="submit">Upload</button>
-                                </div>
-                            </div>
-                            <div class="row gy-4 mb-3">
-                                <div class="col-xxl-3 col-md-6">
-                                    <a href="{{ asset('assets/excel_format/newcontract_format.csv') }}"
-                                        target="_blank">Example format</a>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+      
 
         <div class="col-lg-12">
             <div class="card">
@@ -73,9 +42,9 @@
                                     <label for="space" class="form-label">Tenant Type</label>
                                     <select class="form-control" id="tenant_type" name="tenant_type">
                                         <option value="" selected hidden>--Select Tenant Type--</option>
-                                        <option value="Personal">Personal</option>
-                                        <option value="Company">Company</option>
-                                        <option value="Government">Government</option>
+                                        <option value="TP">Personal</option>
+                                        <option value="TC">Company</option>
+                                        <option value="TG">Government</option>
 
                                     </select>
                                 </div>
@@ -855,10 +824,10 @@
             $("#tenant_type").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
-                    if (optionValue == 'Company') {
+                    if (optionValue == 'TC') {
                         $('.sponsor_hide').show();
 
-                    } else if (optionValue == 'Personal') {
+                    } else if (optionValue == 'TP') {
                         $('.sponsor_hide').hide();
                     }
                 });

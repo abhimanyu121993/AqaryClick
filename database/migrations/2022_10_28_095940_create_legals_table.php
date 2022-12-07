@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('legals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->unsignedBigInteger('contract_id')->nullable();
             $table->string('tenant_name')->nullable();
             $table->string('tenant_mobile')->nullable();
             $table->string('unit_ref')->nullable();

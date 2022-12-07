@@ -174,6 +174,10 @@
                                         <a href="{{ route('admin.tenant.create') }}" class="nav-link"
                                             data-key="t-analytics"> All Tenants </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.ImportExportTenant') }}" class="nav-link"
+                                            data-key="t-analytics">Import/Export</a>
+                                    </li>
                                 @endcan
                             </ul>
                         </div>
@@ -244,6 +248,10 @@
                                     <li class="nav-item">
                                         <a href="{{ route('admin.contract.create') }}" class="nav-link"
                                             data-key="t-analytics">All Contract</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.ImportExportContract') }}" class="nav-link"
+                                            data-key="t-analytics">Import/Export</a>
                                     </li>
                                 @endcan
                             </ul>
@@ -427,6 +435,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.buildingtype.index') }}" class="nav-link"
                                         data-key="t-analytics"> Building Type </a>
+                                </li><li class="nav-item">
+                                    <a href="{{ route('admin.membership.index') }}" class="nav-link"
+                                        data-key="t-analytics"> Membership </a>
                                 </li>
                             </ul>
                         </div>

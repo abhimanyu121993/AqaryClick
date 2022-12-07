@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TenantMail;
 use App\Models\Building;
 use App\Models\Nationality;
 use App\Models\Tenant;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 
 class TenantController extends Controller
@@ -42,7 +44,7 @@ class TenantController extends Controller
      */
     public function create()
     {
-        
+
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $all_tenant = Tenant::all();
@@ -136,12 +138,21 @@ class TenantController extends Controller
             'sponsor_nationality' => $request->sponsor_nationality,
             'attachment_remark' => $request->attachment_remark,
         ]);
-       
+
         if ($tenant) {
+            Mail::to($request->email)->send(new TenantMail($tenant));
             return redirect()->back()->with('success', 'Tenant created successfully.');
         } else {
             return redirect()->back()->with('error', 'Tenant not created.');
         }
+
+
+        if($tenant){
+            return redirect()->back()->with('success','Tenant has been created successfully.');
+            }
+            else{
+                return redirect()->back()->with('error','Tenant not created.');
+            }
     }
 
     /**
@@ -340,18 +351,22 @@ class TenantController extends Controller
 
 
     public function fileDetails($id)
-    {  
+    {
         $html = "";
         $fileDetails = Tenant::find($id);
         $name_file = json_decode($fileDetails->file_name);
-        
+
         $file_attachment = json_decode($fileDetails->attachment_file);
-        
+
     foreach($name_file as $k=>$files){
         $html .="
         <tr><td>$files</td><td>$file_attachment[$k]</td></tr>
         ";
     }
       return $html;
+    }
+
+    public function ImportExportTenant(){
+        return view('admin.tenant.import_export');
     }
 }

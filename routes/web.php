@@ -103,6 +103,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('get-buildings',[BuildingController::class,'get_buildings'])->name('get-buildings');
     Route::get('import-export-building',[BuildingController::class,'ImportExportBuilding'])->name('ImportExportBuilding');
     Route::get('import-export-unit',[UnitController::class,'ImportExportUnit'])->name('ImportExportUnit');
+    Route::get('import-export-contract',[ContractController::class,'ImportExportContract'])->name('ImportExportContract');
+    Route::get('import-export-tenant',[TenantController::class,'ImportExportTenant'])->name('ImportExportTenant');
+
 
 
     Route::resource('unit',UnitController::class);
@@ -154,6 +157,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('cheque',ChequeController::class);
     Route::get('/receipt-vouchure/{invoice_no}',[InvoiceController::class,'receiptVouchure'])->name('receiptVouchure');
     Route::get('/invoice-print/{invoice_no}',[InvoiceController::class,'printInvoice'])->name('printInvoice');
+    Route::get('/invoice-send/{invoice_no}',[InvoiceController::class,'sendInvoice'])->name('sendInvoice');
     Route::get('fetch-due-payment/{contract_id}',[InvoiceController::class,'duePayment'])->name('duePayments');
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
@@ -174,7 +178,6 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
     Route::get('/all-grace/{id}',[ContractController::class,'graceDetails'])->name('graceDetails');
-    
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);

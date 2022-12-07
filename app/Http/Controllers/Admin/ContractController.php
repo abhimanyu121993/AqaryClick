@@ -32,7 +32,7 @@ class ContractController extends Controller
      */
     public function index()
     {
-      
+
         $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
         $contract = Contract::all();
         $max_id = Contract::max('id') + 1;
@@ -50,7 +50,7 @@ class ContractController extends Controller
         $total_delay = $delay_invoice * $total_delay_amt;
         $invoice_balance = $delay_invoice + $not_paid_invoice;
         $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
-        $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);     
+        $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
         $currency = currency::where('status', 1)->get();
         return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'CC', 'currency'));
     }
@@ -62,7 +62,7 @@ class ContractController extends Controller
      */
     public function create()
     {
-       
+
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $contract = Contract::all();
@@ -436,8 +436,8 @@ class ContractController extends Controller
 
     public function bulkUpload(Request $request)
     {
-       
-      
+
+
         if($request->hasFile('bulk_upload')){
             $file = $request->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -476,6 +476,7 @@ class ContractController extends Controller
                     fclose($file);
                     // dd($importData_arr);
                     // Insert to MySQL database
+
                     foreach ($importData_arr as $importData) {
                         $tenant_id = '';
                         $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->first();
@@ -550,5 +551,9 @@ class ContractController extends Controller
             Session::flash('error', 'Please upload a valid .csv file only');
             return redirect()->back();
         }
+    }
+
+    public function ImportExportContract(){
+        return view('admin.contract.import_export');
     }
 }

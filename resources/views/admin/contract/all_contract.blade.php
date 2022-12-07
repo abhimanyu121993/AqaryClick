@@ -9,9 +9,7 @@
                 <div class="col-sm-6">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Contract </h4>
                 </div>
-                <div class="col-sm-6">
-                    <a href="{{route('admin.excel-export.grace-export')}}" class="btn btn-primary">Export Graces</a>
-                </div>
+               
             </div><!-- end card header -->
             <div class="card-body  ">
                 <div class="col-sm-12">
