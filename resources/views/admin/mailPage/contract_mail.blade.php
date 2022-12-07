@@ -43,19 +43,19 @@
                         src="http://www.uberconference.com/static/img2/emails/announcement_l.gif">
                 </div>
                 <div style="display:inline-block;width:70%;vertical-align:top;color: #f08a48;text-align:center">
-                    <div style="font-size:42px;font-weight:bold;padding-bottom:12px;padding-top:25px">Welcome &nbsp; {{ $tenant->tenant_english_name }}
-                        <div style="font-size:24px;font-weight:bold;padding-bottom:12px;padding-top:6px">You are Registered Successfully</div>
+                    <div style="font-size:42px;font-weight:bold;padding-bottom:12px;padding-top:25px">Welcome!
+                        <div style="font-size:24px;font-weight:bold;padding-bottom:12px;padding-top:6px">Your Contract Registered Successfully</div>
 
                     </div>
                     <hr style="width:80%;border:1px solid #10e6e6">
-                    <div style="font-size:24px;font-weight:normal;padding-top:12px;padding-bottom:6px">Your basic
+                    <div style="font-size:24px;font-weight:normal;padding-top:12px;padding-bottom:6px">Your contract
                         details:</div>
                     <table style="margin:auto">
                         <tbody>
                             <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px">Tenant Name</td>
+                                <td style="color:#10e6e6;font-size:14px;padding:6px">Contract Code</td>
                                 <td style="color:#10e6e6;font-size:14px">
-                                    {{ $tenant->tenant_english_name }}
+                                    {{$data->contract_code}}
                                 </td>
                             </tr>
                         </tbody>
@@ -63,11 +63,11 @@
                     <table style="margin:auto">
                         <tbody>
                             <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Email
+                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Document
                                 </td>
                                 <td
                                     style="color:#10e6e6;font-size:14px;padding-right:6px;white-space:nowrap;text-decoration:none">
-                                    {{ $tenant->email }}
+                                    {{$data->qid_document}}
                                 </td>
                             </tr>
                         </tbody>
@@ -75,8 +75,8 @@
                     <table style="margin:auto">
                         <tbody>
                             <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Tenant Code</td>
-                                <td style="color:#10e6e6;font-size:14px;white-space:nowrap">{{ $tenant->tenant_code }}</td>
+                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Mobile Number</td>
+                                <td style="color:#10e6e6;font-size:14px;white-space:nowrap">{{$data->tenant_mobile}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -91,14 +91,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div style="width:15%;display:inline-block;vertical-align:top">
-                    <img style="width:100%;min-height:auto"
-                        src="">
-                </div>
-            </div>
-            <div style="text-align:center">
-                <img style="width:100%;min-height:auto;vertical-align:bottom"
-                    src="">
+
             </div>
         </div>
     </div>
@@ -109,3 +102,4 @@
     </div>
 
 </html>
+

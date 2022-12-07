@@ -358,6 +358,7 @@ class InvoiceController extends Controller
         $cheque=Cheque::where('invoice_no',$invoice_no)->get();
         $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
 
+        $invoice->TenantName->email='o6323756@gmail.com';
 
         Mail::to($invoice->TenantName->email)->send(new InvoiceMail($invoice,$lessor,$company,$symbol,$cheque,$unit_ref,$due_amt,$amt_paid,$total_amt,$tax_amt));
 

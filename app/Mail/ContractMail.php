@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceClickMail extends Mailable
+class ContractMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class InvoiceClickMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Invoice Generated Successfully',
+            subject: 'Contract Rgister Mail',
         );
     }
 
@@ -43,9 +43,9 @@ class InvoiceClickMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'admin.mailPage.invoice_mailpage',
-            with: [
-                'data' => $this->data,
+            view: 'admin.mailPage.contract_mail',
+            with:[
+                'data'=>$this->data,
             ],
         );
     }

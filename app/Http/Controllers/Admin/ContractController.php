@@ -12,6 +12,7 @@ use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
+use App\Mail\ContractMail;
 use App\Models\BusinessDetail;
 use App\Models\ContractRecipt;
 use App\Models\User;
@@ -21,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class ContractController extends Controller
@@ -164,10 +166,10 @@ class ContractController extends Controller
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
-
             'remark' => $request->remark,
         ]);
         if ($data) {
+            Mail::to($data->tenantDetails->email)->send(new ContractMail($data));
             return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
