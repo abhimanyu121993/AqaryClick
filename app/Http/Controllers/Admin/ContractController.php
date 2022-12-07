@@ -516,15 +516,15 @@ class ContractController extends Controller
                                 "attestation_expiry"=>'',
                                 "contract_status"=>'',
                                 "currency"=>'',
-                                "rent_amount"=>'',
-                                "user_amt"=>'',
-                                "total_invoice"=>'',
+                                "rent_amount"=>0,
+                                "user_amt"=>0,
+                                "total_invoice"=>0,
                                 "contract_type"=>'',
                                 "guarantees"=>'',
                                 "guarantees_payment_method"=>'',
                                 "remark"=>'',
-                                "discount"=>'',
-                                "increament_term"=>'',
+                                "discount"=>0,
+                                "increament_term"=>0,
                                 "status"=>''
                             );
                             // dd($insertData);

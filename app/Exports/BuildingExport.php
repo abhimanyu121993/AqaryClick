@@ -18,7 +18,7 @@ class BuildingExport implements FromCollection,WithHeadings,WithStyles, WithEven
     */
     public function collection()
     {
-        return Building::select('building_no','name','building_code','zone_no','area','city','ownership_no','ownership_type','pincode','location')->get();
+        return Building::select('building_no','name','building_code','street_no','zone_no','area','city','ownership_no','ownership_type','pincode','location')->get();
     }
 
     public function headings():array
@@ -29,6 +29,7 @@ class BuildingExport implements FromCollection,WithHeadings,WithStyles, WithEven
             'Building Code',
             'Property Name',
             'Bldg No',
+            'ST No',
             'Zone No',
             'Zone Name',
             'City Name',
