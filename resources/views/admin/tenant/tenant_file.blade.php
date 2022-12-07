@@ -174,7 +174,7 @@ var count = 1;
         $(addButton4).click(function() {
 
             $(wrapper4).append(fieldHTML4); //Add field html
-
+            $('.select2').select2();
         });
 
         //Once remove button is clicked
