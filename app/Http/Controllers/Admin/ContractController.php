@@ -37,8 +37,6 @@ class ContractController extends Controller
 
         $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
         $contract = Contract::all();
-        $max_id = Contract::max('id') + 1;
-        $CC = 'CC' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . $max_id;
         $tenant = Tenant::all();
         $lessor = Customer::all();
         $tenant_doc = Tenant::pluck('tenant_document');

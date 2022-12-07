@@ -269,5 +269,7 @@ class ElectricityController extends Controller
                         $filePath = public_path('upload/electricity_doc/'.$path);
                        return Response::download($filePath);
                     }
-                
+                    public function ImportExportElectricity(){
+                        return view('admin.electricity.import_export');
+                    }
 }

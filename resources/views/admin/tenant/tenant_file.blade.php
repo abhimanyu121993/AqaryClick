@@ -4,7 +4,9 @@
 @php
                                             $filehtml='<option value="">--Select Code--</option>';
                                             foreach($tenantcode as $b){
-                                                $filehtml .='<option value="'.$b->id.'">'.$b->tenant_code??''.'</option>';
+                                                $filehtml .='<option value="'.$b->id.'">'.$b->tenant_english_name??'';
+                                                    $filehtml .=' / '.$b->tenant_primary_mobile??'';
+                                                    $filehtml .='</option>';
                                             }
                                         @endphp
     <div class="row">
@@ -23,14 +25,14 @@
                             <div class="card-body field_wrapper4">
                              <div class="row clone4">
                             <div class="col-xxl-3 col-md-3">
-                                <label for="space" class="form-label">Tenant Code</label>
-                                <select class="form-control select2 form-select" id="tenant_code" name="tenant_code[]">
+                                <label for="space" class="form-label">Tenant</label>
+                                <select class="select2 form-select js-example-basic-single" id="tenant_code" name="tenant_code[]">
                                 @if (isset($city))
                                     <option value="{{ $city->tenant_code }}" selected>{{ $city->tenant_code}}</option>
                                     @else
                                     <option value="">--Select Code--</option>
                                     @foreach ($tenantcode as $code)
-                                    <option value="{{ $code->id }}">{{ $code->tenant_code}}</option>
+                                    <option value="{{ $code->id }}">{{ $code->tenant_english_name??''}}/{{ $code->tenant_primary_mobile??''}}</option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -152,7 +154,7 @@ var count = 1;
         var addButton4 = $('.add_button4'); //Add button selector
         var wrapper4 = $('.field_wrapper4'); //Input field wrapper
         var fieldHTML4 = '<div class="row">\
-        <div class="col-sm-3"><label for="" class="form-label">Tenant Code</label>\
+        <div class="col-sm-3"><label for="" class="form-label">Tenant</label>\
 <select class="form-control select2 form-select" name="tenant_code[]">'+filehtml+'</select>\
            </div>\
         <div class="col-sm-4">\
