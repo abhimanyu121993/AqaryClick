@@ -282,18 +282,18 @@ class TenantController extends Controller
                         }
                     
                         $insertData = array(
-                            "file_no" => $importData[0],
-                            "tenant_code" => $importData[1],
-                            'tenant_document'=>$doctype,
+                            "file_no" => $importData[0]??'',
+                            "tenant_code" => $importData[1]??'',
+                            'tenant_document'=>$doctype??'',
                             'passport'=>$p,
                             'qid_document'=>$q,
                             'cr_document'=>$cr,
-                            'tenant_english_name'=>$importData[4],
-                            'tenant_primary_mobile'=>$importData[5],
-                            'tenant_secondary_mobile'=>$importData[6],
-                            'email'=>$importData[7],
-                            'post_office'=>$importData[8],
-                            'status'=>$importData[9],
+                            'tenant_english_name'=>$importData[4]??'',
+                            'tenant_primary_mobile'=>$importData[5]??'',
+                            'tenant_secondary_mobile'=>$importData[6]??'',
+                            'email'=>$importData[7]??'',
+                            'post_office'=>$importData[8]??'',
+                            'status'=>$importData[9]??'',
                             'tenant_type'=>'TP',
                             
                         );

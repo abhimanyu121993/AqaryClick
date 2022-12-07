@@ -444,7 +444,6 @@ public function document($id){
         if($request->hasFile('bulk_upload')){
             $file = $request->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
-            // dd($filename);
             $extension = $file->getClientOriginalExtension();
             $tempPath = $file->getRealPath();
             $fileSize = $file->getSize();
