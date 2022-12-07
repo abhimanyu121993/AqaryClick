@@ -7,6 +7,7 @@ use App\Models\TenantFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 class TenantFileController extends Controller
 {
@@ -40,27 +41,20 @@ class TenantFileController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'file_name*' => 'required',
         ]);
-        for ($i = 0; $i < count($request->file_name); $i++) {
-            if($request->file_name[$i]!= null){ 
-            $mainpic = [];
-            if ($request->hasFile('attachment_file')) {
-                foreach ($request->file('attachment_file') as $file) {
-                    $name = $request->tenant_code[$i] . '-' . time() . '-' . rand(0, 99) . '.' . $file->extension();
-                    $file->move(public_path('upload/tenant/files'), $name);
-                    $mainpic[] = $name;
-                }
-            }
-            $res = TenantFile::create(['user_id' => Auth::user()->id,'tenant_id' => $request->tenant_code[$i], 'file_name' => $request->file_name[$i] ?? '', 'attachment' => $mainpic[$i] ?? '']);
-            if ($res) {
-                return redirect()->back()->with('success', 'File created successfully.');
-            } else {
-                return redirect()->back()->with('error', 'File not created.');
-            }
-        }
-    }    }
+        $files=$request->attachment_file;
+    foreach ($request->tenant_code as $k=>$tcode)
+     {
+         $name=$tcode.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
+        $res = TenantFile::create(['user_id' => Auth::user()->id,'tenant_id' => $tcode, 'file_name' => $request->file_name[$k] ?? '', 'attachment' => $name ?? '']);
+        
+    } 
+    Session::flash('success','File Uploaded Successfully');
+    return redirect()->back();   
+}
 
     /**
      * Display the specified resource.

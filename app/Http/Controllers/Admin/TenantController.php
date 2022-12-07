@@ -65,7 +65,7 @@ class TenantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tenant_code' => 'required',
+            'tenant_code' => 'required|unique:tenants,tenant_code',
             'tenant_english_name' => 'nullable',
             'tenant_arabic_name' => 'nullable',
             'tenant_document' => 'nullable',
@@ -73,15 +73,17 @@ class TenantController extends Controller
             'cr_document' => 'nullable',
             'passport' => 'nullable',
             'tenant_nationality' => 'nullable',
-            'tenant_primary_mobie' => 'nullable',
+            'tenant_primary_mobile' => 'required|unique:tenants,tenant_primary_mobile',
             'tenant_secondary_mobile' => 'nullable',
-            'email' => 'nullable',
+            'email' => 'required|unique:tenants,email',
             'alternate_email'=>'nullable',
             'post_office' => 'nullable',
             'address' => 'nullable',
             'tenant_type' => 'nullable',
-            'unit_type' => 'nullable',
-            'unit_no' => 'nullable',
+            'unit_type' => 'required',
+            'unit_no' => 'required',
+            'sponsor_oid'=>'nullable|unique:tenants,sponsor_oid',
+            'building_name'=>'required',
             'unit_address' => 'nullable',
             'rental_period' => 'nullable',
             'rental_time' => 'nullable',
@@ -90,19 +92,6 @@ class TenantController extends Controller
             'attachment_file' => 'nullable',
             'attachment_remark' => 'nullable'
         ]);
-
-        $otherpic = [];
-
-
-        // if($request->hasFile('attachment_file'))
-        // {
-        //     foreach($request->file('attachment_file') as $file)
-        //     {
-        //         $name='tenant-'.time().'-'.rand(0,99).'.'.$file->extension();
-        //         $file->move(public_path('upload/tenent'),$name);
-        //         $otherpic[]=$name;
-        //     }
-        // }
              $tenant = Tenant::create([
             'user_id' => Auth::user()->id,
             'file_no' => $request->file_no,
