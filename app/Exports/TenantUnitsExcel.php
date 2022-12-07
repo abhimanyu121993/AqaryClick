@@ -26,9 +26,8 @@ class TenantUnitsExcel implements FromCollection,WithHeadings,WithStyles, WithEv
         foreach ($contracts as $c) {
             $data = collect();
             $data->put('Tenant Code',$c->tenantDetails->tenant_code??'');
-            $data->put('QID No',$c->tenantDetails->qid_document??'');
-            $data->put('Cr No',$c->tenantDetails->cr_document??'');
-            $data->put('Passport',$c->tenantDetails->passport??'');
+            $data->put('Establishment Card', $c->document_type);
+            $data->put('ID. No',$c->qid_document??$c->cr_document??$c->passport??'No Available');
             $data->put('Tenant Name',$c->tenantDetails->tenant_english_name??'');
             $data->put('Building Name', $c->tenantDetails->buildingDetails->name ?? '');
             $building = $c->tenantDetails->buildingDetails->id;
@@ -91,9 +90,8 @@ class TenantUnitsExcel implements FromCollection,WithHeadings,WithStyles, WithEv
     {
         return [
             'Tenant Code',
-            'QID No',
-            'Cr No',
-            'Passport',
+            'Establishment Card',
+            'ID. No',
             'Tenant Name',
             'Building Name',
              'Unit Ref 1',
@@ -126,10 +124,10 @@ class TenantUnitsExcel implements FromCollection,WithHeadings,WithStyles, WithEv
             'Actual Revenue',
             'Paid',
             'Outstanding',
-            'Default Revenue Period',
-            'Default Rvenue',
+            'Deffer Revenue Period',
+            'Deffer Rvenue',
             'Total Cheque',
-            'Bounce .Cheque',
+            'Balance .Cheque',
             'Covered PDC',
             'Not Cover',
             'Last Update',

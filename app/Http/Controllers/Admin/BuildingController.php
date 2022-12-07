@@ -480,75 +480,39 @@ public function document($id){
                     // dd($importData_arr);
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
+                        $city = City::where('name', $importData[6])->first()->id ?? '';
                         $insertData = array(
-                            "building_code" => $importData[0],
-                            "building_name" => $importData[1],
-                            "building_type" => $importData[2],
-                            "building_status" => $importData[3],
-                            "ownership_type" => $importData[4],
-                            "ownership_no" => $importData[5],
-                            "pin_no" => $importData[6],
-                            "owner_name" => $importData[7],
-                            "country" => $importData[8],
-                            "city" => $importData[9],
-                            "zone" => $importData[10],
-                            "building_no" => $importData[11],
-                            "street_no" => $importData[12],
-                            "zone_no" => $importData[13],
-                            "building_location_link" => $importData[14],
-                            "person_incharge" => $importData[15],
-                            "job" => $importData[16],
-                            "mobile" => $importData[17],
-                            "remark" => $importData[18],
-                            "building_description" => $importData[19],
+                            "Building Code" => $importData[0],
+                            "Property Name" => $importData[1],
+                            "Bldg No" => $importData[2],
+                            "ST No" => $importData[3],
+                            "Zone No" => $importData[4],
+                            "Zone Name" => $importData[5],
+                            "City Name" => $city,
+                            "Ownership No" => $importData[7],
+                            "Ownership Type" => $importData[8],
+                            "Pin No" => $importData[9],
+                            "Location" => $importData[10],
+                            
                         );
                         // dd($insertData);
-                        if(!empty($insertData['building_code'])){
-                             Building::create([
+                        if(!empty($insertData['Building Code'])){
+                            $res= Building::firstOrCreate(['building_code'=>$insertData['Building Code']],[
                                 'user_id' => Auth::user()->id,
-                                'building_code' =>$insertData['building_code'],
-                                'name' => $insertData['building_name'],
-                                'owner_name'=>$insertData['owner_name'],
-                                'person_incharge'=>$insertData['person_incharge'],
-                                'total_unit'=>0,
-                                'building_type'=>$insertData['building_type'],
-                                'construction_date'=>$insertData['construction_date'] ?? '',
-                                'ownership_type'=>$insertData['ownership_type'],
-                                'ownership_no'=>$insertData['ownership_no'],
-                                'contract_exp'=>$insertData['contract_exp'] ?? '',
-                                'person_job'=>$insertData['job'],
-                                'building_no'=>$insertData['building_no'],
-                                'building_age'=>$insertData['building_age'] ?? '',
-                                'building_desc'=>$insertData['building_description'],
-                                'building_status'=>$insertData['building_status'],
-                                'appraise_date'=>$insertData['appraise_date'] ?? '',
-                                'land_size_foot'=>$insertData['land_size_foot'] ?? '',
-                                'price_foot'=>$insertData['price_foot'] ?? '',
-                                'total_land'=>$insertData['status'] ?? '',
-                                'status'=>$insertData['building_name'] ?? '',
-                                'landsize_meter'=>$insertData['landsize_meter'] ?? '',
-                                'cost_building'=>$insertData['cost_building'] ?? '',
-                                'building_value'=>$insertData['building_value'] ?? '',
-                                'monthly_income'=>$insertData['monthly_income'] ?? '',
-                                'annual_income'=>$insertData['annual_income'] ?? '',
-                                'payback'=>$insertData['payback'] ?? '',
-                                'property_vlaue'=>$insertData['property_vlaue'] ?? '',
-                                'zone_no'=>$insertData['zone_no'] ?? '',
-                                'street_no'=>$insertData['street_no'] ?? '',
-                                'person_mobile'=>$insertData['mobile'] ?? '',
-                                'building_receive_date'=>$insertData['building_receive_date'] ?? '',
-                                'space'=>$insertData['space'] ?? '',
-                                'location'=>$insertData['building_location_link'] ?? '',
-                                'contract_no'=>$insertData['contract_no'] ?? '',
-                                'country'=>$insertData['country'] ?? '',
-                                'city'=>$insertData['city'] ?? '',
-                                'area'=>$insertData['area'] ?? '',
-                                'pincode'=>$insertData['pin_no'] ?? '',
-                                // 'building_pic'=>$mainpic,
-                                // 'file' =>json_encode($otherpic),
-                                'remark'=>$insertData['remark'] ?? '',
+                                'building_code' =>$insertData['Building Code'],
+                                'name' => $insertData['Property Name'],
+                                'building_no'=>$insertData['Bldg No'],
+                                'street_no'=>$insertData['ST No'],
+                                'zone_no'=>$insertData['Zone No'],
+                                'area'=>$insertData['Zone Name'],
+                                'city'=>$insertData['City Name'],
+                                'ownership_no'=>$insertData['Ownership No'],
+                                'ownership_type'=>$insertData['Ownership Type'],
+                                'pincode'=>$insertData['Pin No'],
+                                'location'=>$insertData['Location'],
+                                
                             ]);
-
+                          
                         }
                     }
                     Session::flash('success', 'Import Successful.');

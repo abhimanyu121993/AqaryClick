@@ -479,7 +479,8 @@ class ContractController extends Controller
 
                     foreach ($importData_arr as $importData) {
                         $tenant_id = '';
-                        $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->first();
+                        $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->where('tenant_primary_mobile',$importData[4])->first();
+                        // return $tenant;
                         if ($tenant) {
                         $contract_code= 'CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
                             $tenant_id = $tenant->id;
@@ -487,56 +488,32 @@ class ContractController extends Controller
                                 "user_id" => Auth::user()->id,
                                 "contract_code" => $contract_code,
                                 "tenant_name" => $tenant_id,
-                                "document_type" => '',
-                                "qid_document" =>'',
-                                "cr_document" =>'',
-                                "passport_document" =>'',
-                                "tenant_mobile" =>$tenant->tenant_primary_mobile,
-                                "tenant_nationality" =>$tenant->tenant_nationality,
-                                "sponsor_nationality" =>$tenant->sponsor_nationality,
-                                "sponsor_id" =>$tenant->sponsor_oid,
-                                "sponsor_name" =>$tenant->sponsor_name,
-                                "sponsor_mobile" =>$tenant->sponsor_phone,
-                                "lessor" =>Auth::user()->id,
-                                "company_id" =>0,
-                                "authorized_person" =>"",
-                                "lessor_sign" =>'',
-                                "release_date" => $importData[9],
-                                "lease_start_date" => $importData[10],
-                                "lease_end_date" => $importData[11],
-                                "lease_period_month"=>carbon::parse($importData[11])->diffInMonths($importData[10]),
-                                "lease_period_day"=>carbon::parse($importData[11])->diffInDays($importData[10]),
-                                "is_grace"=>'',
-                                "grace_start_date"=>'',
-                                "grace_end_date"=>'',
-                                "grace_period_month"=>'',
-                                "grace_period_day"=>'',
-                                "approved_by"=>'',
-                                "attestation_no"=>$importData[5],
-                                "attestation_status"=>'',
-                                "attestation_expiry"=>'',
-                                "contract_status"=>'',
-                                "currency"=>'',
-                                "rent_amount"=>0,
-                                "user_amt"=>0,
-                                "total_invoice"=>0,
-                                "contract_type"=>'',
-                                "guarantees"=>'',
-                                "guarantees_payment_method"=>'',
-                                "remark"=>'',
-                                "discount"=>0,
-                                "increament_term"=>0,
-                                "status"=>''
+                                'lessor'=>'',
+                                'sponsor_name'=>$importData[2],
+                                'sponsor_id'=>$importData[3],
+                                'tenant_mobile'=>$importData[4],
+                                'attestation_no'=>$importData[5],
+                                'attestation_expiry'=>$importData[6],
+                                'created_at'=>Carbon::createFromFormat('d-M-Y',$importData[8])->timestamp,
+                                'release_date'=>$importData[9],
+                                'lease_start_date'=>$importData[10],
+                                'lease_end_date'=>$importData[11],
+                                'lease_period_month'=>$importData[12],
+                                'discount'=>$importData[14],
+                                'increament_term'=>$importData[15],
+                                'status'=>$importData[16],
+                                'contract_type'=>'Internal',
+                                
                             );
                             // dd($insertData);
                             if (count($insertData)>0) {
-                                Contract::create($insertData);
+                                Contract::Create($insertData);
 
                             }
                         
                         }
                         else{
-                            Session::flash('error', 'Importing Cancelled Tenant not found');
+                            Session::flash('error', 'Data Imported But Some Importing Cancelled Due To Tenant not found');
                             return redirect()->back();
                         }
                     }

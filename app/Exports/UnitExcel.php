@@ -18,9 +18,10 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
     {
        
         $d = collect();
-        $units= Unit::select('unit_ref','revenue','unit_status','unit_type','unit_no','unit_floor','unit_size','actual_rent','remark')->get()->append(['unit_type_name','unit_status_name'])->makeHidden(['unit_status','unit_type']);
+        $units= Unit::select('unit_ref','revenue','unit_status','building_id','unit_type','unit_no','unit_floor','unit_size','actual_rent','remark')->get()->append(['unit_type_name','unit_status_name','buildingDetails'])->makeHidden(['unit_status','unit_type']);
         foreach($units as $unit){
             $data = collect();
+            $data->put('Building name', $unit->buildingDetails->name??'');
             $data->put('Unit Ref', $unit->unit_ref);
             $data->put('Revenue Code',$unit->revenue);
             $data->put('Unit Type',$unit->unit_type_name);
@@ -40,6 +41,7 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
     //    $building= new Unit;
     //     return $building->getTableColumns();
         return [
+            'Building Name',
             'Unit Ref',
             'Revenue Code',
             'Unit Type',

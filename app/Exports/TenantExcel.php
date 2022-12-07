@@ -16,7 +16,23 @@ class TenantExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
     */
     public function collection()
     {
-        return Tenant::select('file_no','tenant_code','qid_document','cr_document','passport','tenant_english_name','tenant_primary_mobile','tenant_secondary_mobile','email','post_office','status')->get();
+        $d=collect();        
+        $tenants=Tenant::select('file_no','tenant_code','qid_document','cr_document','passport','tenant_document','tenant_english_name','tenant_primary_mobile','tenant_secondary_mobile','email','post_office','status')->get();
+        foreach($tenants as $tenant){
+            $data = collect();
+            $data->put('File No',$tenant->file_no);
+            $data->put('Tenant Code',$tenant->tenant_code);
+            $data->put('ID. No',$tenant->qid_document??$tenant->cr_document??$tenant->passport??'No Available');
+            $data->put('Establishment Card',$tenant->tenant_document);
+            $data->put('Tenant Name',$tenant->tenant_english_name);
+            $data->put('Mobile (Primary)',$tenant->tenant_primary_mobile);
+            $data->put('Mobile (Secondary)',$tenant->tenant_secondary_mobile);
+            $data->put('Email',$tenant->email);
+            $data->put('P.O. Box',$tenant->post_office);
+            $data->put('Status',$tenant->status);
+            $d->push($data);
+        }
+        return $d;
     }
     public function headings():array
     {
@@ -25,9 +41,8 @@ class TenantExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
         return [
             'File No',
             'Tenant Code',
-            'Qid No',
-            'Cr No',
-            'Passport',
+            'ID. No',
+            'Establishment Card',
             'Tenant Name',
             'Mobile (Primary)',
             'Mobile (Secondary)',
