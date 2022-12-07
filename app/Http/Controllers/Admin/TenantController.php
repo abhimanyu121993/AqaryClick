@@ -298,7 +298,7 @@ class TenantController extends Controller
                             
                         );
                         // dd($insertData['unit_type']);
-                        if(!empty($insertData['file_no'])){
+                        if(count($insertData)>0){
                             Tenant::create($insertData);
                         }
                     }
