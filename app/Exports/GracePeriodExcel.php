@@ -7,7 +7,10 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-class GracePeriodExcel implements FromCollection,WithHeadings,WithStyles
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+
+class GracePeriodExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -62,10 +65,27 @@ class GracePeriodExcel implements FromCollection,WithHeadings,WithStyles
             'remark',
         ];
     }
+  
     public function styles(Worksheet $sheet)
-    {
+{
     return [
        1    => ['font' => ['bold' => true]],
     ];
-    }
+}
+
+public function registerEvents(): array
+{
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+
+                $event->sheet->getDelegate()->getStyle('A1:J1')
+                    ->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('F4B084');
+
+
+        },
+    ];
+}
 }

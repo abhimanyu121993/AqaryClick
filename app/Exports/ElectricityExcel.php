@@ -64,26 +64,27 @@ class ElectricityExcel implements FromCollection,WithHeadings,WithStyles, WithEv
             'Remark',
         ];
     }
+
     public function styles(Worksheet $sheet)
-    {
+{
+    return [
+       1    => ['font' => ['bold' => true]],
+    ];
+}
+
+public function registerEvents(): array
+{
         return [
-           1    => ['font' => ['bold' => true]],
-        ];
-    }
-    
-    public function registerEvents(): array
-    {
-            return [
-                AfterSheet::class => function (AfterSheet $event) {
-    
-                    $event->sheet->getDelegate()->getStyle('A1:J1')
-                        ->getFill()
-                        ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-                        ->getStartColor()
-                        ->setARGB('F4B084');
-    
-    
-            },
-        ];
-    }
+            AfterSheet::class => function (AfterSheet $event) {
+
+                $event->sheet->getDelegate()->getStyle('A1:J1')
+                    ->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('F4B084');
+
+
+        },
+    ];
+}
 }

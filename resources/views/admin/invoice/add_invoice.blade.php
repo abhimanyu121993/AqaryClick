@@ -95,7 +95,7 @@
                                 <input type="text" class="form-control" value="{{$INV}}" id="invoice_no" name="invoice_no" readonly>
                             </div>
                         </div> -->
-                        <div class="col-xxl-3 col-md-3">
+                        <div class="col-xxl-3 col-md-4">
                             <label class="form-label" for="flag">Due Date</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Due Date" readonly>
@@ -115,7 +115,7 @@
                         </div>
 
 
-                        <div class="col-xxl-3 col-md-3">
+                        <div class="col-xxl-3 col-md-4">
                             <label class="form-label" for="flag">Overdue Period</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="overdue_period" name="overdue_period" placeholder="Overdue Period" readonly>
@@ -157,12 +157,12 @@
                                 <input type="file" class="form-control" id="attachment_file" name="tenant_attachment[]" multiple>
                             </div>
                         </div>
-                        <div class="col-xxl-3 col-md-3">
+                        <!-- <div class="col-xxl-3 col-md-3">
                             <label class="form-label" for="flag">Tax No</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="tax_no" name="tax_no" placeholder="Enter Tax Name">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card mt-5">
                         <div class="card-header align-items-center d-flex">

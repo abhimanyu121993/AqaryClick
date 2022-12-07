@@ -6,12 +6,15 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex table-main-heading">
-                <h4 class="card-title mb-0 flex-grow-1">Manage Legal</h4>
+                <h4 class="card-title mb-0 flex-grow-1">{{isset($data)? 'Update Legal': 'Manage Legal' }}</h4>
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
-                    <form action="{{route('admin.legal.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{isset($data)? route('admin.legal.update', $data->id): route('admin.legal.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if (isset($data))
+                                @method('patch')
+                            @endif
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
                             <ul>
@@ -26,23 +29,27 @@
                                 <label class="form-label" for="flag">Choose Contract</label>
                                 <select class="select2 form-select" id="contract_id" name='contract_id'>
                                     <option value="">--Select Contract--</option>
+                                    @if (isset($data))
+                                    <option value="{{ $data->contract_id }}" selected>{{ $data->contractDetails->contract_code??''}}</option>
+                                    @else
                                     @foreach($tenantDetail as $td)
                                     <option value="{{ $td->id}}">{{ $td->contract_code??'' }}</option>
                                     @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Tenant Name</label>
-                                <input type="text" class="form-control" id="tenant_name" name="tenant_name" readonly>
+                                <input type="text" class="form-control" value="{{isset($data)? $data->tenant_name: '' }}" id="tenant_name" name="tenant_name" readonly>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label class="form-label" for="flag">Mobile No</label>
-                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" readonly>
+                                <input type="text" class="form-control" value="{{isset($data)? $data->tenant_mobile: '' }}" id="mobile_no" name="mobile_no" readonly>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Unit Ref</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="unit_ref" name="unit_ref" readonly>
+                                    <input type="text" class="form-control" value="{{isset($data)? $data->unit_ref: '' }}" id="unit_ref" name="unit_ref" readonly>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-4">
@@ -72,13 +79,13 @@
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Remark</label>
                                 <textarea class="form-control" name="remark" >
-                                
+                                {{isset($data)? $data->remark: '' }}
                                     </textarea>
                             </div>
                         </div>
                         <div class="row gy-4">
                             <div class="col-xxl-3 col-md-6">
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-primary" type="submit">{{isset($data)? 'Update': 'Submit' }}</button>
                             </div>
                         </div>
                     </form>
@@ -98,12 +105,12 @@
                         <thead class="thead-color">
                             <tr>
                      <th scope="col">Sr.No.</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Mobile</th>
-                                <th scope="col">Unit Ref</th>
-                                <th scope="col">File</th>                                
+                                <th scope="col">Contract code</th>
+                                <th scope="col">Tenant Name</th>
+                                <th scope="col">Mobile No</th>
+                                <th scope="col">Unit Ref.</th>                                
                                 <th scope="col">Status</th>
-                                <th scope="col">Current Status</th>
+                                <th scope="col">File</th>
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
 
@@ -113,45 +120,59 @@
                         @foreach($legalDetail as $legal)
                                 <tr>
                                     <th scope="row">{{ $loop->index+ 1 }}</th>
-                                    <td>{{ $legal->tenantName->tenant_english_name??''}}</td>
+                                    <td>{{ $legal->contractDetails->contract_code??''}}</td>
                                     <td>
-                                        {{ $legal->tenant_mobile??''}}
+                                        {{ $legal->contractDetails->tenantDetails->tenant_english_name??''}}
+                                    </td>
+                                    <td>
+                                    {{ $legal->contractDetails->tenantDetails->tenant_primary_mobile??''}}
+
                                     </td>
                                     <td>
                                     {{ $legal->unit_ref??''}}
 
                         </td>
-                        <form action="{{ route('admin.alllegal') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="lid" value="{{ $legal->id ?? '' }}" />
-
                         <td>
-                             
-                            <div class="d-flex">
-                                    <img src="{{asset('upload/legal_doc/'.$legal->file)}}" class="" style="height:50px;width:50px;" /> &nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name='attachment_file[]' class="form-control" multiple />
-                                </div>  
+                        {{ $legal->status??''}}
+
                     </td>
                                     <td>
-                                <select class="select2 form-select" id="process" name='status'>
-                                <option value="Collection Process">Collection Process</option>
-                                <option value="In the Court">In the Court</option>
-                                <option value="Settelment Process">Settelment Process</option>
-                                <option value="Settelment Done">Settelment Done</option>
-                                <option value="Exempt by the lessor">Exempt by the lessor</option>
-                                </select>
+                                    <div class="dropdown">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="ri-eye-2-fill"></i>
+                                            </a>
+                                            @php $bid=Crypt::encrypt($legal->id); @endphp
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            @php $pics=json_decode($legal->file); @endphp
+                                            @foreach ($pics as $pic)
+                                                <li><a href="{{ asset('upload/legal_doc').'/'.$pic}}" target="_ blank">{{  $pic ?? ''   }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                        </div>
                                     </td>
                                     <td>
-                                        {{ $legal->status??'' }}
-                                    </td>
-                                    <td>
-                                <input type="text" class="form-control" name="remark" value="{{ isset($legal)? $legal->remark : '' }}" />                                
+                                        {{ $legal->remark??'' }}
                                     </td>
                            <td>
-                           <button type="submit" class="btn-icon btn btn-primary btn-round btn-sm"
-                                                         ><i data-feather="check-circle"></i></button>
-                                                       
+                           <div class="dropdown">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="ri-more-2-fill"></i>
+                                            </a>
+                                            @php $bid=Crypt::encrypt($legal->id); @endphp
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="{{route('admin.legal.edit',$bid)}}">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+
+                                                <form id="delete-form-{{ $bid }}" action="{{ route('admin.legal.destroy', $bid) }}"
+                                                    method="post" style="display: none;">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
+                                            </ul>
+                                        </div>                                                      
                            </td>
-                           </form>
 
                             </tr>@endforeach
                         </tbody>

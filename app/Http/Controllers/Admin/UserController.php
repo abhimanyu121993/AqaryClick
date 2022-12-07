@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserMail;
 use App\Models\Error;
 use App\Models\User;
 use Exception;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Spatie\Permission\Models\Permission;
@@ -74,6 +76,9 @@ class UserController extends Controller
                 'pic' => $pic_name
             ];
             $user = User::create($data);
+
+            Mail::to($user->email)->send(new UserMail($user));
+
             $role_name = Role::find($request->roleid);
             if($user)
             {
@@ -101,7 +106,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {       
+    {
         $id = Crypt::decrypt($id);
         $userEdit=User::find($id);
         $roles = Role::all();
@@ -191,7 +196,7 @@ class UserController extends Controller
 
     }
 
-    
+
     public function profile()
     {
 
@@ -292,7 +297,7 @@ class UserController extends Controller
     public function isActive($id)
     {
         $ass_active=User::find($id);
-   
+
         if($ass_active->status==1)
         {
             $ass_active->status=0;
@@ -306,7 +311,7 @@ class UserController extends Controller
         else
         {
            return 0;
-    
+
         }
     }
 }
