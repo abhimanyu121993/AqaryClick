@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
 
     <div
         style="width:100%;min-width:320px;font-family:Helvetica,Arial;font-weight:bold;font-size:24px;background-color:#efefeb">
-        <div style="margin:0 auto;width:100%;max-width:598px;text-align:center;background-color:#ffffff">
+        <div style="margin:0 auto;width:100%;max-width:598px;text-align:center;background-color:#242e30">
             <table
                 style="width:100%;max-width:599px;font-family:Arial;font-size:16px;color:#868686;background-color:#efefeb"
                 cellspacing="0" cellpadding="0" border="0">
@@ -26,36 +27,33 @@
                 </tbody>
             </table>
             <table
-                style="width:100%;max-width:600px;font-family:Arial;font-size:16px;color:#868686;background-color:#ffffff;table-layout:fixed"
+                style="width:100%;max-width:600px;font-family:Arial;font-size:16px;color:#868686;background-color:#242e30;table-layout:fixed"
                 cellspacing="0" cellpadding="0" border="0">
                 <tbody>
                     <tr style="background-color:#deab12">
-                        <td style="text-align:center;width:auto;background-color:#ffffff"> </td>
-                        <td style="height:38px;text-align:center;width:75px;background-color:#ffffff">
+                        <td style="text-align:center;width:auto;background-color:#242e30"> </td>
+                        <td style="height:38px;text-align:center;width:75px;background-color:#242e30">
                         </td>
-                        <td style="text-align:center;width:auto;background-color:#ffffff"> </td>
+                        <td style="text-align:center;width:auto;background-color:#242e30"> </td>
                     </tr>
                 </tbody>
             </table>
-            <div style="font-size:0;background-color:#ffffff">
+            <div style="font-size:0;background-color:#242e30">
                 <div style="width:15%;display:inline-block;vertical-align:top">
                     <img style="width:100%;min-height:auto"
                         src="http://www.uberconference.com/static/img2/emails/announcement_l.gif">
                 </div>
-                <div style="display:inline-block;width:70%;vertical-align:top;color: #f08a48;text-align:center">
-                    <div style="font-size:42px;font-weight:bold;padding-bottom:12px;padding-top:25px">Welcome &nbsp; {{ $tenant->tenant_english_name }}
-                        <div style="font-size:24px;font-weight:bold;padding-bottom:12px;padding-top:6px">You are Registered Successfully</div>
-
-                    </div>
-                    <hr style="width:80%;border:1px solid #10e6e6">
-                    <div style="font-size:24px;font-weight:normal;padding-top:12px;padding-bottom:6px">Your basic
+                <div style="display:inline-block;width:70%;vertical-align:top;color:#f7f7f7;text-align:center">
+                    <div style="font-size:42px;font-weight:bold;padding-bottom:12px;padding-top:25px">Invoice Created Successfully</div>
+                    <hr style="width:80%;border:1px solid #2f6577">
+                    <div style="font-size:24px;font-weight:normal;padding-top:12px;padding-bottom:6px">Your Invoice
                         details:</div>
                     <table style="margin:auto">
                         <tbody>
                             <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px">Tenant Name</td>
-                                <td style="color:#10e6e6;font-size:14px">
-                                    {{ $tenant->tenant_english_name }}
+                                <td style="color:#afafaf;font-size:14px;padding:6px">Your Invoice Number</td>
+                                <td style="color:#fff;font-size:14px">
+                                    {{ $data->invoice_no }}
                                 </td>
                             </tr>
                         </tbody>
@@ -63,20 +61,12 @@
                     <table style="margin:auto">
                         <tbody>
                             <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Email
+                                <td style="color:#afafaf;font-size:14px;padding:6px;white-space:nowrap">Your Receipt
                                 </td>
                                 <td
-                                    style="color:#10e6e6;font-size:14px;padding-right:6px;white-space:nowrap;text-decoration:none">
-                                    {{ $tenant->email }}
+                                    style="color:#fff;font-size:14px;padding-right:6px;white-space:nowrap;text-decoration:none">
+                                    {{ $data->receipt_no }}
                                 </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table style="margin:auto">
-                        <tbody>
-                            <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Tenant Code</td>
-                                <td style="color:#10e6e6;font-size:14px;white-space:nowrap">{{ $tenant->tenant_code }}</td>
                             </tr>
                         </tbody>
                     </table>

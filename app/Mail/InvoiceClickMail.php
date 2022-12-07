@@ -43,7 +43,7 @@ class InvoiceClickMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'admin.invoice.send_invoice',
+            view: 'admin.mailPage.invoice_mailpage',
             with: [
                 'data' => $this->data,
             ],
