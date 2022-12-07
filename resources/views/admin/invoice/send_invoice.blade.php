@@ -36,7 +36,7 @@
         <summary>Invoice Reciept</summary>
         <div class="summary">
               <p>
-                Dear user you can  Your invoice reciept on the click of Download Button. Your invoice number is <b></b>.
+                Dear user you can  Your invoice reciept on the click of Download Button. Your invoice number is.
                 <br>
                 Thank You <br>
                 Team Aqary Click.
