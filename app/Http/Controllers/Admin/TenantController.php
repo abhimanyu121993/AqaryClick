@@ -299,7 +299,7 @@ class TenantController extends Controller
                         );
                         // dd($insertData['unit_type']);
                         if(!empty($insertData['file_no'])){
-                            Tenant::firstOrcreate(['tenant_code'=>$insertData['tenant_code']], $insertData);
+                            Tenant::create($insertData);
                         }
                     }
                     Session::flash('success', 'Import Successful.');
