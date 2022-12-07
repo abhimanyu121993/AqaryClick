@@ -37,7 +37,6 @@
                                 <th scope="col">Tenant Secondary Number</th>
                                 <th scope="col">Primary Email </th>
                                 <th scope="col">Alternative Email </th>
-                                <th scope="col">Files</th>
                                 <th scope="col">Post Office</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Tenant Type</th>
@@ -67,44 +66,6 @@
                             <td>{{$tenant->tenant_secondary_mobile}}</td>
                             <td>{{$tenant->email}}</td>
                             <td>{{$tenant->alternate_email}}</td>
-
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn-sm btn-primary  fileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{$tenant->id}}">
-                                    View
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">All Files Details</h1>
-                                                <button type="button" class="btn-close refreshButton" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="card-body  table-responsive">
-                                                    <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline  table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                                                        <thead class="thead-color">
-                                                            <tr>
-                                                            <th scope="col">File Name</th>
-                                                            <th scope="col">Attachment File</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="file_loop">
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary refreshButton" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-
                             <td>{{$tenant->post_office}}</td>
                             <td>{{$tenant->address}}</td>
                             <td>{{$tenant->tenant_type}}</td>
@@ -133,7 +94,7 @@
                                     </a>
                                     @php $tid=Crypt::encrypt($tenant->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                                        <li><a class="dropdown-item" href="{{route('admin.tenant.edit',$tid)}}">Edit</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $tid }}').submit();">Delete</a></li>
 
                                         <form id="delete-form-{{ $tid }}" action="{{ route('admin.tenant.destroy', $tid) }}" method="post" style="display: none;">
@@ -159,35 +120,5 @@
 
 
 @section('script-area')
-
-
-<script>
-    $(document).ready(function() {
-        $('.fileBtn').click(function() {
-            var id = $(this).val();
-            var newurl = "{{ url('admin/all-files') }}/" + id;
-
-            $.ajax({
-                url: newurl,
-                method: 'get',
-                beforeSend: function() {
-                    $('.fileBtn').attr('disabled', 'true');
-                },
-                success: function(p) {
-                    console.log(p);
-                    $("#file_loop").html(p);
-
-                }
-            });
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $('.refreshButton').click(function() {
-        // window.setTimeout('location.reload()', 1000); 
-        location.reload();
-    }); 
-</script>
 
 @endsection

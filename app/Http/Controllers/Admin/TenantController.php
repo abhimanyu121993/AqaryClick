@@ -118,7 +118,7 @@ class TenantController extends Controller
             'alternate_email'=>$request->alternate_email,
             'post_office' => $request->post_office,
             'tenant_nationality' => $request->tenant_nationality,
-            'unit_address' => $request->tenant_unit_address,
+            'unit_address' => $request->unit_address,
             'account_no' => $request->account_no,
             'building_name' => $request->building_name,
             'unit_no' => $request->unit_no,
@@ -163,7 +163,13 @@ class TenantController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=Crypt::decrypt($id);
+        $editTenant=Tenant::find($id);
+        $nation = Nationality::all();
+        $building = Building::where('user_id', Auth::user()->id)->get();
+        $unitType = UnitType::all();
+
+        return view('admin.tenant.tenantregister',compact('editTenant','nation','building','unitType'));
     }
 
     /**
@@ -175,7 +181,75 @@ class TenantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tenant_code' => 'required',
+            'tenant_english_name' => 'nullable',
+            'tenant_arabic_name' => 'nullable',
+            'tenant_document' => 'nullable',
+            'qid_document' => 'nullable',
+            'cr_document' => 'nullable',
+            'passport' => 'nullable',
+            'tenant_nationality' => 'nullable',
+            'tenant_primary_mobie' => 'nullable',
+            'tenant_secondary_mobile' => 'nullable',
+            'email' => 'nullable',
+            'alternate_email'=>'nullable',
+            'post_office' => 'nullable',
+            'address' => 'nullable',
+            'tenant_type' => 'nullable',
+            'unit_type' => 'nullable',
+            'unit_no' => 'nullable',
+            'unit_address' => 'nullable',
+            'rental_period' => 'nullable',
+            'rental_time' => 'nullable',
+            'payment_methode' => 'nullable',
+            'payment_receipt' => 'nullable',
+            'attachment_file' => 'nullable',
+            'attachment_remark' => 'nullable'
+        ]);
+
+
+        $tenant = Tenant::find($id)->update([
+            'user_id' => Auth::user()->id,
+            'file_no' => $request->file_no,
+            'tenant_code' => $request->tenant_code,
+            'tenant_english_name' => $request->tenant_english_name,
+            'tenant_arabic_name' => $request->tenant_arabic_name,
+            'tenant_type' => $request->tenant_type,
+            'tenant_document' => $request->tenant_document,
+            'qid_document' => $request->qid_document,
+            'cr_document' => $request->cr_document,
+            'passport' => $request->passport,
+            'tenant_primary_mobile' => $request->tenant_primary_mobile,
+            'tenant_secondary_mobile' => $request->tenant_secondary_mobile,
+            'email' => $request->email,
+            'alternate_email'=>$request->alternate_email,
+            'post_office' => $request->post_office,
+            'tenant_nationality' => $request->tenant_nationality,
+            'unit_address' => $request->unit_address,
+            'account_no' => $request->account_no,
+            'building_name' => $request->building_name,
+            'unit_no' => $request->unit_no,
+            'status' => $request->status,
+            'total_unit' => $request->total_unit,
+            'unit_type' => $request->unit_type,
+            'rental_period' => $request->rental_period,
+            'rental_time' => $request->rental_time,
+            'payment_method' => $request->payment_method,
+            'payment_receipt' => $request->payment_receipt,
+            'sponsor_name' => $request->sponsor_name,
+            'sponsor_oid' => $request->sponsor_oid,
+            'sponsor_email' => $request->sponsor_email,
+            'sponsor_phone' => $request->sponsor_phone,
+            'sponsor_nationality' => $request->sponsor_nationality,
+            'attachment_remark' => $request->attachment_remark,
+        ]);
+
+        if ($tenant) {
+            return redirect()->back()->with('success', 'Tenant update successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Tenant not updated.');
+        }
     }
 
     /**
@@ -338,20 +412,4 @@ class TenantController extends Controller
         }
     }
 
-
-    public function fileDetails($id)
-    {  
-        $html = "";
-        $fileDetails = Tenant::find($id);
-        $name_file = json_decode($fileDetails->file_name);
-        
-        $file_attachment = json_decode($fileDetails->attachment_file);
-        
-    foreach($name_file as $k=>$files){
-        $html .="
-        <tr><td>$files</td><td>$file_attachment[$k]</td></tr>
-        ";
-    }
-      return $html;
-    }
 }

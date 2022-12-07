@@ -184,7 +184,6 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
     Route::get('tenant-download-document/{path}',[TenantController::class,'tenantsDownloadDocument'])->name('TenantsDownloadDocument');
 
-    Route::get('/all-files/{id}',[TenantController::class,'fileDetails'])->name('fileDetails');
     Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
 
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');

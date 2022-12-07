@@ -1,5 +1,5 @@
-@extends('admin.includes.layout', ['breadcrumb_title' => 'Register Tenant'])
-@section('title', 'Register Tenant')
+@extends('admin.includes.layout', ['breadcrumb_title' => isset($editTenant)? 'Update Tenant':'Register Tenant'])
+@section('title',  isset($editTenant)? 'Update Tenant':'Register Tenant')
 @section('main-content')
     <div class="row">
         <div class="col-6">
@@ -50,11 +50,14 @@
                     <h4 class="card-title mb-0 flex-grow-1"> Tenant Detail</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
-                    <form action="{{ route('admin.tenant.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ isset($editTenant)? route('admin.tenant.update',$editTenant->id):route('admin.tenant.store') }}" method="POST" enctype="multipart/form-data">
                         {{-- @if (isset($customer))
                         @method('patch')
                     @endif --}}
                         @csrf
+                        @if (isset($editTenant))
+                            @method('PATCH')
+                        @endif
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible">
                                 <ul>
@@ -68,7 +71,11 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Tenant Type</label>
                                 <select class="form-control" id="tenant_type" name="tenant_type">
-                                    <option value="" selected hidden>-----Select Tenant Type-----</option>
+                                    <option value="{{isset($editTenant)? $editTenant->tenant_type:''}}" selected hidden> 
+                                        {{isset($editTenant)? ($editTenant->tenant_type =='TC'?'Company':''):'-----Select Tenant Type-----'}}
+                                        {{isset($editTenant)? ($editTenant->tenant_type =='TP'?'Personal':''):'-----Select Tenant Type-----'}}
+                                        {{isset($editTenant)? ($editTenant->tenant_type =='TG'?'Government':''):'-----Select Tenant Type-----'}}
+                                    </option>
                                     <option value="TP">Personal</option>
                                     <option value="TC">Company</option>
                                     <option value="TG">Government</option>
@@ -78,14 +85,14 @@
                             <div class=" col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">File No</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="file_no" name="file_no" value=""
+                                    <input type="text" class="form-control" id="{{isset($editTenant)? '':'file_no'}}" name="file_no" value="{{$editTenant->file_no ?? ''}}"
                                         placeholder="Enter File No">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Tenant Code</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code">
+                                    <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code" value="{{$editTenant->tenant_code ?? ''}}">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
@@ -93,7 +100,7 @@
                                         class="text-danger">(English)</sup> </label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="tenant_english_name"
-                                        placeholder="Enter Tenant Name (English)">
+                                        placeholder="Enter Tenant Name (English)" value="{{$editTenant->tenant_english_name ?? ''}}">
                                 </div>
                             </div>
                             <div class=" col-xxl-3 col-md-3">
@@ -101,13 +108,13 @@
                                         class="text-danger">(Arabic)</sup></label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="tenant_arabic_name"
-                                        placeholder="Enter Tenant Name (Arabic)">
+                                        placeholder="Enter Tenant Name (Arabic)" value="{{$editTenant->tenant_arabic_name ?? ''}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Document Type</label>
                                 <select class="form-control" id="tenant_document_type" name="tenant_document">
-                                    <option value="" selected hidden>-----Select Document Type-----</option>
+                                    <option value="{{isset($editTenant)? $editTenant->tenant_document:''}}" selected hidden>{{isset($editTenant)? $editTenant->tenant_document:'-----Select Document Type-----'}}</option>
                                     <option value="QID">QID</option>
                                     <option value="CR">CR</option>
                                     <option value="Passport">Passport</option>
@@ -118,39 +125,39 @@
                                 <label for="country" class="form-label">QID</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="qid_document"
-                                        placeholder="QID Document Number">
+                                        placeholder="QID Document Number" value="{{$editTenant->qid_document ?? ''}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2" id="cr">
                                 <label for="state" class="form-label">CR</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="cr_document"
-                                        placeholder="CR Document">
+                                        placeholder="CR Document" value="{{$editTenant->cr_document ?? ''}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2" id="passport">
                                 <label for="country" class="form-label">Passport</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="passport"
-                                        placeholder="Passport Document">
+                                        placeholder="Passport Document" value="{{$editTenant->passport ?? ''}}">
                                 </div>
                             </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="owner_name" class="form-label">Primary Mobile No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No">
+                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No" value="{{$editTenant->tenant_primary_mobile ?? ''}}">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="owner_name" class="form-label">Secondary Mobile No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No">
+                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No" value="{{$editTenant->tenant_secondary_mobile ?? ''}}">
                             </div>
                         </div>
                             <div class=" col-xxl-3 col-md-3">
                                 <label for="incharge_name" class="form-label">Email </label>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                                    <input type="email" class="form-control" name="email" placeholder="Enter Email" value="{{$editTenant->email ?? ''}}">
                                 </div>
                             </div>
                         
@@ -158,21 +165,21 @@
                             <label for="incharge_name" class="form-label">Alternative Email </label>
                             <div class="input-group">
                                 <input type="email" class="form-control" name="alternate_email"
-                                    placeholder="Enter Alternate Email">
+                                    placeholder="Enter Alternate Email" value="{{$editTenant->alternate_email ?? ''}}">
                             </div>
                         </div>
                             <div class="col-xxl-3 col-md-3" id="cname">
                                 <label for="country" class="form-label">Post Office Box</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" name="post_office"
-                                        placeholder="Post Office">
+                                        placeholder="Post Office" value="{{$editTenant->post_office ?? ''}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-2">
                                 <label for="space" class="form-label">Tenant Nationality</label>
                                 <select class="form-select js-example-basic-single" id="customer"
                                     name="tenant_nationality">
-                                    <option value="">---Select Tenant Nationality---</option>
+                                    <option value=" {{isset($editTenant)? $editTenant->tenant_nationality:''}} " selected hidden > {{isset($editTenant)? $editTenant->tenantNationality->name:'---Select Tenant Nationality---'}}</option>
                                     @foreach ($nation as $nationality)
                                         <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
                                     @endforeach
@@ -182,6 +189,7 @@
                             <div class="col-xxl-3 col-md-12">
                                 <label for="remark" class="form-label">Address</label>
                                 <textarea class="form-control" name="unit_address">
+                                    {{$editTenant->unit_address ?? ''}}
                                 </textarea>
                             </div>
 
@@ -190,7 +198,7 @@
 
                                     <select class="form-select js-example-basic-single" id="building_name"
                                         name='building_name'>
-                                            <option value="">--Select Builidng Name--</option>
+                                            <option value="{{isset($editTenant)? $editTenant->building_name:''}}" selected hidden >{{isset($editTenant)? $editTenant->buildingDetails->name:'--Select Builidng Name--'}}</option>
                                             @foreach ($building as $build)
                                                 <option value="{{ $build->id }}">{{ $build->name }}</option>
                                             @endforeach
@@ -200,14 +208,14 @@
                                 <label class="form-label" for="flag">Unit No</label>
                                     <select class="select2 form-select" id="unit_no"
                                         name='unit_no'>
-                                            <option value="">--Select Unit No--</option>
+                                            <option value="{{isset($editTenant)? $editTenant->unit_no:''}}" selected hidden>{{isset($editTenant)? $editTenant->unit_no:'--Select Unit No--'}}</option>
                                     </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Unit Type</label>
                                 <div class="input-group">
                                     <select class="form-select js-example-basic-single" id="unit_type" name="unit_type">
-                                        <option value="">--Select Unit--</option>
+                                        <option value="{{isset($editTenant)? $editTenant->unit_type:''}}">{{isset($editTenant)? $editTenant->unittypeinfo->name:'--Select Unit--'}}</option>
                                         @foreach ($unitType as $unit)
                                             <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                         @endforeach
@@ -224,7 +232,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="process" name="status">
-                                    <option value="" selected hidden>-----Select Status-----</option>
+                                    <option value="{{isset($editTenant)? $editTenant->status:''}}" selected hidden>{{isset($editTenant)? $editTenant->status:'-----Select Status-----'}}</option>
                                     <option value="New Tenant">New Tenant</option>
                                     <option value="Old Tenant">Old Tenant</option>
                                     <option value="Related Party">Related Party</option>
@@ -233,7 +241,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Rental Period</label>
                                 <select class="form-control" id="rental_period" name="rental_period">
-                                    <option value="" selected hidden>-----Select Type-----</option>
+                                    <option value="{{isset($editTenant)? $editTenant->rental_period:''}}" selected hidden>{{isset($editTenant)? $editTenant->rental_period:'-----Select Type-----'}}</option>
                                     <option value="Days">Days</option>
                                     <option value="Months">Months</option>
                                     <option value="Years">Years</option>
@@ -243,13 +251,13 @@
                                 <label for="country" class="form-label" id="change_rental_time">Days</label>
                                 <div class="input-group">
                                     <input type="text" id="change_placeholder" class="form-control"
-                                        name="rental_time" placeholder=" Enter No of Days ">
+                                        name="rental_time" placeholder=" Enter No of Days " value="{{$editTenant->rental_time ?? ''}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Payment Method</label>
                                 <select class="form-control" id="payment_method" name="payment_method">
-                                    <option value="" selected hidden>-----Select Payment Method-----</option>
+                                    <option value="{{isset($editTenant)? $editTenant->payment_method:''}}" selected hidden> {{isset($editTenant)? $editTenant->payment_method:'-----Select Payment Method-----'}}</option>
                                     <option value="Cash">Cash</option>
                                     <option value="Cheques">Cheques</option>
                                     <option value="Transfer Bank">Transfer Bank</option>
@@ -259,7 +267,7 @@
                                 <label for="country" class="form-label">Account Number</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="account_no"
-                                        placeholder=" Account Number ">
+                                        placeholder=" Account Number " value="{{$editTenant->account_no ?? ''}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3" id="has_cheque">
@@ -267,13 +275,13 @@
                                 <div class="form-check-inline ">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input" value="yes"
-                                            name="payment_receipt">Yes
+                                            name="payment_receipt" {{isset($editTenant)? ($editTenant->payment_receipt == 'yes'? 'checked':''):''}}/>Yes
                                     </label>
                                 </div>
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input" value="no"
-                                            name="payment_receipt">No
+                                            name="payment_receipt" {{isset($editTenant)? ($editTenant->payment_receipt == 'no'? 'checked':''):''}} />No
                                     </label>
                                 </div>
 
@@ -287,35 +295,35 @@
                                     <label for="city" class="form-label">Sponsor Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="sponsor_name"
-                                            placeholder="sponsor Name">
+                                            placeholder="sponsor Name" value="{{$editTenant->sponsor_name ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="city" class="form-label">Sponsor OID</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="sponsor_oid"
-                                            placeholder="sponsor OID">
+                                            placeholder="sponsor OID" value="{{$editTenant->sponsor_oid ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="city" class="form-label">Sponsor Email</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="sponsor_email"
-                                            placeholder="Sponsor Email">
+                                            placeholder="Sponsor Email" value="{{$editTenant->sponsor_email ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="city" class="form-label">Sponsor Phone</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="sponsor_phone"
-                                            placeholder="sponsor Phone">
+                                            placeholder="sponsor Phone" value="{{$editTenant->sponsor_phone ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-3">
                                     <label for="space" class="form-label">Sponsor Nationality</label>
                                     <select class="form-select js-example-basic-single" id="sponser_nationality"
                                         name="sponsor_nationality">
-                                        <option value="">---Select Sponsor Nationality---</option>
+                                        <option value="{{isset($editTenant)? $editTenant->sponsor_nationality:''}}" selected hidden>{{isset($editTenant)? $editTenant->nationality->name:'---Select Sponsor Nationality---'}}</option>
                                         @foreach ($nation as $nationality)
                                             <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
                                         @endforeach
@@ -324,32 +332,9 @@
                             </div>
 
                             <div class="row">
-                        <div class="card-body field_wrapper4">
-                <div class="row clone4">
-
-                <div class="col-xxl-3 col-md-6">
-                        <label for="city" class="form-label">File Name</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="file_name[]" placeholder="File Name">
-                        </div>
-                    </div>
-                <div class="col-xxl-3 col-md-5">
-                        <label for="city" class="form-label">File Attachment</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">
-                        </div>
-                    </div>
-
-                                        <div class="col-sm-1">
-                                            <br />
-                                            <a href="javascript:void(0);" class="add_button4 btn btn-success"
-                                                title="Add field">+</a>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-xxl-3 col-md-12">
                                     <label for="remark" class="form-label">Remark</label>
-                                    <textarea class="form-control" name="attachment_remark">
+                                    <textarea class="form-control" name="attachment_remark">{{$editTenant->attachment_remark ?? ''}}
                         </textarea>
                                 </div>
                             </div>
@@ -358,7 +343,7 @@
                         </div>
                         <div class="row gy-4">
                             <div class="col-xxl-3 col-md-3">
-                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-primary" type="submit">{{isset($editTenant)? 'Update':'Save'}}</button>
                             </div>
                         </div>
                     </form>
@@ -371,38 +356,6 @@
 @endsection
 @section('script-area')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>
-        // product detail
-        var addButton4 = $('.add_button4'); //Add button selector
-        var wrapper4 = $('.field_wrapper4'); //Input field wrapper
-        var fieldHTML4 = '<div class="row">\
-        <div class="col-sm-6">\
-                    <label for="" class="form-label">File Name</label>\
-                    <input type="text" class="form-control" name="file_name[]" placeholder="File Name">\
-                </div>\
-                <div class="col-sm-5">\
-                    <label for="" class="form-label">File Attachment</label>\
-                    <input type="file" class="form-control" name="attachment_file[]" placeholder="Attachment File">\
-                </div>\
-                <div class="col-sm-1">\
-                    <br/>\
-                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
-                </div></div>';
-
-        //Once add button is clicked
-        $(addButton4).click(function() {
-
-            $(wrapper4).append(fieldHTML4); //Add field html
-
-        });
-
-        //Once remove button is clicked
-        $(wrapper4).on('click', '.remove_button4', function(e) {
-            e.preventDefault();
-            $(this).closest('.row').remove(); //Remove field html
-
-        });
-    </script>
     <script>
         $(document).ready(function() {
             $('#qid').hide();
