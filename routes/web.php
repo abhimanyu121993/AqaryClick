@@ -103,6 +103,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('get-buildings',[BuildingController::class,'get_buildings'])->name('get-buildings');
     Route::get('import-export-building',[BuildingController::class,'ImportExportBuilding'])->name('ImportExportBuilding');
     Route::get('import-export-unit',[UnitController::class,'ImportExportUnit'])->name('ImportExportUnit');
+    Route::get('import-export-contract',[ContractController::class,'ImportExportContract'])->name('ImportExportContract');
+    Route::get('import-export-tenant',[TenantController::class,'ImportExportTenant'])->name('ImportExportTenant');
+
 
 
     Route::resource('unit',UnitController::class);
@@ -207,6 +210,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('grace-export', [ExcellController::class, 'grace_export'])->name('grace-export');
         Route::get('tenant-unit', [ExcellController::class, 'tenant_unit'])->name('tenant-units');
         Route::get('master', [ExcellController::class, 'master']);
+        Route::get('contract', [ExcellController::class, 'contract']);
      });
 
 });

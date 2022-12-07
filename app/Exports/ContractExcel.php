@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Exports;
+
+use App\Models\Contract;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+class ContractExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
+{
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function collection()
+    {
+        $contacts=Contract::get();
+        $d = collect();
+        
+        foreach($contacts as  $contact){
+            $data = collect();
+            $data->put('1st Party',$contact->tenantDetails->tenant_english_name??'');
+            $data->put('2nd party',$contact->lessorDetails->fname??'');
+            $data->put('Sponsor',$contact->sponsor_name??'');
+            $data->put('Sponsor ID',$contact->sponsor_oid??'');
+            $data->put('Mobile No.',$contact->sponsor_mobile??'');
+            $data->put('Attestation No.',$contact->attestation_no??'');
+            $data->put('Attestation Expiry',$contact->attestation_expiry??'');
+            $data->put('Attestation Remaning month','');
+            $data->put('1st contract Lease Signing Date',$contact->created_at??'');
+            $data->put('Lease Signed Date',$contact->release_date??'');
+            $data->put('Lease from',$contact->lease_start_date??'');
+            $data->put('Lease to',$contact->lease_end_date??'');
+            $data->put('Total contract period',$contact->lease_period_month??'');
+            $data->put('Remaning period','');
+            $data->put('Discount',$contact->discount??'');
+            $data->put('Increment term',$contact->increament_term??'');
+            $data->put('Status',$contact->contract_status??'');
+            $d->push($data);
+        }
+        return $d;
+    }
+    public function headings():array
+    {
+        return [
+            '1st Party',
+            '2nd party ',
+            'Sponsor',
+            'Sponsor ID',
+            'Mobile No.',
+            'Attestation No.',
+            'Attestation Expiry',
+            'Attestation Remaning month ',
+            '1st contract Lease Signing Date',
+            'Lease Signed Date',
+            'Lease from',
+            'Lease to',
+            'Total contract period',
+            'Remaning period ',
+            'Discount ',
+            'Increment term',
+            'Status',
+        ];
+    }
+    
+    public function styles(Worksheet $sheet)
+{
+    return [
+       1    => ['font' => ['bold' => true]],
+    ];
+}
+
+public function registerEvents(): array
+{
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+
+                $event->sheet->getDelegate()->getStyle('A1:J1')
+                    ->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('F4B084');
+
+
+        },
+    ];
+}
+}

@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header align-items-center d-flex table-main-heading">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-12">
                             <h4 class="card-title mb-0 flex-grow-1">Manage Property</h4>
                         </div>
                     </div>

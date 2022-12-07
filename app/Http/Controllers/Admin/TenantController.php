@@ -365,4 +365,8 @@ class TenantController extends Controller
     }
       return $html;
     }
+
+    public function ImportExportTenant(){
+        return view('admin.tenant.import_export');
+    }
 }

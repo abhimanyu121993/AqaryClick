@@ -18,10 +18,9 @@ class TenantMail extends Mailable
      *
      * @return void
      */
-    public function __construct($tennt,$data)
+    public function __construct($tennt)
     {
         $this->tenant=$tennt;
-        $this->data=$data;
     }
 
     /**

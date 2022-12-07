@@ -167,7 +167,7 @@ class InvoiceController extends Controller
     }
         if ($data) {
             Mail::to($data->TenantName->email)->send(new InvoiceClickMail($data));
-            return redirect(url('admin/invoice-print', $request->invoice_no))->with('success', 'Invoice has been created successfully.');
+            return redirect(url('admin/invoice-print',$invoice_no))->with('success', 'Invoice has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Invoice not created.');
         }
@@ -358,10 +358,8 @@ class InvoiceController extends Controller
         $cheque=Cheque::where('invoice_no',$invoice_no)->get();
         $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
 
-        $invoice->TenantName->email='o6323756@gmail.com';
-        //**MAIL CODE HERE**//
 
-        Mail::to($invoice->TenantName->email)->send(new InvoiceMail($invoice));
+        Mail::to($invoice->TenantName->email)->send(new InvoiceMail($invoice,$lessor,$company,$symbol,$cheque,$unit_ref,$due_amt,$amt_paid,$total_amt,$tax_amt));
 
         return view('admin.invoice.invoice_details', compact('invoice','lessor','company','symbol','cheque','unit_ref','due_amt','amt_paid','total_amt','tax_amt'));
     }
