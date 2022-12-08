@@ -16,22 +16,42 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
     */
     public function collection()
     {
-        return Unit::select('unit_ref','revenue','unit_status','unit_type','unit_no','unit_floor','unit_size','actual_rent','remark')->get()->append(['unit_type_name','unit_status_name'])->makeHidden(['unit_status','unit_type']);
+       
+        $d = collect();
+        $units= Unit::select('unit_ref','revenue','unit_status','building_id','unit_type','unit_no','unit_floor','unit_size','actual_rent','remark')->get()->append(['unit_type_name','unit_status_name','buildingDetails'])->makeHidden(['unit_status','unit_type']);
+        foreach($units as $unit){
+            $data = collect();
+            $data->put('Building name', $unit->buildingDetails->name??'');
+            $data->put('Unit Ref', $unit->unit_ref);
+            $data->put('Revenue Code',$unit->revenue);
+            $data->put('Unit Type',$unit->unit_type_name);
+            $data->put('Unit No',$unit->unit_no);
+            $data->put('Floor',$unit->unit_floor);
+            $data->put('Area/m2',$unit->unit_size);
+            $data->put('Unit Rental Rate',$unit->actual_rent);
+            $data->put('Status',$unit->unit_status_name);
+            $data->put('Remark',$unit->remark);
+            $d->push($data);
+            
+        }
+        return $d;
     }
     public function headings():array
     {
     //    $building= new Unit;
     //     return $building->getTableColumns();
         return [
+            'Building Name',
             'Unit Ref',
             'Revenue Code',
+            'Unit Type',
             'Unit No',
             'Floor',
             'Area/m2',
             'Unit Rental Rate',
-            'Remark',
-            'Unit Type',
             'Status',
+            'Remark',
+           
         ];
     }
 

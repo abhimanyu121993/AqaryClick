@@ -71,7 +71,7 @@ class TenantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tenant_code' => 'required',
+            'tenant_code' => 'required|unique:tenants,tenant_code',
             'tenant_english_name' => 'nullable',
             'tenant_arabic_name' => 'nullable',
             'tenant_document' => 'nullable',
@@ -79,15 +79,17 @@ class TenantController extends Controller
             'cr_document' => 'nullable',
             'passport' => 'nullable',
             'tenant_nationality' => 'nullable',
-            'tenant_primary_mobie' => 'nullable',
+            'tenant_primary_mobile' => 'required|unique:tenants,tenant_primary_mobile',
             'tenant_secondary_mobile' => 'nullable',
-            'email' => 'nullable',
+            'email' => 'required|unique:tenants,email',
             'alternate_email'=>'nullable',
             'post_office' => 'nullable',
             'address' => 'nullable',
             'tenant_type' => 'nullable',
-            'unit_type' => 'nullable',
-            'unit_no' => 'nullable',
+            'unit_type' => 'required',
+            'unit_no' => 'required',
+            'sponsor_oid'=>'nullable|unique:tenants,sponsor_oid',
+            'building_name'=>'required',
             'unit_address' => 'nullable',
             'rental_period' => 'nullable',
             'rental_time' => 'nullable',
@@ -98,19 +100,6 @@ class TenantController extends Controller
             'established_card_no'=>'nullable',
             'government_housing_no' => 'nullable',
         ]);
-
-        $otherpic = [];
-
-
-        // if($request->hasFile('attachment_file'))
-        // {
-        //     foreach($request->file('attachment_file') as $file)
-        //     {
-        //         $name='tenant-'.time().'-'.rand(0,99).'.'.$file->extension();
-        //         $file->move(public_path('upload/tenent'),$name);
-        //         $otherpic[]=$name;
-        //     }
-        // }
              $tenant = Tenant::create([
             'user_id' => Auth::user()->id,
             'file_no' => $request->file_no,
@@ -370,62 +359,39 @@ class TenantController extends Controller
                     // dd($importData_arr);
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
+                        $p = '';
+                        $q = '';
+                        $cr = '';
+                        $doctype = $importData[3];
+                        if($doctype=='Passport'){
+                            $p = $importData[2];
+                        }
+                        else if($doctype=='CR'){
+                            $cr=$importData[2];
+                        }
+                        else{
+                            $q=$importData[2];
+                        }
+                    
                         $insertData = array(
-                            "tenant_type" => $importData[0],
-                            "file_no" => $importData[1],
-                            "tenant_code" => $importData[2],
-                            // "tenant_name_arabic" => $importData[4],
-                            "document_no" => $importData[3],
-                            "document_type" => $importData[4],
-                            "tenant_name_english" => $importData[5],
-                            "tenant_primary_no" => $importData[6],
-                            "tenant_secondary_no" => $importData[7],
-                            "email" => $importData[8],
-                            "post_office" => $importData[9],
-                            "tenant_status" => $importData[10],
-                            // "tenant_nationality" => $importData[11],
-                            // "unit_address" => $importData[12],
-                            // "unit_ref" => $importData[13],
-                            // "revenue_code" => $importData[14],
-                            // "remark" => $importData[15],
+                            "file_no" => $importData[0]??'',
+                            "tenant_code" => $importData[1]??'',
+                            'tenant_document'=>$doctype??'',
+                            'passport'=>$p,
+                            'qid_document'=>$q,
+                            'cr_document'=>$cr,
+                            'tenant_english_name'=>$importData[4]??'',
+                            'tenant_primary_mobile'=>$importData[5]??'',
+                            'tenant_secondary_mobile'=>$importData[6]??'',
+                            'email'=>$importData[7]??'',
+                            'post_office'=>$importData[8]??'',
+                            'status'=>$importData[9]??'',
+                            'tenant_type'=>'TP',
+                            
                         );
                         // dd($insertData['unit_type']);
-                        if(!empty($insertData['file_no'])){
-                            Tenant::create([
-                                'user_id' => Auth::user()->id ?? '',
-                                'file_no' => $insertData['file_no'] ?? '',
-                                'tenant_code' => $insertData['tenant_code'] ?? '',
-                                'tenant_english_name' => $insertData['tenant_name_english'] ?? '',
-                                // 'tenant_arabic_name' => $request->tenant_arabic_name,
-                                'tenant_type' => $insertData['tenant_type'] ?? '',
-                                'tenant_document' => $insertData['document_type'] ?? '',
-                                'qid_document' => strtolower(trim($insertData['document_type'])) == 'qid' ? $insertData['document_no'] : '',
-                                'cr_document' => strtolower(trim($insertData['document_type'])) == 'cr' ? $insertData['document_no'] : '',
-                                'passport' => strtolower(trim($insertData['document_type'])) == 'passport' ? $insertData['document_no'] : '',
-                                'tenant_primary_mobile' => $insertData['tenant_primary_no'] ?? '',
-                                'tenant_secondary_mobile' => $insertData['tenant_secondary_no'] ?? '',
-                                'email' => $insertData['email'] ?? '',
-                                'alternate_email'=>$insertData['alternate_email'] ?? '',
-                                'post_office' => $insertData['post_office'] ?? '',
-                                'tenant_nationality' => $insertData['tenant_nationality'] ?? '',
-                                'unit_address' => $insertData['unit_address'] ?? '',
-                                'account_no' => $insertData['account_no'] ?? '',
-                                'building_name' => $insertData['tenant_type'],
-                                'status' => $insertData['tenant_status'] ?? '',
-                                // 'total_unit' => $insertData['total_unit'] ?? '',
-                                // 'unit_type' => $insertData['unit_type'] ?? '',
-                                // 'rental_period' => $insertData['rental_period'] ?? '',
-                                // 'rental_time' => $insertData['rental_time'] ?? '',
-                                // 'payment_method' => $insertData['payment_method'] ?? '',
-                                // 'payment_receipt' => $insertData['payment_receipt'] ?? '',
-                                // 'sponsor_name' => $insertData['sponsor_name'] ?? '',
-                                // 'sponsor_oid' => $insertData['sponsor_oid'] ?? '',
-                                // 'sponsor_email' => $insertData['sponsor_email'] ?? '',
-                                // 'sponsor_phone' => $insertData['sponsor_phone'] ?? '',
-                                // 'sponsor_nationality' => $insertData['sponsor_nationality'] ?? '',
-                                // 'attachment_remark' => $insertData['attachment_remark'] ?? '',
-                            ]);
-
+                        if(count($insertData)>0){
+                            Tenant::create($insertData);
                         }
                     }
                     Session::flash('success', 'Import Successful.');

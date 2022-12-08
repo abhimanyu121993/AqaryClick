@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Contract;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -29,10 +30,13 @@ class ContractExcel implements FromCollection,WithHeadings,WithStyles, WithEvent
             $data->put('Attestation No.',$contact->attestation_no??'');
             $data->put('Attestation Expiry',$contact->attestation_expiry??'');
             $data->put('Attestation Remaning month','');
-            $data->put('1st contract Lease Signing Date',$contact->created_at??'');
-            $data->put('Lease Signed Date',$contact->release_date??'');
-            $data->put('Lease from',$contact->lease_start_date??'');
-            $data->put('Lease to',$contact->lease_end_date??'');
+            $data->put('1st contract Lease Signing Date',$contact->created_at->format('d-M-Y')??'');
+            $releasedate=Carbon::parse($contact->release_date)->format('d-M-Y');
+            $data->put('Lease Signed Date',$releasedate??'');
+            $lsdate=Carbon::parse($contact->lease_start_date)->format('d-M-Y')??'';
+            $data->put('Lease from',$lsdate??'');
+            $lto=Carbon::parse($contact->lease_end_date)->format('d-M-Y')??'';
+            $data->put('Lease to',$lto??'');
             $data->put('Total contract period',$contact->lease_period_month??'');
             $data->put('Remaning period','');
             $data->put('Discount',$contact->discount??'');

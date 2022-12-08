@@ -268,8 +268,9 @@ class UnitController extends Controller
                     // dd($importData_arr);
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
+                        $buidlingid=Building::where('name',$importData[0])->first()->id??'';
                         $insertData = array(
-                            "building_name" => $importData[0],
+                            "building_name" =>$buidlingid ,
                             "unit_ref" => $importData[1],
                             "revenue_code" => $importData[2],
                             "unit_type" => $importData[3],
@@ -292,24 +293,16 @@ class UnitController extends Controller
                             $unitType = UnitType::where('name', strtolower(trim($insertData['unit_type'] ?? '')))->first();
                             $unitStatus = UnitStatus::where('name', strtolower(trim($insertData['unit_status'] ?? '')))->first();
                             $building = Building::where('name', strtolower(trim($insertData['building_name'] ?? '')))->first();
-                            // dd($building);
-                            Unit::create([
+                                Unit::firstOrCreate(['unit_no'=>$insertData['unit_no']],[
                                 'user_id' => Auth::user()->id ?? '',
-                                'building_id' => $building->id ?? '',
-                                'unit_no'=>$insertData['unit_no'] ?? '',
-                                'unit_code'=>$insertData['unit_code'] ?? '',
-                                'unit_type'=>$unitType->id ?? '',
-                                'unit_size'=>$insertData['unit_size'] ?? '',
-                                'unit_status'=>$unitStatus->id ?? '',
-                                'unit_floor'=>$insertData['unit_floor'] ?? '',
-                                'unit_feature'=>$insertData['unit_feature'] ?? '',
-                                'electric_no'=>$insertData['electric_no'] ?? '',
-                                'water_no'=>$insertData['water_no'] ?? '',
-                                'intial_rent'=>$insertData['initial_rent'] ?? '',
-                                'actual_rent'=>$insertData['actual_rent'] ?? '',
-                                'unit_desc'=>$insertData['unit_description'] ?? '',
+                                'building_id' => $buidlingid?? '',
                                 'unit_ref'=>$insertData['unit_ref'] ?? '',
                                 'revenue'=>$insertData['revenue_code'] ?? '',
+                                'unit_type'=>$unitType->id ?? '',
+                                'unit_floor'=>$insertData['unit_floor'] ?? '',
+                                'unit_size'=>$insertData['unit_size'] ?? '',
+                                'actual_rent'=>$insertData['actual_rent'] ?? '',
+                                'unit_status'=>$unitStatus->id ?? '',
                                 'remark'=>$insertData['remark'] ?? '',
                             ]);
                         }

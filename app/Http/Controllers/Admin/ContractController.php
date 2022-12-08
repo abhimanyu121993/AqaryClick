@@ -12,6 +12,7 @@ use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\Tenant;
 use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
+use App\Mail\ContractMail;
 use App\Models\BusinessDetail;
 use App\Models\ContractRecipt;
 use App\Models\User;
@@ -21,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class ContractController extends Controller
@@ -35,8 +37,6 @@ class ContractController extends Controller
 
         $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
         $contract = Contract::all();
-        $max_id = Contract::max('id') + 1;
-        $CC = 'CC' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . $max_id;
         $tenant = Tenant::all();
         $lessor = Customer::all();
         $tenant_doc = Tenant::pluck('tenant_document');
@@ -45,7 +45,7 @@ class ContractController extends Controller
         $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
         $total_amt = $invoice * $total_amount;
         $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
-        $delay_invoice = Invoice::whereNotNull('overdue_period')->count();
+        $delay_invoice = Invoice::whereNotNull('overdue_period')->count()??'0';
         $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
         $total_delay = $delay_invoice * $total_delay_amt;
         $invoice_balance = $delay_invoice + $not_paid_invoice;
@@ -164,10 +164,10 @@ class ContractController extends Controller
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
-
             'remark' => $request->remark,
         ]);
         if ($data) {
+            Mail::to($data->tenantDetails->email)->send(new ContractMail($data));
             return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
@@ -475,7 +475,8 @@ class ContractController extends Controller
 
                     foreach ($importData_arr as $importData) {
                         $tenant_id = '';
-                        $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->first();
+                        $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->where('tenant_primary_mobile',$importData[4])->first();
+                        // return $tenant;
                         if ($tenant) {
                         $contract_code= 'CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
                             $tenant_id = $tenant->id;
@@ -483,56 +484,32 @@ class ContractController extends Controller
                                 "user_id" => Auth::user()->id,
                                 "contract_code" => $contract_code,
                                 "tenant_name" => $tenant_id,
-                                "document_type" => '',
-                                "qid_document" =>'',
-                                "cr_document" =>'',
-                                "passport_document" =>'',
-                                "tenant_mobile" =>$tenant->tenant_primary_mobile,
-                                "tenant_nationality" =>$tenant->tenant_nationality,
-                                "sponsor_nationality" =>$tenant->sponsor_nationality,
-                                "sponsor_id" =>$tenant->sponsor_oid,
-                                "sponsor_name" =>$tenant->sponsor_name,
-                                "sponsor_mobile" =>$tenant->sponsor_phone,
-                                "lessor" =>Auth::user()->id,
-                                "company_id" =>0,
-                                "authorized_person" =>"",
-                                "lessor_sign" =>'',
-                                "release_date" => $importData[9],
-                                "lease_start_date" => $importData[10],
-                                "lease_end_date" => $importData[11],
-                                "lease_period_month"=>carbon::parse($importData[11])->diffInMonths($importData[10]),
-                                "lease_period_day"=>carbon::parse($importData[11])->diffInDays($importData[10]),
-                                "is_grace"=>'',
-                                "grace_start_date"=>'',
-                                "grace_end_date"=>'',
-                                "grace_period_month"=>'',
-                                "grace_period_day"=>'',
-                                "approved_by"=>'',
-                                "attestation_no"=>$importData[5],
-                                "attestation_status"=>'',
-                                "attestation_expiry"=>'',
-                                "contract_status"=>'',
-                                "currency"=>'',
-                                "rent_amount"=>'',
-                                "user_amt"=>'',
-                                "total_invoice"=>'',
-                                "contract_type"=>'',
-                                "guarantees"=>'',
-                                "guarantees_payment_method"=>'',
-                                "remark"=>'',
-                                "discount"=>'',
-                                "increament_term"=>'',
-                                "status"=>''
+                                'lessor'=>'',
+                                'sponsor_name'=>$importData[2],
+                                'sponsor_id'=>$importData[3],
+                                'tenant_mobile'=>$importData[4],
+                                'attestation_no'=>$importData[5],
+                                'attestation_expiry'=>$importData[6],
+                                'created_at'=>Carbon::createFromFormat('d-M-Y',$importData[8])->timestamp,
+                                'release_date'=>$importData[9],
+                                'lease_start_date'=>$importData[10],
+                                'lease_end_date'=>$importData[11],
+                                'lease_period_month'=>$importData[12],
+                                'discount'=>$importData[14],
+                                'increament_term'=>$importData[15],
+                                'status'=>$importData[16],
+                                'contract_type'=>'Internal',
+                                
                             );
                             // dd($insertData);
                             if (count($insertData)>0) {
-                                Contract::create($insertData);
+                                Contract::Create($insertData);
 
                             }
                         
                         }
                         else{
-                            Session::flash('error', 'Importing Cancelled Tenant not found');
+                            Session::flash('error', 'Data Imported But Some Importing Cancelled Due To Tenant not found');
                             return redirect()->back();
                         }
                     }

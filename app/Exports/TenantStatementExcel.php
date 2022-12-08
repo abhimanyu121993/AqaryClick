@@ -22,13 +22,15 @@ class TenantStatementExcel implements FromCollection,WithHeadings,WithStyles, Wi
         $d = collect();
         $contracts = Contract::get();
        
-        foreach ($contracts as $c) {
+        foreach ($contracts as $k=>$c) {
+            
             $data = collect();
             $data->put('Tenant Code',$c->tenantDetails->tenant_code??'');
-            $data->put('QID No',$c->tenantDetails->qid_document??'');
-            $data->put('Cr No',$c->tenantDetails->cr_document??'');
-            $data->put('Passport',$c->tenantDetails->passport??'');
+            $data->put('Establishment Card', $c->document_type);
+            $data->put('ID. No',$c->qid_document??$c->cr_document??$c->passport??'No Available');
             $data->put('Tenant Name',$c->tenantDetails->tenant_english_name??'');
+            $data->put('Building Name',$c->tenantDetails->buildingDetails->name??'');
+            $data->put('Unit Ref',$c->tenantDetails->unit->unit_ref??'');
             $gracet=json_decode($c->grace_period_month);
             if(is_array($gracet) and count($gracet)>0){
                 $t=array_sum($gracet);
@@ -76,10 +78,11 @@ class TenantStatementExcel implements FromCollection,WithHeadings,WithStyles, Wi
     {
         return [
             'Tenant Code',
-            'QID No',
-            'Cr No',
-            'Passport',
+            'Establishment Card',
+            'ID. No',
             'Tenant Name',
+            'Building Name',
+            'Unit Ref',
             'Grace Period',
             'Total Contract Period',
             'Total Due Invoice',
@@ -92,10 +95,10 @@ class TenantStatementExcel implements FromCollection,WithHeadings,WithStyles, Wi
             'Actual Revenue',
             'Paid',
             'Outstanding',
-            'Default Revenue Period',
-            'Default Rvenue',
+            'Deffered Revenue Period',
+            'Deffered Rvenue',
             'Total Cheque',
-            'Bounce .Cheque',
+            'Balance .Cheque',
             'Covered PDC',
             'Not Cover',
             'Last Update',

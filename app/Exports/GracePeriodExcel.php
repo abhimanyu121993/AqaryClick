@@ -17,11 +17,11 @@ class GracePeriodExcel implements FromCollection,WithHeadings,WithStyles, WithEv
     */
     public function collection()
     {
-        $data = collect();
+       
         $d=collect();
         $graces = Contract::where('is_grace','Yes')->get();
-       
         foreach ($graces as $grace) {
+            $data = collect();
             $grace_start_dates = json_decode($grace->grace_start_date);
             $grace_end_dates = json_decode($grace->grace_end_date);
             $grace_period_months = json_decode($grace->grace_period_month);

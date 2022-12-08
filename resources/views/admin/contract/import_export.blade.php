@@ -9,6 +9,9 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Contract</h4>
                     <div class="col-2">
+                    <a href="{{route('admin.excel-export.contract')}}" class="btn btn-primary">Export Contract</a>
+                </div>
+                    <div class="col-2">
                     <a href="{{route('admin.excel-export.grace-export')}}" class="btn btn-primary">Export Graces</a>
                 </div>
                 </div><!-- end card header -->
