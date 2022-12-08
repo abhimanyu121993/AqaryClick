@@ -497,7 +497,7 @@ class ContractController extends Controller
                                 'lease_period_month'=>$importData[12],
                                 'discount'=>$importData[14],
                                 'increament_term'=>$importData[15],
-                                'status'=>$importData[16],
+                                'contract_status'=>$importData[16],
                                 'contract_type'=>'Internal',
                                 
                             );
