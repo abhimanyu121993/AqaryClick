@@ -106,11 +106,19 @@
                             <tr>
                      <th scope="col">Sr.No.</th>
                                 <th scope="col">Contract code</th>
+                                <th scope="col">File No</th>
+                                <th scope="col">Lease Start</th>
+                                <th scope="col">Lease End</th>
+                               
                                 <th scope="col">Tenant Name</th>
+
                                 <th scope="col">Mobile No</th>
                                 <th scope="col">Unit Ref.</th>                                
                                 <th scope="col">Status</th>
-                                <th scope="col">File</th>
+                                <th scope="col">File</th> 
+                                <th scope="col"> Total Invoice Overdue</th>
+
+                                
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
 
@@ -121,6 +129,12 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index+ 1 }}</th>
                                     <td>{{ $legal->contractDetails->contract_code??''}}</td>
+                                    <td>
+                                        {{ $legal->contractDetails->tenantDetails->file_no??''}}
+                                    </td>
+                                    <td>{{ $legal->contractDetails->lease_start_date??''}}</td>
+                                    <td>{{ $legal->contractDetails->lease_end_date??''}}</td>
+
                                     <td>
                                         {{ $legal->contractDetails->tenantDetails->tenant_english_name??''}}
                                     </td>
@@ -151,6 +165,7 @@
                                         </ul>
                                         </div>
                                     </td>
+                                    <td>0</td>
                                     <td>
                                         {{ $legal->remark??'' }}
                                     </td>

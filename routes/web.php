@@ -90,6 +90,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('/assign-permission',[PermissionController::class,'assignPermission'])->name('assignPermission');
     Route::resource('buildingtype',BuildingTypeController::class);
     Route::resource('register_building',BuildingController::class);
+    Route::get('building-file',[BuildingController::class,'buildingFiles'])->name('buildingFiles');
+    Route::post('building-file-store',[BuildingController::class,'buildingFilesStore'])->name('buildingFilesStore');
+    Route::post('building-file-delete/{id}',[BuildingController::class,'buildingFilesDelete'])->name('buildingFilesDelete');
     Route::resource('unit-type',UnitTypeController::class);
     Route::resource('unit-type',UnitTypeController::class);
     Route::resource('unit-status',UnitStatusController::class);

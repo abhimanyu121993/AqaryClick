@@ -103,6 +103,10 @@
                                         <a href="{{ route('admin.building.index') }}" class="nav-link"
                                             data-key="t-analytics">Registration</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.buildingFiles') }}" class="nav-link"
+                                            data-key="t-analytics">Add Files</a>
+                                    </li>
                                     
                                 @endcan
                                 @can('Building_read')

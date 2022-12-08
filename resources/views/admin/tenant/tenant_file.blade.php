@@ -175,7 +175,6 @@ var count = 1;
 
         //Once add button is clicked
         $(addButton4).click(function() {
-                alert('done');
             $(wrapper4).append(fieldHTML4); //Add field html
 
         });
