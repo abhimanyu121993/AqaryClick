@@ -50,6 +50,8 @@ return new class extends Migration
             $table->json('file_name')->default(json_encode([]));
             $table->json('attachment_file')->default(json_encode([]));
             $table->string('attachment_remark')->nullable();
+            $table->string('established_card_no')->nullable();
+            $table->string('government_housing_no')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

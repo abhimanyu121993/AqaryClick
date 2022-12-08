@@ -2,8 +2,6 @@
 @section('title',  isset($editTenant)? 'Update Tenant':'Register Tenant')
 @section('main-content')
     <div class="row">
-        
-
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
@@ -75,9 +73,11 @@
                                 <label for="space" class="form-label">Document Type</label>
                                 <select class="form-control" id="tenant_document_type" name="tenant_document">
                                     <option value="{{isset($editTenant)? $editTenant->tenant_document:''}}" selected hidden>{{isset($editTenant)? $editTenant->tenant_document:'-----Select Document Type-----'}}</option>
-                                    <option value="QID">QID</option>
-                                    <option value="CR">CR</option>
-                                    <option value="Passport">Passport</option>
+                                    <option value="QID" id="QID">QID</option>
+                                    <option value="CR" id="CR">CR No</option>
+                                    <option value="Passport" id="PASSPORT">Passport</option>
+                                    <option value="Est_Card_No" id="Established_Card_No">Est Card No</option>
+                                    <option value="Govt_Housing_No" id="Government_Housing_Number">Govt Housing No</option>
                                 </select>
                             </div>
 
@@ -100,6 +100,22 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="passport"
                                         placeholder="Passport Document" value="{{$editTenant->passport ?? ''}}">
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-3 col-md-3 mb-2" id="established_card_no">
+                                <label for="country" class="form-label">Established Card No</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="established_card_no"
+                                        placeholder="Established Card No." value="{{$editTenant->established_card_no ?? ''}}">
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-3 col-md-3 mb-2" id="government_housing_number">
+                                <label for="country" class="form-label">Govt. Housing No.</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="government_housing_no"
+                                        placeholder="Government Housing Number" value="{{$editTenant->government_housing_no ?? ''}}">
                                 </div>
                             </div>
                         <div class=" col-xxl-3 col-md-3">
@@ -158,7 +174,7 @@
 
                                     <select class="form-select js-example-basic-single" id="building_name"
                                         name='building_name'>
-                                            <option value="{{isset($editTenant)? $editTenant->building_name:''}}" selected hidden >{{isset($editTenant)? $editTenant->buildingDetails->name:'--Select Builidng Name--'}}</option>
+                                            <option value="{{isset($editTenant)? $editTenant->building_name:''}}" selected hidden >{{isset($editTenant)? ($editTenant->building_name == ''? $editTenant->building_name:$editTenant->buildingDetails->name):'--Select Builidng Name--'}}</option>
                                             @foreach ($building as $build)
                                                 <option value="{{ $build->id }}">{{ $build->name }}</option>
                                             @endforeach
@@ -167,7 +183,7 @@
                             <div class="col-xxl-3 col-md-3 mb-2">
                                 <label class="form-label" for="flag">Unit No</label>
                                     <select class="select2 form-select" id="unit_no"
-                                        name='unit_no'>
+                                        name='unit_no' required>
                                             <option value="{{isset($editTenant)? $editTenant->unit_no:''}}" selected hidden>{{isset($editTenant)? $editTenant->unit_no:'--Select Unit No--'}}</option>
                                     </select>
                             </div>
@@ -283,7 +299,7 @@
                                     <label for="space" class="form-label">Sponsor Nationality</label>
                                     <select class="form-select js-example-basic-single" id="sponser_nationality"
                                         name="sponsor_nationality">
-                                        <option value="{{isset($editTenant)? $editTenant->sponsor_nationality:''}}" selected hidden>{{isset($editTenant)? $editTenant->nationality->name:'---Select Sponsor Nationality---'}}</option>
+                                        <option value="{{isset($editTenant)? $editTenant->sponsor_nationality:''}}" selected hidden>{{isset($editTenant)?  ($editTenant->sponsor_nationality == ''? $editTenant->sponsor_nationality:$editTenant->nationality->name):'---Select Sponsor Nationality---'}}</option>
                                         @foreach ($nation as $nationality)
                                             <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
                                         @endforeach
@@ -321,6 +337,8 @@
             $('#qid').hide();
             $('#cr').hide();
             $('#passport').hide();
+            $('#established_card_no').hide();
+            $('#government_housing_number').hide();
             $("#tenant_document_type").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
@@ -328,22 +346,77 @@
                         $('#qid').show();
                         $('#cr').hide();
                         $('#passport').hide();
+                        $('#established_card_no').hide();
+                        $('#government_housing_number').hide();
 
                     } else if (optionValue == 'CR') {
                         $('#cr').show();
                         $('#qid').hide();
                         $('#passport').hide();
+                        $('#established_card_no').hide();
+                        $('#government_housing_number').hide();
 
                     } else if (optionValue == 'Passport') {
                         $('#passport').show();
                         $('#qid').hide();
                         $('#cr').hide();
+                        $('#established_card_no').hide();
+                        $('#government_housing_number').hide();
 
+                    }else if (optionValue == 'Est_Card_No') {
+                        $('#passport').hide();
+                        $('#qid').hide();
+                        $('#cr').hide();
+                        $('#established_card_no').show();
+                        $('#government_housing_number').hide();
+
+                    }else if (optionValue == 'Govt_Housing_No') {
+                        $('#passport').hide();
+                        $('#qid').hide();
+                        $('#cr').hide();
+                        $('#established_card_no').hide();
+                        $('#government_housing_number').show();
                     }
                 });
             }).change();
         });
     </script>
+
+    <script>
+      $(document).ready(function(){
+            $('#QID').hide();
+            $('#PASSPORT').hide();
+            $('#CR').hide();
+            $('#Established_Card_No').hide();
+            $('#Government_Housing_Number').hide();
+        $("#tenant_type").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'TP') {
+                        $('#QID').show();
+                        $('#PASSPORT').show();
+                        $('#CR').hide();
+                        $('#Established_Card_No').hide();
+                        $('#Government_Housing_Number').hide();
+                    }else if(optionValue == 'TC'){
+                        $('#QID').hide();
+                        $('#PASSPORT').hide();
+                        $('#CR').show();
+                        $('#Established_Card_No').show();
+                        $('#Government_Housing_Number').hide();
+                    }else if(optionValue == 'TG'){
+                        $('#QID').hide();
+                        $('#PASSPORT').hide();
+                        $('#CR').hide();
+                        $('#Established_Card_No').hide();
+                        $('#Government_Housing_Number').show();
+                    }
+                    
+                });
+            });
+      });
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#sponser').hide();

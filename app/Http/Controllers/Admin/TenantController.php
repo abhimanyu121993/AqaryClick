@@ -30,10 +30,16 @@ class TenantController extends Controller
      */
     public function index()
     {
+        $role=Auth::user()->roles[0]->name;
+        if ($role == 'superadmin') {
+            $building = Building::all();    
+        } else {
+            $building = Building::where('user_id', Auth::user()->id)->get();
+        }
+
         $unit = UnitType::all();
         $nation = Nationality::all();
         $unitType = UnitType::all();
-        $building = Building::where('user_id', Auth::user()->id)->get();
         return view('admin.tenant.tenantregister', compact('nation', 'unit', 'building', 'unitType'));
     }
 
@@ -88,7 +94,9 @@ class TenantController extends Controller
             'payment_methode' => 'nullable',
             'payment_receipt' => 'nullable',
             'attachment_file' => 'nullable',
-            'attachment_remark' => 'nullable'
+            'attachment_remark' => 'nullable',
+            'established_card_no'=>'nullable',
+            'government_housing_no' => 'nullable',
         ]);
 
         $otherpic = [];
@@ -137,6 +145,8 @@ class TenantController extends Controller
             'sponsor_phone' => $request->sponsor_phone,
             'sponsor_nationality' => $request->sponsor_nationality,
             'attachment_remark' => $request->attachment_remark,
+            'established_card_no'=>$request->established_card_no,
+            'government_housing_no' =>$request->government_housing_no,
         ]);
 
         if ($tenant) {
@@ -177,9 +187,13 @@ class TenantController extends Controller
         $id=Crypt::decrypt($id);
         $editTenant=Tenant::find($id);
         $nation = Nationality::all();
-        $building = Building::where('user_id', Auth::user()->id)->get();
         $unitType = UnitType::all();
-
+        $role=Auth::user()->roles[0]->name;
+        if ($role == 'superadmin') {
+            $building = Building::all();    
+        } else {
+            $building = Building::where('user_id', Auth::user()->id)->get();
+        }
         return view('admin.tenant.tenantregister',compact('editTenant','nation','building','unitType'));
     }
 
@@ -216,7 +230,9 @@ class TenantController extends Controller
             'payment_methode' => 'nullable',
             'payment_receipt' => 'nullable',
             'attachment_file' => 'nullable',
-            'attachment_remark' => 'nullable'
+            'attachment_remark' => 'nullable',
+            'established_card_no'=>'nullable',
+            'government_housing_no' => 'nullable',
         ]);
 
 
@@ -254,6 +270,8 @@ class TenantController extends Controller
             'sponsor_phone' => $request->sponsor_phone,
             'sponsor_nationality' => $request->sponsor_nationality,
             'attachment_remark' => $request->attachment_remark,
+            'established_card_no'=>$request->established_card_no,
+            'government_housing_no' =>$request->government_housing_no,
         ]);
 
         if ($tenant) {

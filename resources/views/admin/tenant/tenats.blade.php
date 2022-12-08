@@ -32,6 +32,8 @@
                             <th scope="col">QID Document</th>
                             <th scope="col">CR Document</th>
                             <th scope="col">Passport</th>
+                            <th scope="col">Est Card No</th>
+                            <th scope="col">Govt. Housing No.</th>
                             <th scope="col">Tenant Nationality</th>
                             <th scope="col">Tenant Primary Number</th>
                             <th scope="col">Tenant Secondary Number</th>
@@ -61,6 +63,8 @@
                             <td>{{$tenant->qid_document}}</td>
                             <td>{{$tenant->cr_document}}</td>
                             <td>{{$tenant->passport}}</td>
+                            <td>{{$tenant->established_card_no}}</td>
+                            <td>{{$tenant->government_housing_no}}</td>
                             <td>{{$tenant->tenantNationality->name??''}}</td>
                             <td>{{$tenant->tenant_primary_mobile}}</td>
                             <td>{{$tenant->tenant_secondary_mobile}}</td>

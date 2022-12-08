@@ -91,9 +91,9 @@
                     </select>
                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="building_location" class="form-label">Unit Size<sup class="text-danger"> *(in square meter)</sup></label>
+                                    <label for="building_location" class="form-label">Area/m²</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="unit_size" name="unit_size" value="{{isset($buildingedit)? $buildingedit->unit_size: '' }}" placeholder="Enter Unit Size">
+                                        <input type="text" class="form-control" id="unit_size" name="unit_size" value="{{isset($buildingedit)? $buildingedit->unit_size: '' }}" placeholder="Enter Area/m²">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
