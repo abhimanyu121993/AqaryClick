@@ -138,6 +138,9 @@
 
 
 @section('script-area')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function () {
     $('#example').DataTable();
@@ -155,7 +158,7 @@ var count = 1;
         var wrapper4 = $('.field_wrapper4'); //Input field wrapper
         var fieldHTML4 = '<div class="row">\
         <div class="col-sm-3"><label for="" class="form-label">Tenant</label>\
-<select class="select2 form-select js-example-basic-single" name="tenant_code[]">'+filehtml+'</select>\
+<select class="form-control select2 form-select" name="tenant_code[]">'+filehtml+'</select>\
            </div>\
         <div class="col-sm-4">\
                     <label for="" class="form-label">File Name</label>\
@@ -172,9 +175,9 @@ var count = 1;
 
         //Once add button is clicked
         $(addButton4).click(function() {
-
+                alert('done');
             $(wrapper4).append(fieldHTML4); //Add field html
-            $('.select2').select2();
+
         });
 
         //Once remove button is clicked
@@ -185,7 +188,4 @@ var count = 1;
         });
 
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 @endsection

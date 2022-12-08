@@ -45,7 +45,7 @@ class ContractController extends Controller
         $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
         $total_amt = $invoice * $total_amount;
         $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
-        $delay_invoice = Invoice::whereNotNull('overdue_period')->count();
+        $delay_invoice = Invoice::whereNotNull('overdue_period')->count()??'0';
         $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
         $total_delay = $delay_invoice * $total_delay_amt;
         $invoice_balance = $delay_invoice + $not_paid_invoice;
