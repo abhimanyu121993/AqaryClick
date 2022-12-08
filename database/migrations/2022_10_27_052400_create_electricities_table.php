@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('building_name')->nullable();
             $table->string('unit_no')->nullable();
+            $table->string('unit_size')->nullable();
+            $table->string('status')->nullable();
             $table->string('unit_type')->nullable();
             $table->string('electric_under')->nullable();
             $table->string('name')->nullable();

@@ -348,7 +348,7 @@ class InvoiceController extends Controller
 
         $invoice = Invoice::with('customerDetails')->with('TenantName')->where('invoice_no', $invoice_no)->first();
         $country=$invoice->TenantName->tenant_nationality;
-        $symbol=Nationality::where('id',$country)->first()->currency_code;
+        $symbol=Nationality::where('id',$country)->first()->currency_code??'QAR';
         $due_amt=amcurrency::convert()->from('QAR')->to( $symbol)->amount((float)($invoice->due_amt??0))->get();
         $amt_paid=amcurrency::convert()->from('QAR')->to( $symbol)->amount((float)($invoice->amt_paid??0))->get();
         $total_amt=amcurrency::convert()->from('QAR')->to( $symbol)->amount((float)($invoice->total_amt??0))->get();
@@ -357,9 +357,6 @@ class InvoiceController extends Controller
         $unit_ref=Unit::where('building_id',$invoice->TenantName->building_name)->where('unit_type',$invoice->TenantName->unit_type)->first();
         $cheque=Cheque::where('invoice_no',$invoice_no)->get();
         $company=BusinessDetail::where('id',$invoice->customerDetails->company_id)->first();
-
-        $invoice->TenantName->email='o6323756@gmail.com';
-
         Mail::to($invoice->TenantName->email)->send(new InvoiceMail($invoice,$lessor,$company,$symbol,$cheque,$unit_ref,$due_amt,$amt_paid,$total_amt,$tax_amt));
 
         return view('admin.invoice.invoice_details', compact('invoice','lessor','company','symbol','cheque','unit_ref','due_amt','amt_paid','total_amt','tax_amt'));
