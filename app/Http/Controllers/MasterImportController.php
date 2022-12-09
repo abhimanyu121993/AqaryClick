@@ -23,6 +23,8 @@ class MasterImportController extends Controller
 {
     public function excel_upload(Request $req,$country=null)
     {
+        set_time_limit(300);
+        // return 'svsdvsfv';
         $country=2;  //future country code select by user form
 //check tenant code compulsory;
         if ($req->hasFile('bulk_upload')) {
@@ -84,7 +86,14 @@ class MasterImportController extends Controller
                             );
                             $building=Building::firstOrCreate(["building_code"=>$importData[10]],$insertBuildingData);
                             if($building){
-                                $unittype=UnitType::firstOrCreate(['name'=>$importData[23]],['name'=>$importData[23]]);
+                            if ($importData[23] == null || $importData[23]==' ' || $importData[23]==' ') {
+                                $unittype = UnitType::firstOrCreate(['name' =>'N/A'], ['name' =>'N/A']);
+                            }
+                            else
+                            {
+                                $unittype = UnitType::firstOrCreate(['name' => $importData[23]], ['name' => $importData[23] ?? 'N/A']);
+
+                            }
                                 $unitfloor=UnitFloor::firstOrCreate(['name'=>$importData[25]],['name'=>$importData[25]]);
                                 $unitstatus=UnitStatus::firstOrCreate(['name'=>$importData[28]],['name'=>$importData[28]]);
                                 $insertUnitData = array(

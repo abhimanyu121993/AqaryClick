@@ -288,7 +288,7 @@ class UnitController extends Controller
                             // "initial_rent" => $importData[10],
                             // "unit_description" => $importData[12],
                         );
-                        // dd($insertData);
+                       
                         if(!empty($insertData['unit_ref'])){
                             $unitType = UnitType::where('name', strtolower(trim($insertData['unit_type'] ?? '')))->first();
                             $unitStatus = UnitStatus::where('name', strtolower(trim($insertData['unit_status'] ?? '')))->first();

@@ -379,7 +379,7 @@
                                                 <div class="flex-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-2 lh-base">
-                                                            {{  $notify->data['Details']['username']   }}
+                                                            {{  $notify->data['Details']['title']   }}
                                                         </h6>
                                                     </a>
                                                     {{  $notify->data['Details']['body']  }}
