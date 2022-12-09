@@ -41,8 +41,8 @@ class EveryDayNotification extends Command
                 // Attension Please Your Contract is Expire in $contract->overdue days
                  $contractCode=$contract->contract_code;
                 $details=[
-                    'title'=>'Contract contract_code is expire soon'.$contractCode,
-                    'body'=>'Attension Please Your Contract is Expire in $contract->overdue days',
+                    'title'=>'Contract contract_code is expire soon'.' '.$contractCode,
+                    'body'=>'Attension Please Your Contract is Expire in'.' '.$contract->overdue.' '.'days',
                 ];
 
                 $contractUser=$contract->user_id;
