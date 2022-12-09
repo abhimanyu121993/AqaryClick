@@ -101,6 +101,7 @@
                                     </a>
                                     @php $tid=Crypt::encrypt($tenant->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="{{route('admin.yearlyStatement',$tid)}}">Statement</a></li>
                                         <li><a class="dropdown-item" href="{{route('admin.tenant.edit',$tid)}}">Edit</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $tid }}').submit();">Delete</a></li>
 

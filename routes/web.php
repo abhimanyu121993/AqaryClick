@@ -111,6 +111,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('import-export-unit',[UnitController::class,'ImportExportUnit'])->name('ImportExportUnit');
     Route::get('import-export-contract',[ContractController::class,'ImportExportContract'])->name('ImportExportContract');
     Route::get('import-export-tenant',[TenantController::class,'ImportExportTenant'])->name('ImportExportTenant');
+    Route::get('yearly-statement/{id}',[TenantController::class,'yearlyStatement'])->name('yearlyStatement');
+    
 
 
 

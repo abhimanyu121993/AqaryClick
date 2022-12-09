@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\TenantMail;
 use App\Models\Building;
+use App\Models\Invoice;
 use App\Models\Nationality;
 use App\Models\Tenant;
 use App\Models\TenantFile;
@@ -412,9 +413,11 @@ class TenantController extends Controller
     public function ImportExportTenant(){
         return view('admin.tenant.import_export');
     }
-    public function TenantYearlyStatement($tenant_id)
-    {
-        $tenant=Tenant::find($tenant_id);
-        return;
+    public function yearlyStatement($id){
+        $id = Crypt::decrypt($id);
+        $tenant=Tenant::find($id);
+        $inv=Invoice::where('tenant_id',$id)->get();
+
+        return view('admin.tenant.yearly_statement',compact('tenant','inv'));
     }
 }
