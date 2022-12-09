@@ -35,7 +35,7 @@
       <th>Total Unit</th>
       <td>03</td>
       <th>Tenant Code</th>
-      <td>23335959</td>
+      <td>{{ $tenant->tenant_code??'' }}</td>
     </tr>
     <tr>
       <th>Grace Start Date</th>
@@ -47,17 +47,17 @@
     </tr>
     <tr>
       <th>Unit Address</th>
-      <td>Gt. Roard Delhi</td>
+      <td>{{ $tenant->buildingDetails->name??'' }}</td>
       <th>Electric No</th>
-      <td>252554</td>
+      <td>{{ $tenant->unit->electric_no??'' }}</td>
       <th>Mobile No</th>
-      <td>9959582656</td>
+      <td>{{ $tenant->tenant_primary_mobile??'' }},{{ $tenant->tenant_secondary_mobile??'' }}</td>
     </tr>
     <tr>
       <th>P.O.Box</th>
-      <td>25101</td>
+      <td>{{ $tenant->post_office??'' }}</td>
       <th>Email Id</th>
-      <td colspan="3">abhi@gmail.com</td>
+      <td colspan="3">{{ $tenant->email??'' }}</td>
     </tr>
   </tbody>
   <thead>
@@ -67,7 +67,7 @@
   </thead>
   <thead>
     <tr>
-      <th scope="col" colspan="6" style="background-color:#dbeaf9;color:black;">B102/MF/U201/OFFICE/AIRPORT</th>
+      <th scope="col" colspan="6" style="background-color:#dbeaf9;color:black;">{{ $tenant->unit->unit_ref??'' }}</th>
     </tr>
   </thead>
   <thead>
