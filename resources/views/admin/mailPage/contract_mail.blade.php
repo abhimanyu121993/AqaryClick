@@ -1,105 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Register</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Receipt</title>
 </head>
 
-<body style="margin:0;padding:0">
+<body>
+    <center><a href="{{route('admin.pdf',$conn->tenantDetails->id) }}" class="btn btn-success" download>Download</a>
+  </center>
+<div id="contract-download" >
+  <h1 class="text-center">Lease Agreement (عقد الإيجار)</h1>
+  <div class="container">
+    <div class="row">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Contract No:{{$conn->contract_code??'' }}<br>
+              Customer No:{{ str_pad($conn->lessor??'',3,'0' ,STR_PAD_LEFT) }}</th>
+            <th class="text-right">{{$conn->contract_code??'' }}:رقم العقد <br>
+            {{ str_pad($conn->lessor??'',3,'0' ,STR_PAD_LEFT) }}: رقم العميل </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width: 50%;">
+              <p>This LEASE AGREEMENT is made as of {{\Carbon\Carbon::parse($conn->created_at)->format('d F Y')}} by and between the following Parties</p><br><b>1. First Party <br>
+                {{ $conn->tenantDetails->tenant_english_name??'' }} </b><br>
+              @if($conn->tenantDetails->qid_document==!null)
+                QID: {{ $conn->tenantDetails->qid_document??'' }}
+              @elseif($conn->tenantDetails->cr_document==!null)
+              CR: {{ $conn->tenantDetails->cr_document??'' }}
+              @else
+              Passport: {{ $conn->tenantDetails->passport??'' }}
+              @endif
+              P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
+              Phone: {{ $conn->tenantDetails->tenant_primary_mobile??'' }}<br>
+              Email:{{ $conn->tenantDetails->email??'' }}<br>
+              Hereinafter referred to as (<b>The Lessor</b>)<br>
+              <b class="text-center">And</b><br>
+              <b>2. Second Party <br>
+                M/s, /Mr. {{ $conn->ownerDetails->name??'' }} C. R. No ({{ $conn->businessDetails->cr_no??'' }})</b><br>
+              Represented by:<br>
+              Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
+              QID: 265235158985
+              P.O. Box :{{ $conn->businessDetails->post_box??'' }} , {{ $conn->businessDetails->address??'' }}<br>
+              phone1:{{ $conn->businessDetails->phone??'' }}<br>
+              Email:{{ $conn->businessDetails->email??'' }}<br>
+              Hereinafter referred to as (<b>The Lessor</b> )
 
-    <div
-        style="width:100%;min-width:320px;font-family:Helvetica,Arial;font-weight:bold;font-size:24px;background-color:#efefeb">
-        <div style="margin:0 auto;width:100%;max-width:598px;text-align:center;background-color:#ffffff">
-            <table
-                style="width:100%;max-width:599px;font-family:Arial;font-size:16px;color:#868686;background-color:#efefeb"
-                cellspacing="0" cellpadding="0" border="0">
-                <tbody>
-                    <tr>
-                        <td style="padding-top:30px;background-color:#efefeb;width:auto"> </td>
-                        <td style="padding-top:30px;background-color:#efefeb;text-align:center;width:75px">
-                        </td>
-                        <td style="padding-top:30px;height:38px;background-color:#efefeb;width:auto"> </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table
-                style="width:100%;max-width:600px;font-family:Arial;font-size:16px;color:#868686;background-color:#ffffff;table-layout:fixed"
-                cellspacing="0" cellpadding="0" border="0">
-                <tbody>
-                    <tr style="background-color:#deab12">
-                        <td style="text-align:center;width:auto;background-color:#ffffff"> </td>
-                        <td style="height:38px;text-align:center;width:75px;background-color:#ffffff">
-                        </td>
-                        <td style="text-align:center;width:auto;background-color:#ffffff"> </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="font-size:0;background-color:#ffffff">
-                <div style="width:15%;display:inline-block;vertical-align:top">
-                    <img style="width:100%;min-height:auto"
-                        src="http://www.uberconference.com/static/img2/emails/announcement_l.gif">
-                </div>
-                <div style="display:inline-block;width:70%;vertical-align:top;color: #f08a48;text-align:center">
-                    <div style="font-size:42px;font-weight:bold;padding-bottom:12px;padding-top:25px">Welcome!
-                        <div style="font-size:24px;font-weight:bold;padding-bottom:12px;padding-top:6px">Your Contract Registered Successfully</div>
+            </td>
+            <td style="width: 50%;" >
+            <p>This LEASE AGREEMENT is made as of {{\Carbon\Carbon::parse($conn->created_at)->format('d F Y')}} by and between the following Parties</p><br><b>1. First Party <br>
+                {{ $conn->tenantDetails->tenant_arabic_name??'' }} </b><br>
+              @if($conn->tenantDetails->qid_document==!null)
+                QID: {{ $conn->tenantDetails->qid_document??'' }}
+              @elseif($conn->tenantDetails->cr_document==!null)
+              CR: {{ $conn->tenantDetails->cr_document??'' }}
+              @else
+              Passport: {{ $conn->tenantDetails->passport??'' }}
+              @endif
+              P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
+              Phone: {{ $conn->tenantDetails->tenant_primary_mobile??'' }}<br>
+              Email:{{ $conn->tenantDetails->email??'' }}<br>
+              Hereinafter referred to as (<b>The Lessor</b>)<br>
+              <b class="text-center">And</b><br>
+              <b>2. Second Party <br>
+                M/s, /Mr. {{ $conn->ownerDetails->name??'' }} C. R. No ({{ $conn->businessDetails->cr_no??'' }})</b><br>
+              Represented by:<br>
+              Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
+              QID: 265235158985
+              P.O. Box :{{ $conn->businessDetails->post_box??'' }} , {{ $conn->businessDetails->address??'' }}<br>
+              phone1:{{ $conn->businessDetails->phone??'' }}<br>
+              Email:{{ $conn->businessDetails->email??'' }}<br>
+              Hereinafter referred to as (<b>The Lessor</b> )
+            </td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_one_english!!}
+            </td>
+            <td style="width:50%">
+              {!!$contract->clause_one_arabic!!}
+            </td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_two_english!!}
+            </td>
+            <td style="width:50%"> {!!$contract->clause_two_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_three_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_three_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_four_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_four_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_five_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_five_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_six_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_six_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_seven_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_seven_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_eight_english!!}
 
-                    </div>
-                    <hr style="width:80%;border:1px solid #10e6e6">
-                    <div style="font-size:24px;font-weight:normal;padding-top:12px;padding-bottom:6px">Your contract
-                        details:</div>
-                    <table style="margin:auto">
-                        <tbody>
-                            <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px">Contract Code</td>
-                                <td style="color:#10e6e6;font-size:14px">
-                                    {{$data->contract_code}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table style="margin:auto">
-                        <tbody>
-                            <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Document
-                                </td>
-                                <td
-                                    style="color:#10e6e6;font-size:14px;padding-right:6px;white-space:nowrap;text-decoration:none">
-                                    {{$data->qid_document}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table style="margin:auto">
-                        <tbody>
-                            <tr>
-                                <td style="color:#10e6e6;font-size:14px;padding:6px;white-space:nowrap">Mobile Number</td>
-                                <td style="color:#10e6e6;font-size:14px;white-space:nowrap">{{$data->tenant_mobile}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tbody>
-                            <tr>
-                                <td width="100%" style="padding-top:32px;text-align:center" align="center">
-                                    <table width="220px" cellspacing="0" cellpadding="0" style="display:inline-block">
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            </td>
+            <td style="width:50%">{!!$contract->clause_eight_arabic!!}</td>
+          </tr>
 
-            </div>
-        </div>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_nine_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_nine_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_ten_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_ten_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_eleven_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_eleven_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_twelve_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_twelve_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_therteen_english!!}
+            </td>
+            <td style="width:50%">{!! $contract->clause_therteen_arabic !!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_fourteen_english!!}
+            </td>
+            <td style="width:50%">
+              {!!$contract->clause_fourteen_arabic!!}
+            </td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_fifteen_english!!}
+            </td>
+            <td style="width:50%"> {!!$contract->clause_fifteen_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_sixteen_english!!}
+            </td>
+            <td style="width:50%"> {!!$contract->clause_sixteen_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_seventeen_english!!}
+            </td>
+            <td style="width:50%">{!!$contract->clause_seventeen_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_eighteen_english!!}
+            </td>
+            <td style="width:50%"> {!!$contract->clause_eighteen_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              {!!$contract->clause_nineteen_english!!}
+            </td>
+            <td style="width:50%"> {!!$contract->clause_nineteen_arabic!!}</td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              <p><b><u>First Party (The Lessor)</u></b></p><br>
+              <p><b><u>Second Party (The Lessor)</u></b></p><br>
+              <p><b><u>The Guarantor</u></b></p><br>
+            </td>
+            <td style="width:50%">
+              <p><b><u>الطرف الأول "المؤجر"
+                  </u></b></p><br>
+              <p><b><u>الطرف الثاني "المستأجر"
+                  </u></b></p><br>
+              <p><b><u>الكفیل الضامن</u></b></p><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script>
+    window.onload = function() {
+        document.getElementById("download")
+            .addEventListener("click", () => {
+                const invoice = this.document.getElementById("contract-download");
+                console.log(invoice);
+                console.log(window);
+                var opt = {
+                    filename: 'AqaryClick-Contract.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    jsPDF: {
+                        unit: 'in',
+                        format: 'letter',
+                        orientation: 'portrait'
+                    }
+                };
+                html2pdf().from(invoice).set(opt).save();
+            })
+    }
+</script>
+  </body>
 
 </html>
-

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <center><button type="button" class="btn btn-lg btn-outline-danger mt-2" id="download">Download Report</button></a>
+    <center><button type="button" class="btn btn-lg btn-outline-danger mt-2" id="download">Download Receipt</button></a>
   </center>
 <div id="contract-download">
   <h1 class="text-center">Lease Agreement (عقد الإيجار)</h1>
@@ -37,7 +37,7 @@
                 QID: {{ $conn->tenantDetails->qid_document??'' }}
               @elseif($conn->tenantDetails->cr_document==!null)
               CR: {{ $conn->tenantDetails->cr_document??'' }}
-              @else 
+              @else
               Passport: {{ $conn->tenantDetails->passport??'' }}
               @endif
               P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
@@ -63,7 +63,7 @@
                 QID: {{ $conn->tenantDetails->qid_document??'' }}
               @elseif($conn->tenantDetails->cr_document==!null)
               CR: {{ $conn->tenantDetails->cr_document??'' }}
-              @else 
+              @else
               Passport: {{ $conn->tenantDetails->passport??'' }}
               @endif
               P.O. Box :{{ $conn->tenantDetails->post_office??'' }} , {{ $conn->tenantDetails->unit_address??'' }}<br>
@@ -83,7 +83,7 @@
             </td>
           </tr>
           <tr>
-            <td style="width:50%"> 
+            <td style="width:50%">
               {!!$contract->clause_one_english!!}
             </td>
             <td style="width:50%">
