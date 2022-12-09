@@ -30,7 +30,7 @@
                                     <th scope="row">{{ $loop->index+ 1 }}</th>
                                     <td>{{ $legal->tenantName->tenant_english_name??''}}</td>
                                     <td>
-                                        {{ $legal->??''}}
+                                        {{ $legal->unit??''}}
                                     </td>
                                     <td>
                                     {{ $legal->unit_ref??''}}

@@ -240,3 +240,4 @@ Route::get('/optimize-clear', function(){
 });
 
 Route::view('payment-success','home.paymentsuccess');
+Route::get('check',[InvoiceController::class,'checck']);

@@ -29,14 +29,32 @@ class overdue extends Command
      */
     public function handle()
     {
-        $res=Contract::pluck('lease_end_date');
-       foreach($res as $r){
-        $formatted_dt1=Carbon::now();
-        $formatted_dt2=Carbon::parse($r);
-        $date_diff=$formatted_dt1->diffInDays($formatted_dt2);
-        Contract::whereDate('lease_end_date','>',Carbon::now())->update(['overdue'=>$date_diff]);
+    
+       $contracts=Contract::where('expire',0)->get();
+       foreach($contracts as $c){
+       $res= $c->last_paid_invoice;
+       if($res){
+        if(Carbon::parse($c->lease_start_date)->gte(Carbon::parse($res))){
+            Contract::where('id',$c->id)->update(['expire',1]);
+            return 0;
+        }
+        $LastPaid=Carbon::parse($res)->addMonths(1)->addDay(-1);
+        if(Carbon::now()->gte($LastPaid)){
+            $diffDays=Carbon::now()->diffInDays($LastPaid);
+            Contract::where('id',$c->id)->update(['overdue'=>$diffDays]);
+          }
        }
-
-        return Command::SUCCESS;
+       else
+       {
+      $Od=Carbon::parse($c->lease_start_date)->addMonths(1)->addDay(-1);
+      if(Carbon::now()->gte($Od)){
+        $diffDays=Carbon::now()->diffInDays($Od);
+        Contract::where('id',$c->id)->update(['overdue'=>$diffDays]);
+      }  
+       }
+       }
+    
+    
+       
     }
 }

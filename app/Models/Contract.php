@@ -59,4 +59,23 @@ class Contract extends Model
     {
         return $this->belongsTo(BusinessDetail::class, 'company_id');
     }
+    
+    public function getLastPaidInvoiceAttribute(){   
+      $inv=Invoice::where('contract_id',$this->id)->where('payment_status','Paid')->latest()->first(); 
+      if($inv){
+        return $inv->invoice_period_end;
+      }
+      else{
+        return false;
+      }
+     }
+     public function getTotalInvoiceOverdueAttribute(){   
+        $res=Contract::where('contract_id',$this->id)->where('overdue','>=',90)->latest()->first(); 
+        if($res){
+          return ($res->overdue)/30;
+        }
+        else{
+          return false;
+        }
+       }
 }

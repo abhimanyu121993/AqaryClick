@@ -383,5 +383,36 @@ public function receiptVouchure($invoice_no){
     return view('admin.invoice.receipt_vouchar',compact('invoice','lessor','company','symbol','cheque','unit_ref','cheque','due_amt','amt_paid','total_amt','tax_amt'));
 }
 
+
+// public function checck()
+// {
+
+//    $contracts=Contract::where('expire',0)->get();
+//    foreach($contracts as $c){
+//    $res= $c->last_paid_invoice;
+//    if($res){
+//     if(Carbon::parse($c->lease_start_date)->gte(Carbon::parse($res))){
+//         Contract::where('id',$c->id)->update(['expire',1]);
+//         return 0;
+//     }
+//     $LastPaid=Carbon::parse($res)->addMonths(1)->addDay(-1);
+//     if(Carbon::now()->gte($LastPaid)){
+//         $diffDays=Carbon::now()->diffInDays($LastPaid);
+//         Contract::where('id',$c->id)->update(['overdue'=>$diffDays]);
+//       }
+//    }
+//    else
+//    {
+//   $Od=Carbon::parse($c->lease_start_date)->addMonths(1)->addDay(-1);
+//   if(Carbon::now()->gte($Od)){
+//     $diffDays=Carbon::now()->diffInDays($Od);
+//     Contract::where('id',$c->id)->update(['overdue'=>$diffDays]);
+//   }  
+//    }
+//    }
+
+
+   
+// }
 }
 

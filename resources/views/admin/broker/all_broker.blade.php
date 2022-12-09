@@ -22,9 +22,9 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                                <tr>
-                                @foreach ($units as $unit)
+                        <tbody>                           
+                                 @foreach ($units as $unit)                   
+                                    <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $unit->broker_name??''}}</td>
                                     <td>{{ $unit->mobile??''}}</td>
@@ -52,8 +52,9 @@
                                             </ul>
                                         </div>
                                     </td>
-                            @endforeach
+                            
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

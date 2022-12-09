@@ -42,14 +42,24 @@ class BrokerController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
        $request->validate([
-            // 'first_name' => 'required',
-            // 'last_name' => 'required',
-            // 'mobile' => 'required',
-            'email' => 'required',
-
+            'broker_fname' => 'required',
+            'email' => 'required|unique:brokers,email',
+            'commission' => 'required',
+            'broker_type' => 'required',
+            'property_type'=>'required',
         ]);
+        if($request->password==null){
+            $nUser= User::create([
+            'first_name'=> $request->fname,
+            'email'=>$request->email,
+            'phone' => $request->mobile,
+            'password'=>Hash::make(123456),
+            ]);
+        }
+        $nUser->assignRole('Broker');
+
        $data= Broker::create([
             'broker_agent' => $request->broker_agent,
             'broker_name' => $request->broker_fname,

@@ -274,7 +274,6 @@ class BuildingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
         $request->validate([
 
             'building_code' => 'required',

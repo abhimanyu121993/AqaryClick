@@ -165,7 +165,7 @@
                                         </ul>
                                         </div>
                                     </td>
-                                    <td>0</td>
+                                    <td>{{intval($legal->contractDetails->overdue/30)??0}}</td>
                                     <td>
                                         {{ $legal->remark??'' }}
                                     </td>
