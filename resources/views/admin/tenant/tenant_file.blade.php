@@ -158,8 +158,8 @@ var count = 1;
         var wrapper4 = $('.field_wrapper4'); //Input field wrapper
         var fieldHTML4 = '<div class="row">\
         <div class="col-sm-3"><label for="" class="form-label">Tenant</label>\
-<select class="form-control select2 form-select" name="tenant_code[]">'+filehtml+'</select>\
-           </div>\
+<select class="form-control select2 form-select" name="tenant_code[]">'+'{!! $filehtml !!}\
+   </select></div>\
         <div class="col-sm-4">\
                     <label for="" class="form-label">File Name</label>\
                     <input type="text" class="form-control" name="file_name[]" placeholder="File Name">\

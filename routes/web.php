@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\UnitFloorController;
 use App\Http\Controllers\Admin\UnitStatusController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\MasterImportController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -214,6 +215,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('tenant-unit', [ExcellController::class, 'tenant_unit'])->name('tenant-units');
         Route::get('master', [ExcellController::class, 'master']);
         Route::get('contract', [ExcellController::class, 'contract'])->name('contract');
+        Route::post('master-import', [MasterImportController::class,'excel_upload'])->name('master-import');
      });
 
 });

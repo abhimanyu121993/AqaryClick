@@ -52,7 +52,7 @@ class ContractController extends Controller
         $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
         $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
         $currency = currency::where('status', 1)->get();
-        return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance','currency'));
+        return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'currency'));
     }
 
     /**
@@ -251,8 +251,6 @@ class ContractController extends Controller
             'contract_type' => 'required',
         ]);
         $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
-
-
         $mainpic = Contract::find($id)->lessor_sign ?? '';
         if ($request->hasFile('lessor_sign')) {
             $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->lessor_sign->extension();
@@ -312,8 +310,6 @@ class ContractController extends Controller
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
-
-
         ]);
         if ($data) {
             return redirect()->back()->with('success', 'Contract Updated successfully.');
@@ -351,7 +347,7 @@ class ContractController extends Controller
     public function fetchCompany($lessor_id)
     {
         $res = BusinessDetail::where('user_id', $lessor_id)->get();
-        $html = ' <option value="" selected hidden>--Select Business--</option>';
+        $html = '';
 
         foreach ($res as $r) {
             $html .= '<option value="' . $r->id . '">' . $r->business_name . '</option>';
@@ -502,7 +498,7 @@ class ContractController extends Controller
                                 'lease_period_month'=>$importData[12],
                                 'discount'=>$importData[14],
                                 'increament_term'=>$importData[15],
-                                'status'=>$importData[16],
+                                'contract_status'=>$importData[16],
                                 'contract_type'=>'Internal',
                                 
                             );
