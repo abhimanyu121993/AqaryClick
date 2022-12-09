@@ -109,7 +109,7 @@ class MasterImportController extends Controller
                                     "unit_status"=>$unitstatus->id??'', //take from unit status table
                                 );
 
-                                $unit = Unit::firstOrCreate(["building_id" => $building->id], $insertUnitData);
+                                $unit = Unit::firstOrCreate(["unit_ref" =>$importData[21] ], $insertUnitData);
                                 Error::create(['url' => 'Unit Found','message'=>json_encode($unit)]);
                                 if($unit){
                                     $insertTenantData = array(
