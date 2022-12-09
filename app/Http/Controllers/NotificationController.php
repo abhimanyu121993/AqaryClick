@@ -12,28 +12,21 @@ class NotificationController extends Controller
     
     public function sendNotification(){
 
-        $user = User::find(43);
-        $name= $user->name;
-        $username = $user->email;
+        // $user = User::find(43);
+        // $name= $user->name;
         
         
-        $details = [ 
+        // $details = [ 
 
-            'body' => 'You received an new notification from AqaryClick.com', 
+        //     'body' => 'You received an new notification from AqaryClick.com', 
 
-            'name'=>$name, 
-
-            'username'=>$username,
-
-            'click'=>'Click On',
-
-            'url'=>url('/'),
-
-            'thankyou'=>'Thank you', 
-        ]; 
+        //     'title'=>$name, 
+        // ]; 
 
    
 
-        Notification::send($user, new AlertNotification($details)); 
+        // Notification::send($user, new AlertNotification($details)); 
+
+        
     }
 }
