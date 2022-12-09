@@ -412,9 +412,10 @@ class TenantController extends Controller
     public function ImportExportTenant(){
         return view('admin.tenant.import_export');
     }
-    public function TenantYearlyStatement($tenant_id)
-    {
-        $tenant=Tenant::find($tenant_id);
-        return;
+    public function yearlyStatement($id){
+        $id = Crypt::decrypt($id);
+        $tenant=Tenant::find($id);
+
+        return view('admin.tenant.yearly_statement',compact('tenant'));
     }
 }

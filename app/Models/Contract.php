@@ -11,7 +11,7 @@ class Contract extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
-    public function tenantDetails()
+    public function tenantDetails() 
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
