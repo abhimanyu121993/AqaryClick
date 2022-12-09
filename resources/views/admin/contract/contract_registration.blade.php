@@ -41,7 +41,12 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="space" class="form-label">Tenant Type</label>
                                     <select class="form-control" id="tenant_type" name="tenant_type">
+                                        @if (isset($contractedit))
+                                        <option value="{{$contractedit->tenantDetails}}" selected hidden>{{$contractedit->tenantDetails->tenant_type}}</option>
+                                        @else
                                         <option value="" selected hidden>--Select Tenant Type--</option>
+                                        @endif
+                                       
                                         <option value="TP">Personal</option>
                                         <option value="TC">Company</option>
                                         <option value="TG">Government</option>
@@ -77,7 +82,7 @@
                                     <div class="input-group" id="tenantInput">
                                         <input type="text" class="form-control" id="tenant_nationality"
                                             name="tenant_nationality"
-                                            value="{{ isset($contractedit) ? $contractedit->tenant_nationality : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->tenantDetails->nationality->name??'' : '' }}"
                                             placeholder="Enter Tenant Nationality " readonly>
                                     </div>
                                 </div>
@@ -168,8 +173,8 @@
                                     <select class="select2 form-select js-example-basic-single" id="lessor"
                                         name='lessor'>
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->lessor }}" selected>
-                                                {{ $contractedit->lessor }}</option>
+                                            <option value="{{ $contractedit->customer->id }}" selected>
+                                                {{ $contractedit->customer->full_name }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Lessor's--</option>
                                             @foreach ($lessor as $less)
@@ -185,9 +190,10 @@
                                     <select class="form-control select2 form-select" id="company" name="company_id">
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->company_id }}" selected>
-                                                {{ $contractedit->company_id }}</option>
-                                        @endif
+                                                {{ $contractedit->company->business_name }}</option>
+                                        @else
                                         <option value="" selected hidden>--Select Business--</option>
+                                        @endif
 
                                     </select>
                                 </div>
@@ -208,11 +214,9 @@
                                 </div>
 
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Release Date</label>
+                                    <label for="name" class="form-label">Release Date </label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="release_date" name="release_date"
-                                            value="{{ isset($contractedit) ? $contractedit->release_date : '' }}"
-                                            placeholder="Enter Release Date ">
+                                        <input type="date" class="form-control" id="release_date" name="release_date" value="{{isset($contractedit) ?  \Carbon\Carbon::parse($contractedit->release_date)->format('Y-m-d') : ''}}" placeholder="Enter Release Date ">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -220,7 +224,7 @@
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="lease_start_date"
                                             name="lease_start_date"
-                                            value="{{ isset($contractedit) ? $contractedit->lease_start_date : '' }}"
+                                            value="{{ isset($contractedit) ?  \Carbon\Carbon::parse($contractedit->lease_start_date)->format('Y-m-d') : ''}}"
                                             placeholder="Enter Lease Start Date ">
                                     </div>
                                 </div>
@@ -229,7 +233,7 @@
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="lease_end_date"
                                             name="lease_end_date"
-                                            value="{{ isset($contractedit) ? $contractedit->lease_end_date : '' }}"
+                                            value="{{ isset($contractedit) ?  \Carbon\Carbon::parse($contractedit->lease_end_date)->format('Y-m-d') : '' }}"
                                             placeholder="Enter Lease End Date">
                                     </div>
                                 </div>
@@ -319,7 +323,7 @@
                                                 </div>
                                         @endforeach
                                         @else
-                                       <h6 class="text-danger">  Some data are mission ... so this block not created Or this is import via excel</h6>
+                                       <h6 class="text-danger">Grace Block  Some data are mission ... so this block not created Or this is import via excel</h6>
                                         @endif
                                     @endif
                                 </div>
@@ -332,7 +336,7 @@
                                         name='approved_by'>
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->approved_by }}" selected>
-                                                {{ $contractedit->approved_by }}</option>
+                                                {{ $contractedit->customer->full_name }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Person--</option>
                                             @foreach ($lessor as $less)
@@ -568,8 +572,7 @@
             $('#qid').hide();
             $('#cr').hide();
             $('#passport').hide();
-            $("#tenant_name").change(function() {
-
+            $(document).on('change','#tenant_name',function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     var newurl = "{{ url('/admin/fetch-tenant-contract-no') }}/" + optionValue;
@@ -604,7 +607,7 @@
                             }
                         }
                     });
-                    $("#contract_status").change(function() {
+                    $(document).on('change',"#contract_status",function() {
                         $(this).find("option:selected").each(function() {
                             var StatusValue = $(this).attr("value");
                             if (StatusValue == 'auto renewed') {

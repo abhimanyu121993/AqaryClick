@@ -248,8 +248,6 @@ class ContractController extends Controller
             'contract_type' => 'required',
         ]);
         $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
-
-
         $mainpic = Contract::find($id)->lessor_sign ?? '';
         if ($request->hasFile('lessor_sign')) {
             $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->lessor_sign->extension();
@@ -307,8 +305,6 @@ class ContractController extends Controller
             'guarantees' => $request->guarantees,
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
-
-
         ]);
         if ($data) {
             return redirect()->back()->with('success', 'Contract Updated successfully.');
@@ -346,7 +342,7 @@ class ContractController extends Controller
     public function fetchCompany($lessor_id)
     {
         $res = BusinessDetail::where('user_id', $lessor_id)->get();
-        $html = ' <option value="" selected hidden>--Select Business--</option>';
+        $html = '';
 
         foreach ($res as $r) {
             $html .= '<option value="' . $r->id . '">' . $r->business_name . '</option>';

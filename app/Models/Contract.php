@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Faker\Provider\ar_EG\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,5 +49,14 @@ class Contract extends Model
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'contract_id');
+    }
+
+    public function customer(){
+        return $this->belongsTo(Customer::class, 'lessor');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(BusinessDetail::class, 'company_id');
     }
 }
