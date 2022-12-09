@@ -2,109 +2,6 @@
 @section('title', 'Manage Contract')
 @section('main-content')
 
-<<<<<<< Updated upstream
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header align-items-center d-flex table-main-heading">
-                <div class="col-sm-6">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Contract </h4>
-                </div>
-               
-            </div><!-- end card header -->
-            <div class="card-body  ">
-                <div class="col-sm-12">
-                <table id="example" class="table table-bordered " >
-                    <thead class="thead-color">
-                        <tr>
-                            <th scope="col">Sr.No.</th>
-                            <th scope="col">Contract Code</th>
-                            <th scope="col">Tenant Name</th>
-                            <th scope="col">Document Type</th>
-                            <th scope="col">QID No</th>
-                            <th scope="col">CR No</th>
-                            <th scope="col">Passport No</th>
-                            <th scope="col">Est Card No</th>
-                            <th scope="col">Government Housing No</th>
-                            <th scope="col">Sponsor Id</th>
-                            <th scope="col">Sponsor Name</th>
-                            <th scope="col">Sponsor Nationality</th>
-                            <th scope="col">Sponsor Mobile</th>
-                            <th scope="col">Tenant Nationality</th>
-                            <th scope="col">Tenant Mobile</th>
-                            <th scope="col">Lessor's Name</th>
-                            <th scope="col">Release Date</th>
-                            <th scope="col">Lease Start Date</th>
-                            <th scope="col">Lease End Date</th>
-                            <th scope="col">Lease Period Month</th>
-                            <th scope="col">Lease Period Day</th>
-                            <th scope="col">All Grace</th>
-                            <th scope="col">Approved By</th>
-                            <th scope="col">Attestation No</th>
-                            <th scope="col">Attestation Status</th>
-                            <th scope="col">Attestation Expiry</th>
-                            <th scope="col">Contract Status</th>
-                            <th scope="col">Approved/Reject</th>
-                            <th scope="col">Rent Ammount</th>
-                            <th scope="col">Total Invoice</th>
-                            <th scope="col">Guarantees</th>
-                            <th scope="col">Guarantees Payment Mode</th>
-                            <th scope="col">Tenant sign</th>
-                            <th scope="col">Remark</th>
-                            <th scope="col">Receipt</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($contract as $con)
-                        <tr>
-                            <th scope="row">{{ $loop->index + 1 }}</th>
-                            <td>{{ $con->contract_code??'' }}</td>
-                            <td>{{ $con->tenantDetails->tenant_english_name??'' }}</td>
-                            <td>
-                                @if ($con->document_type == 'Govt_Housing_No')
-                                   {{ $con->document_type =='Govt_Housing_No'?'Government Housing':''}}
-                                @elseif ($con->document_type == 'Est_Card_No')
-                                   {{ $con->document_type =='Est_Card_No'?'Estiblish Card':''}}
-                                @else
-                                   {{ $con->document_type??'' }}
-                                @endif
-                            </td>
-                            <td>{{ $con->qid_document??'' }}</td>
-                            <td>{{ $con->cr_document??'' }}</td>
-                            <td>{{ $con->passport_document??'' }}</td>
-                            <td>{{ $con->established_card_no??'' }}</td>
-                            <td>{{ $con->government_housing_no??'' }}</td>
-                            <td>{{ $con->sponsor_id??''}}</td>
-                            <td>{{ $con->sponsor_name??''}}</td>
-                            <td>{{ $con->sponsor_nationality??''}}</td>
-                            <td>{{ $con->sponsor_mobile??''}}</td>
-                            <td>{{ $con->countryDetails->name??''}}</td>
-                            <td>{{ $con->tenant_mobile??''}}</td>
-                            <td>{{ $con->lessor??''}}</td>
-                            <td>{{ $con->release_date??''}}</td>
-                            <td>{{ $con->lease_start_date??''}}</td>
-                            <td>{{ $con->lease_end_date??''}}</td>
-                            <td>{{ $con->lease_period_month ??''}}</td>
-                            <td>{{ $con->lease_period_day??''}}</td>
-                            <td>
-                                <a href="{{route('admin.graceDetails',$con->id)}}" class="graceBtn" data-id="{{$con->id}}" >View</a>
-                            </td>
-                            <td>{{ $con->lessorDetails->name??''}}</td>
-                            <td>{{ $con->attestation_no ??''}}</td>
-                            <td>{{ $con->attestation_status ??''}}</td>
-                            <td>{{ $con->attestation_expiry ??''}}</td>
-                            <td>{{ $con->contract_status ??''}}</td>
-                            <td>
-                                <div class="form-check form-check-primary form-switch">
-                                    <input type="checkbox" value="{{$con->id}}" class="form-check-input is_reject" id="is_reject" {{ $con->status==0?'':'checked' }} />
-                                </div>
-                            </td>
-                            <td>{{ $con->rent_amount ??''}}</td>
-                            <td>{{ $con->total_invoice ??''}}</td>
-                            <td>{{ $con->guarantees ??''}}</td>
-                            <td>{{ $con->guarantees_payment_method ??''}}</td>
-=======
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -112,7 +9,6 @@
                     <div class="col-sm-6">
                         <h4 class="card-title mb-0 flex-grow-1">Manage Contract </h4>
                     </div>
->>>>>>> Stashed changes
 
                 </div><!-- end card header -->
                 <div class="card-body  ">
