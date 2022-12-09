@@ -110,7 +110,7 @@ class MasterImportController extends Controller
                                 );
 
                                 $unit = Unit::firstOrCreate(["unit_ref" =>$importData[21] ], $insertUnitData);
-                                Error::create(['url' => 'Unit Found','message'=>json_encode($unit)]);
+                                // Error::create(['url' => 'Unit Found','message'=>json_encode($unit)]);
                                 if($unit){
                                     $insertTenantData = array(
                                         "building_name"=>$building->id??'',
