@@ -229,7 +229,7 @@ class ElectricityController extends Controller
         $res=Unit::where('id',$building_id)->get();
         $html='<option value="">--Select Unit No--</option>';
         foreach($res as $r){
-            $html .='<option value="'.$r->unit_no.'">'.$r->unit_no.'</option>';
+            $html .='<option value="'.$r->id.'">'.$r->unit_no.'</option>';
         }
 
         $html1='<option value="">--Select Unit Type--</option>';

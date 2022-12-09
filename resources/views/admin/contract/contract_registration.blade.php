@@ -204,8 +204,8 @@
                                     <label for="name" class="form-label">Company</label>
                                     <select class="form-control select2 form-select" id="company" name="company_id">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->company_id }}" selected>
-                                                {{ $contractedit->company->business_name }}</option>
+                                            <option value="{{ $contractedit->company_id??'' }}" selected>
+                                                {{ $contractedit->company->business_name??'' }}</option>
                                         @else
                                         <option value="" selected hidden>--Select Business--</option>
                                         @endif

@@ -147,17 +147,11 @@ class MasterImportController extends Controller
                                         );
                                         $electricity=Electricity::create($insertElectricData);
                                         if($electricity){
-                                    if($tenant->unittypeinfo and $tenant->buildingDetails)
-                                    {
-                                        $contract_code= 'CC-'.$tenant->unittypeinfo->name?$tenant->unittypeinfo->name[0]:'NA'.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
-                                    }
-                                    else
-                                    {
-                                        $contract_code= 'CC-NA'.'- -'.$tenant->unit_no.'-'.Carbon::now()->format('y');
-
-                                    }
-                                           
-                                            
+                                  
+                                        // $contract_code= 'CC-'.$tenant->unittypeinfo->name?$tenant->unittypeinfo->name[0]:'NA'.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
+                                        $contract_code = 'CC-' . time() . rand(0, 99);
+                                        // dd($contract_code);
+                                        Error::create(['url' => 'contract code', 'message' => $contract_code]);
                                             $lessor = Customer::firstOrCreate(['first_name' => $importData[37], 'email' => $importData[38]],['first_name' => $importData[37], 'email' => $importData[38]]);
                                         
                                             $created_at=$importData[44]!=null?Carbon::createFromFormat('d-M-Y',$importData[44])->timestamp:'';
