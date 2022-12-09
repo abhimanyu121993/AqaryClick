@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Contract;
 use App\Models\Customer;
 use App\Models\Electricity;
+use App\Models\Error;
 use App\Models\Invoice;
 use App\Models\Tenant;
 use App\Models\Unit;
@@ -109,6 +110,7 @@ class MasterImportController extends Controller
                                 );
 
                                 $unit = Unit::firstOrCreate(["building_id" => $building->id], $insertUnitData);
+                                Error::create(['url' => 'Unit Found','message'=>json_encode($unit)]);
                                 if($unit){
                                     $insertTenantData = array(
                                         "building_name"=>$building->id??'',
