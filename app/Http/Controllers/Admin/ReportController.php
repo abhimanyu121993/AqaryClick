@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Response;
 class ReportController extends Controller
 {
     public function report(){
+        $tenantStatus=Tenant::all();
         $role=Auth::user()->roles[0]->name;
         if($role=='superadmin'){
         $building=Building::all();
@@ -21,7 +22,7 @@ class ReportController extends Controller
         else{
             $building=Building::where('user_id',Auth::user()->id)->get();
 
-        }        return view('admin.settings.report',compact('building'));
+        }        return view('admin.settings.report',compact('building','tenantStatus'));
     }
 
     public function tenantUnitBuilding($building_id)
@@ -65,4 +66,6 @@ $invoice=Invoice::where('tenant_id',$tenant_id)->get();
 
     return view('admin.settings.master_report',compact('tenant','contract','invoice'));
 }
+
+
 }

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('document_type')->nullable();
             $table->string('qid_document')->nullable();
             $table->string('cr_document')->nullable();
+            $table->string('established_card_no')->nullable();
+            $table->string('government_housing_no')->nullable();
             $table->string('passport_document')->nullable();
             $table->string('tenant_mobile')->nullable();
             $table->string('tenant_nationality')->nullable();

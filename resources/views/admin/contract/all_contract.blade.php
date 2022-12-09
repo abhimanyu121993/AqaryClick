@@ -23,6 +23,8 @@
                             <th scope="col">QID No</th>
                             <th scope="col">CR No</th>
                             <th scope="col">Passport No</th>
+                            <th scope="col">Est Card No</th>
+                            <th scope="col">Government Housing No</th>
                             <th scope="col">Sponsor Id</th>
                             <th scope="col">Sponsor Name</th>
                             <th scope="col">Sponsor Nationality</th>
@@ -58,10 +60,20 @@
                             <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ $con->contract_code??'' }}</td>
                             <td>{{ $con->tenantDetails->tenant_english_name??'' }}</td>
-                            <td>{{ $con->document_type??'' }}</td>
+                            <td>
+                                @if ($con->document_type == 'Govt_Housing_No')
+                                   {{ $con->document_type =='Govt_Housing_No'?'Government Housing':''}}
+                                @elseif ($con->document_type == 'Est_Card_No')
+                                   {{ $con->document_type =='Est_Card_No'?'Estiblish Card':''}}
+                                @else
+                                   {{ $con->document_type??'' }}
+                                @endif
+                            </td>
                             <td>{{ $con->qid_document??'' }}</td>
                             <td>{{ $con->cr_document??'' }}</td>
                             <td>{{ $con->passport_document??'' }}</td>
+                            <td>{{ $con->established_card_no??'' }}</td>
+                            <td>{{ $con->government_housing_no??'' }}</td>
                             <td>{{ $con->sponsor_id??''}}</td>
                             <td>{{ $con->sponsor_name??''}}</td>
                             <td>{{ $con->sponsor_nationality??''}}</td>

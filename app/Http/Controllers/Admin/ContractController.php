@@ -52,7 +52,7 @@ class ContractController extends Controller
         $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
         $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
         $currency = currency::where('status', 1)->get();
-        return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'CC', 'currency'));
+        return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance','currency'));
     }
 
     /**
@@ -130,6 +130,8 @@ class ContractController extends Controller
             'document_type' => $request->document_type,
             'qid_document' => $request->qid_document,
             'cr_document' => $request->cr_document,
+            'established_card_no'=>$request->established_card_no,
+            'government_housing_no'=>$request->government_housing_no,
             'passport_document' => $request->passport_document,
             'sponsor_nationality' =>$snationlity,
             'sponsor_id' => $request->sponsor_id,
@@ -168,6 +170,7 @@ class ContractController extends Controller
         ]);
         if ($data) {
             Mail::to($data->tenantDetails->email)->send(new ContractMail($data));
+
             return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
@@ -273,6 +276,8 @@ class ContractController extends Controller
             'document_type' => $request->document_type,
             'qid_document' => $request->qid_document,
             'cr_document' => $request->cr_document,
+            'established_card_no'=>$request->established_card_no,
+            'government_housing_no'=>$request->government_housing_no,
             'passport_document' => $request->passport_document,
             'sponsor_nationality' => $request->sponsor_nationality,
             'sponsor_id' => $request->sponsor_id,
