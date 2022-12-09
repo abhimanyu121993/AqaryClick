@@ -41,11 +41,9 @@ class AlertNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->details['body'])
-                    ->line($this->details['name'])
-                    ->line($this->details['username'])
-                    ->action($this->details['click'],$this->details['url'],)
-                    ->line($this->details['thankyou']);
+                    ->line($this->details['title'])
+                    ->line($this->details['body']);
+                    
     }
 
     /**
