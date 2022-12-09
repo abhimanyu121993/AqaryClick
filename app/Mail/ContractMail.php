@@ -18,9 +18,11 @@ class ContractMail extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data,$conn,$contract)
     {
         $this->data=$data;
+        $this->conn=$conn;
+        $this->contract=$contract;
     }
 
     /**
@@ -46,6 +48,8 @@ class ContractMail extends Mailable
             view: 'admin.mailPage.contract_mail',
             with:[
                 'data'=>$this->data,
+                'conn'=>$this->conn,
+                'contract'=>$this->contract,
             ],
         );
     }

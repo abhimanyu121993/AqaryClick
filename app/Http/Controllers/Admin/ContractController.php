@@ -123,6 +123,8 @@ class ContractController extends Controller
 
         $tenant = Tenant::find($request->tenant_name);
         $contract_code='CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
+        $conn = Contract::with('tenantDetails')->where('contract_code', $contract_code)->first();
+        $contract = ContractRecipt::first();
         $data = Contract::create([
             'user_id' => Auth::user()->id,
             'contract_code' => $contract_code,
@@ -169,8 +171,7 @@ class ContractController extends Controller
             'remark' => $request->remark,
         ]);
         if ($data) {
-            Mail::to($data->tenantDetails->email)->send(new ContractMail($data));
-
+            Mail::to('$contract->tenantDetails->email')->send(new ContractMail($data,$conn,$contract));
             return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
@@ -500,14 +501,14 @@ class ContractController extends Controller
                                 'increament_term'=>$importData[15],
                                 'contract_status'=>$importData[16],
                                 'contract_type'=>'Internal',
-                                
+
                             );
                             // dd($insertData);
                             if (count($insertData)>0) {
                                 Contract::Create($insertData);
 
                             }
-                        
+
                         }
                         else{
                             Session::flash('error', 'Data Imported But Some Importing Cancelled Due To Tenant not found');

@@ -68,7 +68,7 @@ class BuildingController extends Controller
         // if ($req->ajax()) {
         return DataTables::of($buildings)->addIndexColumn()
             ->addColumn('image', function ($raw) {
-                $imgtag = "<img src='" . asset("upload/building/" . $raw->building_pic) . "' class='me-75 bg-light-danger' style='height:35px;width:35px;'>";
+                $imgtag = "<img src='" . asset("upload/building/" . $raw->building_pic) . "' class='me-75 bg-light-danger' style='height:55px;width:55px;'>";
                 return $imgtag;
             })
             ->addColumn('document', function ($doc) {
@@ -170,11 +170,22 @@ class BuildingController extends Controller
 
 
         ]);
-        $mainpic = '';
-        $otherpic = [];
-        if ($request->hasFile('building_pic')) {
-            $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
-            $request->building_pic->move(public_path('upload/building'), $mainpic);
+        // $mainpic = '';
+        // $otherpic = [];
+        // if ($request->hasFile('building_pic')) {
+        //     $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
+        //     $request->building_pic->move(public_path('upload/building'), $mainpic);
+        // }
+
+        $mainpic=[];
+        if($request->hasFile('building_pic'))
+        {
+            foreach($request->file('building_pic') as $file)
+            {
+                $build_name='build-'.time().'-'.rand(0,99).'.'.$file->extension();
+                $file->move(public_path('upload/building'),$build_name);
+                $mainpic []=$build_name;
+            }
         }
 
         if ($request->hasFile('building_file')) {
@@ -226,7 +237,7 @@ class BuildingController extends Controller
             'state' => $request->state,
             'area' => $request->zone_name,
             'pincode' => $request->pincode,
-            'building_pic' => $mainpic,
+            'building_pic' => json_encode($mainpic),
             'file' => json_encode($otherpic),
             'remark' => $request->remark,
         ]);
@@ -311,14 +322,25 @@ class BuildingController extends Controller
 
         ]);
 
-        $mainpic = Building::find($id)->building_pic ?? '';
-        $otherpic = Building::find($id)->building_file ?? [];
-        if ($request->hasFile('building_pic')) {
-            $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
-            $request->building_pic->move(public_path('upload/building'), $mainpic);
-            $oldpic = Building::find($id)->pluck('building_pic')[0];
-            File::delete(public_path('upload/building/' . $oldpic));
+        $mainpic = [];
+        $otherpic =[];
+        // if ($request->hasFile('building_pic')) {
+        //     $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
+        //     $request->building_pic->move(public_path('upload/building'), $mainpic);
+        //     $oldpic = Building::find($id)->pluck('building_pic')[0];
+        //     File::delete(public_path('upload/building/' . $oldpic));
+        // }
+
+        if($request->hasFile('building_pic'))
+        {
+            foreach($request->file('building_pic') as $file)
+            {
+                $build_name='build-'.time().'-'.rand(0,99).'.'.$file->extension();
+                $file->move(public_path('upload/building'),$build_name);
+                $mainpic[]=$build_name;
+            }
         }
+
 
         if ($request->hasFile('building_file')) {
             foreach ($request->file('building_file') as $file) {
@@ -330,6 +352,11 @@ class BuildingController extends Controller
         if (count($otherpic) > 0) {
             Building::find($id)->update(['file' => json_encode($otherpic)]);
         }
+
+        if (count($mainpic) > 0) {
+            Building::find($id)->update(['building_pic' => json_encode($mainpic)]);
+        }
+
         $data = Building::find($id)->update([
             'user_id' => Auth::user()->id,
             'building_code' => $request->building_code,
@@ -525,7 +552,7 @@ class BuildingController extends Controller
     }
 
     public function buildingFilesStore(Request $request){
-        
+
         $request->validate([
             'file_name*' => 'required',
         ]);
@@ -535,25 +562,25 @@ class BuildingController extends Controller
          $name=$bcode.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
          $files[$k]->move(public_path('upload/building/files'), $name);
         $res = BuildingFiles::create(['user_id' => Auth::user()->id,'building_id' => $bcode, 'file_name' => $request->file_name[$k] ?? '', 'attachment' => $name ?? '']);
-        
-    } 
+
+    }
     Session::flash('success','File Uploaded Successfully');
-    return redirect()->back();   
+    return redirect()->back();
     }
 
     public function buildingFilesDelete($id){
        $id = Crypt::decrypt($id);
         $data=BuildingFiles::find($id);
         $name=$data->attachment;
-       
+
         if($data->delete())
         {
-            $file=File::delete((public_path('upload/building/files/'.$name))); 
+            $file=File::delete((public_path('upload/building/files/'.$name)));
             return redirect()->back()->with('success','Data Deleted successfully.');
         }
         else
         {
             return redirect()->back()->with('error','Data not deleted.');
-        }    
+        }
     }
 }

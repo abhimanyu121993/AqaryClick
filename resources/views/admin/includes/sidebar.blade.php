@@ -107,7 +107,7 @@
                                         <a href="{{ route('admin.buildingFiles') }}" class="nav-link"
                                             data-key="t-analytics">Add Files</a>
                                     </li>
-                                    
+
                                 @endcan
                                 @can('Building_read')
                                     <li class="nav-item">
@@ -272,12 +272,12 @@
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards11">
                             <ul class="nav nav-sm flex-column">
-                                
+
                                     <li class="nav-item">
                                         <a href="{{ route('admin.legal.index') }}" class="nav-link"
                                             data-key="t-analytics">Legal</a>
                                     </li>
-                               
+
                                 @can('Legal_read')
                                     <!-- <li class="nav-item">
                                         <a href="{{ route('admin.legal.create') }}" class="nav-link"
@@ -392,6 +392,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.currency.index') }}" class="nav-link" data-key="t-analytics">
                                         Currency</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('import-data') }}" class="nav-link" data-key="t-analytics">
+                                        Import</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.report') }}" class="nav-link" data-key="t-analytics">

@@ -358,7 +358,7 @@
                             <div class="col-xxl-3 col-md-6">
                                 <label for="building_pic" class="form-label">Building Photo</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="building_pic" name="building_pic">
+                                    <input type="file" class="form-control" id="building_pic" name="building_pic[]" multiple>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-6">
