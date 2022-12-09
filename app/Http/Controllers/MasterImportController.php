@@ -149,6 +149,7 @@ class MasterImportController extends Controller
                                         if($electricity){
                                   
                                         $contract_code= 'CC-'.$tenant->unittypeinfo->name?$tenant->unittypeinfo->name[0]:'NA'.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
+                                        dd($contract_code);
                                         Error::create(['url' => 'contract code', 'message' => $contract_code]);
                                             $lessor = Customer::firstOrCreate(['first_name' => $importData[37], 'email' => $importData[38]],['first_name' => $importData[37], 'email' => $importData[38]]);
                                         
