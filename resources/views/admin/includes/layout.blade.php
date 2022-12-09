@@ -31,7 +31,7 @@
         <!-- ============================================================== -->
         <div class="main-content">
 
-            <div class="page-content">
+            <div class="page-content" style="background: #f1f0ee">
                 <div class="container-fluid">
 
                     @include('admin.includes.breadcrumb')

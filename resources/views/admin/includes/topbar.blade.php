@@ -397,7 +397,7 @@
                                                 </div> -->
                                             </div>
                                         </div>
-                                    @endforeach 
+                                    @endforeach
                                 @else
 
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
@@ -411,12 +411,12 @@
                             </div>
                                 @endif
 
-                                    
+
 
                                 </div>
 
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>

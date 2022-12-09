@@ -32,7 +32,7 @@ class ExcellController extends Controller
     }
     public function electric_export()
     {
-        
+
         return Excel::download(new ElectricityExcel, 'Electric-' . time() . '.xlsx');
     }
     public function tenant_statement()
@@ -55,5 +55,17 @@ class ExcellController extends Controller
     public function contract()
     {
         return Excel::download(new ContractExcel,'contract-'.time().'.xlsx');
+    }
+
+    public function description(Request $req,$id)
+    {
+        $req->validate([
+            'desc'=>'required'
+        ]);
+        Contract::find($id)->update([
+            'reject_desc'=> $req->desc
+        ]);
+        return back();
+
     }
 }

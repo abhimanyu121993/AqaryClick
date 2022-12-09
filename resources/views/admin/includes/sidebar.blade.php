@@ -1,25 +1,29 @@
-{{-- <style>
+<style>
+  .icon-dual {
+        color:white !important;
+        /* font-weight: 500; */
+    }
     li a {
-        color: black !important;
-        font-weight: 500;
+        color:white !important;
+        /* font-weight: 500; */
     }
-    svg{
+    /* svg{
         color: black !important;
-    }
+    }*/
     li a:hover{
-        color: rgb(255, 255, 255) !important;
+        color: rgb(37,160,226) !important;
     }
-</style> --}}
-<div class="app-menu navbar-menu" >
+</style>
+<div class="app-menu navbar-menu" style="background-image: linear-gradient(#0D324D,#7F5A83);">
     <!-- LOGO -->
-    <div class="navbar-brand-box">
+    <div class="navbar-brand-box" >
         <!-- Dark Logo-->
         <a href="#" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="50">
+                <img src="{{ asset('aquary.png') }}" alt="" height="50" style="filter: drop-shadow(5px 5px 5px rgb(78, 77, 77));">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="80"></span>
+                <img src="{{ asset('aquary.png') }}" alt="" height="80" style="filter: drop-shadow(5px 5px 5px rgb(78, 77, 77));"></span>
             </span>
         </a>
 

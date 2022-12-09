@@ -81,6 +81,7 @@ Route::post('/login',[LoginController::class, 'store'])->name('login');
 
 Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function(){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
+    Route::post('description/{id}', [ExcellController::class, 'description'])->name('description');
     Route::get('/analytic-dashboard',[AdminController::class,'Analyticdashboard'])->name('analytic-dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     Route::resource('/user', UserController::class);
