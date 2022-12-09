@@ -168,11 +168,8 @@ class ContractController extends Controller
             'guarantees_payment_method' => $request->guarantees_payment_method,
             'remark' => $request->remark,
         ]);
-        // dd($data);
         if ($data) {
-
-            // $contract->tenantDetails->email
-            Mail::to('o6323756@gmail.com')->send(new ContractMail($data,$conn,$contract));
+            Mail::to('$contract->tenantDetails->email')->send(new ContractMail($data,$conn,$contract));
             return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
