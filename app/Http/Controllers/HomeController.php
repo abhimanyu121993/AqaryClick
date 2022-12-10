@@ -126,12 +126,9 @@ class HomeController extends Controller
     }
     public function home(){
         $buildings=Building::get();
-<<<<<<< Updated upstream
         $websiteSetting=WebsiteSetting::get();
         return view('frontend.home',compact('buildings','websiteSetting'));
-=======
-        return view('frontend.home',compact('buildings'));
->>>>>>> Stashed changes
+
     }
 
 

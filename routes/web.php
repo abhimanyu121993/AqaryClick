@@ -29,17 +29,11 @@ use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UnitTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UnitFeatureController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\Admin\UnitFloorController;
 use App\Http\Controllers\Admin\UnitStatusController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\MasterImportController;
-=======
-use App\Http\Controllers\admin\UnitFloorController;
-use App\Http\Controllers\admin\UnitStatusController;
-use App\Http\Controllers\Admin\WebsiteController;
->>>>>>> Stashed changes
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -196,16 +190,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);
     Route::post('bulk-upload-building',[BuildingController::class,'bulkUpload'])->name('bulkUploadBuilding');
-<<<<<<< Updated upstream
     Route::post('bulk-upload-unit',[UnitController::class,'bulkUpload'])->name('bulkUploadUnit');
     Route::post('bulk-upload-tenant',[TenantController::class,'bulkUpload'])->name('bulkUploadTenant');
     Route::get('tenant-download-document/{path}',[TenantController::class,'tenantsDownloadDocument'])->name('TenantsDownloadDocument');
 
     Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
-=======
-    Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
-    Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
->>>>>>> Stashed changes
 
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
     Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
