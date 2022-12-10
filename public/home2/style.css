@@ -3387,13 +3387,8 @@ footer .copyright .mdc-button{
   height: 32px;
   padding: 0;
   margin-top: 2px;
-<<<<<<< Updated upstream
   overflow: hidden;
   cursor: pointer;
-=======
-  overflow: hidden;            
-  cursor: pointer; 
->>>>>>> Stashed changes
 }
 .options .skin-primary .skin-secondary{
   width: 0;
