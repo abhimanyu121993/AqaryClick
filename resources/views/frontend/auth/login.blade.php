@@ -93,7 +93,7 @@
                             </div>     
                         </form>
                         <div class="row end-xs middle-xs"> 
-                            <a href="#" class="mdc-button normal">
+                            <a href="{{route('home.forget-password')}}" class="mdc-button normal">
                                 <span class="mdc-button__ripple"></span>
                                 <i class="material-icons mdc-button__icon">vpn_key</i>
                                 <span class="mdc-button__label">Reset Password</span> 
