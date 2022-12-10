@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\LegalController;
 use App\Http\Controllers\Admin\NationalityController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StaffController;
@@ -112,9 +113,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('import-export-contract',[ContractController::class,'ImportExportContract'])->name('ImportExportContract');
     Route::get('import-export-tenant',[TenantController::class,'ImportExportTenant'])->name('ImportExportTenant');
     Route::get('yearly-statement/{id}',[TenantController::class,'yearlyStatement'])->name('yearlyStatement');
-    
 
-
+    Route::resource('add-agents-profile',ProfileController::class);
 
     Route::resource('unit',UnitController::class);
     Route::resource('currency',CurrencyController::class);
@@ -245,3 +245,5 @@ Route::get('/optimize-clear', function(){
 Route::view('payment-success','home.paymentsuccess');
 Route::get('check',[InvoiceController::class,'checck']);
 Route::view('import-data','admin.import.importdata');
+// Route::view('add-agents','admin.ourAgents.agents');
+

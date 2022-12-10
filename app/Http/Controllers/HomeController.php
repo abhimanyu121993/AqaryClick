@@ -116,7 +116,7 @@ class HomeController extends Controller
             'address' => $request->address,
             'email'=>$request->email,
             'mobile' => $request->phone,
-        ]);   
+        ]);
         if($user){
         return redirect()->back()->with('success','Your Registration has been successfully.');
         }
@@ -127,7 +127,8 @@ class HomeController extends Controller
     public function home(){
         $buildings=Building::get();
         $websiteSetting=WebsiteSetting::get();
-        return view('frontend.home',compact('buildings','websiteSetting'));
+        $build=Building::first();
+        return view('frontend.home',compact('buildings','websiteSetting','build'));
     }
 
 

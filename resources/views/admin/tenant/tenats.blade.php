@@ -1,20 +1,67 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'All Tenants'])
 @section('title', 'All Tenants')
+<style>
+    #card-header{
+       background:#c8f4f6;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+   }
+   #pop{
+       color: black !important;
+   }
+   #header1
+   {
+       background: #ecf0f3;
+       border: none !important;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+   }
+   #h1
+   {
+       color: black;
+   }
+   #example
+   {
+       font-size: 14px;
+   }
+   thead
+    {
+        background:#c9e6e7 !important;
+    }
+   input ,select,textarea ,#building_type{
+       border-radius: 10px !important;
+       border: none !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset !important;
+   }
+   .dataTables_info,.dataTables_paginate {
+       font-weight: bolder;
+   }
+   #btn-btn
+   {
+       background:#ffffff;
+       color: black;
+       border: none;
+       border-radius: 10px !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px;}
+   #btn-btn:hover
+   { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
+</style>
 @section('main-content')
 {{-- {{ $all_tenant }} --}}
 <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header align-items-center d-flex table-main-heading">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
 
                 <div class="col-4">
-                    <h4 class="card-title mb-0 flex-grow-1">Tenants List</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Tenants List</h4>
                 </div>
                 <div class="col-4">
 
                 </div>
                 <div class="col-4">
-                    <a class="btn btn-primary" href="{{Route('admin.excel-export.tenant')}}">Export</a>
+                    <a class="btn btn-primary" id="btn-btn" href="{{Route('admin.excel-export.tenant')}}">Export</a>
                 </div>
 
 
@@ -22,7 +69,7 @@
             <div class="card-body table-responsive ">
                 <table id="example" class="table table-striped table-bordered table-responsive" style="width:100%">
 
-                    <thead class="thead-color">
+                    <thead>
                         <tr>
                             <th scope="col">Sr.No.</th>
                             <th scope="col">Tenant Code</th>
@@ -84,26 +131,26 @@
                             <td>{{$tenant->attachment_remark}}</td>
                             <td>
                                 <div class="dropdown">
-                                    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a href="#" role="button" id="dropdownMenuLink " id="btn-btn" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ri-eye-2-fill"></i>
                                     </a>
                                     @php $bid=Crypt::encrypt($tenant->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         @php $pics=json_decode($tenant->attachment_file); @endphp
                                         @foreach ($pics as $pic)
-                                        <li><a class="dropdown-item" href="{{route('admin.TenantsDownloadDocument',$pic)}}">{{$pic??''}}</a></li>
+                                        <li><a id="pop" class="dropdown-item" href="{{route('admin.TenantsDownloadDocument',$pic)}}">{{$pic??''}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </td>
                             <td>
-                                <div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
+                                <div class="dropdown"><a href="#" id="btn-btn" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
                                     </a>
                                     @php $tid=Crypt::encrypt($tenant->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="{{route('admin.yearlyStatement',$tid)}}">Statement</a></li>
-                                        <li><a class="dropdown-item" href="{{route('admin.tenant.edit',$tid)}}">Edit</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $tid }}').submit();">Delete</a></li>
+                                    <li><a id="pop" class="dropdown-item" href="{{route('admin.yearlyStatement',$tid)}}">Statement</a></li>
+                                        <li><a id="pop" class="dropdown-item" href="{{route('admin.tenant.edit',$tid)}}">Edit</a></li>
+                                        <li><a id="pop" class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $tid }}').submit();">Delete</a></li>
 
                                         <form id="delete-form-{{ $tid }}" action="{{ route('admin.tenant.destroy', $tid) }}" method="post" style="display: none;">
                                             @method('DELETE')
