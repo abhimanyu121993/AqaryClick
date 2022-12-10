@@ -226,11 +226,11 @@
             </div>
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Monthly Status</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Monthly Statement</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.excel-export.statement-import')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible">
@@ -251,6 +251,39 @@
                                 <div class="col-xxl-3 col-md-6 pt-4">
                                     <button class="btn btn-primary" type="submit">Upload</button>
                                 </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Bulk Upload Master</h4>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="live-preview">
+                        <form action="{{ Route('admin.excel-export.master-import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <div class="row gy-4 mb-3">
+                                <div class="col-xxl-6 col-md-6">
+                                    <label for="name" class="form-label">Upload Master Excel</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="bulk_upload" name="bulk_upload" >
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-6 pt-4">
+                                    <button class="btn btn-primary" type="submit">Upload</button>
+                                </div>
+                                <a href="{{asset('assets/excel_format/master.csv')}}" download>Sample Excell Download</a>
                             </div>
                         </form>
                     </div>

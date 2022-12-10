@@ -49,19 +49,22 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ isset($userEdit)?route('admin.customer.update',$userEdit->id):route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+                            @if(isset($userEdit))
+                            @method('PUT')
+                            @endif
                             @csrf
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="first_name" class="form-label">First Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{isset($userEdit)?$userEdit->first_name:''}}" placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="last_name" class="form-label">Last Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{isset($userEdit)?$userEdit->last_name:''}}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -70,13 +73,13 @@
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                                        <input type="text" class="form-control" id="email" value="{{isset($userEdit)?$userEdit->email:''}}" name="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="phone" class="form-label">Phone</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone">
+                                        <input type="number" class="form-control" id="phone" name="phone"  value="{{isset($userEdit)?$userEdit->phone:''}}" placeholder="Phone">
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -85,7 +88,11 @@
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="email" class="form-label">Select Role</label>
                                     <select name="roleid"  class="form-select">
+                                        @if(isset($userEdit))
+                                        <option value="{{$userEdit->roles[0]->name}}">{{$userEdit->roles[0]->name}}</option>
+                                        @else
                                         <option value="">--Select Role--</option>
+                                        @endif
                                         @foreach ($roles as $role)
                                             <option value="{{ $role->id ??'' }}">{{ $role->name ??''}}</option>
                                         @endforeach
