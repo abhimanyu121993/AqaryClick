@@ -42,7 +42,6 @@ class BrokerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
        $request->validate([
             'broker_fname' => 'required',
             'email' => 'required|unique:brokers,email',
@@ -169,18 +168,18 @@ class BrokerController extends Controller
         foreach($res as $r){
             $html .='<option value="'.$r->id.'">'.$r->unit_ref.'</option>';
         }
-    
+
         return response()->json($html);
         }
 
         public function fetchBrokerBuildingDetails(){
                            $res=Building::all();
                 $html=' <option value="">--Select Building--</option>';
-    
+
                 foreach($res as $r){
                     $html .='<option value="'.$r->id.'">'.$r->name.'</option>';
             }
             return response()->json($html);
-    
+
 }
 }
