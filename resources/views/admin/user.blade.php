@@ -40,7 +40,6 @@
     { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
 </style>
 @section('main-content')
-
     <div class="row">
         <div class="col-lg-12 col-xl-12 col-xxl-12">
             <div class="card" id="header1">
@@ -55,7 +54,7 @@
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="first_name" class="form-label">First Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                                        <input type="text" class="form-control"  id="first_name" name="first_name" placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="col-xxl-6 col-md-6">

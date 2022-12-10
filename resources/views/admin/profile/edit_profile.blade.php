@@ -2,7 +2,6 @@
 @section('title', 'Profile Settings')
 @section('main-content')
     <div class="card-body">
-
         <div class="page-content" style="margin-top:-75px">
             <div class="container-fluid">
 

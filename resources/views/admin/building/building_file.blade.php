@@ -1,4 +1,51 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'File Management'])
+<style>
+    #card-header{
+       background:#c8f4f6;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+   }
+   #pop{
+       color: black !important;
+   }
+   #header1
+   {
+       background: #ecf0f3;
+       border: none !important;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+   }
+   #h1
+   {
+       color: black;
+   }
+   #example
+   {
+       font-size: 14px;
+   }
+   thead
+    {
+        background:#c9e6e7 !important;
+    }
+   input ,select,textarea ,#building_type{
+       border-radius: 10px !important;
+       border: none !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset !important;
+   }
+   .dataTables_info,.dataTables_paginate {
+       font-weight: bolder;
+   }
+   #btn-btn
+   {
+       background:#ffffff;
+       color: black;
+       border: none;
+       border-radius: 10px !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px;}
+   #btn-btn:hover
+   { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
+</style>
 @section('title', 'Files')
 @section('main-content')
 @php
@@ -11,9 +58,9 @@ $filehtml .='<option value="'.$b->id.'">'.$b->name??'';
 @endphp
 <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header align-items-center d-flex table-main-heading">
-                <h4 class="card-title mb-0 flex-grow-1">Create Files</h4>
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Create Files</h4>
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
@@ -56,7 +103,7 @@ $filehtml .='<option value="'.$b->id.'">'.$b->name??'';
                 <div class="row mt-2">
                     <div class="col-xxl-3 col-md-6">
                         <div class="input-group">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-primary" id="btn-btn"type="submit">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -69,11 +116,11 @@ $filehtml .='<option value="'.$b->id.'">'.$b->name??'';
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header align-items-center d-flex table-main-heading">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
                 <h4 class="card-title mb-0 flex-grow-1">Manage Files</h4>
             </div><!-- end card header -->
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                     <thead>
                         <tr>
