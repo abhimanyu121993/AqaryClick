@@ -56,7 +56,7 @@ use App\Http\Controllers\TenantFileController;
 
 // FrontEnd Routes
 Route::controller(HomeController::class)->group(function(){
-    Route::get("/","index");
+    Route::get("/","home");
     Route::get("/about-us","about");
     Route::get("/properties","properties");
     Route::get("/registration","regOverView");
