@@ -1,9 +1,55 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Fetch Permission'])
+<style>
+    #card-header{
+       background:#c8f4f6;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+   }
+   #pop{
+       color: black !important;
+   }
+   #header1
+   {
+       background: #ecf0f3;
+       border: none !important;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+   }
+   #h1
+   {
+       color: black;
+   }
+   thead
+    {
+        background:#c9e6e7;
+    }
+   #example
+   {
+       font-size: 14px;
+   }
+   input ,select{
+       border-radius: 10px !important;
+       border: none !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;
+   }
+   .dataTables_info,.dataTables_paginate {
+       font-weight: bolder;
+   }
+   #btn-btn
+   {
+       background:#ffffff;
+       color: black;
+       border: none;
+       border-radius: 10px !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px;}
+   #btn-btn:hover
+   { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
+</style>
 @section('title', 'Fetch Permissions')
-
 @section('main-content')
-    <div class="card">
-        <div class="card-header">
+    <div class="card" id="header1">
+        <div class="card-header" id="card-header">
             Fetch Permission
         </div>
         <div class="card-body">
@@ -20,7 +66,7 @@
                         </select>
                     </div>
                     <div class="col-xxl-3 col-md-6 ">
-                        <button class="btn btn-primary mt-4" type="submit">Fetch</button>
+                        <button class="btn btn-primary mt-4" id="btn-btn" type="submit">Fetch</button>
                     </div>
                     <!--end col-->
                 </div>
@@ -29,15 +75,15 @@
     </div>
 
     @if (isset($selectrole))
-        <div class="card">
-            <div class="card-header">
+        <div class="card" id="header1">
+            <div class="card-header" id="card-header">
                 Permissions
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.assignPermission') }}" method="post">
                     @csrf
                     <input type="hidden" name='roleid' value="{{ $selectrole->id }}">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="example">
                         <thead>
                             <tr>
                                 <th>Permissions Name</th>

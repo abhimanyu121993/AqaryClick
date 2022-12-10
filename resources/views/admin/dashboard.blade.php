@@ -71,7 +71,7 @@
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <span class="fs-4">
-                                    <i data-feather="users" class="fonts"></i>
+                                    <img src="{{asset('3x/Asset 10@3x.png')}}" height="100px" style="border-radius: 100%;"/>
                                 </span>
                             </div>
                             <a href="{{ route('admin.customer.index') }}">  <div class="flex-grow-1 overflow-hidden ms-3">
@@ -110,7 +110,7 @@
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <span class="fs-4">
-                                    <i data-feather="users" class="fonts"></i>
+                                    <img src="{{asset('3x/Asset 10@3x.png')}}" height="100px" style="border-radius: 100%;"/>
                                 </span>
                             </div>
                             <a href="{{ route('admin.customer.index') }}"><div class="flex-grow-1 ms-3">
@@ -132,7 +132,7 @@
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <span class=" fs-4">
-                                    <i data-feather="home" class="fonts"></i>
+                                    <img src="{{asset('3x/Asset 24@3x.png')}}" height="100px"/>
                                 </span>
                             </div>
                             <a href="{{route('admin.building.create')}}"><div class="flex-grow-1 overflow-hidden ms-3">
