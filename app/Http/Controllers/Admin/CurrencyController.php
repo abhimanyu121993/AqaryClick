@@ -136,7 +136,7 @@ class CurrencyController extends Controller
         {
             $code= $request->currency_code;
             $amt=$request->cheque_amt;
-     $res=amcurrency::convert()->from($code)->to('SAR')->amount($amt)->get();
+     $res=amcurrency::convert()->from($code)->to('QAR')->amount($amt)->get();
 
      return response()->json($res);
     }
@@ -148,5 +148,12 @@ class CurrencyController extends Controller
             $html .='<option value="'.$r->code.'">'.$r->code.'</option>';
         }
         return response()->json($html);
+        }
+
+        public function convertAmtInSarDt($code,$amt)
+        {
+           
+            $res=amcurrency::convert()->from($code)->to('QAR')->amount($amt)->get();
+            return $res;
         }
 }

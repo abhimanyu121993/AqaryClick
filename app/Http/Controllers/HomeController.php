@@ -128,6 +128,7 @@ class HomeController extends Controller
         $buildings=Building::get();
         $websiteSetting=WebsiteSetting::get();
         return view('frontend.home',compact('buildings','websiteSetting'));
+
     }
 
 

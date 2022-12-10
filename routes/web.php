@@ -221,6 +221,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('master', [ExcellController::class, 'master']);
         Route::get('contract', [ExcellController::class, 'contract'])->name('contract');
         Route::post('master-import', [MasterImportController::class,'excel_upload'])->name('master-import');
+        Route::post('statement-import', [MasterImportController::class, 'excel_upload_statement'])->name('statement-import');
      });
 
 });

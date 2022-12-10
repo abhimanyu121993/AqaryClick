@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\admin\CurrencyController;
+use App\Mail\ExcelReport;
 use App\Models\Building;
 use App\Models\City;
 use App\Models\Contract;
@@ -17,6 +19,7 @@ use App\Models\UnitType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use JetBrains\PhpStorm\Internal\TentativeType;
 
@@ -24,8 +27,7 @@ class MasterImportController extends Controller
 {
     public function excel_upload(Request $req,$country=null)
     {
-        set_time_limit(300);
-        // return 'svsdvsfv';
+        
         $country=2;  //future country code select by user form
 //check tenant code compulsory;
         if ($req->hasFile('bulk_upload')) {
@@ -112,13 +114,44 @@ class MasterImportController extends Controller
                                 $unit = Unit::firstOrCreate(["unit_ref" =>$importData[21] ], $insertUnitData);
                                 // Error::create(['url' => 'Unit Found','message'=>json_encode($unit)]);
                                 if($unit){
+                                $qid = '';
+                                $cr = '';
+                                $established = '';
+                                $govhouse = '';
+                                $passport = '';
+                                $tenanttype = '';
+                                if($importData[3]=='passport'){
+                                    $passport = $importData[2];
+                                    $tenanttype = 'TP';
+                                }
+                                else if($importData[3]=='cr'){
+                                    $cr= $importData[2];
+                                    $tenanttype = 'TC';
+                                }
+                                else if($importData[3]=='card'){
+                                    $established = $importData[2];
+                                    $tenanttype = 'TC';
+                                }
+                                else if($importData[3]=='gov'){
+                                    $govhouse = $importData[2];
+                                    $tenanttype = 'TG';
+                                }
+                                else
+                                {
+                                    $qid = $importData[2];
+                                    $tenanttype = 'TP';
+                                }
                                     $insertTenantData = array(
                                         "building_name"=>$building->id??'',
                                         "file_no"=>$importData[0]??'',
                                         "tenant_code"=>$tenantcode??'',
-                                        "qid_document"=>$importData[2]??'',
-                                        // "established_ card_no"=>$importData[3]??'',
-                                        "tenant_type"=>$importData[3]||$importData[39]||$importData[40]?'TC':'TP',//condition based on established card and sponsor
+                                        "tenant_document"=>$importData[3]??'',
+                                        "qid_document"=>$qid??'',
+                                        "cr_document"=>$cr??'',
+                                        "established_card_no"=>$established??'',
+                                        "government_housing_no"=>$govhouse??'',
+                                        "passport"=>$passport??'',
+                                        "tenant_type"=>$tenanttype,//condition based on established card and sponsor
                                         "tenant_english_name"=>$importData[4]??'',
                                         "tenant_primary_mobile"=>$importData[5]??'',
                                         "email"=>$importData[6]??'',
@@ -151,7 +184,7 @@ class MasterImportController extends Controller
                                         // $contract_code= 'CC-'.$tenant->unittypeinfo->name?$tenant->unittypeinfo->name[0]:'NA'.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
                                         $contract_code = 'CC-' . time() . rand(0, 99);
                                         // dd($contract_code);
-                                        Error::create(['url' => 'contract code', 'message' => $contract_code]);
+                                        // Error::create(['url' => 'contract code', 'message' => $contract_code]);
                                             $lessor = Customer::firstOrCreate(['first_name' => $importData[37], 'email' => $importData[38]],['first_name' => $importData[37], 'email' => $importData[38]]);
                                         
                                             $created_at=$importData[44]!=null?Carbon::createFromFormat('d-M-Y',$importData[44])->timestamp:'';
@@ -248,6 +281,114 @@ class MasterImportController extends Controller
                             }
                    
                     
+                    }
+                    Session::flash('success', 'Import Successful.');
+                    return redirect()->back();
+                }
+            else {
+                Session::flash('error', 'File too large. File must be less than 2MB.');
+                return redirect()->back();
+            }
+
+            }
+            else
+            {
+                Session::flash('error', 'Please upload a valid .csv file only');
+            }
+        }else{
+            Session::flash('error', 'Please upload a valid .csv file only');
+        }
+        return redirect()->back();
+    }
+
+    public function excel_upload_statement(Request $req)
+    {
+        
+        if ($req->hasFile('bulk_upload')) {
+            $file = $req->bulk_upload;
+            $filename = time() . $file->getClientOriginalName();
+            // dd($filename);
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $valid_extension = array("csv");
+            $maxFileSize = 2097152;
+            if (in_array(strtolower($extension), $valid_extension)) {
+         
+                 // Check file size
+                 if ($fileSize <= $maxFileSize) {
+                    // File upload location
+                    $location = 'uploads/tenant';
+                    // Upload file
+                    $file->move($location, $filename);
+                    // Import CSV to Database
+                    $filepath = public_path($location . "/" . $filename);
+                    // Reading file
+                    $file = fopen($filepath, "r");
+                    $importData_arr = array();
+                    $i = 0;
+                    while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                        $num = count($filedata);
+                        // Skip first row (Remove below comment if you want to skip the first row)
+                        if ($i == 0 || $i==1) {
+                            $i++;
+                            continue;
+                        }
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                    }
+                    fclose($file);
+                    foreach($importData_arr as $importData){
+                        $report = '';
+                        $tenant = Tenant::where('tenant_code', $importData[0])->first();
+                        $contract = Contract::where('contract_code', $importData[1])->first();
+                        $cur = new CurrencyController;
+                        if ($tenant and $contract) {
+                            $receipt_no=Invoice::where('tenant_id',$tenant->id)->where('contract_id',$contract->id)->count()+1;
+                            $inserStatement = [
+                                'tenant_id'=>$tenant->id,
+                                'contract_id'=>$contract->id,
+                                'invoice_no'=>'INV-'.time().rand(0,99),
+                                'receipt_no'=>str_pad($receipt_no,3,'0', STR_PAD_LEFT),
+                                'due_date'=>$importData[2]??'',
+                                'invoice_period_start'=>$importData[3]??'',
+                                'invoice_period_end'=>$importData[4]??'',
+                                'currency_type'=>$importData[5],
+                                'amt_paid'=>$cur->convertAmtInSarDt($importData[5],$importData[6]),
+                                'user_amt'=>$importData[6],
+                                'due_amt'=>$cur->convertAmtInSarDt($importData[5],$importData[7])??0,
+                                'istax'=>$importData[7]!='' || $importData[7]!=NULL?'true':'false',
+                                'tax_amt'=>$importData[8],
+                                'total_amt'=>$cur->convertAmtInSarDt($importData[5],$importData[6])+$cur->convertAmtInSarDt($importData[5],$importData[7]),
+                                'payment_method'=>$importData[9]??'',
+                                'account_no'=>$importData[10]??'',
+                                'bank_name'=>$importData[11]??'',
+                                'payment_status'=>$importData[12]??'',
+                                'remark'=>$importData[19],
+                                'tenant_account'=>$importData[13],
+                                'tenant_bank'=>$importData[14],
+                                'tax_no'=>$importData[15],
+                                'benifitary_account'=>$importData[16],
+                                'benifitary_name'=>$importData[17],
+                            ];
+                            $invoice = Invoice::Create($inserStatement);
+                        }
+                        else
+                        {
+                            $report .= "Tenant Code " . $importData[0] . " OR Contract Code ".$importData[1]." not Found So Data not inserted";
+                        }
+
+                    }
+                    if($report!=''){
+                        Mail::to(Auth::user()->email)->send(new ExcelReport($report));
+                    }
+                    else
+                    {
+                        $report='Statement Imported Successfully';
+                        Mail::to(Auth::user()->email)->send(new ExcelReport($report));
                     }
                     Session::flash('success', 'Import Successful.');
                     return redirect()->back();
