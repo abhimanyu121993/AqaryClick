@@ -645,6 +645,7 @@
                         url: newurl,
                         method: 'get',
                         success: function(p) {
+                            console.log(p.established_card_no);
                             $("#tenant_primary_mobile").val(p.tenant_primary_mobile);
                             $('#tenant_nationality').val(p.tenant_nationality.name);
                             $('#sponsor_name').val(p.sponsor_name);
@@ -664,11 +665,11 @@
                                 $('#establishment').hide();
                                 $('#government').hide();
 
-                            } else if (p.tenant_document == 'CR') {
+                            } else if (p.tenant_document == 'CR & EST CARD') {
                                 $('#qid').hide();
                                 $('#cr').show();
                                 $('#passport').hide();
-                                $('#establishment').hide();
+                                $('#establishment').show();
                                 $('#government').hide();
                             } else if (p.tenant_document == 'Passport') {
                                 $('#qid').hide();
@@ -676,13 +677,15 @@
                                 $('#passport').show();
                                 $('#establishment').hide();
                                 $('#government').hide();
-                            }else if (p.tenant_document == 'Est_Card_No') {
-                                $('#qid').hide();
-                                $('#cr').hide();
-                                $('#passport').hide();
-                                $('#establishment').show();
-                                $('#government').hide();
-                            }else if (p.tenant_document == 'Govt_Housing_No') {
+                            }
+                            //else if (p.tenant_document == 'Est_Card_No') {
+                            //     $('#qid').hide();
+                            //     $('#cr').hide();
+                            //     $('#passport').hide();
+                            //     $('#establishment').show();
+                            //     $('#government').hide();
+                            // }
+                            else if (p.tenant_document == 'Govt_Housing_No') {
                                 $('#qid').hide();
                                 $('#cr').hide();
                                 $('#passport').hide();
@@ -913,6 +916,9 @@
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'TC') {
                         $('.sponsor_hide').show();
+                        $('#cr').show();
+                        $('#establishment').show();
+
 
                     } else if (optionValue == 'TP') {
                         $('.sponsor_hide').hide();

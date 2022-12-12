@@ -29,6 +29,9 @@ return new class extends Migration
             $table->string('tenant_secondary_mobile')->nullable();
             $table->string('email')->nullable();
             $table->string('alternate_email')->nullable();
+            $table->string('authorized_person')->nullable();
+            $table->string('authorized_person_qid')->nullable();
+            $table->string('post_office')->nullable();
             $table->string('post_office')->nullable();
             $table->string('tenant_nationality')->nullable();
             $table->longText('unit_address')->nullable();

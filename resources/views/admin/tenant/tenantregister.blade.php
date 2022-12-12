@@ -116,9 +116,8 @@
                             <select class="form-control" id="tenant_document_type" name="tenant_document">
                                 <option value="{{isset($editTenant)? $editTenant->tenant_document:''}}" selected hidden>{{isset($editTenant)? $editTenant->tenant_document:'--Select Document Type--'}}</option>
                                 <option value="QID" id="QID">QID</option>
-                                <option value="CR" id="CR">CR</option>
+                                <option value="CR & Est_Card" id="CR_Est_Card">CR & Est Card</option>
                                 <option value="Passport" id="PASSPORT">Passport</option>
-                                <option value="Est_Card_No" id="Established_Card_No">Est Card No</option>
                                 <option value="Govt_Housing_No" id="Government_Housing_Number">Government Housing No</option>
                             </select>
                         </div>
@@ -394,6 +393,7 @@
         $('#passport').hide();
         $('#established_card_no').hide();
         $('#government_housing_number').hide();
+        $('#CR_Est_Card').hide();
         $("#tenant_document_type").change(function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
@@ -403,12 +403,12 @@
                     $('#passport').hide();
                     $('#established_card_no').hide();
                     $('#government_housing_number').hide();
-
-                } else if (optionValue == 'CR') {
+                    $('#CR_Est_Card').hide();
+                } else if (optionValue == 'CR & Est_Card') {
                     $('#cr').show();
                     $('#qid').hide();
                     $('#passport').hide();
-                    $('#established_card_no').hide();
+                    $('#established_card_no').show();
                     $('#government_housing_number').hide();
 
                 } else if (optionValue == 'Passport') {
@@ -417,15 +417,7 @@
                     $('#cr').hide();
                     $('#established_card_no').hide();
                     $('#government_housing_number').hide();
-
-                } else if (optionValue == 'Est_Card_No') {
-                    $('#passport').hide();
-                    $('#qid').hide();
-                    $('#cr').hide();
-                    $('#established_card_no').show();
-                    $('#government_housing_number').hide();
-
-                } else if (optionValue == 'Govt_Housing_No') {
+                 } else if (optionValue == 'Govt_Housing_No') {
                     $('#passport').hide();
                     $('#qid').hide();
                     $('#cr').hide();
@@ -441,7 +433,7 @@
     $(document).ready(function() {
         $('#QID').hide();
         $('#PASSPORT').hide();
-        $('#CR').hide();
+        $('#CR_Est_Card').hide();
         $('#Established_Card_No').hide();
         $('#Government_Housing_Number').hide();
         $("#tenant_type").change(function() {
@@ -450,19 +442,26 @@
                 if (optionValue == 'TP') {
                     $('#QID').show();
                     $('#PASSPORT').show();
-                    $('#CR').hide();
+                    $('#CR_Est_Card').hide();
                     $('#Established_Card_No').hide();
                     $('#Government_Housing_Number').hide();
                 } else if (optionValue == 'TC') {
                     $('#QID').hide();
                     $('#PASSPORT').hide();
-                    $('#CR').show();
+                    $('#CR_Est_Card').show();
                     $('#Established_Card_No').show();
                     $('#Government_Housing_Number').hide();
                 } else if (optionValue == 'TG') {
                     $('#QID').hide();
                     $('#PASSPORT').hide();
-                    $('#CR').hide();
+                    $('#CR_Est_Card').hide();
+                    $('#Established_Card_No').hide();
+                    $('#Government_Housing_Number').show();
+                }
+                else if (optionValue == 'TG') {
+                    $('#QID').hide();
+                    $('#PASSPORT').hide();
+                    $('#CR_Est_Card').hide();
                     $('#Established_Card_No').hide();
                     $('#Government_Housing_Number').show();
                 }
