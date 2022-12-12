@@ -174,9 +174,9 @@
                             </div>
 
                         </div>
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Building Address</h4>
+                        <div class="card" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Building Address</h4>
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
@@ -253,9 +253,9 @@
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Building Appraisal</h4>
+                        <div class="card" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Building Appraisal</h4>
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
@@ -360,8 +360,8 @@
 
 
                         </div>
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
+                        <div class="card" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
                                 <h4 class="card-title mb-0 flex-grow-1">Person in-charge</h4>
                             </div>
                         </div>
@@ -392,9 +392,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Upload attachment</h4>
+                        <div class="card" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Upload attachment</h4>
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">

@@ -1,4 +1,51 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Generate Invoice'])
+<style>
+    #card-header{
+       background:#c8f4f6;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+   }
+   #pop{
+       color: black !important;
+   }
+   #header1
+   {
+       background: #ecf0f3;
+       border: none !important;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+   }
+   #h1
+   {
+       color: black;
+   }
+   #example
+   {
+       font-size: 14px;
+   }
+   thead
+    {
+        background:#c9e6e7 !important;
+    }
+   input ,select,textarea ,#building_type{
+       border-radius: 10px !important;
+       border: none !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset !important;
+   }
+   .dataTables_info,.dataTables_paginate {
+       font-weight: bolder;
+   }
+   #btn-btn
+   {
+       background:#ffffff;
+       color: black;
+       border: none;
+       border-radius: 10px !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px;}
+   #btn-btn:hover
+   { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
+</style>
 @section('title', 'Generate Invoice')
 @section('main-content')
     @php
@@ -25,8 +72,8 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
+            <div class="card" id="header1">
+                <div class="card-header align-items-center d-flex" id="card-header">
                     <h4 class="card-title mb-0 flex-grow-1">Tenant Details</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
@@ -71,8 +118,8 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
+            <div class="card" id="header1">
+                <div class="card-header align-items-center d-flex" id="card-header">
                     <h4 class="card-title mb-0 flex-grow-1">Invoice Management</h4>
                 </div>
                 <form class="needs-validation" novalidate id="invoice_form" action="{{ route('admin.invoice.store') }}"
@@ -91,11 +138,11 @@
                         </div>
                         <input type="radio" class="btn-check" name="options-outlined" id="full-payment-details"
                             autocomplete="off" checked>
-                        <label class="btn btn-outline-success" for="full-payment-details">Full Payment</label>
+                        <label class="btn btn-outline-success" id="btn-btn" for="full-payment-details">Full Payment</label>
 
                         <input type="radio" class="btn-check" name="options-outlined" id="due-payment-details"
                             autocomplete="off">
-                        <label class="btn btn-outline-danger" for="due-payment-details">Due Payment</label>
+                        <label class="btn btn-outline-danger" id="btn-btn" for="due-payment-details">Due Payment</label>
                         <div class="row gy-4 mb-3 mt-5 ">
                             <!-- <div class="col-xxl-3 col-md-2">
                                 <label class="form-label" for="flag">Invoice No</label>
@@ -137,9 +184,9 @@
 
                         </div>
 
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Tenant Account Details</h4>
+                        <div class="card" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Tenant Account Details</h4>
                             </div>
                         </div>
                         <div class="row">
@@ -180,9 +227,9 @@
                                 </div>
                             </div> -->
                         </div>
-                        <div class="card mt-5">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Benifitary Account Details</h4>
+                        <div class="card mt-5" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Benifitary Account Details</h4>
                             </div>
                         </div>
                         <div class="row">
@@ -210,9 +257,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-5">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Payment Details</h4>
+                        <div class="card mt-5" id="header1">
+                            <div class="card-header align-items-center d-flex" id="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Payment Details</h4>
                             </div>
                         </div>
 
@@ -272,8 +319,8 @@
                         </div>
                         <div class="row mt-2" id="">
                             <div class="col-lg-12" id="cheque_management">
-                                <div class="card">
-                                    <div class="card-header align-items-center d-flex">
+                                <div class="card" id="header1">
+                                    <div class="card-header align-items-center d-flex" id="card-header">
                                         <h4 class="card-title mb-0 flex-grow-1">
                                             {{ isset($contractedit) ? 'Update Cheque' : 'Cheque Management' }}</h4>
                                     </div><!-- end card header -->
@@ -396,7 +443,7 @@
                                 <textarea class="form-control" name="remark"> </textarea>
                             </div>
                             <div class="hstack gap-2 justify-content-start d-print-none mt-4">
-                                <button type="submit" class="btn btn-primary"><i
+                                <button type="submit" id="btn-btn" class="btn btn-primary"><i
                                         class="ri-rotete-line align-bottom me-1"></i>Submit</button>
                             </div>
                         </div>

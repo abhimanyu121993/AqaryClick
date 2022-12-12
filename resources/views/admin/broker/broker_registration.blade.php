@@ -1,12 +1,59 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Broker'])
+<style>
+    #card-header{
+       background:#c8f4f6;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+   }
+   #pop{
+       color: black !important;
+   }
+   #header1
+   {
+       background: #ecf0f3;
+       border: none !important;
+       border-top-left-radius:15px;
+       border-top-right-radius: 15px;
+       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+   }
+   #h1
+   {
+       color: black;
+   }
+   #example
+   {
+       font-size: 14px;
+   }
+   thead
+    {
+        background:#c9e6e7 !important;
+    }
+   input ,select,textarea ,#building_type{
+       border-radius: 10px !important;
+       border: none !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset !important;
+   }
+   .dataTables_info,.dataTables_paginate {
+       font-weight: bolder;
+   }
+   #btn-btn
+   {
+       background:#ffffff;
+       color: black;
+       border: none;
+       border-radius: 10px !important;
+       box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px;}
+   #btn-btn:hover
+   { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
+</style>
 @section('title', 'Broker')
 @section('main-content')
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($broker)? 'Update Broker/Agent' : 'Create Broker/Agent' }}</h4>
+            <div class="card" id="header1">
+                <div class="card-header align-items-center d-flex" id="card-header">
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">{{ isset($broker)? 'Update Broker/Agent' : 'Create Broker/Agent' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -32,7 +79,7 @@
                                 @if (isset($broker))
                                     <option value="{{ $broker->broker_agent }}" selected>{{ $broker->broker_agent}}</option>
                                     @else
-                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="" selected hidden>--Select Type--</option>
                                 <option value="broker">Broker</option>
                                     <option value="agent">Agent</option>
                                     @endif
@@ -79,26 +126,26 @@
                                 @if (isset($broker))
                                     <option value="{{ $broker->broker_type }}" selected>{{ $broker->broker_type}}</option>
                                     @else
-                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="" selected hidden>--Select Type--</option>
                                 <option value="personal">Personal</option>
                                     <option value="company">Company</option>
                                     @endif
                                 </select>
                             </div>
-                          
+
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Property Type</label>
                                 <select class="form-control select2 form-select" id="broker_type" name="property_type">
                                 @if (isset($broker))
                                     <option value="{{ $broker->Property_type }}" selected>{{ $broker->Property_type}}</option>
                                     @else
-                                <option value="" selected hidden>--Select Type--</option>   
+                                <option value="" selected hidden>--Select Type--</option>
                                 <option value="unit">Unit</option>
                                     <option value="building">Building</option>
                                     @endif
                                 </select>
                             </div>
-                                
+
                             <div class="col-md-3 mb-1" id="unit_ref_hide">
                                 <label class="form-label" for="flag">Unit Ref</label>
 
@@ -131,7 +178,7 @@
                             <div class="row gy-4 mt-2">
                                 <div class="col-xxl-3 col-md-6">
                                     <div class="input-group">
-                                        <button class="btn btn-primary" type="submit">{{isset($broker) ? 'Update' : 'Submit'}}</button>
+                                        <button class="btn btn-primary" id="btn-btn" type="submit">{{isset($broker) ? 'Update' : 'Submit'}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +189,7 @@
         </div>
     </div>
 
-    
+
 
     <!-- Grids in modals -->
 @endsection
@@ -158,7 +205,7 @@
                 var optionValue = $(this).attr("value");
                 if(optionValue=='unit'){
                     $('#unit_ref_hide').show();
-                    $('#unit_building_hide').hide();  
+                    $('#unit_building_hide').hide();
                     var newurl = "{{ url('/admin/fetch-broker-unit') }}" ;
                 $.ajax({
                     url: newurl,

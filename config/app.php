@@ -189,6 +189,7 @@ return [
          * Package Service Providers...
          */
 
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -218,5 +219,6 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,    ])->toArray(),
         'DataTables' => \Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
 ];

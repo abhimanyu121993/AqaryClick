@@ -44,6 +44,8 @@
 
     @include('frontend.includes.foot')
 
+    @include('sweetalert::alert')
+
     @yield('script-area')
   </body>
 </html>

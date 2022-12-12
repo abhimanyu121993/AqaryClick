@@ -57,7 +57,7 @@ use App\Http\Controllers\TenantFileController;
 
 // FrontEnd Routes
 Route::controller(HomeController::class)->group(function(){
-    Route::get("/","index");
+    Route::get("/","home");
     Route::get("/about-us","about");
     Route::get("/properties","properties");
     Route::get("/registration","regOverView");
@@ -75,6 +75,8 @@ Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/reset-password/{id}', [AuthLoginController::class, 'showResetPasswordForm'])->name('reset-password');
     Route::post('/reset-password', [AuthLoginController::class, 'submitResetPasswordForm'])->name('reset-password-post');
     Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
+    Route::get('/register',[AuthLoginController::class,'registerIndex'])->name('registerIndex');
+    Route::post('/register-store-customer',[AuthLoginController::class,'registerStore'])->name('registerStore');
 });
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');

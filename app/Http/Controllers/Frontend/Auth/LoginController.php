@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -10,8 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class LoginController extends Controller
 {
    public function index()
@@ -64,7 +66,8 @@ class LoginController extends Controller
            $message->subject('Reset Password');
        });
 
-       return back()->with('message', 'We have e-mailed your password reset link!');
+       Alert::alert()->success('Successfully','We have e-mailed your password reset link!');
+       return back();
    }
    /**
     * Write code on Method
@@ -109,5 +112,37 @@ class LoginController extends Controller
    {
         Auth::logout();
         return redirect()->route('home.');
+   }
+
+
+   public function registerIndex(){
+    return view('frontend.auth.register');
+   }
+   
+   public function registerStore(Request $request){
+    
+
+    $request->validate([
+        'first_name'=>'required',
+        'last_name'=>'required',
+        'mobile'=>'required',
+        'email'=>'required',
+        'address'=>'required',
+        
+    ]);
+
+   
+
+    $customer=Customer::create([
+        'first_name'=>$request->first_name,
+        'last_name'=>$request->last_name,
+        'mobile'=>$request->mobile,
+        'email'=>$request->email,
+        'address'=>$request->address,
+    ]);
+    
+    Alert::alert()->success('Successfully','You have register successfully !');
+    return Redirect()->back();
+    
    }
 }

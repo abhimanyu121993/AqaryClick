@@ -7,20 +7,68 @@
                 <div class="row center-xs middle-xs my-5"> 
                     <div class="mdc-card p-3 p-relative mw-500px w-100">
                         <div class="column center-xs middle-xs text-center">  
-                            <h1 class="uppercase">Sign In</h1>
+                            <h1 class="uppercase">Register_Customer</h1>
                             <a href="register.html" class="mdc-button mdc-ripple-surface mdc-ripple-surface--accent accent-color normal w-100">
                                 Don't have an account? Sign up now!
                             </a>  
                         </div>
-                        <form action="{{route('home.login-post')}}" method='post'>  
+                        <form action="{{route('home.registerStore')}}" method='post'>  
                             @csrf
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100 mt-3 custom-field @error('email') mdc-text-field--invalid @enderror">
+
+                            
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100 mt-3 custom-field @error('first_name') mdc-text-field--invalid @enderror">
                                 <i class="material-icons mdc-text-field__icon text-muted">person</i>
+                                <input class="mdc-text-field__input" name='first_name' type='text'>
+                                <div class="mdc-notched-outline">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label class="mdc-floating-label">First_Name</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div> 
+                            <div class="mdc-text-field-helper-line">
+                                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg">@error('first_name') {{$message}} @enderror</div>
+                            </div>
+
+                                
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100 mt-3 custom-field @error('last_name') mdc-text-field--invalid @enderror">
+                                <i class="material-icons mdc-text-field__icon text-muted">person</i>
+                                <input class="mdc-text-field__input" name='last_name' type='text'>
+                                <div class="mdc-notched-outline">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label class="mdc-floating-label">Last_Name</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div> 
+                            <div class="mdc-text-field-helper-line">
+                                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg">@error('last_name') {{$message}} @enderror</div>
+                            </div>
+
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100 mt-3 custom-field @error('mobile') mdc-text-field--invalid @enderror">
+                                <i class="material-icons mdc-text-field__icon text-muted">call</i>
+                                <input class="mdc-text-field__input" name='mobile' type='text'>
+                                <div class="mdc-notched-outline">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label class="mdc-floating-label">Mobile</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div> 
+                            <div class="mdc-text-field-helper-line">
+                                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg">@error('mobile') {{$message}} @enderror</div>
+                            </div>
+
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100 mt-3 custom-field @error('email') mdc-text-field--invalid @enderror">
+                                <i class="material-icons mdc-text-field__icon text-muted">email</i>
                                 <input class="mdc-text-field__input" name='email' type='email'>
                                 <div class="mdc-notched-outline">
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
-                                        <label class="mdc-floating-label">Username</label>
+                                        <label class="mdc-floating-label">Email</label>
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
@@ -29,22 +77,19 @@
                                 <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg">@error('email') {{$message}} @enderror</div>
                             </div>
                            
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon w-100 custom-field mt-3 custom-field @error('password') mdc-text-field--invalid @enderror">
-                                <i class="material-icons mdc-text-field__icon text-muted">lock</i>
-                                <i class="material-icons mdc-text-field__icon text-muted" tabindex="1" id="password-toggle">visibility_off</i>
-                                <input class="mdc-text-field__input" type="password" name="password">
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon w-100 mt-3 custom-field @error('address') mdc-text-field--invalid @enderror">
+                                <i class="material-icons mdc-text-field__icon text-muted">home</i>
+                                <input class="mdc-text-field__input" name='address' type='text'>
                                 <div class="mdc-notched-outline">
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
-                                        <label class="mdc-floating-label">Password</label>
+                                        <label class="mdc-floating-label">Address</label>
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
                             </div> 
                             <div class="mdc-text-field-helper-line">
-                                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg">@error('password')
-                                    {{$message}}
-                                @enderror</div>
+                                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg">@error('address') {{$message}} @enderror</div>
                             </div>
 
                             <div class="mdc-form-field mt-3 w-100">
@@ -63,7 +108,7 @@
                             <div class="text-center mt-2"> 
                                 <button class="mdc-button mdc-button--raised bg-accent" type="submit">
                                     <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__label">Sign to My Account</span> 
+                                    <span class="mdc-button__label">Register</span> 
                                 </button>
                             </div>  
                             <div class="row flex-nowrap between-xs middle-xs mt-3">

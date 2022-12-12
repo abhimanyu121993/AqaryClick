@@ -1,17 +1,6 @@
-<<<<<<< Updated upstream
  @extends('frontend.layout')
  @section('content-area')
     <main class="content-offset-to-top">
-=======
-
-
- @extends('frontend.layout')
- @section('content-area')
- 
-   
- 
-    <main class="content-offset-to-top"> 
->>>>>>> Stashed changes
         <div class="header-image-wrapper">
             <div class="bg bg-anime"></div>
             <div class="mask"></div>
@@ -707,17 +696,10 @@
                                 <button class="mdc-icon-button view-type material-icons d-none d-md-flex d-lg-flex d-xl-flex" data-view-type="grid" data-col="3" data-full-width-page="true">view_module</button>
                                 <button class="mdc-icon-button view-type material-icons d-none d-lg-flex d-xl-flex" data-view-type="grid" data-col="4" data-full-width-page="true">view_comfy</button>
                             </div>
-<<<<<<< Updated upstream
                         </div>
                     </div>
                     @foreach ($buildings as $building)
                     <div class="row item col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-=======
-                        </div>  
-                    </div> 
-                    @foreach ($buildings as $building)
-                    <div class="row item col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"> 
->>>>>>> Stashed changes
                         <div class="mdc-card property-item grid-item column-4 full-width-page">
                             <div class="thumbnail-section">
                                 <div class="row property-status">
@@ -728,7 +710,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-1/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -745,24 +726,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-1/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-1/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-1/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>  
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -786,15 +749,9 @@
                                         </p>
                                         <div class="row between-xs middle-xs">
                                             <h3 class="primary-color price">
-<<<<<<< Updated upstream
                                                 <span>$ {{$building->cost_building??''}}</span>
                                             </h3>
                                             <div class="row start-xs middle-xs ratings" title="29">
-=======
-                                                <span>$ {{$building->cost_building??''}}</span> 
-                                            </h3> 
-                                            <div class="row start-xs middle-xs ratings" title="29">      
->>>>>>> Stashed changes
                                                 <i class="material-icons mat-icon-sm">star</i>
                                                 <i class="material-icons mat-icon-sm">star</i>
                                                 <i class="material-icons mat-icon-sm">star</i>
@@ -807,22 +764,13 @@
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat modi dignissimos blanditiis accusamus, magni provident omnis perferendis laudantium illo recusandae ab molestiae repudiandae cum obcaecati nulla adipisci fuga culpa repellat!</p>
                                             </div>
                                         </div>
-<<<<<<< Updated upstream
                                         <div class="features mt-3">
-=======
-                                        <div class="features mt-3">                    
->>>>>>> Stashed changes
                                             <p><span>Property size</span><span>{{$building->land_size_foot??''}} ft²</span></p>
                                             <p><span>Construction Date</span><span>{{date('d/M/Y',strtotime($building->construction_date??''))}}</span></p>
                                             <p><span>Building Code</span><span>{{$building->building_code??''}}</span></p>
                                             <p><span>Owner</span><span>{{$building->owner_name}}</span></p>
-<<<<<<< Updated upstream
                                         </div>
                                     </div>
-=======
-                                        </div>   
-                                    </div> 
->>>>>>> Stashed changes
                                     <div class="grow"></div>
                                     <div class="actions row between-xs middle-xs">
                                         <p class="row date mb-0">
@@ -831,7 +779,6 @@
                                         </p>
                                         <a href="javascript:void(0);" class="mdc-button mdc-button--outlined">
                                             <span class="mdc-button__ripple"></span>
-<<<<<<< Updated upstream
                                             <span class="mdc-button__label">Details</span>
                                         </a>
                                     </div>
@@ -842,18 +789,6 @@
                     @endforeach
 
                     {{-- <div class="row item col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-=======
-                                            <span class="mdc-button__label">Details</span> 
-                                        </a>  
-                                    </div>
-                                </div>  
-                            </div> 
-                        </div>  
-                    </div>  
-                    @endforeach
-                    
-                    {{-- <div class="row item col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"> 
->>>>>>> Stashed changes
                         <div class="mdc-card property-item grid-item column-4 full-width-page">
                             <div class="thumbnail-section">
                                 <div class="row property-status">
@@ -865,7 +800,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -890,32 +824,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/6-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -988,7 +896,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-1/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -1013,32 +920,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-1/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-1/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-1/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-1/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-1/6-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -1111,7 +992,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -1132,28 +1012,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>   
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -1226,7 +1084,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -1243,24 +1100,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>    
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -1333,7 +1172,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -1350,24 +1188,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>    
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -1440,7 +1260,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office-2/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -1465,32 +1284,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office-2/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office-2/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office-2/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office-2/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office-2/6-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>   
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -1563,7 +1356,6 @@
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                 <div class="swiper-lazy-preloader"></div>
                                             </div>
                                             <div class="swiper-slide">
@@ -1584,28 +1376,6 @@
                                             </div>
                                         </div>
                                         <div class="swiper-pagination white"></div>
-=======
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div> 
-                                            <div class="swiper-slide">
-                                                <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                <div class="swiper-lazy-preloader"></div> 
-                                            </div>   
-                                        </div>  
-                                        <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                         <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                         <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                     </div>
@@ -1659,7 +1429,6 @@
                                         </p>
                                         <a href="javascript:void(0);" class="mdc-button mdc-button--outlined">
                                             <span class="mdc-button__ripple"></span>
-<<<<<<< Updated upstream
                                             <span class="mdc-button__label">Details</span>
                                         </a>
                                     </div>
@@ -1668,16 +1437,6 @@
                         </div>
                     </div>   --}}
                     <div class="row center-xs middle-xs p-2 mt-2 w-100">
-=======
-                                            <span class="mdc-button__label">Details</span> 
-                                        </a>  
-                                    </div>
-                                </div>  
-                            </div> 
-                        </div>  
-                    </div>   --}}
-                    <div class="row center-xs middle-xs p-2 mt-2 w-100">                
->>>>>>> Stashed changes
                         <a href="javascript:void(0);" class="mdc-button mdc-button--raised">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">load more</span>
@@ -1713,19 +1472,11 @@
                                     <h2 class="capitalize fw-600 mb-2">easy to find</h2>
                                     <p class="text-muted fw-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae dolor magnam, facilis voluptas quia excepturi provident cupiditate.</p>
                                 </div>
-<<<<<<< Updated upstream
                            </div>
                         </div>
                         <div class="col-xs-12 col-lg-6 col-xl-6 p-0 d-none d-lg-flex d-xl-flex">
                             <img src="{{asset('home2/assets/images/others/mission.jpg')}}" alt="mission" class="mw-100 d-block">
                         </div>
-=======
-                           </div>                     
-                        </div> 
-                        <div class="col-xs-12 col-lg-6 col-xl-6 p-0 d-none d-lg-flex d-xl-flex">                    
-                            <img src="{{asset('home2/assets/images/others/mission.jpg')}}" alt="mission" class="mw-100 d-block">                
-                        </div>            
->>>>>>> Stashed changes
                     </div>
 
                 </div>
@@ -1837,7 +1588,6 @@
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                             <div class="swiper-lazy-preloader"></div>
                                         </div>
                                         <div class="swiper-slide">
@@ -1858,28 +1608,6 @@
                                         </div>
                                     </div>
                                     <div class="swiper-pagination white"></div>
-=======
-                                            <div class="swiper-lazy-preloader"></div> 
-                                        </div> 
-                                        <div class="swiper-slide">
-                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                            <div class="swiper-lazy-preloader"></div> 
-                                        </div> 
-                                        <div class="swiper-slide">
-                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                            <div class="swiper-lazy-preloader"></div> 
-                                        </div> 
-                                        <div class="swiper-slide">
-                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                            <div class="swiper-lazy-preloader"></div> 
-                                        </div> 
-                                        <div class="swiper-slide">
-                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                            <div class="swiper-lazy-preloader"></div> 
-                                        </div>   
-                                    </div>  
-                                    <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                     <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                 </div>
@@ -1961,7 +1689,6 @@
                                                     <div class="swiper-wrapper">
                                                         <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
                                                         {{-- <div class="swiper-slide">
@@ -1986,32 +1713,6 @@
                                                         </div> --}}
                                                     </div>
                                                     <div class="swiper-pagination white"></div>
-=======
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/6-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                    </div>  
-                                                    <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                                     <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                                 </div>
@@ -2084,7 +1785,6 @@
                                                     <div class="swiper-wrapper">
                                                         <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
                                                         <div class="swiper-slide">
@@ -2105,28 +1805,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="swiper-pagination white"></div>
-=======
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/flat-2/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div>   
-                                                    </div>  
-                                                    <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                                     <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                                 </div>
@@ -2199,7 +1877,6 @@
                                                     <div class="swiper-wrapper">
                                                         <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
                                                         <div class="swiper-slide">
@@ -2216,24 +1893,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="swiper-pagination white"></div>
-=======
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-3/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div>    
-                                                    </div>  
-                                                    <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                                     <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                                 </div>
@@ -2306,7 +1965,6 @@
                                                     <div class="swiper-wrapper">
                                                         <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
                                                         <div class="swiper-slide">
@@ -2323,24 +1981,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="swiper-pagination white"></div>
-=======
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/house-2/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div>    
-                                                    </div>  
-                                                    <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                                     <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                                 </div>
@@ -2413,7 +2053,6 @@
                                                     <div class="swiper-wrapper">
                                                         <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/1-medium.jpg')}}" class="slide-item swiper-lazy">
-<<<<<<< Updated upstream
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
                                                         <div class="swiper-slide">
@@ -2434,28 +2073,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="swiper-pagination white"></div>
-=======
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/2-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/3-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/4-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div> 
-                                                        <div class="swiper-slide">
-                                                            <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/apartment/5-medium.jpg')}}" class="slide-item swiper-lazy">
-                                                            <div class="swiper-lazy-preloader"></div> 
-                                                        </div>   
-                                                    </div>  
-                                                    <div class="swiper-pagination white"></div>  
->>>>>>> Stashed changes
                                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
                                                     <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
                                                 </div>
@@ -2856,29 +2473,18 @@
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/aloha.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/aloha.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/dream.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/dream.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/congrats.png')}}" class="swiper-lazy">
                                         <div class="swiper-lazy-preloader"></div>
@@ -2887,115 +2493,60 @@
                                 <div class="swiper-slide">
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/best.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/congrats.png')}}" class="swiper-lazy"> 
-                                        <div class="swiper-lazy-preloader"></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide"> 
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/best.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/original.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/original.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/retro.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/retro.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/king.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/king.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/love.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/love.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/the.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/the.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/easter.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/easter.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/with.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/with.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/special.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/special.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
-<<<<<<< Updated upstream
                                     <div class="client-item">
                                         <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/bravo.png')}}" class="swiper-lazy">
-=======
-                                    <div class="client-item"> 
-                                        <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/clients/bravo.png')}}" class="swiper-lazy"> 
->>>>>>> Stashed changes
                                         <div class="swiper-lazy-preloader"></div>
                                     </div>
                                 </div>
@@ -3006,17 +2557,10 @@
             </div>
         </div>
         <div class="px-3">
-<<<<<<< Updated upstream
             <div class="theme-container">
                 <div class="get-in-touch bg-primary">
                     <img src="{{asset('home2/assets/images/others/operator.png')}}" alt="operator" class="d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
                     <div class="row between-xs middle-xs content">
-=======
-            <div class="theme-container">  
-                <div class="get-in-touch bg-primary"> 
-                    <img src="{{asset('home2/assets/images/others/operator.png')}}" alt="operator" class="d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">        
-                    <div class="row between-xs middle-xs content"> 
->>>>>>> Stashed changes
                         <div class="column p-3">
                             <h2>LOOKING TO SELL YOUR HOME?</h2>
                             <p class="mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
@@ -3037,7 +2581,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< Updated upstream
         </div>
     </main>
 
@@ -3048,15 +2591,3 @@
 
 @endsection
 
-=======
-        </div> 
-    </main> 
- 
-
-
-
-   
-
-@endsection
-   
->>>>>>> Stashed changes

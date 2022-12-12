@@ -91,25 +91,15 @@ jQuery(document).ready(function($){
     $("#options-toggle").on("click", function(){
         $(".options").toggleClass("show");
     });
-<<<<<<< Updated upstream
-    $('.options .skin-primary').on("click", function() {
-        var base_url = window.location.origin;
-
-=======
     $('.options .skin-primary').on("click", function() {  
         var base_url = window.location.origin;
          
->>>>>>> Stashed changes
         var skinurl = base_url+'/home2/css/skins/'+ $(this).attr('data-name')+'.css';
         // alert(skinurl);
         // var skinurl = 'css/skins/'+ $(this).attr('data-name')+'.css';
         // $('link[rel="stylesheet"][href^="'+base_url+'css/skins/"]').attr('href', skinurl);
         $('#style').attr('href',skinurl);
-<<<<<<< Updated upstream
-        $(".options").removeClass("show");
-=======
         $(".options").removeClass("show"); 
->>>>>>> Stashed changes
     });
 
     var url_end = document.location.pathname.substring(document.location.pathname.lastIndexOf('/') + 1);

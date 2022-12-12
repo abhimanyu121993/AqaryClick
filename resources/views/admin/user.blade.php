@@ -40,7 +40,6 @@
     { box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;}
 </style>
 @section('main-content')
-
     <div class="row">
         <div class="col-lg-12 col-xl-12 col-xxl-12">
             <div class="card" id="header1">
