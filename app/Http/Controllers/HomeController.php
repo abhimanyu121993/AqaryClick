@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 use App\Models\Membership;
+use App\Models\Profile;
 use App\Models\WebsiteSetting;
 
 class HomeController extends Controller
@@ -126,12 +127,11 @@ class HomeController extends Controller
     }
     public function home(){
         $buildings=Building::get();
-        $websiteSetting=WebsiteSetting::get();
-        return view('frontend.home',compact('buildings','websiteSetting'));
-
         $build=Building::first();
-        return view('frontend.home',compact('buildings','websiteSetting','build'));
-    }
+        $websiteSetting=WebsiteSetting::get();
+        $profile=Profile::get();
+        return view('frontend.home',compact('buildings','websiteSetting','build','profile'));
+        }
 
 
 }
