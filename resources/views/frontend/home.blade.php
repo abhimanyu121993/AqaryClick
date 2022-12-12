@@ -745,7 +745,7 @@
                                         <h1 class="title"><a href="#">{{$building->name}}</a></h1>
                                         <p class="row address flex-nowrap">
                                             <i class="material-icons text-muted">location_on</i>
-                                            <span>{{$building->location??''}},  {{$building->cityDetails->nationality??''}}, {{$building->cityDetails->name??''}}, Pin -{{$building->pincode??''}}</span>
+                                            <span style="color:blue">{{$building->location??''}},  {{$building->cityDetails->nationality->name??''}}, {{$building->cityDetails->name??''}}, Pin -{{$building->pincode??''}}</span>
                                         </p>
                                         <div class="row between-xs middle-xs">
                                             <h3 class="primary-color price">
@@ -1624,14 +1624,14 @@
                         <div class="property-content-wrapper">
                             <div class="property-content">
                                 <div class="content">
-                                    <h1 class="title"><a href="#">Spacious and warm flat</a></h1>
+                                    <h1 class="title"><a href="#">{{ $build->name }}</a></h1>
                                     <p class="row address flex-nowrap">
                                         <i class="material-icons text-muted">location_on</i>
-                                        <span>55 W Jackson Blvd, Chicago, IL 60604, USA</span>
+                                        <span>{{$building->location??''}},  {{$building->cityDetails->nationality->name??''}}, {{$building->cityDetails->name??''}}, Pin -{{$building->pincode??''}}</span>
                                     </p>
                                     <div class="row between-xs middle-xs">
                                         <h3 class="primary-color price">
-                                            <span>$ 1,450,000</span>
+                                            <span>${{$build->cost_building??''}}</span>
                                         </h3>
                                         <div class="row start-xs middle-xs ratings" title="29">
                                             <i class="material-icons mat-icon-sm">star</i>
@@ -1643,11 +1643,11 @@
                                     </div>
                                     <div class="d-none d-md-flex d-lg-flex d-xl-flex">
                                         <div class="description mt-3">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat modi dignissimos blanditiis accusamus, magni provident omnis perferendis laudantium illo recusandae ab molestiae repudiandae cum obcaecati nulla adipisci fuga culpa repellat!</p>
+                                            <p>{{ $build->remark }}</p>
                                         </div>
                                     </div>
                                     <div class="features mt-3">
-                                        <p><span>Property size</span><span>1700 ft²</span></p>
+                                        <p><span>Property size</span><span>{{ $build->space }}</span></p>
                                         <p><span>Bedrooms</span><span>5</span></p>
                                         <p><span>Bathrooms</span><span>2</span></p>
                                         <p><span>Garages</span><span>2</span></p>
@@ -1657,7 +1657,7 @@
                                 <div class="actions row between-xs middle-xs">
                                     <p class="row date mb-0">
                                         <i class="material-icons text-muted">date_range</i>
-                                        <span class="mx-2">12 October, 2016</span>
+                                        <span class="mx-2">{{ $build->construction_date }}</span>
                                     </p>
                                     <a href="javascript:void(0);" class="mdc-button mdc-button--outlined">
                                         <span class="mdc-button__ripple"></span>
@@ -1691,7 +1691,7 @@
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/1-medium.jpg')}}" class="slide-item swiper-lazy">
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
-                                                        <div class="swiper-slide">
+                                                        {{-- <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/2-medium.jpg')}}" class="slide-item swiper-lazy">
                                                             <div class="swiper-lazy-preloader"></div>
                                                         </div>
@@ -1710,7 +1710,7 @@
                                                         <div class="swiper-slide">
                                                             <img src="{{asset('home2/assets/images/others/transparent-bg.png')}}" alt="slide image" data-src="{{asset('home2/assets/images/props/office/6-medium.jpg')}}" class="slide-item swiper-lazy">
                                                             <div class="swiper-lazy-preloader"></div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     <div class="swiper-pagination white"></div>
                                                     <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
