@@ -59,7 +59,7 @@
 
                 </div><!-- end card header -->
                 <div class="card-body  ">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="example" class="table table-bordered table-resposive" id="example">
                             <thead >
                                 <tr>
@@ -151,7 +151,7 @@
                                                 href="{{ route('admin.receipt', $con->contract_code) }}">view</a></td>
                                         <td>
                                             <div class="dropdown">
-                                                <a href="#" role="button" id="btn-btn" id="dropdownMenuLink"
+                                                <a href="#" role="button"  id="dropdownMenuLink"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="ri-more-2-fill"></i>
                                                 </a>
