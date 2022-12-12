@@ -420,6 +420,10 @@
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link"
                                         data-key="t-analytics">
                                         Staff </a>
+                                </li><li class="nav-item">
+                                    <a href="{{ route('admin.add-agents-profile.index') }}" class="nav-link"
+                                        data-key="t-analytics">
+                                        Profile </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.city.index') }}" class="nav-link"
