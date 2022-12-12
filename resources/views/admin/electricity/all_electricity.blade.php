@@ -118,10 +118,10 @@
                                             @php $bid=Crypt::encrypt($el->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 @can('ElectricityBill_edit')
-                                                <li><a class="dropdown-item" href="{{route('admin.electricity.edit',$bid)}}">Edit</a></li>
+                                                <li><a class="dropdown-item" id="pop" href="{{route('admin.electricity.edit',$bid)}}">Edit</a></li>
                                                 @endcan
                                                 @can('ElectricityBill_delete')
-                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+                                                <li><a class="dropdown-item" id="pop" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
                                                  @endcan
                                                 <form id="delete-form-{{ $bid }}" action="{{ route('admin.electricity.destroy', $bid) }}"
                                                     method="post" style="display: none;">

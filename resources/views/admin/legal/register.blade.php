@@ -220,8 +220,8 @@
                                             </a>
                                             @php $bid=Crypt::encrypt($legal->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="{{route('admin.legal.edit',$bid)}}">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+                                                <li><a class="dropdown-item" href="{{route('admin.legal.edit',$bid)}}" id="pop">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"  id="pop"onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
 
                                                 <form id="delete-form-{{ $bid }}" action="{{ route('admin.legal.destroy', $bid) }}"
                                                     method="post" style="display: none;">
