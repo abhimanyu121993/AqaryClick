@@ -53,7 +53,7 @@
     <div class="row">
         <form action="{{ route('admin.contract-recipt.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6" id="p1">
                 <label for="remark" class="form-label">Preamble </label>
                 <textarea class="form-control" name="clause_one_english"> 
@@ -67,7 +67,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause One English</label>
                 <textarea class="form-control" name="clause_two_english">
@@ -81,7 +81,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Two English</label>
                 <textarea class="form-control" name="clause_three_english">
@@ -95,7 +95,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Three English</label>
                 <textarea class="form-control" name="clause_four_english">
@@ -109,7 +109,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Four English</label>
                 <textarea class="form-control" name="clause_five_english">
@@ -125,7 +125,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Five English</label>
                 <textarea class="form-control" name="clause_six_english">
@@ -141,7 +141,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Six English</label>
                 <textarea class="form-control" name="clause_seven_english">
@@ -157,7 +157,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Seven English</label>
                 <textarea class="form-control" name="clause_eight_english">
@@ -173,7 +173,7 @@
                     </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eight English</label>
                 <textarea class="form-control" name="clause_nine_english">
@@ -189,7 +189,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Nine English</label>
                 <textarea class="form-control" name="clause_ten_english">
@@ -205,7 +205,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Ten English</label>
                 <textarea class="form-control" name="clause_eleven_english">
@@ -221,7 +221,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eleven English</label>
                 <textarea class="form-control" name="clause_twelve_english">
@@ -237,7 +237,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Twelve English</label>
                 <textarea class="form-control" name="clause_therteen_english">
@@ -252,7 +252,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Thirteen English</label>
                 <textarea class="form-control" name="clause_fourteen_english">
@@ -267,7 +267,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Fourteen English</label>
                 <textarea class="form-control" name="clause_fiftyteen_english">
@@ -282,7 +282,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Fifteen English</label>
                 <textarea class="form-control" name="clause_sixteen_english">
@@ -298,7 +298,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Sixteen English</label>
                 <textarea class="form-control" name="clause_seventeen_english">
@@ -314,7 +314,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Seventeen Arabic</label>
                 <textarea class="form-control" name="clause_eighteen_english">
@@ -330,7 +330,7 @@
                             </textarea>
             </div>
         </div>
-        <div class="row col-lg-12">
+        <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
                 <label for="remark" class="form-label">Clause Eighteen English</label>
                 <textarea class="form-control" name="clause_nineteen_english">
@@ -348,7 +348,7 @@
         <br>
         <div class="row gy-4">
             <div class="col-xxl-3 col-md-3">
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-success" id="btn-btn" type="submit">Submit</button>
             </div>
         </div>
     </div>
