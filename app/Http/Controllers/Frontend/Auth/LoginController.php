@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CustomerRegister;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class LoginController extends Controller
             'password'=>'required|min:6|string'
         ]);
 
-        if (Auth::attempt(['email' => $req->email, 'password' => $req->password],$req->remeber?true:false)) {
+        if (Auth::attempt(['email' => $req->email, 'password' => $req->password,'status'=>true],$req->remeber?true:false)) {
             return redirect()->route('admin.dashboard');
         }
    }
@@ -126,7 +127,7 @@ class LoginController extends Controller
         'first_name'=>'required',
         'last_name'=>'required',
         'mobile'=>'required',
-        'email'=>'required',
+        'email'=>'required|unique:users,email|unique:customers,email',
         'address'=>'required',
         
     ]);
@@ -140,7 +141,17 @@ class LoginController extends Controller
         'email'=>$request->email,
         'address'=>$request->address,
     ]);
-    
+        $password = 'Aqary@' . time();
+        $user = User::create([
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'email'=>$request->email,
+            "phone"=>$request->phone,
+            'address'=>$request->address,
+            'status'=>false,
+            'password'=>Hash::make($password),
+        ]);
+        Mail::to($request->email)->send(new CustomerRegister($request->email,$password));
     Alert::alert()->success('Successfully','You have register successfully !');
     return Redirect()->back();
     

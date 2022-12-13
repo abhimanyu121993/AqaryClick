@@ -58,12 +58,12 @@ use App\Http\Controllers\TenantFileController;
 // FrontEnd Routes
 Route::controller(HomeController::class)->group(function(){
     Route::get("/","home");
-    Route::get("/about-us","about");
-    Route::get("/properties","properties");
-    Route::get("/registration","regOverView");
-    Route::get('/propertie-details','propertie_details');
-    Route::get("/contect-us","contect");
-    Route::post("/contact","contactSubmit")->name('contactus');
+    // Route::get("/about-us","about");
+    // Route::get("/properties","properties");
+    // Route::get("/registration","regOverView");
+    // Route::get('/propertie-details','propertie_details');
+    // Route::get("/contect-us","contect");
+    // Route::post("/contact","contactSubmit")->name('contactus');
 });
 
 Route::group(['prefix'=>'home','as'=>'home.'],function(){

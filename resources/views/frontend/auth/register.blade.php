@@ -8,8 +8,8 @@
                     <div class="mdc-card p-3 p-relative mw-500px w-100">
                         <div class="column center-xs middle-xs text-center">  
                             <h1 class="uppercase">Register_Customer</h1>
-                            <a href="register.html" class="mdc-button mdc-ripple-surface mdc-ripple-surface--accent accent-color normal w-100">
-                                Don't have an account? Sign up now!
+                            <a href="{{route('home.login')}}" class="mdc-button mdc-ripple-surface mdc-ripple-surface--accent accent-color normal w-100">
+                               Already an account? Sign in now!
                             </a>  
                         </div>
                         <form action="{{route('home.registerStore')}}" method='post'>  
