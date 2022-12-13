@@ -68,6 +68,7 @@ Route::controller(HomeController::class)->group(function(){
 
 Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/',[HomeController::class,'home']);
+    Route::get("/plans",[HomeController::class,"regOverView"]);
     Route::get('/login', [AuthLoginController::class, 'index'])->name('login');
     Route::post('/login', [AuthLoginController::class, 'login'])->name('login-post');
     Route::get('/forget-password', [AuthLoginController::class, 'showForgetPasswordForm'])->name('forget-password');
