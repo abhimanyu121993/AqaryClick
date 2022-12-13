@@ -87,7 +87,6 @@
                                         <div class="row gy-4 mb-3">
                                             <div class="col-xxl-6 col-md-6">
                                                 <label class="form-label" for="flag">Contract ID</label>
-                                                <input type="text">
                                                 <select class="select2 form-select" id="contract_id" name='contract_id'>
                                                     <option value="">--Select Contract--</option>
                                                     @if (isset($data))
