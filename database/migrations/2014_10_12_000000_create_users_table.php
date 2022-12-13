@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string ('customer_code')->nullable();
             $table->string('customer_type')->nullable();
             $table->boolean('status')->default(0);
+            $table->bigInteger('membership_id');
+            $table->timestamps('membership_taken');
+            $table->timestamps('membership_end');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
