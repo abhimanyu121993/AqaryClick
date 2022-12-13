@@ -71,47 +71,47 @@ class MasterImportController extends Controller
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
                         $tenantcode = strlen($importData[1]) > 0 ? $importData[1] : 'TP-' . time();
-                            $city = City::firstOrCreate(['name' => $importData[16], 'country_name' => $country], [
+                            $city = City::firstOrCreate(['name' => $importData[23], 'country_name' => $country], [
                                 'country_name'=>$country,
-                                'name'=>$importData[16]
+                                'name'=>$importData[23]
                             ]);
                             $insertBuildingData = array(
-                                "building_code"=>$importData[10]??'',
-                                "name"=>$importData[11]??'',
-                                "building_no"=>$importData[12]??'',
-                                "street_no"=>$importData[13]??'',
-                                "zone_no"=>$importData[14]??'',
-                                "area"=>$importData[15]??'',
+                                "building_code"=>$importData[17]??'',
+                                "name"=>$importData[18]??'',
+                                "building_no"=>$importData[19]??'',
+                                "street_no"=>$importData[20]??'',
+                                "zone_no"=>$importData[21]??'',
+                                "area"=>$importData[22]??'',
                                 "city"=>$city->id??'',
-                                "ownership_no"=>$importData[17]??'',
-                                "ownership_type"=>$importData[18]??'',
-                                "pincode"=>$importData[19]??'',
+                                "ownership_no"=>$importData[24]??'',
+                                "ownership_type"=>$importData[25]??'',
+                                "pincode"=>$importData[26]??'',
                             );
                             $building=Building::firstOrCreate(["building_code"=>$importData[10]],$insertBuildingData);
                             if($building){
-                            if ($importData[23] == null || $importData[23]==' ' || $importData[23]==' ') {
+                            if ($importData[30] == null || $importData[30]==' ' || $importData[30]==' ') {
                                 $unittype = UnitType::firstOrCreate(['name' =>'N/A'], ['name' =>'N/A']);
                             }
                             else
                             {
-                                $unittype = UnitType::firstOrCreate(['name' => $importData[23]], ['name' => $importData[23] ?? 'N/A']);
+                                $unittype = UnitType::firstOrCreate(['name' => $importData[30]], ['name' => $importData[30] ?? 'N/A']);
 
                             }
-                                $unitfloor=UnitFloor::firstOrCreate(['name'=>$importData[25]],['name'=>$importData[25]]);
-                                $unitstatus=UnitStatus::firstOrCreate(['name'=>$importData[28]],['name'=>$importData[28]]);
+                                $unitfloor=UnitFloor::firstOrCreate(['name'=>$importData[32]],['name'=>$importData[32]]);
+                                $unitstatus=UnitStatus::firstOrCreate(['name'=>$importData[35]],['name'=>$importData[35]]);
                                 $insertUnitData = array(
                                     "building_id"=>$building->id??'',
-                                    "unit_ref"=>$importData[21]??'',
-                                    "revenue"=>$importData[22]??'',
+                                    "unit_ref"=>$importData[28]??'',
+                                    "revenue"=>$importData[29]??'',
                                     "unit_type"=>$unittype->id??'', // it take from unit type table
-                                    "unit_no"=>$importData[24]??'',
+                                    "unit_no"=>$importData[31]??'',
                                     "unit_floor"=>$unitfloor->id??'', //take from unit floor table
-                                    "unit_size"=>$importData[26]??'',
-                                    "actual_rent"=>$importData[27]??'',
+                                    "unit_size"=>$importData[33]??'',
+                                    "actual_rent"=>$importData[34]??'',
                                     "unit_status"=>$unitstatus->id??'', //take from unit status table
                                 );
 
-                                $unit = Unit::firstOrCreate(["unit_ref" =>$importData[21] ], $insertUnitData);
+                                $unit = Unit::firstOrCreate(["unit_ref" =>$importData[28] ], $insertUnitData);
                                 // Error::create(['url' => 'Unit Found','message'=>json_encode($unit)]);
                                 if($unit){
                                 $qid = '';
@@ -120,27 +120,24 @@ class MasterImportController extends Controller
                                 $govhouse = '';
                                 $passport = '';
                                 $tenanttype = '';
-                                if($importData[3]=='passport'){
-                                    $passport = $importData[2];
-                                    $tenanttype = 'TP';
+                                if($importData[3]=='PASSPORT'){
+                                    $passport = $importData[5];
                                 }
-                                else if($importData[3]=='cr'){
-                                    $cr= $importData[2];
-                                    $tenanttype = 'TC';
+                                else if($importData[3]=='CR & EST CARD'){
+                                    $cr= $importData[6];
+                                    $established = $importData[7];
+
                                 }
-                                else if($importData[3]=='card'){
-                                    $established = $importData[2];
-                                    $tenanttype = 'TC';
+                                else if($importData[3]=='GOVERNMENT HOUSING No'){
+                                    $govhouse = $importData[8];
+
                                 }
-                                else if($importData[3]=='gov'){
-                                    $govhouse = $importData[2];
-                                    $tenanttype = 'TG';
+                                else if($importData[3]=='QID'){
+                                    $qid = $importData[4];
+                                    
                                 }
-                                else
-                                {
-                                    $qid = $importData[2];
-                                    $tenanttype = 'TP';
-                                }
+
+                                $tenanttype = $importData[2]=='Personal'? 'TP':($importData[2]=='Company'? 'TC':($importData[2]=='Government'? 'TG':''));
                                     $insertTenantData = array(
                                         "building_name"=>$building->id??'',
                                         "file_no"=>$importData[0]??'',
@@ -152,11 +149,14 @@ class MasterImportController extends Controller
                                         "government_housing_no"=>$govhouse??'',
                                         "passport"=>$passport??'',
                                         "tenant_type"=>$tenanttype,//condition based on established card and sponsor
-                                        "tenant_english_name"=>$importData[4]??'',
-                                        "tenant_primary_mobile"=>$importData[5]??'',
-                                        "email"=>$importData[6]??'',
-                                        "post_office"=>$importData[7]??'',
-                                        "status"=>$importData[8]??'',
+                                        "tenant_english_name"=>$importData[9]??'',
+                                        "tenant_primary_mobile"=>$importData[10]??'',
+                                        "email"=>$importData[11]??'',
+                                        "authorized_person"=>$importData[12]??'',
+                                        "authorized_person_qid"=>$importData[13]??'',
+
+                                        "post_office"=>$importData[14]??'',
+                                        "status"=>$importData[15]??'',
                                         "unit_type"=>$unit->unitTypeDetails->id,
                                         "unit_no"=>$unit->id,
                                     );
@@ -164,13 +164,13 @@ class MasterImportController extends Controller
                                     if($tenant){
                                         $insertElectricData = array(
                                         "building_name"=>$building->id??'',
-                                        "electric_no"=>$importData[29]??'',
-                                        "water_no"=>$importData[30]??'',
-                                        "unit_size"=>$importData[31]??'',
-                                        "last_payment"=>Carbon::parse($importData[32])??'',
-                                        "bill_amt"=>$importData[33]??'',
-                                        "status"=>$importData[34]??'',
-                                        "remark"=>$importData[35]??'',
+                                        "electric_no"=>$importData[36]??'',
+                                        "water_no"=>$importData[37]??'',
+                                        "unit_size"=>$importData[38]??'',
+                                        "last_payment"=>Carbon::parse($importData[39])??'',
+                                        "bill_amt"=>$importData[40]??'',
+                                        "status"=>$importData[41]??'',
+                                        "remark"=>$importData[42]??'',
                                         "user_id"=>Auth::user()->id??'',
                                         "name"=>$tenant->tenant_english_name??'', //tenant name,
                                         "unit_type"=>$unit->unitTypeDetails->name??'',  // unit type name
@@ -181,78 +181,78 @@ class MasterImportController extends Controller
                                         $electricity=Electricity::create($insertElectricData);
                                         if($electricity){
                                   
-                                        // $contract_code= 'CC-'.$tenant->unittypeinfo->name?$tenant->unittypeinfo->name[0]:'NA'.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
-                                        $contract_code = 'CC-' . time() . rand(0, 99);
-                                        // dd($contract_code);
+                                          // $contract_code= 'CC-'.$tenant->unittypeinfo->name?$tenant->unittypeinfo->name[0]:'NA'.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
+                                          $contract_code = 'CC-'.$tenant->unittypeinfo->name[0]?:'NA';
+                                          $contract_code=$contract_code.'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
+                                          //  $contract_code = 'CC-' . time() . rand(0, 99);
                                         // Error::create(['url' => 'contract code', 'message' => $contract_code]);
-                                            $lessor = Customer::firstOrCreate(['first_name' => $importData[37], 'email' => $importData[38]],['first_name' => $importData[37], 'email' => $importData[38]]);
-                                        
-                                            $created_at=$importData[44]!=null?Carbon::createFromFormat('d-M-Y',$importData[44])->timestamp:'';
-                                            $attestation_expiry=$importData[42]!=null?Carbon::createFromFormat('d-M-Y',$importData[42])->timestamp:'';
+                                            $lessor = Customer::firstOrCreate(['first_name' => $importData[44], 'email' => $importData[45]],['first_name' => $importData[44], 'email' => $importData[45]]);
+                                            $created_at=Carbon::parse($importData[52])->format('d-m-Y')!=null?Carbon::parse($importData[52])->format('d-m-Y'):'';
+                                            $attestation_expiry=$importData[50]!=null?Carbon::parse($importData[50])->format('d-m-Y'):'';
+                                            $release_date=$importData[53]!=null?Carbon::parse($importData[53])->format('d-m-Y'):'';
                                           
-                                            $release_date=$importData[45]!=null?Carbon::createFromFormat('d-M-Y',$importData[45])->timestamp:'';
-                                          
-                                            $lease_start_date=$importData[46]!=null?Carbon::createFromFormat('d-M-Y',$importData[46])->timestamp:'';
-                                            $lease_end_date=$importData[47]!=null?Carbon::createFromFormat('d-M-Y',$importData[47])->timestamp:'';
+                                            $lease_start_date=$importData[54]!=null?Carbon::parse($importData[54])->format('d-m-Y'):'';
+                                            $lease_end_date=$importData[55]!=null?Carbon::parse($importData[55])->format('d-m-Y'):'';
                                             $insertContract = array(
                                                 'contract_code'=>$contract_code??'',
                                                 'tenant_name'=>$tenant->id??'',
                                                 'lessor'=>$lessor->id??'',
-                                                'sponsor_name'=>$importData[39]??'',
-                                                'sponsor_id'=>$importData[40]??'',
-                                                'sponsor_mobile'=>$importData[41]??'',
-                                                'attestation_no'=>$importData[42]??'',
+                                                'sponsor_name'=>$importData[46]??'',
+                                                'sponsor_id'=>$importData[47]??'',
+                                                'sponsor_mobile'=>$importData[48]??'',
+                                                'attestation_no'=>$importData[49]??'',
                                                 'attestation_expiry'=>$attestation_expiry,
-                                                // 'created_at'=>$created_at??Carbon::now(),
+                                                'created_at'=>$created_at,
                                                 'release_date'=>$release_date,
                                                 'lease_start_date'=>$lease_start_date,
                                                 'lease_end_date'=> $lease_end_date,
-                                                'lease_period_month'=>$importData[49],
-                                                'discount'=>$importData[51],
-                                                'increament_term'=>$importData[52],
-                                                'contract_status'=>$importData[53],
+                                                'lease_period_month'=>$importData[56],
+                                                'discount'=>$importData[58],
+                                                'increament_term'=>$importData[59],
+                                                'contract_status'=>$importData[60],
+                                                'rent_amount'=>$importData[61],
                                                 'contract_type'=>'Internal',
-                                                'total_invoice'=>$importData[49],
+                                                'total_invoice'=>$importData[56],
                                             );
 
                                       
                                             $contract=Contract::firstOrCreate(['contract_code'=>$contract_code],$insertContract);
                                      
-                                            if ($contract) {
-                                                $receipt_count=$importData[68]??0;
-                                                $receipt=str_pad((int)$receipt_count+1, 3, '0', STR_PAD_LEFT);
-                                                $invoice_no=$importData[68]??0;
-                                                $invoice_no= 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-'.str_pad((int)$invoice_no+1, 3, '0', STR_PAD_LEFT);
-                                                $period_month=$importData[68]??0 + 1;
-                                                $inserInvoice = array(
-                                                    'tenant_id'=>$tenant->id,
-                                                    'contract_id'=>$contract->id,
-                                                    'user_id'=>Auth::user()->id,
-                                                    'invoice_period_start'=>Carbon::parse($contract->lease_start_date)->addMonth($period_month),
-                                                    'invoice_period_end'=>Carbon::parse($contract->lease_start_date)->addMonth((int)$period_month+1),
-                                                    'amt_paid'=>$importData[72]??0,
-                                                    'user_amt'=>0,
-                                                    'due_date'=>0,
-                                                    'invoice_no'=>$invoice_no,
-                                                    'receipt_no'=>$receipt,
-                                                    'total_amt'=>$importData[72]??0,
+                                            // if ($contract) {
+                                            //     $receipt_count=$importData[68]??0;
+                                            //     $receipt=str_pad((int)$receipt_count+1, 3, '0', STR_PAD_LEFT);
+                                            //     $invoice_no=$importData[68]??0;
+                                            //     $invoice_no= 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-'.str_pad((int)$invoice_no+1, 3, '0', STR_PAD_LEFT);
+                                            //     $period_month=$importData[68]??0 + 1;
+                                            //     $inserInvoice = array(
+                                            //         'tenant_id'=>$tenant->id,
+                                            //         'contract_id'=>$contract->id,
+                                            //         'user_id'=>Auth::user()->id,
+                                            //         'invoice_period_start'=>Carbon::parse($contract->lease_start_date)->addMonth($period_month),
+                                            //         'invoice_period_end'=>Carbon::parse($contract->lease_start_date)->addMonth((int)$period_month+1),
+                                            //         'amt_paid'=>$importData[72]??0,
+                                            //         'user_amt'=>0,
+                                            //         'due_date'=>0,
+                                            //         'invoice_no'=>$invoice_no,
+                                            //         'receipt_no'=>$receipt,
+                                            //         'total_amt'=>$importData[72]??0,
 
-                                                );
-                                            $invoice=Invoice::create($inserInvoice);
-                                                if($invoice){
-                                                // dd($invoice);
-                                                }
-                                                else
-                                                {
-                                                    Session::flash('error', 'Invoice Not Created Due to Some Error Excel import paused in mid ');
-                                                    return redirect()->back();
-                                                }
-                                            }
-                                            else
-                                            {
-                                                Session::flash('error', 'Contract Not Created Due to Some Error Excel import paused in mid ');
-                                                return redirect()->back(); 
-                                            }
+                                            //     );
+                                            // $invoice=Invoice::create($inserInvoice);
+                                            //     if($invoice){
+                                            //     // dd($invoice);
+                                            //     }
+                                            //     else
+                                            //     {
+                                            //         Session::flash('error', 'Invoice Not Created Due to Some Error Excel import paused in mid ');
+                                            //         return redirect()->back();
+                                            //     }
+                                            // }
+                                            // else
+                                            // {
+                                            //     Session::flash('error', 'Contract Not Created Due to Some Error Excel import paused in mid ');
+                                            //     return redirect()->back(); 
+                                            // }
                                             
                                         }
                                         else
