@@ -25,14 +25,24 @@ class LoginController extends Controller
 
    public function login(Request $req)
    {
-        
+       
         $req->validate([
             'email'=>'required|exists:users,email',
             'password'=>'required|min:6|string'
         ]);
 
-        if (Auth::attempt(['email' => $req->email, 'password' => $req->password,'status'=>true],$req->remeber?true:false)) {
+        if (Auth::attempt(['email' => $req->email, 'password' => $req->password],$req->remeber?true:false)) {
+
+            if(Auth::user()->hasRole('Visitor')){
+                Alert::warning('You Are Visitor', 'Purchase Any One Plan to Become Our Customer');
+                return redirect()->route('home.plans');
+            }
             return redirect()->route('admin.dashboard');
+        }
+        else
+        {
+            Alert::error('OPP\'s', 'Invalid Creadential');
+            return redirect()->back();
         }
    }
 
@@ -151,8 +161,10 @@ class LoginController extends Controller
             'status'=>false,
             'password'=>Hash::make($password),
         ]);
+        $user->assignRole('Visitor');
+        // return $user->getRoleNames();
         Mail::to($request->email)->send(new CustomerRegister($request->email,$password));
-    Alert::alert()->success('Successfully','You have register successfully !');
+    Alert::alert()->success('Registration Done','Credentials has been sent on your email ! ');
     return Redirect()->back();
     
    }

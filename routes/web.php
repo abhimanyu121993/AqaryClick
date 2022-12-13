@@ -42,6 +42,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\TenantFileController;
 
 /*
@@ -68,7 +69,7 @@ Route::controller(HomeController::class)->group(function(){
 
 Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/',[HomeController::class,'home']);
-    Route::get("/plans",[HomeController::class,"regOverView"]);
+    Route::get("/plans",[HomeController::class,"regOverView"])->name('plans');
     Route::get('/login', [AuthLoginController::class, 'index'])->name('login');
     Route::post('/login', [AuthLoginController::class, 'login'])->name('login-post');
     Route::get('/forget-password', [AuthLoginController::class, 'showForgetPasswordForm'])->name('forget-password');
@@ -233,6 +234,11 @@ Route::get('payment',[PaymentController::class,'index'])->name('create');
 Route::get('charge/{id}',[PaymentController::class,'charge'])->name('pay');
 Route::get('success',[PaymentController::class,'success'])->name('success');
 Route::get('error',[PaymentController::class,'error'])->name('error');
+});
+
+// Purchase
+Route::group(['prefix' => 'purchase', 'as' => 'purchase.'], function () {
+    Route::get('membership/{id}',[PurchaseController::class,'membership'])->name('membership');
 });
 Route::post('owner-registration',[HomeController::class,'store'])->name('owner-company');
 

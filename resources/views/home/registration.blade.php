@@ -412,7 +412,7 @@
                                 <li class="true">{{$member->user_count}}</li>
                             </ul>
                             <div class="btn-box" >
-                                <a href="#" class="theme-btn pricing1">SUBSCRIBE</a>
+                                <a href="{{route('purchase.membership',$member->id)}}" class="theme-btn pricing1">SUBSCRIBE</a>
                             </div>
                         </div>
                     </div>
