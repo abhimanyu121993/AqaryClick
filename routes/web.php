@@ -89,6 +89,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('description/{id}', [ExcellController::class, 'description'])->name('description');
     Route::get('/analytic-dashboard',[AdminController::class,'Analyticdashboard'])->name('analytic-dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
+    Route::get('read-notification/{id?}',[AdminController::class,'readNotification'])->name('readNotification');
     Route::resource('/user', UserController::class);
     Route::resource('/role', RoleController::class);
     Route::resource('/permission', PermissionController::class);
