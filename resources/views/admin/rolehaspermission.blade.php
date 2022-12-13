@@ -83,7 +83,7 @@
                 <form action="{{ route('admin.assignPermission') }}" method="post">
                     @csrf
                     <input type="hidden" name='roleid' value="{{ $selectrole->id }}">
-                    <table class="table table-bordered" id="example">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Permissions Name</th>
