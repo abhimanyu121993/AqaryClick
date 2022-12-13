@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('is_active')->default(1);
             $table->longText('address')->nullable();
+            $table->bigInteger('step')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

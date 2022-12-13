@@ -32,7 +32,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-      
+
     }
 
     /**
@@ -177,7 +177,7 @@ class CustomerController extends Controller
     public function isActiveCustomer($id)
     {
         $ass_active=Customer::find($id);
-   
+
         if($ass_active->is_active==1)
         {
             $ass_active->is_active=0;
@@ -191,10 +191,17 @@ class CustomerController extends Controller
         else
         {
            return 0;
-    
+
         }
     }
 
-    
+        public function side_bar($id)
+        {
+            $side=Customer::find($id);
+            if($side->step == 0)
+            {
+                
+            }
+        }
 
 }

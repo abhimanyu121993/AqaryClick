@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('bgcolor');
             $table->boolean('is_active');
             $table->string('price');
+            $table->bigInteger('validity')->default(12);
             $table->timestamps();
         });
     }
