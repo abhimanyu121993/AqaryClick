@@ -229,59 +229,6 @@
                     </li>
                 @endcan
 
-                <!-- Broker Management Menu -->
-                @can('Broker')
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarDashboards6">
-                            <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Broker
-                                Management</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="sidebarDashboards6">
-                            <ul class="nav nav-sm flex-column">
-                                @can('Broker_create')
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.broker.index') }}" class="nav-link"
-                                            data-key="t-analytics">
-                                            Registration </a>
-                                    </li>
-                                @endcan
-                                @can('Broker_read')
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.broker.create') }}" class="nav-link"
-                                            data-key="t-analytics"> All Broker </a>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-                @endcan
-                @can('Legal')
-                    <!-- Legal Management Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarDashboards11" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarDashboards11">
-                            <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Legal
-                                Management</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="sidebarDashboards11">
-                            <ul class="nav nav-sm flex-column">
-
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.legal.index') }}" class="nav-link"
-                                        data-key="t-analytics">Legal</a>
-                                </li>
-
-                                @can('Legal_read')
-                                    <!-- <li class="nav-item">
-                                                <a href="{{ route('admin.legal.create') }}" class="nav-link"
-                                                    data-key="t-analytics">All Legal</a>
-                                            </li> -->
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-                @endcan
                 <!-- Electricity Management Menu -->
                 @can('ElectricityBill')
                     <li class="nav-item">
@@ -336,6 +283,34 @@
                     </li>
                 @endcan
 
+                <!-- Broker Management Menu -->
+                
+                @can('Legal')
+                    <!-- Legal Management Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarDashboards11" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="sidebarDashboards11">
+                            <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Legal
+                                Management</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="sidebarDashboards11">
+                            <ul class="nav nav-sm flex-column">
+
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.legal.index') }}" class="nav-link"
+                                        data-key="t-analytics">Legal</a>
+                                </li>
+
+                                @can('Legal_read')
+                                    <!-- <li class="nav-item">
+                                                <a href="{{ route('admin.legal.create') }}" class="nav-link"
+                                                    data-key="t-analytics">All Legal</a>
+                                            </li> -->
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
                 <!-- Settings Menu -->
                 @can('Setting')
                     <li class="nav-item">
@@ -364,12 +339,40 @@
                                     </div>
                                 </li>
                                 <!-- end customer Module -->
+                                <!-- customer Management Menu -->
+                                @can('Broker')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="sidebarDashboards6">
+                            <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Broker
+                                Management</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="sidebarDashboards6">
+                            <ul class="nav nav-sm flex-column">
+                                @can('Broker_create')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.broker.index') }}" class="nav-link"
+                                            data-key="t-analytics">
+                                            Registration </a>
+                                    </li>
+                                @endcan
+                                @can('Broker_read')
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.broker.create') }}" class="nav-link"
+                                            data-key="t-analytics"> All Broker </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+                                <!-- end customer Module -->
                                 <!-- Business Management Menu -->
                                 <li class="nav-item">
-                                    <a class="nav-link menu-link" href="#sidebarDashboards1222"
+                                <a class="nav-link menu-link" href="#sidebarDashboards1222"
                                         data-bs-toggle="collapse" role="button" aria-expanded="false"
                                         aria-controls="sidebarDashboards1222">
-                                        <span data-key="t-dashboards">Business Details</span>
+                                        <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Business Details</span>
                                     </a>
                                     <div class="collapse menu-dropdown" id="sidebarDashboards1222">
                                         <ul class="nav nav-sm flex-column">
@@ -388,7 +391,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.currency.index') }}" class="nav-link"
                                         data-key="t-analytics">
-                                        Currency</a>
+                                        <i data-feather="dollar-sign" class="icon-dual"></i> Currency</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('import-data') }}" class="nav-link" data-key="t-analytics">
@@ -401,7 +404,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link"
                                         data-key="t-analytics">
-                                        Staff </a>
+                                        <i data-feather="user-plus" class="icon-dual"></i> Staff </a>
                                 </li><li class="nav-item">
                                     <a href="{{ route('admin.add-agents-profile.index') }}" class="nav-link"
                                         data-key="t-analytics">
@@ -452,7 +455,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.membership.index') }}" class="nav-link"
-                                        data-key="t-analytics"> Membership </a>
+                                        data-key="t-analytics"><i data-feather="users" class="icon-dual"></i> Membership </a>
                                 </li>
                             </ul>
                         </div>

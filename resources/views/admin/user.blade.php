@@ -57,13 +57,13 @@
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="first_name" class="form-label">First Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{isset($userEdit)?$userEdit->first_name:''}}" placeholder="First Name">
+                                        <input type="text" class="form-control" id="first_name" pattern="[0-9]" title="Enter Valid Phone No"  name="first_name" value="{{isset($userEdit)?$userEdit->first_name:''}}" placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="last_name" class="form-label">Last Name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{isset($userEdit)?$userEdit->last_name:''}}" placeholder="Last Name">
+                                        <input type="text" class="form-control" id="last_name" pattern="[A-Za-z]" name="last_name" value="{{isset($userEdit)?$userEdit->last_name:''}}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -78,7 +78,7 @@
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="phone" class="form-label">Phone</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="phone" name="phone"  value="{{isset($userEdit)?$userEdit->phone:''}}" placeholder="Phone">
+                                        <input type="number" class="form-control" id="phone" name="phone" pattern="[0-9]" title="Enter Valid Phone No" value="{{isset($userEdit)?$userEdit->phone:''}}" placeholder="Phone">
                                     </div>
                                 </div>
                                 <!--end col-->

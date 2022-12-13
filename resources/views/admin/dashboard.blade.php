@@ -137,7 +137,7 @@
                             </div>
                             <a href="{{route('admin.building.create')}}"><div class="flex-grow-1 overflow-hidden ms-3">
                                 <p id="para"class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Buildings</p>
-                                <div class="d-flex align-items-center mb-3">
+                 <div class="d-flex align-items-center mb-3">
                                     <h4 class="fs-4 flex-grow-1 mb-0" id="para"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h4>
                                     {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>10.35 %</span> --}}
                                 </div>
@@ -173,22 +173,34 @@
 
                     <div id="card-header" class="card-header p-0 bg-soft-light">
                         <div class="row g-0 text-center">
+                            
                         <div class="col-6 col-sm-4">
                         <a href="{{ route('admin.building.create') }}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $buildings }}">{{ $buildings }}</span></h5>
+                        <span class="fs-4">
+                                    <img src="{{asset('3x/building.jpg')}}" height="50px" style="border-radius: 100%;"/>
+                                </span>           
+                        <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $buildings }}">{{ $buildings }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Number of Builidngs</p>
                                 </div></a>
                             </div>
+                            @can('ElectricityBill')
                             <div class="col-6 col-sm-4">
+                          
                             <a href="{{ route('admin.electricity.create') }}"> <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                    <img src="{{asset('3x/electricity1.webp')}}" height="50px" style="border-radius: 100%;"/>
+                                </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$electricity??'0'}}">{{$electricity??'0' }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Electricity Bill Generated</p>
                                 </div></a>
                             </div>
-
+                            @endcan
                            @php $res=App\Models\Invoice::where('payment_status','Paid')->pluck('contract_id') @endphp
                             <div class="col-6 col-sm-4">
                             <a href="{{ route('admin.Overdue') }}"> <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                    <img src="{{asset('3x/overdue.png')}}" height="50px" style="border-radius: 100%;"/>
+                                </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">OverDue</p>
                                 </div></a>
@@ -200,6 +212,7 @@
                 </div><!-- end card -->
             </div><!-- end col -->
         </div>
+        @can('UnitOverview')
         <div class="row">
             <div class="col-xl-12">
                 <div class="card" id="radius">
@@ -246,6 +259,8 @@
                 </div><!-- end card -->
             </div><!-- end col -->
         </div>
+        @endcan
+        @can('TenantOverview')
         <div class="row">
             <div class="col-xl-12">
                 <div class="card" id="radius">
@@ -271,13 +286,19 @@
                         <div class="row g-0 text-center">
                         <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.tenant.create') }}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span></h5>
+                            <span class="fs-4">
+                                    <img src="{{asset('3x/tenant.webp')}}" height="70px" style="border-radius: 100%;"/>
+                                </span>       
+                            <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Tenants</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.contract.create') }}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant_not_sign??'0' }}">{{$tenant_not_sign}}</span></h5>
+                        <span class="fs-4">
+                                    <img src="{{asset('3x/contract-sign.webp')}}" height="70px" style="border-radius: 100%;"/>
+                                </span>            
+                        <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant_not_sign??'0' }}">{{$tenant_not_sign}}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Tenant Not Signature</p>
                                 </div></a>
                             </div>
@@ -295,7 +316,10 @@
                             </div>
                             <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.legal.create') }}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Legal::count() }}">{{  App\Models\Legal::count() }}</span></h5>
+                            <span class="fs-4">
+                                    <img src="{{asset('3x/legal.png')}}" height="70px" style="border-radius: 100%;"/>
+                                </span>               
+                            <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Legal::count() }}">{{  App\Models\Legal::count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Legal</p>
                                 </div></a>
                             </div>
@@ -310,6 +334,8 @@
                 </div><!-- end card -->
             </div><!-- end col -->
         </div>
+        @endcan
+        @can('ContractOverview')
         <div class="row">
             <div class="col-xl-12">
                 <div class="card" id="radius">
@@ -335,6 +361,9 @@
                         <div class="row g-0 text-center">
                                     <div class="col-6 col-sm-4">
                                     <a href="{{route('admin.contract.create')}}">  <div class="p-3 m-2 border" id="background_card">
+                                    <span class="fs-4">
+                                    <img src="{{asset('3x/contract.jpeg')}}" height="50px" style="border-radius: 100%;"/>
+                                </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::count() }}">{{ App\Models\Contract::count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Contract</p>
                                 </div></a>
@@ -389,6 +418,7 @@
 
                     </div>
             </div><!-- end col -->
+           @can('ElectricityBill')
             <div class="row">
             <div class="col-xl-12">
                 <div class="card" id="radius">
@@ -438,10 +468,12 @@
                         </div>
                     </div><!-- end card body -->
                 </div><!-- end card -->
-            </div><!-- end col -->
+            </div>
+            @endcan
         </div>
+        @endcan
         </div>
-        @can('Roles')
+        @can('Financial')
         <div class="row">
             <div class="col-xl-12">
                 <div class="card" id="radius">
