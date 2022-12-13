@@ -116,6 +116,9 @@ class TenantController extends Controller
             'tenant_secondary_mobile' => $request->tenant_secondary_mobile,
             'email' => $request->email,
             'alternate_email'=>$request->alternate_email,
+            'authorized_person'=>$request->authorized_person,
+            'authorized_person_qid'=>$request->authorized_person_qid,
+
             'post_office' => $request->post_office,
             'tenant_nationality' => $request->tenant_nationality,
             'unit_address' => $request->unit_address,
@@ -197,7 +200,6 @@ class TenantController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tenant_code' => 'required',
             'tenant_english_name' => 'nullable',
             'tenant_arabic_name' => 'nullable',
             'tenant_document' => 'nullable',
@@ -229,7 +231,6 @@ class TenantController extends Controller
         $tenant = Tenant::find($id)->update([
             'user_id' => Auth::user()->id,
             'file_no' => $request->file_no,
-            'tenant_code' => $request->tenant_code,
             'tenant_english_name' => $request->tenant_english_name,
             'tenant_arabic_name' => $request->tenant_arabic_name,
             'tenant_type' => $request->tenant_type,

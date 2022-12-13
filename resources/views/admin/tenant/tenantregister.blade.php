@@ -179,6 +179,17 @@
                                 <input type="email" class="form-control" name="alternate_email" placeholder="Enter Alternate Email" value="{{$editTenant->alternate_email ?? ''}}">
                             </div>
                         </div>
+                        <div class=" col-xxl-3 col-md-3">
+                            <label for="incharge_name" class="form-label">Authorized Person </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="authorized_person" placeholder="Authorized Person" value="{{$editTenant->authorized_person ?? ''}}">
+                            </div>
+                        </div><div class=" col-xxl-3 col-md-3">
+                            <label for="incharge_name" class="form-label">Authorized Person QID</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="authorized_person_qid" placeholder="Authorized Person QID" value="{{$editTenant->authorized_person_qid ?? ''}}">
+                            </div>
+                        </div>
                         <div class="col-xxl-3 col-md-3" id="cname">
                             <label for="country" class="form-label">Post Office Box</label>
                             <div class="input-group">
