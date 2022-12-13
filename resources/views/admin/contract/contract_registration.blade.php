@@ -918,10 +918,25 @@
                         $('.sponsor_hide').show();
                         $('#cr').show();
                         $('#establishment').show();
+                        $('#passport').hide();
+
 
 
                     } else if (optionValue == 'TP') {
                         $('.sponsor_hide').hide();
+                        $('#government').hide();
+                        $('#cr').show();
+                        $('#establishment').hide();
+                        $('#passport').show();
+
+                    }
+                    else if (optionValue == 'TG') {
+                        $('.sponsor_hide').hide();
+                        $('#government').show();
+                        $('#cr').hide();
+                        $('#establishment').hide();
+                        $('#passport').hide();
+
                     }
                 });
             }).change();
