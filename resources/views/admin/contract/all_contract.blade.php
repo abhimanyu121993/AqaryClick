@@ -194,8 +194,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" id="btn-btn" class="close btn btn-primary">&times;</button>
-                        <h4 class="modal-title">Reject Reason</h4>
+                        <h4 class="modal-title" id="h1">Reject Reason</h4>
                     </div>
                     <form action="" method="post" id="contractrejform">
                         @csrf
