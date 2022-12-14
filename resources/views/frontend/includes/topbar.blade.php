@@ -185,12 +185,14 @@
                             
                         <li>
                                 <a href="{{route('home.login')}}" class="mdc-list-item" role="menuitem"> 
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
                                     <span class="mdc-list-item__text px-3">Login</span>
                                 </a>
                             </li> 
                             <li role="separator" class="mdc-list-divider m-0"></li>
                             <li>
                                 <a href="{{route('home.registerIndex')}}" class="mdc-list-item" role="menuitem">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
                                  <span class="mdc-list-item__text px-3">Register</span>
                                 </a>
                             </li> 

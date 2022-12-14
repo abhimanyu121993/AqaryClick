@@ -65,10 +65,10 @@
 <div class="row project-wrapper" >
 <div class="row">
     
-					<div class="col-xl-12 col-xxl-12">
+					<div class="col-xl-6 col-xxl-12">
 						<div class="row">
-							<div class="col-xl-12">
-								<div class="card bg-danger property-bx text-white">
+							<div class="col-xl-12" >
+								<div class="card property-bx text-white" style="background-color: #003a51;">
 									<div class="card-body">
 										<div class="media d-sm-flex d-block align-items-center">
 											<span class="me-4 d-block mb-sm-0 mb-3">
@@ -85,9 +85,10 @@
 														<span class="sr-only">86% Complete</span>
 													</div>
 												</div>
-												<span class="fs-14">431 more to break last month record</span>
-											</div>
-											<h1 style="color:#fffee9;">4,562</h1>
+												<span class="fs-14">Our Total Valuable Property</span>
+                                                </div>
+
+											<h1 style="color:#fffee9;float:right" >{{ App\Models\Building::count() }}</h1>
 										</div>
 									</div>
 								</div>
