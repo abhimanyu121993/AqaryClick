@@ -32,29 +32,41 @@ class AdminController extends Controller
         $tenant=Tenant::count();
         $vacant=Unit::where('unit_status','vacant')->count() ;
         $tenant_not_sign=Contract::where('lessor_sign',null)->count();
-
+        $totle_contract=Contract::all();
+        $invoice=Invoice::all();
         $electricity=Electricity::count();
-        }
-        else{
-            $buildings=Building::where('user_id',Auth::user()->id)->count();
-            $electricity=Electricity::where('user_id',Auth::user()->id)->count();
-            $unit=Unit::where('user_id',Auth::user()->id)->count();
-            $tenant=Tenant::where('user_id',Auth::user()->id)->count();
-            $tenant_not_sign=Contract::where('user_id',Auth::user()->id)->where('lessor_sign',null)->count();
-
-            $vacant=Unit::where('user_id',Auth::user()->id)->where('unit_status','vacant')->count() ;
-
-
-
-
-        }
         $cheque=Cheque::where('cheque_status','Valid')->get();
         $bounce_cheque=Cheque::where('cheque_status','Bounced')->get();
         $expired_cheque=Cheque::where('cheque_status','Expired')->get();
         $postponed_cheque=Cheque::where('cheque_status','Postponed')->get();
         $cleared_cheque=Cheque::where('cheque_status','Cleared')->get();
         $security_cheque=Cheque::where('cheque_status','Security Cheque')->get();
-        return view('admin.dashboard',compact('cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque','buildings','electricity','tenant','tenant_not_sign'));
+        $cheque_reccord=Cheque::count();
+        $overdue=Contract::where('overdue','>=',0)->count();
+        }
+        else{
+            $buildings=Building::where('user_id',Auth::user()->id)->count();
+            $electricity=Electricity::where('user_id',Auth::user()->id)->count();
+            $unit=Unit::where('user_id',Auth::user()->id)->count();
+            $totle_contract=Contract::where('user_id',Auth::user()->id)->get();
+            $tenant=Tenant::where('user_id',Auth::user()->id)->count();
+            $tenant_not_sign=Contract::where('user_id',Auth::user()->id)->where('lessor_sign',null)->count();
+
+            $vacant=Unit::where('user_id',Auth::user()->id)->where('unit_status','vacant')->count() ;
+            $cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Valid')->get();
+            $bounce_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Bounced')->get();
+            $expired_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Expired')->get();
+            $postponed_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Postponed')->get();
+            $cleared_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Cleared')->get();
+            $security_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Security Cheque')->get();
+            $invoice=Invoice::where('user_id',Auth::user()->id)->get();
+            $cheque_reccord=Cheque::where('user_id',Auth::user()->id)->count();
+            $overdue=Contract::where('user_id',Auth::user()->id)->where('overdue','>=',0)->count();
+
+
+        }
+       
+        return view('admin.dashboard',compact('overdue','cheque_reccord','invoice','vacant','totle_contract','cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque','buildings','electricity','tenant','tenant_not_sign','unit'));
     }
     public function Analyticdashboard()
     {
@@ -88,15 +100,6 @@ class AdminController extends Controller
         Session::flush();
         return redirect('/');
 
-    }
-
-    public function readNotification(Request $request ,$id =''){
-        if($id){
-            Auth()->user()->unreadNotifications->where('id',$id)->markAsRead();
-        }else{
-            Auth()->user()->unreadNotifications->markAsRead();
-        }
-        return redirect()->back();
     }
 
 }

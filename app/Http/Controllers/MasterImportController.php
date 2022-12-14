@@ -120,6 +120,7 @@ class MasterImportController extends Controller
                                 $govhouse = '';
                                 $passport = '';
                                 $tenanttype = '';
+<<<<<<< Updated upstream
                                 if($importData[3]=='PASSPORT'){
                                     $passport = $importData[5];
                                 }
@@ -135,6 +136,23 @@ class MasterImportController extends Controller
                                 else if($importData[3]=='QID'){
                                     $qid = $importData[4];
                                     
+=======
+                                if($importData[3]=='Personal'){
+                                    $passport = $importData[2];
+                                    $tenanttype = 'TP';
+                                }
+                                else if($importData[3]=='Company'){
+                                    $cr= $importData[2];
+                                    $tenanttype = 'TC';
+                                }
+                                else if($importData[3]=='Government'){
+                                    $established = $importData[2];
+                                    $tenanttype = 'TG';
+                                }
+                                else
+                                {
+                                    $tenanttype = 'TP';
+>>>>>>> Stashed changes
                                 }
 
                                 $tenanttype = $importData[2]=='Personal'? 'TP':($importData[2]=='Company'? 'TC':($importData[2]=='Government'? 'TG':''));

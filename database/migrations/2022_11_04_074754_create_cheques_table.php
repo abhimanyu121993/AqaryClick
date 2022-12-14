@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('cheques', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('tenant_id')->nullable();
             $table->unsignedBigInteger('contract_id')->nullable();
             $table->string('invoice_no')->nullable();

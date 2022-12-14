@@ -309,7 +309,7 @@ class TenantController extends Controller
 
     public function fileNumber($file_no)
     {
-        $max_id = Tenant::max('id') + 1;
+        $max_id = Tenant::where('user_id',Auth::user()->id)->max('id') + 1;
         $TT = $file_no . '-' . Carbon::now()->month . '-' . Carbon::now()->format('y') . '-' . str_pad($max_id, 2, '0', STR_PAD_LEFT);
         return response()->json($TT);
     }
