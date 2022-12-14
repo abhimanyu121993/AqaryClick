@@ -153,6 +153,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('staff',StaffController::class);
     Route::resource('broker',BrokerController::class);
     Route::resource('legal',LegalController::class);
+    Route::post('updateLegal',[LegalController::class,'updateLegal'])->name('updateLegal');
     Route::resource('tenant-files',TenantFileController::class);
     Route::get('fetch-legal-contract/{contract_id}',[LegalController::class,'legalContract'])->name('legalContract');
 
