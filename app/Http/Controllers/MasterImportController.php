@@ -28,8 +28,7 @@ class MasterImportController extends Controller
     public function excel_upload(Request $req,$country=null)
     {
         
-        $country=2;  //future country code select by user form
-//check tenant code compulsory;
+        $country=2;  
         if ($req->hasFile('bulk_upload')) {
             $file = $req->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -41,7 +40,6 @@ class MasterImportController extends Controller
             $valid_extension = array("csv");
             $maxFileSize = 2097152;
             if (in_array(strtolower($extension), $valid_extension)) {
-         
                  // Check file size
                  if ($fileSize <= $maxFileSize) {
                     // File upload location
@@ -78,6 +76,7 @@ class MasterImportController extends Controller
                             $insertBuildingData = array(
                                 "building_code"=>$importData[17]??'',
                                 "name"=>$importData[18]??'',
+                                "user_id"=>Auth::user()->id??'',
                                 "building_no"=>$importData[19]??'',
                                 "street_no"=>$importData[20]??'',
                                 "zone_no"=>$importData[21]??'',
@@ -101,6 +100,7 @@ class MasterImportController extends Controller
                                 $unitstatus=UnitStatus::firstOrCreate(['name'=>$importData[35]],['name'=>$importData[35]]);
                                 $insertUnitData = array(
                                     "building_id"=>$building->id??'',
+                                    "user_id"=>Auth::user()->id??'',
                                     "unit_ref"=>$importData[28]??'',
                                     "revenue"=>$importData[29]??'',
                                     "unit_type"=>$unittype->id??'', // it take from unit type table
@@ -120,7 +120,6 @@ class MasterImportController extends Controller
                                 $govhouse = '';
                                 $passport = '';
                                 $tenanttype = '';
-<<<<<<< Updated upstream
                                 if($importData[3]=='PASSPORT'){
                                     $passport = $importData[5];
                                 }
@@ -136,23 +135,6 @@ class MasterImportController extends Controller
                                 else if($importData[3]=='QID'){
                                     $qid = $importData[4];
                                     
-=======
-                                if($importData[3]=='Personal'){
-                                    $passport = $importData[2];
-                                    $tenanttype = 'TP';
-                                }
-                                else if($importData[3]=='Company'){
-                                    $cr= $importData[2];
-                                    $tenanttype = 'TC';
-                                }
-                                else if($importData[3]=='Government'){
-                                    $established = $importData[2];
-                                    $tenanttype = 'TG';
-                                }
-                                else
-                                {
-                                    $tenanttype = 'TP';
->>>>>>> Stashed changes
                                 }
 
                                 $tenanttype = $importData[2]=='Personal'? 'TP':($importData[2]=='Company'? 'TC':($importData[2]=='Government'? 'TG':''));
@@ -172,7 +154,7 @@ class MasterImportController extends Controller
                                         "email"=>$importData[11]??'',
                                         "authorized_person"=>$importData[12]??'',
                                         "authorized_person_qid"=>$importData[13]??'',
-
+                                        "user_id"=>Auth::user()->id??'',
                                         "post_office"=>$importData[14]??'',
                                         "status"=>$importData[15]??'',
                                         "unit_type"=>$unit->unitTypeDetails->id,
@@ -182,6 +164,7 @@ class MasterImportController extends Controller
                                     if($tenant){
                                         $insertElectricData = array(
                                         "building_name"=>$building->id??'',
+                                        "user_id"=>Auth::user()->id??'',
                                         "electric_no"=>$importData[36]??'',
                                         "water_no"=>$importData[37]??'',
                                         "unit_size"=>$importData[38]??'',
@@ -189,7 +172,6 @@ class MasterImportController extends Controller
                                         "bill_amt"=>$importData[40]??'',
                                         "status"=>$importData[41]??'',
                                         "remark"=>$importData[42]??'',
-                                        "user_id"=>Auth::user()->id??'',
                                         "name"=>$tenant->tenant_english_name??'', //tenant name,
                                         "unit_type"=>$unit->unitTypeDetails->name??'',  // unit type name
                                         "unit_no"=>$unit->unit_no??'',  //Unit no
@@ -215,6 +197,7 @@ class MasterImportController extends Controller
                                                 'contract_code'=>$contract_code??'',
                                                 'tenant_name'=>$tenant->id??'',
                                                 'lessor'=>$lessor->id??'',
+                                                'user_id'=>Auth::user()->id??'',
                                                 'sponsor_name'=>$importData[46]??'',
                                                 'sponsor_id'=>$importData[47]??'',
                                                 'sponsor_mobile'=>$importData[48]??'',
@@ -318,7 +301,7 @@ class MasterImportController extends Controller
         }
         return redirect()->back();
     }
-
+    
     public function excel_upload_statement(Request $req)
     {
         
