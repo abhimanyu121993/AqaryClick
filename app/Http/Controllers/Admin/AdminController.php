@@ -45,23 +45,32 @@ class AdminController extends Controller
         $overdue=Contract::where('overdue','>=',0)->count();
         }
         else{
-            $buildings=Building::where('user_id',Auth::user()->id)->count();
-            $electricity=Electricity::where('user_id',Auth::user()->id)->count();
-            $unit=Unit::where('user_id',Auth::user()->id)->count();
-            $totle_contract=Contract::where('user_id',Auth::user()->id)->get();
-            $tenant=Tenant::where('user_id',Auth::user()->id)->count();
-            $tenant_not_sign=Contract::where('user_id',Auth::user()->id)->where('lessor_sign',null)->count();
 
-            $vacant=Unit::where('user_id',Auth::user()->id)->where('unit_status','vacant')->count() ;
-            $cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Valid')->get();
-            $bounce_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Bounced')->get();
-            $expired_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Expired')->get();
-            $postponed_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Postponed')->get();
-            $cleared_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Cleared')->get();
-            $security_cheque=Cheque::where('user_id',Auth::user()->id)->where('cheque_status','Security Cheque')->get();
-            $invoice=Invoice::where('user_id',Auth::user()->id)->get();
-            $cheque_reccord=Cheque::where('user_id',Auth::user()->id)->count();
-            $overdue=Contract::where('user_id',Auth::user()->id)->where('overdue','>=',0)->count();
+            $user_id = '';
+            if (Auth::user()->hasRole('Owner')) {
+                $user_id = Auth::user()->id;
+            }
+            else
+            {
+                $user_id=Auth::user()->created_by;
+            }
+            $buildings=Building::where('user_id',$user_id)->count();
+            $electricity=Electricity::where('user_id',$user_id)->count();
+            $unit=Unit::where('user_id',$user_id)->count();
+            $totle_contract=Contract::where('user_id',$user_id)->get();
+            $tenant=Tenant::where('user_id',$user_id)->count();
+            $tenant_not_sign=Contract::where('user_id',$user_id)->where('lessor_sign',null)->count();
+
+            $vacant=Unit::where('user_id',$user_id)->where('unit_status','vacant')->count() ;
+            $cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Valid')->get();
+            $bounce_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Bounced')->get();
+            $expired_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Expired')->get();
+            $postponed_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Postponed')->get();
+            $cleared_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Cleared')->get();
+            $security_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Security Cheque')->get();
+            $invoice=Invoice::where('user_id',$user_id)->get();
+            $cheque_reccord=Cheque::where('user_id',$user_id)->count();
+            $overdue=Contract::where('user_id',$user_id)->where('overdue','>=',0)->count();
 
 
         }

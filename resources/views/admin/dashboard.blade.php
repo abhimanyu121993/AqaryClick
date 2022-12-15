@@ -64,7 +64,7 @@
 
 <div class="row project-wrapper" >
 <div class="row">
-    
+                    @role('superadmin')
 					<div class="col-xl-6 col-xxl-12">
 						<div class="row">
 							<div class="col-xl-12" >
@@ -95,6 +95,7 @@
 							</div>
 						</div>
 					</div>
+                    @endrole
 </div>
 </div>
     <div class="col-xxl-8">

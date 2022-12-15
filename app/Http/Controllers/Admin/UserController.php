@@ -27,8 +27,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        $users = User::all();
+        $roles = Role::where('created_by',Auth::user()->id)->get();
+        $users = User::where('created_by',Auth::user()->id)->get();
         return view('admin.user', compact('users', 'roles'));
     }
 
@@ -73,7 +73,8 @@ class UserController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => Hash::make($default_password),
-                'pic' => $pic_name
+                'pic' => $pic_name,
+                'created_by'=>Auth::user()->id,
             ];
             $user = User::create($data);
 
