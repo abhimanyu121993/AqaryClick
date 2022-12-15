@@ -645,12 +645,11 @@
                         url: newurl,
                         method: 'get',
                         success: function(p) {
-                            console.log(p.established_card_no);
                             $("#tenant_primary_mobile").val(p.tenant_primary_mobile);
                             $('#tenant_nationality').val(p.tenant_nationality.name);
                             $('#sponsor_name').val(p.sponsor_name);
-                            $('#sponsor_id').val(p.sponsor_oid);
-                            $('#sponsor_mobile').val(p.sponsor_phone);
+                             $('#sponsor_id').val(p.sponsor_oid);
+                             $('#sponsor_mobile').val(p.sponsor_phone);
                             $('#document_type').val(p.tenant_document);
                             $('#sponer_nationality').val(p.nationality.name);
                             $('#qid_document').val(p.qid_document);
@@ -658,40 +657,6 @@
                             $('#passport_doc').val(p.passport);
                             $('#establishment_card').val(p.established_card_no);
                             $('#government_housing').val(p.government_housing_no);
-                            if (p.tenant_document == 'QID') {
-                                $('#qid').show();
-                                $('#cr').hide();
-                                $('#passport').hide();
-                                $('#establishment').hide();
-                                $('#government').hide();
-
-                            } else if (p.tenant_document == 'CR & EST CARD') {
-                                $('#qid').hide();
-                                $('#cr').show();
-                                $('#passport').hide();
-                                $('#establishment').show();
-                                $('#government').hide();
-                            } else if (p.tenant_document == 'Passport') {
-                                $('#qid').hide();
-                                $('#cr').hide();
-                                $('#passport').show();
-                                $('#establishment').hide();
-                                $('#government').hide();
-                            }
-                            //else if (p.tenant_document == 'Est_Card_No') {
-                            //     $('#qid').hide();
-                            //     $('#cr').hide();
-                            //     $('#passport').hide();
-                            //     $('#establishment').show();
-                            //     $('#government').hide();
-                            // }
-                            else if (p.tenant_document == 'Govt_Housing_No') {
-                                $('#qid').hide();
-                                $('#cr').hide();
-                                $('#passport').hide();
-                                $('#establishment').hide();
-                                $('#government').show();
-                            }
                         }
                     });
                     $(document).on('change',"#contract_status",function() {
@@ -919,15 +884,17 @@
                         $('#cr').show();
                         $('#establishment').show();
                         $('#passport').hide();
+                        $('#qid').hide();
 
 
 
                     } else if (optionValue == 'TP') {
                         $('.sponsor_hide').hide();
                         $('#government').hide();
-                        $('#cr').show();
+                        $('#cr').hide();
                         $('#establishment').hide();
                         $('#passport').show();
+                        $('#qid').show();
 
                     }
                     else if (optionValue == 'TG') {
@@ -936,6 +903,7 @@
                         $('#cr').hide();
                         $('#establishment').hide();
                         $('#passport').hide();
+                        $('#qid').hide();
 
                     }
                 });

@@ -111,4 +111,13 @@ class AdminController extends Controller
 
     }
 
+    public function readNotification(Request $request ,$id =''){
+        if($id){
+            Auth()->user()->unreadNotifications->where('id',$id)->markAsRead();
+        }else{
+            Auth()->user()->unreadNotifications->markAsRead();
+        }
+        return redirect()->back();
+    }
+
 }
