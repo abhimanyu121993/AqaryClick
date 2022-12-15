@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PermissionName;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -104,14 +105,14 @@ class PermissionController extends Controller
 
     public function rolePermission()
     {
-        $roles=Role::all();
+        $roles=Role::where('created_by',Auth::user()->id)->get();
         return view('admin.rolehaspermission',compact('roles'));
     }
 
     public function fetchPermission(Request $request)
     {
         $selectrole=Role::find($request->role);
-        $roles=Role::all();
+        $roles=Role::where('created_by',Auth::user()->id)->get();
         $permissionnames=PermissionName::all();
         return view('admin.rolehaspermission',compact('roles','permissionnames','selectrole'));
     }
