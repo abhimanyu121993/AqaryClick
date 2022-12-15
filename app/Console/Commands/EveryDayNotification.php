@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Contract;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Models\Invoice;
+use App\Models\Legal;
 use App\Notifications\AlertNotification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
@@ -86,6 +88,22 @@ class EveryDayNotification extends Command
                 }
             }
         }
+
+
+        $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
+        $contractsDetails=Contract::where('overdue','>=',90)->whereNotIn('id',$res)->get();
+        if($contractsDetails){
+            foreach ($contractsDetails as $contractDetail) {
+                $data=Legal::firstOrCreate([
+                    'contract_id'=>$contractDetail->id,
+                    'tenant_name'=>$contractDetail->tenantDetails->tenant_english_name,
+                    'tenant_mobile'=>$contractDetail->tenant_mobile,
+                    'unit_ref'=>$contractDetail->tenantDetails->unit->unit_ref,
+                ]);
+            }
+        }
+        
+        
         return Command::SUCCESS;
     }
 }

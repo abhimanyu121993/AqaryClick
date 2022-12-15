@@ -543,7 +543,7 @@ else{
     $(document).ready(function() {
         $("#monthly_income").keyup(function(){
        var a=$(this).val();
-       $('#annual_income').val(a*12);
+       $('#annual_income').val((a*12).toLocaleString());
       var b= $('#annual_income').val();
       var c= $('#property_vlaue').val();
 
@@ -566,15 +566,15 @@ else{
         var a= $(this).val();
         $("#cost_building").keyup(function(){
         var b= $(this).val();
-        $('#building_value').val(parseInt(a)*parseInt(b));
+        $('#building_value').val((parseInt(a)*parseInt(b)).toLocaleString());
         var sum=parseInt(a)*parseInt(b);
         $("#landsize_meter").keyup(function(){
        var e=$(this).val();
-       $('#land_size').val(e*10764);
+       $('#land_size').val((e*10764).toLocaleString());
        $("#price_foot").keyup(function(){
        var f=$(this).val();
-      $('#total_land').val((e*10764)*f);
-        $('#property_vlaue').val(((e*10764)*f)+ sum);
+       $('#total_land').val(((e*10764)*f).toLocaleString());
+        $('#property_vlaue').val((((e*10764)*f)+ sum).toLocaleString());
        });
        });
 

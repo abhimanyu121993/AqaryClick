@@ -51,6 +51,7 @@
                     </a>
                 </li>
                 <!-- Analytics Dashboard -->
+                @role('superadmin')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('admin.analytic-dashboard') }}" role="button"
                         aria-expanded="false">
@@ -58,6 +59,7 @@
                             Dashboard</span>
                     </a>
                 </li>
+                @endcan
                 <!-- User Menu -->
                 @can('User')
                     @can('User_create')

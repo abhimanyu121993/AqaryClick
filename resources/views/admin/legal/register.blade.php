@@ -65,16 +65,13 @@
                     <div class="col-lg-12">
                         <div class="card" id="header1">
                             <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
-                                <h4 class="card-title mb-0 flex-grow-1">{{isset($data)? 'Update Legal': 'Manage Legal' }}</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Update Legal</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div><!-- end card header -->
                             <div class="card-body">
                                 <div class="live-preview">
-                                    <form action="{{isset($data)? route('admin.legal.update', $data->id): route('admin.legal.store') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @if (isset($data))
-                                        @method('patch')
-                                        @endif
+                                <form action="{{route('admin.updateLegal')}}" method="POST" enctype="multipart/form-data">
+                                        @csrf 
                                         @if ($errors->any())
                                         <div class="alert alert-danger alert-dismissible">
                                             <ul>
@@ -85,42 +82,10 @@
                                         </div>
                                         @endif
                                         <div class="row gy-4 mb-3">
-                                            <div class="col-xxl-6 col-md-6">
-                                                <label class="form-label" for="flag">Contract ID</label>
-                                                <select class="select2 form-select" id="contract_id" name='contract_id'>
-                                                    <option value="">--Select Contract--</option>
-                                                    @if (isset($data))
-                                                    <option value="{{ $data->contract_id }}" selected>{{ $data->contractDetails->contract_code??''}}</option>
-                                                    @else
-                                                    @foreach($tenantDetail as $td)
-                                                    <option value="{{ $td->id}}">{{ $td->contract_code??'' }}</option>
-                                                    @endforeach
-                                                    @endif
-                                                </select>
-                                            </div>
-                                            <div class="col-xxl-6 col-md-6">
-                                                <label class="form-label" for="flag">Tenant Name</label>
-                                                <input type="text" class="form-control" value="{{isset($data)? $data->tenant_name: '' }}" id="tenant_name" name="tenant_name" readonly>
-                                            </div>
-                                            <!-- <div class="col-xxl-3 col-md-3">
-                                <label class="form-label" for="flag">Mobile No</label>
-                                <input type="text" class="form-control" value="{{isset($data)? $data->tenant_mobile: '' }}" id="mobile_no" name="mobile_no" readonly>
-                            </div> -->
-                                            <!-- <div class="col-xxl-3 col-md-3">
-                                <label for="name" class="form-label">Unit Ref</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" value="{{isset($data)? $data->unit_ref: '' }}" id="unit_ref" name="unit_ref" readonly>
-                                </div>
-                            </div> -->
-                                            <!-- <div class="col-xxl-3 col-md-4">
-                                <label for="name" class="form-label">Last Payment Date</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="last_payment_date" name="last_payment_date" readonly>
-                                </div>
-                            </div> -->
-                                            <div class="col-xxl-6 col-md-6">
+                                            <div class="col-xxl-6 col-md-12">
                                                 <label class="form-label" for="flag">Status</label>
                                                 <select class="select2 form-select" id="process" name='status'>
+                                                <option value="" selected hidden id="option">--Select Status--</option>
                                                     <option value="Collection Process">Collection Process</option>
                                                     <option value="In the Court">In the Court</option>
                                                     <option value="Settelment Process">Settelment Process</option>
@@ -128,7 +93,7 @@
                                                     <option value="Exempt by the lessor">Exempt by the lessor</option>
                                                 </select>
                                             </div>
-                                            <div class="col-xxl-6 col-md-6">
+                                            <div class="col-xxl-6 col-md-12">
                                                 <label for="attachment_file" class="form-label">Attachment File</label>
                                                 <div class="input-group">
                                                     <input type="file" class="form-control" id="attachment_file" name="attachment_file[]" multiple>
@@ -138,14 +103,18 @@
                                         <div class="row gy-4 mb-3">
                                             <div class="col-xxl-3 col-md-12">
                                                 <label for="remark" class="form-label">Remark</label>
-                                                <textarea class="form-control" name="remark">
-                                                {{isset($data)? $data->remark: '' }}
+                                                <textarea id="remark" class="form-control" name="remark">  
                                                 </textarea>
+                                            </div>
+                                            <div class="col-xxl-3 col-md-12">
+                                                <div class="input-group">
+                                                    <input type="hidden" class="form-control" id="legal" name="id" >
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row gy-4">
                                             <div class="col-xxl-3 col-md-6">
-                                                <button class="btn btn-primary" id="btn-btn" type="submit">{{isset($data)? 'Update': 'Submit' }}</button>
+                                            <button class="btn btn-primary" id="btn-btn" type="submit">Update</button>
                                             </div>
                                         </div>
                                     </form>
@@ -193,44 +162,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($tenantDetail as $td)
+                    @foreach($legalDetail as $legal)
                         <tr>
                             <th scope="row">{{ $loop->index+ 1 }}</th>
-                            <td>{{ $td->contract_code??''}}</td>
+                            <td>{{ $legal->contractDetails->contract_code??''}}</td>
                             <td>
-                                {{ $td->tenantDetails->file_no??''}}
+                            {{ $legal->contractDetails->tenantDetails->file_no??''}}
                             </td>
-                            <td>{{ $td->lease_start_date??''}}</td>
-                            <td>{{ $td->lease_end_date??''}}</td>
+                            <td>{{ $legal->contractDetails->lease_start_date??''}}</td>
+                            <td>{{ $legal->contractDetails->lease_end_date??''}}</td>
 
                             <td>
-                                {{ $td->tenantDetails->tenant_english_name??''}}
+                            {{ $legal->tenant_name??''}}
                             </td>
                             <td>
-                                {{ $td->tenantDetails->tenant_primary_mobile??''}}
-
-                            </td>
-                            <td>
-                                {{ $td->unit ??''}}
+                            {{ $legal->tenant_mobile??''}}
 
                             </td>
                             <td>
-                                {{' No'  }}
+                            {{ $legal->unit_ref??''}}
+
+                            </td>
+                            <td>
+                            {{ $legal->status??''}}
                             </td>
                             <td>
                                 <div class="dropdown">
                                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ri-eye-2-fill"></i>
                                     </a>
-                                    @php $bid=Crypt::encrypt($td->id); @endphp
+                                    @php $bid=Crypt::encrypt($legal->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        {{ 'No'  }}
+                                    @php $pics=json_decode($legal->file); @endphp
+                                        @foreach ($pics as $pic)
+                                        <li><a href="{{ asset('upload/legal_doc').'/'.$pic}}" target="_ blank" id="pop">{{ $pic ?? ''   }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </td>
-                            <td>{{$td->contractDetails?intval($td->contractDetails->overdue/30):0}}</td>
+                            <td>{{$legal->contractDetails?intval($legal->contractDetails->overdue/30):0}}</td>
                             <td>
-                                {{ 'No ' }}
+                            {{ $legal->remark??'' }}
                             </td>
 
                             <td>
@@ -238,13 +210,13 @@
                                     <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ri-more-2-fill"></i>
                                     </a>
-                                    @php $bid=Crypt::encrypt($td->id); @endphp
+                                    <!-- data-bs-toggle="modal" data-bs-target="#exampleModal" -->
+                                    @php $bid=Crypt::encrypt($legal->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#" id="pop" data-bs-toggle="modal" data-bs-target="#exampleModal">take action</a></li>
-                                        <li><a class="dropdown-item" href="#" id="pop">Edit</a></li>
+                                        <li><a class="dropdown-item leage_id" href="#" id="pop" data-id="{{$bid}}" data-bs-toggle="modal" data-bs-target="#exampleModal" >Edit</a></li>
                                         <li><a class="dropdown-item" href="#" id="pop" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
 
-                                        <form id="delete-form-{{ $bid }}" action="#" method="post" style="display: none;">
+                                        <form id="delete-form-{{ $bid }}" action="{{ route('admin.legal.destroy', $bid) }}" method="post" style="display: none;">
                                             @method('DELETE')
                                             @csrf
                                         </form>
@@ -288,4 +260,24 @@
         }).change();
     });
 </script>
+
+<Script>
+     $(document).ready(function() {
+        $(document).on('click', '.leage_id', function() {
+            var Id = $(this).attr("data-id");
+                 var newurl = "{{url('admin/legal')}}/"+Id+"/{{'edit'}}";
+                 $.ajax({
+                    url: newurl,
+                    method: 'get',
+                    success: function(response) {
+                        $('#legal').val(response.data.id);
+                        $('#remark').text(response.data.remark)
+                        $('#attachment_file').val(response.data.attachment_file)
+                        $('#process').val(response.data.status)
+                    }
+                });
+        });
+     });
+</Script>
+
 @endsection
