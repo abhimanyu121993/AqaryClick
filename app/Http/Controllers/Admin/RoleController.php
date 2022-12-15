@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
 
@@ -16,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $Roles = Role::get()->all();
+        $Roles = Role::where('created_by',Auth::user()->id)->get();
         return view('admin.role',compact('Roles'));
     }
 
@@ -42,7 +43,8 @@ class RoleController extends Controller
             'role' => 'required',
         ]);
         Role::create([
-            'name' => $request->role
+            'name' => $request->role,
+            'created_by'=>Auth::user()->id
         ]);
         return redirect()->back()->with('success','Role has been created successfully.');
     }
@@ -68,7 +70,7 @@ class RoleController extends Controller
     {
         $id = Crypt::decrypt($id);
         $RoleEdit=Role::find($id);
-        $Roles = Role::get()->all();
+        $Roles = Role::where('created_by',Auth::user()->id)->get();
         return view('admin.role',compact('Roles','RoleEdit'));    }
 
     /**

@@ -171,7 +171,7 @@ class BuildingController extends Controller
 
         ]);
         // $mainpic = '';
-        // $otherpic = [];
+        $otherpic = [];
         // if ($request->hasFile('building_pic')) {
         //     $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
         //     $request->building_pic->move(public_path('upload/building'), $mainpic);

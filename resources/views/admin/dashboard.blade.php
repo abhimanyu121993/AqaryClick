@@ -61,7 +61,43 @@
 </style>
 @section('title', 'Dashboard')
 @section('main-content')
+
 <div class="row project-wrapper" >
+<div class="row">
+                    @role('superadmin')
+					<div class="col-xl-6 col-xxl-12">
+						<div class="row">
+							<div class="col-xl-12" >
+								<div class="card property-bx text-white" style="background-color: #003a51;">
+									<div class="card-body">
+										<div class="media d-sm-flex d-block align-items-center">
+											<span class="me-4 d-block mb-sm-0 mb-3">
+												<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M31.8333 79.1667H4.16659C2.33325 79.1667 0.833252 77.6667 0.833252 75.8333V29.8333C0.833252 29 1.16659 28 1.83325 27.5L29.4999 1.66667C30.4999 0.833332 31.8333 0.499999 32.9999 0.999999C34.3333 1.66667 34.9999 2.83333 34.9999 4.16667V76C34.9999 77.6667 33.4999 79.1667 31.8333 79.1667ZM7.33325 72.6667H28.4999V11.6667L7.33325 31.3333V72.6667Z" fill="white"/>
+													<path d="M75.8333 79.1667H31.6666C29.8333 79.1667 28.3333 77.6667 28.3333 75.8334V36.6667C28.3333 34.8334 29.8333 33.3334 31.6666 33.3334H75.8333C77.6666 33.3334 79.1666 34.8334 79.1666 36.6667V76C79.1666 77.6667 77.6666 79.1667 75.8333 79.1667ZM34.9999 72.6667H72.6666V39.8334H34.9999V72.6667Z" fill="white"/>
+													<path d="M60.1665 79.1667H47.3332C45.4999 79.1667 43.9999 77.6667 43.9999 75.8334V55.5C43.9999 53.6667 45.4999 52.1667 47.3332 52.1667H60.1665C61.9999 52.1667 63.4999 53.6667 63.4999 55.5V75.8334C63.4999 77.6667 61.9999 79.1667 60.1665 79.1667ZM50.6665 72.6667H56.9999V58.8334H50.6665V72.6667Z" fill="white"/>
+												</svg>
+											</span>
+											<div class="media-body mb-sm-0 mb-3 me-5">
+												<h4 class="fs-22 text-white">Total Properties</h4>
+												<div class="progress mt-3 mb-2" style="height:8px;">
+													<div class="progress-bar bg-white progress-animated" style="width: 86%; height:8px;" role="progressbar">
+														<span class="sr-only">86% Complete</span>
+													</div>
+												</div>
+												<span class="fs-14">Our Total Valuable Property</span>
+                                                </div>
+
+											<h1 style="color:#fffee9;float:right" >{{ App\Models\Building::count() }}</h1>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    @endrole
+</div>
+</div>
     <div class="col-xxl-8">
         @role('superadmin')
         <div class="row">
@@ -201,7 +237,7 @@
                             <span class="fs-4">
                                     <img src="{{asset('3x/overdue.png')}}" height="50px" style="border-radius: 100%;"/>
                                 </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ App\Models\Contract::where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">OverDue</p>
                                 </div></a>
                             </div>
@@ -304,13 +340,13 @@
                             </div>
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.contract.create') }}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('contract_status','renewed')->count() }}">{{ App\Models\Contract::where('contract_status','renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Tenant Renew Contract</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.contract.create') }}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('contract_status','not renewed')->count() }}">{{ App\Models\Contract::where('contract_status','not renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Tenant Not Renew Contract</p>
                                 </div></a>
                             </div>
@@ -364,49 +400,49 @@
                                     <span class="fs-4">
                                     <img src="{{asset('3x/contract.jpeg')}}" height="50px" style="border-radius: 100%;"/>
                                 </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::count() }}">{{ App\Models\Contract::count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$totle_contract->count()??'' }}">{{$totle_contract->count()??'' }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Contract</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('attestation_status','Done')->count() }}">{{ App\Models\Contract::where('attestation_status','Done')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','Done')->count() }}">{{ $totle_contract->where('attestation_status','Done')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Attestation Contract</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('attestation_status','Not Yet')->count() }}">{{ App\Models\Contract::where('attestation_status','Not Yet')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','Not Yet')->count() }}">{{ $totle_contract->where('attestation_status','Not Yet')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Contract Not Attestation Yet</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('attestation_status','under process')->count() }}">{{ App\Models\Contract::where('attestation_status','under process')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','under process')->count() }}">{{ $totle_contract->where('attestation_status','under process')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Contract Under Process</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('contract_status','renewed')->count() }}">{{ App\Models\Contract::where('contract_status','renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Renewed Contract</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('contract_status','not renewed')->count() }}">{{ App\Models\Contract::where('contract_status','not renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Contract Not Renewed </p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::whereNotNull('approved_by')->count() }}">{{ App\Models\Contract::whereNotNull('approved_by')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->whereNotNull('approved_by')->count() }}">{{ $totle_contract->whereNotNull('approved_by')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Contract Approved by Lessor </p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Contract::where('contract_type','Internal')->count() }}">{{ App\Models\Contract::where('contract_status','not renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_type','Internal')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Internal Contact</p>
                                 </div></a>
                             </div>
@@ -505,25 +541,25 @@
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.invoice.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Invoice::where('payment_status','Paid')->count() }}">{{ App\Models\Invoice::where('payment_status','Paid')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$invoice->where('payment_status','Paid')->count() }}">{{ $invoice->where('payment_status','Paid')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Paid Invoice</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Invoice::whereNotNull('overdue_period')->count() }}">{{ App\Models\Contract::where('attestation_status','Not Yet')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$overdue??''}}">{{ $overdue??''}}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Overdue Invoice</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::count() }}">{{ App\Models\Contract::count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$cheque_reccord??'' }}">{{ $cheque_reccord??''}}</span></h5>
                                     <p id="parag"class="text-muted mb-0"> Record Cheque</p>
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
-                            <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}">{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}</span></h5>
+                            <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">      
+                            <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}">{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0"> Bounced Cheques</p>
                                 </div></a>
                             </div>

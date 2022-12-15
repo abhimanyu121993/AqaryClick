@@ -9,7 +9,6 @@ use App\Models\Invoice;
 use App\Models\Legal;
 use App\Notifications\AlertNotification;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
 
 class EveryDayNotification extends Command
@@ -49,43 +48,14 @@ class EveryDayNotification extends Command
                 ];
 
                 $contractUser=$contract->user_id;
-                if( $contractUser !=''){
                 $user=User::find($contractUser);
                 Notification::send($user, new AlertNotification($details)); 
-                }
-                
 
                 $tenantName=$contract->tenant_name;
-                if($tenantName !=''){
-                    $tenantUser=Tenant::find($tenantName);
-                    Notification::send($tenantUser, new AlertNotification($details)); 
-                }
-           
+                $tenantUser=Tenant::find($tenantName);
+                Notification::send($tenantUser, new AlertNotification($details)); 
                 
 
-            }
-
-            if(Carbon::parse($contract->lease_end_date)->subDays(62) || Carbon::parse($contract->lease_end_date)->subDays(30)|| Carbon::parse($contract->lease_end_date)->subDays(15) || Carbon::parse($contract->lease_end_date)->subDays(7) || Carbon::parse($contract->lease_end_date)->subDays(3)){
-
-                $leaseDate=$contract->lease_end_date;
-
-                $details=[
-                    'title'=>'Contract Lease is expire date soon'.' '.$leaseDate,
-                    'body'=>'Attension Please Your Contract Lease is Expire Date in'.' '.$contract->lease_end_date.' '.'Date',
-                ];
-                
-                $contractUser=$contract->user_id;
-                if( $contractUser !=''){
-                $user=User::find($contractUser);
-                Notification::send($user, new AlertNotification($details)); 
-                }
-                
-
-                $tenantName=$contract->tenant_name;
-                if($tenantName !=''){
-                    $tenantUser=Tenant::find($tenantName);
-                    Notification::send($tenantUser, new AlertNotification($details)); 
-                }
             }
         }
 

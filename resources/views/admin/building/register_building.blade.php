@@ -544,6 +544,7 @@ else{
         $("#monthly_income").keyup(function(){
        var a=$(this).val();
        $('#annual_income').val((a*12).toLocaleString());
+       $('#annual_income').val((a*12).toLocaleString());
       var b= $('#annual_income').val();
       var c= $('#property_vlaue').val();
 
@@ -567,9 +568,11 @@ else{
         $("#cost_building").keyup(function(){
         var b= $(this).val();
         $('#building_value').val((parseInt(a)*parseInt(b)).toLocaleString());
+        $('#building_value').val((parseInt(a)*parseInt(b)).toLocaleString());
         var sum=parseInt(a)*parseInt(b);
         $("#landsize_meter").keyup(function(){
        var e=$(this).val();
+       $('#land_size').val((e*10764).toLocaleString());
        $('#land_size').val((e*10764).toLocaleString());
        $("#price_foot").keyup(function(){
        var f=$(this).val();

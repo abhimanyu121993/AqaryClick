@@ -173,7 +173,32 @@
                     </div> 
                 </div> 
                 @else
-                <div> <a href="{{route('home.login')}}">Login</a></div>
+                <div class="mdc-menu-surface--anchor"> 
+                    <button class="mdc-button mdc-ripple-surface"> 
+                        <span class="mdc-button__ripple"></span>
+                        <i class="material-icons mdc-button__icon mx-1">person</i>
+                        <span class="mdc-button__label">account</span>
+                        <i class="material-icons mdc-button__icon m-0">arrow_drop_down</i>
+                    </button> 
+                    <div class="mdc-menu mdc-menu-surface user-menu">
+                        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+                            
+                        <li>
+                                <a href="{{route('home.login')}}" class="mdc-list-item" role="menuitem"> 
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    <span class="mdc-list-item__text px-3">Login</span>
+                                </a>
+                            </li> 
+                            <li role="separator" class="mdc-list-divider m-0"></li>
+                            <li>
+                                <a href="{{route('home.registerIndex')}}" class="mdc-list-item" role="menuitem">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                 <span class="mdc-list-item__text px-3">Register</span>
+                                </a>
+                            </li> 
+                        </ul>
+                    </div> 
+                </div> 
                 @endif
 
             </div> 

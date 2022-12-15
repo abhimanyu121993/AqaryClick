@@ -162,7 +162,7 @@ class InvoiceController extends Controller
                     $mainpic[] = $name;
                 }
             }
-            $res = Cheque::create(['invoice_no' => $invoice_no, 'tenant_id' => $request->tenant_name,'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'qar_amt' => $request->sar_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'user_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
+            $res = Cheque::create(['user_id' => Auth::user()->id,'invoice_no' => $invoice_no, 'tenant_id' => $request->tenant_name,'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'qar_amt' => $request->sar_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'user_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
         }
     }
         if ($data) {

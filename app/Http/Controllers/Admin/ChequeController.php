@@ -30,7 +30,6 @@ class ChequeController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**

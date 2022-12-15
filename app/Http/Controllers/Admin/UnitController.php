@@ -85,6 +85,7 @@ class UnitController extends Controller
             }
         }
        $data= Unit::create([
+        'user_id'=>Auth::user()->id,
             'building_id' => $request->building_name,
             'unit_no'=>$request->unit_no,
             'unit_code'=>$request->unit_code,

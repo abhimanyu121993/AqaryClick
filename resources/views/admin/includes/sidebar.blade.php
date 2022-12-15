@@ -324,6 +324,7 @@
                         <div class="collapse menu-dropdown" id="sidebarDashboards10">
                             <ul class="nav nav-sm flex-column">
                                 <!-- customer Management Menu -->
+                                @role('superadmin')
                                 <li class="nav-item">
                                     <a class="nav-link menu-link" href="#sidebarDashboards12345"
                                         data-bs-toggle="collapse" role="button" aria-expanded="false"
@@ -340,6 +341,7 @@
                                         </ul>
                                     </div>
                                 </li>
+                                @endrole
                                 <!-- end customer Module -->
                                 <!-- customer Management Menu -->
                                 @can('Broker')
@@ -455,17 +457,22 @@
                                     <a href="{{ route('admin.buildingtype.index') }}" class="nav-link"
                                         data-key="t-analytics"> Building Type </a>
                                 </li>
+                                @role('superadmin')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.membership.index') }}" class="nav-link"
                                         data-key="t-analytics"><i data-feather="users" class="icon-dual"></i> Membership </a>
                                 </li>
+                                @endrole
                             </ul>
                         </div>
                     </li>
+                    @role('superadmin')
+
                     <li class='nav-item'>
                         <a class='nav-link menu-link' href=''>
                             <i class="feather-globe"></i> <span data-key="t-dashboards">Website Setting</span></a>
                     </li>
+                    @endrole
                 @endcan
             </ul>
         </div>

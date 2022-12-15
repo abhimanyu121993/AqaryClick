@@ -13,7 +13,7 @@ class PurchaseController extends Controller
     
     public function membership($id)
     {
-        
+        $user = Auth::user();
         $membership = Membership::find($id);
         if($membership){
             if ($membership->active_membership) {
@@ -27,7 +27,7 @@ class PurchaseController extends Controller
                     $user->syncRoles('Owner');
 
                 } else {
-                    $user = Auth::user();
+                    
                     $user->update([
                         'membership_id'=>$membership->id,
                         'membership_taken'=>Carbon::now(),
