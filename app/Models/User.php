@@ -27,5 +27,10 @@ class User extends Authenticatable
     public function getNameAttribute(){
         return $this->first_name.' '.$this->last_name;
     }
+
+    public function customerDetail()
+    {
+        return $this->hasMany(Customer::class, 'email', 'email');
+    }
     
 }
