@@ -171,7 +171,7 @@
                                             @php $bid=Crypt::encrypt($f->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <!-- <li><a class="dropdown-item" href="{{ route('admin.tenant-files.edit', $bid) }}">Edit</a></li> -->
-                                                <li><a class="dropdown-item" href="#"
+                                                <li><a class="dropdown-item" id="pop" href="#"
                                                         onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a>
                                                 </li>
 
@@ -231,7 +231,7 @@
                     </div>\
                     <div class="col-sm-1">\
                         <br/>\
-                        <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
+                        <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" id="btn-btn" title=" field">-</a>\
                     </div></div>';
 
         //Once add button is clicked
