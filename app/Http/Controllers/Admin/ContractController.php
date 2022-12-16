@@ -46,22 +46,39 @@ class ContractController extends Controller
      */
     public function index()
     {
+        $this->getUser();
        
-        $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
-        $contract = Contract::all();
-        $tenant = Tenant::all();
-        $lessor = Customer::all();
-        $tenant_doc = Tenant::pluck('tenant_document');
+        if(Auth::user()->hasRole('superadmin')){
+            $contract = Contract::all();
+            $tenant = Tenant::all();
+            $lessor = Customer::all();
+            $tenant_doc = Tenant::pluck('tenant_document');  
+            $invoice = Invoice::all()->count();
+            $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();   
+            $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
+            $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
+            $delay_invoice = Invoice::whereNotNull('overdue_period')->count()??'0';
+            $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+            $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+        }
+        else
+        {
+            $contract = Contract::where('user_id',$this->user_id)->get();
+            $tenant = Tenant::where('user_id',$this->user_id)->get();
+            $lessor = Customer::where('user_id',$this->user_id)->get();
+            $tenant_doc = Tenant::where('user_id',$this->user_id)->pluck('tenant_document');
+            $invoice = Invoice::where('user_id',$this->user_id)->get()->count();  
+            $invoiceDetails = Invoice::where('user_id',$this->user_id)->where('payment_status', 'Paid')->get();
+            $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$this->user_id)->get()->sum('contract_sum_rent_amount');
+            $not_paid_invoice = Invoice::where('user_id',$this->user_id)->where('payment_status', 'Not Paid')->count();
+            $delay_invoice = Invoice::where('user_id',$this->user_id)->whereNotNull('overdue_period')->count()??'0';
+            $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$this->user_id)->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+            $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$this->user_id)->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+        }
         $tenant_nation = Nationality::pluck('name');
-        $invoice = Invoice::all()->count();
-        $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
         $total_amt = $invoice * $total_amount;
-        $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
-        $delay_invoice = Invoice::whereNotNull('overdue_period')->count()??'0';
-        $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
         $total_delay = $delay_invoice * $total_delay_amt;
         $invoice_balance = $delay_invoice + $not_paid_invoice;
-        $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
         $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
         $currency = currency::where('status', 1)->get();
         return view('admin.contract.contract_registration', compact('contract', 'tenant', 'tenant_doc', 'tenant_nation', 'lessor', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'currency'));
@@ -75,8 +92,7 @@ class ContractController extends Controller
     public function create()
     {
         $this->getUser();
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
+        if (Auth::user()->hasRole('superadmin')) {
             $contract = Contract::all();
         } else {
             $contract = Contract::where('user_id',$this->user_id)->get();
