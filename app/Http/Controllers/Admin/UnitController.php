@@ -293,7 +293,7 @@ class UnitController extends Controller
                     // dd($importData_arr);
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
-                        $buidlingid=Building::where('name',$importData[0])->first()->id??'';
+                        $buidlingid=Building::where('building_code',$importData[0])->first()->id??'';
                         $insertData = array(
                             "building_name" =>$buidlingid ,
                             "unit_ref" => $importData[1],
