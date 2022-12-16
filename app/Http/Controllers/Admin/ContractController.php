@@ -202,7 +202,7 @@ class ContractController extends Controller
             'remark' => $request->remark,
         ]);
         if ($data) {
-            Mail::to('$contract->tenantDetails->email')->send(new ContractMail($data,$conn,$contract));
+            Mail::to($data->tenantDetails->email)->send(new ContractMail($data,$conn,$contract));
             return redirect(route('admin.receipt', $contract_code))->with('success', 'Contract Registration has been created successfully.');
         } else {
             return redirect()->back()->with('error', 'Contract Registration not created.');
