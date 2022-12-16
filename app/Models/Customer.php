@@ -17,6 +17,6 @@ class Customer extends Model
     }
 
     public function user(){
-        return $this->belongsTo(Customer::class, 'email', 'email');
+        return $this->belongsTo(User::class, 'email', 'email');
     }
 }
