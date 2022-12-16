@@ -24,6 +24,17 @@ use Illuminate\Support\Facades\Response;
 
 class TenantController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,11 +42,12 @@ class TenantController extends Controller
      */
     public function index()
     {
-        $role=Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
+
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
             $building = Building::all();    
         } else {
-            $building = Building::where('user_id', Auth::user()->id)->get();
+            $building = Building::where('user_id',$this->user_id)->get();
         }
 
         $unit = UnitType::all();
@@ -52,12 +64,13 @@ class TenantController extends Controller
     public function create()
     {
 
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
+        $this->getUser();
+        if(Auth::user()->hasRole('superadmin')){
             $all_tenant = Tenant::all();
-        } else {
-            $all_tenant = Tenant::where('user_id', Auth::user()->id)->get();
-        $role=Auth::user()->roles[0]->name;
+        }
+        else
+        {
+            $all_tenant = Tenant::where('user_id', $this->user_id)->get();
         }
         return view('admin.tenant.tenats', compact('all_tenant'));
     }
@@ -71,6 +84,7 @@ class TenantController extends Controller
      */
     public function store(Request $request)
     {
+        $this->getUser();
         $request->validate([
             'tenant_code' => 'required|unique:tenants,tenant_code',
             'tenant_english_name' => 'nullable',
@@ -102,7 +116,7 @@ class TenantController extends Controller
             'government_housing_no' => 'nullable',
         ]);
              $tenant = Tenant::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user_id,
             'file_no' => $request->file_no,
             'tenant_code' => $request->tenant_code,
             'tenant_english_name' => $request->tenant_english_name,
@@ -177,6 +191,7 @@ class TenantController extends Controller
      */
     public function edit($id)
     {
+        $this->getUser();
         $id=Crypt::decrypt($id);
         $editTenant=Tenant::find($id);
         $nation = Nationality::all();
@@ -185,7 +200,7 @@ class TenantController extends Controller
         if ($role == 'superadmin') {
             $building = Building::all();    
         } else {
-            $building = Building::where('user_id', Auth::user()->id)->get();
+            $building = Building::where('user_id', $this->user_id)->get();
         }
         return view('admin.tenant.tenantregister',compact('editTenant','nation','building','unitType'));
     }
@@ -229,7 +244,6 @@ class TenantController extends Controller
 
 
         $tenant = Tenant::find($id)->update([
-            'user_id' => Auth::user()->id,
             'file_no' => $request->file_no,
             'tenant_english_name' => $request->tenant_english_name,
             'tenant_arabic_name' => $request->tenant_arabic_name,
@@ -309,7 +323,8 @@ class TenantController extends Controller
 
     public function fileNumber($file_no)
     {
-        $max_id = Tenant::where('user_id',Auth::user()->id)->max('id') + 1;
+        $this->getUser();
+        $max_id = Tenant::where('user_id',$this->user_id)->max('id') + 1;
         $TT = $file_no . '-' . Carbon::now()->month . '-' . Carbon::now()->format('y') . '-' . str_pad($max_id, 2, '0', STR_PAD_LEFT);
         return response()->json($TT);
     }

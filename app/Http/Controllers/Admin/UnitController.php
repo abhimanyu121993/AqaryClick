@@ -17,14 +17,28 @@ use Illuminate\Support\Facades\Session;
 
 class UnitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     public function index()
     {
-        $units=Building::where('user_id',Auth::user()->id)->get();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $units = Building::get();
+        }
+        else
+        {
+            $units = Building::where('user_id', $this->user_id)->get();
+        }
         $units2=UnitType::all();
         $units3=UnitStatus::all();
         $units4=UnitFloor::all();
@@ -39,12 +53,13 @@ class UnitController extends Controller
      */
     public function create()
     {
-            $role=Auth::user()->roles[0]->name;
-        if($role=='superadmin'){
+        $this->getUser();
+           
+        if(Auth::user()->hasRole('superadmin')){
             $units=Unit::all();
         }
         else{
-        $units=Unit::where('user_id',Auth::user()->id)->get();
+        $units=Unit::where('user_id',$this->user_id)->get();
         }
         return view('admin.unit.all_unit',compact('units'));    }
 
@@ -56,6 +71,7 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
+        $this->getUser();
         $request->validate([
             'building_name'=>'required',
             'unit_no'=>'required',
@@ -85,7 +101,7 @@ class UnitController extends Controller
             }
         }
        $data= Unit::create([
-        'user_id'=>Auth::user()->id,
+            'user_id'=>$this->user_id,
             'building_id' => $request->building_name,
             'unit_no'=>$request->unit_no,
             'unit_code'=>$request->unit_code,
@@ -135,7 +151,14 @@ class UnitController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
-        $units=Building::all();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $units = Building::get();
+        }
+        else
+        {
+            $units = Building::where('user_id', $this->user_id)->get();
+        }
         $units2=UnitType::all();
         $units3=UnitStatus::all();
         $units4=UnitFloor::all();
@@ -230,6 +253,7 @@ class UnitController extends Controller
 
     public function bulkUpload(Request $request)
     {
+        $this->getUser();
         if($request->hasFile('bulk_upload')){
             $file = $request->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -295,7 +319,7 @@ class UnitController extends Controller
                             $unitStatus = UnitStatus::where('name', strtolower(trim($insertData['unit_status'] ?? '')))->first();
                             $building = Building::where('name', strtolower(trim($insertData['building_name'] ?? '')))->first();
                                 Unit::firstOrCreate(['unit_no'=>$insertData['unit_no']],[
-                                'user_id' => Auth::user()->id ?? '',
+                                'user_id' => $this->user_id ?? '',
                                 'building_id' => $buidlingid?? '',
                                 'unit_ref'=>$insertData['unit_ref'] ?? '',
                                 'revenue'=>$insertData['revenue_code'] ?? '',

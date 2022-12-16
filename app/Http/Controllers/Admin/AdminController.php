@@ -23,8 +23,20 @@ use Spatie\Permission\Models\Permission;
 
 class AdminController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     public function dashboard()
     {
+        
         $role=Auth::user()->roles[0]->name;
         if($role=='superadmin'){
         $buildings=Building::count();
@@ -43,6 +55,7 @@ class AdminController extends Controller
         $security_cheque=Cheque::where('cheque_status','Security Cheque')->get();
         $cheque_reccord=Cheque::count();
         $overdue=Contract::where('overdue','>=',0)->count();
+        $dueInvoice = Invoice::whereNotNull('due_amt')->orWhere('due_amt', '>', 0)->count();
         }
         else{
 
@@ -71,11 +84,13 @@ class AdminController extends Controller
             $invoice=Invoice::where('user_id',$user_id)->get();
             $cheque_reccord=Cheque::where('user_id',$user_id)->count();
             $overdue=Contract::where('user_id',$user_id)->where('overdue','>=',0)->count();
-
+            $dueInvoice = Invoice::where('user_id', $this->user_id)->where(function ($query) {
+                $query->whereNotNull('due_amt')->orWhere('due_amt', '>', 0);
+            })->count();
 
         }
        
-        return view('admin.dashboard',compact('overdue','cheque_reccord','invoice','vacant','totle_contract','cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque','buildings','electricity','tenant','tenant_not_sign','unit'));
+        return view('admin.dashboard',compact('overdue','cheque_reccord','invoice','vacant','totle_contract','cheque','bounce_cheque','expired_cheque','postponed_cheque','cleared_cheque','security_cheque','buildings','electricity','tenant','tenant_not_sign','unit','dueInvoice'));
     }
     public function Analyticdashboard()
     {
