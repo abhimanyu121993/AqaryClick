@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Response;
 
 class BusinessController extends Controller
 {
+
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,6 +67,7 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
+        $this->getUser();
         // $request->validate([
         //     'first_name' => 'required',
         //     'last_name' => 'required',
@@ -76,7 +90,7 @@ class BusinessController extends Controller
             $logo = $company;
         }
         $business = BusinessDetail::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user_id,
             'customer_type' => $request->customer_type,
             'business_type' => $request->business_type,
             'business_name' => $request->business_name,
