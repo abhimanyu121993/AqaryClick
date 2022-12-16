@@ -152,6 +152,7 @@ class BuildingController extends Controller
      */
     public function store(Request $request)
     {
+        $this->getUser();
         $request->validate([
             'building_code' => 'required',
             'building_name' => 'required',
