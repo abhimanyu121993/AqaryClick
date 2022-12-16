@@ -216,7 +216,7 @@ class BuildingController extends Controller
             }
         }
         $data = Building::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user_id,
             'building_code' => $request->building_code,
             'name' => $request->building_name,
             'owner_name' => $request->owner_name,

@@ -59,7 +59,7 @@ class UserController extends Controller
             'pic' => 'nullable|image'
         ]);
         try{
-            $default_password = '12345';
+            $default_password = '123456';
             $pic_name = 'assets/images/default_user.png';
             if($request->hasFile('pic'))
             {
