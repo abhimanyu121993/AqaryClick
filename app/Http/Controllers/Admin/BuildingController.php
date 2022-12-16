@@ -20,6 +20,17 @@ use Yajra\DataTables\Facades\DataTables;
 
 class BuildingController extends Controller
 {
+    protected $user_id = '';
+  public function getUser()
+  {
+         if(Auth::user()->hasRole('Owner')){
+            $this->user_id = Auth::user()->id;
+        }
+        else
+        {
+            $this->user_id = Auth::user()->created_by;
+        }
+  }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +39,14 @@ class BuildingController extends Controller
     public function index()
     {
 
-        $buildings = Building::all();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $buildings = Building::all();
+        }
+        else
+        {
+            $buildings = Building::where('user_id',$this->user_id)->get();
+        }
         $building_types = BuildingType::all();
         $building_statuses = BuildingStatus::all();
         $cityDetail = City::all();
@@ -44,13 +62,13 @@ class BuildingController extends Controller
      */
     public function create()
     {
-
+        $this->getUser();
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $buildings = Building::all();
             // dd($buildings);
         } else {
-            $buildings = Building::where('user_id', Auth::user()->id)->get();
+            $buildings = Building::where('user_id', $this->user_id)->get();
         }
 
         return view('admin.building.all_building', compact('buildings'));
@@ -58,11 +76,13 @@ class BuildingController extends Controller
 
     public function get_buildings(Request $req)
     {
+        $this->getUser();
         $role = Auth::user()->roles[0]->name;
         $query = Building::query()->with(['nationality', 'cityDetails']);
         if ($role == 'superadmin') {
+
         } else {
-            $query->where('user_id', Auth::user()->id);
+            $query->where('user_id', $this->user_id);
         }
         $buildings = $query->get();
         // if ($req->ajax()) {
@@ -358,7 +378,6 @@ class BuildingController extends Controller
         }
 
         $data = Building::find($id)->update([
-            'user_id' => Auth::user()->id,
             'building_code' => $request->building_code,
             'name' => $request->building_name,
             'owner_name' => $request->owner_name,
@@ -455,6 +474,7 @@ class BuildingController extends Controller
 
     public function bulkUpload(Request $request)
     {
+        $this->getUser();
         if ($request->hasFile('bulk_upload')) {
             $file = $request->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -511,7 +531,7 @@ class BuildingController extends Controller
                         // dd($insertData);
                         if (!empty($insertData['Building Code'])) {
                             $res = Building::firstOrCreate(['building_code' => $insertData['Building Code']], [
-                                'user_id' => Auth::user()->id,
+                                'user_id' => $this->user_id,
                                 'building_code' => $insertData['Building Code'],
                                 'name' => $insertData['Property Name'],
                                 'building_no' => $insertData['Bldg No'],
@@ -546,13 +566,22 @@ class BuildingController extends Controller
 
     public function buildingFiles()
     {
-        $files=BuildingFiles::all();
-        $building=Building::all();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $building = Building::all();
+            $files=BuildingFiles::all();
+        }
+        else
+        {
+            $building = Building::where('user_id',$this->user_id)->get();
+            $files=BuildingFiles::where('user_id',$this->user_id)->get();
+        }
         return view('admin.building.building_file',compact('building','files'));
     }
 
     public function buildingFilesStore(Request $request){
 
+        $this->getUser();
         $request->validate([
             'file_name*' => 'required',
         ]);
@@ -561,7 +590,7 @@ class BuildingController extends Controller
      {
          $name=$bcode.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
          $files[$k]->move(public_path('upload/building/files'), $name);
-        $res = BuildingFiles::create(['user_id' => Auth::user()->id,'building_id' => $bcode, 'file_name' => $request->file_name[$k] ?? '', 'attachment' => $name ?? '']);
+        $res = BuildingFiles::create(['user_id' => $this->user_id,'building_id' => $bcode, 'file_name' => $request->file_name[$k] ?? '', 'attachment' => $name ?? '']);
 
     }
     Session::flash('success','File Uploaded Successfully');

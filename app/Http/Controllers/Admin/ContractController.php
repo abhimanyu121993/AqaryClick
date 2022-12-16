@@ -27,6 +27,18 @@ use Illuminate\Support\Facades\Session;
 
 class ContractController extends Controller
 {
+
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +46,7 @@ class ContractController extends Controller
      */
     public function index()
     {
-
+       
         $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
         $contract = Contract::all();
         $tenant = Tenant::all();
@@ -62,12 +74,12 @@ class ContractController extends Controller
      */
     public function create()
     {
-
+        $this->getUser();
         $role = Auth::user()->roles[0]->name;
         if ($role == 'superadmin') {
             $contract = Contract::all();
         } else {
-            $contract = Contract::where('user_id', Auth::user()->id)->get();
+            $contract = Contract::where('user_id',$this->user_id)->get();
         }
 
         return view('admin.contract.all_contract', compact('contract'));
@@ -107,6 +119,9 @@ class ContractController extends Controller
             'contract_type' => 'required',
 
         ]);
+
+        $this->getUser();
+
         $mainpic = '';
         if ($request->hasFile('lessor_sign')) {
             $mainpic = 'contract-' . time() . '-' . rand(0, 99) . '.' . $request->lessor_sign->extension();
@@ -126,7 +141,7 @@ class ContractController extends Controller
         $conn = Contract::with('tenantDetails')->where('contract_code', $contract_code)->first();
         $contract = ContractRecipt::first();
         $data = Contract::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user_id,
             'contract_code' => $contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type' => $request->document_type,
@@ -269,7 +284,6 @@ class ContractController extends Controller
             Contract::find($id)->update(['tenant_sign' => $mainpic2]);
         }
         $data = Contract::find($id)->update([
-            'user' => Auth::user()->id,
             'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type' => $request->document_type,
@@ -435,7 +449,7 @@ class ContractController extends Controller
     public function bulkUpload(Request $request)
     {
 
-
+        $this->getUser();
         if($request->hasFile('bulk_upload')){
             $file = $request->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -477,13 +491,13 @@ class ContractController extends Controller
 
                     foreach ($importData_arr as $importData) {
                         $tenant_id = '';
-                        $tenant=Tenant::where('user_id', Auth::user()->id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->where('tenant_primary_mobile',$importData[4])->first();
+                        $tenant=Tenant::where('user_id', $this->user_id)->where('tenant_english_name', $importData[0])->where('sponsor_oid',$importData[3])->where('tenant_primary_mobile',$importData[4])->first();
                         // return $tenant;
                         if ($tenant) {
                         $contract_code= 'CC-'.$tenant->unittypeinfo->name[0].'-'.$tenant->buildingDetails->zone_no.'-'.$tenant->buildingDetails->building_no.'-'.$tenant->unit_no.'-'.Carbon::now()->format('y');
                             $tenant_id = $tenant->id;
                             $insertData = array(
-                                "user_id" => Auth::user()->id,
+                                "user_id" => $this->user_id,
                                 "contract_code" => $contract_code,
                                 "tenant_name" => $tenant_id,
                                 'lessor'=>'',

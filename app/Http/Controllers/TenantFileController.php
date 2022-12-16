@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Session;
 
 class TenantFileController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +29,17 @@ class TenantFileController extends Controller
      */
     public function index()
     {
-        $tenantcode=Tenant::all();
-        $files=TenantFile::all();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $tenantcode = Tenant::all();
+            $files=TenantFile::all();
+        }
+        else
+        {
+            $tenantcode = Tenant::where('user_id',$this->user_id)->get();
+            $files=TenantFile::where('user_id',$this->user_id)->get();
+        }
+        
     return view('admin.tenant.tenant_file',compact('tenantcode','files'));
     }
 
@@ -41,7 +61,7 @@ class TenantFileController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->getUser();
         $request->validate([
             'file_name*' => 'required',
         ]);
@@ -49,7 +69,7 @@ class TenantFileController extends Controller
     foreach ($request->tenant_code as $k=>$tcode)
      {
          $name=$tcode.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
-        $res = TenantFile::create(['user_id' => Auth::user()->id,'tenant_id' => $tcode, 'file_name' => $request->file_name[$k] ?? '', 'attachment' => $name ?? '']);
+        $res = TenantFile::create(['user_id' => $this->user_id,'tenant_id' => $tcode, 'file_name' => $request->file_name[$k] ?? '', 'attachment' => $name ?? '']);
         
     } 
     Session::flash('success','File Uploaded Successfully');

@@ -34,9 +34,9 @@ class Contract extends Model
     }
 
     public function getTotalContractAttribute(){   
-       $rent=$this->rent_amount;
-       $month=$this->lease_period_month;
-        return $rent*$month;
+       $rent=$this->rent_amount??0;
+       $month=$this->lease_period_month??0;
+        return (float)$rent*(float)$month;
     }
     public function cheques()
     {

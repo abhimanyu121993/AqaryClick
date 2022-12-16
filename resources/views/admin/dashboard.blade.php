@@ -535,7 +535,7 @@
                         <div class="row g-0 text-center">
                                     <div class="col-6 col-sm-4">
                                     <a href="{{route('admin.invoice.create')}}">  <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Invoice::whereNotNull('due_amt')->orWhere('due_amt','>',0)->count() }}">{{ App\Models\Invoice::whereNotNull('due_amt')->orWhere('due_amt','>',0)->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $dueInvoice}}">{{ $dueInvoice}}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Invoice Due</p>
                                 </div></a>
                             </div>
