@@ -337,6 +337,7 @@ class TenantController extends Controller
 
     public function bulkUpload(Request $request)
     {
+        $this->getUser();
         if($request->hasFile('bulk_upload')){
             $file = $request->bulk_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -394,6 +395,7 @@ class TenantController extends Controller
                             "file_no" => $importData[0]??'',
                             "tenant_code" => $importData[1]??'',
                             'tenant_document'=>$doctype??'',
+                            'user_id'=>$this->user_id,
                             'passport'=>$p,
                             'qid_document'=>$q,
                             'cr_document'=>$cr,
