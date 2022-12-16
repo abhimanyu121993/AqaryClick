@@ -98,7 +98,7 @@
                     @endrole
 </div>
 </div>
-    <div class="col-xxl-8">
+    <div class="col-xl-12">
         @role('superadmin')
         <div class="row">
             <div class="col-xl-4">
