@@ -16,6 +16,17 @@ use Illuminate\Support\Facades\Response;
 
 class ElectricityController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,17 +34,20 @@ class ElectricityController extends Controller
      */
     public function index()
     {
+        $this->getUser();
         
-        $role=Auth::user()->roles[0]->name;
-        if($role=='superadmin'){
+        if(Auth::user()->hasRole('superadmin')){
             $build=Building::all();
+            $electric_invoice=Electricity::latest()->first();
+            $electric=Electricity::all();
         }
         else{
-            $build=Building::where('user_id',Auth::user()->id)->get();
+            $build=Building::where('user_id',$this->user_id)->get();
+            $electric_invoice=Electricity::where('user_id',$this->user_id)->latest()->first();
+            $electric=Electricity::where('user_id',$this->user_id)->get();
 
         }
-        $electric_invoice=Electricity::latest()->first();
-        $electric=Electricity::all();
+      
         return view('admin.electricity.electric',compact('electric','build','electric_invoice'));  
         }
 
@@ -44,15 +58,15 @@ class ElectricityController extends Controller
      */
     public function create()
     {
-        $electric_invoice=Electricity::latest()->first();
-       
-        $role=Auth::user()->roles[0]->name;
-        if($role=='superadmin'){
+        $this->getUser();
+        
+        if(Auth::user()->hasRole('superadmin')){
+            $electric_invoice=Electricity::latest()->first();
             $electric=Electricity::all();
         }
         else{
-            $electric=Electricity::where('user_id',Auth::user()->id)->get();
-
+            $electric_invoice=Electricity::where('user_id',$this->user_id)->latest()->first();
+            $electric=Electricity::where('user_id',$this->user_id)->get();
         }
         return view('admin.electricity.all_electricity',compact('electric','electric_invoice'));  
     }
@@ -65,6 +79,7 @@ class ElectricityController extends Controller
      */
     public function store(Request $request)
     {
+        $this->getUser();
         $request->validate([
             'building_name'=>'required',
             'unit_no'=>'required',
@@ -92,6 +107,7 @@ class ElectricityController extends Controller
             }
         }
        $data= Electricity::create([
+        'user_id'=>$this->user_id,
         'building_name' => $request->building_name,
         'unit_no'=> $request->unit_no,
         'unit_type'=> $request->unit_type,
@@ -137,8 +153,16 @@ class ElectricityController extends Controller
     {
         $id = Crypt::decrypt($id);
         $electricity=Electricity::find($id);
-        $electric_invoice=Electricity::latest()->first();
-        $electric=Electricity::all();
+        $this->getUser();
+        
+        if(Auth::user()->hasRole('superadmin')){
+            $electric_invoice=Electricity::latest()->first();
+            $electric=Electricity::all();
+        }
+        else{
+            $electric_invoice=Electricity::where('user_id',$this->user_id)->latest()->first();
+            $electric=Electricity::where('user_id',$this->user_id)->get();
+        }
         return view('admin.electricity.electric',compact('electricity','electric','electric_invoice'));
     }
 
