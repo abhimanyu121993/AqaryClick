@@ -116,7 +116,7 @@
                             <select class="form-control" id="tenant_document_type" name="tenant_document">
                                 <option value="{{isset($editTenant)? $editTenant->tenant_document:''}}" selected hidden>{{isset($editTenant)? $editTenant->tenant_document:'--Select Document Type--'}}</option>
                                 <option value="QID" id="QID">QID</option>
-                                <option value="CR & Est_Card" id="CR_Est_Card">CR & Est Card</option>
+                                <option value="CR & Est Card" id="CR_Est_Card">CR & Est Card</option>
                                 <option value="Passport" id="PASSPORT">Passport</option>
                                 <option value="Govt_Housing_No" id="Government_Housing_Number">Government Housing No</option>
                             </select>
@@ -415,7 +415,7 @@
                     $('#established_card_no').hide();
                     $('#government_housing_number').hide();
                     $('#CR_Est_Card').hide();
-                } else if (optionValue == 'CR & Est_Card') {
+                } else if (optionValue == 'CR & Est Card') {
                     $('#cr').show();
                     $('#qid').hide();
                     $('#passport').hide();

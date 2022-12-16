@@ -234,7 +234,7 @@ class ElectricityController extends Controller
 
         $html1='<option value="">--Select Unit Type--</option>';
         foreach($res as $r){
-            $html1 .='<option value="'.$r->unit_type.'">'.$r->unit_type.'</option>';
+            $html1 .='<option value="'.$r->unit_type.'">'.$r->unittypeinfo->name.'</option>';
         }
 
         $result=Electricity::where('building_name',$building_id)->first();

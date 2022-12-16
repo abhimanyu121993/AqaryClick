@@ -362,6 +362,8 @@ class ContractController extends Controller
     public function fetchCompany($lessor_id)
     {
         $res = BusinessDetail::where('user_id', $lessor_id)->get();
+        dd($res);
+
         $html = '';
 
         foreach ($res as $r) {
