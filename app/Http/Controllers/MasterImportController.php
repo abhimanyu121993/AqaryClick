@@ -25,9 +25,20 @@ use JetBrains\PhpStorm\Internal\TentativeType;
 
 class MasterImportController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     public function excel_upload(Request $req,$country=null)
     {
-        
+        $this->getUser();
         $country=2;  
         if ($req->hasFile('bulk_upload')) {
             $file = $req->bulk_upload;
@@ -76,7 +87,7 @@ class MasterImportController extends Controller
                             $insertBuildingData = array(
                                 "building_code"=>$importData[17]??'',
                                 "name"=>$importData[18]??'',
-                                "user_id"=>Auth::user()->id??'',
+                                "user_id"=>$this->user_id??'',
                                 "building_no"=>$importData[19]??'',
                                 "street_no"=>$importData[20]??'',
                                 "zone_no"=>$importData[21]??'',
@@ -100,7 +111,7 @@ class MasterImportController extends Controller
                                 $unitstatus=UnitStatus::firstOrCreate(['name'=>$importData[35]],['name'=>$importData[35]]);
                                 $insertUnitData = array(
                                     "building_id"=>$building->id??'',
-                                    "user_id"=>Auth::user()->id??'',
+                                    "user_id"=>$this->user_id??'',
                                     "unit_ref"=>$importData[28]??'',
                                     "revenue"=>$importData[29]??'',
                                     "unit_type"=>$unittype->id??'', // it take from unit type table
@@ -154,7 +165,7 @@ class MasterImportController extends Controller
                                         "email"=>$importData[11]??'',
                                         "authorized_person"=>$importData[12]??'',
                                         "authorized_person_qid"=>$importData[13]??'',
-                                        "user_id"=>Auth::user()->id??'',
+                                        "user_id"=>$this->user_id??'',
                                         "post_office"=>$importData[14]??'',
                                         "status"=>$importData[15]??'',
                                         "unit_type"=>$unit->unitTypeDetails->id,
@@ -164,7 +175,7 @@ class MasterImportController extends Controller
                                     if($tenant){
                                         $insertElectricData = array(
                                         "building_name"=>$building->id??'',
-                                        "user_id"=>Auth::user()->id??'',
+                                        "user_id"=>$this->user_id??'',
                                         "electric_no"=>$importData[36]??'',
                                         "water_no"=>$importData[37]??'',
                                         "unit_size"=>$importData[38]??'',
@@ -197,7 +208,7 @@ class MasterImportController extends Controller
                                                 'contract_code'=>$contract_code??'',
                                                 'tenant_name'=>$tenant->id??'',
                                                 'lessor'=>$lessor->id??'',
-                                                'user_id'=>Auth::user()->id??'',
+                                                'user_id'=>$this->user_id??'',
                                                 'sponsor_name'=>$importData[46]??'',
                                                 'sponsor_id'=>$importData[47]??'',
                                                 'sponsor_mobile'=>$importData[48]??'',
@@ -228,7 +239,7 @@ class MasterImportController extends Controller
                                             //     $inserInvoice = array(
                                             //         'tenant_id'=>$tenant->id,
                                             //         'contract_id'=>$contract->id,
-                                            //         'user_id'=>Auth::user()->id,
+                                            //         'user_id'=>$this->user_id,
                                             //         'invoice_period_start'=>Carbon::parse($contract->lease_start_date)->addMonth($period_month),
                                             //         'invoice_period_end'=>Carbon::parse($contract->lease_start_date)->addMonth((int)$period_month+1),
                                             //         'amt_paid'=>$importData[72]??0,
