@@ -65,7 +65,7 @@ class ContractController extends Controller
         {
             $contract = Contract::where('user_id',$this->user_id)->get();
             $tenant = Tenant::where('user_id',$this->user_id)->get();
-            $lessor = Customer::find($this->user_id);
+            $lessor = Customer::where('id',$this->user_id)->get();
             $tenant_doc = Tenant::where('user_id',$this->user_id)->pluck('tenant_document');
             $invoice = Invoice::where('user_id',$this->user_id)->get()->count();  
             $invoiceDetails = Invoice::where('user_id',$this->user_id)->where('payment_status', 'Paid')->get();
