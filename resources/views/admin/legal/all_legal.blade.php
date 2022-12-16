@@ -8,7 +8,7 @@
                 <div class="card-header align-items-center d-flex table-main-heading">
                     <h4 class="card-title mb-0 flex-grow-1">Manage Legal</h4>
                 </div><!-- end card header -->
-                <div class="card-body">
+                <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">
                         <thead class="thead-color">
                             <tr>
