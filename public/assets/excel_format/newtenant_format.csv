@@ -1,1 +1,1 @@
-﻿File No,Tenant Code,ID. No,Establishment Card,Tenant Name,Mobile (Primary),Mobile (Secondary),Email,P.O. Box,Status
+﻿File No,Tenant Code,"Tenant Type (Personal,Company,Government)","Document Type (QID,PASSPORT,CR & EST CARD ,GOVERNMENT HOUSING No)",QID,PASSPORT,CR,EST CARD,GOVERNMENT HOUSING NO,Tenant Name,Mobile (Primary),Mobile (Secondary),Email,P.O. Box,Status
