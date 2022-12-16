@@ -226,7 +226,7 @@ class ElectricityController extends Controller
     }
 
     public function fetchUnit($building_id){
-        $res=Unit::where('id',$building_id)->get();
+        $res=Unit::where('building_id',$building_id)->get();
         $html='<option value="">--Select Unit No--</option>';
         foreach($res as $r){
             $html .='<option value="'.$r->id.'">'.$r->unit_no.'</option>';
