@@ -94,7 +94,7 @@ $filehtml .='<option value="'.$b->id.'">'.$b->name??'';
 
                                 <div class="col-sm-1">
                                     <br />
-                                    <a href="javascript:void(0);" class="add_button4 btn btn-success" title="Add field">+</a>
+                                    <a href="javascript:void(0);" class="add_button4 btn btn-success" id="btn-btn" title="Add field">+</a>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@ $filehtml .='<option value="'.$b->id.'">'.$b->name??'';
                                     @php $bid=Crypt::encrypt($f->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <!-- <li><a class="dropdown-item" href="{{route('admin.tenant-files.edit',$bid)}}">Edit</a></li> -->
-                                        <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+                                        <li><a class="dropdown-item" id="pop" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
 
                                         <form id="delete-form-{{ $bid }}" action="{{ route('admin.buildingFilesDelete', $bid) }}" method="post" style="display: none;">
                                             @csrf
@@ -204,7 +204,7 @@ $filehtml .='<option value="'.$b->id.'">'.$b->name??'';
                 </div>\
                 <div class="col-sm-1">\
                     <br/>\
-                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4" title=" field">-</a>\
+                    <a href="javascript:void(0);" class="add_button btn btn-danger remove_button4"  id="btn-btn" title=" field">-</a>\
                 </div></div>';
 
     //Once add button is clicked
