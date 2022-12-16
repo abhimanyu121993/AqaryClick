@@ -268,7 +268,14 @@ class ElectricityController extends Controller
         return response()->json(array('html'=>$html,'html1'=>$html1,'result'=>$result));    
 }
         public function fetchTenantName(){
-            $res=Tenant::pluck('tenant_english_name');
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $res = Tenant::pluck('tenant_english_name');
+        }
+        else
+        {
+            $res = Tenant::where('user_id',$this->user_id)->get()->pluck('tenant_english_name');
+        }
             $html='<option value="">--Select Tenant Name--</option>';
             foreach($res as $r){
                 $html .='<option value="'.$r.'">'.$r.'</option>';
@@ -277,7 +284,15 @@ class ElectricityController extends Controller
             return response()->json($html);
             }
             public function fetchContract(){
-                $res=Contract::pluck('lessor');
+
+                $this->getUser();
+                if (Auth::user()->hasRole('superadmin')) {
+                    $res = Contract::pluck('lessor');
+                }
+                else
+                {
+                    $res =Contract::where('user_id',$this->user_id)->get()->pluck('lessor');
+                }
                 $html='<option value="">--Select Lessor Name--</option>';
                 foreach($res as $r){
                     $html .='<option value="'.$r.'">'.$r.'</option>';
