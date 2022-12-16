@@ -287,15 +287,15 @@ class ElectricityController extends Controller
 
                 $this->getUser();
                 if (Auth::user()->hasRole('superadmin')) {
-                    $res = Contract::pluck('lessor');
+                    $res = Contract::with('customer')->get();
                 }
                 else
                 {
-                    $res =Contract::where('user_id',$this->user_id)->get()->pluck('lessor');
+                    $res =Contract::with('customer')->where('user_id',$this->user_id)->get()->pluck('lessor');
                 }
                 $html='<option value="">--Select Lessor Name--</option>';
                 foreach($res as $r){
-                    $html .='<option value="'.$r.'">'.$r.'</option>';
+                    $html .='<option value="'.$r->customer->id.'">'.$r->customer->first_name.'</option>';
                 }
                 return response()->json($html);
                 }
