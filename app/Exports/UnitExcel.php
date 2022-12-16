@@ -28,7 +28,7 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
     */
     public function collection()
     {
-       
+        $this->getUser();
         $d = collect();
         if (Auth::user()->hasRole('superadmin')) {
             $units = Unit::select('unit_ref', 'revenue', 'unit_status', 'building_id', 'unit_type', 'unit_no', 'unit_floor', 'unit_size', 'actual_rent', 'remark')->get()->append(['unit_type_name', 'unit_status_name', 'buildingDetails'])->makeHidden(['unit_status', 'unit_type']);
