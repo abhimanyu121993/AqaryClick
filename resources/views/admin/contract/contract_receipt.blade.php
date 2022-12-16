@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <center><button type="button" class="btn btn-lg btn-outline-danger mt-2" id="download">Download Receipt</button></a>
+    <center><button type="button" class="btn btn-lg btn-outline-danger mt-2" id="download">Download Contract</button></a>
   </center>
 <div id="contract-download">
   <h1 class="text-center">Lease Agreement (عقد الإيجار)</h1>
