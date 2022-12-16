@@ -422,9 +422,8 @@
                                                         <tr>
                                                             <td colspan="5">
                                                                 <a href="javascript:new_link()" id="add-item"
-                                                                    class="btn btn-soft-secondary fw-medium"><i
-                                                                        class="ri-add-fill me-1 align-bottom"></i> Add
-                                                                    Item</a>
+                                                                    class="btn btn-success fw-medium"><i
+                                                                        class="ri-add-fill me-1 align-bottom"></i></a>
                                                             </td>
                                                         </tr>
                                                 </table>

@@ -81,7 +81,7 @@
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $unit->buildingDetails->name??'' }}</td>
                                     <td>{{ $unit->unit_no??''}}</td>
-                                    <td>{{ $unit->unitTD??'' }}</td>
+                                    <td>{{ $unit->unitTypeDetails->name ??'' }}</td>
                                     <td>{{ $unit->unitStatus->name??'' }}</td>
                                     <td>{{ $unit->unit_floor??'' }}</td>
                                     <td>{{ $unit->unitFeature->name??''}}</td>
@@ -97,8 +97,8 @@
                                             </a>
                                             @php $bid=Crypt::encrypt($unit->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="{{route('admin.unit.edit',$bid)}}">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+                                                <li><a class="dropdown-item" id="pop" href="{{route('admin.unit.edit',$bid)}}">Edit</a></li>
+                                                <li><a class="dropdown-item" id="pop" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
 
                                                 <form id="delete-form-{{ $bid }}" action="{{ route('admin.unit.destroy', $bid) }}"
                                                     method="post" style="display: none;">

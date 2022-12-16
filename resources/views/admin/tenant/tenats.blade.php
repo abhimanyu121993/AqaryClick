@@ -144,7 +144,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="dropdown"><a href="#" id="btn-btn" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
+                                <div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
                                     </a>
                                     @php $tid=Crypt::encrypt($tenant->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
