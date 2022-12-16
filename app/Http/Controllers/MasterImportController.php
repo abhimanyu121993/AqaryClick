@@ -215,7 +215,7 @@ class MasterImportController extends Controller
                                                 "government_housing_no"=>$govhouse??'',
                                                 "passport_document"=>$passport??'',
                                                 'tenant_mobile'=>$tenant->tenant_primary_mobile,
-                                                'tenant_nationality'=>$tenant->nationality,
+                                                'tenant_nationality'=>$tenant->tenant_nationality,
                                                 'lessor'=>$lessor->id??'',
                                                 'user_id'=>$this->user_id??'',
                                                 'sponsor_name'=>$importData[46]??'',
