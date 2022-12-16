@@ -377,35 +377,47 @@ class TenantController extends Controller
                     // dd($importData_arr);
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
-                        $p = '';
-                        $q = '';
-                        $cr = '';
-                        $doctype = $importData[3];
-                        if($doctype=='Passport'){
-                            $p = $importData[2];
-                        }
-                        else if($doctype=='CR'){
-                            $cr=$importData[2];
-                        }
-                        else{
-                            $q=$importData[2];
-                        }
-                    
+                                $qid = '';
+                                $cr = '';
+                                $established = '';
+                                $govhouse = '';
+                                $passport = '';
+                                $tenanttype = '';
+                                if($importData[3]=='PASSPORT'){
+                                    $passport = $importData[5];
+                                }
+                                else if($importData[3]=='CR & EST CARD'){
+                                    $cr= $importData[6];
+                                    $established = $importData[7];
+
+                                }
+                                else if($importData[3]=='GOVERNMENT HOUSING No'){
+                                    $govhouse = $importData[8];
+
+                                }
+                                else if($importData[3]=='QID'){
+                                    $qid = $importData[4];
+                                    
+                                }
+
+                        $tenanttype = $importData[2]=='Personal'? 'TP':($importData[2]=='Company'? 'TC':($importData[2]=='Government'? 'TG':''));
                         $insertData = array(
                             "file_no" => $importData[0]??'',
-                            "tenant_code" => $importData[1]??'',
-                            'tenant_document'=>$doctype??'',
+                            "tenant_code" => $importData[1]??$tenanttype.'-'.time(),
+                            "tenant_type"=>$tenanttype,
+                            'tenant_document'=>$importData[3]??'',
                             'user_id'=>$this->user_id,
-                            'passport'=>$p,
-                            'qid_document'=>$q,
+                            'passport'=>$passport,
+                            'qid_document'=>$qid,
                             'cr_document'=>$cr,
-                            'tenant_english_name'=>$importData[4]??'',
-                            'tenant_primary_mobile'=>$importData[5]??'',
-                            'tenant_secondary_mobile'=>$importData[6]??'',
-                            'email'=>$importData[7]??'',
-                            'post_office'=>$importData[8]??'',
-                            'status'=>$importData[9]??'',
-                            'tenant_type'=>'TP',
+                            'established_card_no'=>$established,
+                            'government_housing_no'=>$govhouse,
+                            'tenant_english_name'=>$importData[9]??'',
+                            'tenant_primary_mobile'=>$importData[10]??'',
+                            'tenant_secondary_mobile'=>$importData[11]??'',
+                            'email'=>$importData[12]??'',
+                            'post_office'=>$importData[13]??'',
+                            'status'=>$importData[14]??'',
                             
                         );
                         // dd($insertData['unit_type']);
