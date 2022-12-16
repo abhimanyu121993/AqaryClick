@@ -158,6 +158,7 @@ class MasterImportController extends Controller
                                         "cr_document"=>$cr??'',
                                         "established_card_no"=>$established??'',
                                         "government_housing_no"=>$govhouse??'',
+                                        "tenant_nationality"=>2,
                                         "passport"=>$passport??'',
                                         "tenant_type"=>$tenanttype,//condition based on established card and sponsor
                                         "tenant_english_name"=>$importData[9]??'',
