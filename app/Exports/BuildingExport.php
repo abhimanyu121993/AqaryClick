@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Building;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -13,12 +14,30 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class BuildingExport implements FromCollection,WithHeadings,WithStyles, WithEvents
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-       $building= Building::get();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $building = Building::get();
+        }
+        else
+        {
+            $building = Building::where('user_id',$this->user_id)->get();
+        }
        $d=collect();
 
         foreach($building as $bl){
