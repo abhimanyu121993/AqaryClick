@@ -97,7 +97,7 @@ class MasterImportController extends Controller
                                 "ownership_type"=>$importData[25]??'',
                                 "pincode"=>$importData[26]??'',
                             );
-                            $building=Building::firstOrCreate(["building_code"=>$importData[10]],$insertBuildingData);
+                            $building=Building::firstOrCreate(["building_code"=>$importData[17]],$insertBuildingData);
                             if($building){
                             if ($importData[30] == null || $importData[30]==' ' || $importData[30]==' ') {
                                 $unittype = UnitType::firstOrCreate(['name' =>'N/A'], ['name' =>'N/A']);
