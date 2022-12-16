@@ -5,6 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Contract;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Models\Invoice;
+use App\Models\Legal;
+use Illuminate\Support\Carbon;
 use App\Notifications\AlertNotification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Notification;
@@ -46,16 +49,60 @@ class EveryDayNotification extends Command
                 ];
 
                 $contractUser=$contract->user_id;
+                if( $contractUser !=''){
                 $user=User::find($contractUser);
                 Notification::send($user, new AlertNotification($details)); 
+                }
 
                 $tenantName=$contract->tenant_name;
+                if($tenantName !=''){
                 $tenantUser=Tenant::find($tenantName);
                 Notification::send($tenantUser, new AlertNotification($details)); 
-                
+                }
 
             }
+
+
+            
+            if(Carbon::parse($contract->lease_end_date)->subDays(62) || Carbon::parse($contract->lease_end_date)->subDays(30)|| Carbon::parse($contract->lease_end_date)->subDays(15) || Carbon::parse($contract->lease_end_date)->subDays(7) || Carbon::parse($contract->lease_end_date)->subDays(3)){
+
+                $leaseDate=$contract->lease_end_date;
+
+                $details=[
+                    'title'=>'Contract Lease is expire date soon'.' '.$leaseDate,
+                    'body'=>'Attension Please Your Contract Lease is Expire Date in'.' '.$contract->lease_end_date.' '.'Date',
+                ];
+
+                $contractUser=$contract->user_id;
+                if( $contractUser !=''){
+                $user=User::find($contractUser);
+                Notification::send($user, new AlertNotification($details)); 
+                }
+
+
+                $tenantName=$contract->tenant_name;
+                if($tenantName !=''){
+                    $tenantUser=Tenant::find($tenantName);
+                    Notification::send($tenantUser, new AlertNotification($details)); 
+                }
+            }
         }
+
+
+        $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
+        $contractsDetails=Contract::where('overdue','>=',90)->whereNotIn('id',$res)->get();
+        if($contractsDetails){
+            foreach ($contractsDetails as $contractDetail) {
+                $data=Legal::firstOrCreate([
+                    'contract_id'=>$contractDetail->id,
+                    'tenant_name'=>$contractDetail->tenantDetails->tenant_english_name,
+                    'tenant_mobile'=>$contractDetail->tenant_mobile,
+                    'unit_ref'=>$contractDetail->tenantDetails->unit->unit_ref,
+                ]);
+            }
+        }
+        
+        
         return Command::SUCCESS;
     }
 }

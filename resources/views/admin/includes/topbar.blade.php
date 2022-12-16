@@ -359,6 +359,9 @@
                                     <div class="col-auto dropdown-tabs">
                                         <span class="badge badge-soft-light fs-13"> {{ Auth::user()->unreadnotifications->count() ?? 0 }} New</span>
                                     </div>
+                                    <div class="col-auto dropdown-tabs">
+                                        <a href="{{route('admin.readNotification')}}"><span class="badge badge-soft-light fs-13">All Read</span></a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -377,7 +380,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="flex-1">
-                                                    <a href="#!" class="stretched-link">
+                                                    <a href="{{route('admin.readNotification',$notify->id)}}" class="stretched-link">
                                                         <h6 class="mt-0 mb-2 lh-base">
                                                             {{  $notify->data['Details']['title']   }}
                                                         </h6>
