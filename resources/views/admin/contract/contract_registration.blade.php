@@ -77,26 +77,19 @@
                                 </div>
                             @endif
                             <div class="row gy-4">
-                                {{-- <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Contract Code</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="" name="contract_code"
-                                            value="{{ isset($contractedit) ? $contractedit->contract_code : $CC }}"
-                                            placeholder="Enter Contract Code">
-                                    </div>
-                                </div> --}}
+                               
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="space" class="form-label">Tenant Type</label>
                                     <select class="form-control" id="tenant_type" name="tenant_type">
                                         @if (isset($contractedit))
-                                        <option value="{{$contractedit->tenantDetails}}" selected hidden>{{$contractedit->tenantDetails->tenant_type}}</option>
+                                        <option value="{{$contractedit->tenantDetails->id}}" selected hidden>{{$contractedit->tenantDetails->tenant_document??''}}</option>
                                         @else
                                         <option value="" selected hidden>--Select Tenant Type--</option>
                                         @endif
 
-                                        <option value="TP">Personal</option>
+                                        <!-- <option value="TP">Personal</option>
                                         <option value="TC">Company</option>
-                                        <option value="TG">Government</option>
+                                        <option value="TG">Government</option> -->
 
                                     </select>
                                 </div>
@@ -106,8 +99,7 @@
                                     <select class="select2 form-select js-example-basic-single" id="tenant_name"
                                         name='tenant_name'>
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->tenant_name }}" selected>
-                                                {{ $contractedit->tenantDetails->tenant_english_name }}</option>
+                                            <option value="{{ $contractedit->tenant_name }}" selected> {{ $contractedit->tenantDetails->tenant_english_name }}</option>
 
                                         @else
                                         <option value="" selected hidden>--Select Tenant--</option>
@@ -124,12 +116,13 @@
                                             placeholder="Enter tenant mobile " readonly>
                                     </div>
                                 </div>
+                               
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Tenant Nationality</label>
                                     <div class="input-group" id="tenantInput">
                                         <input type="text" class="form-control" id="tenant_nationality"
                                             name="tenant_nationality"
-                                            value="{{ isset($contractedit) ? $contractedit->tenantDetails->nationality->name??'' : '' }}"
+                                            value=" {{ isset($contractedit) ? $contractedit->countryDetails->name??'' : '' }}"
                                             placeholder="Enter Tenant Nationality " readonly>
                                     </div>
                                 </div>
@@ -144,7 +137,7 @@
                                 <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                     <label for="country" class="form-label">ID</label>
                                     <div class="input-group">
-                                        <input type="text" id="qid_document" class="form-control" name="qid_document"
+                                        <input type="text" value="{{ isset($contractedit) ? $contractedit->qid_document : '' }} id="qid_document" class="form-control" name="qid_document"
                                             placeholder="QID Document Number" readonly>
                                     </div>
                                 </div>

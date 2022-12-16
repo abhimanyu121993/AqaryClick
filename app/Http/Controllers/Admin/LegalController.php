@@ -69,9 +69,7 @@ class LegalController extends Controller
         $id = Crypt::decrypt($id);
         $data=Legal::find($id);
          return response()->json(['data'=>$data]);
-
       }
-
     /**
      * Update the specified resource in storage.
      *
