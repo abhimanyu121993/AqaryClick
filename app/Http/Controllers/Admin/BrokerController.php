@@ -8,11 +8,23 @@ use App\Models\Building;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class BrokerController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,8 +42,14 @@ class BrokerController extends Controller
      */
     public function create()
     {
-
-        $units=Broker::all();
+        $this->getUser();
+        if(Auth::user()->hasRole('superadmin')){
+        $units=Broker::get();
+        }
+        else
+        {
+        $units=Broker::where('user_id',$this->user_id)->get();
+        }
         return view('admin.broker.all_broker',compact('units'));    }
 
     /**
@@ -49,6 +67,7 @@ class BrokerController extends Controller
             'broker_type' => 'required',
             'property_type'=>'required',
         ]);
+        $this->getUser();
         if($request->password==null){
             $nUser= User::create([
             'first_name'=> $request->fname,
@@ -60,6 +79,7 @@ class BrokerController extends Controller
         $nUser->assignRole('Broker');
 
        $data= Broker::create([
+            'user_id'=>$this->user_id,
             'broker_agent' => $request->broker_agent,
             'broker_name' => $request->broker_fname,
             'broker_id' => $request->broker_id,
