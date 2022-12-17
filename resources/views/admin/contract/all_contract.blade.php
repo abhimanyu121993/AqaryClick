@@ -139,7 +139,7 @@
                                             </div>
                                         </td>
                                         <td>{{ $con->reject_desc ?? '' }}</td>
-                                        <td>{{number_format(($con->rent_amount),2,'.',) ?? '' }}</td>
+                                        <td>{{($con->rent_amount),2,'.'?? '' }}</td>
                                         <td>{{ $con->total_invoice ?? '' }}</td>
                                         <td>{{ $con->guarantees ?? '' }}</td>
                                         <td>{{ $con->guarantees_payment_method ?? '' }}</td>

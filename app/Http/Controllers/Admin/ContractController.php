@@ -47,14 +47,14 @@ class ContractController extends Controller
     public function index()
     {
         $this->getUser();
-       
+
         if(Auth::user()->hasRole('superadmin')){
             $contract = Contract::all();
             $tenant = Tenant::all();
             $lessor = Customer::all();
-            $tenant_doc = Tenant::pluck('tenant_document');  
+            $tenant_doc = Tenant::pluck('tenant_document');
             $invoice = Invoice::all()->count();
-            $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();   
+            $invoiceDetails = Invoice::where('payment_status', 'Paid')->get();
             $total_amount = Invoice::withSum('Contract', 'rent_amount')->get()->sum('contract_sum_rent_amount');
             $not_paid_invoice = Invoice::where('payment_status', 'Not Paid')->count();
             $delay_invoice = Invoice::whereNotNull('overdue_period')->count()??'0';
@@ -67,7 +67,7 @@ class ContractController extends Controller
             $tenant = Tenant::where('user_id',$this->user_id)->get();
             $lessor = User::find($this->user_id)->customerDetail;
             $tenant_doc = Tenant::where('user_id',$this->user_id)->pluck('tenant_document');
-            $invoice = Invoice::where('user_id',$this->user_id)->get()->count();  
+            $invoice = Invoice::where('user_id',$this->user_id)->get()->count();
             $invoiceDetails = Invoice::where('user_id',$this->user_id)->where('payment_status', 'Paid')->get();
             $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$this->user_id)->get()->sum('contract_sum_rent_amount');
             $not_paid_invoice = Invoice::where('user_id',$this->user_id)->where('payment_status', 'Not Paid')->count();
@@ -246,7 +246,8 @@ class ContractController extends Controller
         $tenant = Tenant::pluck('tenant_english_name');
         $tenant_doc = Tenant::pluck('tenant_document');
         $tenant_nation = Nationality::pluck('name');
-        return view('admin.contract.contract_registration', compact('contractedit', 'tenant', 'tenant_doc', 'tenant_nation', 'invoiceDetails', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance'));
+        $currency = currency::where('status', 1)->get();
+        return view('admin.contract.contract_registration', compact('currency','contractedit', 'tenant', 'tenant_doc', 'tenant_nation', 'invoiceDetails', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance'));
     }
 
     /**

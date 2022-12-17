@@ -34,4 +34,5 @@ class Building extends Model
     {
         return $this->hasMany(BuildingFiles::class, 'building_id');
     }
+    
 }
