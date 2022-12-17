@@ -130,12 +130,12 @@
                                                 @php $bid=Crypt::encrypt($building->id); @endphp
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                     @can('Building_edit')
-                                                        <li><a class="dropdown-item"
+                                                        <li><a class="dropdown-item" id="pop"
                                                                 href="{{ route('admin.register_building.edit', $bid) }}">Edit</a>
                                                         </li>
                                                     @endcan
                                                     @can('Building_delete')
-                                                        <li><a class="dropdown-item" href="#"
+                                                        <li><a class="dropdown-item" href="#" id="pop"
                                                                 onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a>
                                                         </li>
                                                     @endcan

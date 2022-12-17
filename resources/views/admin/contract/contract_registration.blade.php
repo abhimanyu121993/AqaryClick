@@ -50,8 +50,6 @@
 @section('main-content')
 
     <div class="row">
-
-
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
@@ -418,10 +416,10 @@
                                                 {{ $contractedit->attestation_status }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Status--</option>
-                                            <option value="Done">Done</option>
-                                            <option value="Not Yet">Not Yet</option>
-                                            <option value="Under Process">Under Process</option>
                                         @endif
+                                        <option value="Done">Done</option>
+                                        <option value="Not Yet">Not Yet</option>
+                                        <option value="Under Process">Under Process</option>
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3" id="attestation_no">
@@ -450,10 +448,11 @@
                                                 {{ $contractedit->currency }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Currency--</option>
-                                            @foreach ($currency as $c)
-                                                <option value="{{ $c->code }}">{{ $c->code ?? '' }}</option>
-                                            @endforeach
+
                                         @endif
+                                        @foreach ($currency as $c)
+                                        <option value="{{ $c->id }}">{{ $c->code?? '' }}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -487,9 +486,9 @@
                                                 {{ $contractedit->Guarantees }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Guarantees--</option>
-                                            <option value="Available">Available</option>
-                                            <option value="Not Available">Not Available</option>
                                         @endif
+                                        <option value="Available">Available</option>
+                                            <option value="Not Available">Not Available</option>
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3" id="guarantees_pay">
@@ -500,9 +499,9 @@
                                                 {{ $contractedit->guarantees_payment_method }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Option--</option>
-                                            <option value="Cheque">Cheque</option>
-                                            <option value="Cash">Cash</option>
                                         @endif
+                                        <option value="Cheque">Cheque</option>
+                                            <option value="Cash">Cash</option>
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -514,9 +513,9 @@
                                                 {{ $contractedit->contract_type }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Contract--</option>
-                                            <option value="Internal">Internal</option>
-                                            <option value="External">External</option>
                                         @endif
+                                        <option value="Internal">Internal</option>
+                                        <option value="External">External</option>
                                     </select>
                                 </div>
                             </div>

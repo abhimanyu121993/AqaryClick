@@ -19,6 +19,10 @@ class Building extends Model
     {
         return $this->belongsTo(City::class, 'city', 'id');
     }
+    public function areaDetails()
+    {
+        return $this->belongsTo(Area::class, 'area', 'id');
+    }
     public function Units()
     {
         return $this->hasMany(Unit::class, 'building_id');
@@ -34,4 +38,5 @@ class Building extends Model
     {
         return $this->hasMany(BuildingFiles::class, 'building_id');
     }
+    
 }

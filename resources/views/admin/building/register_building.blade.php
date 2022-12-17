@@ -171,7 +171,7 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Country</label>
 
-                                <select class="select2 form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'country' }}" name='country'>
+                                <select class="select2 form-select js-example-basic-single" id="country" name='country'>
 
                                     <option value="{{ $buildingedit->country ?? '' }}" selected hidden>{{ $buildingedit->nationality->name ?? '--Select Country--'}}</option>
                                     @foreach($countryDetail as $cd)
@@ -183,23 +183,38 @@
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">City</label>
 
-                                <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'city' }}" name='city'>
+                                <select class="select2  form-select js-example-basic-single" id="city" name='city'>
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name ?? ''}}</option>
+                                    @if ($buildingedit->city)
+                                    @foreach ($buildingedit->cityDetails->nationality->cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach       
                                     @endif
+                                    @else
                                     <option value="">--Select City--</option>
+                                    @endif
 
                                 </select>
+
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Zone Name</label>
 
-                                <select class="select2  form-select js-example-basic-single" id="{{isset($buildingedit)? '': 'zone' }}" name='zone_name'>
+                                 <select class="select2  form-select js-example-basic-single" id="zone" name='zone_name'>
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->area}}</option>
+                                    <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->areaDetails->name ?? ''}}</option>
+                                    @if ( $buildingedit->area)
+                                        @foreach ($buildingedit->areaDetails->city->zones as $zone )
+                                        <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                        @endforeach
                                     @endif
+                                    @else
                                     <option value="">--Select Zone--</option>
+                                    @endif
+                                   
                                 </select>
+
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
@@ -257,15 +272,13 @@
                             <div class="col-xxl-3 col-md-4">
                                 <label for="space" class="form-label">Building Status</label>
                                 <select class="select2  form-select js-example-basic-single" id="building_status" name="building_status">
-                                @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->building_status }}" selected>{{ $buildingedit->building_status }}</option>
-                                    @else
-                                    <option value="">--Select Status--</option>
+                               
+                                    <option value="{{ $buildingedit->building_status ?? '' }}" selected hidden>{{ $buildingedit->building_status ?? '--Select Status--'}}</option>
                                     <option value="NEW">New</option>
                                     <option value="OLD">Old</option>
                                     <option value="RENOVATED">Renovated</option>
                                     <option value="DEMOLISHED">Demolished</option>
-                                    @endif
+
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-4">
@@ -359,7 +372,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="country" class="form-label">Job</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="country" name="person_job" value="{{isset($buildingedit)? $buildingedit->person_job: '' }}" placeholder="Enter job">
+                                    <input type="text" class="form-control"  name="person_job" value="{{isset($buildingedit)? $buildingedit->person_job: '' }}" placeholder="Enter job">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -449,7 +462,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        $("#country").change(function() {
+        $(document).on('change',"#country",function() {
             $("#city").val('');
         $("#zone").innerHTML = '';
             $(this).find("option:selected").each(function() {
@@ -473,7 +486,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        $("#city").change(function() {
+        $(document).on('change',"#city",function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
                 var newurl = "{{ url('/admin/fetchzone') }}/" + optionValue;

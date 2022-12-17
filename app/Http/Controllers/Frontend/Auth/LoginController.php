@@ -161,7 +161,7 @@ class LoginController extends Controller
             'first_name'=>$request->first_name,
             'last_name'=>$request->last_name,
             'email'=>$request->email,
-            "phone"=>$request->phone,
+            "phone"=>$request->mobile,
             'address'=>$request->address,
             'status'=>false,
             'password'=>Hash::make($password),

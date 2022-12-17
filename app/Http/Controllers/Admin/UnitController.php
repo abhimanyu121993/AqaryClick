@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 
 class UnitController extends Controller
 {
-    
+
     protected $user_id = '';
     public function getUser()
     {
@@ -54,7 +54,7 @@ class UnitController extends Controller
     public function create()
     {
         $this->getUser();
-           
+
         if(Auth::user()->hasRole('superadmin')){
             $units=Unit::all();
         }
@@ -313,7 +313,7 @@ class UnitController extends Controller
                             // "initial_rent" => $importData[10],
                             // "unit_description" => $importData[12],
                         );
-                       
+
                         if(!empty($insertData['unit_ref'])){
                             $unitType = UnitType::where('name', strtolower(trim($insertData['unit_type'] ?? '')))->first();
                             $unitStatus = UnitStatus::where('name', strtolower(trim($insertData['unit_status'] ?? '')))->first();
@@ -353,8 +353,8 @@ class UnitController extends Controller
             $html .= '<option value="' . $b->id . '">' .$b->unit_ref.' ('.$b->unittypeinfo->name.') '. '</option>';
         }
         return response()->json($html);
-      
-       
+
+
     }
 
     public function ImportExportUnit(){
