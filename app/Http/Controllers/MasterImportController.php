@@ -131,23 +131,11 @@ class MasterImportController extends Controller
                                 $govhouse = '';
                                 $passport = '';
                                 $tenanttype = '';
-                                if(strtolower($importData[3])==strtolower('PASSPORT')){
-                                    $passport = $importData[5];
-                                }
-                                else if(strtolower($importData[3])==strtolower('CR & EST CARD')){
-                                    $cr= $importData[6];
-                                    $established = $importData[7];
-
-                                }
-                                else if(strtolower($importData[3])==strtolower('GOVERNMENT HOUSING No')){
-                                    $govhouse = $importData[8];
-
-                                }
-                                else if(strtolower($importData[3])==strtolower('QID')){
-                                    $qid = $importData[4];
-                                    
-                                }
-
+                                $passport = $importData[5]??'';
+                                $cr= $importData[6]??'';
+                                $established = $importData[7]??'';
+                                $govhouse = $importData[8]??'';
+                                $qid = $importData[4]??'';
                                 $tenanttype = strtolower($importData[2])=='personal'? 'TP':(strtolower($importData[2])=='company'? 'TC':(strtolower($importData[2])=='government'? 'TG':'TP'));
                                     $insertTenantData = array(
                                         "building_name"=>$building->id??'',
