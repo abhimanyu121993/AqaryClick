@@ -452,7 +452,7 @@ class BuildingController extends Controller
         $res = Area::where('city_id', $city_id)->get();
         $html = '<option value="">--Select Zone--</option>';
         foreach ($res as $r) {
-            $html .= '<option value="' . $r->name . '">' . $r->name . '</option>';
+            $html .= '<option value="' . $r->id . '">' . $r->name . '</option>';
         }
         return response()->json($html);
     }

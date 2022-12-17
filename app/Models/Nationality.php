@@ -11,5 +11,9 @@ class Nationality extends Model
     use HasFactory,SoftDeletes;
     protected $guarded=[];
 
+    public function cities()
+    {
+      return $this->hasMany(City::class,'country_name','id');
+    }
     
 }
