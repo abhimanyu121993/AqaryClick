@@ -85,9 +85,9 @@
                                         <option value="" selected hidden>--Select Tenant Type--</option>
                                         @endif
 
-                                        <!-- <option value="TP">Personal</option>
+                                        <option value="TP">Personal</option>
                                         <option value="TC">Company</option>
-                                        <option value="TG">Government</option> -->
+                                        <option value="TG">Government</option> 
 
                                     </select>
                                 </div>
