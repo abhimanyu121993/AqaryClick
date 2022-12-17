@@ -37,7 +37,12 @@ class LoginController extends Controller
                 Alert::warning('You Are Visitor', 'Purchase Any One Plan to Become Our Customer');
                 return redirect()->route('home.plans');
             }
-            return redirect()->route('admin.dashboard');
+            elseif(Auth::user()->hasRole('superadmin')){
+                dd(Auth::user()->devices);
+            }
+            else {
+                return redirect()->route('admin.dashboard');
+            }
         }
         else
         {
