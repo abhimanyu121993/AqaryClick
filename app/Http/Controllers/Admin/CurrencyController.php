@@ -135,7 +135,7 @@ class CurrencyController extends Controller
     public function convertAmtInSar(Request $request)
         {
             $code= $request->currency_code;
-            $amt=str_replace(',','',$request->cheque_amt);
+            $amt=$request->cheque_amt;
      $res=amcurrency::convert()->from($code)->to('QAR')->amount($amt)->get();
 
      return response()->json($res);
