@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Building;
 use App\Models\Contract;
 use App\Models\Invoice;
 use App\Models\Legal;
 use App\Models\Tenant;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class LegalController extends Controller
@@ -18,9 +20,27 @@ class LegalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     public function index()
     { 
+        $this->getUser();
+        if(Auth::user()->hasRole('superadmin')){
         $legalDetail = Legal::all();
+        }
+        else{
+        $legalDetail = Legal::where('user_id',$this->user_id)->get();
+
+        }
         // $data = Legal::find($id);
         return view('admin.legal.register', compact('legalDetail'));
     }
@@ -137,4 +157,111 @@ public function updateLegal(Request $request){
 
 }
 
+public function contractDetails($tenant_id)
+{
+    $this->getUser();
+
+  if(Auth::user()->hasRole('superadmin')){
+    $res = Contract::where('tenant_name', $tenant_id)->get();
+}
+  else{
+    $res = Contract::where('user_id',Auth::$this->user_id)->where('tenant_name', $tenant_id)->get();
+  }
+    $html = ' <option value="" selected hidden disabled>--Select Contract--</option>';
+    foreach ($res as $r) {
+        $html .= '<option value="' . $r->id . '">' . $r->contract_code . ' (' ;
+        $html .= isset($r->tenantDetails->buildingDetails)?$r->tenantDetails->buildingDetails->name:'No Bilding Found' ;
+        $html .= ')' . '</option>';
+    }
+    return response()->json($html);
+}
+public function tenantBuildingLegal($building_id)
+{
+    $this->getUser();
+
+    if ($building_id == 'all') {
+        if(Auth::user()->hasRole('superadmin')){
+            $res = Tenant::all();
         }
+        else{
+            $res = Tenant::where('user_id',$this->user_id)->get();
+        }
+
+        $html = ' <option value=""selected hidden disabled> --Select Tenant--</option>';
+        foreach ($res as $r) {
+            $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
+        }
+    } else {
+        if(Auth::user()->hasRole('superadmin')){
+            $res = Tenant::where('building_name', $building_id)->get();
+        }
+        else{
+            $res = Tenant::where('user_id',$this->user_id)->where('building_name', $building_id)->get();
+        }
+
+        $html = ' <option value=""selected hidden disabled>--Select Tenant--</option>';
+        foreach ($res as $r) {
+            $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
+        }
+    }
+    return response()->json($html);
+}
+
+public function contractLegalDetails($tenant_id)
+    {
+        $this->getUser();
+        $role=Auth::user()->roles[0]->name;
+      if($role=='superadmin'){
+        $res = Contract::where('tenant_name', $tenant_id)->get();
+    }
+      else{
+        $res = Contract::where('user_id',$this->user_id)->where('tenant_name', $tenant_id)->get();
+      }
+        $html = ' <option value="" selected hidden disabled>--Select Contract--</option>';
+        foreach ($res as $r) {
+            $html .= '<option value="' . $r->id . '">' . $r->contract_code . ' (' ;
+            $html .= isset($r->tenantDetails->buildingDetails)?$r->tenantDetails->buildingDetails->name:'No Bilding Found' ;
+            $html .= ')' . '</option>';
+        }
+        return response()->json($html);
+    }
+public function legalReport(){
+    $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $building = Building::all();
+        } else {
+            $building = Building::where('user_id',$this->user_id)->get();
+        }
+    return view('admin.legal.legal_report',compact('building'));
+}
+
+public function legalDetails($contract_id)
+    {
+        $this->getUser();
+
+        if (Auth::user()->hasRole('superadmin')){
+            $res = Contract::where('id', $contract_id)->where('overdue','>=',90)->first();
+            if($res){
+                $msg="Legal Case on this contract";
+
+            }
+            else{
+                $msg="This Contract Have No any Legal Record, Its Already In good Conditions.";
+            }
+        
+        } else {
+            $res = Contract::where('user_id',$this->user_id)->where('id', $contract_id)->where('overdue','>=',90)->first();
+            if($res){
+                $msg="Legal Case on this contract";
+
+            }
+            else{
+                $msg="This Contract Have No any Legal Record, Its Already In good Conditions";
+            }
+        }
+        return response()->json($msg);
+    }
+
+
+
+}

@@ -302,6 +302,10 @@
                                     <a href="{{ route('admin.legal.index') }}" class="nav-link"
                                         data-key="t-analytics">Legal</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.legalReport') }}" class="nav-link"
+                                        data-key="t-analytics">Legal Report</a>
+                                </li>
 
                                 @can('Legal_read')
                                     <!-- <li class="nav-item">
