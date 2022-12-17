@@ -48,25 +48,16 @@ class InvoiceController extends Controller
         $this->getUser();
         if(Auth::user()->hasRole('superadmin')){
             $a = invoice::pluck('contract_id');
-            $max_id = Invoice::max('id') + 1;
-            // $receipt_count=Invoice::where('user_id',Auth::user()->id)->where('tenant_id',$request->tenant_name)->count()??0;
-            // $receipt=str_pad($receipt_count+1, 3, '0', STR_PAD_LEFT);
-            $INV = 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . $max_id;
             $tenantDetails = Tenant::get();
             $building = Building::get();
         } else {
             $a = invoice::where('user_id', $this->user_id)->pluck('contract_id');
-            $max_id = Invoice::where('user_id', $this->user_id)->max('id') + 1;
-            // $receipt_count=Invoice::where('user_id',Auth::user()->id)->where('tenant_id',$request->tenant_name)->count()??0;
-            // $receipt=str_pad($receipt_count+1, 3, '0', STR_PAD_LEFT);
-            $INV = 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . $max_id;
             $tenantDetails = Tenant::where('user_id', $this->user_id)->get();
             $building = Building::where('user_id', $this->user_id)->get();
-          
         }
         $bank = Bank::all();
         $currency = currency::where('status', 1)->get();
-        return view('admin.invoice.add_invoice', compact('tenantDetails', 'INV', 'building', 'bank', 'currency'));
+        return view('admin.invoice.add_invoice', compact('tenantDetails', 'building', 'bank', 'currency'));
     }
 
     /**
@@ -76,13 +67,11 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
+        if (Auth::user()->hasRole('superadmin')) {
             $invoice = Invoice::all();
         } else {
-            $invoice = Invoice::where('user_id', Auth::user()->id)->get();
+            $invoice = Invoice::where('user_id', $this->user_id)->get();
         }
-
         return view('admin.invoice.show_invoice', compact('invoice'));
     }
 
@@ -94,6 +83,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        $this->getUser();
         $request->validate([
             'tenant_name' => 'required',
             'contract' => 'required',
@@ -128,16 +118,17 @@ class InvoiceController extends Controller
             $tax_amt = 0;
         }
         $rent_amt = $data->rent_amount;
+        dd($rent_amt);
         $inv_due = Invoice::where('contract_id', $request->contract_id)->latest()->first()->due_amt ?? 0;
         $totle_balance = $inv_due + $rent_amt + $tax_amt;
         $due_amt = (float)($totle_balance - $qar_amt);
         $totle_amt = $qar_amt + $due_amt;
-        $receipt_count = Invoice::where('user_id', Auth::user()->id)->where('tenant_id', $request->tenant_name)->count() ?? 0;
+        $receipt_count = Invoice::where('user_id', $this->user_id)->where('tenant_id', $request->tenant_name)->count() ?? 0;
         $receipt = str_pad($receipt_count + 1, 3, '0', STR_PAD_LEFT);
-        $invoice_no = Invoice::where('user_id', Auth::user()->id)->where('tenant_id', $request->tenant_name)->count() ?? 0;
+        $invoice_no = Invoice::where('user_id', $this->user_id)->where('tenant_id', $request->tenant_name)->count() ?? 0;
         $invoice_no = 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . str_pad($invoice_no + 1, 3, '0', STR_PAD_LEFT);
         $data = Invoice::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user_id,
             'tenant_id' => $request->tenant_name,
             'contract_id' => $request->contract,
             'invoice_no' => $invoice_no,
@@ -176,7 +167,7 @@ class InvoiceController extends Controller
                         $mainpic[] = $name;
                     }
                 }
-                $res = Cheque::create(['user_id' => Auth::user()->id, 'invoice_no' => $invoice_no, 'tenant_id' => $request->tenant_name, 'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'qar_amt' => $request->sar_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'user_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
+                $res = Cheque::create(['user_id' => $this->user_id, 'invoice_no' => $invoice_no, 'tenant_id' => $request->tenant_name, 'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'qar_amt' => $request->sar_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'user_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
             }
         }
         if ($data) {
@@ -233,11 +224,11 @@ class InvoiceController extends Controller
     }
     public function contractDetails($tenant_id)
     {
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
             $res = Contract::where('tenant_name', $tenant_id)->get();
         } else {
-            $res = Contract::where('user_id', Auth::user()->id)->where('tenant_name', $tenant_id)->get();
+            $res = Contract::where('user_id', $this->user_id)->where('tenant_name', $tenant_id)->get();
         }
         $html = ' <option value="" selected hidden disabled>--Select Contract--</option>';
         foreach ($res as $r) {
@@ -248,27 +239,24 @@ class InvoiceController extends Controller
         return response()->json($html);
     }
     public function tenantBuilding($building_id)
-    {
+    {        $this->getUser();
         if ($building_id == 'all') {
-            $role = Auth::user()->roles[0]->name;
-            if ($role == 'superadmin') {
+            if (Auth::user()->hasRole('superadmin')) {
                 $res = Tenant::all();
             } else {
-                $res = Tenant::where('user_id', Auth::user()->id)->get();
+                $res = Tenant::where('user_id', $this->user_id)->get();
             }
-
             $html = ' <option value=""selected hidden disabled> --Select Tenant--</option>';
             foreach ($res as $r) {
                 $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
             }
-        } else {
-            $role = Auth::user()->roles[0]->name;
-            if ($role == 'superadmin') {
+        } else
+         { 
+            if (Auth::user()->hasRole('superadmin')) {
                 $res = Tenant::where('building_name', $building_id)->get();
             } else {
-                $res = Tenant::where('user_id', Auth::user()->id)->where('building_name', $building_id)->get();
+                $res = Tenant::where('user_id', $this->user_id)->where('building_name', $building_id)->get();
             }
-
             $html = ' <option value=""selected hidden disabled>--Select Tenant--</option>';
             foreach ($res as $r) {
                 $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
@@ -278,13 +266,12 @@ class InvoiceController extends Controller
     }
     public function invoiceDetails($contract_id)
     {
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
             $res = Contract::with('countryDetails')->with('TenantDetails')->where('id', $contract_id)->first();
         } else {
-            $res = Contract::with('countryDetails')->with('TenantDetails')->where('user_id', Auth::user()->id)->where('id', $contract_id)->first();
+            $res = Contract::with('countryDetails')->with('TenantDetails')->where('user_id', $this->user_id)->where('id', $contract_id)->first();
         }
-
         $country_code = $res->countryDetails->currency_code;
         $percent = $res->countryDetails->percentage ?? 0;
         $inv = invoice::where('contract_id', $contract_id)->latest()->first();
@@ -317,9 +304,9 @@ class InvoiceController extends Controller
             $invoice = $inv->invoice_period_end ?? null;
             if ($invoice == !null) {
                 $invoiceStart = $invoice;
-                $invoiceEnd = Carbon::parse($invoice)->addMonth(1)->addDay(-1)->format('Y-m-d');
+                $invoiceEnd = Carbon::parse($invoice)->addMonth(1)->addDay(-1)->format('d-m-Y');
                 $msg = '';
-                $lastmonth = Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('Y-m-d');
+                $lastmonth = Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('d-m-Y');
                 $qar_amt = amcurrency::convert()->from('QAR')->to($country_code)->amount((float)$inv->due_amt)->get();
                 $due_amt = round($qar_amt, 2);
                 $rent_amt = amcurrency::convert()->from('QAR')->to($country_code)->amount((float)($res->rent_amount ?? 0))->get();
@@ -328,8 +315,8 @@ class InvoiceController extends Controller
                 $per = $percent;
             } else {
                 $invoiceStart = $res->lease_start_date;
-                $invoiceEnd = Carbon::parse($res->lease_start_date)->addMonth(1)->addDay(-1)->format('Y-m-d');
-                $lastmonth = Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('Y-m-d');
+                $invoiceEnd = Carbon::parse($res->lease_start_date)->addMonth(1)->addDay(-1)->format('d-m-Y');
+                $lastmonth = Carbon::parse($res->lease_end_date)->addMonth(-1)->addDay(1)->format('d-m-Y');
                 $qar_amt = amcurrency::convert()->from('QAR')->to($country_code)->amount((float)($inv->due_amt ?? 0))->get();
                 $msg = '';
                 $due_amt = round($qar_amt ?? 0, 2);
@@ -340,10 +327,10 @@ class InvoiceController extends Controller
                 $rent_amt = $country_code . round(($rent_amt), 2);
             }
         }
-        if (Carbon::parse(Carbon::now()) < $invoiceEnd) {
+        if (Carbon::parse(Carbon::now()) < Carbon::parse($invoiceEnd)->format('Y-m-d')) {
             $overdue = "No Due ";
         } else {
-            $overdue = Carbon::parse(Carbon::now())->diffInDays($invoiceEnd);
+            $overdue = Carbon::parse(Carbon::now())->diffInDays(Carbon::parse($invoiceEnd)->format('Y-m-d'));
         }
 
         return response()->json(array('res' => $res, 'invoiceEnd' => $invoiceEnd, 'invoiceStart' => $invoiceStart, 'msg' => $msg, 'payable' => $payable, 'due_amt' => $due_amt, 'rent_amt' => $rent_amt, 'lastmonth' => $lastmonth, 'overdue' => $overdue, 'per' => $per));
@@ -367,12 +354,7 @@ class InvoiceController extends Controller
 
         return view('admin.invoice.invoice_details', compact('invoice', 'lessor', 'company', 'symbol', 'cheque', 'unit_ref', 'due_amt', 'amt_paid', 'total_amt', 'tax_amt'));
     }
-    public function duePayment($contract_id)
-    {
-        $res = invoice::where('contract_id', $contract_id)->latest()->first();
-        $overdue = Carbon::parse(Carbon::now())->diffInDays($res->invoice_period_end);
-        return response()->json(array('res' => $res, 'overdue' => $overdue));
-    }
+  
     public function receiptVouchure($invoice_no)
     {
         $invoice = Invoice::with('customerDetails')->with('TenantName')->where('invoice_no', $invoice_no)->first();
@@ -389,7 +371,18 @@ class InvoiceController extends Controller
         $company = BusinessDetail::where('id', $invoice->customerDetails->company_id)->first();
         return view('admin.invoice.receipt_vouchar', compact('invoice', 'lessor', 'company', 'symbol', 'cheque', 'unit_ref', 'cheque', 'due_amt', 'amt_paid', 'total_amt', 'tax_amt'));
     }
+    public function duePayment($contract_id)
+    {
+        $res = invoice::where('contract_id', $contract_id)->latest()->first();
+        if($res==null){
+            $overdue=0;
+        }
+        else{
+            $overdue = Carbon::parse(Carbon::now())->diffInDays($res->invoice_period_end);
 
+        }
+        return response()->json(array('res' => $res, 'overdue' => $overdue));
+    }
 
     // public function checck()
     // {

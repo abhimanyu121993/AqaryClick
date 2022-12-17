@@ -156,6 +156,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::resource('broker',BrokerController::class);
     Route::resource('legal',LegalController::class);
     Route::post('updateLegal',[LegalController::class,'updateLegal'])->name('updateLegal');
+    Route::get('legal_report',[LegalController::class,'legalReport'])->name('legalReport');
+
     Route::resource('tenant-files',TenantFileController::class);
     Route::get('fetch-legal-contract/{contract_id}',[LegalController::class,'legalContract'])->name('legalContract');
 
@@ -175,6 +177,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetch-due-payment/{contract_id}',[InvoiceController::class,'duePayment'])->name('duePayments');
     Route::get('invoice-details/{contract_id}',[InvoiceController::class,'invoiceDetails'])->name('invoiceDetails');
     Route::get('fetch-building-tenant/{building_id}',[InvoiceController::class,'tenantBuilding'])->name('tenantBuilding');
+    Route::get('fetch-legal-building-tenant/{building_id}',[LegalController::class,'tenantBuildingLegal'])->name('tenantBuildingLegal');
+    Route::get('fetch-legal-contract-details/{tenant_id}',[LegalController::class,'contractLegalDetails'])->name('contractLegalDetails');
+    Route::get('legal-contract-details/{contract_id}',[LegalController::class,'legalDetails'])->name('legalDetails');
+
     Route::get('fetch-contract-details/{tenant_id}',[InvoiceController::class,'contractDetails'])->name('contractDetails');
     Route::resource('invoice',InvoiceController::class);
     Route::resource('tenant',TenantController::class);
