@@ -79,10 +79,5 @@ class Contract extends Model
         }
        }
 
-       public function setRentAmountAttribute($data){
-        return $this->rent_amount =str_replace(',','',$data);
-       }
-       public function setUserAmtAttribute($data){
-        return $this->user_amt =str_replace(',','',$data);
-       }
+
 }
