@@ -118,7 +118,6 @@ class InvoiceController extends Controller
             $tax_amt = 0;
         }
         $rent_amt = $data->rent_amount;
-        dd($rent_amt);
         $inv_due = Invoice::where('contract_id', $request->contract_id)->latest()->first()->due_amt ?? 0;
         $totle_balance = $inv_due + $rent_amt + $tax_amt;
         $due_amt = (float)($totle_balance - $qar_amt);

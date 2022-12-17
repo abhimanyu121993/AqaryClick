@@ -135,7 +135,7 @@
                                 <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                     <label for="country" class="form-label">ID</label>
                                     <div class="input-group">
-                                        <input type="text" value="{{ isset($contractedit) ? $contractedit->qid_document : '' }} id="qid_document" class="form-control" name="qid_document"
+                                        <input type="text" value="{{ isset($contractedit) ? $contractedit->qid_document : '' }}" id="qid_document" class="form-control" name="qid_document"
                                             placeholder="QID Document Number" readonly>
                                     </div>
                                 </div>
@@ -637,18 +637,19 @@
                         url: newurl,
                         method: 'get',
                         success: function(p) {
+                            console.log(p);
                             $("#tenant_primary_mobile").val(p.tenant_primary_mobile);
                             $('#tenant_nationality').val(p.tenant_nationality.name);
                             $('#sponsor_name').val(p.sponsor_name);
                              $('#sponsor_id').val(p.sponsor_oid);
                              $('#sponsor_mobile').val(p.sponsor_phone);
-                            $('#document_type').val(p.tenant_document);
-                            $('#sponer_nationality').val(p.nationality.name);
                             $('#qid_document').val(p.qid_document);
+                            $('#document_type').val(p.tenant_document);
                             $('#cr_document').val(p.cr_document);
                             $('#passport_doc').val(p.passport);
                             $('#establishment_card').val(p.established_card_no);
                             $('#government_housing').val(p.government_housing_no);
+                            $('#sponer_nationality').val(p.nationality.name);
                         }
                     });
                     $(document).on('change',"#contract_status",function() {
