@@ -36,8 +36,6 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
-        // dd(Auth::user()->auths()->count());
-        
         $role=Auth::user()->roles[0]->name;
         if($role=='superadmin'){
         $buildings=Building::count();
