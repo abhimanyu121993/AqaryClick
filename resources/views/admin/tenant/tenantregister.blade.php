@@ -196,6 +196,9 @@
                                 <input type="number" class="form-control" name="post_office" placeholder="Post Office" value="{{$editTenant->post_office ?? ''}}">
                             </div>
                         </div>
+
+
+                        
                         <div class="col-xxl-3 col-md-3 mb-2">
                             <label for="space" class="form-label">Tenant Nationality</label>
                             <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
