@@ -138,6 +138,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('delete-bank-details/{id}',[BusinessController::class,'userbankdelete'])->name('bankdelete');
     Route::get('edit-bank-details/{id}',[BusinessController::class,'editBankDetails'])->name('editBank');
     Route::post('update-bank-details/{id}',[BusinessController::class,'updateBankDetails'])->name('updateBank');
+    Route::post('business-data/{data}',[BusinessController::class,'modalBusinessDetail'])->name('storeModalBusinessData');
+    Route::post('business-document-data',[BusinessController::class,'modalBusinessDocument'])->name('storeModalBusinessDocumentData');
+    Route::post('business-bank-data',[BusinessController::class,'modalBusinessBankDocument'])->name('storeModalBankDocumentData');
 
     Route::get('overdue',[ContractController::class,'Overdue'])->name('Overdue');
     Route::get('fetchtenant/{tenant_name}',[ContractController::class,'fetchTenant'])->name('fetchTenant');
@@ -257,4 +260,5 @@ Route::get('/optimize-clear', function(){
 Route::view('payment-success','home.paymentsuccess');
 Route::get('check',[InvoiceController::class,'checck']);
 Route::view('import-data','admin.import.importdata');
+Route::view('business-modal', 'admin.businessModal.businessModal');
 

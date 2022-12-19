@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function customerDetail()
     {
-        return $this->hasMany(Customer::class, 'email', 'email');
+        return $this->hasOne(Customer::class, 'email', 'email');
     }
-    
+
 }
