@@ -63,7 +63,7 @@
                 <div class="card-body ">
 
                     <div class='table-responsive'>
-                        <table id="example" class="table table-striped table-bordered  " style="width:100%">
+                        <table id="example" class="table table-striped table-bordered  " >
                             <thead >
                                 <tr>
                                     <th scope="col">Sr.No.</th>
