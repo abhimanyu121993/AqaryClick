@@ -55,7 +55,7 @@
         box-shadow: rgb(201, 212, 221) 3px 3px 6px 0px inset, rgba(211, 206, 206, 0.349) -3px -3px 6px 1px inset;
     }
 </style>
-
+@role('Owner')
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="col-lg-12" >
@@ -245,6 +245,7 @@
         </div>
     </div>
 </div>
+@endrole
 <script type="text/javascript">
     $(window).on('load', function() {
         @if (Auth::user()->hasRole('Owner'))
