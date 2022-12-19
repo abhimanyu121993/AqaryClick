@@ -19,6 +19,8 @@ use AmrShawky\LaravelCurrency\Facade\Currency as amcurrency;
 use App\Mail\InvoiceClickMail;
 use App\Mail\InvoiceMail;
 use App\Models\Nationality;
+use App\Models\PaymentHistory;
+use App\Models\TenantPayment;
 use App\Models\Unit;
 use Exception;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -167,8 +169,20 @@ class InvoiceController extends Controller
                     }
                 }
                 $res = Cheque::create(['user_id' => $this->user_id, 'invoice_no' => $invoice_no, 'tenant_id' => $request->tenant_name, 'contract_id' => $request->contract, 'currency' => $request->currency[$i] ?? '', 'qar_amt' => $request->sar_amt[$i] ?? '', 'deposite_date' => $request->deposite_date[$i] ?? '', 'user_amt' => $request->cheque_amt[$i] ?? '', 'cheque_no' => $request->cheque_no[$i] ?? '', 'bank_name' => $request->cheque_bank_name[$i] ?? '', 'cheque_status' => $request->cheque_status[$i] ?? '', 'attachment' => $mainpic[$i] ?? '', 'remark' => $request->cheque_remark[$i] ?? '']);
+                if($res){
+                         $res= TenantPayment::updateOrCreate(['tenant_id' => $request->tenant_name, 'contract_id' => $request->contract]);
+                         $result= $res->increment('remaining',$request->sar_amt[$i] ?? '0');
+                         if($result){
+                            $result= PaymentHistory::create(['tenant_payment_id'=>$res->id,'status'=>'CR','amount'=>$request->sar_amt[$i] ?? 0,'remaining'=>$res->remaining??0]);
+                         }
+                } 
+                $res= TenantPayment::updateOrCreate(['tenant_id' => $request->tenant_name, 'contract_id' => $request->contract]);
+                $result= $res->decrement('remaining',$qar_amt ?? '0');
+                $payment_history= PaymentHistory::create(['tenant_payment_id'=>$res->id ,'status'=>'DR','amount'=>$qar_amt,'remaining'=>$res->remaining ?? 0]);
+
             }
         }
+
         if ($data) {
             Mail::to($data->TenantName->email)->send(new InvoiceClickMail($data));
             return redirect(url('admin/invoice-print', $invoice_no))->with('success', 'Invoice has been created successfully.');

@@ -16,6 +16,10 @@
         color: rgb(37, 160, 226) !important;
     }
 </style>
+
+@role('Owner')
+    @php $rolecolor="linear-gradient('90deg #C165DD,70deg #5C27E')"; @endphp
+@endrole
 <div class="app-menu navbar-menu" style="background-image: linear-gradient(#0D324D,#7F5A83);">
     <!-- LOGO -->
     <div class="navbar-brand-box" style="background-image: linear-gradient(#ffffff,#ffffff);">
@@ -35,8 +39,8 @@
         </button>
     </div>
 
-    <div id="scrollbar">
-        <div class="container-fluid">
+    <div id="scrollbar" style="background-color:{{$rolecolor}}">
+        <div class="container-fluid" >
 
             <div id="two-column-menu">
             </div>
