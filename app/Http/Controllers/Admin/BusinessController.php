@@ -319,7 +319,7 @@ class BusinessController extends Controller
             $otherpic[] = $name;
             if (Auth::user()->customerDetail->step == 1) {
                 $company_document = BusinessDocument::create([
-                    'business_id' => $bus,
+                    'business_id' => $bus->id,
                     'document_name' => $request->document_name[$k],
                     'file' => $otherpic[$k],
                     'expire_date' => $request->document_exp_date[$k],
