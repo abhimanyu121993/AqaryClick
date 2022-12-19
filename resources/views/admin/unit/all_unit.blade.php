@@ -83,7 +83,7 @@
                                     <td>{{ $unit->unit_no??''}}</td>
                                     <td>{{ $unit->unitTypeDetails->name ??'' }}</td>
                                     <td>{{ $unit->unitStatus->name??'' }}</td>
-                                    <td>{{ $unit->unit_floor??'' }}</td>
+                                    <td>{{ $unit->unitfloor->name??'' }}</td>
                                     <td>{{ $unit->unitFeature->name??''}}</td>
                                     <td>{{ $unit->unit_size??''}}</td>
                                     <td>{{ $unit->electric_no??''}}</td>
