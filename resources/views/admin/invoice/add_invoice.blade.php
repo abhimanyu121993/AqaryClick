@@ -415,35 +415,35 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
                     <div class="row">\
                         <div class="col-xxl-12 col-md-12 mt-2">\
                             <div class="input-group row">\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <input type="date" class="form-control" id="productName-1" name="deposite_date[]" placeholder="Product Name" required />\
                                 </div>\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <textarea class="form-control mt-1" id="productDetails-1" name="cheque_remark[]" rows="1" cols="50" placeholder="Enter Remark"></textarea>\
                                 </div>\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <input type="file" class="form-control mt-1" name="file[]" id="product-qty-1" multiple>\
                                 </div>\
                             </div>\
                         </div>\
                         <div class="col-xxl-12 col-md-12 mt-2">\
                             <div class="input-group row">\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <select class="form-control select2 form-select currency " name="currency[]" id="currency">\
                                         {!! $currencyhtml !!}\
                                     </select>\
                                 </div>\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <input type="text" class="form-control cheque_amt" name="cheque_amt[]" id="product-qty-1" placeholder="Enter Cheque Amount">\
                                 </div>\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in QAR" readonly />\
                                 </div>\
                             </div>\
                         </div>\
                         <div class="col-xxl-12 col-md-12 mt-2">\
                             <div class="input-group row">\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <select class="form-control select2 form-select" name="cheque_status[]" id="currency">\
                                         <option value="" selected hidden>Select Cheque\
                                         </option>\
@@ -456,10 +456,10 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
                                         </option>\
                                     </select>\
                                 </div>\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <input type="text" class="form-control" id="productPrice-1" name="cheque_no[]" placeholder="Cheque No" />\
                                 </div>\
-                                <div class="col-xxl-3 col-md-4">\
+                                <div class="col-xxl-4 col-md-4">\
                                     <select class="form-control select2 form-select " name="cheque_bank_name[]" id="bank">\
                                         {!! $bankhtml !!}\
                                     </select>\
