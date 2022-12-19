@@ -47,7 +47,7 @@
               <b class="text-center">And</b><br>
               <b>2. Second Party <br>
                 M/s, /Mr. {{ $conn->ownerDetails->name??'' }} C. R. No ({{ $conn->businessDetails->cr_no??'' }})</b><br>
-              Represented by:<br>
+              Represented by:<br><img height='50px' width='100px' src="{{asset('upload/contract/signature'.$conn->lessor_sign??'')}}"/>
               Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
               QID: 265235158985
               P.O. Box :{{ $conn->businessDetails->post_box??'' }} , {{ $conn->businessDetails->address??'' }}<br>
