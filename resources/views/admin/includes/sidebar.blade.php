@@ -39,7 +39,7 @@
         </button>
     </div>
 
-    <div id="scrollbar" style="background-color:{{$rolecolor}}">
+    <div id="scrollbar" @role('Owner')style="background-color:{{$rolecolor}}"@endrole>
         <div class="container-fluid" >
 
             <div id="two-column-menu">
