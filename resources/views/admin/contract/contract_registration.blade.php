@@ -230,10 +230,16 @@
                                                 {{ $contractedit->customer->full_name }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Lessor's--</option>
+                                            @role('superadmin')
                                             @foreach ($lessor as $less)
                                                 <option value="{{ $less->id }}">{{ $less->first_name }}
                                                     {{ $less->last_name }}</option>
                                             @endforeach
+                                            @endrole
+                                            @role('Owner')
+                                            <option value="{{ $lessor->id }}">{{ $lessor->first_name }}
+                                                {{ $lessor->last_name }}</option>
+                                            @endrole
                                         @endif
 
                                     </select>
