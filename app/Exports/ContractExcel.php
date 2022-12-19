@@ -29,11 +29,20 @@ class ContractExcel implements FromCollection,WithHeadings,WithStyles, WithEvent
     */
     public function collection()
     {
-        $contacts=Contract::get();
+        $this->getUser();
+        if(Auth::user()->hasRole('superadmin')){
+            $contacts=Contract::get();
+        }
+        else
+        {
+            $contacts = Contract::where('user_id', $this->user_id)->get();
+        }
+       
         $d = collect();
         
         foreach($contacts as  $contact){
             $data = collect();
+            $data->put('Contract Code', $contact->contract_code);
             $data->put('1st Party',$contact->tenantDetails->tenant_english_name??'');
             $data->put('2nd party',$contact->lessorDetails->fname??'');
             $data->put('Sponsor',$contact->sponsor_name??'');
@@ -54,6 +63,7 @@ class ContractExcel implements FromCollection,WithHeadings,WithStyles, WithEvent
             $data->put('Discount',$contact->discount??'');
             $data->put('Increment term',$contact->increament_term??'');
             $data->put('Status',$contact->contract_status??'');
+            $data->put('Approved By', $contact->approved_by);
             $d->push($data);
         }
         return $d;
@@ -61,6 +71,7 @@ class ContractExcel implements FromCollection,WithHeadings,WithStyles, WithEvent
     public function headings():array
     {
         return [
+            'Contract Code',
             '1st Party',
             '2nd party ',
             'Sponsor',
@@ -78,6 +89,7 @@ class ContractExcel implements FromCollection,WithHeadings,WithStyles, WithEvent
             'Discount ',
             'Increment term',
             'Status',
+            'Approved By'
         ];
     }
     
@@ -93,7 +105,7 @@ public function registerEvents(): array
         return [
             AfterSheet::class => function (AfterSheet $event) {
 
-                $event->sheet->getDelegate()->getStyle('A1:J1')
+                $event->sheet->getDelegate()->getStyle('A1:S1')
                     ->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()
