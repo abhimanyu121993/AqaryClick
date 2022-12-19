@@ -52,7 +52,7 @@ class LoginController extends Controller
    //forget Passwword
    public function showForgetPasswordForm()
    {
-      return view('frontend.auth.forgetPassword');
+      return view('frontend.auth.forgetpassword');
    }
 
    /**
@@ -119,7 +119,7 @@ class LoginController extends Controller
 
        DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
-       return redirect('/login')->with('message', 'Your password has been changed!');
+       return redirect(route('home.login'))->with('message', 'Your password has been changed!');
    }
 
    public function logout()
