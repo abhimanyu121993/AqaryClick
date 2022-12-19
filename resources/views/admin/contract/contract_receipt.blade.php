@@ -47,7 +47,7 @@
               <b class="text-center">And</b><br>
               <b>2. Second Party <br>
                 M/s, /Mr. {{ $conn->ownerDetails->name??'' }} C. R. No ({{ $conn->businessDetails->cr_no??'' }})</b><br>
-              Represented by:<br><img height='50px' width='100px' src="{{asset('upload/contract/signature'.$conn->lessor_sign??'')}}"/>
+              Represented by:<br>
               Mr:{{ $conn->lessorDetails->first_name??'' }}<br>
               QID: 265235158985
               P.O. Box :{{ $conn->businessDetails->post_box??'' }} , {{ $conn->businessDetails->address??'' }}<br>
@@ -205,7 +205,7 @@
           <tr>
             <td style="width:50%">
               <p><b><u>First Party (The Lessor)</u></b></p><br>
-              <p><b><u>Second Party (The Lessor)</u></b></p><br>
+              <p><b><u>Second Party (The Lessor)</u></b><img height='50px' width='100px' src="{{asset('upload/contract/signature/'.$conn->lessor_sign??'')}}"/></p><br>
               <p><b><u>The Guarantor</u></b></p><br>
             </td>
             <td style="width:50%">

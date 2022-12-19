@@ -413,7 +413,7 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
      var fieldHTML1=' <div class="card field_wrapper mt-3" id="header1">\
                 <div class="card-header align-items-center d-flex">\
                     <div class="row">\
-                        <div class="col-xxl-3 col-md-12 mt-2">\
+                        <div class="col-xxl-12 col-md-12 mt-2">\
                             <div class="input-group row">\
                                 <div class="col-xxl-3 col-md-4">\
                                     <input type="date" class="form-control" id="productName-1" name="deposite_date[]" placeholder="Product Name" required />\
@@ -426,7 +426,7 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="col-xxl-3 col-md-12 mt-2">\
+                        <div class="col-xxl-12 col-md-12 mt-2">\
                             <div class="input-group row">\
                                 <div class="col-xxl-3 col-md-4">\
                                     <select class="form-control select2 form-select currency " name="currency[]" id="currency">\
@@ -441,7 +441,7 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="col-xxl-3 col-md-12 mt-2">\
+                        <div class="col-xxl-12 col-md-12 mt-2">\
                             <div class="input-group row">\
                                 <div class="col-xxl-3 col-md-4">\
                                     <select class="form-control select2 form-select" name="cheque_status[]" id="currency">\
@@ -466,7 +466,7 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="col-xxl-3 col-md-2 mt-2">\
+                        <div class="col-xxl-12 col-md-2 mt-2">\
                             <div class="input-group">\
                                 <a href="javascript:new_link()" id="btn-btn" class="btn btn-success fw-medium removeButton">-</a>\
                             </div>\
