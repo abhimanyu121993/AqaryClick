@@ -9,10 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-
-class User extends Authenticatable
+use Lab404\AuthChecker\Models\HasLoginsAndDevices;
+use Lab404\AuthChecker\Interfaces\HasLoginsAndDevicesInterface;
+class User extends Authenticatable implements HasLoginsAndDevicesInterface
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, HasLoginsAndDevices;  
     protected $guarded = [];
 
     public function companyOwner()

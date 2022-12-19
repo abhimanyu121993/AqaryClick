@@ -94,6 +94,7 @@ class EveryDayNotification extends Command
         if($contractsDetails){
             foreach ($contractsDetails as $contractDetail) {
                 $data=Legal::firstOrCreate([
+                    'user_id'=>$contractDetail->user_id,
                     'contract_id'=>$contractDetail->id,
                     'tenant_name'=>$contractDetail->tenantDetails->tenant_english_name,
                     'tenant_mobile'=>$contractDetail->tenant_mobile,

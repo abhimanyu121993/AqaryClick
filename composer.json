@@ -9,6 +9,7 @@
         "amrshawky/laravel-currency": "^5.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "lab404/laravel-auth-checker": "^1.7",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.5",

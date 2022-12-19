@@ -14,4 +14,9 @@ class City extends Model
     {
       return $this->belongsTo(Nationality::class,'country_name','id');
     }
+
+    public function zones()
+    {
+      return $this->hasMany(Area::class,'city_id','id');
+    }
 }

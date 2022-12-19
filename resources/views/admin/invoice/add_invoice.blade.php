@@ -78,7 +78,6 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <p id="msg" class="text-danger"></p>
                         <div class="row">
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Building Name</label>
@@ -97,8 +96,8 @@
                                     name='tenant_name'>
                                     <option value="" selected hidden disabled>--Select Tenant--</option>
                                     <!-- @foreach ($tenantDetails as $td)
-    <option value="{{ $td->id }}">{{ $td->tenant_english_name }}</option>
-    @endforeach -->
+                                 <option value="{{ $td->id }}">{{ $td->tenant_english_name }}</option>
+                                 @endforeach -->
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
@@ -131,6 +130,7 @@
                             name="tenant_name" hidden>
                         <input type="hidden" class="form-control cid" id="cid" value="" name="contract" hidden>
                         <div class="msg">
+                        <p id="msg" class="text-danger"></p>
                             <p id="due_amt"></p>
                             <p id="rent_amt"></p>
                             <p id="tax_amount"></p>
@@ -144,37 +144,29 @@
                             autocomplete="off">
                         <label class="btn btn-outline-danger" id="btn-btn" for="due-payment-details">Due Payment</label>
                         <div class="row gy-4 mb-3 mt-5 ">
-                            <!-- <div class="col-xxl-3 col-md-2">
-                                <label class="form-label" for="flag">Invoice No</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" value="{{ $INV }}" id="invoice_no" name="invoice_no" readonly>
-                                </div>
-                            </div> -->
-
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label class="form-label" for="flag">Due Date</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="due_date" name="due_date"
                                         placeholder="Due Date" readonly>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="name" class="form-label">Invoice Period</label>
                                 <div class="row input-group m-0">
-                                    <div class="col-mt-3 ">
+                                    <div class="col-6">
                                         <input type="text" class="form-control" id="invoice_period_start"
                                             name="invoice_period_start" readonly placeholder="Start Date">
                                     </div>
-                                    <div class="col-mb-3 mt-1">
+                                    <div class="col-6">
                                         <input type="text" class="form-control" id="invoice_period_end"
                                             name="invoice_period_end" readonly placeholder="End Date">
                                     </div>
-
                                 </div>
                             </div>
 
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label class="form-label" for="flag">Overdue Period</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="overdue_period" name="overdue_period"
@@ -658,8 +650,11 @@
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-                        console.log(p);
-                        $('#due_date').val(p.res.invoice_period_end);
+                        if(p.res==null){
+                        $('#msg').text('You Have No Any Due Payment,Proceed with Full PayMent');
+                        }
+                        else{
+                            $('#due_date').val(p.res.invoice_period_end);
                         $('#invoice_period_start').val(p.res.invoice_period_start);
                         $('#invoice_period_end').val(p.res.invoice_period_end);
                         $('#overdue_period').val(p.overdue + 'Days');
@@ -667,6 +662,8 @@
                         $('#rent_amt').text('');
                         // $('#tax_amount').text('Tax Amount: ' + p.per);
                         $('#payable_amt').text('Total Payable Amount   ' + p.res.due_amt);
+                        }
+                     
                     }
                 });
             });

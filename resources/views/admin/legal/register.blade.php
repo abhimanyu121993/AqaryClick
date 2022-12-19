@@ -229,12 +229,11 @@
         $(document).on('change','#contract_id',function() {
             $(this).find("option:selected").each(function() {
                 var optionValue = $(this).attr("value");
-                var newurl = "{{ url('/admin/fetch-legal-contract') }}/" + optionValue;
+                var newurl = "{{ url('/admin/fetch-legal-building-tenant') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
                     method: 'get',
                     success: function(p) {
-                        console.log(p);
                         $("#tenant_name").val(p.res.tenant_details.tenant_english_name);
                         $("#mobile_no").val(p.res.tenant_details.tenant_primary_mobile);
 
@@ -246,6 +245,7 @@
         }).change();
     });
 </script>
+
 
 <Script>
      $(document).ready(function() {

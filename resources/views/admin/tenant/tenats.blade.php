@@ -137,7 +137,7 @@
                             <td>{{$tenant->unittypeinfo->name??''}}</td>
                             <td>{{$tenant->unit->unit_no ??''}}</td>
                             <td>{{$tenant->unit->unit_ref ??''}}</td>
-                            <td>{{$tenant->unit->unitfloor->name}}</td>
+                            <td>{{$tenant->unit->unitfloor->name ?? ''}}</td>
                             <td>{{$tenant->rental_period ??''}}</td>
                             <td>{{$tenant->status ?? ''}}</td>
                             <td>

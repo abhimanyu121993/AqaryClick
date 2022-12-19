@@ -37,7 +37,10 @@ class LoginController extends Controller
                 Alert::warning('You Are Visitor', 'Purchase Any One Plan to Become Our Customer');
                 return redirect()->route('home.plans');
             }
-            return redirect()->route('admin.dashboard');
+            else {
+               
+                return redirect()->route('admin.dashboard');
+            }
         }
         else
         {
@@ -156,7 +159,7 @@ class LoginController extends Controller
             'first_name'=>$request->first_name,
             'last_name'=>$request->last_name,
             'email'=>$request->email,
-            "phone"=>$request->phone,
+            "phone"=>$request->mobile,
             'address'=>$request->address,
             'status'=>false,
             'password'=>Hash::make($password),

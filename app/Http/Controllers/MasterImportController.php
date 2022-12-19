@@ -131,24 +131,12 @@ class MasterImportController extends Controller
                                 $govhouse = '';
                                 $passport = '';
                                 $tenanttype = '';
-                                if($importData[3]=='PASSPORT'){
-                                    $passport = $importData[5];
-                                }
-                                else if($importData[3]=='CR & EST CARD'){
-                                    $cr= $importData[6];
-                                    $established = $importData[7];
-
-                                }
-                                else if($importData[3]=='GOVERNMENT HOUSING No'){
-                                    $govhouse = $importData[8];
-
-                                }
-                                else if($importData[3]=='QID'){
-                                    $qid = $importData[4];
-                                    
-                                }
-
-                                $tenanttype = $importData[2]=='Personal'? 'TP':($importData[2]=='Company'? 'TC':($importData[2]=='Government'? 'TG':''));
+                                $passport = $importData[5]??'';
+                                $cr= $importData[6]??'';
+                                $established = $importData[7]??'';
+                                $govhouse = $importData[8]??'';
+                                $qid = $importData[4]??'';
+                                $tenanttype = strtolower($importData[2])=='personal'? 'TP':(strtolower($importData[2])=='company'? 'TC':(strtolower($importData[2])=='government'? 'TG':'TP'));
                                     $insertTenantData = array(
                                         "building_name"=>$building->id??'',
                                         "file_no"=>$importData[0]??'',
@@ -159,6 +147,9 @@ class MasterImportController extends Controller
                                         "established_card_no"=>$established??'',
                                         "government_housing_no"=>$govhouse??'',
                                         "tenant_nationality"=>2,
+                                        'sponsor_name'=>$importData[46]??'',
+                                        'sponsor_oid'=>$importData[47]??'',
+                                        'sponsor_phone'=>$importData[48]??'',
                                         "passport"=>$passport??'',
                                         "tenant_type"=>$tenanttype,//condition based on established card and sponsor
                                         "tenant_english_name"=>$importData[9]??'',
