@@ -227,7 +227,7 @@
                                         @if (isset($buildingedit)) disabled @endif required>
                                         @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->id }}" selected>
-                                                {{ $buildingedit->unitFeature->unit_feature }}</option>
+                                                {{ $buildingedit->unitFeature->unit_feature??'' }}</option>
                                         @endif
                                         <option value="" selected>---Select Type---</option>
                                         @foreach ($units5 as $unit)
