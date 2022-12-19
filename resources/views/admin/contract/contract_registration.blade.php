@@ -247,6 +247,7 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Company</label>
                                     <select class="form-control select2 form-select" id="company" name="company_id">
+                                        <option value=''>--Select Company--</option>
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->company_id??'' }}" selected>
                                                 {{ $contractedit->company->business_name??'' }}</option>
@@ -257,7 +258,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="name" class="form-label">Authorized Person</label>
+                                    <label for="name" class="form-label">Company Authorized Person</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="authorized_person"
                                             name="authorized_person"

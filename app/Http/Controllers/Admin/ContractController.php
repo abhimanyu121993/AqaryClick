@@ -380,7 +380,7 @@ class ContractController extends Controller
     {
             $lessor=Customer::find($lessor_id)->user;
             $res = BusinessDetail::where('user_id', $lessor->id)->get();
-        $html = '';
+        $html = '<option value="">--Select Company--</option>';
 
         foreach ($res as $r) {
             $html .= '<option value="' . $r->id . '">' . $r->business_name . '</option>';
