@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Unit;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -31,11 +32,11 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
         $this->getUser();
         $d = collect();
         if (Auth::user()->hasRole('superadmin')) {
-            $units = Unit::select('unit_ref', 'revenue', 'unit_status', 'building_id', 'unit_type', 'unit_no', 'unit_floor', 'unit_size', 'actual_rent', 'remark')->get()->append(['unit_type_name', 'unit_status_name', 'buildingDetails'])->makeHidden(['unit_status', 'unit_type']);
+            $units = Unit::select('unit_ref', 'revenue', 'unit_status', 'building_id', 'unit_type', 'unit_no', 'unit_floor', 'unit_size', 'actual_rent', 'remark','updated_at')->get()->append(['unit_type_name', 'unit_status_name', 'buildingDetails'])->makeHidden(['unit_status', 'unit_type']);
         }
         else
         {
-            $units = Unit::select('unit_ref', 'revenue', 'unit_status', 'building_id', 'unit_type', 'unit_no', 'unit_floor', 'unit_size', 'actual_rent', 'remark')->where('user_id',$this->user_id)->get()->append(['unit_type_name', 'unit_status_name', 'buildingDetails'])->makeHidden(['unit_status', 'unit_type']);
+            $units = Unit::select('unit_ref', 'revenue', 'unit_status', 'building_id', 'unit_type', 'unit_no', 'unit_floor', 'unit_size', 'actual_rent', 'remark','updated_at')->where('user_id',$this->user_id)->get()->append(['unit_type_name', 'unit_status_name', 'buildingDetails'])->makeHidden(['unit_status', 'unit_type']);
         }
         foreach($units as $unit){
             $data = collect();
@@ -48,6 +49,8 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
             $data->put('Area/m2',$unit->unit_size);
             $data->put('Unit Rental Rate',$unit->actual_rent);
             $data->put('Status',$unit->unit_status_name);
+            $data->put('Vacat From',(strtolower($unit->unit_status_name)=='vacant')?$unit->updated_at->format('d-M-Y'):'');
+            $data->put('Vacat Days',(strtolower($unit->unit_status_name)=='vacant')?Carbon::now()->diffInDays($unit->updated_at->format('d-M-Y')):'');
             $data->put('Remark',$unit->remark);
             $d->push($data);
             
@@ -68,6 +71,8 @@ class UnitExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
             'Area/m2',
             'Unit Rental Rate',
             'Status',
+            'Vacant From',
+            'Vacant Days',
             'Remark',
            
         ];

@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Tenant;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -11,13 +12,31 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class TenantExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        $d=collect();        
-        $tenants=Tenant::select('file_no','tenant_code','tenant_type','tenant_document','qid_document','cr_document','passport','tenant_document','tenant_english_name','tenant_primary_mobile','tenant_secondary_mobile','email','post_office','status')->get();
+        $this->getUser();
+        $d=collect();
+        if (Auth::user()->hasRole('superadmin')) {
+            $tenants = Tenant::get();
+        }
+        else
+        {
+            $tenants = Tenant::where('user_id',$this->user_id)->get();
+        }
         foreach($tenants as $tenant){
             $data = collect();
             $data->put('File No',$tenant->file_no);
@@ -31,6 +50,7 @@ class TenantExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
             $data->put('Email',$tenant->email);
             $data->put('P.O. Box',$tenant->post_office);
             $data->put('Status',$tenant->status);
+            $data->put('legal', $tenant->legals->count());
             $d->push($data);
         }
         return $d;
@@ -50,7 +70,8 @@ class TenantExcel implements FromCollection,WithHeadings,WithStyles, WithEvents
             'Mobile (Secondary)',
             'Email',
             'P.O. Box',
-            'Status'
+            'Status',
+            'Legal Count'
         ];
     }
     public function styles(Worksheet $sheet)

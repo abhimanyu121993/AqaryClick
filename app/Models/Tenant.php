@@ -39,4 +39,14 @@ class Tenant extends Model
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
+
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class, 'tenant_name');
+    }
+
+    public function legals()
+    {
+       return  $this->hasManyThrough(Legal::class, Contract::class, 'tenant_name', 'contract_id');
+    }
 }

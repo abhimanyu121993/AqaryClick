@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contract extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $guarded=[];
-    public function tenantDetails() 
+    use HasFactory, SoftDeletes;
+    protected $guarded = [];
+    public function tenantDetails()
     {
         return $this->belongsTo(Tenant::class, 'tenant_name', 'id');
     }
@@ -19,7 +19,7 @@ class Contract extends Model
     {
         return $this->belongsTo(Nationality::class, 'tenant_nationality', 'id');
     }
-    
+
     public function ownerDetails()
     {
         return $this->belongsTo(User::class, 'lessor', 'id');
@@ -33,10 +33,11 @@ class Contract extends Model
         return $this->belongsTo(User::class, 'approved_by', 'id');
     }
 
-    public function getTotalContractAttribute(){   
-       $rent=$this->rent_amount??0;
-       $month=$this->lease_period_month??0;
-        return (float)$rent*(float)$month;
+    public function getTotalContractAttribute()
+    {
+        $rent = $this->rent_amount ?? 0;
+        $month = $this->lease_period_month ?? 0;
+        return (float)$rent * (float)$month;
     }
     public function cheques()
     {
@@ -51,7 +52,8 @@ class Contract extends Model
         return $this->hasMany(Invoice::class, 'contract_id');
     }
 
-    public function customer(){
+    public function customer()
+    {
         return $this->belongsTo(Customer::class, 'lessor');
     }
 
@@ -59,25 +61,27 @@ class Contract extends Model
     {
         return $this->belongsTo(BusinessDetail::class, 'company_id');
     }
-    
-    public function getLastPaidInvoiceAttribute(){   
-      $inv=Invoice::where('contract_id',$this->id)->where('payment_status','Paid')->latest()->first(); 
-      if($inv){
-        return $inv->invoice_period_end;
-      }
-      else{
-        return false;
-      }
-     }
-     public function getTotalInvoiceOverdueAttribute(){   
-        $res=Contract::where('contract_id',$this->id)->where('overdue','>=',90)->latest()->first(); 
-        if($res){
-          return ($res->overdue)/30;
-        }
-        else{
-          return false;
-        }
-       }
 
-
+    public function getLastPaidInvoiceAttribute()
+    {
+        $inv = Invoice::where('contract_id', $this->id)->where('payment_status', 'Paid')->latest()->first();
+        if ($inv) {
+            return $inv->invoice_period_end;
+        } else {
+            return false;
+        }
+    }
+    public function getTotalInvoiceOverdueAttribute()
+    {
+        $res = Contract::where('contract_id', $this->id)->where('overdue', '>=', 90)->latest()->first();
+        if ($res) {
+            return ($res->overdue) / 30;
+        } else {
+            return false;
+        }
+    }
+    public function legal()
+    {
+        return $this->hasOne(Legal::class, 'contract_id');
+    }
 }
