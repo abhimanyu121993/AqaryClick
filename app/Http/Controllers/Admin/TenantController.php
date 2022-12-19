@@ -7,6 +7,7 @@ use App\Mail\TenantMail;
 use App\Models\Building;
 use App\Models\Invoice;
 use App\Models\Nationality;
+use App\Models\PaymentHistory;
 use App\Models\Tenant;
 use App\Models\TenantFile;
 use App\Models\Unit;
@@ -447,7 +448,6 @@ class TenantController extends Controller
         $id = Crypt::decrypt($id);
         $tenant=Tenant::find($id);
         $inv=Invoice::where('tenant_id',$id)->get();
-
         return view('admin.tenant.yearly_statement',compact('tenant','inv'));
     }
 }

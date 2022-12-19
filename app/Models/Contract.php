@@ -47,6 +47,10 @@ class Contract extends Model
     {
         return $this->hasOne(Invoice::class, 'contract_id')->latest();
     }
+    public function tenant_payment()
+    {
+        return $this->hasOne(TenantPayment::class, 'contract_id');
+    }
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'contract_id');

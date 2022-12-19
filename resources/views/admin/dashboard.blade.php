@@ -209,9 +209,8 @@
 
                     <div id="card-header" class="card-header p-0 bg-soft-light">
                         <div class="row g-0 text-center">
-                            
                         <div class="col-6 col-sm-4">
-                        <a href="{{ route('admin.building.create') }}"> <div class="p-3 m-2 border" id="background_card">
+                        <a href="{{ route('admin.building.create') }}"> <div class="p-3 m-2 border" id="background_card" style="background-image:url('3x/building.jpg');">
                         <span class="fs-4">
                                     <img src="{{asset('3x/building.jpg')}}" height="50px" style="border-radius: 100%;"/>
                                 </span>           
