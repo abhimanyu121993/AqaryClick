@@ -330,15 +330,15 @@ $bankhtml .= '<option value="' . $b->id . '">' . $b->name ?? '' . '</option>';
                         </div>
                         <div class="col-xxl-12 col-md-12 mt-2">
                             <div class="input-group row">
-                                <div class="col-xxl-3 col-md-4">
+                                <div class="col-xxl-4 col-md-4">
                                     <select class="form-control select2 form-select currency " name="currency[]" id="currency">
                                         {!! $currencyhtml !!}
                                     </select>
                                 </div>
-                                <div class="col-xxl-12 col-md-4">
+                                <div class="col-xxl-4 col-md-4">
                                     <input type="text" class="form-control cheque_amt" name="cheque_amt[]" id="product-qty-1" placeholder="Enter Cheque Amount">
                                 </div>
-                                <div class="col-xxl-12 col-md-4">
+                                <div class="col-xxl-4 col-md-4">
                                     <input type="text" class="form-control sar_amt" name="sar_amt[]" id="product-qty-1" placeholder="Amount in QAR" readonly />
                                 </div>                               
                             </div>
