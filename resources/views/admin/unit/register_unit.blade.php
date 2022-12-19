@@ -185,8 +185,8 @@
                                     <select class="form-control select2 form-select" id="building_name"
                                         name="unit_status">
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->name }}" selected>
-                                                {{$buildingedit->unitFeature->name}} </option>
+                                            <option value="{{ $buildingedit->name??'' }}" selected>
+                                                {{$buildingedit->unitFeature->name??''}} </option>
                                         @else
                                             <option value="" selected hidden>--Select Building--</option>
                                         @endif
