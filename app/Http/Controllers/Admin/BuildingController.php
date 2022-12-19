@@ -108,14 +108,14 @@ class BuildingController extends Controller
                 $d .= '<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
 
                 if (Auth::user()->hasPermissionTo('Building_edit')) {
-                    $d .= '<li><a class="dropdown-item" href="';
+                    $d .= '<li><a class="dropdown-item" id="pop" href="';
                     $d .= route('admin.register_building.edit', $bid);
                     $d .= '">Edit</a>
                         </li>';
                 }
                 if (Auth::user()->hasPermissionTo('Building_delete')) {
                     $d .= '
-                        <li><a class="dropdown-item" href="#"';
+                        <li><a class="dropdown-item" id="pop" href="#"';
                     $d .= '
                                 onclick="event.preventDefault();document.getElementById(\'delete-form-{{ $bid }}\').submit();">';
                     $d .= "Delete</a>

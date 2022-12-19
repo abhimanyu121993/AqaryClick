@@ -63,7 +63,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div id="card-header" class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Create Permission</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Create Permission</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -91,7 +91,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div id="card-header" class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Permissions</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Manage Permissions</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <table class="table table-nowrap container" id="example">
@@ -117,9 +117,9 @@
                                             </a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                                <li><a class="dropdown-item" href="#" id="pop">View</a></li>
+                                                <li><a class="dropdown-item" href="#" id="pop">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#" id="pop">Delete</a></li>
                                             </ul>
                                         </div>
                                     </td>

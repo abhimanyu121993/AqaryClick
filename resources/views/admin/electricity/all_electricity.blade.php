@@ -53,7 +53,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Electricity</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Manage Electricity</h4>
                     <div class="col-2">
                     <a href="{{route('admin.excel-export.electric')}}" class="btn btn-primary" id="btn-btn">Export</a>
                 </div>
@@ -103,7 +103,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             @php $pics=json_decode($el->file); @endphp
                                             @foreach ($pics as $pic)
-                                                <li><a class="dropdown-item" href="{{route('admin.getDownload',$pic)}}">{{$pic??''}}</a></li>
+                                                <li><a class="dropdown-item" id="pop" href="{{route('admin.getDownload',$pic)}}">{{$pic??''}}</a></li>
                                             @endforeach
                                         </ul>
                                         </div>

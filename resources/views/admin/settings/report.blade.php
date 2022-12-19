@@ -59,7 +59,7 @@
     <div class="col-lg-12">
         <div class="card" id="header1">
             <div class="card-header align-items-center d-flex" id="card-header">
-                <h4 class="card-title mb-0 flex-grow-1">Tenant Report</h4>
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Tenant Report</h4>
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
@@ -116,7 +116,7 @@
     <div class="col-xl-12">
         <div class="card" id="header1">
             <div class="card-header align-items-center d-flex" id="card-header">
-                <h4 class="card-title mb-0 flex-grow-1">Tenant Status</h4>
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Tenant Status</h4>
                 <div class="flex-shrink-0">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="tenant_status">
                         <option value="" selected disabled>Sort By</option>

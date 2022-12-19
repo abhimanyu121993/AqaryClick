@@ -87,7 +87,7 @@
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                 <table id="example2" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                <thead class="thead-color">            
+                <thead >            
                 <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Name</th>

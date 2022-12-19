@@ -9,7 +9,7 @@
                     @if($breadcrumb_title == 'Dashboard')
                         {{-- <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
                     @else
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="color: black !important;">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{ $breadcrumb_title ?? '' }}</li>
                     @endif
                 </ol>

@@ -49,7 +49,7 @@
     <div class="col-lg-12">
         <div class="card" id="header1">
             <div class="card-header align-items-center d-flex" id="card-header">
-                <h4 class="card-title mb-0 flex-grow-1">{{ isset($buildingedit)? 'Update Building' : 'Register Building' }}</h4>
+                <h4 class="card-title mb-0 flex-grow-1" id="h1" >{{ isset($buildingedit)? 'Update Building' : 'Register Building' }}</h4>
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
@@ -358,7 +358,7 @@
                         </div>
                         <div class="card" id="header1">
                             <div class="card-header align-items-center d-flex" id="card-header">
-                                <h4 class="card-title mb-0 flex-grow-1">Person in-charge</h4>
+                                <h4 class="card-title mb-0 flex-grow-1" id="h1">Person in-charge</h4>
                             </div>
                         </div>
 

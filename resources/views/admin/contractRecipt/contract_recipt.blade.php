@@ -55,27 +55,27 @@
             @csrf
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6" id="p1">
-                <label for="remark" class="form-label">Preamble </label>
+                <label for="remark" class="form-label" id="h1">Preamble </label>
                 <textarea class="form-control" name="clause_one_english"> 
                        {!!$contract->clause_one_english!!}
 
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Preamble Arabic</label>
+                <label for="remark" class="form-label" id="h1" >Preamble Arabic</label>
                 <textarea class="form-control" name="clause_one_arabic"> {!!$contract->clause_one_arabic!!}
                     </textarea>
             </div>
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause One English</label>
+                <label for="remark" class="form-label" id="h1" >Clause One English</label>
                 <textarea class="form-control" name="clause_two_english">
                 {!!$contract->clause_two_english!!}
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause One Arabic</label>
+                <label for="remark" class="form-label" id="h1" >Clause One Arabic</label>
                 <textarea class="form-control" name="clause_two_arabic">
                 {!!$contract->clause_two_arabic!!}
                     </textarea>
@@ -83,13 +83,13 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Two English</label>
+                <label for="remark" class="form-label" id="h1" >Clause Two English</label>
                 <textarea class="form-control" name="clause_three_english">
                 {!!$contract->clause_three_english!!}
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Two Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Two Arabic</label>
                 <textarea class="form-control" name="clause_three_arabic">
                 {!!$contract->clause_three_arabic!!}
                     </textarea>
@@ -97,13 +97,13 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Three English</label>
+                <label for="remark" class="form-label" id="h1">Clause Three English</label>
                 <textarea class="form-control" name="clause_four_english">
                 {!!$contract->clause_four_english!!}
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Three Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Three Arabic</label>
                 <textarea class="form-control" name="clause_four_arabic">
                 {!!$contract->clause_four_arabic!!}
                     </textarea>
@@ -111,14 +111,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Four English</label>
+                <label for="remark" class="form-label" id="h1">Clause Four English</label>
                 <textarea class="form-control" name="clause_five_english">
                 {!!$contract->clause_five_english!!}
 
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Four Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Four Arabic</label>
                 <textarea class="form-control" name="clause_five_arabic">
                 {!!$contract->clause_five_arabic!!}
 
@@ -127,14 +127,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Five English</label>
+                <label for="remark" class="form-label" id="h1">Clause Five English</label>
                 <textarea class="form-control" name="clause_six_english">
                 {!!$contract->clause_six_english!!}
 
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Five Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Five Arabic</label>
                 <textarea class="form-control" name="clause_six_arabic">
                 {!!$contract->clause_six_arabic!!}
 
@@ -143,14 +143,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Six English</label>
+                <label for="remark" class="form-label" id="h1" >Clause Six English</label>
                 <textarea class="form-control" name="clause_seven_english">
                 {!!$contract->clause_seven_english!!}
 
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Six Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Six Arabic</label>
                 <textarea class="form-control" name="clause_seven_arabic">
                 {!!$contract->clause_seven_arabic!!}
 
@@ -159,14 +159,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Seven English</label>
+                <label for="remark" class="form-label" id="h1">Clause Seven English</label>
                 <textarea class="form-control" name="clause_eight_english">
                 {!!$contract->clause_eight_english!!}
 
                         </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Seven Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Seven Arabic</label>
                 <textarea class="form-control" name="clause_eight_arabic">
                 {!!$contract->clause_eight_arabic!!}
 
@@ -175,14 +175,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Eight English</label>
+                <label for="remark" class="form-label" id="h1">Clause Eight English</label>
                 <textarea class="form-control" name="clause_nine_english">
                 {!!$contract->clause_nine_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Eight Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Eight Arabic</label>
                 <textarea class="form-control" name="clause_nine_arabic">
                 {!!$contract->clause_nine_arabic!!}
 
@@ -191,14 +191,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Nine English</label>
+                <label for="remark" class="form-label" id="h1">Clause Nine English</label>
                 <textarea class="form-control" name="clause_ten_english">
                 {!!$contract->clause_ten_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Nine Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Nine Arabic</label>
                 <textarea class="form-control" name="clause_ten_arabic">
                 {!!$contract->clause_ten_arabic!!}
 
@@ -207,14 +207,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Ten English</label>
+                <label for="remark" class="form-label" id="h1">Clause Ten English</label>
                 <textarea class="form-control" name="clause_eleven_english">
                 {!!$contract->clause_eleven_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Ten Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Ten Arabic</label>
                 <textarea class="form-control" name="clause_eleven_arabic">
                 {!!$contract->clause_eleven_arabic!!}
 
@@ -223,14 +223,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Eleven English</label>
+                <label for="remark" class="form-label" id="h1">Clause Eleven English</label>
                 <textarea class="form-control" name="clause_twelve_english">
                 {!!$contract->clause_twelve_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Eleven Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Eleven Arabic</label>
                 <textarea class="form-control" name="clause_twelve_arabic">
                 {!!$contract->clause_twelve_arabic!!}
 
@@ -239,14 +239,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Twelve English</label>
+                <label for="remark" class="form-label" id="h1">Clause Twelve English</label>
                 <textarea class="form-control" name="clause_therteen_english">
                 {!!$contract->clause_therteen_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Twelve Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Twelve Arabic</label>
                 <textarea class="form-control" name="clause_therteen_arabic">
                 {!!$contract->clause_therteen_arabic!!}
                             </textarea>
@@ -254,13 +254,13 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Thirteen English</label>
+                <label for="remark" class="form-label" id="h1">Clause Thirteen English</label>
                 <textarea class="form-control" name="clause_fourteen_english">
                 {!!$contract->clause_fourteen_english!!}
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Thirteen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Thirteen Arabic</label>
                 <textarea class="form-control" name="clause_fourteen_arabic">
                 {!!$contract->clause_fourteen_arabic!!}
 
@@ -269,14 +269,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Fourteen English</label>
+                <label for="remark" class="form-label" id="h1">Clause Fourteen English</label>
                 <textarea class="form-control" name="clause_fiftyteen_english">
                 {!!$contract->clause_fiftyteen_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Fourteen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Fourteen Arabic</label>
                 <textarea class="form-control" name="clause_fiftyteen_arabic">
                 {!!$contract->clause_fiftyteen_arabic!!}
                             </textarea>
@@ -284,14 +284,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Fifteen English</label>
+                <label for="remark" class="form-label" id="h1">Clause Fifteen English</label>
                 <textarea class="form-control" name="clause_sixteen_english">
                 {!!$contract->clause_sixteen_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Fifteen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Fifteen Arabic</label>
                 <textarea class="form-control" name="clause_sixteen_arabic">
                 {!!$contract->clause_sixteen_arabic!!}
 
@@ -300,14 +300,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Sixteen English</label>
+                <label for="remark" class="form-label" id="h1">Clause Sixteen English</label>
                 <textarea class="form-control" name="clause_seventeen_english">
                 {!!$contract->clause_seventeen_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Sixteen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Sixteen Arabic</label>
                 <textarea class="form-control" name="clause_seventeen_arabic">
                 {!!$contract->clause_seventeen_arabic!!}
 
@@ -316,14 +316,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Seventeen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Seventeen Arabic</label>
                 <textarea class="form-control" name="clause_eighteen_english">
                 {!!$contract->clause_eighteen_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Seventeen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Seventeen Arabic</label>
                 <textarea class="form-control" name="clause_eighteen_arabic">
                 {!!$contract->clause_eighteen_arabic!!}
 
@@ -332,14 +332,14 @@
         </div>
         <div class="row col-lg-12" id="card-header">
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Eighteen English</label>
+                <label for="remark" class="form-label"id="h1">Clause Eighteen English</label>
                 <textarea class="form-control" name="clause_nineteen_english">
                 {!!$contract->clause_nineteen_english!!}
 
                                 </textarea>
             </div>
             <div class="col-md-6">
-                <label for="remark" class="form-label">Clause Eighteen Arabic</label>
+                <label for="remark" class="form-label" id="h1">Clause Eighteen Arabic</label>
                 <textarea class="form-control" name="clause_nineteen_arabic">
                 {!!$contract->clause_nineteen_arabic!!}
                             </textarea>

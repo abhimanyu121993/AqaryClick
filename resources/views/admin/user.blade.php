@@ -10,6 +10,10 @@
     {
         background:#c9e6e7;
     }
+    #h1
+   {
+       color: black;
+   }
     #example
     {
         font-size: 14px;
@@ -44,7 +48,7 @@
         <div class="col-lg-12 col-xl-12 col-xxl-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ isset($userEdit)? 'Update User' : 'Register User' }}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">{{ isset($userEdit)? 'Update User' : 'Register User' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
@@ -124,7 +128,7 @@
         <div class="col-lg-12">
             <div class="card" id="header">
                 <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1">Manage Users</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Manage Users</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                     <table class="table table-nowrap container" id="example">
@@ -167,9 +171,9 @@
                                             </a>
                                             @php $bid=Crypt::encrypt($user->id); @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item text-black" href="#">View</a></li>
-                                                <li><a class="dropdown-item text-black" href="{{route('admin.user.edit',$bid)}}">Edit</a></li>
-                                                <li><a class="dropdown-item text-black" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
+                                            <li><a class="dropdown-item text-black" id="pop" href="#">View</a></li>
+                                                <li><a class="dropdown-item text-black" id="pop" href="{{route('admin.user.edit',$bid)}}">Edit</a></li>
+                                                <li><a class="dropdown-item text-black" id="pop" href="#" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
 
                                                 <form id="delete-form-{{ $bid }}" action="{{ route('admin.user.destroy', $bid) }}"
                                                     method="post" style="display: none;">

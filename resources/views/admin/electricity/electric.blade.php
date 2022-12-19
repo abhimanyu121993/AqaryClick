@@ -49,7 +49,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1">
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">
                         {{ isset($electricity) ? 'Update Electricity Bill' : 'Electricity Bill ' }}</h4>
                 </div><!-- end card header -->
                 <div class="card-body">

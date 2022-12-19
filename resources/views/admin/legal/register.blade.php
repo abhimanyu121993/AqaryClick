@@ -55,7 +55,7 @@
                     <div class="col-lg-12">
                         <div class="card" id="header1">
                             <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
-                            <h4 class="card-title mb-0 flex-grow-1">Update Legal</h4>
+                            <h4 class="card-title mb-0 flex-grow-1" id="h1">Update Legal</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div><!-- end card header -->
                             <div class="card-body">
@@ -122,7 +122,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex table-main-heading" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1">All Legal Details</h4>
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">All Legal Details</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive" >
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline table-responsive" style="width: 100%;" aria-describedby="ajax-datatables_info">

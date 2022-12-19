@@ -50,7 +50,7 @@
 @section('main-content')
     <div class="card" id="header1">
         <div class="card-header" id="card-header">
-            Fetch Permission
+            <h4 class="card-title mb-0 flex-grow-1" id="h1">Fetch Permission</h4>
         </div>
         <div class="card-body">
             <form action="{{ route('admin.fetchPermission') }}" method="post">

@@ -246,7 +246,7 @@
                                                             <td>{{ $c->cheque_no ?? '' }}</td>
                                                             <td>{{ $c->deposite_date ?? '' }}</td>
                                                             <td>
-                                                                {{ $c->sar_amt ?? '' }}
+                                                            {{ $symbol??'' }}&nbsp;{{ $c->qar_amt ?? '' }}
                                                             </td>
                                                             <td>{{ $c->bankDetails->name ?? '' }}</td>
                                                             <td class="text-end">{{ $c->cheque_status ?? '' }}</td>
