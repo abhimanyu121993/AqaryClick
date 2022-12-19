@@ -218,7 +218,7 @@ class MasterImportController extends Controller
                                                 'release_date'=>$release_date,
                                                 'lease_start_date'=>$lease_start_date,
                                                 'lease_end_date'=> $lease_end_date,
-                                                'lease_period_month'=>$importData[56],
+                                                'lease_period_month'=>Carbon::parse($lease_start_date)->diffInMonths($lease_end_date)??0,
                                                 'discount'=>$importData[58],
                                                 'increament_term'=>$importData[59],
                                                 'contract_status'=>$importData[60],
