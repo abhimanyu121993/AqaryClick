@@ -7,6 +7,7 @@ use App\Models\BankDetail;
 use App\Models\BusinessDetail;
 use App\Models\BusinessDocument;
 use App\Models\CompanyDocument;
+use App\Models\Customer;
 use App\Models\Owner;
 use App\Models\OwnerCompany;
 use App\Models\User;
@@ -21,13 +22,11 @@ class BusinessController extends Controller
     protected $user_id = '';
     public function getUser()
     {
-           if(Auth::user()->hasRole('Owner')){
-              $this->user_id = Auth::user()->id;
-          }
-          else
-          {
-              $this->user_id = Auth::user()->created_by;
-          }
+        if (Auth::user()->hasRole('Owner')) {
+            $this->user_id = Auth::user()->id;
+        } else {
+            $this->user_id = Auth::user()->created_by;
+        }
     }
 
     /**
@@ -199,33 +198,34 @@ class BusinessController extends Controller
     public function showBankDetail($id)
     {
         $id = Crypt::decrypt($id);
-        $bank = BankDetail::where('id',$id)->get();
-        $editbank=BankDetail::find($id);
-        return view('admin.business.customer_bank_detail', compact('bank','editbank'));
+        $bank = BankDetail::where('id', $id)->get();
+        $editbank = BankDetail::find($id);
+        return view('admin.business.customer_bank_detail', compact('bank', 'editbank'));
     }
 
-    public function editBankDetails($id){
+    public function editBankDetails($id)
+    {
         $id = Crypt::decrypt($id);
-        $bank = BankDetail::where('id',$id)->get();
-        $editbank=BankDetail::find($id);
-        return view('admin.business.customer_bank_detail', compact('bank','editbank'));
+        $bank = BankDetail::where('id', $id)->get();
+        $editbank = BankDetail::find($id);
+        return view('admin.business.customer_bank_detail', compact('bank', 'editbank'));
     }
 
-    public function updateBankDetails(Request $request,$id){
-        $data=BankDetail::find($id)->update([
-        'user_id'=>Auth::user()->id,
-        'bank_name' => $request->bank_name,
-        'account_number' => $request->account_number,
-        'iban_no'=>$request->iban_no,
-        'ifsc'=>$request->ifsc,
-        'swift'=>$request->swift,
+    public function updateBankDetails(Request $request, $id)
+    {
+        $data = BankDetail::find($id)->update([
+            'user_id' => Auth::user()->id,
+            'bank_name' => $request->bank_name,
+            'account_number' => $request->account_number,
+            'iban_no' => $request->iban_no,
+            'ifsc' => $request->ifsc,
+            'swift' => $request->swift,
         ]);
-         if($data){
-               return redirect()->back()->with('success','Bank Details Updated successfully.');
-            }
-            else{
-                return redirect()->back()->with('error','Bank Details not Updated.');
-           }  
+        if ($data) {
+            return redirect()->back()->with('success', 'Bank Details Updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Bank Details not Updated.');
+        }
     }
 
     public function usercompanydelete($id)
@@ -246,7 +246,7 @@ class BusinessController extends Controller
         $editdocument = BusinessDocument::find($id);
         return view('admin.business.business_document', compact('editdocument', 'document'));
     }
-    public function updateDocuments(Request $request,$id)
+    public function updateDocuments(Request $request, $id)
     {
         // dd($id);
         $file = $request->file('docfile');
@@ -260,14 +260,103 @@ class BusinessController extends Controller
                 'expire_date' => $request->document_exp_date[$k],
             ]);
         }
-        if ( $company_document) {
+        if ($company_document) {
             return redirect()->back()->with('success', 'Business has been updated successfully.');
         } else {
             return redirect()->back()->with('error', 'Something Went Wron .');
         }
     }
-    public function DocumentDownload($path){
-        $filePath = public_path('upload/company/document/'.$path);
-       return Response::download($filePath);
+    public function DocumentDownload($path)
+    {
+        $filePath = public_path('upload/company/document/' . $path);
+        return Response::download($filePath);
+    }
+
+    public function modalBusinessDetail(Request $request)
+    {
+        // dd($request);
+        $logo = '';
+        if ($request->hasFile('company_logo')) {
+            $company = 'Company-logo-' . time() . '-' . rand(0, 99) . '.' . $request->company_logo->extension();
+            $request->company_logo->move(public_path('upload/company/logo/'), $company);
+            $logo = $company;
+        }
+        if (Auth::user()->customerDetail->step == 0) {
+            $business = BusinessDetail::create([
+                'user_id' => Auth::user()->user_id,
+                'customer_type' => $request->customer_type,
+                'business_type' => $request->business_type,
+                'business_name' => $request->business_name,
+                'address' => $request->address,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'post_box' => $request->post_box,
+                'authorized_person' => $request->authorized_person,
+                'logo' => $logo,
+                'activity' => $request->company_activity,
+            ]);
+            $buss = Customer::find(Auth::user()->customerDetail->id)->update(['step' => 1]);
+        }
+        if ($business) {
+            return redirect(url('admin/dashboard'))->with('success', 'Business has been updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Business has not been updated successfully.');
+        }
+    }
+
+    public function modalBusinessDocument(Request $request)
+    {
+
+        $business = BusinessDetail::get();
+        // dd($business);
+        $user = Auth::user()->id;
+        // dd($user);
+        $bus = BusinessDetail::where('user_id', $user)->first();
+        $file = $request->file('docfile');
+        foreach ($request->document_name as $k => $doc) {
+            $name = 'logo-' . time() . '-' . rand(0, 99) . '.' . $file[$k]->extension();
+            $file[$k]->move(public_path('upload/company/document'), $name);
+            $otherpic[] = $name;
+            if (Auth::user()->customerDetail->step == 1) {
+                $company_document = BusinessDocument::create([
+                    'business_id' => $bus->id,
+                    'document_name' => $request->document_name[$k],
+                    'file' => $otherpic[$k],
+                    'expire_date' => $request->document_exp_date[$k],
+                ]);
+                $buss = Customer::find(Auth::user()->customerDetail->id)->update(['step' => 2]);
+            }
+
+
+            if ($company_document) {
+                return redirect(url('admin/dashboard'))->with('success', 'Business has been updated successfully.');
+            } else {
+                return redirect()->back()->with('error', 'Business has not been updated successfully.');
+            }
+        }
+    }
+
+    public function modalBusinessBankDocument(Request $request)
+    {
+        $user = Auth::user()->id;
+        $bus = BusinessDetail::where('user_id', $user)->first();
+        if (Auth::user()->customerDetail->step == 2) {
+        $bankdata = BankDetail::create([
+            'user_id' => Auth::user()->id,
+            'business_id' => $bus->id,
+            'bank_name' => $request->bank_name,
+            'account_number' => $request->account_number,
+            'ifsc' => $request->ifsc,
+            'swift' => $request->swift,
+            'iban_no' => $request->iban_no
+        ]);
+        $buss = Customer::find(Auth::user()->customerDetail->id)->update(['step' => 3]);
+
+    }
+        if ($bankdata) {
+            return redirect(url('admin/dashboard'))->with('success', 'Business has been updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Business has not been updated successfully.');
+        }
     }
 }

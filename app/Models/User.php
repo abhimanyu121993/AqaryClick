@@ -31,7 +31,7 @@ class User extends Authenticatable implements HasLoginsAndDevicesInterface
 
     public function customerDetail()
     {
-        return $this->hasMany(Customer::class, 'email', 'email');
+        return $this->hasOne(Customer::class, 'email', 'email');
     }
-    
+
 }

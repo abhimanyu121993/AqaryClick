@@ -209,18 +209,19 @@
 
                     <div id="card-header" class="card-header p-0 bg-soft-light">
                         <div class="row g-0 text-center">
+
                         <div class="col-6 col-sm-4">
                         <a href="{{ route('admin.building.create') }}"> <div class="p-3 m-2 border" id="background_card" style="background-image:url('3x/building.jpg');">
                         <span class="fs-4">
                                     <img src="{{asset('3x/building.jpg')}}" height="50px" style="border-radius: 100%;"/>
-                                </span>           
+                                </span>
                         <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $buildings }}">{{ $buildings }}</span></h5>
-                                    <p id="parag"class="text-muted mb-0">Number of Builidngs</p>
+                                    <p id="parag"class="text-muted mb-0">Number of Builidngs </p>
                                 </div></a>
                             </div>
                             @can('ElectricityBill')
                             <div class="col-6 col-sm-4">
-                          
+
                             <a href="{{ route('admin.electricity.create') }}"> <div class="p-3 m-2 border" id="background_card">
                             <span class="fs-4">
                                     <img src="{{asset('3x/electricity1.webp')}}" height="50px" style="border-radius: 100%;"/>
@@ -323,7 +324,7 @@
                             <a href="{{ route('admin.tenant.create') }}"> <div class="p-3 m-2 border" id="background_card">
                             <span class="fs-4">
                                     <img src="{{asset('3x/tenant.webp')}}" height="70px" style="border-radius: 100%;"/>
-                                </span>       
+                                </span>
                             <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Tenants</p>
                                 </div></a>
@@ -332,7 +333,7 @@
                         <a href="{{ route('admin.contract.create') }}"> <div class="p-3 m-2 border" id="background_card">
                         <span class="fs-4">
                                     <img src="{{asset('3x/contract-sign.webp')}}" height="70px" style="border-radius: 100%;"/>
-                                </span>            
+                                </span>
                         <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant_not_sign??'0' }}">{{$tenant_not_sign}}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Tenant Not Signature</p>
                                 </div></a>
@@ -353,7 +354,7 @@
                             <a href="{{ route('admin.legal.create') }}"> <div class="p-3 m-2 border" id="background_card">
                             <span class="fs-4">
                                     <img src="{{asset('3x/legal.png')}}" height="70px" style="border-radius: 100%;"/>
-                                </span>               
+                                </span>
                             <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Legal::count() }}">{{  App\Models\Legal::count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0">Total Legal</p>
                                 </div></a>
@@ -557,7 +558,7 @@
                                 </div></a>
                             </div>
                             <div class="col-6 col-sm-4">
-                            <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">      
+                            <a href="{{route('admin.contract.create')}}"> <div class="p-3 m-2 border" id="background_card">
                             <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}">{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}</span></h5>
                                     <p id="parag"class="text-muted mb-0"> Bounced Cheques</p>
                                 </div></a>
@@ -808,4 +809,5 @@
         }).change();
     });
 </script>
+@include('admin.businessModal.businessModal')
 @endsection
