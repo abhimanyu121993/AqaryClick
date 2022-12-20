@@ -43,7 +43,7 @@ class ReportController extends Controller
 
             $building = Building::where('user_id', Auth::user()->id)->get();
             $customer = User::find($this->user_id)->customerDetail;
-            $tenantStatus = Tenant::where('user_id', Auth::user()->id)->get();
+            $tenantStatus = Tenant::where('user_id', $this->user_id)->get();
         }
         return view('admin.settings.report', compact('building', 'tenantStatus', 'customer'));
     }
