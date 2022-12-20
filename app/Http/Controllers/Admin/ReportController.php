@@ -115,9 +115,11 @@ class ReportController extends Controller
         if ($req->type == 'a') {
             $buildings = Building::where('user_id', $req->owner_id)->where('status', 'active')->get();
         } else if ($req->type == 'na') {
-            $buildings = Building::where('user_id', $req->owner_id)->where('status', 'inactive')->get();
+            $buildings = Building::where('user_id', $req->owner_id)->where('status', 'inactive')->orWhereNull('status')->get();
         }
-        return $buildings;
+        return view('admin.report.building', compact('buildings'));
+        $pdf=Pdf::loadView('admin.report.building',compact('buildings'));
+        return $pdf->stream('buildong.pdf');
     }
 
     public function statementReport(Request $req)
