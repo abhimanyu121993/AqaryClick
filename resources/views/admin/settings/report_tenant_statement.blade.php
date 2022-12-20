@@ -27,11 +27,10 @@
                                 <th scope="col">Date</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Cheque/Bank A (No)</th>
-                                <th scope="col">Contract Expiry Date</th>
-                                <th scope="col">Contract Period Months</th>
-                                <th scope="col">Monthly Rent</th>
-                                <th scope="col">Total Value of Contract</th>
-                                <th scope="col">Total Remaining</th>
+                                <th scope="col">Debit</th>
+                                <th scope="col">Credit</th>
+                                <th scope="col">Account Balance</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
