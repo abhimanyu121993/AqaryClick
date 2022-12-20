@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Contract;
+use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
@@ -65,6 +66,43 @@ $contract=Contract::where('tenant_name',$tenant_id)->get();
 $invoice=Invoice::where('tenant_id',$tenant_id)->get();  
 
     return view('admin.settings.master_report',compact('tenant','contract','invoice'));
+}
+
+public function contractReport(Request $req)
+{
+        $req->validate([
+            'owner_id' => 'required|numeric',
+            'type' => 'required|in:ccr,lpcr,recc'
+        ]);
+        $user=Customer::find($req->owner_id)->user;
+        if($req->type=='ccr'){
+            $contracts=Contract::where('user_id', $user->id)->get();
+        }
+        else if($req->type=='lpcr'){
+            $contracts=Contract::where('user_id', $user->id)->where('overdue','>',0)->get();
+
+        }
+        else if($req->type=='recc'){
+            $contracts=Contract::where('user_id', $user->id)->where('expire',true)->get();
+        }
+
+        return $contracts;
+}
+
+public function buildingReport(Request $req){
+        $req->validate([
+            'owner_id'=>'required|numeric',
+            'type'=>'required|in:a,na'
+        ]);
+
+        if($req->type=='a'){
+            $buildings = Building::where('user_id',$req->owner_id)->where('status','active')->get();
+        }
+        else if($req->type=='na'){
+            $buildings = Building::where('user_id',$req->owner_id)->where('status','inactive')->get();  
+        }
+        return $buildings;
+
 }
 
 

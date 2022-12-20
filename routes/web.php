@@ -239,6 +239,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 
 });
 
+Route::group(['prefix' => 'Report', 'as' => 'Report.'], function () {
+    Route::get('contract', [ReportController::class, 'contractReport']);
+    Route::get('building', [ReportController::class,'buildingReport']);
+});
+
 //  Payment
 Route::group(['prefix'=>'paypal','as'=>'paypal.'],function(){
 Route::get('payment',[PaymentController::class,'index'])->name('create');
