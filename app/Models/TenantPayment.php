@@ -15,4 +15,8 @@ class TenantPayment extends Model
         return $this->hasMany(PaymentHistory::class, 'tenant_payment_id', 'id');
 
     }
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class,'tenant_id');
+    }
 }

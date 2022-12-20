@@ -12,7 +12,7 @@ class PaymentHistory extends Model
     Protected $guarded=[];
     public function tenantPayment()
     {
-        return $this->belongsTo(TenantPayments::class, 'tenant_payment_id', 'id');
+        return $this->belongsTo(TenantPayment::class, 'tenant_payment_id', 'id');
 
     }
 }

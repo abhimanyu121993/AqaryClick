@@ -8,6 +8,7 @@ use App\Models\Contract;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Tenant;
+use App\Models\TenantPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -105,5 +106,20 @@ public function buildingReport(Request $req){
 
 }
 
+public function statementReport(Request $req)
+{
+        $req->validate([
+            'from'=>'required|date',
+            'end'=>'required|date',
+            'tenant_id'=>'required|numeric'
+        ]);
+        $data=$req->all();
+        $res = TenantPayment::with([
+            'payHistory' => function ($query) use ($data) {
+                return $query->whereDateBetween('cteated_at', $data['from'], $data['to']);
+        }])->where('tenant_id', $req->tenant_id)->get();
+        
+        return $res;
+}
 
 }
