@@ -49,6 +49,7 @@
                         <th>Unit Type</th>
                         <th>Unit Status</th>
                         <th>Area/m<sup>2</sup></th>
+                        <th>Electric No</th>
                         <th>Actual Rent</th>
                         <th>Unit Ref</th>
                     </tr>
@@ -61,6 +62,7 @@
                             <th>{{$unit->unittypeinfo->name}}</th>
                             <th>{{$unit->unitStatus->name}}</th>
                             <th>{{$unit->unit_size}}</th>
+                            <th>{{$unit->electric_no}}</th>
                             <th>{{$unit->actual_rent}}</th>
                             <th>{{$unit->unit_ref}}</th>
                         </tr>
