@@ -9,13 +9,10 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
-<<<<<<< Updated upstream
 use App\Models\TenantPayment;
 use Carbon\Carbon;
-=======
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
->>>>>>> Stashed changes
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -25,26 +22,6 @@ class ReportController extends Controller
     protected $user_id = '';
     public function getUser()
     {
-<<<<<<< Updated upstream
-           if(Auth::user()->hasRole('Owner')){
-              $this->user_id = Auth::user()->id;
-          }
-          else
-          {
-              $this->user_id = Auth::user()->created_by;
-          }
-    }
-    public function report()
-    {
-        $tenantStatus = Tenant::all();
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
-            $building = Building::all();
-        } else {
-            $building = Building::where('user_id', Auth::user()->id)->get();
-        }
-        return view('admin.settings.report', compact('building', 'tenantStatus'));
-=======
         if (Auth::user()->hasRole('Owner')) {
             $this->user_id = Auth::user()->id;
         } else {
@@ -68,7 +45,6 @@ class ReportController extends Controller
             $tenantStatus = Tenant::where('user_id', Auth::user()->id)->get();
         }
         return view('admin.settings.report', compact('building', 'tenantStatus', 'customer'));
->>>>>>> Stashed changes
     }
 
     public function tenantUnitBuilding($building_id)
@@ -125,13 +101,8 @@ class ReportController extends Controller
         } else if ($req->type == 'recc') {
             $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
         }
-<<<<<<< Updated upstream
-
-        return $contracts;
-=======
         $pdf = Pdf::loadView('admin.settings.report_details',compact('contracts'));
         return $pdf->stream('report.pdf');
->>>>>>> Stashed changes
     }
 
     public function buildingReport(Request $req)
@@ -149,7 +120,6 @@ class ReportController extends Controller
         return $buildings;
     }
 
-<<<<<<< Updated upstream
     public function statementReport(Request $req)
     {
         $req->validate([
@@ -189,18 +159,5 @@ class ReportController extends Controller
         ])->whereDateBetwwen('created_at',Carbon::parse($req->start_date),Carbon::parse($req->end_date))->latest();
 
         return $statement;
-=======
-
-    public function newReport()
-    {
-        $tenantStatus = Tenant::all();
-        $role = Auth::user()->roles[0]->name;
-        if ($role == 'superadmin') {
-            $building = Building::all();
-        } else {
-            $building = Building::where('user_id', Auth::user()->id)->get();
-        }
-        return view('admin.settings.new_report', compact('building', 'tenantStatus'));
->>>>>>> Stashed changes
     }
 }
