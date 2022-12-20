@@ -9,8 +9,6 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
-use App\Models\TenantPayment;
-use Carbon\Carbon;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 use Illuminate\Http\Request;
@@ -120,44 +118,16 @@ class ReportController extends Controller
         return $buildings;
     }
 
-    public function statementReport(Request $req)
+
+    public function newReport()
     {
-        $req->validate([
-            'from' => 'required|date',
-            'end' => 'required|date',
-            'tenant_id' => 'required|numeric'
-        ]);
-        $data = $req->all();
-        $res = TenantPayment::with([
-            'payHistory' => function ($query) use ($data) {
-                return $query->whereDateBetween('cteated_at', $data['from'], $data['to']);
-            }
-        ])->where('tenant_id', $req->tenant_id)->get();
-
-        return $res;
-    }
-
-
-    public function MonthlyReport(Request $req)
-    {
-        $req->validate([
-            'start_date'=>'required|date',
-            'end_date'=>'required|date'
-        ]);
-        $this->getUser();
-        if(Auth::user()->hasRole('superadmin')){
-            $tenants = Tenant::pluck('id');
+        $tenantStatus = Tenant::all();
+        $role = Auth::user()->roles[0]->name;
+        if ($role == 'superadmin') {
+            $building = Building::all();
+        } else {
+            $building = Building::where('user_id', Auth::user()->id)->get();
         }
-        else
-        {
-            $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
-        }
-        $statement = PaymentHistory::with([
-            'tenantPayment' => function ($query) use($tenants) {
-                return $query->whereIn('tenant_id', $tenants);
-            }
-        ])->whereDateBetwwen('created_at',Carbon::parse($req->start_date),Carbon::parse($req->end_date))->latest();
-
-        return $statement;
+        return view('admin.settings.new_report', compact('building', 'tenantStatus'));
     }
 }
