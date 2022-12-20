@@ -243,6 +243,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 Route::group(['prefix' => 'Report', 'as' => 'Report.'], function () {
     Route::post('contract', [ReportController::class, 'contractReport'])->name('reportContract');
     Route::post('building', [ReportController::class,'buildingReport'])->name('building');
+    Route::post('monthly-report', [ReportController::class,'MonthlyReport'])->name('monthly-report');
 });
 
 //  Payment
