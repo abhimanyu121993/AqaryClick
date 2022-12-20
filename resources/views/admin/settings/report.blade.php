@@ -176,24 +176,24 @@
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
-                    <form action="" method="POST">
+                    <form action="{{route('Report.statementReport')}}" method="POST">
                         @csrf
                         <div class="row gy-12">
                         <div class="col-md-3 mb-1">
                                 <label class="form-label" for="flag">Date From</label>
                                 <div class="input-group">
-                                        <input type="date" class="form-control" id="name" name="date_from">
+                                        <input type="date" class="form-control" id="name" name="from">
                                     </div>
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label class="form-label" for="flag">Date To</label>
                                 <div class="input-group">
-                                        <input type="date" class="form-control" id="" name="date_to">
+                                        <input type="date" class="form-control" id="" name="to">
                                     </div>
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label class="form-label" for="flag">Customer Name</label>
-                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                <select class="select2 form-select js-example-basic-single" id="tenant_id" name='tenant_id'>
                                     <option value="" selected hidden disabled>--Select Customer--</option>
                                 @role('superadmin')
                                     @foreach($customer as $c)
@@ -206,12 +206,17 @@
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label class="form-label" for="flag">Choose Tenant</label>
-                                <select class="select2 form-select js-example-basic-single" id="tenant" name='tenant'>
+                                <select class="select2 form-select js-example-basic-single" id="tenant" name='tenant_id'>
                                 <option value="" selected hidden disabled>--Select Tenant--</option>
                                 @foreach($tenantStatus as $t)    
                                     <option value="{{$t->id}}">{{$t->tenant_english_name}}</option>
                                 @endforeach
                                 </select>
+                            </div>
+                            <div class="row mt-2">
+                            <div class="col-md-3 mb-1">
+                            <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
+                            </div>
                             </div>
                         </div>
                     </form>

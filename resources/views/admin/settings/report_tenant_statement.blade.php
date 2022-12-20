@@ -11,7 +11,6 @@
     <title>Tenant Statement</title>
   </head>
   <body>
-
   </div>
     <div class="row">
         <div class="col-lg-12">
@@ -21,33 +20,45 @@
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                        <thead style="background-color: #EDC70B;">
-                            <tr>
-                                <th scope="col">Sr.No.</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Cheque/Bank A (No)</th>
-                                <th scope="col">Debit</th>
-                                <th scope="col">Credit</th>
-                                <th scope="col">Account Balance</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                <thead>
+      <tr>
+        <th scope="col" class="text-center" colspan="6" style="background-color:#003a51;color:white;">ACCOUNT DETAILS FOR EACH CONTRACT</th>
+      </tr>
+    </thead>
 
-                            @endforeach
-                            </tr>
-                        </tbody>
+    @foreach($res as $c )
+    <thead>
+      <tr>
+        <th scope="col" colspan="6" style="background-color:#dbeaf9;color:black;">{{ $c->contract->contract_code??'' }}</th>
+      </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th scope="col">S.n</th>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Debit</th>
+        <th scope="col">Credit</th>
+        <th scope="col">Account Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      @isset($c->payHistory)
+      @foreach($c->payHistory as $tp)
+
+      <tr>
+        <td>{{$loop->index+1}}</td>
+        <td>{{$tp->created_at->format('d-M-Y')??''}}</td>
+        <td></td>
+        <td class="text-danger">{{($tp->status=='dr')?$tp->amount:'0.00'}}</td>
+        <td class="text-success">{{($tp->status=='cr')?$tp->amount:'0.00'}}</td>
+        <td>{{ $tp->remaining??'' }} QAR</td>
+      </tr>
+      @endforeach
+      @endisset
+    </tbody>
+
+    @endforeach
                     </table>
                 </div>
             </div>

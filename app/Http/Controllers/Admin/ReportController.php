@@ -127,24 +127,23 @@ else{
         }
         return view('admin.report.building', compact('buildings'));
         $pdf=Pdf::loadView('admin.report.building',compact('buildings'));
-        return $pdf->stream('buildong.pdf');
+        return $pdf->stream('building.pdf');
     }
 
     public function statementReport(Request $req)
     {
         $req->validate([
             'from' => 'required|date',
-            'end' => 'required|date',
+            'to' => 'required|date',
             'tenant_id' => 'required|numeric'
         ]);
         $data = $req->all();
         $res = TenantPayment::with([
             'payHistory' => function ($query) use ($data) {
-                return $query->whereDateBetween('cteated_at', $data['from'], $data['to']);
+                return $query->whereDate('created_at','>=', $data['from'])->whereDate('created_at','<=',$data['to']);
             }
         ])->where('tenant_id', $req->tenant_id)->get();
-
-        return $res;
+return view('admin.settings.report_tenant_statement',compact('res'));
     }
 
 
