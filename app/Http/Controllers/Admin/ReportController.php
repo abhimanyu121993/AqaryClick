@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Building;
+use App\Models\BusinessDetail;
 use App\Models\Contract;
 use App\Models\Customer;
 use App\Models\Invoice;
@@ -99,9 +100,16 @@ class ReportController extends Controller
         } else if ($req->type == 'recc') {
             $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
         }
-        $pdf = Pdf::loadView('admin.settings.report_details',compact('contracts'));
+if(count($contracts)==0){
+    return redirect()->back()->with('error', 'No Records Found!.');
+}
+else{
+
+        $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
+        return view('admin.settings.report_details',compact('contracts','company'));
+        $pdf = Pdf::loadView('admin.settings.report_details',compact('contracts','company'));
         return $pdf->stream('report.pdf');
-    }
+    }}
 
     public function buildingReport(Request $req)
     {
