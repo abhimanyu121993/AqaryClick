@@ -9,8 +9,10 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
+use App\Models\TenantPayment;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -138,11 +140,12 @@ class ReportController extends Controller
 
     public function MonthlyReport(Request $req)
     {
+        $this->getUser();
         $req->validate([
             'start_date'=>'required|date',
             'end_date'=>'required|date'
         ]);
-        $this->getUser();
+        
         if(Auth::user()->hasRole('superadmin')){
             $tenants = Tenant::pluck('id');
         }
