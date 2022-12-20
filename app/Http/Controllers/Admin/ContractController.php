@@ -202,7 +202,7 @@ class ContractController extends Controller
             'remark' => $request->remark,
         ]);
         if ($data) {
-            if(isset($data->tenantDetails->email))
+            if($data->tenantDetails->email!=null)
             {
                  Mail::to($data->tenantDetails->email)->send(new ContractMail($data,$conn,$contract));
             }
