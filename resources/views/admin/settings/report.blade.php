@@ -55,7 +55,353 @@
         <a class="btn btn-primary" id="btn-btn" href="{{route('admin.excel-export.tenant-units')}}">Export All Unit Statement</a>
     </div>
 </div>
+@if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 <div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Contract Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="{{route('Report.reportContract')}}" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                        <div class="col-md-6 mb-1">
+                                <label class="form-label" for="flag">Customer Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="owner_id" name='owner_id'>
+                                    <option value="" selected hidden disabled>--Select Customer--</option>
+                                @role('superadmin')
+                                    @foreach($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                 @endforeach
+                                     @else
+                                 <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                 @endrole
+                                 
+
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-1">
+                                <label class="form-label" for="flag">Select Type</label>
+                                <select class="select2 form-select js-example-basic-single" id="type" name='type'>
+                                    <option value="" selected hidden disabled>--Select Type--</option>
+                                    <option value="ccr">Client Contract Report</option>
+                                    <option value="lpcr">Late Payment Client Report</option>
+                                    <option value="recc">Report of Expired Contract Client</option>
+
+                                </select>
+                            </div>
+                            <div class="row mt-2">
+                            <div class="col-md-3 mb-1">
+                            <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
+                            </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Building Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                        <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Customer Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Customer--</option>
+                                @role('superadmin')
+                                    @foreach($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                 @endforeach
+                                     @else
+                                 <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                 @endrole
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Property Status</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Type--</option>
+                                    <option value="a">Available</option>
+                                    <option value="na">Not Available</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">choose Type</label>
+                                <select class="select2 form-select js-example-basic-single" name="">
+                                    <option value="" selected hidden disabled>--Select Type--</option>
+                                    <option value="a">Rental Property Data Report</option>
+                                    <option value="na">Real estate status data report</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Tenant Statement Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                        <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Date From</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="name" name="date_from">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Date To</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="" name="date_to">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Customer Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Customer--</option>
+                                @role('superadmin')
+                                    @foreach($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                 @endforeach
+                                     @else
+                                 <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                 @endrole
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Choose Tenant</label>
+                                <select class="select2 form-select js-example-basic-single" id="tenant" name='tenant'>
+                                <option value="" selected hidden disabled>--Select Tenant--</option>
+                                @foreach($tenantStatus as $t)    
+                                    <option value="{{$t->id}}">{{$t->tenant_english_name}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">All Tenant Statement Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                        <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Date From</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="name" name="date_from">
+                                    </div>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Date To</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="" name="date_to">
+                                    </div>
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label class="form-label" for="flag">Customer Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Customer--</option>
+                                @role('superadmin')
+                                    @foreach($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                 @endforeach
+                                     @else
+                                 <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                 @endrole
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Month Tenant Statement Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                        <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Date From</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="name" name="date_from">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Date To</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="" name="date_to">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Customer Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Customer--</option>
+                                @role('superadmin')
+                                    @foreach($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                 @endforeach
+                                     @else
+                                 <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                 @endrole
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Choose Tenant</label>
+                                <select class="select2 form-select js-example-basic-single" id="tenant" name='tenant'>
+                                <option value="" selected hidden disabled>--Select Tenant--</option>
+                                <option value="all">All</option>
+                                @foreach($tenantStatus as $t)    
+                                    <option value="{{$t->id}}">{{$t->tenant_english_name}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Company Account Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                        <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Date From</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="name" name="date_from">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Date To</label>
+                                <div class="input-group">
+                                        <input type="date" class="form-control" id="" name="date_to">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Customer Name</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Customer--</option>
+                                @role('superadmin')
+                                    @foreach($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                 @endforeach
+                                     @else
+                                 <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                 @endrole
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label class="form-label" for="flag">Choose Tenant</label>
+                                <select class="select2 form-select js-example-basic-single" id="tenant" name='tenant'>
+                                <option value="" selected hidden disabled>--Select Tenant--</option>
+                                <option value="all">All</option>
+                                @foreach($tenantStatus as $t)    
+                                    <option value="{{$t->id}}">{{$t->tenant_english_name}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Contract Report</h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row gy-12">
+                            <div class="col-md-12 mb-1">
+                                <label class="form-label" for="flag">Select Type</label>
+                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                    <option value="" selected hidden disabled>--Select Type--</option>
+                                    <option value="client contract report">Client Contract Report</option>
+                                    <option value="late payment client report">Late Payment Client Report</option>
+                                    <option value="report of expired contract client">Report of Expired Contract Client</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
     <div class="col-lg-12">
         <div class="card" id="header1">
             <div class="card-header align-items-center d-flex" id="card-header">

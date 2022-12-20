@@ -414,6 +414,10 @@
                                         Report </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('admin.newReport') }}" class="nav-link" data-key="t-analytics">
+                                       New Report </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('admin.staff.index') }}" class="nav-link"
                                         data-key="t-analytics">
                                         <i data-feather="user-plus" class="icon-dual"></i> Staff </a>

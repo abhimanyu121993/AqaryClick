@@ -238,7 +238,7 @@ class BuildingController extends Controller
             'land_size_foot' => $request->land_size_foot,
             'price_foot' => $request->price_foot,
             'total_land' => $request->total_land,
-            'status' => $request->building_status,
+            'status' => $request->status,
             'landsize_meter' => $request->landsize_meter,
             'cost_building' => $request->cost_building,
             'building_value' => $request->building_value,

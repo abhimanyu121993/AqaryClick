@@ -93,15 +93,10 @@
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="building_status" name="status" >
                                     <option value="{{ $buildingedit->status ?? '' }}" selected hidden>{{ $buildingedit->status ?? '--Select Status--'}}</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
                                 </select>
                             </div>
-
-                        </div>
-                        <div class="row gy-4 mb-3">
-
-
 
                         </div>
                         <div class="row gy-4 mb-3">
