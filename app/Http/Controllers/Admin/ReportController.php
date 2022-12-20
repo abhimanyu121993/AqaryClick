@@ -118,7 +118,46 @@ class ReportController extends Controller
         return $buildings;
     }
 
+    public function statementReport(Request $req)
+    {
+        $req->validate([
+            'from' => 'required|date',
+            'end' => 'required|date',
+            'tenant_id' => 'required|numeric'
+        ]);
+        $data = $req->all();
+        $res = TenantPayment::with([
+            'payHistory' => function ($query) use ($data) {
+                return $query->whereDateBetween('cteated_at', $data['from'], $data['to']);
+            }
+        ])->where('tenant_id', $req->tenant_id)->get();
 
+        return $res;
+    }
+
+
+    public function MonthlyReport(Request $req)
+    {
+        $req->validate([
+            'start_date'=>'required|date',
+            'end_date'=>'required|date'
+        ]);
+        $this->getUser();
+        if(Auth::user()->hasRole('superadmin')){
+            $tenants = Tenant::pluck('id');
+        }
+        else
+        {
+            $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
+        }
+        $statement = PaymentHistory::with([
+            'tenantPayment' => function ($query) use($tenants) {
+                return $query->whereIn('tenant_id', $tenants);
+            }
+        ])->whereDateBetwwen('created_at',Carbon::parse($req->start_date),Carbon::parse($req->end_date))->latest();
+
+        return $statement;
+    }
     public function newReport()
     {
         $tenantStatus = Tenant::all();
