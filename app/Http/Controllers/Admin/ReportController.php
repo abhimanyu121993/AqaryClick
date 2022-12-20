@@ -10,8 +10,10 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
+use App\Models\TenantPayment;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -121,12 +123,54 @@ else{
         if ($req->type == 'a') {
             $buildings = Building::where('user_id', $req->owner_id)->where('status', 'active')->get();
         } else if ($req->type == 'na') {
-            $buildings = Building::where('user_id', $req->owner_id)->where('status', 'inactive')->get();
+            $buildings = Building::where('user_id', $req->owner_id)->where('status', 'inactive')->orWhereNull('status')->get();
         }
-        return $buildings;
+        return view('admin.report.building', compact('buildings'));
+        $pdf=Pdf::loadView('admin.report.building',compact('buildings'));
+        return $pdf->stream('buildong.pdf');
+    }
+
+    public function statementReport(Request $req)
+    {
+        $req->validate([
+            'from' => 'required|date',
+            'end' => 'required|date',
+            'tenant_id' => 'required|numeric'
+        ]);
+        $data = $req->all();
+        $res = TenantPayment::with([
+            'payHistory' => function ($query) use ($data) {
+                return $query->whereDateBetween('cteated_at', $data['from'], $data['to']);
+            }
+        ])->where('tenant_id', $req->tenant_id)->get();
+
+        return $res;
     }
 
 
+    public function MonthlyReport(Request $req)
+    {
+        $this->getUser();
+        $req->validate([
+            'start_date'=>'required|date',
+            'end_date'=>'required|date'
+        ]);
+        
+        if(Auth::user()->hasRole('superadmin')){
+            $tenants = Tenant::pluck('id');
+        }
+        else
+        {
+            $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
+        }
+        $statement = PaymentHistory::with([
+            'tenantPayment' => function ($query) use($tenants) {
+                return $query->whereIn('tenant_id', $tenants);
+            }
+        ])->whereDateBetwwen('created_at',Carbon::parse($req->start_date),Carbon::parse($req->end_date))->latest();
+
+        return $statement;
+    }
     public function newReport()
     {
         $tenantStatus = Tenant::all();

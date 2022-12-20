@@ -123,32 +123,32 @@
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
-                    <form action="" method="POST">
+                    <form action="{{route('Report.building')}}" method="POST">
                         @csrf
                         <div class="row gy-12">
                         <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Customer Name</label>
-                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                <select class="select2 form-select js-example-basic-single" id="owner_id" name='owner_id'>
                                     <option value="" selected hidden disabled>--Select Customer--</option>
                                 @role('superadmin')
                                     @foreach($customer as $c)
                                     <option value="{{ $c->id }}">{{ $c->first_name }}</option>
                                  @endforeach
-                                     @else
+                                @else
                                  <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
                                  @endrole
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label class="form-label" for="flag">Property Status</label>
-                                <select class="select2 form-select js-example-basic-single" id="building_name" name='building_name'>
+                                <label class="form-label" for="type">Property Status</label>
+                                <select class="select2 form-select js-example-basic-single" id="type" name='type'>
                                     <option value="" selected hidden disabled>--Select Type--</option>
                                     <option value="a">Available</option>
                                     <option value="na">Not Available</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label class="form-label" for="flag">choose Type</label>
+                                <label class="form-label" for="flag">Choose Type</label>
                                 <select class="select2 form-select js-example-basic-single" name="">
                                     <option value="" selected hidden disabled>--Select Type--</option>
                                     <option value="a">Rental Property Data Report</option>
@@ -156,6 +156,11 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3 mb-1">
+                            <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
+                            </div>
+                            </div>
                     </form>
                 </div>
             </div>
