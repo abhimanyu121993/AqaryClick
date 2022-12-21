@@ -43,7 +43,7 @@ class ReportController extends Controller
 
             $building = Building::where('user_id', Auth::user()->id)->get();
             $customer = User::find($this->user_id)->customerDetail;
-            $tenantStatus = Tenant::where('user_id', Auth::user()->id)->get();
+            $tenantStatus = Tenant::where('user_id', $this->user_id)->get();
         }
         return view('admin.settings.report', compact('building', 'tenantStatus', 'customer'));
     }
@@ -138,14 +138,21 @@ else{
             'tenant_id' => 'required|numeric'
         ]);
         $data = $req->all();
-        $res = TenantPayment::with([
+        $res = TenantPayment::with('contract')->with([
             'payHistory' => function ($query) use ($data) {
                 return $query->whereDate('created_at','>=', $data['from'])->whereDate('created_at','<=',$data['to']);
             }
         ])->where('tenant_id', $req->tenant_id)->get();
-return view('admin.settings.report_tenant_statement',compact('res'));
+        $tenant=$res[0]->tenant;
+        $date=carbon::parse($req->from)->format('d-M-Y').' To '.carbon::parse($req->to)->format('d-M-Y');
+        if(count($res)==0){
+            return redirect()->back()->with('error', 'No Records Found!.');
+        }
+        else{
+                $company = BusinessDetail::where('id', $res[0]->contract->company_id)->first();
+          return view('admin.settings.report_tenant_statement',compact('res','company','tenant','date'));
     }
-
+    }
 
     public function MonthlyReport(Request $req)
     {
