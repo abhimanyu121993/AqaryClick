@@ -141,7 +141,7 @@
                             @csrf
                             <div class="row gy-12">
                                 <div class="col-md-4 mb-1">
-                                    <label class="form-label" for="flag">Customer Name</label>
+                                    <label class="form-label" for="owner_id">Customer Name</label>
                                     <select class="select2 form-select js-example-basic-single" id="owner_id"
                                         name='owner_id'>
                                         <option value="" selected hidden disabled>--Select Customer--</option>
@@ -196,21 +196,21 @@
                     <form action="{{route('Report.statementReport')}}" method="POST">
                         @csrf
                         <div class="row gy-12">
-                            <div class="col-md-3 mb-1">
+                            <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Date From</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="name" name="from">
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-1">
+                            <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Date To</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control" id="" name="to">
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-1">
-                                <label class="form-label" for="flag">Choose Tenant</label>
-                                <select class="select2 form-select js-example-basic-single" id="tenant"
+                            <div class="col-md-4 mb-1">
+                                <label class="form-label" for="tenant1">Choose Tenant</label>
+                                <select class="select2 form-select js-example-basic-single" id="tenant1"
                                     name='tenant_id'>
                                     <option value="" selected hidden disabled>--Select Tenant--</option>
                                     @foreach ($tenantStatus as $t)

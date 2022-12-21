@@ -71,7 +71,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Building Code</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="building_code" name="building_code" value="{{isset($buildingedit)? $buildingedit->building_code: '' }}" placeholder="Building Code">
+                                    <input type="text" class="form-control" id="building_code" name="building_code" value="{{isset($buildingedit)? $buildingedit->building_code: '' }}" placeholder="Building Code" {{isset($buildingedit)? 'readonly': '' }}>
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
@@ -83,16 +83,26 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Building Type</label>
                                 <select class="select2  form-select js-example-basic-single" id="building_type" name="building_type">
-                                    <option value="{{ $buildingedit->building_type ?? '' }}" selected hidden>{{ $buildingedit->building_type ?? '--Select Builidng Type--'}}</option>
+                                @if (isset($buildingedit))
+                                            <option value="{{ $buildingedit->type }}">
+                                                {{ $buildingedit->building_type }}</option>
+                                                @else
+                                            <option value="" selected hidden>--Select Building Type--</option>
+                                        @endif
                                     @foreach ($building_types as $type)
-                                    <option value="{{ $type->name }}">{{ $type->name }}</option>
+                                    <option value="{{ $type->name}}">{{ $type->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="building_status" name="status" >
-                                    <option value="{{ $buildingedit->status ?? '' }}" selected hidden>{{ $buildingedit->status ?? '--Select Status--'}}</option>
+                                @if (isset($buildingedit))
+                                            <option value="{{ $buildingedit->status ??''}}">
+                                                {{ $buildingedit->status??'' }}</option>
+                                                @else
+                                            <option value="" selected hidden>--Select Status--</option>
+                                        @endif                                    
                                     <option value="active">Active</option>
                                     <option value="inactive">Inactive</option>
                                 </select>
@@ -103,8 +113,13 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Ownership Type</label>
                                 <select class="form-control select2 form-select" id="flag" name="ownership_type">
-                                    <option value="{{ $buildingedit->ownership_type ?? '' }}" selected hidden>{{ $buildingedit->ownership_type ?? '--Select Ownership--'}}</option>
-                                    <option value="title_deed">Title Deed</option>
+                                @if (isset($buildingedit))
+                                            <option value="{{ $buildingedit->ownership_type ??''}}">
+                                                {{ $buildingedit->ownership_type??'' }}</option>
+                                                @else
+                                            <option value="" selected hidden>--Select OwnershipType--</option>
+                                        @endif                              
+                                       <option value="title_deed">Title Deed</option>
                                     <option value="Usufruct contract">Usufruct Contract</option>
                                 </select>
 
@@ -168,7 +183,11 @@
 
                                 <select class="select2 form-select js-example-basic-single" id="country" name='country'>
 
-                                    <option value="{{ $buildingedit->country ?? '' }}" selected hidden>{{ $buildingedit->nationality->name ?? '--Select Country--'}}</option>
+                                    @if (isset($buildingedit))
+                                    <option value="{{ $buildingedit->country ?? '' }}" selected hidden>{{ $buildingedit->nationality->name ??''}}</option>
+                                                @else
+                                            <option value="" selected hidden>--Select Country--</option>
+                                        @endif                              
                                     @foreach($countryDetail as $cd)
                                     <option value="{{ $cd->id}}">{{ $cd->name ?? '' }}</option>
                                     @endforeach

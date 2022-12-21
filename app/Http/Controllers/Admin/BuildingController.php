@@ -191,12 +191,6 @@ class BuildingController extends Controller
 
 
         ]);
-        // $mainpic = '';
-        $otherpic = [];
-        // if ($request->hasFile('building_pic')) {
-        //     $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
-        //     $request->building_pic->move(public_path('upload/building'), $mainpic);
-        // }
 
         $mainpic=[];
         if($request->hasFile('building_pic'))
@@ -300,7 +294,7 @@ class BuildingController extends Controller
         $request->validate([
 
             // 'building_code' => 'required',
-            // 'building_name' => 'required',
+            'building_name' => 'required',
             // 'building_type' => 'required',
             // 'status' => 'required',
             // 'ownership_type' => 'required',
@@ -357,7 +351,7 @@ class BuildingController extends Controller
             'person_incharge' => $request->incharge_name,
             'total_unit' => $request->total_unit,
             'building_no' => $request->building_no,
-            'status' => $request->building_status,
+            'status' => $request->status,
             'land_size_foot' => $request->land_size_foot,
             'price_foot' => $request->price_foot,
             'total_land' => $request->total_land,

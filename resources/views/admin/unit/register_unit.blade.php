@@ -87,11 +87,12 @@
                                 {{-- <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Building Name</label>
 
-                                    <select class="select2  form-select js-example-basic-single" name='building_name'
-                                        @if (isset($buildingedit)) readonly @endif required>
+                                    <select class="select2  form-select js-example-basic-single" name='building_name'>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->id }}" selected>
+                                            <option value="{{ $buildingedit->id }}" disabled>
                                                 {{ $buildingedit->building_name }}</option>
+                                                @else
+                                            <option value="" selected hidden>--Select Building--</option>
                                         @endif
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->id }}">{{ $unit->name }}</option>
@@ -130,23 +131,6 @@
                                             placeholder="Enter Unit No">
                                     </div>
                                 </div>
-
-
-                                {{-- <div class="col-xxl-3 col-md-3">
-                                    <label class="form-label" for="flag">Unit Type</label>
-
-                                    <select class="select2  form-select js-example-basic-single" name='unit_type'>
-                                        @if (isset($buildingedit))
-                                            <option value="{{$buildingedit->id}}" selected>
-                                                {{ $buildingedit->unitTypeDetails->name }}  </option>
-                                        @endif
-                                        <option value="" selected disabled hidden>---Select Type---</option>
-                                        @foreach ($units2 as $unit)
-                                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
-
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Type</label>
                                     <select class="form-control select2 form-select" id="building_name"
@@ -163,31 +147,17 @@
                                     </select>
                                 </div>
 
-                                {{-- <div class="col-xxl-3 col-md-3">
-                                    <label class="form-label" for="flag">Unit Status</label>
-
-                                    <select class="select2  form-select js-example-basic-single" name='unit_status'
-                                        @if (isset($buildingedit)) disabled @endif required>
-                                        @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->name }}" selected>
-                                                {{ $buildingedit->unit_status }}</option>
-                                        @endif
-                                        <option value="" selected>---Select Type---</option>
-                                        @foreach ($units3 as $unit)
-                                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
+                       
 
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Status</label>
-                                    <select class="form-control select2 form-select" id="building_name"
+                                    <select class="form-control select2 form-select" 
                                         name="unit_status">
                                         @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->name??'' }}"> {{$buildingedit->unitFeature->name??''}} </option>
-                                        @endif
-                                            <option value="" >--Select Building--</option>
-                
+                                        @else
+                                            <option value="" selected hidden>--Select Unit Status--</option>
+                                         @endif
                                         @foreach ($units3 as $unit)
                                         <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                     @endforeach
@@ -200,8 +170,9 @@
                                     <select class="select2 select2  form-select js-example-basic-single" name='unit_floor'>                                        @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->id }}">
                                                 {{ $buildingedit->unit_floor }}</option>
+                                        @else
+                                        <option value="" selected hidden>---Select Type---</option>
                                         @endif
-                                        <option value="" {{ isset($buildingedit)?'hidden':'selected' }}>---Select Type---</option>
                                         @foreach ($units4 as $unit)
                                             <option value="{{ $unit->name }}">{{ $unit->name }}</option>
                                         @endforeach
@@ -223,8 +194,9 @@
                                         @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->id }}">
                                                 {{ $buildingedit->unitFeature->name??'' }}</option>
+                                        @else
+                                        <option value="" selected hidden>---Select Type---</option>
                                         @endif
-                                        <option value="" {{ isset($buildingedit)?'hidden':'selected' }}>---Select Type---</option>
                                         @foreach ($units5 as $unit)
                                             <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                         @endforeach
