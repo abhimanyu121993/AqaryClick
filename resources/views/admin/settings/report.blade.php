@@ -265,12 +265,12 @@
         </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
                     <h4 class="card-title mb-0 flex-grow-1" id="h1">Month Tenant Statement Report</h4>
-                </div><!-- end card header -->
+                </div>
                 <div class="card-body">
                     <div class="live-preview">
                         <form action="" method="POST">
@@ -320,14 +320,14 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
                     <h4 class="card-title mb-0 flex-grow-1" id="h1">Company Account Report</h4>
-                </div><!-- end card header -->
+                </div>
                 <div class="card-body">
                     <div class="live-preview">
                         {{-- <form action="{{route('Report.monthly-report')}}" method="POST">
@@ -377,40 +377,8 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
-
-    {{-- <div class="row">
-        <div class="col-lg-12">
-            <div class="card" id="header1">
-                <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Contract Report</h4>
-                </div><!-- end card header -->
-                <div class="card-body">
-                    <div class="live-preview">
-                        <form action="" method="POST">
-                            @csrf
-                            <div class="row gy-12">
-                                <div class="col-md-12 mb-1">
-                                    <label class="form-label" for="flag">Select Type</label>
-                                    <select class="select2 form-select js-example-basic-single" id="building_name"
-                                        name='building_name'>
-                                        <option value="" selected hidden disabled>--Select Type--</option>
-                                        <option value="client contract report">Client Contract Report</option>
-                                        <option value="late payment client report">Late Payment Client Report</option>
-                                        <option value="report of expired contract client">Report of Expired Contract Client
-                                        </option>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div> --}}
     {{-- <div class="row mt-5">
         <div class="col-lg-12">
             <div class="card" id="header1">
