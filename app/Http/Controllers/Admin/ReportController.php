@@ -138,19 +138,19 @@ else{
             'tenant_id' => 'required|numeric'
         ]);
         $data = $req->all();
-        $res = TenantPayment::with([
+        $res = TenantPayment::with('contract')->with([
             'payHistory' => function ($query) use ($data) {
                 return $query->whereDate('created_at','>=', $data['from'])->whereDate('created_at','<=',$data['to']);
             }
         ])->where('tenant_id', $req->tenant_id)->get();
-        dd($res);
+        $tenant=$res[0]->tenant;
+        $date=carbon::parse($req->from)->format('d-M-Y').' To '.carbon::parse($req->to)->format('d-M-Y');
         if(count($res)==0){
             return redirect()->back()->with('error', 'No Records Found!.');
         }
         else{
-        
-                $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
-return view('admin.settings.report_tenant_statement',compact('res'));
+                $company = BusinessDetail::where('id', $res[0]->contract->company_id)->first();
+          return view('admin.settings.report_tenant_statement',compact('res','company','tenant','date'));
     }
     }
 
