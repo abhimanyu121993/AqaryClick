@@ -119,14 +119,16 @@ else{
             'owner_id' => 'required|numeric',
             'type' => 'required|in:a,na'
         ]);
-
+        $user = Customer::find($req->owner_id)->User->id;
+       
+        
         if ($req->type == 'a') {
-            $buildings = Building::where('user_id', $req->owner_id)->where('status', 'active')->get();
+            $buildings = Building::where('user_id', $user)->where('status', 'active')->get();
         } else if ($req->type == 'na') {
-            $buildings = Building::where('user_id', $req->owner_id)->where('status', 'inactive')->orWhereNull('status')->get();
+            $buildings = Building::where('user_id', $user)->where('status', 'inactive')->orWhereNull('status')->get();
         }
-        return view('admin.report.building', compact('buildings'));
-        $pdf=Pdf::loadView('admin.report.building',compact('buildings'));
+        // return view('admin.report.building', compact('buildings'));
+        $pdf=Pdf::loadView('admin.report.building',compact('buildings'))->setPaper('a4', 'landscape');;
         return $pdf->stream('building.pdf');
     }
 
@@ -154,13 +156,14 @@ else{
     }
     }
 
-    public function MonthlyReport(Request $req)
+    public function statementReportAllTenant(Request $req)
     {
         $this->getUser();
         $req->validate([
-            'start_date'=>'required|date',
-            'end_date'=>'required|date'
+            'date_from'=>'required|date',
+            'date_to'=>'required|date'
         ]);
+        
         
         if(Auth::user()->hasRole('superadmin')){
             $tenants = Tenant::pluck('id');
@@ -169,11 +172,10 @@ else{
         {
             $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
         }
-        $statement = PaymentHistory::with([
-            'tenantPayment' => function ($query) use($tenants) {
+        $statement = PaymentHistory::with(['tenantPayment' => function ($query) use($tenants) {
                 return $query->whereIn('tenant_id', $tenants);
             }
-        ])->whereDateBetwwen('created_at',Carbon::parse($req->start_date),Carbon::parse($req->end_date))->latest();
+        ])->whereDate('created_at','>=',Carbon::parse($req->date_from))->where('created_at','<=',Carbon::parse($req->date_to))->get();
 
         return $statement;
     }
