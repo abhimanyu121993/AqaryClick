@@ -80,7 +80,7 @@
                                     <label for="space" class="form-label">Tenant Type</label>
                                     <select class="form-control" id="tenant_type" name="tenant_type">
                                         @if (isset($contractedit))
-                                        <option value="{{$contractedit->tenantDetails->id}}" selected hidden>{{$contractedit->tenantDetails->tenant_document??''}}</option>
+                                        <option value="{{$contractedit->tenantDetails->tenant_type}}" selected hidden>{{$contractedit->tenantDetails->tenant_type=='TP'?'Personal':($contractedit->tenantDetails->tenant_type=='TC'?'Company':($contractedit->tenantDetails->tenant_type=='TG'?'Goverment':'N/A'))}}</option>
                                         @else
                                         <option value="" selected hidden>--Select Tenant Type--</option>
                                         @endif
@@ -872,7 +872,9 @@
     <script>
         $(document).ready(function() {
             $('.sponsor_hide').hide();
-            $("#tenant_type").change(function() {
+         
+        });
+        $(document).on('change',"#tenant_type",function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'TC') {
@@ -903,13 +905,12 @@
 
                     }
                 });
-            }).change();
-        });
+            });
     </script>
 
     <script>
         $(document).ready(function() {
-            $("#tenant_type").change(function() {
+            $(document).on('change',"#tenant_type",function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     var newurl = "{{ url('/admin/fetch-tenant-details') }}/" + optionValue;
