@@ -391,7 +391,7 @@
     </div>
 
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
@@ -421,8 +421,8 @@
 
             </div>
         </div>
-    </div>
-    <div class="row mt-5">
+    </div> --}}
+    {{-- <div class="row mt-5">
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
@@ -478,7 +478,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>  --}}
 
     <div class="container tenant_all_data">
 
