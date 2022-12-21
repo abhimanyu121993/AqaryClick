@@ -143,9 +143,16 @@ else{
                 return $query->whereDate('created_at','>=', $data['from'])->whereDate('created_at','<=',$data['to']);
             }
         ])->where('tenant_id', $req->tenant_id)->get();
+        dd($res);
+        if(count($res)==0){
+            return redirect()->back()->with('error', 'No Records Found!.');
+        }
+        else{
+        
+                $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
 return view('admin.settings.report_tenant_statement',compact('res'));
     }
-
+    }
 
     public function MonthlyReport(Request $req)
     {

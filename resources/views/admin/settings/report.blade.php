@@ -229,61 +229,7 @@
         </div>
     </div>
 </div>
-    {{-- <div class="row">
-        <div class="col-lg-12">
-            <div class="card" id="header1">
-                <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Tenant Statement Report</h4>
-                </div><!-- end card header -->
-                <div class="card-body">
-                    <div class="live-preview">
-                        <form action="" method="POST">
-                            @csrf
-                            <div class="row gy-12">
-                                <div class="col-md-3 mb-1">
-                                    <label class="form-label" for="flag">Date From</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" id="name" name="date_from">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-1">
-                                    <label class="form-label" for="flag">Date To</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" id="" name="date_to">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-1">
-                                    <label class="form-label" for="flag">Customer Name</label>
-                                    <select class="select2 form-select js-example-basic-single" id="building_name"
-                                        name='building_name'>
-                                        <option value="" selected hidden disabled>--Select Customer--</option>
-                                        @role('superadmin')
-                                            @foreach ($customer as $c)
-                                                <option value="{{ $c->id }}">{{ $c->first_name }}</option>
-                                            @endforeach
-                                        @else
-                                            <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
-                                        @endrole
-                                    </select>
-                                </div>
-                                <div class="col-md-3 mb-1">
-                                    <label class="form-label" for="flag">Choose Tenant</label>
-                                    <select class="select2 form-select js-example-basic-single" id="tenant"
-                                        name='tenant'>
-                                        <option value="" selected hidden disabled>--Select Tenant--</option>
-                                        @foreach ($tenantStatus as $t)
-                                            <option value="{{ $t->id }}">{{ $t->tenant_english_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+   
     <div class="row">
         <div class="col-lg-12">
             <div class="card" id="header1">

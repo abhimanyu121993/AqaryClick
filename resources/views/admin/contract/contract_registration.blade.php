@@ -469,12 +469,6 @@
                                             placeholder="Enter Rent Amount">
                                     </div>
                                 </div>
-                                <!-- <div class="col-xxl-3 col-md-3">
-                                    <label for="building_pic" class="form-label">Tenant Sign</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="tenant_sign" name="tenant_sign">
-                                    </div>
-                                </div> -->
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Total Invoice</label>
                                     <div class="input-group">
