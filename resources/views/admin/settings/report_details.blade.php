@@ -52,7 +52,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">Client Contracts Report</h4>
+                    <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">Tenant Contracts Report</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
@@ -60,13 +60,15 @@
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Contract No</th>
-                                <th scope="col">Customer Name</th>
+                                <th scope="col">Tenant Name</th>
                                 <th scope="col">Contract Start Date</th>
                                 <th scope="col">Contract Expiry Date</th>
                                 <th scope="col">Contract Period Months</th>
                                 <th scope="col">Monthly Rent</th>
                                 <th scope="col">Total Value of Contract</th>
                                 <th scope="col">Total Remaining</th>
+                                <th scope="col">Overdue</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -81,6 +83,7 @@
                                     <td>{{number_format($c->rent_amount)??0}}</td>
                                     <td>{{$total=floatval($c->rent_amount)*floatval($c->lease_period_month)??0}}</td>
                                     <td>{{number_format($total-($c->Allinvoices->sum('amt_paid')??0))}}</td>
+                                    <td>{{ $c->overdue ?? '' }}</td>
 
                             @endforeach
                             </tr>

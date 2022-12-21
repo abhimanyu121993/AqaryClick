@@ -108,9 +108,9 @@
                                     <select class="select2 form-select js-example-basic-single" id="type"
                                         name='type'>
                                         <option value="" selected hidden disabled>--Select Type--</option>
-                                        <option value="ccr">Client Contract Report</option>
-                                        <option value="lpcr">Late Payment Client Report</option>
-                                        <option value="recc">Report of Expired Contract Client</option>
+                                        <option value="ccr">Tenant Contract Report</option>
+                                        <option value="lpcr">Tenant Overdue Report</option>
+                                        <option value="recc">Tenant Expired Contract Report</option>
 
                                     </select>
                                 </div>
