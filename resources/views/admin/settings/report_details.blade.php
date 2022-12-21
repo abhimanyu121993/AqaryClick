@@ -10,11 +10,14 @@
 
     <title>Report</title>
   </head>
-
+ 
 <body>
 <div class="row">
+
 <div class="col-lg-12">
                                     <div class="card-header border-bottom-dashed p-4">
+                                    <center> <a href="javascript:window.print()" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</a></center>
+
                                         <div class="d-flex">
                                             <div  class="flex-grow-1">
                                                 @if ($company->customer_type == 'Indivisual')
@@ -57,7 +60,7 @@
                             <tr>
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Contract No</th>
-                                <th scope="col">Customer Phone</th>
+                                <th scope="col">Customer Name</th>
                                 <th scope="col">Contract Start Date</th>
                                 <th scope="col">Contract Expiry Date</th>
                                 <th scope="col">Contract Period Months</th>
@@ -71,7 +74,7 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $c->contract_code ?? '' }}</td>
-                                    <td>{{ $c->tenantDetails->tenant_primary_mobile ?? '' }}</td>
+                                    <td>{{ $c->tenantDetails->tenant_english_name ?? '' }}</td>
                                     <td>{{$c->lease_start_date??''}}</td>
                                     <td>{{$c->lease_end_date??''}}</td>
                                     <td>{{$c->lease_period_month??''}}</td>

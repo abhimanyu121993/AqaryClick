@@ -61,8 +61,10 @@
 </style>
 @section('title', 'Dashboard')
 @section('main-content')
-
-<div class="row project-wrapper" >
+<div class="row">
+<center><a href="{{ route('admin.report') }}"><button type="button" class="btn btn-primary text-end">View Reports</button></a></center>
+</div>
+<div class="row project-wrapper mt-2">
 <div class="row">
                     @role('superadmin')
 					<div class="col-xl-6 col-xxl-12">

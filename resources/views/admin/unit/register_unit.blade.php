@@ -134,7 +134,7 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Type</label>
                                     <select class="form-control select2 form-select" id="building_name"
-                                        name="unit_type">
+                                        name="unit_type" required>
                                         @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->id }}" selected>
                                                 {{$buildingedit->unitTypeDetails->name}}</option>
@@ -151,8 +151,7 @@
 
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Status</label>
-                                    <select class="form-control select2 form-select" 
-                                        name="unit_status">
+                                    <select class="form-control select2 form-select" name="unit_status" required>
                                         @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->name??'' }}"> {{$buildingedit->unitFeature->name??''}} </option>
                                         @else
@@ -167,20 +166,20 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Floor</label>
 
-                                    <select class="select2 select2  form-select js-example-basic-single" name='unit_floor'>                                        @if (isset($buildingedit))
+                                    <select class="select2 select2  form-select js-example-basic-single" name='unit_floor' required>                                        @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->id }}">
-                                                {{ $buildingedit->unit_floor }}</option>
+                                                {{ $buildingedit->unit_floor->name }}</option>
                                         @else
                                         <option value="" selected hidden>---Select Type---</option>
                                         @endif
                                         @foreach ($units4 as $unit)
-                                            <option value="{{ $unit->name }}">{{ $unit->name }}</option>
+                                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="col-xxl-3 col-md-3">
-                                    <label for="building_location" class="form-label">Area/m²</label>
+                                    <label for="building_location" class="form-label">Unit size <sup class="text-danger">(Area/m²)</sup> </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="unit_size" name="unit_size"
                                             value="{{ isset($buildingedit) ? $buildingedit->unit_size : '' }}"
@@ -190,7 +189,7 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Feature</label>
 
-                                    <select class="select2  form-select js-example-basic-single" name='unit_feature'>
+                                    <select class="select2  form-select js-example-basic-single" name='unit_feature' required>
                                         @if (isset($buildingedit))
                                             <option value="{{ $buildingedit->id }}">
                                                 {{ $buildingedit->unitFeature->name??'' }}</option>
