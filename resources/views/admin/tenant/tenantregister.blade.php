@@ -96,7 +96,7 @@
                         <div class=" col-xxl-3 col-md-3">
                             <label for="name" class="form-label">Tenant Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code" value="{{$editTenant->tenant_code ?? ''}}">
+                                <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code" value="{{$editTenant->tenant_code ?? ''}}" {{isset($editTenant)?'readonly' : ''}}>
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">

@@ -389,16 +389,10 @@
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
-                            <div class="col-xxl-3 col-md-6">
+                            <div class="col-xxl-3 col-md-12">
                                 <label for="building_pic" class="form-label">Building Photo</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" id="building_pic" name="building_pic[]" multiple>
-                                </div>
-                            </div>
-                            <div class="col-xxl-3 col-md-6">
-                                <label for="building_file" class="form-label">Building File</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control"  id="building_file" name="building_file[]" multiple>
                                 </div>
                             </div>
                         </div>
@@ -537,9 +531,11 @@ else{
        $('#annual_income').val((a*12).toLocaleString());
        $('#annual_income').val((a*12).toLocaleString());
       var b= $('#annual_income').val();
+    var AI=b.replace(/,/g, "");
       var c= $('#property_vlaue').val();
+      var PV=c.replace(/,/g, "")
 
-      $('#payback').val((c/b).toFixed(1)+"Years");
+      $('#payback').val((PV/AI).toFixed(1)+"Years");
 
        });
     });

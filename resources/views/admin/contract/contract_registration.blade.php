@@ -174,17 +174,16 @@
                                     <select class="form-control select2 form-select" id="contract_status"
                                         name="contract_status">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->contract_status }}" selected>
-                                                {{ $contractedit->contract_status }}</option>
-                                        @else
-                                            <option value="" selected hidden>--Select Status--</option>
+                                            <option value="{{ $contractedit->contract_status }}">
+                                                {{ $contractedit->contract_status??''}}</option>
+                                        @endif
+                                            <option value="" {{ isset($contractedit)?'hidden':'selected' }}>--Select Status--</option>
                                             <option value="new">New</option>
                                             <option value="renewed">Renewed</option>
                                             <option value="not renewed">Not Renewed</option>
                                             <option value="auto renewed">Auto Renewed</option>
                                             <option value="long term">Long Term</option>
                                             <option value="releted parties">Related Parties</option>
-                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 sponsor_hide">
@@ -228,8 +227,8 @@
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->customer->id }}" selected>
                                                 {{ $contractedit->customer->full_name }}</option>
-                                        @else
-                                            <option value="" selected hidden>--Select Lessor's--</option>
+                                        @endif
+                                            <option value="" {{ isset($contractedit)?'hidden':'selected' }}>--Select Lessor's--</option>
                                             @role('superadmin')
                                             @foreach ($lessor as $less)
                                                 <option value="{{ $less->id }}">{{ $less->first_name }}
@@ -240,8 +239,6 @@
                                             <option value="{{ $lessor->id }}">{{ $lessor->first_name }}
                                                 {{ $lessor->last_name }}</option>
                                             @endrole
-                                        @endif
-
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -323,11 +320,10 @@
                                             <option id="selectedOption" value="{{ $contractedit }}">
                                                 {{ $contractedit->is_grace }}
                                             </option>
-                                        @else
-                                            <option value="" selected hidden>--Select grace--</option>
+                                        @endif
+                                            <option value="" {{ isset($contractedit)?'hidden':'selected' }}>--Select grace--</option>
                                             <option value="Yes">Yes</option>
                                             <option value="No">No</option>
-                                        @endif
 
                                     </select>
                                 </div>
@@ -395,10 +391,10 @@
                                     <select class="select2 form-select js-example-basic-single" id="approved_by"
                                         name='approved_by'>
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->approved_by }}" selected>
+                                            <option value="{{ $contractedit->approved_by }}">
                                                 {{ $contractedit->customer->full_name }}</option>
                                         @else
-                                            <option value="" selected hidden>--Select Person--</option>
+                                            <option value="" {{ isset($contractedit)?'hidden':'selected' }}>--Select Person--</option>
                                             @role('superadmin')
                                             @foreach ($lessor as $less)
                                                 <option value="{{ $less->id }}">{{ $less->first_name }}

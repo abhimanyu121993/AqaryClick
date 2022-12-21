@@ -20,7 +20,7 @@ class Unit extends Model
     }
     public function unitFeature()
     {
-        return $this->belongsTo(UnitStatus::class, 'unit_feature', 'id');
+        return $this->belongsTo(UnitFeature::class, 'unit_feature', 'id');
     }
 
     public function unitTypeDetails()

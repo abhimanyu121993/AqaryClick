@@ -208,14 +208,6 @@ class BuildingController extends Controller
                 $mainpic []=$build_name;
             }
         }
-
-        if ($request->hasFile('building_file')) {
-            foreach ($request->file('building_file') as $file) {
-                $name = 'build-' . time() . '-' . rand(0, 99) . '.' . $file->extension();
-                $file->move(public_path('upload/building_doc'), $name);
-                $otherpic[] = $name;
-            }
-        }
         $data = Building::create([
             'user_id' => $this->user_id,
             'building_code' => $request->building_code,
@@ -259,7 +251,6 @@ class BuildingController extends Controller
             'area' => $request->zone_name,
             'pincode' => $request->pincode,
             'building_pic' => json_encode($mainpic),
-            'file' => json_encode($otherpic),
             'remark' => $request->remark,
         ]);
         if ($data) {
@@ -308,50 +299,42 @@ class BuildingController extends Controller
     {
         $request->validate([
 
-            'building_code' => 'required',
-            'building_name' => 'required',
-            'building_type' => 'required',
-            'status' => 'required',
-            'ownership_type' => 'required',
-            'pincode' => 'required',
-            'owner_name' => 'required',
-            'lessor_name' => 'required',
-            'country' => 'required',
-            'city' => 'required',
-            'zone_name' => 'required',
-            'building_no' => 'required',
-            'street_no' => 'required',
-            'zone_no' => 'required',
-            'construction_date' => 'required',
-            'building_age' => 'required',
-            'building_status' => 'required',
-            'built_up_area' => 'required',
-            'cost_building' => 'required',
-            'building_value' => 'required',
-            'landsize_meter' => 'required',
-            'land_size_foot' => 'required',
-            'price_foot' => 'required',
-            'total_land' => 'required',
-            'monthly_income' => 'required',
-            'annual_income' => 'required',
-            'payback' => 'required',
-            'property_vlaue' => 'required',
-            'incharge_name' => 'required',
-            'person_job' => 'required',
-            'person_mobile' => 'required',
-            'building_receive_date' => 'required',
+            // 'building_code' => 'required',
+            // 'building_name' => 'required',
+            // 'building_type' => 'required',
+            // 'status' => 'required',
+            // 'ownership_type' => 'required',
+            // 'pincode' => 'required',
+            // 'owner_name' => 'required',
+            // 'lessor_name' => 'required',
+            // 'country' => 'required',
+            // 'city' => 'required',
+            // 'zone_name' => 'required',
+            // 'building_no' => 'required',
+            // 'street_no' => 'required',
+            // 'zone_no' => 'required',
+            // 'construction_date' => 'required',
+            // 'building_age' => 'required',
+            // 'building_status' => 'required',
+            // 'built_up_area' => 'required',
+            // 'cost_building' => 'required',
+            // 'building_value' => 'required',
+            // 'landsize_meter' => 'required',
+            // 'land_size_foot' => 'required',
+            // 'price_foot' => 'required',
+            // 'total_land' => 'required',
+            // 'monthly_income' => 'required',
+            // 'annual_income' => 'required',
+            // 'payback' => 'required',
+            // 'property_vlaue' => 'required',
+            // 'incharge_name' => 'required',
+            // 'person_job' => 'required',
+            // 'person_mobile' => 'required',
+            // 'building_receive_date' => 'required',
 
         ]);
 
         $mainpic = [];
-        $otherpic =[];
-        // if ($request->hasFile('building_pic')) {
-        //     $mainpic = 'build-' . time() . '-' . rand(0, 99) . '.' . $request->building_pic->extension();
-        //     $request->building_pic->move(public_path('upload/building'), $mainpic);
-        //     $oldpic = Building::find($id)->pluck('building_pic')[0];
-        //     File::delete(public_path('upload/building/' . $oldpic));
-        // }
-
         if($request->hasFile('building_pic'))
         {
             foreach($request->file('building_pic') as $file)
@@ -360,18 +343,6 @@ class BuildingController extends Controller
                 $file->move(public_path('upload/building'),$build_name);
                 $mainpic[]=$build_name;
             }
-        }
-
-
-        if ($request->hasFile('building_file')) {
-            foreach ($request->file('building_file') as $file) {
-                $name = 'build-' . time() . '-' . rand(0, 99) . '.' . $file->extension();
-                $file->move(public_path('upload/building_doc'), $name);
-                $otherpic[] = $name;
-            }
-        }
-        if (count($otherpic) > 0) {
-            Building::find($id)->update(['file' => json_encode($otherpic)]);
         }
 
         if (count($mainpic) > 0) {

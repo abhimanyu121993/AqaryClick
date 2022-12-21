@@ -84,7 +84,6 @@ class UnitController extends Controller
             'water_no'=>'required',
             'intial_rent'=>'required',
             'actual_rent'=>'required',
-            'unit_desc'=>'required',
             'unit_ref'=>'required',
             'revenue'=>'required',
 
@@ -188,7 +187,6 @@ class UnitController extends Controller
             'water_no'=>'required',
             'intial_rent'=>'required',
             'actual_rent'=>'required',
-            'unit_desc'=>'required',
             'unit_ref'=>'required',
             'revenue'=>'required',
         ]);

@@ -33,5 +33,6 @@ class User extends Authenticatable implements HasLoginsAndDevicesInterface
     {
         return $this->hasOne(Customer::class, 'email', 'email');
     }
+   
 
 }

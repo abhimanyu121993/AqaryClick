@@ -38,5 +38,9 @@ class Building extends Model
     {
         return $this->hasMany(BuildingFiles::class, 'building_id');
     }
+    public function lessorDetails()
+    {
+        return $this->belongsTo(User::class, 'lessor_name', 'id');
+    }
     
 }
