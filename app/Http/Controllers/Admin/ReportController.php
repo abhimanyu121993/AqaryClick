@@ -152,7 +152,9 @@ else{
         }
         else{
                 $company = BusinessDetail::where('id', $res[0]->contract->company_id)->first();
-          return view('admin.settings.report_tenant_statement',compact('res','company','tenant','date'));
+              return view('admin.settings.report_tenant_statement',compact('res','company','tenant','date'));
+              $pdf=Pdf::loadView('admin.settings.report_tenant_statement',compact('res','company','tenant','date'))->setPaper('a4', 'landscape');
+              return $pdf->stream('Tenants Statement.pdf');
     }
     }
 
@@ -176,8 +178,12 @@ else{
                 return $query->whereIn('tenant_id', $tenants);
             }
         ])->whereDate('created_at','>=',Carbon::parse($req->date_from))->where('created_at','<=',Carbon::parse($req->date_to))->get();
+        $date=carbon::parse($req->date_from)->format('d-M-Y').' To '.carbon::parse($req->date_to)->format('d-M-Y');
 
-        return $statement;
+        // return $statement;
+        return view('admin.report.all_tenant_statement',compact('statement','date'));
+        $pdf=Pdf::loadView('admin.report.all_tenant_statement',compact('statement','date'))->setPaper('a4', 'landscape');
+              return $pdf->stream('All Tenants Statement.pdf');
     }
     public function newReport()
     {
