@@ -238,7 +238,7 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="" method="POST">
+                        <form action="{{route('Report.all-tenant-statement-report')}}" method="POST">
                             @csrf
                             <div class="row gy-12">
                                 <div class="col-md-4 mb-1">
@@ -253,19 +253,8 @@
                                         <input type="date" class="form-control" id="" name="date_to">
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-1">
-                                    <label class="form-label" for="flag">Customer Name</label>
-                                    <select class="select2 form-select js-example-basic-single" id="building_name"
-                                        name='building_name'>
-                                        <option value="" selected hidden disabled>--Select Customer--</option>
-                                        @role('superadmin')
-                                            @foreach ($customer as $c)
-                                                <option value="{{ $c->id }}">{{ $c->first_name }}</option>
-                                            @endforeach
-                                        @else
-                                            <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
-                                        @endrole
-                                    </select>
+                                <div class="col-md-4 mb-1 mt-4">
+                                    <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
                                 </div>
                             </div>
                         </form>
@@ -341,7 +330,7 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{route('Report.monthly-report')}}" method="POST">
+                        {{-- <form action="{{route('Report.monthly-report')}}" method="POST">
                             @csrf
                             <div class="row gy-12">
                                 <div class="col-md-3 mb-1">
@@ -382,7 +371,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
 
