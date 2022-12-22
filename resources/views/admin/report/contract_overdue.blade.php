@@ -53,55 +53,73 @@
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
                     <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">Tenant Overdue Report</h4>
-                </div><!-- end card header -->
-                <div class="card-body table-responsive">
+                </div>
+                <div class="row">
+        <div class="col-lg-12">
+            <div class="card" id="header1">
+                <div class="card-body">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
-                        <thead style="background-color: #EDC70B;">
+                        <thead style="background-color: #264da6;color:white">
                             <tr>
-                                <th scope="col">Sr.No.</th>
-                                <th scope="col">Contract No</th>
-                                <th scope="col">Tenant Name/Tenant Phone</th>
-                                <th scope="col">Contract Start Date</th>
-                                <th scope="col">Contract Expiry Date</th>
-                                <th scope="col">Contract Period Months</th>
-                                <th scope="col">Monthly Rent</th>
-                                <th scope="col">Total Value of Contract</th>
-                                <th scope="col">Total Remaining</th>
-                                <th scope="col">Last Payment Date</th>
-                                <th scope="col">Duration Delay</th>
-                                <th scope="col">Notes</th>
-
-
+                                <th scope="col">Total Invoice Paid</th>
+                                <th scope="col">Total Amount Paid</th>
+                                <th scope="col">Total Invoice Unpaid</th>
+                                <th scope="col">Total Amount Unpaid</th>
+                                <th scope="col">Invoices Balance Unpaid</th>
+                                <th scope="col">Total Outstanding</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($contracts as $c)
-                                <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ $c->contract_code ?? '' }}</td>
-                                    <td>{{ $c->tenantDetails->tenant_english_name ?? '' }}</td>
-                                    <td>{{$c->lease_start_date??''}}</td>
-                                    <td>{{$c->lease_end_date??''}}</td>
-                                    <td>{{$c->lease_period_month??''}}</td>
-                                    <td>{{number_format($c->rent_amount)??0}}</td>
-                                    <td>{{$total=floatval($c->rent_amount)*floatval($c->lease_period_month)??0}}</td>
-                                    <td>{{number_format($total-($c->Allinvoices->sum('amt_paid')??0))}}</td>
-                                    <td>{{ $c->last_paid_invoice ?? 'N/A' }}</td>
-                                    <td>{{ $c->overdue ?? '' }} Days</td>
-                                    <td>{{ $c->remark ?? '' }}</td>
-                                    
-
-                            @endforeach
+                            <tr>
+                                <td>{{$invoice??''}}</td>
+                                <td>{{ number_format($inv_paid_amt) ?? 0 }}</td>
+                                <td>{{ $not_paid_invoice ?? 0 }}</td>
+                                <td>{{ number_format($invoice_not_paid_amt) ?? 0 }}</td>
+                                <td>{{number_format($invoice_balance)?? 0}}</td>
+                                <td>{{ number_format($outstanding) ?? 0 }}</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-body field_wrapper -responsive">
+                <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
+                        <thead style="background-color: #264da6;color:white">
+                            <tr>
+                                <th scope="col">Sr.No.</th>
+                                <th scope="col">Contract No</th>
+                                <th scope="col">Tenant Name</th>
+                                <th scope="col">Invoice No</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Payment Date</th>
+                                <th scope="col">Due Amount</th>
+                                <!-- <th scope="col">Total Contract</th> -->
+                                <!-- <th scope="col">Amount Paid</th> -->
+                                <th scope="col">Payment Status</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Overdue Period </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($Allinvoice as $inv)
+                                <tr>
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $inv->Contract->contract_code ?? '' }}</td>
+                                    <td>{{ $inv->TenantName->tenant_english_name ?? '' }}</td>
+                                    <td>{{ $inv->invoice_no ?? '' }}</td>
+                                    <td>{{ Carbon\Carbon::parse($inv->due_date)->format('d-M-Y') ?? '' }}</td>
+                                    <td>{{ Carbon\Carbon::parse($inv->created_at)->format('d-M-Y') ?? '' }}</td>
+                                    <td>{{ number_format($inv->total_balance) ?? '' }}</td>
+                                    <!-- <td>{{ $inv->Contract->total_contract ?? '' }}</td> -->
+                                    <!-- <td>{{ $inv->amt_paid ?? '' }}</td> -->
+                                    <td>{{ $inv->payment_status ?? '' }}</td>
+                                    <td>{{ $inv->payment_method ?? '' }}</td>
+                                    <td>{{ $inv->overdue_period ?? '' }}Days</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
 </html>

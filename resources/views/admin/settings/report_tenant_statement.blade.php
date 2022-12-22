@@ -27,19 +27,21 @@
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
                 <thead>
       <tr>
-        <th scope="col" class="text-center" colspan="6" style="background-color:#003a51;color:white;">ACCOUNT DETAILS FOR EACH CONTRACT</th>
+        <th scope="col" class="text-center" colspan="8" style="background-color:#003a51;color:white;">ACCOUNT DETAILS FOR EACH CONTRACT</th>
       </tr>
     </thead>
 
-    @foreach($res as $c )
+    @foreach($res as $c)
     <thead>
       <tr>
-        <th scope="col" colspan="6" style="background-color:#dbeaf9;color:black;">{{ $c->contract->contract_code??'' }}</th>
+        <th scope="col" colspan="8" style="background-color:#dbeaf9;color:black;">{{ $c->contract->contract_code??'' }}</th>
       </tr>
     </thead>
     <thead>
       <tr>
         <th scope="col">S.n</th>
+        <th scope="col">Tenant Name</th>
+        <th scope="col">Building Name</th>
         <th scope="col">Date</th>
         <th scope="col">Description</th>
         <th scope="col">Debit</th>
@@ -53,6 +55,8 @@
 
       <tr>
         <td>{{$loop->index+1}}</td>
+        <td>{{$c->tenant->tenant_english_name??''}}</td>
+        <td>{{$c->tenant->buildingDetails->name??''}}</td>
         <td>{{$tp->created_at->format('d-M-Y')??''}}</td>
         <td></td>
         <td class="text-danger">{{($tp->status=='dr')?$tp->amount:'0.00'}}</td>

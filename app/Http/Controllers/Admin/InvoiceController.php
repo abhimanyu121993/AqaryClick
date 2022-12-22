@@ -127,7 +127,7 @@ class InvoiceController extends Controller
         $receipt_count = Invoice::where('user_id', $this->user_id)->where('tenant_id', $request->tenant_name)->count() ?? 0;
         $receipt = str_pad($receipt_count + 1, 3, '0', STR_PAD_LEFT);
         $invoice_no = Invoice::where('user_id', $this->user_id)->where('tenant_id', $request->tenant_name)->count() ?? 0;
-        $invoice_no = 'INV' . '-' . Carbon::now()->day . Carbon::now()->month . Carbon::now()->format('y') . '-' . str_pad($invoice_no + 1, 3, '0', STR_PAD_LEFT);
+        $invoice_no = 'INV' . '-' .Carbon::now()->month . Carbon::now()->format('y') . '-' . str_pad($invoice_no + 1, 3, '0', STR_PAD_LEFT);
         $data = Invoice::create([
             'user_id' => $this->user_id,
             'tenant_id' => $request->tenant_name,

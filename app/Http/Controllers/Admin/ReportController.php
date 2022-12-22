@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\BusinessDetail;
 use App\Models\Contract;
+use App\Models\currency;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\Nationality;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
 use App\Models\TenantPayment;
@@ -117,7 +119,27 @@ else{
 
         }
         else if($req->type='lpcr'){
-            return view('admin.report.contract_overdue',compact('contracts','company'));
+            $owner_id=Customer::find($req->owner_id);
+            $owner=$owner_id->user->id;
+            $contract = Contract::where('user_id',$owner)->get();
+            $total_invoice=Invoice::where('user_id', $owner);
+            $invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get()->count();
+            
+            $Allinvoice = Invoice::where('user_id',$owner)->get();
+            $invoiceDetails = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get();
+            $inv_paid_amt=$invoiceDetails->sum('amt_paid');
+            $inv_all_due_amt=$invoiceDetails->sum('due_amt');
+            $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->get()->sum('contract_sum_rent_amount');
+            $not_paid_invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Not Paid')->count();
+            $delay_invoice = Invoice::where('user_id',$owner)->whereNotNull('overdue_period')->count()??'0';
+            $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+            $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+            $total_amt = $invoice * $total_amount;
+            $total_delay = $delay_invoice * $total_delay_amt;
+            $invoice_balance = $total_delay + $not_paid_invoice;
+            $outstanding=$invoice_balance-$inv_paid_amt;
+            $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
+            return view('admin.report.contract_overdue',compact('contracts','company','contract','invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance','invoice','delay_invoice','not_paid_invoice','invoice_not_paid_amt','inv_paid_amt','outstanding','Allinvoice','inv_all_due_amt'));
 
         }
         
@@ -146,11 +168,13 @@ else{
 
     public function statementReport(Request $req)
     {
+
         $req->validate([
             'from' => 'required|date',
             'to' => 'required|date',
             'tenant_id' => 'required|numeric'
         ]);
+
         $data = $req->all();
         $res = TenantPayment::with('contract')->with([
             'payHistory' => function ($query) use ($data) {
@@ -159,6 +183,8 @@ else{
         ])->where('tenant_id', $req->tenant_id)->get();
         $tenant=$res[0]->tenant;
         $date=carbon::parse($req->from)->format('d-M-Y').' To '.carbon::parse($req->to)->format('d-M-Y');
+
+        
         if(count($res)==0){
             return redirect()->back()->with('error', 'No Records Found!.');
         }
@@ -178,18 +204,32 @@ else{
             'date_to'=>'required|date'
         ]);
         
-        
         if(Auth::user()->hasRole('superadmin')){
-            $tenants = Tenant::pluck('id');
+            if($req->building_id=='all'){
+            $tenants = Tenant::where('building_name',$req->building_id)->pluck('id');
+            }
+            else
+            {
+                $tenants = Tenant::pluck('id');
+            }
         }
         else
         {
-            $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
+            if($req->building_id=='all')
+            {
+                $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
+            }
+            else
+            {
+            $tenants = Tenant::where('user_id', $this->user_id)->where('building_name',$req->building_id)->pluck('id');
+            }
         }
+
         $statement = PaymentHistory::with(['tenantPayment' => function ($query) use($tenants) {
                 return $query->whereIn('tenant_id', $tenants);
             }
         ])->whereDate('created_at','>=',Carbon::parse($req->date_from))->where('created_at','<=',Carbon::parse($req->date_to))->get();
+        
         $date=carbon::parse($req->date_from)->format('d-M-Y').' To '.carbon::parse($req->date_to)->format('d-M-Y');
 
         // return $statement;
@@ -207,5 +247,9 @@ else{
             $building = Building::where('user_id', Auth::user()->id)->get();
         }
         return view('admin.settings.new_report', compact('building', 'tenantStatus'));
+    }
+
+    public function OverdueReort(Request $req){
+
     }
 }

@@ -196,6 +196,24 @@
                     <form action="{{route('Report.statementReport')}}" method="POST">
                         @csrf
                         <div class="row gy-12">
+                        <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="flag">Building Name</label>
+                                    <select class="select2 form-select js-example-basic-single" id="building_statement"
+                                        name='building_id'>
+                                        <option value="" selected hidden disabled>--Select Building--</option>
+                                        <option value="all">All</option>
+                                        @foreach ($building as $build)
+                                            <option value="{{ $build->id }}">{{ $build->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="flag">Tenant Name</label>
+                                    <select class="select2 form-select js-example-basic-single" id="tenant_name_statement"
+                                        name='tenant_id'>
+                                        <option value="" selected hidden disabled>--Select Tenant--</option>
+                                    </select>
+                                </div>
                             <div class="col-md-4 mb-1">
                                 <label class="form-label" for="flag">Date From</label>
                                 <div class="input-group">
@@ -208,16 +226,7 @@
                                     <input type="date" class="form-control" id="" name="to">
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-1">
-                                <label class="form-label" for="tenant1">Choose Tenant</label>
-                                <select class="select2 form-select js-example-basic-single" id="tenant1"
-                                    name='tenant_id'>
-                                    <option value="" selected hidden disabled>--Select Tenant--</option>
-                                    @foreach ($tenantStatus as $t)
-                                        <option value="{{ $t->id }}">{{ $t->tenant_english_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            
                         </div><div class="row mt-2">
                             <div class="col-md-3 mb-1">
                                 <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
@@ -241,6 +250,18 @@
                         <form action="{{route('Report.all-tenant-statement-report')}}" method="POST">
                             @csrf
                             <div class="row gy-12">
+                            <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="flag">Building Name</label>
+                                    <select class="select2 form-select js-example-basic-single" id="building"
+                                        name='building_id'>
+                                        <option value="" selected hidden disabled>--Select Building--</option>
+                                        <option value="all">All</option>
+                                        @foreach ($building as $build)
+                                            <option value="{{ $build->id }}">{{ $build->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="col-md-4 mb-1">
                                     <label class="form-label" for="flag">Date From</label>
                                     <div class="input-group">
@@ -563,6 +584,8 @@
                         method: 'get',
                         success: function(p) {
                             $("#tenant_name").html(p);
+                            $("#tenant_name_statement").html(p);
+
                         }
                     });
                     $.ajax({
@@ -572,6 +595,24 @@
                             $('#unit_type').html(a);
                         }
                     });
+                });
+            }).change();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#building_statement").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    var newurl = "{{ url('/admin/fetch-building-tenant-unit') }}/" + optionValue;
+                    $.ajax({
+                        url: newurl,
+                        method: 'get',
+                        success: function(p) {
+                            $("#tenant_name_statement").html(p);
+                        }
+                    });
+                   
                 });
             }).change();
         });

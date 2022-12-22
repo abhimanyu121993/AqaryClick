@@ -26,12 +26,13 @@
           <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
           <thead>
       <tr>
-        <th scope="col" class="" colspan="6" style="background-color:#003a51;color:white;">Statement Date: {{$date??''}}</th>
+        <th scope="col" class="" colspan="8" style="background-color:#003a51;color:white;">Statement Date: {{$date??''}}</th>
       </tr>
     </thead> 
           <thead>
               <tr>
                 <th scope="col">S.n</th>
+                <th scope="col">Contract Code</th>
                 <th scope="col">Tenant Name</th>
                 <th scope="col">QID/CR/PASSPORT/EST CARD/Govt Housing No</th>
                 <th scope="col">Debit</th>
@@ -43,6 +44,7 @@
                 @foreach($statement as $st)
               <tr>
                 <td>{{$loop->index+1}}</td>
+                <td>{{$st->tenantPayment->contract->contract_code??''}}</td>
                 <td>{{$st->tenantPayment->tenant->tenant_english_name??''}}</td>
                 <td>{{$st->tenantPayment->tenant->tenant_document??''}}</td>
                 <td class="text-danger">{{ $st->status=='dr'?$st->amount:0.00 }}</td>

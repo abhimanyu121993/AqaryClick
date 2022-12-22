@@ -47,7 +47,7 @@ class TenantUnitsExcel implements FromCollection,WithHeadings,WithStyles, WithEv
             if(is_array($gracet) and count($gracet)>0){
                 $t=array_sum($gracet);
             }
-            $data->put('Grace Period',$c->lease_period_month-$c->cheques->count());
+            $data->put('Grace Period',floatval($c->lease_period_month)-$c->cheques->count()??0);
             $data->put('Total Contract Period',$c->lease_period_month);
             $data->put('Total Due Invoice','');
             $data->put('Lease From',$c->lease_start_date);
