@@ -11,6 +11,7 @@ use App\Models\Invoice;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
 use App\Models\TenantPayment;
+use App\Models\UnitStatus;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 use Carbon\Carbon;
@@ -207,5 +208,37 @@ else{
             $building = Building::where('user_id', Auth::user()->id)->get();
         }
         return view('admin.settings.new_report', compact('building', 'tenantStatus'));
+    }
+
+    public function buildingRevenueReport(Request $req)
+    {
+        $req->validate([
+            'building_id' => 'required',
+            'year' => 'required',
+        ]);
+        $data = [];
+        $data['building'] = Building::find($req->building_id);
+        $data['revenue'] = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $Janunit = Building::with([
+                'Units' => function ($query) use($i,$req) {
+                    return $query->with('alloted')->whereDate('created_at','<=',Carbon::parse('31'.'-'.$i.'-'.$req->year));
+                }
+            ])->find($req->building_id);
+            $janUnitIds = $Janunit->Units->pluck('alloted')->pluck('id')->toArray();
+            $tenantsid = array_values(array_filter($janUnitIds, fn($value) => !is_null($value) && $value !== ''));
+            $invoiceamt = Invoice::whereDate('invoice_period_start','>=',Carbon::parse('01'.'-'.$i.'-'.$req->year))->whereDate('invoice_period_end','<=',Carbon::parse('31'.'-'.$i.'-'.$req->year))->whereIn('tenant_id', $tenantsid)->sum('amt_paid');
+            // return $invoiceamt;
+            $data['revenue'][$i] = ([
+                'totalunit' => $Janunit->Units->count(),
+                'act_exp_rev' => $Janunit->Units->sum('actual_rent_num'),
+                'rev_date' => Carbon::parse('1'.'-'.$i.'-' .$req->year)->format('M-Y'),
+                'act_col_rev' => $invoiceamt,
+                'legal' =>
+                $Janunit->Units->where('unit_status', UnitStatus::where('name', 'legal process')->first()->id)->count(),
+                'vacant' => $Janunit->Units->where('unit_status', UnitStatus::where('name', 'vacant')->first()->id)->count()
+            ]);
+        }
+        return view('admin.report.building_revenue',compact('data'));
     }
 }
