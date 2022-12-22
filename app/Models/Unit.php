@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
@@ -48,4 +49,13 @@ class Unit extends Model
         return $this->unitStatus?$this->unitStatus->name:'';
     }
 
+    public function getActualRentNumAttribute()
+    {
+        return (float)str_replace(',','',$this->actual_rent);
+    }
+
+    public function alloted()
+    {
+        return $this->HasOne(Tenant::class, 'unit_no');
+    }
 }

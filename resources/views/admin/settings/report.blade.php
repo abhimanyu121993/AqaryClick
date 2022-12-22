@@ -159,8 +159,8 @@
                                     <select class="select2 form-select js-example-basic-single" id="type"
                                         name='type'>
                                         <option value="" selected hidden disabled>--Select Type--</option>
-                                        <option value="a">Available</option>
-                                        <option value="na">Not Available</option>
+                                        <option value="a">Active</option>
+                                        <option value="na">In Active</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-1">
@@ -176,6 +176,45 @@
                                 <div class="col-md-3 mb-1">
                                     <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
                                 </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" id="header1">
+                <div class="card-header align-items-center d-flex" id="card-header">
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Building Revenue Report</h4>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="live-preview">
+                        <form action="{{ route('Report.building-revenue-report') }}" method="POST">
+                            @csrf
+                            <div class="row gy-12">
+                                <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="building_id">Building</label>
+                                    <select class="select2 form-select js-example-basic-single" id="building_id"
+                                        name='building_id'>
+                                        <option value="" selected hidden disabled>--Select building--</option>
+                                       
+                                            @foreach ($building as $b)
+                                                <option value="{{ $b->id }}">{{ $b->name }}</option>
+                                            @endforeach
+                                       
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="date_from">Year</label>
+                                    <input type="Number" name="year" class="form-control" id="date_from" min="1990" max="2050" value="{{\Carbon\Carbon::now()->format('Y')}}">
+                                </div> 
+                                <div class="col-md-3 mt-3">
+                                    <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
+                                </div>
+                               
                             </div>
                         </form>
                     </div>
