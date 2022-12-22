@@ -108,9 +108,21 @@ if(count($contracts)==0){
 else{
 
         $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
-        return view('admin.settings.report_details',compact('contracts','company'));
-        $pdf = Pdf::loadView('admin.settings.report_details',compact('contracts','company'));
-        return $pdf->stream('report.pdf');
+        if($req->type== 'ccr'){
+            return view('admin.settings.report_details',compact('contracts','company'));
+
+        }
+        else if($req->type=='recc'){
+            return view('admin.report.contract_expire',compact('contracts','company'));
+
+        }
+        else if($req->type='lpcr'){
+            return view('admin.report.contract_overdue',compact('contracts','company'));
+
+        }
+        
+        // $pdf = Pdf::loadView('admin.settings.report.contract_expire',compact('contracts','company'));
+        // return $pdf->stream('report.pdf');
     }}
 
     public function buildingReport(Request $req)
