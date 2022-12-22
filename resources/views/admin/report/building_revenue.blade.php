@@ -15,13 +15,13 @@
 
     <table class="table table-bordered">
         <tr>
-            <th class="text-primary">Building Name</th><td>{{$data['building']->name}}</td>
-            <th class="text-primary">Building Code</th><td>{{$data['building']->building_code}}</td>
+            <th class="text-primary">Building Name</th><td>{{$data['building']->name??''}}</td>
+            <th class="text-primary">Building Code</th><td>{{$data['building']->building_code??''}}</td>
             <th class="text-primary">Construction Date</th><td>{{\Carbon\Carbon::parse($data['building']->construction_date)->format('d-M-Y')}}</td>
 
         </tr><tr>
-            <th class="text-primary">City</th><td colspan="2">{{$data['building']->cityDetails->name}}</td>
-            <th class="text-primary">Zone</th><td>{{$data['building']->areaDetails->name}}</td>
+            <th class="text-primary">City</th><td colspan="2">{{$data['building']->cityDetails->name??''}}</td>
+            <th class="text-primary">Zone</th><td>{{$data['building']->areaDetails->name??''}}</td>
         </tr>
     </table>
     <table class="table table-bordered">
@@ -34,12 +34,12 @@
             @foreach($data['revenue'] as $revenue)
                 <tr>
                     <td>{{$loop->index+1}}</td>
-                    <td>{{$revenue['totalunit']}}</td>
-                    <td>{{$revenue['act_exp_rev']}}</td>
-                    <td>{{$revenue['rev_date']}}</td>
-                    <td>{{$revenue['act_col_rev']}}</td>
-                    <td>{{$revenue['legal']}}</td>
-                    <td>{{$revenue['vacant']}}</td>
+                    <td>{{$revenue['totalunit']??''}}</td>
+                    <td>{{$revenue['act_exp_rev']??''}}</td>
+                    <td>{{$revenue['rev_date']??''}}</td>
+                    <td>{{$revenue['act_col_rev']??''}}</td>
+                    <td>{{$revenue['legal']??''}}</td>
+                    <td>{{$revenue['vacant']??''}}</td>
                 </tr>
             @endforeach
         </tbody>
