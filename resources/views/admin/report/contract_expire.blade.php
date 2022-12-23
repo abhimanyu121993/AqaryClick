@@ -16,10 +16,9 @@
 
 <div class="col-lg-12">
                                     <div class="card-header border-bottom-dashed p-4">
-                                    <center> <a href="javascript:window.print()" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</a></center>
-
-                                        <div class="d-flex">
+                                    <center> <a href="javascript:window.print()" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</a></center>                                        <div class="d-flex">
                                             <div  class="flex-grow-1">
+                                                @if(isset($company))
                                                 @if ($company->customer_type == 'Indivisual')
                                                     <h3>{{ $company->business_name ?? '' }}</h3>
                                                 @else
@@ -43,6 +42,7 @@
                                                 <h6 class="mb-0"><span class="text-muted fw-normal">Post Box:&nbsp;<span id="contact-no"> {{ $company->post_box??'' }}</span></h6>
 
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <!--end card-header-->

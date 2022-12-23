@@ -194,13 +194,12 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="h1">Reject Reason</h4>
+                        <h4 class="modal-title text-center" id="h1" >Why You Reject This Contract ?</h4>
                     </div>
                     <form action="" method="post" id="contractrejform">
                         @csrf
                         <div class="form-group">
-                            <label for="">Description</label>
-                            <textarea class="form-control" name="desc" rows="3"></textarea>
+                            <textarea class="form-control" name="desc" rows="3" placeholder="Write Something Here!"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button id="btn-btn" type="submit" class="btn btn-primary">Update</button>

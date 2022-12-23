@@ -20,6 +20,7 @@
 
                                         <div class="d-flex">
                                             <div  class="flex-grow-1">
+                                                @if(isset($company))
                                                 @if ($company->customer_type == 'Indivisual')
                                                     <h3>{{ $company->business_name ?? '' }}</h3>
                                                 @else
@@ -43,6 +44,7 @@
                                                 <h6 class="mb-0"><span class="text-muted fw-normal">Post Box:&nbsp;<span id="contact-no"> {{ $company->post_box??'' }}</span></h6>
 
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <!--end card-header-->

@@ -200,7 +200,7 @@
                                     <!-- data-bs-toggle="modal" data-bs-target="#exampleModal" -->
                                     @php $bid=Crypt::encrypt($legal->id); @endphp
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item leage_id" href="#" id="pop" data-id="{{$bid}}" data-bs-toggle="modal" data-bs-target="#exampleModal" >Edit</a></li>
+                                        <li><a class="dropdown-item leage_id" href="#" id="pop" data-id="{{$bid}}" data-bs-toggle="modal" data-bs-target="#exampleModal" >Take Action</a></li>
                                         <li><a class="dropdown-item" href="#" id="pop" onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a></li>
 
                                         <form id="delete-form-{{ $bid }}" action="{{ route('admin.legal.destroy', $bid) }}" method="post" style="display: none;">
