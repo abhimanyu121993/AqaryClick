@@ -276,7 +276,7 @@
                                 <div class="col-xxl-3 col-md-12">
                                     <label for="remark" class="form-label">Remark</label>
                                     <textarea class="form-control" name="remark">
-                                    {{ isset($buildingedit) ? $buildingedit->revenue : '' }}
+                                    {{ isset($buildingedit) ? $buildingedit->remark : '' }}
                                     </textarea>
                                 </div>
                             </div>
