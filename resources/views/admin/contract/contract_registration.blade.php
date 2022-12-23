@@ -58,8 +58,7 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form
-                            action="{{ isset($contractedit) ? route('admin.contract.update', $contractedit->id) : route('admin.contract.store') }}"
+                        <form action="{{ isset($contractedit) ? route('admin.contract.update', $contractedit->id) : route('admin.contract.store') }}"
                             method="POST" enctype="multipart/form-data">
                             @if (isset($contractedit))
                                 @method('patch')
