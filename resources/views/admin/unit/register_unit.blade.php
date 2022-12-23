@@ -167,8 +167,8 @@
                                     <label class="form-label" for="flag">Unit Floor</label>
 
                                     <select class="select2 select2  form-select js-example-basic-single" name='unit_floor' required>                                        @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->id }}">
-                                                {{ $buildingedit->unit_floor->name }}</option>
+                                            <option value="{{ $buildingedit->unit_floor->id }}">
+                                                {{ $buildingedit->unit_floor->name??'' }}</option>
                                         @else
                                         <option value="" selected hidden>---Select Type---</option>
                                         @endif
