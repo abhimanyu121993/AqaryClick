@@ -21,8 +21,8 @@ class Kernel extends ConsoleKernel
     ];
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('Overdue:update')->hourly();
-        $schedule->command('Notification:daily')->hourly();
+        $schedule->command('Overdue:update')->everyMinute();
+        $schedule->command('Notification:daily')->everyMinute();
     }
 
     /**
