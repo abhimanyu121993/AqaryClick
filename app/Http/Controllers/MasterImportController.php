@@ -119,7 +119,9 @@ class MasterImportController extends Controller
                                     "unit_no"=>$importData[31]??'',
                                     "unit_floor"=>$unitfloor->id??'', //take from unit floor table
                                     "unit_size"=>$importData[33]??'',
-                                    "actual_rent"=>$importData[34]??'',
+                                    "actual_rent"=>$importData[34]??'',  
+                                    "electric_no"=>$importData[36]??'',
+                                    "water_no"=>$importData[37]??'',
                                     "unit_status"=>$unitstatus->id??'', //take from unit status table
                                 );
 
@@ -220,6 +222,7 @@ class MasterImportController extends Controller
                                                 'lease_start_date'=>$lease_start_date,
                                                 'lease_end_date'=> $lease_end_date,
                                                 'lease_period_month'=>Carbon::parse($lease_start_date)->diffInMonths($lease_end_date)??0,
+                                                'lease_period_day'=>Carbon::parse($lease_start_date)->diffInDays($lease_end_date)??0,
                                                 'discount'=>$importData[58],
                                                 'increament_term'=>$importData[59],
                                                 'contract_status'=>$importData[60],

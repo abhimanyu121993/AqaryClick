@@ -138,7 +138,7 @@
                             <td>{{$tenant->unit->unit_no ??''}}</td>
                             <td>{{$tenant->unit->unit_ref ??''}}</td>
                             <td>{{$tenant->unit->unitfloor->name ?? ''}}</td>
-                            <td>{{$tenant->rental_period ??''}}</td>
+                            <td>{{$tenant->contracts->count()>0?$tenant->contracts->first()->lease_period_month:'N/A'}} months</td>
                             <td>{{$tenant->status ?? ''}}</td>
                             <td>
                                 <div class="dropdown"><a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-more-2-fill"></i>
