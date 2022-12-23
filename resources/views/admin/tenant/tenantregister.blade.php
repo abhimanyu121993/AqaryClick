@@ -582,7 +582,7 @@ $('#unit_no').html(p.html);
 </script>
 <script>
     $(document).ready(function() {
-        $("#building_name").change(function() {
+        $(document).on('change',"#building_name",function() {
             $(this).find("option:selected").each(function() {
 
                 var optionValue = $(this).attr("value");
