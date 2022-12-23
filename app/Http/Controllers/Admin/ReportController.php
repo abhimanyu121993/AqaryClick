@@ -181,20 +181,18 @@ else{
                 return $query->whereDate('created_at','>=', $data['from'])->whereDate('created_at','<=',$data['to']);
             }
         ])->where('tenant_id', $req->tenant_id)->get();
+        if(count($res)<1){
+            return redirect()->back()->with('error', 'There is no any Payment History in Your Panel!.');
+        }else{
         $tenant=$res[0]->tenant;
-        $date=carbon::parse($req->from)->format('d-M-Y').' To '.carbon::parse($req->to)->format('d-M-Y');
-
-        
-        if(count($res)==0){
-            return redirect()->back()->with('error', 'No Records Found!.');
-        }
-        else{
+        $date=carbon::parse($req->from)->format('d-M-Y').' To '.carbon::parse($req->to)->format('d-M-Y');    
                 $company = BusinessDetail::where('id', $res[0]->contract->company_id)->first();
               return view('admin.settings.report_tenant_statement',compact('res','company','tenant','date'));
               $pdf=Pdf::loadView('admin.settings.report_tenant_statement',compact('res','company','tenant','date'))->setPaper('a4', 'landscape');
               return $pdf->stream('Tenants Statement.pdf');
+    
     }
-    }
+}
 
     public function statementReportAllTenant(Request $req)
     {
@@ -229,14 +227,16 @@ else{
                 return $query->whereIn('tenant_id', $tenants);
             }
         ])->whereDate('created_at','>=',Carbon::parse($req->date_from))->where('created_at','<=',Carbon::parse($req->date_to))->get();
-        
+        if(count($statement)<1){
+            return redirect()->back()->with('error', 'There is no any Payment History in Your Panel!.');
+        }else{
         $date=carbon::parse($req->date_from)->format('d-M-Y').' To '.carbon::parse($req->date_to)->format('d-M-Y');
 
         // return $statement;
         return view('admin.report.all_tenant_statement',compact('statement','date'));
         $pdf=Pdf::loadView('admin.report.all_tenant_statement',compact('statement','date'))->setPaper('a4', 'landscape');
               return $pdf->stream('All Tenants Statement.pdf');
-    }
+    }}
     public function newReport()
     {
         $tenantStatus = Tenant::all();
