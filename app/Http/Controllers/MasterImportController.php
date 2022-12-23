@@ -38,6 +38,7 @@ class MasterImportController extends Controller
     }
     public function excel_upload(Request $req,$country=null)
     {
+        ini_set('max_execution_time', 300);
         $this->getUser();
         $country=2;  
         if ($req->hasFile('bulk_upload')) {
