@@ -6,14 +6,14 @@ use App\Models\Contract;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class overdue extends Command
+class Overdue extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'overdue:update';
+    protected $signature = 'Overdue:update';
 
     /**
      * The console command description.

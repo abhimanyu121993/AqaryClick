@@ -19,7 +19,7 @@ class EveryDayNotification extends Command
      *
      * @var string
      */
-    protected $signature = 'command:EverydayNotification';
+    protected $signature = 'Notification:daily';
 
     /**
      * The console command description.
