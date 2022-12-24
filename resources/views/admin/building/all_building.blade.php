@@ -67,22 +67,25 @@
                             <thead >
                                 <tr>
                                     <th scope="col">Sr.No.</th>
-                                    <th scope="col"> Property No</th>
-                                    <th scope="col"> Property Code</th>
-                                    <th scope="col"> Property Type</th>
-                                    <th scope="col">Property Name</th>
-                                    <th scope="col">Property Cost</th>
-                                    <th scope="col">Construction Date</th>
-                                    <th scope="col">Person Incharge</th>
-                                    <th scope="col">Person Job</th>
-                                    <th scope="col">Person Mobile</th>
-                                    <th scope="col">Country</th>
+                                    <th scope="col"> Building Code</th>
+                                    <th scope="col">Building Name</th>
+                                    <th scope="col">Building No</th>
+                                    <th scope="col">Zone No</th>
+                                    <th scope="col">St No</th>
                                     <th scope="col">City</th>
+                                    <th scope="col">Zone Name</th>
+                                    <th scope="col">Building Type</th>
+                                    <th scope="col">Total Unit</th>
+                                    <th scope="col">Ownership Type</th>
+                                    <th scope="col">Ownership No</th>
+                                    <th scope="col">Pin No</th>
+                                    <th scope="col">Building Status</th>
+                                    {{-- <th scope="col">Country</th>
                                     <th scope="col">Area</th>
                                     <th scope="col">Pincode</th>
                                     <th scope="col">Property Receiving Date</th>
                                     <th scope="col">Owner Name</th>
-                                    <th scope="col">Lessor's Name</th>
+                                    <th scope="col">Lessor's Name</th> --}}
                                     <th scope="col">Image</th>
                                     <th scope="col">Document</th>
                                     @role('superadmin')
@@ -183,44 +186,24 @@
                         name: 'id'
                     },
                     {
-                        data:'building_no',
-                        name:'building_no'
-                    },
-                    {
                         data:'building_code',
                         name:'buiding_code'
-                    },
-                    {
-                        data:'building_type',
-                        name:'building_type'
                     },
                     {
                         data:'name',
                         name:'name'
                     },
                     {
-                        data:'cost_building',
-                        name:'cost_building'
+                        data:'building_no',
+                        name:'building_no'
                     },
                     {
-                        data:'construction_date',
-                        name:'construction_date'
+                        data:'zone_no',
+                        name:'zone_no',
                     },
                     {
-                        data:'person_incharge',
-                        name:'person_incharge'
-                    },
-                    {
-                        data:'person_job',
-                        name:'person_job'
-                    },
-                    {
-                        data:'person_mobile',
-                        name:'person_mobile'
-                    },
-                    {
-                        data:'nationality.name',
-                        name:'nationality.name'
+                        data:'street_no',
+                        name:'street_no'
                     },
                     {
                         data:'city_details.name',
@@ -231,20 +214,28 @@
                         name:'area'
                     },
                     {
+                        data:'building_type',
+                        name:'building_type'
+                    },
+                    {
+                        data:'units',
+                        name:'units'
+                    },
+                    {
+                        data:'ownership_type',
+                        name:'ownership_type'
+                    },
+                    {
+                        data:'ownership_no',
+                        name:'ownership_no'
+                    },
+                    {
                         data:'pincode',
                         name:'pincode'
                     },
                     {
-                        data:'building_receive_date',
-                        name:'building_receive_date'
-                    },
-                    {
-                        data:'owner_name',
-                        name:'owner_name'
-                    },
-                    {
-                        data:'lessor_name',
-                        name:'lessor_name'
+                        data:'status',
+                        name:'status'
                     },
                     {
                         data:'image',

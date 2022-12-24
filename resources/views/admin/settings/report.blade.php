@@ -209,7 +209,7 @@
                                         @endrole
                                     </select>
                                 </div>
-                                <div class="col-md-4 mb-1">
+                                {{-- <div class="col-md-4 mb-1">
                                     <label class="form-label" for="type">Property Status</label>
                                     <select class="select2 form-select js-example-basic-single" id="type"
                                         name='type'>
@@ -217,7 +217,7 @@
                                         <option value="a">Active</option>
                                         <option value="na">In Active</option>
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4 mb-1">
                                     <label class="form-label" for="flag">Choose Type</label>
                                     <select class="select2 form-select js-example-basic-single" name="">

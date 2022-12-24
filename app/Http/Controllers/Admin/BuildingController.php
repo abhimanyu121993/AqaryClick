@@ -78,7 +78,7 @@ class BuildingController extends Controller
     {
         $this->getUser();
         $role = Auth::user()->roles[0]->name;
-        $query = Building::query()->with(['nationality', 'cityDetails']);
+        $query = Building::query()->with(['nationality', 'cityDetails', 'Units']);
         if ($role == 'superadmin') {
 
         } else {
@@ -139,6 +139,9 @@ class BuildingController extends Controller
             })
             ->addColumn('deleted', function ($c) {
                 return Carbon::parse($c->deleted_at)->format('d-m-Y H:i A');
+            })
+            ->addColumn('units', function ($u) {
+                return $u->Units->count();
             })
             ->rawColumns(['image', 'document', 'action', 'created'])
             ->make(true);
