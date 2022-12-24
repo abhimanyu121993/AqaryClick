@@ -8,17 +8,21 @@ use App\Models\BusinessDetail;
 use App\Models\Contract;
 use App\Models\currency;
 use App\Models\Customer;
+use App\Models\Grace;
 use App\Models\Invoice;
 use App\Models\Nationality;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
 use App\Models\TenantPayment;
+use App\Models\Unit;
 use App\Models\UnitStatus;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 use Carbon\Carbon;
+use DeepCopy\Filter\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class ReportController extends Controller
@@ -42,13 +46,15 @@ class ReportController extends Controller
             $building = Building::all();
             $customer = Customer::all();
             $tenantStatus = Tenant::all();
+            $unit=UnitStatus::all();
         } else {
 
             $building = Building::where('user_id', Auth::user()->id)->get();
             $customer = User::find($this->user_id)->customerDetail;
             $tenantStatus = Tenant::where('user_id', $this->user_id)->get();
+            $unit=UnitStatus::all();
         }
-        return view('admin.settings.report', compact('building', 'tenantStatus', 'customer'));
+        return view('admin.settings.report', compact('building', 'tenantStatus', 'customer','unit'));
     }
 
     public function tenantUnitBuilding($building_id)
@@ -95,7 +101,7 @@ class ReportController extends Controller
     {
         $req->validate([
             'owner_id' => 'required|numeric',
-            'type' => 'required|in:ccr,lpcr,recc'
+            'type' => 'required|in:ccr,lpcr,recc,grace'
         ]);
         $user = Customer::find($req->owner_id)->user;
         if ($req->type == 'ccr') {
@@ -103,7 +109,21 @@ class ReportController extends Controller
         } else if ($req->type == 'lpcr') {
             $contracts = Contract::where('user_id', $user->id)->where('overdue', '>', 0)->get();
         } else if ($req->type == 'recc') {
-            $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
+if($req->year){
+    $contracts = Contract::where([
+        ["user_id",'=',$user->id],
+        [DB::raw("str_to_date(lease_end_date,'%d-%m-%Y')"),'>=',$req->year.'-01-01'],
+        [DB::raw("str_to_date(lease_end_date,'%d-%m-%Y')"),"<=",$req->year."-12-31"]
+        ])->get();
+    // dd($contracts);
+}else{
+    $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
+
+}
+            }
+        else if($req->type=='grace'){
+            $grace=Grace::where('user_id',$user->id)->get();
+            return view('admin.report.grace',compact('grace'));
         }
 if(count($contracts)==0){
     return redirect()->back()->with('error', 'No Any Record Related This Customer!.');
@@ -283,5 +303,17 @@ else{
             ]);
         }
         return view('admin.report.building_revenue',compact('data'));
+    }
+
+    public function unitReport(Request $req){
+        $user = Customer::find($req->owner_id)->user;
+if($req->unit_status=='all'){
+    $unit=Unit::where('user_id',$user->id)->get();
+
+}
+else{
+    $unit=Unit::where('user_id',$user->id)->where('unit_status',$req->unit_status)->get();
+}
+return view('admin.report.unit',compact('unit'));
     }
 }

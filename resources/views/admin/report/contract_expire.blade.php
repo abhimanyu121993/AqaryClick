@@ -52,7 +52,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">Tenant Expired Contracts Report</h4>
+                    <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">Tenant Expiry Contracts Report</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
@@ -83,7 +83,7 @@
                                     <td>{{number_format($c->rent_amount)??0}}</td>
                                     <td>{{$total=floatval($c->rent_amount)*floatval($c->lease_period_month)??0}}</td>
                                     <td>{{number_format($total-($c->Allinvoices->sum('amt_paid')??0))}}</td>
-                                    <td class="text-danger">{{ $c->expire?'Expired': '' }}</td>
+                                    <td class="{{$c->expire?'Text-danger':'Text-Success'  }}">{{ $c->expire?'Expired': 'Expiry In '.carbon\carbon::now()->diffInDays($c->lease_end_date).' Days'??'' }}</td>
 
                             @endforeach
                             </tr>

@@ -105,15 +105,20 @@
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label class="form-label" for="flag">Select Type</label>
-                                    <select class="select2 form-select js-example-basic-single" id="type"
+                                    <select class="select2 form-select js-example-basic-single" id="contract_type"
                                         name='type'>
                                         <option value="" selected hidden disabled>--Select Type--</option>
                                         <option value="ccr">Tenant Contract Report</option>
+                                        <option value="grace">Grace Period Report</option>
                                         <option value="lpcr">Tenant Overdue Report</option>
-                                        <option value="recc">Tenant Expired Contract Report</option>
+                                        <option value="recc" >Tenant Expired Contract Report</option>
 
                                     </select>
                                 </div>
+                                <div class="col-md-4 mb-1" id="expire_year">
+                                    <label class="form-label" for="date_from">Year</label>
+                                    <input type="Number" name="year" class="form-control" id="date_from" min="1990" max="2050" value="{{\Carbon\Carbon::now()->format('Y')}}">
+                                </div> 
                                 <div class="row mt-2">
                                     <div class="col-md-3 mb-1">
                                         <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
@@ -129,6 +134,56 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" id="header1">
+                <div class="card-header align-items-center d-flex" id="card-header">
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Unit Report</h4>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="live-preview">
+                        <form action="{{ route('Report.unitReport') }}" method="POST">
+                            @csrf
+                            <div class="row gy-12">
+                                <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="owner_id">Customer Name</label>
+                                    <select class="select2 form-select js-example-basic-single" id="owner_id"
+                                        name='owner_id'>
+                                        <option value="" selected hidden disabled>--Select Customer--</option>
+                                        @role('superadmin')
+                                            @foreach ($customer as $c)
+                                                <option value="{{ $c->id }}">{{ $c->first_name }}</option>
+                                            @endforeach
+                                        @else
+                                            <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
+                                        @endrole
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <label class="form-label" for="type">Unit Status</label>
+                                    <select class="select2 form-select js-example-basic-single" id="unit_status"
+                                        name='unit_status'>
+                                        <option value="" selected hidden disabled>--Select Type--</option>
+                                        <option value="all">All</option>
+                                        @foreach($unit as $u)
+                                        <option value="{{$u->id}}">{{$u->name??''}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-3 mb-1">
+                                    <button class="btn btn-primary" id="btn-btn" type="submit">Download</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card" id="header1">
@@ -678,6 +733,21 @@
                         $('.invoice_file').hide();
                         $('.document_file').hide();
                     }
+                });
+            }).change();
+        });
+    </script>
+     <script>
+        $(document).ready(function() {
+            $('#expire_year').hide();
+            $(document).on('change', '#contract_type', function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'recc') {
+                        $('#expire_year').show();
+                    } else {
+                        $('#expire_year').hide();
+                    } 
                 });
             }).change();
         });
