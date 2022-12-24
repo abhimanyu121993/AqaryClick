@@ -95,58 +95,67 @@ class ReportController extends Controller
     {
         $req->validate([
             'owner_id' => 'required|numeric',
-            'type' => 'required|in:ccr,lpcr,recc'
         ]);
-        $user = Customer::find($req->owner_id)->user;
-        if ($req->type == 'ccr') {
-            $contracts = Contract::where('user_id', $user->id)->get();
-        } else if ($req->type == 'lpcr') {
-            $contracts = Contract::where('user_id', $user->id)->where('overdue', '>', 0)->get();
-        } else if ($req->type == 'recc') {
-            $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
-        }
-if(count($contracts)==0){
-    return redirect()->back()->with('error', 'No Any Record Related This Customer!.');
-}
-else{
-
-        $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
-        if($req->type== 'ccr'){
-            return view('admin.settings.report_details',compact('contracts','company'));
-
-        }
-        else if($req->type=='recc'){
-            return view('admin.report.contract_expire',compact('contracts','company'));
-
-        }
-        else if($req->type='lpcr'){
-            $owner_id=Customer::find($req->owner_id);
-            $owner=$owner_id->user->id;
-            $contract = Contract::where('user_id',$owner)->get();
-            $total_invoice=Invoice::where('user_id', $owner);
-            $invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get()->count();
-            
-            $Allinvoice = Invoice::where('user_id',$owner)->get();
-            $invoiceDetails = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get();
-            $inv_paid_amt=$invoiceDetails->sum('amt_paid');
-            $inv_all_due_amt=$invoiceDetails->sum('due_amt');
-            $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->get()->sum('contract_sum_rent_amount');
-            $not_paid_invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Not Paid')->count();
-            $delay_invoice = Invoice::where('user_id',$owner)->whereNotNull('overdue_period')->count()??'0';
-            $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
-            $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
-            $total_amt = $invoice * $total_amount;
-            $total_delay = $delay_invoice * $total_delay_amt;
-            $invoice_balance = $total_delay + $not_paid_invoice;
-            $outstanding=$invoice_balance-$inv_paid_amt;
-            $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
-            return view('admin.report.contract_overdue',compact('contracts','company','contract','invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance','invoice','delay_invoice','not_paid_invoice','invoice_not_paid_amt','inv_paid_amt','outstanding','Allinvoice','inv_all_due_amt'));
-
-        }
         
-        // $pdf = Pdf::loadView('admin.settings.report.contract_expire',compact('contracts','company'));
-        // return $pdf->stream('report.pdf');
-    }}
+            //         $user = Customer::find($req->owner_id)->user;
+            //         if ($req->type == 'ccr') {
+            //             $contracts = Contract::where('user_id', $user->id)->get();
+            //         } else if ($req->type == 'lpcr') {
+            //             $contracts = Contract::where('user_id', $user->id)->where('overdue', '>', 0)->get();
+            //         } else if ($req->type == 'recc') {
+            //             $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
+            //         }
+            // if(count($contracts)==0){
+            //     return redirect()->back()->with('error', 'No Any Record Related This Customer!.');
+            // }
+            // else{
+
+            //         $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
+            //         if($req->type== 'ccr'){
+            //             return view('admin.settings.report_details',compact('contracts','company'));
+
+            //         }
+            //         else if($req->type=='recc'){
+            //             return view('admin.report.contract_expire',compact('contracts','company'));
+
+            //         }
+            //         else if($req->type='lpcr'){
+            //             $owner_id=Customer::find($req->owner_id);
+            //             $owner=$owner_id->user->id;
+            //             $contract = Contract::where('user_id',$owner)->get();
+            //             $total_invoice=Invoice::where('user_id', $owner);
+            //             $invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get()->count();
+                        
+            //             $Allinvoice = Invoice::where('user_id',$owner)->get();
+            //             $invoiceDetails = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get();
+            //             $inv_paid_amt=$invoiceDetails->sum('amt_paid');
+            //             $inv_all_due_amt=$invoiceDetails->sum('due_amt');
+            //             $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->get()->sum('contract_sum_rent_amount');
+            //             $not_paid_invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Not Paid')->count();
+            //             $delay_invoice = Invoice::where('user_id',$owner)->whereNotNull('overdue_period')->count()??'0';
+            //             $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+            //             $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+            //             $total_amt = $invoice * $total_amount;
+            //             $total_delay = $delay_invoice * $total_delay_amt;
+            //             $invoice_balance = $total_delay + $not_paid_invoice;
+            //             $outstanding=$invoice_balance-$inv_paid_amt;
+            //             $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
+            //             return view('admin.report.contract_overdue',compact('contracts','company','contract','invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance','invoice','delay_invoice','not_paid_invoice','invoice_not_paid_amt','inv_paid_amt','outstanding','Allinvoice','inv_all_due_amt'));
+
+            //         }
+                    
+            //         // $pdf = Pdf::loadView('admin.settings.report.contract_expire',compact('contracts','company'));
+            //         // return $pdf->stream('report.pdf');
+            //     }
+
+        $user = Customer::find($req->owner_id)->user;
+        $contracts = Contract::where('user_id', $user->id)->get();
+        $year = $req->year??Carbon::now()->format('Y');
+        $contractsthisyear = Contract::where('user_id', $user->id)->whereYear('created_at',$year)->get();
+        return view('admin.report.contract',compact('user','contracts','contractsthisyear','year'));
+
+}
+
 
     public function buildingReport(Request $req)
     {
