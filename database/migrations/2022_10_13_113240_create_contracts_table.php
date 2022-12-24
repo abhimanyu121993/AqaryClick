@@ -44,6 +44,7 @@ return new class extends Migration
             $table->string('grace_end_date')->nullable();
             $table->string('grace_period_month')->nullable();
             $table->string('grace_period_day')->nullable();
+            $table->integer('grace_count')->default(0);
             $table->string('approved_by')->nullable();
             $table->string('attestation_no')->nullable();
             $table->string('attestation_status')->nullable();

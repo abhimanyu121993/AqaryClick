@@ -66,9 +66,9 @@
                                 <th scope="col">Contract Start Date</th>
                                 <th scope="col">Contract Expiry Date</th>
                                 <th scope="col">Contract Period Months</th>
+                                <th scope="col">Grace Period</th>
                                 <th scope="col">Monthly Rent</th>
                                 <th scope="col">Total Value of Contract</th>
-                                <th scope="col">Total Remaining</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,9 +80,9 @@
                                     <td>{{$c->lease_start_date??''}}</td>
                                     <td>{{$c->lease_end_date??''}}</td>
                                     <td>{{$c->lease_period_month??''}}</td>
-                                    <td>{{number_format($c->rent_amount)??0}}</td>
-                                    <td>{{$total=floatval($c->rent_amount)*floatval($c->lease_period_month)??0}}</td>
-                                    <td>{{number_format($total-($c->Allinvoices->sum('amt_paid')??0))}}</td>
+                                    <td>{{$c->grace_count??''}}</td>
+                                    <td>{{number_format($c->rent_amount,2)??0}}</td>
+                                    <td>{{number_format(floatval($c->rent_amount)*($c->lease_period_month-$c->grace_count)??0,2)}}</td>
                             @endforeach
                             </tr>
                         </tbody>

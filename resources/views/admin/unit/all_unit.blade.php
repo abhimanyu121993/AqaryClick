@@ -71,7 +71,7 @@
                                 <th scope="col">Unit Size</th>
                                 <th scope="col">Electric No</th>
                                 <th scope="col">Water No</th>
-                                <th scope="col">Unit Desc</th>
+                                <th scope="col">Unit </th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -88,7 +88,7 @@
                                     <td>{{ $unit->unit_size??''}}</td>
                                     <td>{{ $unit->electric_no??''}}</td>
                                     <td>{{ $unit->water_no??''}}</td>
-                                    <td>{{ $unit->unit_desc??''}}</td>
+                                    <td>{{ $unit->actual_rent??''}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

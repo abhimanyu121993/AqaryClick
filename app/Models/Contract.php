@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Faker\Provider\ar_EG\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contract extends Model
 {
+    protected $cast=[
+        'lease_end_date'=>'DATE'
+    ];
     use HasFactory, SoftDeletes;
     protected $guarded = [];
     public function tenantDetails()
@@ -91,5 +95,10 @@ class Contract extends Model
     public function legal()
     {
         return $this->hasOne(Legal::class, 'contract_id');
+    }
+
+    public function getLeaseEndConDateAttribute()
+    {
+        return Carbon::parse($this->lease_end_date);
     }
 }
