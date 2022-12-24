@@ -128,7 +128,7 @@
                     </div>
                 </form> --}}
             </div>
-
+            <center><a href="{{ route('admin.report') }}"><button type="button" class="btn btn-primary text-end">Reports</button></a></center>
             <div class="d-flex align-items-center">
 
                 <div class="dropdown d-md-none topbar-head-dropdown header-item">
@@ -428,9 +428,15 @@
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
+                            @if ($data=Auth::user()->pic)
+                            <img class="rounded-circle header-profile-user"
+                                src="{{ asset($data) }}"
+                                alt="Header Avatar">                         
+                            @else
                             <img class="rounded-circle header-profile-user"
                                 src="{{ asset('assets/images/users/avatar-1.jpg') }}"
                                 alt="Header Avatar">
+                            @endif
                             <span class="text-start ms-xl-2">
                                 <span
                                     class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ Auth::user()->first_name ?? 'Admin' }}</span>

@@ -36,7 +36,7 @@
                     <td>{{$loop->index+1}}</td>
                     <td>{{$revenue['totalunit']??''}}</td>
                     <td>{{$revenue['act_exp_rev']??''}}</td>
-                    <td>{{$revenue['rev_date']??''}}</td>
+                    <td>{{carbon\carbon::parse($revenue['rev_date'])->format('d-M-Y')??''}}</td>
                     <td>{{$revenue['act_col_rev']??''}}</td>
                     <td>{{$revenue['legal']??''}}</td>
                     <td>{{$revenue['vacant']??''}}</td>

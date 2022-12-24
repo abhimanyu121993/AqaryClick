@@ -8,6 +8,7 @@
                 <ol class="breadcrumb m-0">
                     @if($breadcrumb_title == 'Dashboard')
                         {{-- <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li> --}}
+                        <h5 id="time"></h5>
                     @else
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="color: black !important;">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{ $breadcrumb_title ?? '' }}</li>

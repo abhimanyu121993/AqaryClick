@@ -88,10 +88,10 @@
                             @csrf
                             <div class="row gy-12">
                                 <div class="col-md-6 mb-1">
-                                    <label class="form-label" for="flag">Customer Name</label>
+                                    <label class="form-label" for="flag">{{Auth::user()->hasRole('superadmin')? 'Customer Name':'Owner Name'}}</label>
                                     <select class="select2 form-select js-example-basic-single" id="owner_id"
                                         name='owner_id'>
-                                        <option value="" selected hidden disabled>--Select Customer--</option>
+                                        <option value="" selected hidden disabled>{{Auth::user()->hasRole('superadmin')? '--Select Customer--':'--Select Owner--'}}</option>
                                         @role('superadmin')
                                             @foreach ($customer as $c)
                                                 <option value="{{ $c->id }}">{{ $c->first_name }}</option>
@@ -141,10 +141,10 @@
                             @csrf
                             <div class="row gy-12">
                                 <div class="col-md-4 mb-1">
-                                    <label class="form-label" for="owner_id">Customer Name</label>
+                                    <label class="form-label" for="owner_id">{{Auth::user()->hasRole('superadmin')? 'Customer Name':'Owner Name'}}</label>
                                     <select class="select2 form-select js-example-basic-single" id="owner_id"
                                         name='owner_id'>
-                                        <option value="" selected hidden disabled>--Select Customer--</option>
+                                        <option value="" selected hidden disabled>{{Auth::user()->hasRole('superadmin')? '--Select Customer--':'--Select Owner--'}}</option>
                                         @role('superadmin')
                                             @foreach ($customer as $c)
                                                 <option value="{{ $c->id }}">{{ $c->first_name }}</option>

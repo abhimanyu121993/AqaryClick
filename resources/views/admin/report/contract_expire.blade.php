@@ -77,8 +77,8 @@
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $c->contract_code ?? '' }}</td>
                                     <td>{{ $c->tenantDetails->tenant_english_name ?? '' }}</td>
-                                    <td>{{$c->lease_start_date??''}}</td>
-                                    <td>{{$c->lease_end_date??''}}</td>
+                                    <td>{{carbon\carbon::parse($c->lease_start_date)->format('d-M-Y')??''}}</td>
+                                    <td>{{carbon\carbon::parse($c->lease_end_date)->format('d-M-Y')??''}}</td>
                                     <td>{{$c->lease_period_month??''}}</td>
                                     <td>{{number_format($c->rent_amount)??0}}</td>
                                     <td>{{$total=floatval($c->rent_amount)*floatval($c->lease_period_month)??0}}</td>
