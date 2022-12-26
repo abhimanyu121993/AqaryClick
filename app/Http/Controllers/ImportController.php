@@ -6,10 +6,22 @@ use App\Models\Contract;
 use App\Models\Grace;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ImportController extends Controller
 {
+    protected $user_id = '';
+    public function getUser()
+    {
+           if(Auth::user()->hasRole('Owner')){
+              $this->user_id = Auth::user()->id;
+          }
+          else
+          {
+              $this->user_id = Auth::user()->created_by;
+          }
+    }
     public function buildingImport(Request $request)
     {
         if ($request->hasFile('bulk_upload')) {
@@ -98,6 +110,7 @@ class ImportController extends Controller
     }
     public function graceImport(Request $request)
     {
+        $this->getUser();
         if ($request->hasFile('grace_upload')) {
             $file = $request->grace_upload;
             $filename = time() . $file->getClientOriginalName();
@@ -137,9 +150,10 @@ class ImportController extends Controller
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
                         $insertData = [
+                            'user_id'=>$this->user_id,
                             'contract_code'=>$importData[0]??'',
-                            'grace_start_date'=>$importData[1]??'',
-                            'grace_end_date'=>$importData[2]??'',
+                            'grace_start_date'=>Carbon::parse($importData[1])??'',
+                            'grace_end_date'=>Carbon::parse($importData[2])??'',
                             'grace_period_month'=>Carbon::parse($importData[1])->diffInMonths(Carbon::parse($importData[2])),
                             'grace_period_day'=>Carbon::parse($importData[1])->diffInDays(Carbon::parse($importData[2])),
                         ];
