@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\admin\CurrencyController;
 use App\Mail\ExcelReport;
+use App\Models\Area;
 use App\Models\Building;
 use App\Models\City;
 use App\Models\Contract;
@@ -85,6 +86,7 @@ class MasterImportController extends Controller
                                 'country_name'=>$country,
                                 'name'=>$importData[23]
                             ]);
+                        $area = Area::firstOrCreate(['name'=>$importData[22],'city_id'=>$city->id],['name'=>$importData[22],'city_id'=>$city->id]);
                             $insertBuildingData = array(
                                 "building_code"=>$importData[17]??'',
                                 "name"=>$importData[18]??'',
@@ -92,7 +94,7 @@ class MasterImportController extends Controller
                                 "building_no"=>$importData[19]??'',
                                 "street_no"=>$importData[20]??'',
                                 "zone_no"=>$importData[21]??'',
-                                "area"=>$importData[22]??'',
+                                "area"=>$area->id??'',
                                 "city"=>$city->id??'',
                                 "ownership_no"=>$importData[24]??'',
                                 "ownership_type"=>$importData[25]??'',
