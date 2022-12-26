@@ -7,6 +7,7 @@ use App\Models\Tenant;
 use App\Models\User;
 use App\Models\Invoice;
 use App\Models\Legal;
+use App\Models\LegalHistory;
 use Illuminate\Support\Carbon;
 use App\Notifications\AlertNotification;
 use Illuminate\Console\Command;
@@ -99,6 +100,11 @@ class EveryDayNotification extends Command
                     'tenant_name'=>$contractDetail->tenantDetails->tenant_english_name,
                     'tenant_mobile'=>$contractDetail->tenant_mobile,
                     'unit_ref'=>$contractDetail->tenantDetails->unit->unit_ref,
+                ]);
+                LegalHistory::create([
+                    'legal_id'=>$data->id,
+                    'status'=>'',
+                    'remark'=>'Invoice not found from last 90 days'
                 ]);
             }
         }

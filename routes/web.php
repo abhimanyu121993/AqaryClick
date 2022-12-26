@@ -45,6 +45,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\TenantFileController;
+use App\Models\Area;
 
 /*
 |--------------------------------------------------------------------------
@@ -279,4 +280,17 @@ Route::view('payment-success','home.paymentsuccess');
 Route::get('check',[InvoiceController::class,'checck']);
 Route::view('import-data','admin.import.importdata');
 Route::view('business-modal', 'admin.businessModal.businessModal');
+
+Route::get('update-building', function () {
+    $bs = App\Models\Building::get();
+    foreach($bs as $b){
+        if(is_numeric($b->area)){
+
+        } else {
+            $a = Area::firstOrCreate(['name' => $b->area]);
+            $b->update(['area' => $a->id]);
+        }
+    }
+
+});
 
