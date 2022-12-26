@@ -95,6 +95,7 @@ class MasterImportController extends Controller
                                 "street_no"=>$importData[20]??'',
                                 "zone_no"=>$importData[21]??'',
                                 "area"=>$area->id??'',
+                                "country"=>$city->country_name,
                                 "city"=>$city->id??'',
                                 "ownership_no"=>$importData[24]??'',
                                 "ownership_type"=>$importData[25]??'',
