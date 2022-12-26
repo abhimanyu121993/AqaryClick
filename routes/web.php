@@ -38,6 +38,7 @@ use App\Http\Controllers\MasterImportController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\NotificationController;
@@ -236,6 +237,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
         Route::get('contract', [ExcellController::class, 'contract'])->name('contract');
         Route::post('master-import', [MasterImportController::class,'excel_upload'])->name('master-import');
         Route::post('statement-import', [MasterImportController::class, 'excel_upload_statement'])->name('statement-import');
+        Route::post('grace-import', [ImportController::class, 'graceImport'])->name('grace_import');
      });
 
 });

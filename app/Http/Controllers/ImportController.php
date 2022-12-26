@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grace;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ImportController extends Controller
 {
@@ -79,6 +82,68 @@ class ImportController extends Controller
 
                             ]);
                         }
+                    }
+                    Session::flash('success', 'Import Successful.');
+                    return redirect()->back();
+                } else {
+                    Session::flash('error', 'File too large. File must be less than 2MB.');
+                    return redirect()->back();
+                }
+            }
+        } else {
+            Session::flash('error', 'Please upload a valid .csv file only');
+            return redirect()->back();
+        }
+    }
+    public function graceImport(Request $request)
+    {
+        if ($request->hasFile('bulk_upload')) {
+            $file = $request->bulk_upload;
+            $filename = time() . $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $valid_extension = array("csv");
+            $maxFileSize = 2097152;
+            if (in_array(strtolower($extension), $valid_extension)) {
+                // Check file size
+                if ($fileSize <= $maxFileSize) {
+                    // File upload location
+                    $location = 'uploads/building';
+                    // Upload file
+                    $file->move($location, $filename);
+                    // Import CSV to Database
+                    $filepath = public_path($location . "/" . $filename);
+                    // Reading file
+                    $file = fopen($filepath, "r");
+                    $importData_arr = array();
+                    $i = 0;
+                    while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                        $num = count($filedata);
+                        // Skip first row (Remove below comment if you want to skip the first row)
+                        if ($i == 0) {
+                            $i++;
+                            continue;
+                        }
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                    }
+                    fclose($file);
+                    // dd($importData_arr);
+                    // Insert to MySQL database
+                    foreach ($importData_arr as $importData) {
+                        $insertData = [
+                            'contract_code'=>$importData[0]??'',
+                            'grace_start_date'=>$importData[1]??'',
+                            'grace_end_date'=>$importData[2]??'',
+                            'grace_period_month'=>Carbon::parse($importData[1])->diffInMonths(Carbon::parse($importData[2])),
+                            'grace_period_day'=>Carbon::parse($importData[1])->diffInDays(Carbon::parse($importData[2])),
+                        ];
+                        $res=Grace::create($insertData);
+                    
                     }
                     Session::flash('success', 'Import Successful.');
                     return redirect()->back();

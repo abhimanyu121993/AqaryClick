@@ -483,13 +483,14 @@ class BuildingController extends Controller
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
                         $city = City::where('name', $importData[6])->first()->id ?? '';
+                        $area = Area::firstOrCreate(['name'=>$importData[5],'city_id'=>$city],['name'=>$importData[5],'city_id'=>$city])->id ?? '';
                         $insertData = array(
                             "Building Code" => $importData[0],
                             "Property Name" => $importData[1],
                             "Bldg No" => $importData[2],
                             "ST No" => $importData[3],
                             "Zone No" => $importData[4],
-                            "Zone Name" => $importData[5],
+                            "Zone Name" => $area,
                             "City Name" => $city,
                             "Ownership No" => $importData[7],
                             "Ownership Type" => $importData[8],
