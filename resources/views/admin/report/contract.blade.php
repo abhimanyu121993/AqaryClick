@@ -15,27 +15,35 @@
                         <div id="thisyear" style="width:100%; height:300px;"></div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
         <div class="row">
-            <div class="col-12"><h6>Filters</h6></div>
-            <form action="{{route('Report.reportContract')}}" method="post" id="filterform">
+            <div class="col-12">
+                <h6>Filters</h6>
+            </div>
+        </div>
+            <form action="{{ route('Report.reportContract') }}" method="Post" id="filterform">
                 @csrf
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="form-label">Select Year</label>
-                <select class="form-select" name="year" id='year'>
-                    @for($i=2000;$i<2050;$i++)
-                    <option value="{{$i}}">{{$i}}</option>
-                    @endfor
-                </select>
+                <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="form-label">Select Year</label>
+                        <select class="form-select" name="year" >
+                            @for ($i = 2000; $i < 2050; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-1 mt-4">
+                    <button type='submit' class="btn btn-danger">Apply</button>
+                </div>
             </div>
-            </div>
-        </form>
+            </form>
         </div>
     </div>
 
-.
+    .
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -67,18 +75,14 @@
                 ['Rejected', {{ $contractsthisyear->where('status', true)->count() }}]
             ]);
             var optionsyear = {
-                title:'Report Of Year '+{{$year}},
+                title: 'Report Of Year ' + {{ $year }},
                 pieHole: 0.5,
             };
 
             var chart2 = new google.visualization.PieChart(document.getElementById('thisyear'));
             chart2.draw(datayear, optionsyear);
-          
+
 
         }
-
-        $('#year').on('change',function(){
-            $('#filterform').submit();
-        });
     </script>
 @endsection

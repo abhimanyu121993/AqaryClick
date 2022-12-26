@@ -241,7 +241,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
 });
 
 Route::group(['prefix' => 'Report', 'as' => 'Report.'], function () {
-    Route::any('contract', [ReportController::class, 'contractReport'])->name('reportContract');
+    Route::post('contract', [ReportController::class, 'contractReport'])->name('reportContract');
     Route::post('building', [ReportController::class,'buildingReport'])->name('building');
     Route::post('statement', [ReportController::class, 'statementReport'])->name('statementReport');
     Route::post('all-tenant-statement-report', [ReportController::class,'statementReportAllTenant'])->name('all-tenant-statement-report');

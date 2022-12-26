@@ -92,4 +92,9 @@ class ImportController extends Controller
             return redirect()->back();
         }
     }
+
+    public function graceImport(Request )
+    {
+        # code...
+    }
 }
