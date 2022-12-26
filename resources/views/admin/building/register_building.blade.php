@@ -84,7 +84,7 @@
                                 <label for="space" class="form-label">Building Type</label>
                                 <select class="select2  form-select js-example-basic-single" id="building_type" name="building_type">
                                 @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->type }}">
+                                            <option value="{{ $buildingedit->building_type }}">
                                                 {{ $buildingedit->building_type }}</option>
                                                 @else
                                             <option value="" selected hidden>--Select Building Type--</option>
