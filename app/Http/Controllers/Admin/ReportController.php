@@ -149,10 +149,25 @@ class ReportController extends Controller
             //     }
 
         $user = Customer::find($req->owner_id)->user;
+        // return $user;
+        $owner = $req->owner_id;
         $contracts = Contract::where('user_id', $user->id)->get();
         $year = $req->year??Carbon::now()->format('Y');
-        $contractsthisyear = Contract::where('user_id', $user->id)->whereYear('created_at',$year)->get();
-        return view('admin.report.contract',compact('user','contracts','contractsthisyear','year'));
+        $query = Contract::query()->where('user_id', $user->id)->whereYear('created_at',$year);
+        if($req->status!=''){
+            if($req->status=='overdue'){
+                $query = $query->where('overdue', '>', 0);
+            }
+            else if($req->status=='expire'){
+                $query = $query->where('expire', true);
+            }
+            else if($req->status=='rejected'){
+                $query = $query->where('status', true);
+            }
+        }
+        $contractsthisyear = $query->get();
+        $status = $req->status ?? '';
+        return view('admin.report.contract',compact('owner','contracts','contractsthisyear','year','status'));
 
 }
 
