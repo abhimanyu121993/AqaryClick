@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('legal_id');
             $table->string('status')->nullable();
             $table->text('remark')->nullable();
+            $table->text('file')->nullable();
             $table->timestamps();
         });
     }

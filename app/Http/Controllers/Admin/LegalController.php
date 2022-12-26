@@ -7,6 +7,7 @@ use App\Models\Building;
 use App\Models\Contract;
 use App\Models\Invoice;
 use App\Models\Legal;
+use App\Models\LegalHistory;
 use App\Models\Tenant;
 use App\Models\Unit;
 use Illuminate\Http\Request;
@@ -149,6 +150,12 @@ public function updateLegal(Request $request){
         'status' => $request->status,
         'remark' => $request->remark,
     ]);
+        LegalHistory::create([
+            'legal_id'=>$request->id,
+            'status' => $request->status,
+            'remark' => $request->remark,
+            'file'=>json_encode($otherpic)
+        ]);
     if ($data) {
         return redirect()->back()->with('success', 'Legal has been Updated successfully.');
     } else {
