@@ -165,12 +165,12 @@
                                         name='unit_status'>
                                         <option value="" selected hidden disabled>--Select Type--</option>
                                         <option value="all">All</option>
-                                        @foreach($unit as $u)
-                                        <option value="{{$u->id}}">{{$u->name??''}}</option>
-                                        @endforeach
+                                        <option value="vacant">Vacant</option>
+                                        <option value="occupied">Occupied</option>
+                                        <option value="court">Court</option>
+                                        <option value="under mentainance">under Maintainance</option>
                                     </select>
                                 </div>
-                                
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-3 mb-1">

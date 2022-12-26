@@ -310,10 +310,10 @@ else{
         $user = Customer::find($req->owner_id)->user;
 if($req->unit_status=='all'){
     $unit=Unit::where('user_id',$user->id)->get();
-
 }
 else{
-    $unit=Unit::where('user_id',$user->id)->where('unit_status',$req->unit_status)->get();
+    $usi=UnitStatus::where('name',$req->unit_status)->first();
+    $unit=Unit::where('user_id',$user->id)->where('unit_status',$usi->id)->get();
 }
 return view('admin.report.unit',compact('unit'));
     }
