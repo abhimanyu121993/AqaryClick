@@ -59,7 +59,7 @@ class UserController extends Controller
             'pic' => 'nullable|image'
         ]);
         try{
-            $default_password = '123456';
+            $default_password = $request->password;
             $pic_name = 'assets/images/default_user.png';
             if($request->hasFile('pic'))
             {
@@ -149,27 +149,24 @@ class UserController extends Controller
             'pic' => 'nullable|image'
         ]);
         try{
-            $default_password = '12345';
-            $pic_name = 'assets/images/default_user.png';
             if($request->hasFile('pic'))
             {
                 $upic='user-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
                 $request->pic->move(public_path('upload/user/'),$upic);
                 $pic_name = 'upload/user/'.$upic;
+                $user = User::find($id)->update(['pic' => $pic_name]);
             }
             $data = [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'password' => Hash::make($default_password),
-                'pic' => $pic_name
             ];
             $user = User::find($id)->update($data);
             $role_name = Role::find($request->roleid);
             if($user)
             {
-                $user->assignRole($role_name);
+                user::find($id)->syncRoles($role_name);
                 Session::flash('success', 'User Updated successfully');
             }
             else
@@ -224,13 +221,14 @@ class UserController extends Controller
             $upic='user-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
             $request->pic->move(public_path('upload/user/'),$upic);
             $pic_name = 'upload/user/'.$upic;
+            $user = User::find(Auth::user()->id)->update(['pic' => $pic_name]);
+
         }
              $user =User::find(Auth::user()->id)
              ->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,
-                'pic'=>$pic_name
             ]);
             // dd($user);
             if($user)

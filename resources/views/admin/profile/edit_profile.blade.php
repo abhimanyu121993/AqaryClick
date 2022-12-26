@@ -56,13 +56,13 @@
                                 <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
                                     role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails"
+                                        <a class="nav-link active text-dark"  data-bs-toggle="tab" href="#personalDetails"
                                             role="tab">
                                             <i class="fas fa-home"></i> Personal Details
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#changePassword" role="tab">
+                                        <a class="nav-link text-dark" data-bs-toggle="tab" href="#changePassword" role="tab"style="color:black;">
                                             <i class="far fa-user"></i> Change Password
                                         </a>
                                     </li>

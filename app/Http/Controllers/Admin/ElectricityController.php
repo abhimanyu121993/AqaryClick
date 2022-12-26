@@ -8,6 +8,7 @@ use App\Models\Contract;
 use App\Models\Electricity;
 use App\Models\Tenant;
 use App\Models\Unit;
+use App\Models\UnitStatus;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -253,7 +254,9 @@ class ElectricityController extends Controller
         $res=Unit::where('building_id',$building_id)->get();
         $html='<option value="">--Select Unit No--</option>';
         foreach($res as $r){
-            $html .='<option value="'.$r->id.'">'.$r->unit_no.'</option>';
+            $html .='<option value="'.$r->id.'"';
+            $html .=$r->unit_status==UnitStatus::where('name','vacant')->first()->id?'': 'disabled ';
+            $html .='>'.$r->unit_no.' ('.UnitStatus::find($r->unit_status)->name.')'.'</option>';
         }
 
         $html1='<option value="">--Select Unit Type--</option>';

@@ -133,7 +133,7 @@
                             <td>{{$tenant->tenant_primary_mobile ?? ''}}</td>
                             <td>{{$tenant->email ?? ''}}</td>
                             <td>{{$tenant->post_office ?? ''}}</td>
-                            <td>{{$tenant->c ?? ''}}</td>
+                            <td>{{$tenant->buildingDetails->name ?? ''}}</td>
                             <td>{{$tenant->unittypeinfo->name??''}}</td>
                             <td>{{$tenant->unit->unit_no ??''}}</td>
                             <td>{{$tenant->unit->unit_ref ??''}}</td>
