@@ -287,7 +287,7 @@ Route::get('update-building', function () {
         if(is_numeric($b->area)){
 
         } else {
-            $a = Area::firstOrCreate(['name' => $b->area]);
+            $a = Area::firstOrCreate(['name' => $b->area,'city_id'=>$b->city],['name' => $b->area,'city_id'=>$b->city]);
             $b->update(['area' => $a->id]);
         }
     }
