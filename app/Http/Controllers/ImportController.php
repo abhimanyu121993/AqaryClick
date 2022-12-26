@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Building;
+use App\Models\City;
 use App\Models\Contract;
 use App\Models\Grace;
 use Carbon\Carbon;
