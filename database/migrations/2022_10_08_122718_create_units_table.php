@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('unit_desc')->nullable();
             $table->string('unit_ref')->nullable();
             $table->string('revenue')->nullable();
+            $table->string('reason_vacant')->nullable();
+            $table->timestamp('vacant_date')->nullable();            
             $table->json('attachment')->default(json_encode([]));
             $table->longText('remark')->nullable();
             $table->softDeletes();

@@ -10,6 +10,7 @@ use App\Models\UnitFeature;
 use App\Models\UnitFloor;
 use App\Models\UnitStatus;
 use App\Models\UnitType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -358,4 +359,34 @@ class UnitController extends Controller
     public function ImportExportUnit(){
         return view('admin.unit.import_export');
     }
+
+    public function isVacant($id)
+    {
+        $ass_vacant = unit::find($id);
+        $USI=$ass_vacant->unitStatus->name;
+        if ($USI == 'vacant') {
+            $USO=UnitStatus::where('name','occupied')->first();
+            $ass_vacant->unit_status = $USO->id;
+        } else {
+            $USO=UnitStatus::where('name','vacant')->first();
+            $ass_vacant->unit_status = $USO->id;
+        }
+        if ($ass_vacant->update()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } 
+    public function vacantReason(Request $req,$id)
+    {
+        $req->validate([
+            'desc'=>'required'
+        ]);
+        Unit::find($id)->update([
+            'reason_vacant'=> $req->desc,
+            'vacant_date'=> Carbon::now()
+        ]);
+        return back();
+
+    }  
 }

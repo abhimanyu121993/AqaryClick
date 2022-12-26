@@ -88,6 +88,8 @@ Route::post('/login',[LoginController::class, 'store'])->name('login');
 Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function(){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
     Route::post('description/{id}', [ExcellController::class, 'description'])->name('description');
+    Route::post('reason-vacant/{id}', [UnitController::class, 'vacantReason'])->name('vacantReason');
+
     Route::get('/analytic-dashboard',[AdminController::class,'Analyticdashboard'])->name('analytic-dashboard');
     Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     Route::get('read-notification/{id?}',[AdminController::class,'readNotification'])->name('readNotification');
@@ -201,6 +203,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
+    Route::get('/isvacant/{id}',[UnitController::class,'isVacant'])->name('isvacant');
+
     Route::get('/all-grace/{id}',[ContractController::class,'graceDetails'])->name('graceDetails');
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
