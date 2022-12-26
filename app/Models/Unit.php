@@ -34,7 +34,7 @@ class Unit extends Model
 
     }
     public function unitfloor(){
-        return $this->belongsTo(UnitFloor::class, 'unit_floor');
+        return $this->belongsTo(UnitFloor::class, 'unit_floor','id');
     }
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());

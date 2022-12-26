@@ -210,8 +210,8 @@
                         name:'city_details.name'
                     },
                     {
-                        data:'area',
-                        name:'area'
+                        data:'areaname',
+                        name:'areaname'
                     },
                     {
                         data:'building_type',

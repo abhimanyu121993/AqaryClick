@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label class="form-label" for="flag">Name</label>
-                                    <select class="select2 form-select" id="{{ !isset($electricity) ? 'name' : '' }}"
+                                    <select class="select2 name form-select" id="{{ !isset($electricity) ? 'name' : '' }}"
                                         name='name'>
                                         @if (isset($electricity))
                                             <option value="{{ $electricity->name }}" selected>{{ $electricity->name }}
@@ -137,14 +137,59 @@
                                         @endif
                                     </select>
                                 </div>
-                                <div class="col-xxl-3 col-md-4">
+
+
+                                <div class="col-xxl-3 col-md-4" id="tenant">
+                                    <label for="name" class="form-label">Tenant Type</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="tenant_type" name="tenant_type"
+                                            value="{{ isset($electricity) ? $electricity->type : '' }}"
+                                            placeholder="Enter Tenant Document" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4" id="qid">
                                     <label for="name" class="form-label">QID</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="qid_no" name="qid_no"
                                             value="{{ isset($electricity) ? $electricity->qid_no : '' }}"
-                                            placeholder="Enter QID No">
+                                            placeholder="Enter QID No" disabled>
                                     </div>
                                 </div>
+                                <div class="col-xxl-3 col-md-4" id="est">
+                                    <label for="name" class="form-label">EST</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="est_no" name="est_no"
+                                            value="{{ isset($electricity) ? $electricity->est_no : '' }}"
+                                            placeholder="Enter Est No" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4" id="cr">
+                                    <label for="name" class="form-label">CR</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cr_no" name="cr_no"
+                                            value="{{ isset($electricity) ? $electricity->cr_no : '' }}"
+                                            placeholder="Enter Cr No" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4" id="govt">
+                                    <label for="name" class="form-label">Govt. Housing</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="govt_housing" name="govt_housing"
+                                            value="{{ isset($electricity) ? $electricity->govt_housing : '' }}"
+                                            placeholder="Enter Govt_housing No" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-4" id="passport">
+                                    <label for="name" class="form-label">Passport</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="passport_no" name="passport_no"
+                                            value="{{ isset($electricity) ? $electricity->passport_no : '' }}"
+                                            placeholder="Enter Passport No" disabled>
+                                    </div>
+                                </div>
+
+
+
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Register Mobile</label>
                                     <div class="input-group">
@@ -302,6 +347,12 @@
     </script>
     <script>
         $(document).ready(function() {
+        $('#qid').hide();
+        $('#est').hide();
+        $('#cr').hide();
+        $('#govt').hide();
+        $('#passport').hide();
+        $('#tenant').hide();
             $("#name").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
@@ -311,7 +362,30 @@
                         method: 'get',
                         success: function(p) {
                             $("#qid_no").val(p.qid_document);
-
+                            $("#est_no").val(p.established_card_no);
+                            $("#cr_no").val(p.cr_document);
+                            $("#govt_housing").val(p.government_housing_no);
+                            $("#passport_no").val(p.passport);
+                            $("#tenant_type").val(p.tenant_type);
+                            if(p.tenant_type == 'TC'){
+                                $('#est').show();
+                                $('#cr').show();
+                                $('#govt').hide();
+                                $('#passport').hide();
+                                $('#qid').hide();
+                            }else if(p.tenant_type == 'TP'){
+                                $('#qid').show();
+                                $('#est').hide();
+                                $('#cr').hide();
+                                $('#govt').hide();
+                                $('#passport').show();
+                            }else if(p.tenant_type == 'TG'){
+                                $('#qid').hide();
+                                $('#est').hide();
+                                $('#cr').hide();
+                                $('#govt').show();
+                                $('#passport').hide();
+                            }
                         }
                     });
                 });

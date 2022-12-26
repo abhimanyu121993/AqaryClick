@@ -68,6 +68,7 @@
                                 <th scope="col">Unit Type</th>
                                 <th scope="col">Electricity Under</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Qid</th>
                                 <th scope="col">Electric No</th>
                                 <th scope="col">Water No</th>
                                 <th scope="col">Bill Amount</th>
@@ -87,6 +88,7 @@
                                     <td>{{ $el->unit_type ?? '' }}</td>
                                     <td>{{ $el->electric_under ?? '' }}</td>
                                     <td>{{ $el->name ?? '' }}</td>
+                                    <td>{{$el->qid_no ?? ''}}</td>
                                     <td>{{ $el->electric_no ?? '' }}</td>
                                     <td>{{ $el->water_no ?? '' }}</td>
                                     <td>{{ $el->bill_amt ?? '' }}</td>

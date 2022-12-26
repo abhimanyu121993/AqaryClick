@@ -117,6 +117,8 @@ class UnitController extends Controller
             'unit_ref'=>$request->unit_ref,
             'revenue'=>$request->revenue,
             'attachment'=>json_encode($otherpic),
+            'parking_status'=>$request->parking_status,
+            'parking_no'=>$request->parking_no,
             'remark'=>$request->remark,
 
 
@@ -217,6 +219,8 @@ class UnitController extends Controller
             'unit_ref'=>$request->unit_ref,
             'revenue'=>$request->revenue,
             'attachment'=>json_encode($otherpic),
+            'parking_status'=>$request->parking_status,
+            'parking_no'=>$request->parking_no,
             'remark'=>$request->remark,
 
 

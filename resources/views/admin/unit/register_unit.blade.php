@@ -104,8 +104,8 @@
                                     <select class="form-control select2 form-select" id="building_name"
                                         name="building_name">
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->id }}" selected>
-                                                {{ $buildingedit->buildingDetails->name }}</option>
+                                            <option value="{{ $buildingedit->building_id ??'' }}" selected>
+                                                {{ $buildingedit->buildingDetails->name ?? ''}}</option>
                                         @else
                                             <option value="" selected hidden>--Select Building--</option>
                                         @endif
@@ -136,8 +136,8 @@
                                     <select class="form-control select2 form-select" id="building_name"
                                         name="unit_type" required>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->id }}" selected>
-                                                {{$buildingedit->unitTypeDetails->name}}</option>
+                                            <option value="{{ $buildingedit->unit_type ?? '' }}" selected>
+                                                {{$buildingedit->unitTypeDetails->name ?? ''}}</option>
                                         @else
                                             <option value="" selected hidden>--Select Building--</option>
                                         @endif
@@ -153,7 +153,7 @@
                                     <label class="form-label" for="flag">Unit Status</label>
                                     <select class="form-control select2 form-select" name="unit_status" required>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->name??'' }}"> {{$buildingedit->unitFeature->name??''}} </option>
+                                            <option value="{{ $buildingedit->unit_status ??'' }}"> {{$buildingedit->unitStatus->name??''}} </option>
                                         @else
                                             <option value="" selected hidden>--Select Unit Status--</option>
                                          @endif
@@ -167,8 +167,8 @@
                                     <label class="form-label" for="flag">Unit Floor</label>
 
                                     <select class="select2 select2  form-select js-example-basic-single" name='unit_floor' required>                                        @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->unit_floor->id??'' }}">
-                                                {{ $buildingedit->unit_floor->name??'' }}</option>
+                                            <option value="{{ $buildingedit->unit_floor ??'' }}">
+                                                {{ $buildingedit->unitfloor->name??'' }}</option>
                                         @else
                                         <option value="" selected hidden>---Select Type---</option>
                                         @endif
@@ -191,8 +191,8 @@
 
                                     <select class="select2  form-select js-example-basic-single" name='unit_feature' required>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->id }}">
-                                                {{ $buildingedit->unitFeature->name??'' }}</option>
+                                            <option value="{{ $buildingedit->unit_feature ?? '' }}">
+                                                {{ $buildingedit->unitFeature->name ??'' }}</option>
                                         @else
                                         <option value="" selected hidden>---Select Type---</option>
                                         @endif
@@ -271,6 +271,23 @@
                                             multiple>
                                     </div>
                                 </div>
+
+                                <div class="col-xxl-3 col-md-3">
+                                    <label class="form-label" for="flag">Parking Status</label>
+                                    <select class="form-control select2 form-select" id="parking_status" name="parking_status" required>
+                                    <option value="{{$buildingedit->parking_status ?? ''}}" selected hidden>{{$buildingedit->parking_status ?? '--Select Parking Status--'}}</option>
+                                    <option value="Yes" >Yes</option>
+                                    <option value="No" >No</option>
+                                    </select>
+                                </div>
+                                <div class="col-xxl-3 col-md-4" id="parking">
+                                    <label for="revenue" class="form-label">Parking No.</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="parking_no" name="parking_no"
+                                            value="{{$buildingedit->parking_no ?? ''}}"
+                                            placeholder="Enter Parking No">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row gy-4 mb-3">
                                 <div class="col-xxl-3 col-md-12">
@@ -299,4 +316,20 @@
 
 
 @section('script-area')
+
+<script>
+    $(document).ready(function() {
+        $('#parking').hide();
+        $("#parking_status").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue == 'Yes') {
+                    $('#parking').show();
+                } else if (optionValue == 'No') {
+                    $('#parking').hide();
+                }
+            });
+        }).change();
+    });
+</script>
 @endsection

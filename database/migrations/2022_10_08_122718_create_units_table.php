@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('unit_ref')->nullable();
             $table->string('revenue')->nullable();
             $table->json('attachment')->default(json_encode([]));
+            $table->string('parking_status')->nullable();
+            $table->string('parking_no')->nullable();
             $table->longText('remark')->nullable();
             $table->softDeletes();
             $table->timestamps();

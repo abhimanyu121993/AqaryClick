@@ -202,7 +202,7 @@
                                     <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name ?? ''}}</option>
                                     @if ($buildingedit->city)
                                     @foreach ($buildingedit->cityDetails->nationality->cities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                        <option value="{{$city->id ?? ''}}">{{$city->name ?? ''}}</option>
                                     @endforeach       
                                     @endif
                                     @else
@@ -219,9 +219,9 @@
                                     @if (isset($buildingedit))
                                     <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->areaDetails->name ?? ''}}</option>
                                     @if ( $buildingedit->area)
-                                        {{-- @foreach ($buildingedit->city->zones as $zone )
-                                        <option value="{{$zone->id}}">{{$zone->name}}</option>
-                                        @endforeach --}}
+                                       @foreach ($buildingedit->areaDetails->city->zones as $zone )
+                                        <option value="{{$zone->id ?? ''}}">{{$zone->name ??''}}</option>
+                                        @endforeach
                                     @endif
                                     @else
                                     <option value="">--Select Zone--</option>

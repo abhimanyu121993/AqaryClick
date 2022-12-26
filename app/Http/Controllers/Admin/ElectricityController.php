@@ -87,7 +87,7 @@ class ElectricityController extends Controller
             'unit_type'=>'required',
             'electric_under'=>'required',
             'name'=>'required',
-            'qid_no'=>'required',
+            // 'qid_no'=>'required',
             'reg_mobile'=>'required',
             'electric_no'=>'required',
             'water_no'=>'required',
@@ -115,6 +115,12 @@ class ElectricityController extends Controller
         'electric_under'=> $request->electric_under,
         'name'=>$request->name,
         'qid_no'=>$request->qid_no,
+
+        'est_no'=>$request->est_no,
+        'cr_no'=>$request->cr_no,
+        'govt_housing'=>$request->govt_housing,
+        'passport_no'=>$request->passport_no,
+
         'reg_mobile'=>$request->reg_mobile,
         'electric_no'=>$request->electric_no,
         'water_no'=>$request->water_no,
@@ -304,7 +310,7 @@ class ElectricityController extends Controller
                 }
 
                 public function fetchQid($name){
-                    $res=Tenant::where('tenant_english_name',$name)->first('qid_document');
+                    $res=Tenant::where('tenant_english_name',$name)->first();
                     return response()->json($res);
                     }
                     public function getDownload($path){

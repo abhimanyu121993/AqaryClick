@@ -78,7 +78,7 @@ class BuildingController extends Controller
     {
         $this->getUser();
         $role = Auth::user()->roles[0]->name;
-        $query = Building::query()->with(['nationality', 'cityDetails', 'Units']);
+        $query = Building::query()->with(['nationality', 'cityDetails', 'Units','areaDetails']);
         if ($role == 'superadmin') {
 
         } else {
@@ -142,6 +142,8 @@ class BuildingController extends Controller
             })
             ->addColumn('units', function ($u) {
                 return $u->Units->count();
+            })->addColumn('areaname',function($area){
+                return $area->areaDetails->name??'';
             })
             ->rawColumns(['image', 'document', 'action', 'created'])
             ->make(true);
