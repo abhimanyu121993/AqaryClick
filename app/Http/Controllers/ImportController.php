@@ -161,7 +161,6 @@ class ImportController extends Controller
                         ];
                         $res=Grace::create($insertData);
                         Contract::where('contract_code', $res->contract_code)->increment('grace_count');
-                    
                     }
                     Session::flash('success', 'Import Successful.');
                     return redirect()->back();

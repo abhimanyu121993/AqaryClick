@@ -52,7 +52,7 @@
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form action="{{ isset($userEdit)?route('admin.customer.update',$userEdit->id):route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ isset($userEdit)?route('admin.user.update',$userEdit->id):route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
                             @if(isset($userEdit))
                             @method('PUT')
                             @endif
@@ -85,14 +85,21 @@
                                         <input type="number" class="form-control" id="phone" name="phone" pattern="[0-9]" title="Enter Valid Phone No" value="{{isset($userEdit)?$userEdit->phone:''}}" placeholder="Phone">
                                     </div>
                                 </div>
+                                @if(!isset($userEdit))
+                                <div class="col-xxl-6 col-md-6">
+                                    <label for="phone" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="pass" name="password"  value="{{isset($userEdit)?$userEdit->password:''}}" placeholder="Password">
+                                    </div>
+                                </div>
+                                @endif
                                 <!--end col-->
-                            </div>
-                            <div class="row gy-4 mb-3">
+                            
                                 <div class="col-xxl-6 col-md-6">
                                     <label for="email" class="form-label">Select Role</label>
-                                    <select name="roleid"  class="form-select">
+                                    <select name="roleid"  class="form-select" required>
                                         @if(isset($userEdit))
-                                        <option value="{{$userEdit->roles[0]->name}}">{{$userEdit->roles[0]->name}}</option>
+                                        <option value="{{$userEdit->roles[0]->id??''}}" selected hidden>{{$userEdit->roles[0]->name??''}}</option>
                                         @else
                                         <option value="">--Select Role--</option>
                                         @endif
