@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contract;
 use App\Models\Grace;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -143,6 +144,7 @@ class ImportController extends Controller
                             'grace_period_day'=>Carbon::parse($importData[1])->diffInDays(Carbon::parse($importData[2])),
                         ];
                         $res=Grace::create($insertData);
+                        Contract::where('contract_code', $res->contract_code)->increment('grace_count');
                     
                     }
                     Session::flash('success', 'Import Successful.');
