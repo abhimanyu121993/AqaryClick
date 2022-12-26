@@ -380,7 +380,7 @@ class ContractController extends Controller
         if (count($request->grace_start_date)>0) {
 
             foreach ($request->grace_start_date as $k=>$i) {
-                    $res = Grace::create(['user_id' => $this->user_id,'contract_code' => $contract_code, 'grace_start_date' => $i ?? '', 'grace_end_date' => $request->grace_end_date[$k] ?? '', 'grace_period_month' => $request->grace_period_month[$k] ?? '', 'grace_period_day' => $request->grace_period_day[$k] ?? '']);
+                    $res = Grace::create(['user_id' => $this->user_id,'contract_code' => $request->contract_code, 'grace_start_date' => $i ?? '', 'grace_end_date' => $request->grace_end_date[$k] ?? '', 'grace_period_month' => $request->grace_period_month[$k] ?? '', 'grace_period_day' => $request->grace_period_day[$k] ?? '']);
             }
         }
         if ($data) {

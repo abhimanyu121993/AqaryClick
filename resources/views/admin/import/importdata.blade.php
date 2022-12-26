@@ -336,6 +336,40 @@
                     </div>
                 </div>
             </div>
+            <!-- grace data -->
+            <div class="card" id="header1">
+                <div class="card-header align-items-center d-flex" id="card-header">
+                    <h4 class="card-title mb-0 flex-grow-1" id="h1">Bulk Grace Upload</h4>
+                </div><!-- end card header -->
+                <div class="card-body">
+                    <div class="live-preview">
+                        <form action="{{ Route('admin.excel-export.grace_import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <div class="row gy-4 mb-3">
+                                <div class="col-xxl-6 col-md-6">
+                                    <label for="name" class="form-label">Upload Grace Excel</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="grace_upload" name="grace_upload" >
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-md-6 pt-4">
+                                    <button class="btn btn-primary" id="btn-btn" type="submit">Upload</button>
+                                </div>
+                                <a href="{{asset('assets/excel_format/grace_format.csv')}}" download>Sample Excell Download</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

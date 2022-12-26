@@ -98,8 +98,8 @@ class ImportController extends Controller
     }
     public function graceImport(Request $request)
     {
-        if ($request->hasFile('bulk_upload')) {
-            $file = $request->bulk_upload;
+        if ($request->hasFile('grace_upload')) {
+            $file = $request->grace_upload;
             $filename = time() . $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
             $tempPath = $file->getRealPath();
@@ -111,7 +111,7 @@ class ImportController extends Controller
                 // Check file size
                 if ($fileSize <= $maxFileSize) {
                     // File upload location
-                    $location = 'uploads/building';
+                    $location = 'uploads/contract';
                     // Upload file
                     $file->move($location, $filename);
                     // Import CSV to Database
