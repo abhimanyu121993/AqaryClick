@@ -95,7 +95,7 @@
                                             <div class="form-check form-check-primary form-switch">
                                                 <input type="checkbox" value="{{ $unit->id }}"
                                                     class="form-check-input is_vacant" id="is_vacant"
-                                                    {{ isset($unit->unitStatus)?($unit->unitStatus->name=='vacant'?'':'checked'):'' }}
+                                                    {{ isset($unit->unitStatus)?($unit->unitStatus->name=='vacant'?'checked':''):'' }}
                                                      />
                                             </div>
                                         </td>
@@ -182,13 +182,18 @@
                 beforeSend: function() {
                     $('.is_vacant').attr('disabled', 'true');
                 },
-                success: function() {
-
+                success: function(data) {
+                    if(typeof data !='number'){
+                        alert('There is a contract which is not expire please expire this first -'+data);
+                        window.location.reload();
+                    }
+                    else{
                     $('.is_vacant').removeAttr('disabled')
                     if (check) {
                         $('#contractrejform').attr('action',furl+id);
                         $("#contractrejdesc").modal('show');
                     }
+                }
                 }
             });
         });

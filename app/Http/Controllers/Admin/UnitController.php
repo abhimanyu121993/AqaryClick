@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\BuildingType;
+use App\Models\Contract;
+use App\Models\Tenant;
 use App\Models\Unit;
 use App\Models\UnitFeature;
 use App\Models\UnitFloor;
@@ -366,12 +368,20 @@ class UnitController extends Controller
 
     public function isVacant($id)
     {
-        $ass_vacant = unit::find($id);
+        $ass_vacant = Unit::find($id);
         $USI=$ass_vacant->unitStatus->name;
         if ($USI == 'vacant') {
             $USO=UnitStatus::where('name','occupied')->first();
             $ass_vacant->unit_status = $USO->id;
         } else {
+            $tenants = Tenant::with([
+                'contracts' => function ($q) {
+                    return $q->where('expire', false);
+            }])->where('unit_no', $id)->first();
+            $contracts=$tenants->contracts;
+            if($contracts->count() > 0){
+                return $contracts->first()->contract_code;
+            }
             $USO=UnitStatus::where('name','vacant')->first();
             $ass_vacant->unit_status = $USO->id;
         }
