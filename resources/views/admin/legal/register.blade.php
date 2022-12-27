@@ -20,6 +20,10 @@
    {
        color: black;
    }
+   #blck{
+    background:#ffffff00;
+    border-color: #ffffff00;
+   }
    #example
    {
        font-size: 14px;
@@ -47,10 +51,10 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
+<div class="modal fade"   id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content" id="blck">
+            <div class="modal-body" >
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card" id="header1">
@@ -61,7 +65,7 @@
                             <div class="card-body">
                                 <div class="live-preview">
                                 <form action="{{route('admin.updateLegal')}}" method="POST" enctype="multipart/form-data">
-                                        @csrf 
+                                        @csrf
                                         @if ($errors->any())
                                         <div class="alert alert-danger alert-dismissible">
                                             <ul>
@@ -91,9 +95,9 @@
                                             </div>
                                         </div>
                                         <div class="row gy-4 mb-3">
-                                            <div class="col-xxl-3 col-md-12">
+                                            <div class=" col-md-12">
                                                 <label for="remark" class="form-label">Remark</label>
-                                                <textarea id="remark" class="form-control" name="remark">  
+                                                <textarea id="remark" class="form-control" name="remark">
                                                 </textarea>
                                             </div>
                                             <div class="col-xxl-3 col-md-12">
@@ -133,16 +137,16 @@
                                 <th scope="col">File No</th>
                                 <th scope="col">Lease Start</th>
                                 <th scope="col">Lease End</th>
-                               
+
                                 <th scope="col">Tenant Name</th>
 
                                 <th scope="col">Mobile No</th>
-                                <th scope="col">Unit Ref.</th>                                
+                                <th scope="col">Unit Ref.</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">File</th> 
+                                <th scope="col">File</th>
                                 <th scope="col"> Total Invoice Overdue</th>
 
-                                
+
                                 <th scope="col">Remark</th>
                                 <th scope="col">Action</th>
 
