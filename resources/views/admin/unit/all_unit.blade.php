@@ -95,7 +95,7 @@
                                             <div class="form-check form-check-primary form-switch">
                                                 <input type="checkbox" value="{{ $unit->id }}"
                                                     class="form-check-input is_vacant" id="is_vacant"
-                                                    {{ isset($unit->unit_status)?($unit->unitStatus->name=='vacant'?'':'checked'):'' }}
+                                                    {{ isset($unit->unitStatus)?($unit->unitStatus->name=='vacant'?'':'checked'):'' }}
                                                      />
                                             </div>
                                         </td>
