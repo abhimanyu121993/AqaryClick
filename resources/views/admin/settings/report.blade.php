@@ -219,14 +219,14 @@
                                         <option value="na">In Active</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 mb-1">
+                                {{-- <div class="col-md-4 mb-1">
                                     <label class="form-label" for="flag">Choose Type</label>
                                     <select class="select2 form-select js-example-basic-single" name="">
                                         <option value="" selected hidden disabled>--Select Type--</option>
                                         <option value="a">Rental Property Data Report</option>
                                         <option value="na">Real estate status data report</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-3 mb-1">
