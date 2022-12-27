@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="card" id="header1">
                 <div class="card-header align-items-center d-flex" id="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">{{$type=='vacant'?'Unit Vacant Report':($type=='occupied'?'Unit Occupied Report':'Unit Report')}}</h4>
+                    <h4 class="card-title mb-0 flex-grow-1 text-center" id="h1">{{$type=='vacant'?'Unit Vacant Report':($type=='occupied'?'Unit Occupied Report':(($type=='under mentainance')?'Unit Under Maintainance':(($type=='legal process')?'Unit Legal Report':'Unit Report')))}}</h4>
                 </div><!-- end card header -->
                 <div class="card-body table-responsive">
                 <table id="example" class="display table table-bordered dt-responsive dataTable dtr-inline" style="width: 100%;" aria-describedby="ajax-datatables_info">
@@ -42,6 +42,11 @@
                                 @if($type=='vacant')
                                 <th scope="col">Vacant Date</th>
                                 <th scope="col">Vacant Reason</th>
+                                @endif
+                                @if($type=='legal process')
+                                <th scope="col">legal Date</th>
+                                <th scope="col">legal Status</th>
+                                <th scope="col">legal process Reason</th>
                                 @endif
                                 <th scope="col">Revenue Status</th>
                             </tr>
@@ -60,6 +65,11 @@
                                     @if($type=='vacant')
                                     <td>{{isset($u->vacant_date)?carbon\carbon::parse($u->vacant_date)->format('d-M-Y'):''}}</td>
                                     <td>{{ $u->reason_vacant??''}}</td>
+                                    @endif
+                                    @if($type=='legal process')
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     @endif
                                     <td></td>
 

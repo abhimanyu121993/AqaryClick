@@ -168,7 +168,8 @@
                                         <option value="vacant">Vacant</option>
                                         <option value="occupied">Occupied</option>
                                         <option value="court">Court</option>
-                                        <option value="under mentainance">under Maintainance</option>
+                                        <option value="legal process">Legal Process</option>
+                                        <option value="under mentainance">Under Maintainance</option>
                                     </select>
                                 </div>
                             </div>

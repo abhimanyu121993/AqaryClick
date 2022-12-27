@@ -22,4 +22,8 @@ class Legal extends Model
     {
         return $this->belongsTo(Unit::class, 'unit_type', 'id');
     }
+    public function unitRef()
+    {
+        return $this->belongsTo(Unit::class, 'unit_ref', 'unit_ref');
+    }
 }
