@@ -827,7 +827,7 @@
                 end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
                 total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date
                     .getMonth() -
-                    start_date.getMonth())
+                    start_date.getMonth());
                 $('#lease_period_month').val(total_months);
                 $('#total_invoice').val(total_months);
 
@@ -919,7 +919,7 @@
                 end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
                 total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date
                     .getMonth() -
-                    start_date.getMonth())
+                    start_date.getMonth());
                 $(this).closest('.pgrace').children('.grace_period_month').children('.input-group')
                     .children('.grace_month').val(total_months);
 
