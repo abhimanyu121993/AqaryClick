@@ -178,13 +178,13 @@ else{
         $user = Customer::find($req->owner_id)->User->id;
        
         
-        // if ($req->type == 'a') {
-        //     $buildings = Building::where('user_id', $user)->where('status', 'active')->get();
-        // } else if ($req->type == 'na') {
-        //     $buildings = Building::where('user_id', $user)->where('status', 'inactive')->orWhereNull('status')->get();
-        // }
+        if ($req->type == 'a') {
+            $buildings = Building::where('user_id', $user)->where('status', 'active')->get();
+        } else if ($req->type == 'na') {
+            $buildings = Building::where('user_id', $user)->where('status', 'inactive')->orWhereNull('status')->get();
+        }
         // return view('admin.report.building', compact('buildings'));
-        $buildings = Building::where('user_id', $user)->get();
+        // $buildings = Building::where('user_id', $user)->get();
         $pdf=Pdf::loadView('admin.report.building',compact('buildings'))->setPaper('a4', 'landscape');;
         return $pdf->stream('building.pdf');
     }
