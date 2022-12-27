@@ -47,15 +47,15 @@ class ReportController extends Controller
             $building = Building::all();
             $customer = Customer::all();
             $tenantStatus = Tenant::all();
-            $unit=UnitStatus::all();
+            $unit = UnitStatus::all();
         } else {
 
             $building = Building::where('user_id', Auth::user()->id)->get();
             $customer = User::find($this->user_id)->customerDetail;
             $tenantStatus = Tenant::where('user_id', $this->user_id)->get();
-            $unit=UnitStatus::all();
+            $unit = UnitStatus::all();
         }
-        return view('admin.settings.report', compact('building', 'tenantStatus', 'customer','unit'));
+        return view('admin.settings.report', compact('building', 'tenantStatus', 'customer', 'unit'));
     }
 
     public function tenantUnitBuilding($building_id)
@@ -110,64 +110,57 @@ class ReportController extends Controller
         } else if ($req->type == 'lpcr') {
             $contracts = Contract::where('user_id', $user->id)->where('overdue', '>', 0)->get();
         } else if ($req->type == 'recc') {
-if($req->year){
-    $contracts = Contract::where([
-        ["user_id",'=',$user->id],
-        [DB::raw("str_to_date(lease_end_date,'%d-%m-%Y')"),'>=',$req->year.'-01-01'],
-        [DB::raw("str_to_date(lease_end_date,'%d-%m-%Y')"),"<=",$req->year."-12-31"]
-        ])->get();
-    // dd($contracts);
-}else{
-    $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
-
-}
+            if ($req->year) {
+                $contracts = Contract::where([
+                    ["user_id", '=', $user->id],
+                    [DB::raw("str_to_date(lease_end_date,'%d-%m-%Y')"), '>=', $req->year . '-01-01'],
+                    [DB::raw("str_to_date(lease_end_date,'%d-%m-%Y')"), "<=", $req->year . "-12-31"]
+                ])->get();
+                // dd($contracts);
+            } else {
+                $contracts = Contract::where('user_id', $user->id)->where('expire', true)->get();
             }
-        else if($req->type=='grace'){
-            $grace=Grace::where('user_id',$user->id)->get();
-            return view('admin.report.grace',compact('grace'));
+        } else if ($req->type == 'grace') {
+            $grace = Grace::where('user_id', $user->id)->get();
+            return view('admin.report.grace', compact('grace'));
         }
-if(count($contracts)==0){
-    return redirect()->back()->with('error', 'No Any Record Related This Customer!.');
-}
-else{
+        if (count($contracts) == 0) {
+            return redirect()->back()->with('error', 'No Any Record Related This Customer!.');
+        } else {
 
-        $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
-        if($req->type== 'ccr'){
-            return view('admin.settings.report_details',compact('contracts','company'));
+            $company = BusinessDetail::where('id', $contracts[0]->company_id)->first();
+            if ($req->type == 'ccr') {
+                return view('admin.settings.report_details', compact('contracts', 'company'));
+            } else if ($req->type == 'recc') {
+                return view('admin.report.contract_expire', compact('contracts', 'company'));
+            } else if ($req->type = 'lpcr') {
+                $owner_id = Customer::find($req->owner_id);
+                $owner = $owner_id->user->id;
+                $contract = Contract::where('user_id', $owner)->get();
+                $total_invoice = Invoice::where('user_id', $owner);
+                $invoice = Invoice::where('user_id', $owner)->where('payment_status', 'Paid')->get()->count();
 
+                $Allinvoice = Invoice::where('user_id', $owner)->get();
+                $invoiceDetails = Invoice::where('user_id', $owner)->where('payment_status', 'Paid')->get();
+                $inv_paid_amt = $invoiceDetails->sum('amt_paid');
+                $inv_all_due_amt = $invoiceDetails->sum('due_amt');
+                $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id', $owner)->get()->sum('contract_sum_rent_amount');
+                $not_paid_invoice = Invoice::where('user_id', $owner)->where('payment_status', 'Not Paid')->count();
+                $delay_invoice = Invoice::where('user_id', $owner)->whereNotNull('overdue_period')->count() ?? '0';
+                $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id', $owner)->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
+                $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id', $owner)->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
+                $total_amt = $invoice * $total_amount;
+                $total_delay = $delay_invoice * $total_delay_amt;
+                $invoice_balance = $total_delay + $not_paid_invoice;
+                $outstanding = $invoice_balance - $inv_paid_amt;
+                $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
+                return view('admin.report.contract_overdue', compact('contracts', 'company', 'contract', 'invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance', 'invoice', 'delay_invoice', 'not_paid_invoice', 'invoice_not_paid_amt', 'inv_paid_amt', 'outstanding', 'Allinvoice', 'inv_all_due_amt'));
+            }
+
+            // $pdf = Pdf::loadView('admin.settings.report.contract_expire',compact('contracts','company'));
+            // return $pdf->stream('report.pdf');
         }
-        else if($req->type=='recc'){
-            return view('admin.report.contract_expire',compact('contracts','company'));
-
-        }
-        else if($req->type='lpcr'){
-            $owner_id=Customer::find($req->owner_id);
-            $owner=$owner_id->user->id;
-            $contract = Contract::where('user_id',$owner)->get();
-            $total_invoice=Invoice::where('user_id', $owner);
-            $invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get()->count();
-            
-            $Allinvoice = Invoice::where('user_id',$owner)->get();
-            $invoiceDetails = Invoice::where('user_id',$owner)->where('payment_status', 'Paid')->get();
-            $inv_paid_amt=$invoiceDetails->sum('amt_paid');
-            $inv_all_due_amt=$invoiceDetails->sum('due_amt');
-            $total_amount = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->get()->sum('contract_sum_rent_amount');
-            $not_paid_invoice = Invoice::where('user_id',$owner)->where('payment_status', 'Not Paid')->count();
-            $delay_invoice = Invoice::where('user_id',$owner)->whereNotNull('overdue_period')->count()??'0';
-            $total_delay_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->whereNotNull('overdue_period')->get()->sum('contract_sum_rent_amount');
-            $invoice_not_paid_amt = Invoice::withSum('Contract', 'rent_amount')->where('user_id',$owner)->where('payment_status', 'Not Paid')->get()->sum('contract_sum_rent_amount');
-            $total_amt = $invoice * $total_amount;
-            $total_delay = $delay_invoice * $total_delay_amt;
-            $invoice_balance = $total_delay + $not_paid_invoice;
-            $outstanding=$invoice_balance-$inv_paid_amt;
-            $total_balance = $total_delay + ($not_paid_invoice * $invoice_not_paid_amt);
-            return view('admin.report.contract_overdue',compact('contracts','company','contract','invoiceDetails', 'total_amt', 'total_delay', 'invoice_balance', 'total_balance','invoice','delay_invoice','not_paid_invoice','invoice_not_paid_amt','inv_paid_amt','outstanding','Allinvoice','inv_all_due_amt'));
-
-        }
-        
-        // $pdf = Pdf::loadView('admin.settings.report.contract_expire',compact('contracts','company'));
-        // return $pdf->stream('report.pdf');
-    }}
+    }
 
     public function buildingReport(Request $req)
     {
@@ -176,6 +169,13 @@ else{
             // 'type' => 'required|in:a,na'
         ]);
         $user = Customer::find($req->owner_id)->User->id;
+
+
+        // if ($req->type == 'a') {
+        //     $buildings = Building::where('user_id', $user)->where('status', 'active')->get();
+        // } else if ($req->type == 'na') {
+        //     $buildings = Building::where('user_id', $user)->where('status', 'inactive')->orWhereNull('status')->get();
+        // }
        
         
         if ($req->type == 'a') {
@@ -184,7 +184,7 @@ else{
             $buildings = Building::where('user_id', $user)->where('status', 'inactive')->orWhereNull('status')->get();
         }
         // return view('admin.report.building', compact('buildings'));
-        // $buildings = Building::where('user_id', $user)->get();
+        $buildings = Building::where('user_id', $user)->get();
         $pdf=Pdf::loadView('admin.report.building',compact('buildings'))->setPaper('a4', 'landscape');;
         return $pdf->stream('building.pdf');
     }
@@ -201,65 +201,59 @@ else{
         $data = $req->all();
         $res = TenantPayment::with('contract')->with([
             'payHistory' => function ($query) use ($data) {
-                return $query->whereDate('created_at','>=', $data['from'])->whereDate('created_at','<=',$data['to']);
+                return $query->whereDate('created_at', '>=', $data['from'])->whereDate('created_at', '<=', $data['to']);
             }
         ])->where('tenant_id', $req->tenant_id)->get();
-        if(count($res)<1){
+        if (count($res) < 1) {
             return redirect()->back()->with('error', 'There is no any Payment History in Your Panel!.');
-        }else{
-        $tenant=$res[0]->tenant;
-        $date=carbon::parse($req->from)->format('d-M-Y').' To '.carbon::parse($req->to)->format('d-M-Y');    
-                $company = BusinessDetail::where('id', $res[0]->contract->company_id)->first();
-              return view('admin.settings.report_tenant_statement',compact('res','company','tenant','date'));
-              $pdf=Pdf::loadView('admin.settings.report_tenant_statement',compact('res','company','tenant','date'))->setPaper('a4', 'landscape');
-              return $pdf->stream('Tenants Statement.pdf');
-    
+        } else {
+            $tenant = $res[0]->tenant;
+            $date = carbon::parse($req->from)->format('d-M-Y') . ' To ' . carbon::parse($req->to)->format('d-M-Y');
+            $company = BusinessDetail::where('id', $res[0]->contract->company_id)->first();
+            return view('admin.settings.report_tenant_statement', compact('res', 'company', 'tenant', 'date'));
+            $pdf = Pdf::loadView('admin.settings.report_tenant_statement', compact('res', 'company', 'tenant', 'date'))->setPaper('a4', 'landscape');
+            return $pdf->stream('Tenants Statement.pdf');
+        }
     }
-}
 
     public function statementReportAllTenant(Request $req)
     {
         $this->getUser();
         $req->validate([
-            'date_from'=>'required|date',
-            'date_to'=>'required|date'
+            'date_from' => 'required|date',
+            'date_to' => 'required|date'
         ]);
-        
-        if(Auth::user()->hasRole('superadmin')){
-            if($req->building_id=='all'){
-            $tenants = Tenant::where('building_name',$req->building_id)->pluck('id');
-            }
-            else
-            {
+
+        if (Auth::user()->hasRole('superadmin')) {
+            if ($req->building_id == 'all') {
+                $tenants = Tenant::where('building_name', $req->building_id)->pluck('id');
+            } else {
                 $tenants = Tenant::pluck('id');
             }
-        }
-        else
-        {
-            if($req->building_id=='all')
-            {
+        } else {
+            if ($req->building_id == 'all') {
                 $tenants = Tenant::where('user_id', $this->user_id)->pluck('id');
-            }
-            else
-            {
-            $tenants = Tenant::where('user_id', $this->user_id)->where('building_name',$req->building_id)->pluck('id');
+            } else {
+                $tenants = Tenant::where('user_id', $this->user_id)->where('building_name', $req->building_id)->pluck('id');
             }
         }
 
-        $statement = PaymentHistory::with(['tenantPayment' => function ($query) use($tenants) {
+        $statement = PaymentHistory::with([
+            'tenantPayment' => function ($query) use ($tenants) {
                 return $query->whereIn('tenant_id', $tenants);
             }
-        ])->whereDate('created_at','>=',Carbon::parse($req->date_from))->where('created_at','<=',Carbon::parse($req->date_to))->get();
-        if(count($statement)<1){
+        ])->whereDate('created_at', '>=', Carbon::parse($req->date_from))->where('created_at', '<=', Carbon::parse($req->date_to))->get();
+        if (count($statement) < 1) {
             return redirect()->back()->with('error', 'There is no any Payment History in Your Panel!.');
-        }else{
-        $date=carbon::parse($req->date_from)->format('d-M-Y').' To '.carbon::parse($req->date_to)->format('d-M-Y');
+        } else {
+            $date = carbon::parse($req->date_from)->format('d-M-Y') . ' To ' . carbon::parse($req->date_to)->format('d-M-Y');
 
-        // return $statement;
-        return view('admin.report.all_tenant_statement',compact('statement','date'));
-        $pdf=Pdf::loadView('admin.report.all_tenant_statement',compact('statement','date'))->setPaper('a4', 'landscape');
-              return $pdf->stream('All Tenants Statement.pdf');
-    }}
+            // return $statement;
+            return view('admin.report.all_tenant_statement', compact('statement', 'date'));
+            $pdf = Pdf::loadView('admin.report.all_tenant_statement', compact('statement', 'date'))->setPaper('a4', 'landscape');
+            return $pdf->stream('All Tenants Statement.pdf');
+        }
+    }
     public function newReport()
     {
         $tenantStatus = Tenant::all();
@@ -272,8 +266,8 @@ else{
         return view('admin.settings.new_report', compact('building', 'tenantStatus'));
     }
 
-    public function OverdueReort(Request $req){
-
+    public function OverdueReort(Request $req)
+    {
     }
     public function buildingRevenueReport(Request $req)
     {
@@ -286,42 +280,44 @@ else{
         $data['revenue'] = [];
         for ($i = 1; $i <= 12; $i++) {
             $Janunit = Building::with([
-                'Units' => function ($query) use($i,$req) {
-                    return $query->with('alloted')->whereDate('created_at','<=',Carbon::parse('31'.'-'.$i.'-'.$req->year));
+                'Units' => function ($query) use ($i, $req) {
+                    return $query->with('alloted')->whereDate('created_at', '<=', Carbon::parse('31' . '-' . $i . '-' . $req->year));
                 }
             ])->find($req->building_id);
             $janUnitIds = $Janunit->Units->pluck('alloted')->pluck('id')->toArray();
-            $tenantsid = array_values(array_filter($janUnitIds, fn($value) => !is_null($value) && $value !== ''));
-            $invoiceamt = Invoice::whereDate('invoice_period_start','>=',Carbon::parse('01'.'-'.$i.'-'.$req->year))->whereDate('invoice_period_end','<=',Carbon::parse('31'.'-'.$i.'-'.$req->year))->whereIn('tenant_id', $tenantsid)->sum('amt_paid');
+            $tenantsid = array_values(array_filter($janUnitIds, fn ($value) => !is_null($value) && $value !== ''));
+            $invoiceamt = Invoice::whereDate('invoice_period_start', '>=', Carbon::parse('01' . '-' . $i . '-' . $req->year))->whereDate('invoice_period_end', '<=', Carbon::parse('31' . '-' . $i . '-' . $req->year))->whereIn('tenant_id', $tenantsid)->sum('amt_paid');
             // return $invoiceamt;
             $data['revenue'][$i] = ([
                 'totalunit' => $Janunit->Units->count(),
                 'act_exp_rev' => $Janunit->Units->sum('actual_rent_num'),
-                'rev_date' => Carbon::parse('1'.'-'.$i.'-' .$req->year)->format('M-Y'),
+                'rev_date' => Carbon::parse('1' . '-' . $i . '-' . $req->year)->format('M-Y'),
                 'act_col_rev' => $invoiceamt,
                 'legal' =>
                 $Janunit->Units->where('unit_status', UnitStatus::where('name', 'legal process')->first()->id)->count(),
                 'vacant' => $Janunit->Units->where('unit_status', UnitStatus::where('name', 'vacant')->first()->id)->count()
             ]);
         }
-        return view('admin.report.building_revenue',compact('data'));
+        return view('admin.report.building_revenue', compact('data'));
     }
 
-    public function unitReport(Request $req){
+    public function unitReport(Request $req)
+    {
         $user = Customer::find($req->owner_id)->user;
-        $type=$req->unit_status;
-if($type='legal process'){
-$unit=Legal::where('user_id',$user->id)->get();
-}
-else{
-    if($req->unit_status=='all'){
-        $unit=Unit::where('user_id',$user->id)->get();
-    }
-    else{
-        $usi=UnitStatus::where('name',$req->unit_status)->first();
-        $unit=Unit::where('user_id',$user->id)->where('unit_status',$usi->id)->get();
-    }
-}
-return view('admin.report.unit',compact('unit','type'));
+        $type = $req->unit_status;
+        if ($type=='court') {
+            $unit = Legal::where('user_id', $user->id)->where('status', 'In the Court')->get();
+        } else if ($type =='legal process') {
+            $unit = Legal::where('user_id', $user->id)->get();
+        } 
+        else {
+            if ($req->unit_status == 'all') {
+                $unit = Unit::where('user_id', $user->id)->get();
+            } else {
+                $usi = UnitStatus::where('name', $req->unit_status)->first();
+                $unit = Unit::where('user_id', $user->id)->where('unit_status', $usi->id)->get();
+            }
+        }
+        return view('admin.report.unit', compact('unit', 'type'));
     }
 }

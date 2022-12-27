@@ -248,6 +248,11 @@ public function legalDetails($contract_id)
 
         if (Auth::user()->hasRole('superadmin')){
             $res = Contract::where('id', $contract_id)->where('overdue','>=',90)->first();
+        }else {
+            $res = Contract::where('user_id',$this->user_id)->where('id', $contract_id)->where('overdue','>=',90)->first();
+           $legal=Legal::where('user_id',$this->user_id)->where('contract_id',$res->id)->get();
+         return view('admin.report.legal',compact('legal'));
+        }
             if($res){
                 $msg="Legal Case on this contract";
 
@@ -256,16 +261,6 @@ public function legalDetails($contract_id)
                 $msg="This Contract Have No any Legal Record, Its Already In good Conditions.";
             }
         
-        } else {
-            $res = Contract::where('user_id',$this->user_id)->where('id', $contract_id)->where('overdue','>=',90)->first();
-            if($res){
-                $msg="Legal Case on this contract";
-
-            }
-            else{
-                $msg="This Contract Have No any Legal Record, Its Already In good Conditions";
-            }
-        }
         return response()->json($msg);
     }
 
