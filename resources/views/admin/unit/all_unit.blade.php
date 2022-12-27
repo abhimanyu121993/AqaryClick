@@ -165,6 +165,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
         $('.is_vacant').on('click', function() {
             var id = $(this).val();
@@ -184,7 +186,14 @@
                 },
                 success: function(data) {
                     if(typeof data !='number'){
-                        alert('There is a contract which is not expire please expire this first -'+data);
+                        // alert('There is a contract which is not expire please expire this first -'+data);
+                        var newurl="{{ route('admin.contract.create') }}";
+                        Swal.fire({
+  icon: 'error',
+  title: 'Can\'t Vacant',
+  text: 'This Unit Is Under Contract -'+data+', Please ! Expired This Contract First',
+  footer: '<a href="'+newurl+'">Goto Contract</a>'
+});
                         window.location.reload();
                     }
                     else{

@@ -88,6 +88,7 @@
                                     <th scope="col">Attestation Status</th>
                                     <th scope="col">Attestation Expiry</th>
                                     <th scope="col">Contract Status</th>
+                                    <th scope="col">Expire</th>
                                     <th scope="col">Reject</th>
                                     <th scope="col">Reject_Desc</th>
                                     <th scope="col">Rent Ammount</th>
@@ -131,6 +132,11 @@
                                         <td>{{ $con->attestation_status ?? '' }}</td>
                                         <td>{{ $con->attestation_expiry ?? '' }}</td>
                                         <td>{{ $con->contract_status ?? '' }}</td>
+                                        <td>
+                                    <div class="form-check form-check-primary form-switch">
+                                        <input type="checkbox" value="{{$con->id}}" class="form-check-input is_expired" id="is_expired" {{ $con->expire==0?'':'checked' }} />
+                                    </div>
+                                    </td>
                                         <td>
                                             <div class="form-check form-check-primary form-switch">
                                                 <input type="checkbox" value="{{ $con->id }}"
@@ -256,5 +262,23 @@
             });
         });
     </script>
+<script>
+    $('.is_expired').on('click', function() {
+        var id = $(this).val();
+        var newurl = "{{ url('admin/isexpired') }}/" + id;
 
+        $.ajax({
+            url: newurl,
+            method: 'get',
+            beforeSend: function() {
+                $('.is_expired').attr('disabled', 'true');
+            },
+            success: function() {
+
+                $('.is_expired').removeAttr('disabled')
+
+            }
+        });
+    });
+</script>
 @endsection

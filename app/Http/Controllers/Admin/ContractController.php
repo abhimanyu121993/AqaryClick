@@ -484,6 +484,26 @@ class ContractController extends Controller
             return 0;
         }
     }
+    public function isExpired($id)
+    {
+        $ass_expired=Contract::find($id);
+
+        if($ass_expired->expire==1)
+        {
+            $ass_expired->expire=0;
+        }else
+        {
+            $ass_expired->expire=true;
+        }
+        if($ass_expired->update()){
+           return 1;
+        }
+        else
+        {
+           return 0;
+
+        }
+    }
     public function generatePDF($contract_code)
     {
         $conn = Contract::where('contract_code', $contract_code)->first();

@@ -71,13 +71,7 @@
                                     <td></td>
                                     <td></td>
                                     @endif
-                                    <td></td>
-
-
-
-
-
-                                   
+                                    <td></td>     
                             @endforeach
                             </tr>
                         </tbody>

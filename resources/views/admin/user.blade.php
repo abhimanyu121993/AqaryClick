@@ -165,11 +165,7 @@
                                     <td>{{ $user->email ?? '' }}</td>
                                     <td>{{ $user->phone ?? '' }}</td>
                                     <td>{{ $user->roles[0]->name ?? '' }}</td>
-                                    <td>
-                                    <div class="form-check form-check-primary form-switch">
-                                        <input type="checkbox" value="{{$user->id}}" class="form-check-input is_active" id="is_active" {{ $user->status==0?'':'checked' }} />
-                                    </div>
-                                    </td>
+                                    c
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"

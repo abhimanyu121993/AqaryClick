@@ -203,6 +203,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
     Route::get('receipt/{contract_code}',[ContractController::class,'contractReceipt'])->name('receipt');
     Route::get('/isreject/{id}',[ContractController::class,'isReject'])->name('activeContract');
+    Route::get('/isexpired/{id}',[ContractController::class,'isExpired'])->name('expireContract');
     Route::get('/isvacant/{id}',[UnitController::class,'isVacant'])->name('isvacant');
 
     Route::get('/all-grace/{id}',[ContractController::class,'graceDetails'])->name('graceDetails');
