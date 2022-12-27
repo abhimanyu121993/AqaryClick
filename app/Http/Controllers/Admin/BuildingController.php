@@ -190,7 +190,7 @@ class BuildingController extends Controller
             'incharge_name' => 'required',
             'person_job' => 'required',
             'person_mobile' => 'required',
-            'building_receive_date' => 'required',
+            // 'building_receive_date' => 'required',
 
 
 
