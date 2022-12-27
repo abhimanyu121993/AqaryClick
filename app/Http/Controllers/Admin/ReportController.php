@@ -10,6 +10,7 @@ use App\Models\currency;
 use App\Models\Customer;
 use App\Models\Grace;
 use App\Models\Invoice;
+use App\Models\Legal;
 use App\Models\Nationality;
 use App\Models\PaymentHistory;
 use App\Models\Tenant;
@@ -308,13 +309,19 @@ else{
 
     public function unitReport(Request $req){
         $user = Customer::find($req->owner_id)->user;
-if($req->unit_status=='all'){
-    $unit=Unit::where('user_id',$user->id)->get();
+        $type=$req->unit_status;
+if($type='legal process'){
+$unit=Legal::where('user_id',$user->id)->get();
 }
 else{
-    $usi=UnitStatus::where('name',$req->unit_status)->first();
-    $unit=Unit::where('user_id',$user->id)->where('unit_status',$usi->id)->get();
+    if($req->unit_status=='all'){
+        $unit=Unit::where('user_id',$user->id)->get();
+    }
+    else{
+        $usi=UnitStatus::where('name',$req->unit_status)->first();
+        $unit=Unit::where('user_id',$user->id)->where('unit_status',$usi->id)->get();
+    }
 }
-return view('admin.report.unit',compact('unit'));
+return view('admin.report.unit',compact('unit','type'));
     }
 }

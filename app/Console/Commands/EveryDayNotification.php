@@ -88,8 +88,6 @@ class EveryDayNotification extends Command
                 }
             }
         }
-
-
         $res=Invoice::where('payment_status','Paid')->pluck('contract_id');
         $contractsDetails=Contract::where('overdue','>=',90)->whereNotIn('id',$res)->get();
         if($contractsDetails){
@@ -108,8 +106,7 @@ class EveryDayNotification extends Command
                 ]);
             }
         }
-        
-        
+
         return Command::SUCCESS;
     }
 }

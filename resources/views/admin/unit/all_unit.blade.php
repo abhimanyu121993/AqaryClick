@@ -71,7 +71,9 @@
                                 <th scope="col">Unit Size</th>
                                 <th scope="col">Electric No</th>
                                 <th scope="col">Water No</th>
-                                <th scope="col">Unit </th>
+                                <th scope="col">Unit Rent</th>
+                                <th scope="col">Is Vacant</th>
+                                <th scope="col">Vacant Reason</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -89,6 +91,16 @@
                                     <td>{{ $unit->electric_no??''}}</td>
                                     <td>{{ $unit->water_no??''}}</td>
                                     <td>{{ $unit->actual_rent??''}}</td>
+                                    <td>
+                                            <div class="form-check form-check-primary form-switch">
+                                                <input type="checkbox" value="{{ $unit->id }}"
+                                                    class="form-check-input is_vacant" id="is_vacant"
+                                                    {{ isset($unit->unit_status)?($unit->unitStatus->name=='vacant'?'':'checked'):'' }}
+                                                     />
+                                            </div>
+                                        </td>
+                                    <td>{{$unit->reason_vacant??''}}</td>
+
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -117,8 +129,28 @@
             </div>
         </div>
     </div>
+    <!-- Grids in modals -->
+      <!-- Modal -->
+      <div class="modal fade " id="contractrejdesc" role="dialog">
+            <div class="modal-dialog">
 
-
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center" id="h1" >Reason Why You Vacant This Unit?</h4>
+                    </div>
+                    <form action="" method="post" id="contractrejform">
+                        @csrf
+                        <div class="form-group">
+                            <textarea class="form-control" name="desc" rows="3" placeholder="Write Something Here!"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn-btn" type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <!-- Grids in modals -->
 @endsection
@@ -133,4 +165,33 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+<script>
+        $('.is_vacant').on('click', function() {
+            var id = $(this).val();
+            var newurl = "{{ url('admin/isvacant') }}/" + id;
+            var check = $(this).is(':checked');
+            var furl="{{url('admin/reason-vacant/')}}/";
+            $('.close').on('click', function() {
+                $(".myModalaa").modal('hide');
+            })
+
+
+            $.ajax({
+                url: newurl,
+                method: 'get',
+                beforeSend: function() {
+                    $('.is_vacant').attr('disabled', 'true');
+                },
+                success: function() {
+
+                    $('.is_vacant').removeAttr('disabled')
+                    if (check) {
+                        $('#contractrejform').attr('action',furl+id);
+                        $("#contractrejdesc").modal('show');
+                    }
+                }
+            });
+        });
+    </script>
+
 @endsection
