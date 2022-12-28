@@ -202,19 +202,17 @@
                         <div class="col-xxl-3 col-md-3 mb-2">
                             <label for="space" class="form-label">Tenant Nationality</label>
                             <select class="form-select js-example-basic-single" id="customer" name="tenant_nationality">
-                                <option value=" {{isset($editTenant)? $editTenant->tenant_nationality:''}} " selected hidden>
-                                    @if (isset($editTenant))
-                                    @if ($editTenant->tenant_nationality =='')
-                                    {{$editTenant->tenant_nationality ?? ''}}
-                                    @else
-                                    {{$editTenant->tenantNationality->name ?? ''}}
-                                    @endif
-                                    @else
-                                    --Select Tenant Nationality--
-                                    @endif
-                                </option>
-                                @foreach ($nation as $nationality)
-                                <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
+                            <option value=""> 
+                                @if (isset($editTenant))
+                                @if($editTenant->tenant_nationality =='')
+                                 --select nationality--
+                                @endif
+                                @else
+                                --select nationality--    
+                                @endif
+                            </option>
+                                @foreach ($nation as $nationality)  
+                                <option value="{{ $nationality->id }}" {{ isset($editTenant)? ($editTenant->tenant_nationality == $nationality->id ? 'selected' : '') :'' }}>{{ $nationality->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -230,20 +228,17 @@
                             <label class="form-label" for="flag">Building Name</label>
 
                             <select class="form-select js-example-basic-single" id="building_name" name='building_name'>
-                                <option value="{{isset($editTenant)? $editTenant->building_name:''}}" selected hidden>
-
+                                <option value="">
                                     @if (isset($editTenant))
                                     @if ($editTenant->building_name =='')
-                                    {{$editTenant->building_name ?? ''}}
-                                    @else
-                                    {{$editTenant->buildingDetails->name ?? ''}}
+                                    --Select Builidng Name--
                                     @endif
                                     @else
                                     --Select Builidng Name--
                                     @endif
                                 </option>
                                 @foreach ($building as $build)
-                                <option value="{{ $build->id }}">{{ $build->name }}</option>
+                                <option value="{{ $build->id }}" {{ isset($editTenant)? ($editTenant->building_name == $build->id ? 'selected' : '') :'' }}>{{ $build->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -257,20 +252,17 @@
                             <label for="space" class="form-label">Unit Type</label>
                             <div class="input-group">
                                 <select class="form-select js-example-basic-single" id="unit_type" name="unit_type">
-                                    <option value="{{isset($editTenant)? $editTenant->unit_type:''}}">
-
+                                    <option value="">
                                         @if (isset($editTenant))
                                         @if ($editTenant->unit_type =='')
-                                        {{$editTenant->unit_type ?? ''}}
-                                        @else
-                                        {{$editTenant->unittypeinfo->name ?? ''}}
+                                        --Select Unit--
                                         @endif
                                         @else
                                         --Select Unit--
                                         @endif
                                     </option>
                                     @foreach ($unitType as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                    <option value="{{ $unit->id }}" {{ isset($editTenant)? ($editTenant->unit_type == $unit->id ? 'selected' : '') :'' }}>{{ $unit->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -367,9 +359,17 @@
                             <div class="col-xxl-3 col-md-3 mb-3">
                                 <label for="space" class="form-label">Sponsor Nationality</label>
                                 <select class="form-select js-example-basic-single" id="sponser_nationality" name="sponsor_nationality">
-                                    <option value="{{isset($editTenant)? $editTenant->sponsor_nationality:''}}" selected hidden>{{isset($editTenant)? ($editTenant->sponsor_nationality == ''? $editTenant->sponsor_nationality:$editTenant->nationality->name):'---Select Sponsor Nationality---'}}</option>
+                                    <option value="">
+                                        @if (isset($editTenant))
+                                        @if ($editTenant->sponsor_nationality =='')
+                                        ---Select Sponsor Nationality---
+                                        @endif
+                                        @else
+                                        ---Select Sponsor Nationality---
+                                        @endif
+                                    </option>
                                     @foreach ($nation as $nationality)
-                                    <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
+                                    <option value="{{ $nationality->id }}" {{ isset($editTenant)? ($editTenant->sponsor_nationality == $nationality->id ? 'selected' : '') :'' }}>{{ $nationality->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
