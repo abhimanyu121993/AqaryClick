@@ -185,6 +185,7 @@
                     $('.is_vacant').attr('disabled', 'true');
                 },
                 success: function(data) {
+                    alert(data);
                     alert(typeof data);
                     return 0;
                     if(typeof data !='number'){
