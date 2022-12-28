@@ -84,7 +84,7 @@
                                 <label for="space" class="form-label">Building Type</label>
                                 <select class="select2  form-select js-example-basic-single" id="building_type" name="building_type">
                                 @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->building_type }}">
+                                            <option value="{{ $buildingedit->building_type }}" selected hidden>
                                                 {{ $buildingedit->building_type }}</option>
                                                 @else
                                             <option value="" selected hidden>--Select Building Type--</option>
@@ -98,7 +98,7 @@
                                 <label for="space" class="form-label">Status</label>
                                 <select class="form-control" id="building_status" name="status" >
                                 @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->status ??''}}">
+                                            <option value="{{ $buildingedit->status ??''}}"selected hidden>
                                                 {{ $buildingedit->status??'' }}</option>
                                                 @else
                                             <option value="" selected hidden>--Select Status--</option>
@@ -114,7 +114,7 @@
                                 <label for="space" class="form-label">Ownership Type</label>
                                 <select class="form-control select2 form-select" id="flag" name="ownership_type">
                                 @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->ownership_type ??''}}">
+                                            <option value="{{ $buildingedit->ownership_type ??''}}" selected hidden>
                                                 {{ $buildingedit->ownership_type??'' }}</option>
                                                 @else
                                             <option value="" selected hidden>--Select OwnershipType--</option>
