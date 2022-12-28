@@ -251,7 +251,7 @@
 
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Parking Status</label>
-                                    <select class="form-control select2 form-select" id="parking_status" name="parking_status" required>
+                                    <select class="form-control select2 form-select" id="parking_status" name="parking_status" >
                                     <option value="{{$buildingedit->parking_status ?? ''}}" selected hidden>{{$buildingedit->parking_status ?? '--Select Parking Status--'}}</option>
                                     <option value="Yes" >Yes</option>
                                     <option value="No" >No</option>

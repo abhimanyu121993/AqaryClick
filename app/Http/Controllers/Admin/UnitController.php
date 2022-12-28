@@ -82,13 +82,13 @@ class UnitController extends Controller
             'unit_type'=>'required',
             'unit_size'=>'required',
             'unit_floor'=>'required',
-            'unit_feature'=>'required',
-            'electric_no'=>'required',
-            'water_no'=>'required',
-            'intial_rent'=>'required',
-            'actual_rent'=>'required',
+            'unit_feature'=>'nullable',
+            'electric_no'=>'nullable',
+            'water_no'=>'nullable',
+            'intial_rent'=>'nullable',
+            'actual_rent'=>'nullable',
             'unit_ref'=>'required',
-            'revenue'=>'required',
+            'revenue'=>'nullable',
 
 
         ]);
@@ -188,12 +188,12 @@ class UnitController extends Controller
             'unit_size'=>'required',
             'unit_floor'=>'required',
             'unit_feature'=>'required',
-            'electric_no'=>'required',
-            'water_no'=>'required',
-            'intial_rent'=>'required',
+            'electric_no'=>'nullable',
+            'water_no'=>'nullable',
+            'intial_rent'=>'nullable',
             'actual_rent'=>'required',
-            'unit_ref'=>'required',
-            'revenue'=>'required',
+            'unit_ref'=>'nullable',
+            'revenue'=>'nullable',
         ]);
         $otherpic=[];
         if($request->hasFile('file'))
