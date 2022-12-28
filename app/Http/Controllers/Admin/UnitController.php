@@ -378,7 +378,7 @@ class UnitController extends Controller
 
             $tenants = Tenant::with([
                 'contracts' => function ($q) {
-                    return $q->where('expire',true);
+                    return $q->where('expire',false);
             }])->where('unit_no', $id)->first();
             $contracts=$tenants->contracts;
             if($contracts->count() > 0){
