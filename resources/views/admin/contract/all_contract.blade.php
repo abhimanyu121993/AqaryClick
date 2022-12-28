@@ -154,11 +154,7 @@
                                                 class="me-75 bg-light-danger" style="height:35px;width:35px;" /></td>
                                         <td>{{ $con->remark ?? '' }}</td>
                                         <td><a class="dropdown-item"
-<<<<<<< Updated upstream
                                                 href="{{ $con->status==0?route('admin.receipt', $con->contract_code):'#' }}">view</a></td>
-=======
-                                                href="{{$con->status==1? route('admin.receipt', $con->contract_code):'#' }}">view</a></td>
->>>>>>> Stashed changes
                                         <td>
                                             <div class="dropdown">
                                                 <a href="#" role="button"  id="dropdownMenuLink"
