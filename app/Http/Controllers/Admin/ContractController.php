@@ -316,6 +316,8 @@ class ContractController extends Controller
             'currency_type' => 'required',
             'contract_type' => 'required',
         ]);
+        $this->getUser();
+
         $sar_amt = amcurrency::convert()->from($request->currency_type)->to('QAR')->amount($request->rent_amount)->get();
         $mainpic = Contract::find($id)->lessor_sign ?? '';
         if ($request->hasFile('lessor_sign')) {
@@ -367,7 +369,7 @@ class ContractController extends Controller
             'attestation_status' => $request->attestation_status,
             'attestation_expiry' => $request->attestation_expiry,
             'contract_status' => $request->contract_status,
-            'currency' => $request->currency,
+            'currency' => $request->currency_type,
             'rent_amount' => $sar_amt,
             'user_amt' => $request->rent_amount,
             'tenant_sign' => $mainpic2,
