@@ -515,15 +515,13 @@ class ContractController extends Controller
     }
 
 
-    public function graceDetails($id)
+    public function graceDetails($contract_code)
     {
-        $graceDetails = Contract::find($id);
-        $grace_start = json_decode($graceDetails->grace_start_date);
-        $grace_end = json_decode($graceDetails->grace_end_date);
-        $grace_day = json_decode($graceDetails->grace_period_day);
-        $grace_month = json_decode($graceDetails->grace_period_month);
 
-        return view('admin.contract.grace_contract', compact('grace_start','grace_end','grace_day','grace_month'));
+        $graceDetails = Grace::where('contract_code',$contract_code)->get();
+       
+
+        return view('admin.contract.grace_contract', compact('graceDetails'));
     }
 
     public function bulkUpload(Request $request)

@@ -11,6 +11,7 @@ use App\Models\PaymentHistory;
 use App\Models\Tenant;
 use App\Models\TenantFile;
 use App\Models\Unit;
+use App\Models\UnitStatus;
 use App\Models\UnitType;
 use App\Models\User;
 use Carbon\Carbon;
@@ -312,12 +313,14 @@ class TenantController extends Controller
     }
 
     public function BuildingDetails($building_id){
-        $res=Unit::with('unittypeinfo')->where('building_id',$building_id)->get();
         $total_unit =Unit::where('building_id',$building_id)->count();
-        $html=' <option value="">--Select Unit--</option>';
-    foreach($res as $r){
-        $html .='<option value="'.$r->unittypeinfo->id.'">'.$r->unittypeinfo->name.'</option>';
-    }
+        $res=Unit::where('building_id',$building_id)->get();
+        $html='<option value="">--Select Unit No--</option>';
+        foreach($res as $r){
+            $html .='<option value="'.$r->id.'"';
+            $html .=$r->unit_status==UnitStatus::where('name','vacant')->first()->id?'': 'disabled ';
+            $html .='>'.$r->unit_no.'</option>';
+        }
 
         return response()->json(['html'=>$html,'total_unit'=>$total_unit]);
     }

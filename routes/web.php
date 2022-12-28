@@ -206,7 +206,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('/isexpired/{id}',[ContractController::class,'isExpired'])->name('expireContract');
     Route::get('/isvacant/{id}',[UnitController::class,'isVacant'])->name('isvacant');
 
-    Route::get('/all-grace/{id}',[ContractController::class,'graceDetails'])->name('graceDetails');
+    Route::get('/all-grace/{contract_code}',[ContractController::class,'graceDetails'])->name('graceDetails');
     Route::get('/generate-pdf/{contract_code}', [ContractController::class, 'generatePDF'])->name('pdf');
     Route::resource('membership',MembershipController::class);
     Route::resource('contract-recipt',ContractReciptController::class);

@@ -18,14 +18,15 @@
                 </tr>
             </thead>
             <tbody id="grace_loop">
-                @if(isset($grace_start))
-                @foreach ($grace_start as $k=>$grace )
+                @if(isset($graceDetails))
+                @foreach ($graceDetails as $grace )
+                {{ $grace }}
                 <tr>
                     <td>{{$loop->index+1}}</td>
-                    <td>{{Carbon\Carbon::parse($grace)->format('d M Y') ?? ''}}</td>
-                    <td>{{Carbon\Carbon::parse($grace_end[$k])->format('d M Y') ??''}}</td>
-                    <td>{{$grace_month[$k] ??''}} Months</td>
-                    <td>{{$grace_day[$k] ??''}} Days</td>
+                    <td>{{Carbon\Carbon::parse($grace->grace_start_date)->format('d M Y') ?? ''}}</td>
+                    <td>{{Carbon\Carbon::parse($grace->grace_end_date)->format('d M Y') ??''}}</td>
+                    <td>{{$grace->grace_period_month??''}} Months</td>
+                    <td>{{$grace->grace_period_day??''}} Days</td>
 
                 </tr>
                 @endforeach
