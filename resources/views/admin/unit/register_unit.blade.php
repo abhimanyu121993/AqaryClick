@@ -89,7 +89,7 @@
 
                                     <select class="select2  form-select js-example-basic-single" name='building_name'>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->id }}" disabled>
+                                            <option value="{{ $buildingedit->id }}" selected hidden>
                                                 {{ $buildingedit->building_name }}</option>
                                                 @else
                                             <option value="" selected hidden>--Select Building--</option>
@@ -104,7 +104,7 @@
                                     <select class="form-control select2 form-select" id="building_name"
                                         name="building_name">
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->building_id ??'' }}" selected>
+                                            <option value="{{ $buildingedit->building_id ??'' }}" selected hidden>
                                                 {{ $buildingedit->buildingDetails->name ?? ''}}</option>
                                         @else
                                             <option value="" selected hidden>--Select Building--</option>
@@ -136,7 +136,7 @@
                                     <select class="form-control select2 form-select" id="building_name"
                                         name="unit_type" required>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->unit_type ?? '' }}" selected>
+                                            <option value="{{ $buildingedit->unit_type ?? '' }}" selected hidden>
                                                 {{$buildingedit->unitTypeDetails->name ?? ''}}</option>
                                         @else
                                             <option value="" selected hidden>--Select Building--</option>
@@ -153,7 +153,7 @@
                                     <label class="form-label" for="flag">Unit Status</label>
                                     <select class="form-control select2 form-select" name="unit_status" required>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->unit_status ??'' }}"> {{$buildingedit->unitStatus->name??''}} </option>
+                                            <option value="{{ $buildingedit->unit_status ??'' }}"selected hidden> {{$buildingedit->unitStatus->name??''}} </option>
                                         @else
                                             <option value="" selected hidden>--Select Unit Status--</option>
                                          @endif
@@ -166,8 +166,8 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Floor</label>
 
-                                    <select class="select2 select2  form-select js-example-basic-single" name='unit_floor' required>                                        @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->unit_floor ??'' }}">
+                                    <select class="select2 select2  form-select js-example-basic-single" name='unit_floor'>                                        @if (isset($buildingedit))
+                                            <option value="{{ $buildingedit->unit_floor ??'' }}" selected hidden>
                                                 {{ $buildingedit->unitfloor->name??'' }}</option>
                                         @else
                                         <option value="" selected hidden>---Select Type---</option>
@@ -189,9 +189,9 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Feature</label>
 
-                                    <select class="select2  form-select js-example-basic-single" name='unit_feature' required>
+                                    <select class="select2  form-select js-example-basic-single" name='unit_feature'>
                                         @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->unit_feature ?? '' }}">
+                                            <option value="{{ $buildingedit->unit_feature ?? '' }}" selected hidden>
                                                 {{ $buildingedit->unitFeature->name ??'' }}</option>
                                         @else
                                         <option value="" selected hidden>---Select Type---</option>
