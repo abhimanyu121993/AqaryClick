@@ -388,9 +388,9 @@ class UnitController extends Controller
             $ass_vacant->unit_status = $USO->id;
         }
         if ($ass_vacant->update()) {
-            return 1;
+            return true;
         } else {
-            return 0;
+            return false;
         }
     } 
     public function vacantReason(Request $req,$id)
