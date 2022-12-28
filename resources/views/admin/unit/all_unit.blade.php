@@ -194,7 +194,8 @@
   text: 'This Unit Is Under Contract -'+data+', Please ! Expired This Contract First',
   footer: '<a href="'+newurl+'">Goto Contract</a>'
 });
-                        window.location.reload();
+                        // window.location.reload();
+                        $('.is_vacant').removeAttr('disabled')
                     }
                     else{
                     $('.is_vacant').removeAttr('disabled')
