@@ -373,10 +373,12 @@ class UnitController extends Controller
         if ($USI == 'vacant') {
             $USO=UnitStatus::where('name','occupied')->first();
             $ass_vacant->unit_status = $USO->id;
-        } else {
+        } 
+        else {
+
             $tenants = Tenant::with([
                 'contracts' => function ($q) {
-                    return $q->where('expire', false);
+                    return $q->where('expire',true);
             }])->where('unit_no', $id)->first();
             $contracts=$tenants->contracts;
             if($contracts->count() > 0){
