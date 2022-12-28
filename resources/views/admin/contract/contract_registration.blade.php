@@ -150,28 +150,28 @@
                                         <input type="text"
                                             value="{{ isset($contractedit) ? $contractedit->qid_document : '' }}"
                                             id="qid_document" class="form-control" name="qid_document"
-                                            placeholder="QID Document Number" readonly>
+                                            placeholder="QID Document Number">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-2" id="cr">
                                     <label for="state" class="form-label">CR</label>
                                     <div class="input-group">
                                         <input type="text" id="cr_document" class="form-control" name="cr_document"
-                                            placeholder="Enter CR No" readonly>
+                                            placeholder="Enter CR No" >
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-2" id="passport">
                                     <label for="country" class="form-label">Passport</label>
                                     <div class="input-group">
                                         <input type="text" id="passport_doc" class="form-control"
-                                            name="passport_document" placeholder="Passport Document" readonly>
+                                            name="passport_document" placeholder="Passport Document">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-2" id="establishment">
                                     <label for="country" class="form-label">Establishment Card No</label>
                                     <div class="input-group">
                                         <input type="text" id="establishment_card" class="form-control"
-                                            name="established_card_no" placeholder="Establishment Card No" readonly>
+                                            name="established_card_no" placeholder="Establishment Card No">
                                     </div>
                                 </div>
 
@@ -179,7 +179,7 @@
                                     <label for="country" class="form-label">Government Housing No</label>
                                     <div class="input-group">
                                         <input type="text" id="government_housing" class="form-control"
-                                            name="government_housing_no" placeholder="Government Housing No" readonly>
+                                            name="government_housing_no" placeholder="Government Housing No">
                                     </div>
                                 </div>
 
@@ -240,7 +240,7 @@
                                     <select class="select2 form-select js-example-basic-single" id="lessor"
                                         name='lessor'>
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->customer->id }}" selected>
+                                            <option value="{{ $contractedit->customer->id }}" selected hidden>
                                                 {{ $contractedit->customer->full_name }}</option>
                                         @endif
                                         <option value="" {{ isset($contractedit) ? 'hidden' : 'selected hidden' }}>--Select
@@ -511,7 +511,7 @@
                                     <select class="form-control select2 form-select .currency" name="currency_type"
                                         id="currency">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->currency }}" selected>
+                                            <option value="{{ $contractedit->currency }}" selected hidden>
                                                 {{ $contractedit->currency }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Currency--</option>
@@ -542,8 +542,8 @@
                                     <label for="name" class="form-label">Guarantees</label>
                                     <select class="form-control select2 form-select" id="guarantees" name="guarantees">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->Guarantees }}" selected hidden>
-                                                {{ $contractedit->Guarantees }}</option>
+                                            <option value="{{ $contractedit->guarantees }}" selected hidden>
+                                                {{ $contractedit->guarantees }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Guarantees--</option>
                                         @endif
@@ -691,10 +691,23 @@
     <script>
         $(document).ready(function() {
             $('#qid').hide();
-            $('#cr').hide();
             $('#passport').hide();
+            $('#cr').hide();
+           
             $('#establishment').hide();
             $('#government').hide();
+            @if(isset($contractedit))
+            @if($contractedit->tenantDetails->tenant_type == 'TP')
+            $('#qid').show();
+            $('#passport').show();
+            @elseif($contractedit->tenantDetails->tenant_type == 'TC')
+            $('#cr').show();
+           $('#establishment').show();
+           @elseif($contractedit->tenantDetails->tenant_type == 'TG')
+           $('#government').show();
+
+           @endif
+           @endif
             $(document).on('change', '#tenant_name', function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
