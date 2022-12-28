@@ -311,7 +311,6 @@
                                 </div>
                             </a>
                         </div>
-
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body p-0 pb-2">

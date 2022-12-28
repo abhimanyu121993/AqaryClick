@@ -72,8 +72,8 @@ class AdminController extends Controller
             $totle_contract=Contract::where('user_id',$user_id)->get();
             $tenant=Tenant::where('user_id',$user_id)->count();
             $tenant_not_sign=Contract::where('user_id',$user_id)->where('lessor_sign',null)->count();
-
-            $vacant=Unit::where('user_id',$user_id)->where('unit_status','vacant')->count() ;
+            $unit_status=UnitStatus::where('name','vacant')->first();
+            $vacant=Unit::where('user_id',$user_id)->where('unit_status',$unit_status->id)->count() ;
             $cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Valid')->get();
             $bounce_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Bounced')->get();
             $expired_cheque=Cheque::where('user_id',$user_id)->where('cheque_status','Expired')->get();

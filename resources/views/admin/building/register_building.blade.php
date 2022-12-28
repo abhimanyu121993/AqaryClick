@@ -83,14 +83,9 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="space" class="form-label">Building Type</label>
                                 <select class="select2  form-select js-example-basic-single" id="building_type" name="building_type">
-                                @if (isset($buildingedit))
-                                            <option value="{{ $buildingedit->building_type }}" selected hidden>
-                                                {{ $buildingedit->building_type }}</option>
-                                                @else
-                                            <option value="" selected hidden>--Select Building Type--</option>
-                                        @endif
+                                  <option value="" selected hidden>--Select Building Type--</option>
                                     @foreach ($building_types as $type)
-                                    <option value="{{ $type->name}}">{{ $type->name}}</option>
+                                    <option value="{{ $type->name}}"{{ isset($buildingedit)? ($buildingedit->building_type == $type->name ? 'selected' : '') :'' }}>{{ $type->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -182,15 +177,18 @@
                                 <label class="form-label" for="flag">Country</label>
 
                                 <select class="select2 form-select js-example-basic-single" id="country" name='country'>
-
-                                    @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->country ?? '' }}" selected hidden>{{ $buildingedit->nationality->name ??''}}</option>
-                                                @else
-                                            <option value="" selected hidden>--Select Country--</option>
-                                        @endif                              
-                                    @foreach($countryDetail as $cd)
-                                    <option value="{{ $cd->id}}">{{ $cd->name ?? '' }}</option>
-                                    @endforeach
+                                <option value=""> 
+                                @if (isset($buildingedit))
+                                @if($buildingedit->country =='')
+                                --Select Country--
+                                @endif
+                                @else
+                                --Select Country--   
+                                @endif
+                               </option>
+                                @foreach ($countryDetail as $cd)  
+                                <option value="{{ $cd->id ??'' }}" {{ isset($buildingedit)? ($buildingedit->country == $cd->id ? 'selected' : '') :'' }}>{{ $cd->name ?? '' }}</option>
+                                @endforeach
                                 </select>
                             </div>
 
@@ -198,17 +196,17 @@
                                 <label class="form-label" for="flag">City</label>
 
                                 <select class="select2  form-select js-example-basic-single" id="city" name='city'>
-                                    @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->city }}" selected hidden>{{ $buildingedit->cityDetails->name ?? ''}}</option>
-                                    @if ($buildingedit->city)
-                                    @foreach ($buildingedit->cityDetails->nationality->cities as $city)
-                                        <option value="{{$city->id ?? ''}}">{{$city->name ?? ''}}</option>
-                                    @endforeach       
-                                    @endif
-                                    @else
-                                    <option value="">--Select City--</option>
-                                    @endif
-
+                                   
+                                @if (isset($buildingedit))
+                                @if($buildingedit->city =='')
+                                <option value="">--Select Country--</option>
+                                @endif
+                                @foreach ($buildingedit->cityDetails->nationality->cities as $city)  
+                                <option value="{{ $city->id ?? '' }}" {{ isset($buildingedit)? ($buildingedit->city == $city->id ? 'selected' : '') :'' }}>{{ $city->name ?? '' }}</option>
+                                @endforeach
+                                @else
+                                <option value="">--Select Country--</option>  
+                                @endif
                                 </select>
 
                             </div>
@@ -216,19 +214,18 @@
                                 <label class="form-label" for="flag">Zone Name</label>
 
                                  <select class="select2  form-select js-example-basic-single" id="zone" name='zone_name'>
+                                    
                                     @if (isset($buildingedit))
-                                    <option value="{{ $buildingedit->area }}" selected hidden>{{ $buildingedit->areaDetails->name ?? ''}}</option>
-                                    @if ( $buildingedit->area)
-                                       @foreach ($buildingedit->areaDetails->city->zones as $zone )
-                                        <option value="{{$zone->id ?? ''}}">{{$zone->name ??''}}</option>
-                                        @endforeach
+                                    @if($buildingedit->area =='')
+                                      <option value="">--Select Zone--</option>
                                     @endif
+                                       @foreach ($buildingedit->areaDetails->city->zones as $zone )
+                                        <option value="{{$zone->id ?? ''}}" {{ isset($buildingedit)? ($buildingedit->area == $zone->id ? 'selected' : '') :'' }}>{{$zone->name ??''}}</option>
+                                        @endforeach
                                     @else
                                     <option value="">--Select Zone--</option>
-                                    @endif
-                                   
+                                    @endif 
                                 </select>
-
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
@@ -285,7 +282,7 @@
                             </div>
                             <div class="col-xxl-3 col-md-4">
                                 <label for="space" class="form-label">Building Status</label>
-                                <select class="select2  form-select js-example-basic-single" id="building_status" name="building_status">
+                                <select class="select2  form-select " id="building_status" name="building_status">
                                
                                     <option value="{{ $buildingedit->building_status ?? '' }}" selected hidden>{{ $buildingedit->building_status ?? '--Select Status--'}}</option>
                                     <option value="NEW">New</option>
