@@ -188,7 +188,7 @@
                                     <select class="form-control select2 form-select" id="contract_status"
                                         name="contract_status">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->contract_status }}">
+                                            <option value="{{ $contractedit->contract_status }}" selected hidden>
                                                 {{ $contractedit->contract_status ?? '' }}</option>
                                         @endif
                                         <option value="" {{ isset($contractedit) ? 'hidden' : 'selected' }}>--Select
@@ -243,7 +243,7 @@
                                             <option value="{{ $contractedit->customer->id }}" selected>
                                                 {{ $contractedit->customer->full_name }}</option>
                                         @endif
-                                        <option value="" {{ isset($contractedit) ? 'hidden' : 'selected' }}>--Select
+                                        <option value="" {{ isset($contractedit) ? 'hidden' : 'selected hidden' }}>--Select
                                             Lessor's--</option>
                                         @role('superadmin')
                                             @foreach ($lessor as $less)
@@ -460,6 +460,7 @@
                                         @else
                                             <option value="" {{ isset($contractedit) ? 'hidden' : 'selected' }}>--Select
                                                 Person--</option>
+                                                @endif
                                             @role('superadmin')
                                                 @foreach ($lessor as $less)
                                                     <option value="{{ $less->id }}">{{ $less->first_name }}
@@ -470,7 +471,6 @@
                                                 <option value="{{ $lessor->id }}">{{ $lessor->first_name }}
                                                     {{ $lessor->last_name }}</option>
                                             @endrole
-                                        @endif
 
                                     </select>
                                 </div>
@@ -479,7 +479,7 @@
                                     <select class="form-control select2 form-select" name="attestation_status"
                                         id="attestation_status">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->attestation_status }}" selected>
+                                            <option value="{{ $contractedit->attestation_status }}" selected hidden>
                                                 {{ $contractedit->attestation_status }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Status--</option>
@@ -542,7 +542,7 @@
                                     <label for="name" class="form-label">Guarantees</label>
                                     <select class="form-control select2 form-select" id="guarantees" name="guarantees">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->Guarantees }}" selected>
+                                            <option value="{{ $contractedit->Guarantees }}" selected hidden>
                                                 {{ $contractedit->Guarantees }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Guarantees--</option>
@@ -569,7 +569,7 @@
                                     <select class="form-control select2 form-select" id="contract_type"
                                         name="contract_type">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->contract_type }}" selected>
+                                            <option value="{{ $contractedit->contract_type }}" selected hidden>
                                                 {{ $contractedit->contract_type }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Contract--</option>
@@ -823,14 +823,11 @@
                 var diff = d2.getTime() - d1.getTime();
                 var daydiff = diff / (1000 * 60 * 60 * 24);
                 $('#lease_period_day').val(daydiff);
-
                 function diff_years(d2, d1) {
-
                     var diff = (d2.getTime() - d1.getTime()) / 1000;
                     diff /= (60 * 60 * 24);
                     return Math.abs(Math.round(diff / 365.25));
                 }
-
                 var total_years = diff_years(d1, d2);
                 var gracediv = '';
                 for (var i = 1; i <= total_years; i++) {
@@ -858,8 +855,8 @@
                                             <input type="text" class="form-control grace_day" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
                                         </div>\
                                     </div></div>';
-                }
-                $('.clone_grace').html(gracediv);
+                                   }
+                                   $('.clone_grace').html(gracediv);
 
           
       }
