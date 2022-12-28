@@ -309,8 +309,6 @@
             </div>
         </div>
     </div>
-
-
     <!-- Grids in modals -->
 @endsection
 
