@@ -40,6 +40,9 @@
                  <div class="col">
                     <b>Legal :- </b>{{$building->Units->where('unit_status',\App\Models\UnitStatus::where('name','court')->first()->id)->count()+$building->Units->where('unit_status',\App\Models\UnitStatus::where('name','court')->first()->id)->count()}}
                 </div>
+                <div class="col">
+                    <b>Building status :- </b>{{$building->status??''}}
+                </div>
             </div>
         </div>
         </div>

@@ -533,27 +533,7 @@
         }).change();
     });
 </script>
-{{-- <script>
-        $(document).ready(function() {
-            $("#building_name").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    var newurl = "{{ url('/admin/fetch-building-details') }}/" + optionValue;
-$.ajax({
-url: newurl,
-method: 'get',
-beforeSend:function(){
-$('#unit_no').html('<option selected hidden>Fetching.......</option>');
-},
-success: function(p) {
-$('#unit_no').html(p.html);
-// $('#total_unit').val(p.total_unit);
-}
-});
-});
-}).change();
-});
-</script> --}}
+
 <script>
     $(document).ready(function() {
         $('#rental_time').hide();
@@ -585,7 +565,7 @@ $('#unit_no').html(p.html);
             $(this).find("option:selected").each(function() {
 
                 var optionValue = $(this).attr("value");
-                var newurl = "{{ url('/admin/fetchunit') }}/" + optionValue;
+                var newurl = "{{ url('/admin/fetch-building-details') }}/" + optionValue;
                 $.ajax({
                     url: newurl,
                     method: 'get',
@@ -593,6 +573,7 @@ $('#unit_no').html(p.html);
                         $('#unit_no').html('<option selected hidden>Fetching.......</option>');
                     },
                     success: function(p) {
+                        console.log(p);
                         $("#unit_no").html(p.html);
 
                     }

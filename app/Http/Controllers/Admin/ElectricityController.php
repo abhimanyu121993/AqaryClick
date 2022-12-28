@@ -261,8 +261,8 @@ class ElectricityController extends Controller
         $html='<option value="">--Select Unit No--</option>';
         foreach($res as $r){
             $html .='<option value="'.$r->id.'"';
-            $html .=$r->unit_status==UnitStatus::where('name','vacant')->first()->id?'': 'disabled ';
-            $html .='>'.$r->unit_no.' ('.UnitStatus::find($r->unit_status)->name.')'.'</option>';
+            // $html .=$r->unit_status==UnitStatus::where('name','vacant')->first()->id?'': 'disabled ';
+            $html .='>'.$r->unit_no.'</option>';
         }
 
         $html1='<option value="">--Select Unit Type--</option>';
@@ -288,8 +288,7 @@ class ElectricityController extends Controller
             $html='<option value="">--Select Tenant Name--</option>';
             foreach($res as $r){
                 $html .='<option value="'.$r.'">'.$r.'</option>';
-            }
-            
+            }  
             return response()->json($html);
             }
             public function fetchContract(){
