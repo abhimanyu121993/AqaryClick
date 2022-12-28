@@ -877,11 +877,9 @@
             var yearFrom = dateF.getFullYear();
             start_date = new Date(yearTo, monthTo, dayTo);
             end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
-            total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -
-                start_date.getMonth())
+            total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() - start_date.getMonth())
             $('#lease_period_month').val(total_months);
             $('#total_invoice').val(total_months);
-
             var d1 = new Date(date);
             var d2 = new Date(dateF);
             var diff = d2.getTime() - d1.getTime();
