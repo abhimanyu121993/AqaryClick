@@ -185,6 +185,8 @@
                     $('.is_vacant').attr('disabled', 'true');
                 },
                 success: function(data) {
+                    alert(typeof data);
+                    return 0;
                     if(typeof data !='number'){
                         // alert('There is a contract which is not expire please expire this first -'+data);
                         var newurl="{{ route('admin.contract.create') }}";
