@@ -71,7 +71,7 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="name" class="form-label">Building Code</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="building_code" name="building_code" value="{{isset($buildingedit)? $buildingedit->building_code: '' }}" placeholder="Building Code" {{isset($buildingedit)? 'readonly': '' }}>
+                                    <input type="text" class="form-control" id="building_code" name="building_code" value="{{isset($buildingedit)? $buildingedit->building_code: '' }}" placeholder="Building Code" >
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
