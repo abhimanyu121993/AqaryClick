@@ -117,9 +117,9 @@
                                 </a> 
                             </li>
                             <li>
-                                <a href="my-properties.html" class="mdc-list-item" role="menuitem">
+                                <a href="{{ route('admin.dashboard') }}" class="mdc-list-item" role="menuitem">
                                     <i class="material-icons mat-icon-sm text-muted">home</i> 
-                                    <span class="mdc-list-item__text px-3">My Properties</span>
+                                    <span class="mdc-list-item__text px-3">Go To Dashboard</span>
                                 </a>
                             </li>
                             <li>
