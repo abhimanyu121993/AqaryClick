@@ -124,7 +124,7 @@
                                         <td>{{ $con->lease_period_month ?? '' }}</td>
                                         <td>{{ $con->lease_period_day ?? '' }}</td>
                                         <td>
-                                            <a href="{{ route('admin.graceDetails', $con->contract_code) }}" class="graceBtn"
+                                            <a href="{{ route('admin.graceDetails',$con->contract_code ??'') }}" class="graceBtn"
                                                 data-id="{{ $con->id }}">View</a>
                                         </td>
                                         <td>{{ $con->lessorDetails->name ?? '' }}</td>
@@ -154,7 +154,7 @@
                                                 class="me-75 bg-light-danger" style="height:35px;width:35px;" /></td>
                                         <td>{{ $con->remark ?? '' }}</td>
                                         <td><a class="dropdown-item"
-                                                href="{{ $con->status==0?route('admin.receipt',$con->contract_code):'#' }}">view</a></td>
+                                                href="{{ $con->status==0?route('admin.receipt',$con->contract_code ??''):'#' }}">view</a></td>
                                         <td>
                                             <div class="dropdown">
                                                 <a href="#" role="button"  id="dropdownMenuLink"

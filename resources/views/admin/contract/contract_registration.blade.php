@@ -150,6 +150,7 @@
                                         <input type="text"
                                             value="{{ isset($contractedit) ? $contractedit->qid_document : '' }}"
                                             id="qid_document" class="form-control" name="qid_document"
+                                            value="{{ isset($contractedit) ? $contractedit->qid_document : '' }}"
                                             placeholder="QID Document Number">
                                     </div>
                                 </div>
@@ -157,6 +158,7 @@
                                     <label for="state" class="form-label">CR</label>
                                     <div class="input-group">
                                         <input type="text" id="cr_document" class="form-control" name="cr_document"
+                                         value="{{ isset($contractedit) ? $contractedit->cr_document : '' }}"
                                             placeholder="Enter CR No" >
                                     </div>
                                 </div>
@@ -164,13 +166,16 @@
                                     <label for="country" class="form-label">Passport</label>
                                     <div class="input-group">
                                         <input type="text" id="passport_doc" class="form-control"
-                                            name="passport_document" placeholder="Passport Document">
+                                            name="passport_document" 
+                                            value="{{ isset($contractedit) ? $contractedit->passport_document : '' }}"
+                                            placeholder="Passport Document">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-2" id="establishment">
                                     <label for="country" class="form-label">Establishment Card No</label>
                                     <div class="input-group">
                                         <input type="text" id="establishment_card" class="form-control"
+                                        value="{{ isset($contractedit) ? $contractedit->established_card_no : '' }}"
                                             name="established_card_no" placeholder="Establishment Card No">
                                     </div>
                                 </div>
@@ -179,6 +184,7 @@
                                     <label for="country" class="form-label">Government Housing No</label>
                                     <div class="input-group">
                                         <input type="text" id="government_housing" class="form-control"
+                                        value="{{ isset($contractedit) ? $contractedit->government_housing_no : '' }}"
                                             name="government_housing_no" placeholder="Government Housing No">
                                     </div>
                                 </div>
@@ -187,12 +193,7 @@
                                     <label for="name" class="form-label">Contract Status</label>
                                     <select class="form-control select2 form-select" id="contract_status"
                                         name="contract_status">
-                                        @if (isset($contractedit))
-                                            <option value="{{ $contractedit->contract_status }}" selected hidden>
-                                                {{ $contractedit->contract_status ?? '' }}</option>
-                                        @endif
-                                        <option value="" {{ isset($contractedit) ? 'hidden' : 'selected' }}>--Select
-                                            Status--</option>
+                                        <option value="{{ $contractedit->contract_status ?? '' }}" {{ isset($contractedit) ? 'hidden' : 'selected' }}>{{ $contractedit->contract_status ?? '--Select Status--' }}</option>
                                         <option value="new">New</option>
                                         <option value="renewed">Renewed</option>
                                         <option value="not renewed">Not Renewed</option>
@@ -239,20 +240,15 @@
                                     <label for="name" class="form-label">Lessor's Name</label>
                                     <select class="select2 form-select js-example-basic-single" id="lessor"
                                         name='lessor'>
-                                        @if (isset($contractedit))
-                                            <option value="{{ $contractedit->customer->id }}" selected hidden>
-                                                {{ $contractedit->customer->full_name }}</option>
-                                        @endif
-                                        <option value="" {{ isset($contractedit) ? 'hidden' : 'selected hidden' }}>--Select
-                                            Lessor's--</option>
+                                        <option value="">--Select Lessor's--</option>    
                                         @role('superadmin')
                                             @foreach ($lessor as $less)
-                                                <option value="{{ $less->id }}">{{ $less->first_name }}
+                                                <option value="{{ $less->id }}"  {{ isset($contractedit)? ($contractedit->customer->id == $less->id ? 'selected' : '') :'' }}>{{ $less->first_name }}
                                                     {{ $less->last_name }}</option>
                                             @endforeach
                                         @endrole
                                         @role('Owner')
-                                            <option value="{{ $lessor->id }}">{{ $lessor->first_name }}
+                                            <option value="{{ $lessor->id }}" {{ isset($contractedit)? ($contractedit->customer->id == $lessor->id ? 'selected' : '') :'' }}>{{ $lessor->first_name }}
                                                 {{ $lessor->last_name }}</option>
                                         @endrole
                                     </select>
@@ -334,8 +330,7 @@
                                     <label class="form-label" for="flag">Grace Period</label>
 
                                     <select class="select2 form-select" id="grace" name='grace'>
-                                        <option value="" {{ isset($contractedit->grace_start_date) ? 'hidden' : 'selected' }}>--Select
-                                            grace--</option>
+                                        <option value="{{$contractedit->is_grace ?? ''}}" {{isset($contractedit)?'hidden':'selected'}}>{{$contractedit->is_grace ?? '--Select grace--'}}</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
 
@@ -454,21 +449,15 @@
                                     <label for="name" class="form-label">Approved By</label>
                                     <select class="select2 form-select js-example-basic-single" id="approved_by"
                                         name='approved_by'>
-                                        @if (isset($contractedit))
-                                            <option value="{{ $contractedit->approved_by }}">
-                                                {{ $contractedit->customer->full_name }}</option>
-                                        @else
-                                            <option value="" {{ isset($contractedit) ? 'hidden' : 'selected' }}>--Select
-                                                Person--</option>
-                                                @endif
+                                                <option value="">--Select Person--</option>
                                             @role('superadmin')
                                                 @foreach ($lessor as $less)
-                                                    <option value="{{ $less->id }}">{{ $less->first_name }}
+                                                    <option value="{{ $less->id }}" {{ isset($contractedit)? ($contractedit->approved_by == $less->id ? 'selected' : '') :'' }}>{{ $less->first_name }}
                                                         {{ $less->last_name }}</option>
                                                 @endforeach
                                             @endrole
                                             @role('Owner')
-                                                <option value="{{ $lessor->id }}">{{ $lessor->first_name }}
+                                                <option value="{{ $lessor->id }}" {{ isset($contractedit)? ($contractedit->approved_by == $lessor->id ? 'selected' : '') :'' }}>{{ $lessor->first_name }}
                                                     {{ $lessor->last_name }}</option>
                                             @endrole
 
@@ -510,14 +499,9 @@
                                     <label for="name" class="form-label">Currency</label>
                                     <select class="form-control select2 form-select .currency" name="currency_type"
                                         id="currency">
-                                        @if (isset($contractedit))
-                                            <option value="{{ $contractedit->currency }}" selected hidden>
-                                                {{ $contractedit->currency }}</option>
-                                        @else
-                                            <option value="" selected hidden>--Select Currency--</option>
-                                        @endif
+                                        <option value="" selected hidden>--Select Currency--</option>
                                         @foreach ($currency as $c)
-                                            <option value="{{ $c->id }}">{{ $c->code ?? '' }}</option>
+                                            <option value="{{ $c->id }}" {{ isset($contractedit)? ($contractedit->currency == $c->id ? 'selected' : '') :'' }}>{{ $c->code ?? '' }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -555,7 +539,7 @@
                                     <label for="name" class="form-label">Payment Mode</label>
                                     <select class="form-control select2 form-select" name="guarantees_payment_method">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->guarantees_payment_method }}" selected>
+                                            <option value="{{ $contractedit->guarantees_payment_method }}" selected hidden>
                                                 {{ $contractedit->guarantees_payment_method }}</option>
                                         @else
                                             <option value="" selected hidden>--Select Option--</option>
@@ -918,7 +902,7 @@
                 var d1 = new Date(date);
                 var d2 = new Date(dateF);
                 var diff = d2.getTime() - d1.getTime();
-                var daydiff = diff / (1000 * 60 * 60 * 24);
+                var daydiff = (diff / (1000 * 60 * 60 * 24))+1;
                 $(this).closest('.pgrace').children('.grace_period_day').children('.input-group').children('.grace_day').val(daydiff);
             });
         });
@@ -980,7 +964,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $("#lessor").change(function() {
+            $(document).on('change',"#lessor",function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     var newurl = "{{ url('/admin/fetch-company') }}/" + optionValue;

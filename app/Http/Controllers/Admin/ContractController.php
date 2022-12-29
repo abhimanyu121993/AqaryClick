@@ -187,7 +187,7 @@ class ContractController extends Controller
             'grace_end_date' => json_encode($request->grace_end_date),
             'grace_period_month' => json_encode($request->grace_period_month),
             'grace_period_day' => json_encode($request->grace_period_day),
-            'grace_count' =>count($request->grace_start_date),
+            'grace_count' =>count($request->grace_start_date??[] ),
             'approved_by' => $request->approved_by,
             'attestation_no' => $request->attestation_no,
             'attestation_status' => $request->attestation_status,
@@ -203,7 +203,7 @@ class ContractController extends Controller
             'guarantees_payment_method' => $request->guarantees_payment_method,
             'remark' => $request->remark,
         ]);
-        if (count($request->grace_start_date)>0) {
+        if (count($request->grace_start_date ??[])>0) {
 
         foreach ($request->grace_start_date as $k=>$i) {
                 $res = Grace::create(['user_id' => $this->user_id,'contract_code' => $contract_code, 'grace_start_date' => $i ?? '', 'grace_end_date' => $request->grace_end_date[$k] ?? '', 'grace_period_month' => $request->grace_period_month[$k] ?? '', 'grace_period_day' => $request->grace_period_day[$k] ?? '']);
@@ -363,7 +363,7 @@ class ContractController extends Controller
             'grace_end_date' => json_encode($request->grace_end_date),
             'grace_period_month' => json_encode($request->grace_period_month),
             'grace_period_day' => json_encode($request->grace_period_day),
-            'grace_count' =>count($request->grace_start_date),
+            'grace_count' =>count($request->grace_start_date ??[]),
             'approved_by' => $request->approved_by,
             'attestation_no' => $request->attestation_no,
             'attestation_status' => $request->attestation_status,
@@ -379,7 +379,7 @@ class ContractController extends Controller
             'contract_type' => $request->contract_type,
             'guarantees_payment_method' => $request->guarantees_payment_method,
         ]);
-        if (count($request->grace_start_date)>0) {
+        if (count($request->grace_start_date ??[])>0) {
 
             foreach ($request->grace_start_date as $k=>$i) {
                     $res = Grace::create(['user_id' => $this->user_id,'contract_code' => $request->contract_code, 'grace_start_date' => $i ?? '', 'grace_end_date' => $request->grace_end_date[$k] ?? '', 'grace_period_month' => $request->grace_period_month[$k] ?? '', 'grace_period_day' => $request->grace_period_day[$k] ?? '']);
