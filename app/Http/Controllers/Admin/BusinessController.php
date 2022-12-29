@@ -283,7 +283,7 @@ class BusinessController extends Controller
         }
         if (Auth::user()->customerDetail->step == 0) {
             $business = BusinessDetail::create([
-                'user_id' => Auth::user()->user_id,
+                'user_id' => Auth::user()->id,
                 'customer_type' => $request->customer_type,
                 'business_type' => $request->business_type,
                 'business_name' => $request->business_name,
