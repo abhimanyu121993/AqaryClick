@@ -336,7 +336,6 @@ class ContractController extends Controller
             Contract::find($id)->update(['tenant_sign' => $mainpic2]);
         }
         $data = Contract::find($id)->update([
-            'contract_code' => $request->contract_code,
             'tenant_name' => $request->tenant_name,
             'document_type' => $request->document_type,
             'qid_document' => $request->qid_document,
