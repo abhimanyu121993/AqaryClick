@@ -43,7 +43,7 @@ class RoleController extends Controller
             'role' => 'required',
         ]);
         Role::create([
-            'name' => $request->role,
+            'name' => Auth::user()->id.'_'.$request->role,
             'created_by'=>Auth::user()->id
         ]);
         return redirect()->back()->with('success','Role has been created successfully.');
