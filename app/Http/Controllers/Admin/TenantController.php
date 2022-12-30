@@ -88,7 +88,7 @@ class TenantController extends Controller
     {
         $this->getUser();
         $request->validate([
-            'tenant_code' => 'required|unique:tenants,tenant_code',
+            'tenant_code' => 'required',
             'tenant_english_name' => 'nullable',
             'tenant_arabic_name' => 'nullable',
             'tenant_document' => 'nullable',
@@ -117,6 +117,10 @@ class TenantController extends Controller
             'established_card_no'=>'nullable',
             'government_housing_no' => 'nullable',
         ]);
+        $primary_status = 1;
+        if(Tenant::where('tenant_code',$request->tenant_code)->exists()>0){
+            $primary_status = 0;
+        }
              $tenant = Tenant::create([
             'user_id' => $this->user_id,
             'file_no' => $request->file_no,
@@ -156,6 +160,7 @@ class TenantController extends Controller
             'attachment_remark' => $request->attachment_remark,
             'established_card_no'=>$request->established_card_no,
             'government_housing_no' =>$request->government_housing_no,
+            'primary_status'=>$primary_status,
         ]);
 
         if ($tenant) {
