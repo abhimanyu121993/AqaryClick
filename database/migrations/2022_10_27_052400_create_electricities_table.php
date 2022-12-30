@@ -24,10 +24,6 @@ return new class extends Migration
             $table->string('electric_under')->nullable();
             $table->string('name')->nullable();
             $table->string('qid_no')->nullable();
-            $table->string('est_no')->nullable();
-            $table->string('cr_no')->nullable();
-            $table->string('govt_housing')->nullable();
-            $table->string('passport_no')->nullable();
             $table->string('reg_mobile')->nullable();
             $table->string('electric_no')->nullable();
             $table->string('water_no')->nullable();
