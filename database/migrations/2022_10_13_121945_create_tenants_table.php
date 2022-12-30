@@ -55,6 +55,7 @@ return new class extends Migration
             $table->string('attachment_remark')->nullable();
             $table->string('established_card_no')->nullable();
             $table->string('government_housing_no')->nullable();
+            $table->boolean('primary_status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
