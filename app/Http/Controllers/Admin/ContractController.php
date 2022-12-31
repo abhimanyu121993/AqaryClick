@@ -409,11 +409,19 @@ class ContractController extends Controller
     }
     public function fetchTenantDetails($tenant_name)
     {
-        $res = Tenant::where('tenant_type', $tenant_name)->get();
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $res = Tenant::where('tenant_type', $tenant_name)->get();
+        }
+        else
+        {
+           
+            $res = Tenant::where('tenant_type', $tenant_name)->where('user_id',$this->user_id)->get();
+        }
         $html = ' <option value="">--Select Tenant--</option>';
 
         foreach ($res as $r) {
-            $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
+            $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name .' /('.$r->unit->unit_ref.')'. '</option>';
         }
         return response()->json($html);
     }

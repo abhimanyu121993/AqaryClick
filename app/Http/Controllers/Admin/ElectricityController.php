@@ -283,11 +283,11 @@ class ElectricityController extends Controller
         }
         else
         {
-            $res = Tenant::where('user_id',$this->user_id)->get()->pluck('tenant_english_name');
+            $res = Tenant::where('user_id',$this->user_id)->get();
         }
             $html='<option value="">--Select Tenant Name--</option>';
             foreach($res as $r){
-                $html .='<option value="'.$r.'">'.$r.'</option>';
+                $html .='<option value="'.$r->tenant_english_name.'">'.$r->tenant_english_name.' /('.$r->unit->unit_ref.')'.'</option>';
             }  
             return response()->json($html);
             }
@@ -299,7 +299,7 @@ class ElectricityController extends Controller
                 }
                 else
                 {
-                    $res =Contract::with('customer')->where('user_id',$this->user_id)->get()->pluck('lessor');
+            $res = Contract::with('customer')->where('user_id', $this->user_id)->distinct('lessor');
                 }
                 $html='<option value="">--Select Lessor Name--</option>';
                 foreach($res as $r){

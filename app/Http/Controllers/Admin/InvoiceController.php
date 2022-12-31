@@ -261,7 +261,7 @@ class InvoiceController extends Controller
             }
             $html = ' <option value=""selected hidden disabled> --Select Tenant--</option>';
             foreach ($res as $r) {
-                $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
+                $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name .' / ('. $r->unit->unit_ref.')'.'</option>';
             }
         } else
          { 
@@ -272,7 +272,7 @@ class InvoiceController extends Controller
             }
             $html = ' <option value=""selected hidden disabled>--Select Tenant--</option>';
             foreach ($res as $r) {
-                $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name . '</option>';
+                $html .= '<option value="' . $r->id . '">' . $r->tenant_english_name .' / ('. $r->unit->unit_ref.')'. '</option>';
             }
         }
         return response()->json($html);
