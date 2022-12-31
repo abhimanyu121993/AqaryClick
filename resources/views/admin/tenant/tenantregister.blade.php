@@ -376,7 +376,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xxl-3 col-md-12">
+                            <div class="col-xxl-12 col-md-12">
                                 <label for="remark" class="form-label">Remark</label>
                                 <textarea class="form-control" name="attachment_remark">{{$editTenant->attachment_remark ?? ''}}
                                 </textarea>

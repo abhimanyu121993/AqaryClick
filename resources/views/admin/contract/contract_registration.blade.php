@@ -565,7 +565,7 @@
                             </div>
                     </div>
                     <div class="row gy-4 mt-2">
-                        <div class="col-xxl-3 col-md-12">
+                        <div class="col-xxl-12 col-md-12">
                             <label for="remark" class="form-label">Remark</label>
                             <textarea class="form-control" name="remark">
                                     {{ isset($contractedit) ? $contractedit->remark : '' }}
@@ -786,6 +786,7 @@
 
     <script>
         $(document).ready(function() {
+            $('.clone_grace').hide();
             $("#grace").change(function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");

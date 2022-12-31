@@ -413,7 +413,7 @@
                             </div>
                         </div>
                         <div class="row gy-4 mb-3">
-                            <div class="col-xxl-3 col-md-12">
+                            <div class="col-xxl-12 col-md-12">
                                 <label for="remark" class="form-label">Remark</label>
                                 <textarea class="form-control" name="remark">
                                 {{isset($buildingedit)? $buildingedit->remark: '' }}
