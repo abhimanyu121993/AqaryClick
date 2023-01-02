@@ -17,6 +17,6 @@ class Electricity extends Model
     }
   public function unit()
   {
-        return $this->belongsTo(Unit::class, 'unit_no','unit_no');
+        return $this->belongsTo(Unit::class, 'unit_no');
   }
 }

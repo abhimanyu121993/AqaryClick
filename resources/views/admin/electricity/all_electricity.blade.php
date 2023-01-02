@@ -84,8 +84,8 @@
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td><i>{{ $el->building->name ?? '' }}</i></td>
-                                    <td>{{ $el->unit_no ?? '' }}</td>
-                                    <td>{{ $el->unit_type ?? '' }}</td>
+                                    <td>{{ $el->unit->unit_no}}</td>
+                                    <td>{{ $el->unit->unittypeinfo->name ?? '' }}</td>
                                     <td>{{ $el->electric_under ?? '' }}</td>
                                     <td>{{ $el->name ?? '' }}</td>
                                     <td>{{$el->qid_no ?? ''}}</td>

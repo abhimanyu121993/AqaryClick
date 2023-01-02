@@ -76,65 +76,45 @@
 
                                     <select class="form-select js-example-basic-single" id="building_name"
                                         name='building_name'>
-                                        @if (isset($electricity))
-                                            <option value="{{ $electricity->id }}" selected>
-                                                {{ $electricity->building_name }}</option>
-                                        @else
-                                            <option value="">--Select Builidng Name--</option>
+
+                                        <option value="" selected hidden>--Select Builidng Name--</option>
                                             @foreach ($build as $building)
-                                                <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                                <option value="{{ $building->id }}" {{ isset($electricity)? ($electricity->building_name == $building->id ? 'selected' : '') :'' }} >{{ $building->name }}</option>
                                             @endforeach
-                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label class="form-label" for="flag">Unit No</label>
-                                    <select class="select2 form-select" id="{{ !isset($electricity) ? 'unit_no' : '' }}"
+                                    <select class="select2 form-select" id="unit_no"
                                         name='unit_no'>
-                                        @if (isset($electricity))
-                                            <option value="{{ $electricity->unit_no }}" selected>{{ $electricity->unit_no }}
-                                            </option>
-                                        @else
-                                            <option value="">--Select Unit No--</option>
-                                        @endif
+                                   
+                                        <option value="{{$electricity->unit_no ?? ''}}" >{{$electricity->unit->unit_no ?? '--Select Unit No--'}}</option>
                                     </select>
                                 </div>
 
                                 <div class="col-xxl-3 col-md-4">
                                     <label class="form-label" for="flag">Unit Type</label>
-                                    <select class="select2 form-select" id="{{ !isset($electricity) ? 'unit_type' : '' }}"
+                                    <select class="select2 form-select" id="unit_type"
                                         name='unit_type'>
-                                        @if (isset($electricity))
-                                            <option value="{{ $electricity->unit_type }}" selected>
-                                                {{ $electricity->unit_type }}</option>
-                                        @else
-                                            <option value="">--Select Unit Type--</option>
-                                        @endif
+                                       
+                                        <option value="{{$electricity->unit_type ?? ''}}" >{{$electricity->unit->unittypeinfo->name ?? '--Select Unit No--'}}</option>
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Electricity Account Under</label>
                                     <select class="select2 form-select" id="electric_under" name='electric_under'>
-                                        @if (isset($electricity))
-                                            <option value="{{ $electricity->electric_under }}" selected>
-                                                {{ $electricity->electric_under }}</option>
-                                        @else
-                                            <option value="">--Select Electricity Under--</option>
+                                       
+                                        <option value="{{$electricity->electric_under ?? ''}}" selected hidden>{{$electricity->electric_under ??'--Select Electricity Under--'}}</option>
                                             <option value="tenant">Tenant</option>
                                             <option value="lessor">Lessor</option>
-                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label class="form-label" for="flag">Name</label>
-                                    <select class="select2 name form-select" id="{{ !isset($electricity) ? 'name' : '' }}"
+                                    <select class="select2 name form-select" id="name"
                                         name='name'>
-                                        @if (isset($electricity))
-                                            <option value="{{ $electricity->name }}" selected>{{ $electricity->name }}
-                                            </option>
-                                        @else
-                                            <option value="">--Select Name--</option>
-                                        @endif
+                                        
+                                        <option value="{{$electricity->name ?? ''}}" >{{$electricity->name ?? '--Select Name--'}}</option>
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-4" id="qid">
@@ -188,14 +168,10 @@
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="name" class="form-label">Paid By</label>
                                     <select class="select2 form-select" id="paid_by" name='paid_by'>
-                                        @if (isset($electricity))
-                                            <option value="{{ $electricity->paid_by }}" selected>
-                                                {{ $electricity->paid_by }}</option>
-                                        @else
-                                            <option value="">--Select--</option>
+                                        
+                                        <option value="{{ $electricity->paid_by ?? ''}}" selected hidden>{{$electricity->paid_by ??'--Select--'}}</option>
                                             <option value="tenant">Tenant</option>
                                             <option value="lessor">Lessor</option>
-                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -243,7 +219,7 @@
 @section('script-area')
     <script>
         $(document).ready(function() {
-            $("#building_name").change(function() {
+            $(document).on('change',"#building_name",function() {
                 $(this).find("option:selected").each(function() {
 
                     var optionValue = $(this).attr("value");
@@ -272,7 +248,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $("#electric_under").change(function() {
+            $(document).on('change',"#electric_under",function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     if (optionValue == 'tenant') {
@@ -302,7 +278,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $("#name").change(function() {
+            $(document).on('change',"#name",function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     var newurl = "{{ url('/admin/fetch-qid') }}/" + optionValue;

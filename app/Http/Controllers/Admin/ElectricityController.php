@@ -157,14 +157,16 @@ class ElectricityController extends Controller
         $this->getUser();
         
         if(Auth::user()->hasRole('superadmin')){
+            $build=Building::all();
             $electric_invoice=Electricity::latest()->first();
             $electric=Electricity::all();
         }
         else{
+            $build=Building::where('user_id',$this->user_id)->get();
             $electric_invoice=Electricity::where('user_id',$this->user_id)->latest()->first();
             $electric=Electricity::where('user_id',$this->user_id)->get();
         }
-        return view('admin.electricity.electric',compact('electricity','electric','electric_invoice'));
+        return view('admin.electricity.electric',compact('electricity','electric','electric_invoice','build'));
     }
 
     /**
