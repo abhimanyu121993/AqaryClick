@@ -361,7 +361,7 @@
                                                         <div class="input-group">
                                                             <input type="date" class="form-control grace_start"
                                                                 id="grace_start" name="grace_start_date[]"
-                                                                value="{{isset($contractedit) ? (isset($pg) ? $pg : ''):'' }}"
+                                                                value="{{ isset($pg) ? $pg : '' }}"
                                                                 placeholder="dd-mm-yyyy">
                                                         </div>
                                                     </div>
@@ -370,7 +370,7 @@
                                                         <div class="input-group">
                                                             <input type="date" class="form-control grace_end" id="grace_end"
                                                                 name="grace_end_date[]"
-                                                                value="{{ isset($contractedit) ? (isset($pg) ? $graceto[$k] : ''):'' }}"
+                                                                value="{{ isset($pg) ? $graceto[$k] : '' }}"
                                                                 placeholder="dd-mm-yyyy">
                                                         </div>
                                                     </div>
@@ -380,7 +380,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control grace_month" id="grace_month"
                                                                 name="grace_period_month[]"
-                                                                value="{{ isset($contractedit) ? (isset($gracem) ? $gracem[$k] : ''):'' }}"
+                                                                value="{{ isset($gracem) ? $gracem[$k] : '' }}"
                                                                 placeholder="Grace Period Month" readonly>
                                                         </div>
 
@@ -390,7 +390,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control grace_day" id="grace_day"
                                                                 name="grace_period_day[]"
-                                                                value="{{ isset($contractedit) ? (isset($graced) ? $graced[$k] : ''):'' }}"
+                                                                value="{{ isset($graced) ? $graced[$k] : '' }}"
                                                                 placeholder="Enter Grace Period Day" readonly>
                                                         </div>
                                                     </div>
