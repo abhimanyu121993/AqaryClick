@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\admin\CurrencyController;
 use App\Mail\ExcelReport;
+use App\Mail\MasterImportEmail;
 use App\Models\Area;
 use App\Models\Building;
 use App\Models\City;
@@ -52,6 +53,7 @@ class MasterImportController extends Controller
             $mimeType = $file->getMimeType();
             $valid_extension = array("csv");
             $maxFileSize = 2097152;
+            $report = '<table>';
             if (in_array(strtolower($extension), $valid_extension)) {
                  // Check file size
                  if ($fileSize <= $maxFileSize) {
@@ -78,9 +80,7 @@ class MasterImportController extends Controller
                         $i++;
                     }
                     fclose($file);
-                    // dd($importData_arr);
-                    // Insert to MySQL database
-                    foreach ($importData_arr as $importData) {
+                    foreach ($importData_arr as $k=>$importData) {
                         $tenantcode = strlen($importData[1]) > 0 ? $importData[1] : 'TP-' . time();
                             $city = City::firstOrCreate(['name' => $importData[23], 'country_name' => $country], [
                                 'country_name'=>$country,
@@ -169,7 +169,7 @@ class MasterImportController extends Controller
                                         "unit_type"=>$unit->unitTypeDetails->id,
                                         "unit_no"=>$unit->id,
                                     );
-                                    $tenant=Tenant::firstOrCreate(["tenant_code"=>$tenantcode],$insertTenantData);
+                                    $tenant=Tenant::firstOrCreate(["tenant_code"=>$tenantcode,"unit_no"=>$unit->id,],$insertTenantData);
                                     if($tenant){
                                         $insertElectricData = array(
                                         "building_name"=>$building->id??'',
@@ -237,7 +237,7 @@ class MasterImportController extends Controller
                                       
                                             $contract=Contract::firstOrCreate(['contract_code'=>$contract_code],$insertContract);
                                      
-                                            // if ($contract) {
+                                             if ($contract) {
                                             //     $receipt_count=$importData[68]??0;
                                             //     $receipt=str_pad((int)$receipt_count+1, 3, '0', STR_PAD_LEFT);
                                             //     $invoice_no=$importData[68]??0;
@@ -266,28 +266,38 @@ class MasterImportController extends Controller
                                             //         Session::flash('error', 'Invoice Not Created Due to Some Error Excel import paused in mid ');
                                             //         return redirect()->back();
                                             //     }
-                                            // }
-                                            // else
-                                            // {
-                                            //     Session::flash('error', 'Contract Not Created Due to Some Error Excel import paused in mid ');
-                                            //     return redirect()->back(); 
-                                            // }
+                                            }
+                                            else
+                                            {
+                                            $report .="<tr><td>Report  - </td><td>Excel Row".($k+1)." Contract not create due to contract insert failure <td></tr>";
+                                                $this->email_excel_masterimport_report($report);
+                                                Session::flash('error', 'Contract Not Created Due to Some Error Excel import paused in mid ');
+                                                return redirect()->back(); 
+                                            }
                                             
                                         }
                                         else
                                         {
+                                            $report .="<tr><td>Report  - </td><td>Excel Row".($k+1)." Electricity not create due to Electricity insert failure <td></tr>";
+                                            $this->email_excel_masterimport_report($report);
                                             Session::flash('error', 'Electricity Not Created Due to Some Error Excel import paused in mid ');
                                             return redirect()->back(); 
                                         }
                                     }
                                     else
                                     {
+                                        
+                                    $report .="<tr><td>Report 1 - </td><td>Excel Row".($k+1)." Tenant not create due to tenant insert failure <td></tr>";
+                                    $this->email_excel_masterimport_report($report);
                                         Session::flash('error', 'Tenant Not Created Due to Some Error Excel import paused in mid ');
                                         return redirect()->back(); 
                                     }
                                 }
                                 else
                                 {
+                                    
+                                $report .="<tr><td>Report  - </td><td>Excel Row".($k+1)." Unit not create due to Unit insert failure <td></tr>";
+                                $this->email_excel_masterimport_report($report);
                                     Session::flash('error', 'Unit Not Created Due to Some Error Excel import paused in mid ');
                                     return redirect()->back();
                                 }
@@ -295,6 +305,8 @@ class MasterImportController extends Controller
                             }
                             else
                             {
+                                $report .="<tr><td>Report  - </td><td>Excel Row".($k+1)." not create due to building insert failure <td></tr>";
+                            $this->email_excel_masterimport_report($report);
                                 Session::flash('error', 'Building Not Created Due to Some Error Excel import paused in mid ');
                                 return redirect()->back();
                             }
@@ -320,6 +332,19 @@ class MasterImportController extends Controller
         return redirect()->back();
     }
     
+    public function email_excel_masterimport_report($report)
+    {
+        $report .="</table>";
+        $this->getUser();
+        if(Auth::user()->hasRole('superadmin')){
+            Mail::to('abhimanyu121993@gmail.com')->send(new MasterImportEmail($report));
+        }
+        else
+        {
+            Mail::to(Auth::user()->email)->send(new MasterImportEmail($report));
+        }
+        return 0;
+    }
     public function excel_upload_statement(Request $req)
     {
         
