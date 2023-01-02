@@ -203,8 +203,8 @@ class ContractController extends Controller
             'guarantees_payment_method' => $request->guarantees_payment_method,
             'remark' => $request->remark,
         ]);
-        if (count($request->grace_start_date ??[])>0) {
-
+        if (count($request->grace_start_date)>1) {
+            dd($request->grace_start_date);
         foreach ($request->grace_start_date as $k=>$i) {
                 $res = Grace::create(['user_id' => $this->user_id,'contract_code' => $contract_code, 'grace_start_date' => $i ?? '', 'grace_end_date' => $request->grace_end_date[$k] ?? '', 'grace_period_month' => $request->grace_period_month[$k] ?? '', 'grace_period_day' => $request->grace_period_day[$k] ?? '']);
         }
