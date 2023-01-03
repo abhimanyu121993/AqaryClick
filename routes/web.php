@@ -80,6 +80,7 @@ Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
     Route::get('/register',[AuthLoginController::class,'registerIndex'])->name('registerIndex');
     Route::post('/register-store-customer',[AuthLoginController::class,'registerStore'])->name('registerStore');
+    // Route::get('');
 });
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');

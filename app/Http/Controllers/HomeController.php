@@ -134,4 +134,8 @@ class HomeController extends Controller
         }
 
 
+    public function single_product()
+    {
+        # code...
+    }
 }
