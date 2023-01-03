@@ -76,8 +76,8 @@
                         <div class="col-xxl-3 col-md-3">
                             <label for="space" class="form-label">Tenant Type</label>
                             <select class="form-control" id="tenant_type" name="tenant_type">
-                                <option value="{{isset($editTenant)? $editTenant->tenant_type:''}}" selected hidden>
-                                    {{isset($editTenant)? ($editTenant->tenant_type =='TC'?'Company':''):'--Select Tenant Type--'}}
+                                <option value="{{isset($editTenant)? $editTenant->tenant_type:old('tenant_type','')}}" selected hidden>
+                                    {{isset($editTenant)? ($editTenant->tenant_type =='TC'?'Company':''):old('tenant_type','--Select Tenant Type--')}}
                                     {{isset($editTenant)? ($editTenant->tenant_type =='TP'?'Personal':''):''}}
                                     {{isset($editTenant)? ($editTenant->tenant_type =='TG'?'Government':''):''}}
                                 </option>
@@ -90,31 +90,31 @@
                         <div class=" col-xxl-3 col-md-3">
                             <label for="name" class="form-label">File No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="{{isset($editTenant)? '':'file_no'}}" name="file_no" value="{{$editTenant->file_no ?? ''}}" placeholder="Enter File No">
+                                <input type="text" class="form-control" id="{{isset($editTenant)? '':'file_no'}}" name="file_no" value="{{$editTenant->file_no ?? old('file_no','')}}" placeholder="Enter File No">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="name" class="form-label">Tenant Code</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code" value="{{$editTenant->tenant_code ?? ''}}" {{isset($editTenant)?'readonly' : ''}}>
+                                <input type="text" class="form-control" id="tenant_code" name="tenant_code" placeholder="Enter Tenant Code" value="{{$editTenant->tenant_code ?? old('tenant_code')}}" {{isset($editTenant)?'readonly' : ''}}>
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="owner_name" class="form-label">Tenant Name <sup class="text-danger">(English)</sup> </label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_english_name" placeholder="Enter Tenant Name (English)" value="{{$editTenant->tenant_english_name ?? ''}}">
+                                <input type="text" class="form-control" name="tenant_english_name" placeholder="Enter Tenant Name (English)" value="{{$editTenant->tenant_english_name ?? old('tenant_english_name')}}">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="owner_name" class="form-label">Tenant Name <sup class="text-danger">(Arabic)</sup></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_arabic_name" placeholder="Enter Tenant Name (Arabic)" value="{{$editTenant->tenant_arabic_name ?? ''}}">
+                                <input type="text" class="form-control" name="tenant_arabic_name" placeholder="Enter Tenant Name (Arabic)" value="{{$editTenant->tenant_arabic_name ??old('tenant_arabic_name')}}">
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3">
                             <label for="space" class="form-label">Document Type</label>
                             <select class="form-control" id="tenant_document_type" name="tenant_document">
-                                <option value="{{isset($editTenant)? $editTenant->tenant_document:''}}" selected hidden>{{isset($editTenant)? $editTenant->tenant_document:'--Select Document Type--'}}</option>
+                                <option value="{{isset($editTenant)? $editTenant->tenant_document:old('tenant_document')}}" selected hidden>{{isset($editTenant)? $editTenant->tenant_document:old('tenant_document','--Select Document Type--')}}</option>
                                 <option value="QID" id="QID">QID</option>
                                 <option value="CR & Est Card" id="CR_Est_Card">CR & Est Card</option>
                                 <option value="Passport" id="PASSPORT">Passport</option>
@@ -125,75 +125,75 @@
                         <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                             <label for="country" class="form-label">QID</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="qid_document" placeholder="QID Document Number" value="{{$editTenant->qid_document ?? ''}}">
+                                <input type="text" class="form-control" name="qid_document" placeholder="QID Document Number" value="{{$editTenant->qid_document ?? old('qid_document')}}">
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3 mb-2" id="cr">
                             <label for="state" class="form-label">CR No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="cr_document" placeholder="Commercial Reference No" value="{{$editTenant->cr_document ?? ''}}">
+                                <input type="text" class="form-control" name="cr_document" placeholder="Commercial Reference No" value="{{$editTenant->cr_document ?? old('cr_document')}}">
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3 mb-2" id="passport">
                             <label for="country" class="form-label">Passport</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="passport" placeholder="Passport Document" value="{{$editTenant->passport ?? ''}}">
+                                <input type="text" class="form-control" name="passport" placeholder="Passport Document" value="{{$editTenant->passport ?? old('passport')}}">
                             </div>
                         </div>
 
                         <div class="col-xxl-3 col-md-3 mb-2" id="established_card_no">
                             <label for="country" class="form-label">Establishment Card No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="established_card_no" placeholder="Establishment Card No." value="{{$editTenant->established_card_no ?? ''}}">
+                                <input type="text" class="form-control" name="established_card_no" placeholder="Establishment Card No." value="{{$editTenant->established_card_no ??old('established_card_no')}}">
                             </div>
                         </div>
 
                         <div class="col-xxl-3 col-md-3 mb-2" id="government_housing_number">
                             <label for="country" class="form-label">Government Housing No.</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="government_housing_no" placeholder="Government Housing Number" value="{{$editTenant->government_housing_no ?? ''}}">
+                                <input type="text" class="form-control" name="government_housing_no" placeholder="Government Housing Number" value="{{$editTenant->government_housing_no ??old('government_housing_no')}}">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="owner_name" class="form-label">Primary Mobile No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No" value="{{$editTenant->tenant_primary_mobile ?? ''}}">
+                                <input type="text" class="form-control" name="tenant_primary_mobile" placeholder="Tenant Priamry Mobile No" value="{{$editTenant->tenant_primary_mobile ?? old('tenant_primary_mobile')}}">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="owner_name" class="form-label">Secondary Mobile No</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No" value="{{$editTenant->tenant_secondary_mobile ?? ''}}">
+                                <input type="text" class="form-control" name="tenant_secondary_mobile" placeholder="Tenant Secondary Mobile No" value="{{$editTenant->tenant_secondary_mobile ?? old('tenant_secondary_mobile')}}">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="incharge_name" class="form-label">Email </label>
                             <div class="input-group">
-                                <input type="email" class="form-control" name="email" placeholder="Enter Email" value="{{$editTenant->email ?? ''}}">
+                                <input type="email" class="form-control" name="email" placeholder="Enter Email" value="{{$editTenant->email ??old('email')}}">
                             </div>
                         </div>
 
                         <div class=" col-xxl-3 col-md-3">
                             <label for="incharge_name" class="form-label">Alternative Email </label>
                             <div class="input-group">
-                                <input type="email" class="form-control" name="alternate_email" placeholder="Enter Alternate Email" value="{{$editTenant->alternate_email ?? ''}}">
+                                <input type="email" class="form-control" name="alternate_email" placeholder="Enter Alternate Email" value="{{$editTenant->alternate_email ??old('alternate_email')}}">
                             </div>
                         </div>
                         <div class=" col-xxl-3 col-md-3">
                             <label for="incharge_name" class="form-label">Authorized Person </label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="authorized_person" placeholder="Authorized Person" value="{{$editTenant->authorized_person ?? ''}}">
+                                <input type="text" class="form-control" name="authorized_person" placeholder="Authorized Person" value="{{$editTenant->authorized_person ??old('authorized_person')}}">
                             </div>
                         </div><div class=" col-xxl-3 col-md-3">
                             <label for="incharge_name" class="form-label">Authorized Person QID</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="authorized_person_qid" placeholder="Authorized Person QID" value="{{$editTenant->authorized_person_qid ?? ''}}">
+                                <input type="text" class="form-control" name="authorized_person_qid" placeholder="Authorized Person QID" value="{{$editTenant->authorized_person_qid ??old('authorized_person_qid')}}">
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3" id="cname">
                             <label for="country" class="form-label">Post Office Box</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="post_office" placeholder="Post Office" value="{{$editTenant->post_office ?? ''}}">
+                                <input type="number" class="form-control" name="post_office" placeholder="Post Office" value="{{$editTenant->post_office ??old('post_office')}}">
                             </div>
                         </div>
 
@@ -212,7 +212,7 @@
                                 @endif
                             </option>
                                 @foreach ($nation as $nationality)  
-                                <option value="{{ $nationality->id }}" {{ isset($editTenant)? ($editTenant->tenant_nationality == $nationality->id ? 'selected' : '') :'' }}>{{ $nationality->name }}</option>
+                                <option value="{{ $nationality->id }}" {{ isset($editTenant)? ($editTenant->tenant_nationality == $nationality->id ? 'selected' : '') :(old('tenant_nationality')==$nationality->id?'selected':'')}}>{{ $nationality->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -220,7 +220,7 @@
                         <div class="col-xxl-3 col-md-12">
                             <label for="remark" class="form-label">Address</label>
                             <textarea class="form-control" name="unit_address">
-                            {{$editTenant->unit_address ?? ''}}
+                            {{$editTenant->unit_address ??old('unit_address')}}
                             </textarea>
                         </div>
 
@@ -238,14 +238,14 @@
                                     @endif
                                 </option>
                                 @foreach ($building as $build)
-                                <option value="{{ $build->id }}" {{ isset($editTenant)? ($editTenant->building_name == $build->id ? 'selected' : '') :'' }}>{{ $build->name }}</option>
+                                <option value="{{ $build->id }}" {{ isset($editTenant)? ($editTenant->building_name == $build->id ? 'selected' : '') :(old('building_name')==$build->id?'selected':'') }}>{{ $build->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-xxl-3 col-md-3 mb-2">
                             <label class="form-label" for="flag">Unit No</label>
                             <select class="select2 form-select js-example-disabled" id="unit_no" name='unit_no' required>
-                                <option value="{{isset($editTenant)? $editTenant->unit_no:''}}" selected hidden>{{isset($editTenant)? $editTenant->unit_no:'--Select Unit No--'}}</option>
+                                <option value="{{isset($editTenant)? $editTenant->unit_no:old('unit_no')}}" selected hidden>{{isset($editTenant)? $editTenant->unit_no:old('unit_no','--Select Unit No--')}}</option>
                             </select>
                         </div>
                         <div class="col-xxl-3 col-md-3">
@@ -262,7 +262,7 @@
                                         @endif
                                     </option>
                                     @foreach ($unitType as $unit)
-                                    <option value="{{ $unit->id }}" {{ isset($editTenant)? ($editTenant->unit_type == $unit->id ? 'selected' : '') :'' }}>{{ $unit->name }}</option>
+                                    <option value="{{ $unit->id }}" {{ isset($editTenant)? ($editTenant->unit_type == $unit->id ? 'selected' : '') :(old('unit_type')==$unit->id?'selected':'') }}>{{ $unit->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -277,7 +277,7 @@
                         <div class="col-xxl-3 col-md-3">
                             <label for="space" class="form-label">Status</label>
                             <select class="form-control" id="process" name="status">
-                                <option value="{{isset($editTenant)? $editTenant->status:''}}" selected hidden>{{isset($editTenant)? $editTenant->status:'--Select Status--'}}</option>
+                                <option value="{{isset($editTenant)? $editTenant->status:old('status')}}" selected hidden>{{isset($editTenant)? $editTenant->status:old('status','--Select Status--')}}</option>
                                 <option value="New Tenant">New Tenant</option>
                                 <option value="Old Tenant">Old Tenant</option>
                                 <option value="Related Party">Related Party</option>
@@ -286,7 +286,7 @@
                         <div class="col-xxl-3 col-md-3">
                             <label for="space" class="form-label">Rental Period</label>
                             <select class="form-control" id="rental_period" name="rental_period">
-                                <option value="{{isset($editTenant)? $editTenant->rental_period:''}}" selected hidden>{{isset($editTenant)? $editTenant->rental_period:'--Select Type--'}}</option>
+                                <option value="{{isset($editTenant)? $editTenant->rental_period:old('rental_period')}}" selected hidden>{{isset($editTenant)? $editTenant->rental_period:old('rental_period','--Select Type--')}}</option>
                                 <option value="Days">Days</option>
                                 <option value="Months">Months</option>
                                 <option value="Years">Years</option>
@@ -295,13 +295,13 @@
                         <div class="col-xxl-3 col-md-3" id="rental_time">
                             <label for="country" class="form-label" id="change_rental_time">Days</label>
                             <div class="input-group">
-                                <input type="text" id="change_placeholder" class="form-control" name="rental_time" placeholder=" Enter No of Days " value="{{$editTenant->rental_time ?? ''}}">
+                                <input type="text" id="change_placeholder" class="form-control" name="rental_time" placeholder="Enter No of Days " value="{{$editTenant->rental_time ??old('rental_time')}}">
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3">
                             <label for="space" class="form-label">Payment Method</label>
                             <select class="form-control" id="payment_method" name="payment_method">
-                                <option value="{{isset($editTenant)? $editTenant->payment_method:''}}" selected hidden> {{isset($editTenant)? $editTenant->payment_method:'--Select Payment Method--'}}</option>
+                                <option value="{{isset($editTenant)? $editTenant->payment_method:old('payment_method')}}" selected hidden> {{isset($editTenant)? $editTenant->payment_method:old('payment_method','--Select Payment Method--')}}</option>
                                 <option value="Cash">Cash</option>
                                 <option value="Cheques">Cheques</option>
                                 <option value="Transfer Bank">Transfer Bank</option>
@@ -310,19 +310,19 @@
                         <div class="col-xxl-3 col-md-3" id="account_no">
                             <label for="country" class="form-label">Account Number</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="account_no" placeholder=" Account Number " value="{{$editTenant->account_no ?? ''}}">
+                                <input type="text" class="form-control" name="account_no" placeholder=" Account Number " value="{{$editTenant->account_no ??old('account_no')}}">
                             </div>
                         </div>
                         <div class="col-xxl-3 col-md-3" id="has_cheque">
                             <label for="country" class="form-label">Receipt Of Cheques</label><br>
                             <div class="form-check-inline ">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="yes" name="payment_receipt" {{isset($editTenant)? ($editTenant->payment_receipt == 'yes'? 'checked':''):''}} />Yes
+                                    <input type="radio" class="form-check-input" value="yes" name="payment_receipt" {{isset($editTenant)? ($editTenant->payment_receipt == 'yes'? 'checked':''):(old('payment_receipt')=='yes'?'checked':'')}} />Yes
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="no" name="payment_receipt" {{isset($editTenant)? ($editTenant->payment_receipt == 'no'? 'checked':''):''}} />No
+                                    <input type="radio" class="form-check-input" value="no" name="payment_receipt" {{isset($editTenant)? ($editTenant->payment_receipt == 'no'? 'checked':''):(old('payment_receipt')=='no'?'checked':'')}} />No
                                 </label>
                             </div>
 
@@ -335,25 +335,25 @@
                             <div class="col-xxl-3 col-md-3">
                                 <label for="city" class="form-label">Sponsor Name</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="sponsor_name" placeholder="sponsor Name" value="{{$editTenant->sponsor_name ?? ''}}">
+                                    <input type="text" class="form-control" name="sponsor_name" placeholder="sponsor Name" value="{{$editTenant->sponsor_name ??old('sponsor_name')}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="city" class="form-label">Sponsor OID</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="sponsor_oid" placeholder="sponsor OID" value="{{$editTenant->sponsor_oid ?? ''}}">
+                                    <input type="text" class="form-control" name="sponsor_oid" placeholder="sponsor OID" value="{{$editTenant->sponsor_oid ??old('sponsor_oid')}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
-                                <label for="city" class="form-label">Sponsor Email</label>
+                                <label for="city" class="form-label">Sponsor Email</label>  
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email" value="{{$editTenant->sponsor_email ?? ''}}">
+                                    <input type="text" class="form-control" name="sponsor_email" placeholder="Sponsor Email" value="{{$editTenant->sponsor_email ??old('sponsor_email')}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
                                 <label for="city" class="form-label">Sponsor Phone</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="sponsor_phone" placeholder="sponsor Phone" value="{{$editTenant->sponsor_phone ?? ''}}">
+                                    <input type="text" class="form-control" name="sponsor_phone" placeholder="sponsor Phone" value="{{$editTenant->sponsor_phone ??old('sponsor_phone')}}">
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3 mb-3">
@@ -369,7 +369,7 @@
                                         @endif
                                     </option>
                                     @foreach ($nation as $nationality)
-                                    <option value="{{ $nationality->id }}" {{ isset($editTenant)? ($editTenant->sponsor_nationality == $nationality->id ? 'selected' : '') :'' }}>{{ $nationality->name }}</option>
+                                    <option value="{{ $nationality->id }}" {{ isset($editTenant)? ($editTenant->sponsor_nationality == $nationality->id ? 'selected' : '') :(old('sponsor_nationality'==$nationality->id)?'selected':'') }}>{{ $nationality->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -378,7 +378,7 @@
                         <div class="row">
                             <div class="col-xxl-12 col-md-12">
                                 <label for="remark" class="form-label">Remark</label>
-                                <textarea class="form-control" name="attachment_remark">{{$editTenant->attachment_remark ?? ''}}
+                                <textarea class="form-control" name="attachment_remark">{{$editTenant->attachment_remark ?? old('attachment_remark')}}
                                 </textarea>
                             </div>
                         </div>

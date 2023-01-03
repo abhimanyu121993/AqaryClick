@@ -94,7 +94,8 @@
                                                 {{ $contractedit->tenantDetails->tenant_type == 'TP' ? 'Personal' : ($contractedit->tenantDetails->tenant_type == 'TC' ? 'Company' : ($contractedit->tenantDetails->tenant_type == 'TG' ? 'Goverment' : 'N/A')) }}
                                             </option>
                                         @else
-                                            <option value="" selected hidden>--Select Tenant Type--</option>
+                                            <option value="{{ old('tenant_type', '') }}" selected hidden>
+                                                {{ old('tenant_type', '--Select Tenant Type--') }}</option>
                                         @endif
 
                                         <option value="TP">Personal</option>
@@ -112,7 +113,7 @@
                                             <option value="{{ $contractedit->tenant_name }}" selected>
                                                 {{ $contractedit->tenantDetails->tenant_english_name }}</option>
                                         @else
-                                            <option value="" selected hidden>--Select Tenant--</option>
+                                            <option value="{{old('tenant_name','')}}" selected hidden>{{old('tenant_name','--Select Tenant--')}}</option>
                                         @endif
 
                                     </select>
@@ -122,7 +123,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="tenant_primary_mobile"
                                             name="tenant_mobile"
-                                            value="{{ isset($contractedit) ? $contractedit->tenant_mobile : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->tenant_mobile : old('tenant_mobile','') }}"
                                             placeholder="Enter tenant mobile " readonly>
                                     </div>
                                 </div>
@@ -132,7 +133,7 @@
                                     <div class="input-group" id="tenantInput">
                                         <input type="text" class="form-control" id="tenant_nationality"
                                             name="tenant_nationality"
-                                            value=" {{ isset($contractedit) ? $contractedit->countryDetails->name ?? '' : '' }}"
+                                            value=" {{ isset($contractedit) ? $contractedit->countryDetails->name ?? '' : old('tenant_nationality','') }}"
                                             placeholder="Enter Tenant Nationality " readonly>
                                     </div>
                                 </div>
@@ -140,16 +141,14 @@
                                     <label for="space" class="form-label">Document Type</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="document_type" name="document_type"
-                                            value="{{ isset($contractedit) ? $contractedit->document_type : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->document_type : old('document_type','') }}"
                                             placeholder="Enter Document Type" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-2" id="qid">
                                     <label for="country" class="form-label">ID</label>
                                     <div class="input-group">
-                                        <input type="text"
-                                            value="{{ isset($contractedit) ? $contractedit->qid_document : '' }}"
-                                            id="qid_document" class="form-control" name="qid_document"
+                                        <input type="text"  value="{{ isset($contractedit) ? $contractedit->qid_document : old('qid_document','') }}" id="qid_document" class="form-control" name="qid_document"
                                             value="{{ isset($contractedit) ? $contractedit->qid_document : '' }}"
                                             placeholder="QID Document Number">
                                     </div>
@@ -158,16 +157,16 @@
                                     <label for="state" class="form-label">CR</label>
                                     <div class="input-group">
                                         <input type="text" id="cr_document" class="form-control" name="cr_document"
-                                         value="{{ isset($contractedit) ? $contractedit->cr_document : '' }}"
-                                            placeholder="Enter CR No" >
+                                            value="{{ isset($contractedit) ? $contractedit->cr_document : old('cr_document') }}"
+                                            placeholder="Enter CR No">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3 mb-2" id="passport">
                                     <label for="country" class="form-label">Passport</label>
                                     <div class="input-group">
                                         <input type="text" id="passport_doc" class="form-control"
-                                            name="passport_document" 
-                                            value="{{ isset($contractedit) ? $contractedit->passport_document : '' }}"
+                                            name="passport_document"
+                                            value="{{ isset($contractedit) ? $contractedit->passport_document : old('passport_document') }}"
                                             placeholder="Passport Document">
                                     </div>
                                 </div>
@@ -175,8 +174,7 @@
                                     <label for="country" class="form-label">Establishment Card No</label>
                                     <div class="input-group">
                                         <input type="text" id="establishment_card" class="form-control"
-                                        value="{{ isset($contractedit) ? $contractedit->established_card_no : '' }}"
-                                            name="established_card_no" placeholder="Establishment Card No">
+                                            value="{{ isset($contractedit) ? $contractedit->established_card_no : old('established_card_no') }}" name="established_card_no" placeholder="Establishment Card No">
                                     </div>
                                 </div>
 
@@ -184,7 +182,7 @@
                                     <label for="country" class="form-label">Government Housing No</label>
                                     <div class="input-group">
                                         <input type="text" id="government_housing" class="form-control"
-                                        value="{{ isset($contractedit) ? $contractedit->government_housing_no : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->government_housing_no : old('government_housing_no') }}"
                                             name="government_housing_no" placeholder="Government Housing No">
                                     </div>
                                 </div>
@@ -193,7 +191,9 @@
                                     <label for="name" class="form-label">Contract Status</label>
                                     <select class="form-control select2 form-select" id="contract_status"
                                         name="contract_status">
-                                        <option value="{{ $contractedit->contract_status ?? '' }}" {{ isset($contractedit) ? 'hidden' : 'selected' }}>{{ $contractedit->contract_status ?? '--Select Status--' }}</option>
+                                        <option value="{{ $contractedit->contract_status ?? '' }}"
+                                            {{ isset($contractedit) ? 'hidden' : 'selected' }}>
+                                            {{ $contractedit->contract_status ?? '--Select Status--' }}</option>
                                         <option value="new">New</option>
                                         <option value="renewed">Renewed</option>
                                         <option value="not renewed">Not Renewed</option>
@@ -206,7 +206,7 @@
                                     <label for="name" class="form-label">Sponsor Name</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_name" name="sponsor_name"
-                                            value="{{ isset($contractedit) ? $contractedit->sponsor_name : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->sponsor_name :old('sponsor_name') }}"
                                             placeholder="Enter sponsor name" readonly>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                                     <label for="name" class="form-label">Sponsor id</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_id" name="sponsor_id"
-                                            value="{{ isset($contractedit) ? $contractedit->sponsor_id : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->sponsor_id : old('sponsor_id') }}"
                                             placeholder="Enter sponsor id" readonly>
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponer_nationality"
                                             name="sponser_nationality"
-                                            value="{{ isset($contractedit) ? $contractedit->nationality : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->nationality : old('sponser_nationality') }}"
                                             placeholder="Enter Sponser Nationality " readonly>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sponsor_mobile"
                                             name="sponsor_mobile"
-                                            value="{{ isset($contractedit) ? $contractedit->sponsor_mobile : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->sponsor_mobile : old('sponsor_mobile') }}"
                                             placeholder="Enter sponsor mobile " readonly>
                                     </div>
                                 </div>
@@ -240,15 +240,19 @@
                                     <label for="name" class="form-label">Lessor's Name</label>
                                     <select class="select2 form-select js-example-basic-single" id="lessor"
                                         name='lessor'>
-                                        <option value="">--Select Lessor's--</option>    
+                                        <option value="">--Select Lessor's--</option>
                                         @role('superadmin')
                                             @foreach ($lessor as $less)
-                                                <option value="{{ $less->id }}"  {{ isset($contractedit)? ($contractedit->customer->id == $less->id ? 'selected' : '') :'' }}>{{ $less->first_name }}
+                                                <option value="{{ $less->id }}"
+                                                    {{ isset($contractedit) ? ($contractedit->customer->id == $less->id ? 'selected' : '') : (old('lessor')==$less->id?'selected':'') }}>
+                                                    {{ $less->first_name }}
                                                     {{ $less->last_name }}</option>
                                             @endforeach
                                         @endrole
                                         @role('Owner')
-                                            <option value="{{ $lessor->id }}" {{ isset($contractedit)? ($contractedit->customer->id == $lessor->id ? 'selected' : '') :'' }}>{{ $lessor->first_name }}
+                                            <option value="{{ $lessor->id }}"
+                                                {{ isset($contractedit) ? ($contractedit->customer->id == $lessor->id ? 'selected' : '') : (old('lessor')==$lessor->id?'selected':'') }}>
+                                                {{ $lessor->first_name }}
                                                 {{ $lessor->last_name }}</option>
                                         @endrole
                                     </select>
@@ -256,7 +260,7 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Company</label>
                                     <select class="form-control select2 form-select" id="company" name="company_id">
-                                        <option value=''>--Select Company--</option>
+                                        <option value='{{old('company_id','')}}'>{{old('company_id','--Select Company--')}}</option>
                                         @if (isset($contractedit))
                                             <option value="{{ $contractedit->company_id ?? '' }}" selected>
                                                 {{ $contractedit->company->business_name ?? '' }}</option>
@@ -271,7 +275,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="authorized_person"
                                             name="authorized_person"
-                                            value="{{ isset($contractedit) ? $contractedit->authorized_person : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->authorized_person : old('authorized_person') }}"
                                             placeholder="Authorized Person " readonly>
                                     </div>
                                 </div>
@@ -286,7 +290,7 @@
                                     <label for="name" class="form-label">Release Date </label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="release_date" name="release_date"
-                                            value="{{ isset($contractedit) ? \Carbon\Carbon::parse($contractedit->release_date)->format('Y-m-d') : '' }}"
+                                            value="{{ isset($contractedit) ? \Carbon\Carbon::parse($contractedit->release_date)->format('Y-m-d') : old('release_date') }}"
                                             placeholder="Enter Release Date ">
                                     </div>
                                 </div>
@@ -295,7 +299,7 @@
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="lease_start_date"
                                             name="lease_start_date"
-                                            value="{{ isset($contractedit) ? \Carbon\Carbon::parse($contractedit->lease_start_date)->format('Y-m-d') : '' }}"
+                                            value="{{ isset($contractedit) ? \Carbon\Carbon::parse($contractedit->lease_start_date)->format('Y-m-d') : old('lease_start_date') }}"
                                             placeholder="Enter Lease Start Date ">
                                     </div>
                                 </div>
@@ -304,7 +308,7 @@
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="lease_end_date"
                                             name="lease_end_date"
-                                            value="{{ isset($contractedit) ? \Carbon\Carbon::parse($contractedit->lease_end_date)->format('Y-m-d') : '' }}"
+                                            value="{{ isset($contractedit) ? \Carbon\Carbon::parse($contractedit->lease_end_date)->format('Y-m-d') : old('lease_end_date') }}"
                                             placeholder="Enter Lease End Date">
                                     </div>
                                 </div>
@@ -313,7 +317,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="lease_period_month"
                                             name="lease_period_month"
-                                            value="{{ isset($contractedit) ? $contractedit->lease_period_month : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->lease_period_month : old('lease_period_month') }}"
                                             placeholder="Enter Lease Period Month" readonly>
                                     </div>
                                 </div>
@@ -322,7 +326,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="lease_period_day"
                                             name="lease_period_day"
-                                            value="{{ isset($contractedit) ? $contractedit->lease_period_day : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->lease_period_day : old('lease_period_day') }}"
                                             placeholder="Enter Lease Period Day" readonly>
                                     </div>
                                 </div>
@@ -330,7 +334,9 @@
                                     <label class="form-label" for="flag">Grace Period</label>
 
                                     <select class="select2 form-select" id="grace" name='grace'>
-                                        <option value="{{$contractedit->is_grace ?? ''}}" {{isset($contractedit)?'hidden':'selected'}}>{{$contractedit->is_grace ?? '--Select grace--'}}</option>
+                                        <option value="{{ $contractedit->is_grace ?? '' }}"
+                                            {{ isset($contractedit) ? 'hidden' : 'selected' }}>
+                                            {{ $contractedit->is_grace ?? '--Select grace--' }}</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
 
@@ -368,8 +374,8 @@
                                                     <div class="col-xxl-3 col-md-3" id="grace_end_date">
                                                         <label for="name" class="form-label">Grace To</label>
                                                         <div class="input-group">
-                                                            <input type="date" class="form-control grace_end" id="grace_end"
-                                                                name="grace_end_date[]"
+                                                            <input type="date" class="form-control grace_end"
+                                                                id="grace_end" name="grace_end_date[]"
                                                                 value="{{ isset($pg) ? $graceto[$k] : '' }}"
                                                                 placeholder="dd-mm-yyyy">
                                                         </div>
@@ -378,8 +384,8 @@
                                                         <label for="name" class="form-label">Grace Period
                                                             Month</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control grace_month" id="grace_month"
-                                                                name="grace_period_month[]"
+                                                            <input type="text" class="form-control grace_month"
+                                                                id="grace_month" name="grace_period_month[]"
                                                                 value="{{ isset($gracem) ? $gracem[$k] : '' }}"
                                                                 placeholder="Grace Period Month" readonly>
                                                         </div>
@@ -388,8 +394,8 @@
                                                     <div class="col-xxl-3 col-md-3" id="grace_period_day">
                                                         <label for="name" class="form-label">Grace Period Day</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control grace_day" id="grace_day"
-                                                                name="grace_period_day[]"
+                                                            <input type="text" class="form-control grace_day"
+                                                                id="grace_day" name="grace_period_day[]"
                                                                 value="{{ isset($graced) ? $graced[$k] : '' }}"
                                                                 placeholder="Enter Grace Period Day" readonly>
                                                         </div>
@@ -398,11 +404,10 @@
                                         @else
                                             {{-- <h6 class="text-danger">Grace Block Some data are mission ... so this block not
                                                 created Or this is import via excel</h6> --}}
-                                               @for($i=1;$i<=Carbon\Carbon::parse($contractedit->lease_start_date)->diffInYears(Carbon\Carbon::parse($contractedit->lease_end_date));$i++ )
-                                                   
-                                              
+                                            @for ($i = 1; $i <= Carbon\Carbon::parse($contractedit->lease_start_date)->diffInYears(Carbon\Carbon::parse($contractedit->lease_end_date)); $i++)
                                                 <div class="row pgrace">
-                                                    <div class="col-xxl-3 col-md-3 grace_start_date" id="grace_start_date">
+                                                    <div class="col-xxl-3 col-md-3 grace_start_date"
+                                                        id="grace_start_date">
 
                                                         <label for="name" class="form-label">Grace From</label>
                                                         <div class="input-group">
@@ -414,32 +419,35 @@
                                                     <div class="col-xxl-3 col-md-3 grace_end_date" id="grace_end_date">
                                                         <label for="name" class="form-label">Grace To</label>
                                                         <div class="input-group">
-                                                            <input type="date" class="form-control grace_end" id="grace_end"
-                                                                name="grace_end_date[]" value=""
+                                                            <input type="date" class="form-control grace_end"
+                                                                id="grace_end" name="grace_end_date[]" value=""
                                                                 placeholder="dd-mm-yyyy">
                                                         </div>
                                                     </div>
-                                                    <div class="col-xxl-3 col-md-3 grace_period_month" id="grace_period_month">
-                                                        <label for="name" class="form-label">Grace Period Month</label>
+                                                    <div class="col-xxl-3 col-md-3 grace_period_month"
+                                                        id="grace_period_month">
+                                                        <label for="name" class="form-label">Grace Period
+                                                            Month</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control grace_month" id="grace_month"
-                                                                name="grace_period_month[]" value=""
-                                                                placeholder="Grace Period Month" readonly>
+                                                            <input type="text" class="form-control grace_month"
+                                                                id="grace_month" name="grace_period_month[]"
+                                                                value="" placeholder="Grace Period Month" readonly>
                                                         </div>
 
                                                     </div>
-                                                    <div class="col-xxl-3 col-md-3 grace_period_day" id="grace_period_day">
+                                                    <div class="col-xxl-3 col-md-3 grace_period_day"
+                                                        id="grace_period_day">
                                                         <label for="name" class="form-label">Grace Period Day</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control grace_day" id="grace_day"
-                                                                name="grace_period_day[]" value=""
+                                                            <input type="text" class="form-control grace_day"
+                                                                id="grace_day" name="grace_period_day[]" value=""
                                                                 placeholder="Enter Grace Period Day" readonly>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                                @endfor
-                                             @endif
+                                            @endfor
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -449,17 +457,21 @@
                                     <label for="name" class="form-label">Approved By</label>
                                     <select class="select2 form-select js-example-basic-single" id="approved_by"
                                         name='approved_by'>
-                                                <option value="">--Select Person--</option>
-                                            @role('superadmin')
-                                                @foreach ($lessor as $less)
-                                                    <option value="{{ $less->id }}" {{ isset($contractedit)? ($contractedit->approved_by == $less->id ? 'selected' : '') :'' }}>{{ $less->first_name }}
-                                                        {{ $less->last_name }}</option>
-                                                @endforeach
-                                            @endrole
-                                            @role('Owner')
-                                                <option value="{{ $lessor->id }}" {{ isset($contractedit)? ($contractedit->approved_by == $lessor->id ? 'selected' : '') :'' }}>{{ $lessor->first_name }}
-                                                    {{ $lessor->last_name }}</option>
-                                            @endrole
+                                        <option value="">--Select Person--</option>
+                                        @role('superadmin')
+                                            @foreach ($lessor as $less)
+                                                <option value="{{ $less->id }}"
+                                                    {{ isset($contractedit) ? ($contractedit->approved_by == $less->id ? 'selected' : '') : (old('approved_by')==$less->id?'selected':'') }}>
+                                                    {{ $less->first_name }}
+                                                    {{ $less->last_name }}</option>
+                                            @endforeach
+                                        @endrole
+                                        @role('Owner')
+                                            <option value="{{ $lessor->id }}"
+                                                {{ isset($contractedit) ? ($contractedit->approved_by == $lessor->id ? 'selected' : '') : (old('approved_by')==$lessor->id?'selected':'') }}>
+                                                {{ $lessor->first_name }}
+                                                {{ $lessor->last_name }}</option>
+                                        @endrole
 
                                     </select>
                                 </div>
@@ -471,7 +483,7 @@
                                             <option value="{{ $contractedit->attestation_status }}" selected hidden>
                                                 {{ $contractedit->attestation_status }}</option>
                                         @else
-                                            <option value="" selected hidden>--Select Status--</option>
+                                            <option value="{{old('attestation_status','')}}" selected hidden>{{old('attestation_status','--Select Status--')}}</option>
                                         @endif
                                         <option value="Done">Done</option>
                                         <option value="Not Yet">Not Yet</option>
@@ -482,7 +494,7 @@
                                     <label for="name" class="form-label">Attestation No</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="name" name="attestation_no"
-                                            value="{{ isset($contractedit) ? $contractedit->attestation_no : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->attestation_no : old('attestation_no') }}"
                                             placeholder="Enter Attestation No">
                                     </div>
                                 </div>
@@ -491,7 +503,7 @@
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="name"
                                             name="attestation_expiry"
-                                            value="{{ isset($contractedit) ? $contractedit->attestation_expiry : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->attestation_expiry : old('attestation_expiry') }}"
                                             placeholder="Enter Attestation Expiry">
                                     </div>
                                 </div>
@@ -501,16 +513,16 @@
                                         id="currency">
                                         <option value="" selected hidden>--Select Currency--</option>
                                         @foreach ($currency as $c)
-                                            <option value="{{ $c->id }}" {{ isset($contractedit)? ($contractedit->currency == $c->id ? 'selected' : '') :'' }}>{{ $c->code ?? '' }}</option>
+                                            <option value="{{ $c->id }}"
+                                                {{ isset($contractedit) ? ($contractedit->currency == $c->id ? 'selected' : '') : (old('currency_type')==$c->id?'selected':'') }}>
+                                                {{ $c->code ?? '' }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Rent Amount</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="rent_amount" name="rent_amount"
-                                            value="{{ isset($contractedit) ? $contractedit->rent_amount : '' }}"
-                                            placeholder="Enter Rent Amount">
+                                        <input type="text" class="form-control" id="rent_amount" name="rent_amount" value="{{ isset($contractedit) ? $contractedit->rent_amount : old('rent_amount') }}"  placeholder="Enter Rent Amount">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
@@ -518,7 +530,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="total_invoice"
                                             name="total_invoice"
-                                            value="{{ isset($contractedit) ? $contractedit->total_invoice : '' }}"
+                                            value="{{ isset($contractedit) ? $contractedit->total_invoice : old('total_invoice') }}"
                                             placeholder="Total Invoice" readonly>
                                     </div>
                                 </div>
@@ -529,7 +541,7 @@
                                             <option value="{{ $contractedit->guarantees }}" selected hidden>
                                                 {{ $contractedit->guarantees }}</option>
                                         @else
-                                            <option value="" selected hidden>--Select Guarantees--</option>
+                                            <option value="{{old('guarantees')}}" selected hidden>{{old('guarantees','--Select Guarantees--')}}</option>
                                         @endif
                                         <option value="Available">Available</option>
                                         <option value="Not Available">Not Available</option>
@@ -539,10 +551,11 @@
                                     <label for="name" class="form-label">Payment Mode</label>
                                     <select class="form-control select2 form-select" name="guarantees_payment_method">
                                         @if (isset($contractedit))
-                                            <option value="{{ $contractedit->guarantees_payment_method }}" selected hidden>
+                                            <option value="{{ $contractedit->guarantees_payment_method }}" selected
+                                                hidden>
                                                 {{ $contractedit->guarantees_payment_method }}</option>
                                         @else
-                                            <option value="" selected hidden>--Select Option--</option>
+                                            <option value="{{old('guarantees_payment_method','')}}" selected hidden>{{old('guarantees_payment_method','--Select Option--')}}</option>
                                         @endif
                                         <option value="Cheque">Cheque</option>
                                         <option value="Cash">Cash</option>
@@ -556,7 +569,7 @@
                                             <option value="{{ $contractedit->contract_type }}" selected hidden>
                                                 {{ $contractedit->contract_type }}</option>
                                         @else
-                                            <option value="" selected hidden>--Select Contract--</option>
+                                            <option value="{{old('contract_type','')}}" selected hidden>{{old('contract_type','--Select Contract--')}}</option>
                                         @endif
                                         <option value="Internal">Internal</option>
                                         <option value="External">External</option>
@@ -568,7 +581,7 @@
                         <div class="col-xxl-12 col-md-12">
                             <label for="remark" class="form-label">Remark</label>
                             <textarea class="form-control" name="remark">
-                                    {{ isset($contractedit) ? $contractedit->remark : '' }}
+                                    {{ isset($contractedit) ? $contractedit->remark : old('remark') }}
                                     </textarea>
                         </div>
                     </div>
@@ -677,21 +690,20 @@
             $('#qid').hide();
             $('#passport').hide();
             $('#cr').hide();
-           
+
             $('#establishment').hide();
             $('#government').hide();
-            @if(isset($contractedit))
-            @if($contractedit->tenantDetails->tenant_type == 'TP')
-            $('#qid').show();
-            $('#passport').show();
-            @elseif($contractedit->tenantDetails->tenant_type == 'TC')
-            $('#cr').show();
-           $('#establishment').show();
-           @elseif($contractedit->tenantDetails->tenant_type == 'TG')
-           $('#government').show();
-
-           @endif
-           @endif
+            @if (isset($contractedit))
+                @if ($contractedit->tenantDetails->tenant_type == 'TP')
+                    $('#qid').show();
+                    $('#passport').show();
+                @elseif ($contractedit->tenantDetails->tenant_type == 'TC')
+                    $('#cr').show();
+                    $('#establishment').show();
+                @elseif ($contractedit->tenantDetails->tenant_type == 'TG')
+                    $('#government').show();
+                @endif
+            @endif
             $(document).on('change', '#tenant_name', function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
@@ -727,43 +739,52 @@
                                     url: leaseurl,
                                     method: 'get',
                                     success: function(p) {
-                                        $('#rent_amount').val(p.res.rent_amount);
-                                        $('#release_date').val(p.res.release_date);
-                                        $('#lease_start_date').val(p.res.lease_end_date);
-                                        $('#lease_end_date').val(p.date);
-                                        $('#lease_period_month').val(p.diff_in_months);
-                                        $('#total_invoice').val(p.diff_in_months);
-                                        $('#lease_period_day').val(p.diff_in_Days);
-                                        var total_years = p.diff_in_Years;
+                                        $('#rent_amount').val(p.res
+                                            .rent_amount);
+                                        $('#release_date').val(p.res
+                                            .release_date);
+                                        $('#lease_start_date').val(p.res
+                                            .lease_end_date);
+                                        $('#lease_end_date').val(p
+                                        .date);
+                                        $('#lease_period_month').val(p
+                                            .diff_in_months);
+                                        $('#total_invoice').val(p
+                                            .diff_in_months);
+                                        $('#lease_period_day').val(p
+                                            .diff_in_Days);
+                                        var total_years = p
+                                            .diff_in_Years;
                                         var gracediv = '';
                                         for (var i = 1; i <=
                                             total_years; i++) {
                                             gracediv += '<div class="row pgrace"><div class="col-xxl-3 col-md-3 grace_start_date">\
-                                        <label for="name" class="form-label">Grace From</label>\
-                                        <div class="input-group">\
-                                            <input type="date" class="form-control grace_start" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                            <label for="name" class="form-label">Grace From</label>\
+                                            <div class="input-group">\
+                                                <input type="date" class="form-control grace_start" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                            </div>\
                                         </div>\
-                                    </div>\
-                                    <div class="col-xxl-3 col-md-3 grace_end_date">\
-                                        <label for="name" class="form-label">Grace To</label>\
-                                        <div class="input-group">\
-                                            <input type="date" class="form-control grace_end" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                        <div class="col-xxl-3 col-md-3 grace_end_date">\
+                                            <label for="name" class="form-label">Grace To</label>\
+                                            <div class="input-group">\
+                                                <input type="date" class="form-control grace_end" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                            </div>\
                                         </div>\
-                                    </div>\
-                                    <div class="col-xxl-3 col-md-3 grace_period_month" >\
-                                        <label for="name" class="form-label">Grace Period Month</label>\
-                                        <div class="input-group">\
-                                            <input type="text" class="form-control grace_month" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                        <div class="col-xxl-3 col-md-3 grace_period_month" >\
+                                            <label for="name" class="form-label">Grace Period Month</label>\
+                                            <div class="input-group">\
+                                                <input type="text" class="form-control grace_month" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                            </div>\
                                         </div>\
-                                    </div>\
-                                    <div class="col-xxl-3 col-md-3 grace_period_day">\
-                                        <label for="name" class="form-label">Grace Period Day</label>\
-                                        <div class="input-group">\
-                                            <input type="text" class="form-control grace_day" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
-                                        </div>\
-                                    </div></div>';
+                                        <div class="col-xxl-3 col-md-3 grace_period_day">\
+                                            <label for="name" class="form-label">Grace Period Day</label>\
+                                            <div class="input-group">\
+                                                <input type="text" class="form-control grace_day" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
+                                            </div>\
+                                        </div></div>';
                                         }
-                                        $('.clone_grace').html(gracediv);
+                                        $('.clone_grace').html(
+                                        gracediv);
                                     }
                                 });
                             } else {
@@ -802,62 +823,64 @@
         });
     </script>
     <script>
-      function gracecal(){
-        var date = new Date($('#lease_start_date').val());
+        function gracecal() {
+            var date = new Date($('#lease_start_date').val());
             var dayTo = date.getDate();
             var monthTo = date.getMonth() + 1;
             var yearTo = date.getFullYear();
             var dateF = new Date($('#lease_end_date').val());
-                var dayFrom = dateF.getDate();
-                var monthFrom = dateF.getMonth() + 1;
-                var yearFrom = dateF.getFullYear();
-                start_date = new Date(yearTo, monthTo, dayTo);
-                end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
-                total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -start_date.getMonth());
-                $('#lease_period_month').val(total_months);
-                $('#total_invoice').val(total_months);
-                var d1 = new Date(date);
-                var d2 = new Date(dateF);
-                var diff = d2.getTime() - d1.getTime();
-                var daydiff = diff / (1000 * 60 * 60 * 24);
-                $('#lease_period_day').val(daydiff);
-                function diff_years(d2, d1) {
-                    var diff = (d2.getTime() - d1.getTime()) / 1000;
-                    diff /= (60 * 60 * 24);
-                    return Math.abs(Math.round(diff / 365.25));
-                }
-                var total_years = diff_years(d1, d2);
-                var gracediv = '';
-                for (var i = 1; i <= total_years; i++) {
-                    gracediv += '<div class="row pgrace "><div class="col-xxl-3 col-md-3 grace_start_date">\
-                                        <label for="name" class="form-label">Grace From</label>\
-                                        <div class="input-group">\
-                                            <input type="date" class="form-control grace_start" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-xxl-3 col-md-3 grace_end_date">\
-                                        <label for="name" class="form-label">Grace To</label>\
-                                        <div class="input-group">\
-                                            <input type="date" class="form-control grace_end" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-xxl-3 col-md-3 grace_period_month" >\
-                                        <label for="name" class="form-label">Grace Period Month</label>\
-                                        <div class="input-group">\
-                                            <input type="text" class="form-control grace_month" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-xxl-3 col-md-3 grace_period_day">\
-                                        <label for="name" class="form-label">Grace Period Day</label>\
-                                        <div class="input-group">\
-                                            <input type="text" class="form-control grace_day" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
-                                        </div>\
-                                    </div></div>';
-                                   }
-                                   $('.clone_grace').html(gracediv);
+            var dayFrom = dateF.getDate();
+            var monthFrom = dateF.getMonth() + 1;
+            var yearFrom = dateF.getFullYear();
+            start_date = new Date(yearTo, monthTo, dayTo);
+            end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
+            total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() - start_date
+                .getMonth());
+            $('#lease_period_month').val(total_months);
+            $('#total_invoice').val(total_months);
+            var d1 = new Date(date);
+            var d2 = new Date(dateF);
+            var diff = d2.getTime() - d1.getTime();
+            var daydiff = diff / (1000 * 60 * 60 * 24);
+            $('#lease_period_day').val(daydiff);
 
-          
-      }
+            function diff_years(d2, d1) {
+                var diff = (d2.getTime() - d1.getTime()) / 1000;
+                diff /= (60 * 60 * 24);
+                return Math.abs(Math.round(diff / 365.25));
+            }
+            var total_years = diff_years(d1, d2);
+            var gracediv = '';
+            for (var i = 1; i <= total_years; i++) {
+                gracediv += '<div class="row pgrace "><div class="col-xxl-3 col-md-3 grace_start_date">\
+                                            <label for="name" class="form-label">Grace From</label>\
+                                            <div class="input-group">\
+                                                <input type="date" class="form-control grace_start" id="grace_start" name="grace_start_date[]" value="" placeholder="dd-mm-yyyy">\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-xxl-3 col-md-3 grace_end_date">\
+                                            <label for="name" class="form-label">Grace To</label>\
+                                            <div class="input-group">\
+                                                <input type="date" class="form-control grace_end" id="grace_end" name="grace_end_date[]"value="" placeholder="dd-mm-yyyy">\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-xxl-3 col-md-3 grace_period_month" >\
+                                            <label for="name" class="form-label">Grace Period Month</label>\
+                                            <div class="input-group">\
+                                                <input type="text" class="form-control grace_month" id="grace_month" name="grace_period_month[]" value="" placeholder="Grace Period Month" readonly>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-xxl-3 col-md-3 grace_period_day">\
+                                            <label for="name" class="form-label">Grace Period Day</label>\
+                                            <div class="input-group">\
+                                                <input type="text" class="form-control grace_day" id="grace_day" name="grace_period_day[]"value="" placeholder="Enter Grace Period Day" readonly>\
+                                            </div>\
+                                        </div></div>';
+            }
+            $('.clone_grace').html(gracediv);
+
+
+        }
 
         $(document).on('change', '#lease_end_date', function() {
             gracecal();
@@ -872,7 +895,8 @@
             var yearFrom = dateF.getFullYear();
             start_date = new Date(yearTo, monthTo, dayTo);
             end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
-            total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() - start_date.getMonth())
+            total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -
+                start_date.getMonth())
             $('#lease_period_month').val(total_months);
             $('#total_invoice').val(total_months);
             var d1 = new Date(date);
@@ -898,13 +922,16 @@
                 var yearFrom = dateF.getFullYear();
                 start_date = new Date(yearTo, monthTo, dayTo);
                 end_date = new Date(new Date(yearFrom, monthFrom, dayFrom));
-                total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date.getMonth() -start_date.getMonth());
-                $(this).closest('.pgrace').children('.grace_period_month').children('.input-group').children('.grace_month').val(total_months);
+                total_months = (end_date.getFullYear() - start_date.getFullYear()) * 12 + (end_date
+                    .getMonth() - start_date.getMonth());
+                $(this).closest('.pgrace').children('.grace_period_month').children('.input-group')
+                    .children('.grace_month').val(total_months);
                 var d1 = new Date(date);
                 var d2 = new Date(dateF);
                 var diff = d2.getTime() - d1.getTime();
-                var daydiff = (diff / (1000 * 60 * 60 * 24))+1;
-                $(this).closest('.pgrace').children('.grace_period_day').children('.input-group').children('.grace_day').val(daydiff);
+                var daydiff = (diff / (1000 * 60 * 60 * 24)) + 1;
+                $(this).closest('.pgrace').children('.grace_period_day').children('.input-group').children(
+                    '.grace_day').val(daydiff);
             });
         });
     </script>
@@ -965,7 +992,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $(document).on('change',"#lessor",function() {
+            $(document).on('change', "#lessor", function() {
                 $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
                     var newurl = "{{ url('/admin/fetch-company') }}/" + optionValue;
