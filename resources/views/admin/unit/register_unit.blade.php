@@ -103,18 +103,17 @@
                                     <label class="form-label" for="flag">Building Name</label>
                                     <select class="form-control select2 form-select js-example-basic-single" id="building_name"
                                         name="building_name">
-                                            <option value="" selected hidden disabled>--Select Building--</option>
+                                            <option value="" selected hidden disabled>{{old('building_name','--Select Building--')}}</option>
                                         @foreach ($units as $unit)
-                                        <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->building_id == $unit->id ? 'selected' : ''):''}}>{{ $unit->name }}</option>
+                                        <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->building_id == $unit->id ? 'selected' : ''):(old('building_name')==$unit->id?'selected':'')}}>{{ $unit->name }}</option>
                                     @endforeach
                                     </select>
                                 </div>
-
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="unit_code" class="form-label">Unit code </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="unit_code" name="unit_code"
-                                            value="{{ isset($buildingedit) ? $buildingedit->unit_no : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->unit_no :old('unit_code')}}"
                                             placeholder="Enter Unit Code">
                                     </div>
                                 </div>
@@ -122,7 +121,7 @@
                                     <label for="lessor_name" class="form-label">Unit No </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="lessor_name" name="unit_no"
-                                            value="{{ isset($buildingedit) ? $buildingedit->unit_no : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->unit_no : old('unit_no') }}"
                                             placeholder="Enter Unit No">
                                     </div>
                                 </div>
@@ -132,19 +131,19 @@
                                         name="unit_type" required>
                                             <option value="" selected hidden disabled>--Select Unit Type--</option>
                                         @foreach ($units2 as $unit)
-                                        <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->unit_type == $unit->id ? 'selected' : ''):''}}>{{ $unit->name }}</option>
+                                        <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->unit_type == $unit->id ? 'selected' : ''):(old('unit_type')==$unit->id?'selected':'')}}>{{ $unit->name }}</option>
                                     @endforeach
                                     </select>
                                 </div>
 
-                       
+
 
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Status</label>
                                     <select class="form-control select2 form-select js-example-basic-single" name="unit_status" required>
                                             <option value="" selected hidden disabled>--Select Unit Status--</option>
                                         @foreach ($units3 as $unit)
-                                        <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->unit_status == $unit->id ? 'selected' : ''):''}}>{{ $unit->name }}</option>
+                                        <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->unit_status == $unit->id ? 'selected' : ''):(old('unit_status')==$unit->id?'selected':'')}}>{{ $unit->name }}</option>
                                     @endforeach
                                     </select>
                                 </div>
@@ -152,10 +151,10 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label class="form-label" for="flag">Unit Floor</label>
 
-                                    <select class="select2 select2  form-select js-example-basic-single" name='unit_floor'>             
+                                    <select class="select2 select2  form-select js-example-basic-single" name='unit_floor'>
                                         <option value="" selected hidden disabled>---Select Unit Floor---</option>
                                         @foreach ($units4 as $unit)
-                                            <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->unit_floor == $unit->id ? 'selected' : ''):''}}>{{ $unit->name }}</option>
+                                            <option value="{{ $unit->id }}" {{isset($buildingedit)?($buildingedit->unit_floor == $unit->id ? 'selected' : ''):(old('unit_floor')==$unit->id?'selected':'')}}>{{ $unit->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -164,7 +163,7 @@
                                     <label for="building_location" class="form-label">Unit size <sup class="text-danger">(Area/m²)</sup> </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="unit_size" name="unit_size"
-                                            value="{{ isset($buildingedit) ? $buildingedit->unit_size : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->unit_size : old('unit_size') }}"
                                             placeholder="Enter Area/m²">
                                     </div>
                                 </div>
@@ -174,7 +173,7 @@
                                     <select class="select2  form-select js-example-basic-single" name='unit_feature'>
                                         <option value="" selected hidden disabled>---Select Unit Feature---</option>
                                         @foreach ($units5 as $unit)
-                                            <option value="{{ $unit->id }}" {{ isset($buildingedit)? ($buildingedit->unit_feature == $unit->id ? 'selected' : '') :'' }}>{{ $unit->name }}</option>
+                                            <option value="{{ $unit->id }}" {{ isset($buildingedit)? ($buildingedit->unit_feature == $unit->id ? 'selected' :'') :(old('unit_feature')==$unit->id?'selected':'') }}>{{ $unit->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -187,7 +186,7 @@
                                     <label for="contract_no" class="form-label">Electric No</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="electric" name="electric_no"
-                                            value="{{ isset($buildingedit) ? $buildingedit->electric_no : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->electric_no : old('electric_no') }}"
                                             placeholder="Enter electric Number">
                                     </div>
                                 </div>
@@ -195,7 +194,7 @@
                                     <label for="pincode" class="form-label">Water</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="water" name="water_no"
-                                            value="{{ isset($buildingedit) ? $buildingedit->water_no : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->water_no :old('water_no')}}"
                                             placeholder="Enter water no">
                                     </div>
                                 </div>
@@ -204,7 +203,7 @@
                                     <label for="country" class="form-label">Intial Rent</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="intial_rent" name="intial_rent"
-                                            value="{{ isset($buildingedit) ? $buildingedit->intial_rent : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->intial_rent : old('intial_rent') }}"
                                             placeholder="Enter Intial Rent">
                                     </div>
                                 </div>
@@ -212,7 +211,7 @@
                                     <label for="state" class="form-label">Actual Rent</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="actual_rent" name="actual_rent"
-                                            value="{{ isset($buildingedit) ? $buildingedit->actual_rent : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->actual_rent : old('actual_rent') }}"
                                             placeholder="Enter Actual Rent">
                                     </div>
                                 </div>
@@ -221,14 +220,14 @@
                                 <div class="col-xxl-3 col-md-12">
                                     <label for="remark" class="form-label">Unit Discription</label>
                                     <textarea class="form-control" id="desc" name="unit_desc">
-                                    {{ isset($buildingedit) ? $buildingedit->unit_desc : '' }}
+                                    {{ isset($buildingedit) ? $buildingedit->unit_desc : old('unit_desc') }}
                                     </textarea>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
                                     <label for="lessor_name" class="form-label">Unit Ref</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="unit_ref" name="unit_ref"
-                                            value="{{ isset($buildingedit) ? $buildingedit->unit_ref : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->unit_ref : old('unit_ref') }}"
                                             placeholder="Enter Unit ref">
                                     </div>
                                 </div>
@@ -237,7 +236,7 @@
                                     <label for="revenue" class="form-label">Revenue Code</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="revenue" name="revenue"
-                                            value="{{ isset($buildingedit) ? $buildingedit->revenue : '' }}"
+                                            value="{{ isset($buildingedit) ? $buildingedit->revenue : old('revenue') }}"
                                             placeholder="Enter revenue">
                                     </div>
                                 </div>
@@ -261,7 +260,7 @@
                                     <label for="revenue" class="form-label">Parking No.</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="parking_no" name="parking_no"
-                                            value="{{$buildingedit->parking_no ?? ''}}"
+                                            value="{{$buildingedit->parking_no ?? old('parking_no')}}"
                                             placeholder="Enter Parking No">
                                     </div>
                                 </div>
@@ -270,7 +269,7 @@
                                 <div class="col-xxl-12 col-md-12">
                                     <label for="remark" class="form-label">Remark</label>
                                     <textarea class="form-control" name="remark">
-                                    {{ isset($buildingedit) ? $buildingedit->remark : '' }}
+                                    {{ isset($buildingedit) ? $buildingedit->remark : old('remark') }}
                                     </textarea>
                                 </div>
                             </div>
