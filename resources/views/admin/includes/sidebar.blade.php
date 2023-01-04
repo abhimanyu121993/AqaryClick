@@ -33,11 +33,11 @@
             </span>
         </a>
 
+        <input type="text" class="form-control mb-1 " placeholder="search" id='menusearch'>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
-
     <div id="scrollbar" @role('Owner')style="background-color:{{$rolecolor}}" @endrole>
         <div class="container-fluid">
 
