@@ -187,3 +187,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
+
+<script>
+    $(document).on('keyup','#menusearch',function(){
+        var v=$(this).val();
+       var matches=$('ul#navbar-nav').find('li:contains('+v+')');
+       $('.nav-item','ul#navbar-nav').not(matches).slideUp();
+       matches.slideDown();
+    });
+</script>

@@ -2,11 +2,22 @@
     #translate select{
         height: 30px;
         width: 150px;
-        background-color: #f7901c;
-        color: white;
+        color: black;
         border: none;
-        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
     }
+    #loading {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0.7;
+  background-color: #fff;
+  z-index: 9999999999;
+}
 </style>
 <header id="page-topbar">
     <div class="layout-width">

@@ -14,6 +14,10 @@ body {
 }
 </style>
 <body style="">
+    <div id="loading" style="margin-height:250px !important;">
+            <img src="{{asset('aquary.gif')}}" height="150px" width="300px">
+        
+    </div>
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -73,7 +77,11 @@ body {
     <!-- Foot -->
     @include('admin.includes.footer');
     <!-- Foot End -->
-
+    <script>
+        $(document).ready(function(){
+            $('#loading').hide();
+        });
+    </script>
 </body>
 
 </html>
