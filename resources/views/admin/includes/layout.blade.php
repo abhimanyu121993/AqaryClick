@@ -6,7 +6,13 @@
 @include('admin.includes.head')
 @yield('header-area')
 {{-- ===================== Head_end ================== --}}
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+<style>
+body {
+  font-family: "Comfortaa",serif;
+  font-weight: bold;
+}
+</style>
 <body style="">
 
     <!-- Begin page -->
