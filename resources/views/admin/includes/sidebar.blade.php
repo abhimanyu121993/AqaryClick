@@ -60,47 +60,14 @@
                     </a>
                 </li>
                 @endcan
-                <!-- User Menu -->
-                @can('User')
-                @can('User_create')
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('admin.user.index') }}" role="button" aria-expanded="false">
-                        <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">User</span>
-                    </a>
-                </li>
-                @endcan
-                @endcan
-                <!-- Role/Permission Menu -->
-                @can('Roles')
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1">
-                        <i data-feather="lock" class="icon-dual"></i> <span data-key="t-dashboards">Roles/Permission</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards1">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.role.index') }}" class="nav-link" data-key="t-analytics">
-                                    Role
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('admin.permission.index') }}" class="nav-link" data-key="t-analytics">Permission</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.rolePermission') }}" class="nav-link" data-key="t-analytics">Role has permission</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                @endcan
+               
+             
 
                 <!-- Building Management Menu -->
                 @can('Building')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards2" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards2">
-                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Building
-                            Management</span>
+                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Building</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards2">
                         <ul class="nav nav-sm flex-column">
@@ -129,8 +96,7 @@
                 @can('Unit')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards3" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards3">
-                        <i data-feather="box" class="icon-dual"></i> <span data-key="t-dashboards">Unit
-                            Management</span>
+                        <i data-feather="box" class="icon-dual"></i> <span data-key="t-dashboards">Unit</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards3">
                         <ul class="nav nav-sm flex-column">
@@ -156,8 +122,7 @@
                 @can('Tenant')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards4" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards4">
-                        <i data-feather="briefcase" class="icon-dual"></i> <span data-key="t-dashboards">Tenant
-                            Management</span>
+                        <i data-feather="briefcase" class="icon-dual"></i> <span data-key="t-dashboards">Tenant</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards4">
                         <ul class="nav nav-sm flex-column">
@@ -185,8 +150,7 @@
                 @can('Contract')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards8">
-                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Contract
-                            Management</span>
+                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Contract</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards8">
                         <ul class="nav nav-sm flex-column">
@@ -208,35 +172,12 @@
                 </li>
                 @endcan
 
-                <!-- Electricity Management Menu -->
-                @can('ElectricityBill')
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards9" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
-                        <i data-feather="zap" class="icon-dual"></i> <span data-key="t-dashboards">Electricity
-                            Management</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarDashboards9">
-                        <ul class="nav nav-sm flex-column">
-                            @can('ElectricityBill_create')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.electricity.index') }}" class="nav-link" data-key="t-analytics">Generate Bill</a>
-                            </li>
-                            @endcan
-                            @can('ElectricityBill_read')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.electricity.create') }}" class="nav-link" data-key="t-analytics">All Electricity Bills</a>
-                            </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
-                @endcan
+             
                 <!-- Invoice Management Menu -->
                 @can('Financial')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards15" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
-                        <i data-feather="dollar-sign" class="icon-dual"></i> <span data-key="t-dashboards">Financial
-                            Management</span>
+                        <i data-feather="dollar-sign" class="icon-dual"></i> <span data-key="t-dashboards">Financial</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards15">
                         <ul class="nav nav-sm flex-column">
@@ -261,8 +202,7 @@
                 <!-- Legal Management Menu -->
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards11" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards11">
-                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Legal
-                            Management</span>
+                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Legal</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards11">
                         <ul class="nav nav-sm flex-column">
@@ -284,12 +224,115 @@
                     </div>
                 </li>
                 @endcan
+                 <!-- User Menu -->
+                 @can('User')
+                @can('User_create')
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('admin.user.index') }}" role="button" aria-expanded="false">
+                        <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Employee</span>
+                    </a>
+                </li>
+                @endcan
+                @endcan
+                  <!-- Business Management Menu -->
+                  <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards1222" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1222">
+                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Company Management</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards1222">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.business.index') }}" class="nav-link" data-key="t-analytics">Registration </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.business.create') }}" class="nav-link" data-key="t-analytics">My Company</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- end business Module -->
+                   <!-- Electricity Management Menu -->
+                   @can('ElectricityBill')
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards9" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards9">
+                        <i data-feather="zap" class="icon-dual"></i> <span data-key="t-dashboards">Electricity</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards9">
+                        <ul class="nav nav-sm flex-column">
+                            @can('ElectricityBill_create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.electricity.index') }}" class="nav-link" data-key="t-analytics">Generate Bill</a>
+                            </li>
+                            @endcan
+                            @can('ElectricityBill_read')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.electricity.create') }}" class="nav-link" data-key="t-analytics">All Electricity Bills</a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+                @endcan
+                 <!-- customer Management Menu -->
+                 @can('Broker')
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards6">
+                                    <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Broker</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards6">
+                                    <ul class="nav nav-sm flex-column">
+                                        @can('Broker_create')
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.broker.index') }}" class="nav-link" data-key="t-analytics">
+                                                Registration </a>
+                                        </li>
+                                        @endcan
+                                        @can('Broker_read')
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.broker.create') }}" class="nav-link" data-key="t-analytics"> All Broker </a>
+                                        </li>
+                                        @endcan
+                                    </ul>
+                                </div>
+                            </li>
+                            @endcan
+                            <!-- end customer Module -->
+                            <!-- Report Menu -->
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards12223" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12223">
+                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Reports</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards12223">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.report') }}" class="nav-link" data-key="t-analytics">
+                                                Report </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- end business Module -->
+                            <!-- Import Menu -->
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sidebarDashboards122235" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards122235">
+                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Import/Export</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="sidebarDashboards122235">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{{ url('import-data') }}" class="nav-link" data-key="t-analytics">
+                                                Import/Export</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- end business Module -->
                 <!-- Settings Menu -->
+
                 @can('Setting')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards10" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards10">
-                        <i data-feather="settings" class="icon-dual"></i> <span data-key="t-dashboards">AqaryClick
-                            Options</span>
+                        <i data-feather="settings" class="icon-dual"></i> <span data-key="t-dashboards">Settings</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards10">
                         <ul class="nav nav-sm flex-column">
@@ -310,48 +353,6 @@
                             </li>
                             @endrole
                             <!-- end customer Module -->
-                            <!-- customer Management Menu -->
-                            @can('Broker')
-                            <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards6">
-                                    <i data-feather="users" class="icon-dual"></i> <span data-key="t-dashboards">Broker
-                                        Management</span>
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarDashboards6">
-                                    <ul class="nav nav-sm flex-column">
-                                        @can('Broker_create')
-                                        <li class="nav-item">
-                                            <a href="{{ route('admin.broker.index') }}" class="nav-link" data-key="t-analytics">
-                                                Registration </a>
-                                        </li>
-                                        @endcan
-                                        @can('Broker_read')
-                                        <li class="nav-item">
-                                            <a href="{{ route('admin.broker.create') }}" class="nav-link" data-key="t-analytics"> All Broker </a>
-                                        </li>
-                                        @endcan
-                                    </ul>
-                                </div>
-                            </li>
-                            @endcan
-                            <!-- end customer Module -->
-                            <!-- Business Management Menu -->
-                            <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards1222" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1222">
-                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Business Details</span>
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarDashboards1222">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="{{ route('admin.business.index') }}" class="nav-link" data-key="t-analytics">Registration </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="{{ route('admin.business.create') }}" class="nav-link" data-key="t-analytics">All Business</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- end business Module -->
                             <!-- Business SetUp Menu -->
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sidebarDashboards122552" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards122552">
@@ -401,41 +402,35 @@
                                 </div>
                             </li>
                             <!-- end business Module -->
-                            <!-- Report Menu -->
+                            
+                               <!-- Role/Permission Menu -->
+                @can('Roles')
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1">
+                        <i data-feather="lock" class="icon-dual"></i> <span data-key="t-dashboards">Roles/Permission</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards1">
+                        <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards12223" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12223">
-                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Report</span>
+                                <a href="{{ route('admin.role.index') }}" class="nav-link" data-key="t-analytics">
+                                    Role
                                 </a>
-                                <div class="collapse menu-dropdown" id="sidebarDashboards12223">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="{{ route('admin.report') }}" class="nav-link" data-key="t-analytics">
-                                                Report </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
-                            <!-- end business Module -->
-                            <!-- Import Menu -->
-                            <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards122235" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards122235">
-                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Import/Export</span>
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarDashboards122235">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="{{ url('import-data') }}" class="nav-link" data-key="t-analytics">
-                                                Import/Export</a>
-                                        </li>
 
-                                    </ul>
-                                </div>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.permission.index') }}" class="nav-link" data-key="t-analytics">Permission</a>
                             </li>
-                            <!-- end business Module -->
+                            <li class="nav-item">
+                                <a href="{{ route('admin.rolePermission') }}" class="nav-link" data-key="t-analytics">Role has permission</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @endcan
 
                             <li class="nav-item">
                                 <a href="{{ route('admin.add-agents-profile.index') }}" class="nav-link" data-key="t-analytics">
-                                    Profile </a>
+                                    Profile Setting </a>
                             </li>
 
 

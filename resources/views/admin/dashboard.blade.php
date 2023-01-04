@@ -1,72 +1,72 @@
 @extends('admin.includes.layout', ['breadcrumb_title' => 'Dashboard'])
 <style>
-    #cards {
-        background-image: linear-gradient(#01b2a8, #01d2bd);
-        border-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-    }
+#cards {
+    background-image: linear-gradient(#01b2a8, #01d2bd);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
 
-    .text-primary,
-    #para {
-        color: white !important;
-        text: bold;
-    }
+.text-primary,
+#para {
+    color: white !important;
+    text: bold;
+}
 
-    #parag {
-        color: rgb(0, 0, 0) !important;
-        text: bold;
-    }
+#parag {
+    color: rgb(0, 0, 0) !important;
+    text: bold;
+}
 
-    #cards:hover {
-        box-shadow: none;
-    }
+#cards:hover {
+    box-shadow: none;
+}
 
-    #card1 {
-        background-image: linear-gradient(#733ec7, #8c4aec);
-        border-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-    }
+#card1 {
+    background-image: linear-gradient(#733ec7, #8c4aec);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
 
-    #card1:hover {
-        box-shadow: none;
-    }
+#card1:hover {
+    box-shadow: none;
+}
 
-    #card2 {
-        background-image: linear-gradient(#fe4d15, #fe5824);
-        border-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-    }
+#card2 {
+    background-image: linear-gradient(#fe4d15, #fe5824);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
 
-    #card2:hover {
-        box-shadow: none;
-    }
+#card2:hover {
+    box-shadow: none;
+}
 
-    #radius {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-    }
+#radius {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
 
-    #card-header {
-        background: #c8f4f6;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
+#card-header {
+    background: #c8f4f6;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
 
-    #h1 {
-        color: #000000;
-    }
+#h1 {
+    color: #000000;
+}
 
-    .fonts {
-        background: none;
-        color: white;
-    }
+.fonts {
+    background: none;
+    color: white;
+}
 
-    #background_card {
-        background: #fffee9;
-        box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
-        border-radius: 5px;
-    }
+#background_card {
+    background: #fffee9;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    border-radius: 5px;
+}
 </style>
 @section('title', 'Dashboard')
 @section('main-content')
@@ -83,16 +83,24 @@
                         <div class="card-body">
                             <div class="media d-sm-flex d-block align-items-center">
                                 <span class="me-4 d-block mb-sm-0 mb-3">
-                                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M31.8333 79.1667H4.16659C2.33325 79.1667 0.833252 77.6667 0.833252 75.8333V29.8333C0.833252 29 1.16659 28 1.83325 27.5L29.4999 1.66667C30.4999 0.833332 31.8333 0.499999 32.9999 0.999999C34.3333 1.66667 34.9999 2.83333 34.9999 4.16667V76C34.9999 77.6667 33.4999 79.1667 31.8333 79.1667ZM7.33325 72.6667H28.4999V11.6667L7.33325 31.3333V72.6667Z" fill="white" />
-                                        <path d="M75.8333 79.1667H31.6666C29.8333 79.1667 28.3333 77.6667 28.3333 75.8334V36.6667C28.3333 34.8334 29.8333 33.3334 31.6666 33.3334H75.8333C77.6666 33.3334 79.1666 34.8334 79.1666 36.6667V76C79.1666 77.6667 77.6666 79.1667 75.8333 79.1667ZM34.9999 72.6667H72.6666V39.8334H34.9999V72.6667Z" fill="white" />
-                                        <path d="M60.1665 79.1667H47.3332C45.4999 79.1667 43.9999 77.6667 43.9999 75.8334V55.5C43.9999 53.6667 45.4999 52.1667 47.3332 52.1667H60.1665C61.9999 52.1667 63.4999 53.6667 63.4999 55.5V75.8334C63.4999 77.6667 61.9999 79.1667 60.1665 79.1667ZM50.6665 72.6667H56.9999V58.8334H50.6665V72.6667Z" fill="white" />
+                                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M31.8333 79.1667H4.16659C2.33325 79.1667 0.833252 77.6667 0.833252 75.8333V29.8333C0.833252 29 1.16659 28 1.83325 27.5L29.4999 1.66667C30.4999 0.833332 31.8333 0.499999 32.9999 0.999999C34.3333 1.66667 34.9999 2.83333 34.9999 4.16667V76C34.9999 77.6667 33.4999 79.1667 31.8333 79.1667ZM7.33325 72.6667H28.4999V11.6667L7.33325 31.3333V72.6667Z"
+                                            fill="white" />
+                                        <path
+                                            d="M75.8333 79.1667H31.6666C29.8333 79.1667 28.3333 77.6667 28.3333 75.8334V36.6667C28.3333 34.8334 29.8333 33.3334 31.6666 33.3334H75.8333C77.6666 33.3334 79.1666 34.8334 79.1666 36.6667V76C79.1666 77.6667 77.6666 79.1667 75.8333 79.1667ZM34.9999 72.6667H72.6666V39.8334H34.9999V72.6667Z"
+                                            fill="white" />
+                                        <path
+                                            d="M60.1665 79.1667H47.3332C45.4999 79.1667 43.9999 77.6667 43.9999 75.8334V55.5C43.9999 53.6667 45.4999 52.1667 47.3332 52.1667H60.1665C61.9999 52.1667 63.4999 53.6667 63.4999 55.5V75.8334C63.4999 77.6667 61.9999 79.1667 60.1665 79.1667ZM50.6665 72.6667H56.9999V58.8334H50.6665V72.6667Z"
+                                            fill="white" />
                                     </svg>
                                 </span>
                                 <div class="media-body mb-sm-0 mb-3 me-5">
                                     <h4 class="fs-22 text-white">Total Properties</h4>
                                     <div class="progress mt-3 mb-2" style="height:8px;">
-                                        <div class="progress-bar bg-white progress-animated" style="width: 86%; height:8px;" role="progressbar">
+                                        <div class="progress-bar bg-white progress-animated"
+                                            style="width: 86%; height:8px;" role="progressbar">
                                             <span class="sr-only">86% Complete</span>
                                         </div>
                                     </div>
@@ -110,6 +118,7 @@
     </div>
 </div>
 <div class="col-xl-12">
+
     @role('superadmin')
     <div class="row">
         <div class="col-xl-4">
@@ -118,15 +127,18 @@
                     <div class="d-flex align-items-center">
                         <div class="">
                             <span class="fs-4">
-                                <img src="{{asset('3x/Asset 10@3x.png')}}" height="100px" style="border-radius: 100%;" />
+                                <img src="{{asset('3x/Asset 10@3x.png')}}" height="100px"
+                                    style="border-radius: 100%;" />
                             </span>
                         </div>
                         <a href="{{ route('admin.customer.index') }}">
                             <div class="flex-grow-1 overflow-hidden ms-3">
-                                <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">Active Customer</p>
+                                <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">Active
+                                    Customer</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para" data-target="{{ App\Models\Customer::where('is_active',1)->count() }}">{{ App\Models\Customer::where('is_active',1)->count() }}</span></h4>
-                                    {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>5.02 %</span> --}}
+                                    <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                            data-target="{{ App\Models\Customer::where('is_active',1)->count() }}">{{ App\Models\Customer::where('is_active',1)->count() }}</span>
+                                    </h4>
                                 </div>
                                 {{-- <p id="parag"class="text-muted text-truncate mb-0">Projects this month</p> --}}
                             </div>
@@ -159,14 +171,17 @@
                     <div class="d-flex align-items-center">
                         <div class="">
                             <span class="fs-4">
-                                <img src="{{asset('3x/Asset 10@3x.png')}}" height="100px" style="border-radius: 100%;" />
+                                <img src="{{asset('3x/Asset 10@3x.png')}}" height="100px"
+                                    style="border-radius: 100%;" />
                             </span>
                         </div>
                         <a href="{{ route('admin.customer.index') }}">
                             <div class="flex-grow-1 ms-3">
                                 <p id="para" class="text-uppercase fw-medium text-muted mb-3">Registered Customers</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0" id="para"><span class="counter-value" data-target="{{ App\Models\Customer::count() }}">{{ App\Models\Customer::count() }}</span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0" id="para"><span class="counter-value"
+                                            data-target="{{ App\Models\Customer::count() }}">{{ App\Models\Customer::count() }}</span>
+                                    </h4>
                                     {{-- <span class="badge badge-soft-success fs-12"><i class="ri-arrow-up-s-line fs-13 align-middle me-1"></i>3.58 %</span> --}}
                                 </div>
                                 {{-- <p id="parag"class="text-muted mb-0">Leads this month</p> --}}
@@ -188,9 +203,12 @@
                         </div>
                         <a href="{{route('admin.building.create')}}">
                             <div class="flex-grow-1 overflow-hidden ms-3">
-                                <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">Total Buildings</p>
+                                <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">Total
+                                    Buildings</p>
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="fs-4 flex-grow-1 mb-0" id="para"><span class="counter-value" data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span></h4>
+                                    <h4 class="fs-4 flex-grow-1 mb-0" id="para"><span class="counter-value"
+                                            data-target="{{ App\Models\Building::count() }}">{{ App\Models\Building::count() }}</span>
+                                    </h4>
                                     {{-- <span class="badge badge-soft-danger fs-12"><i class="ri-arrow-down-s-line fs-13 align-middle me-1"></i>10.35 %</span> --}}
                                 </div>
                                 {{-- <p id="parag"class="text-muted text-truncate mb-0">Work this month</p> --}}
@@ -226,45 +244,81 @@
 
                 <div id="card-header" class="card-header p-0 bg-soft-light">
                     <div class="row g-0 text-center">
-
-                        <div class="col-6 col-sm-4">
-                            <a href="{{ route('admin.building.create') }}">
-                                <div class="p-3 m-2 border" id="background_card" style="background-image:url('3x/building.jpg');">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/building.jpg')}}" height="50px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $buildings }}">{{ $buildings }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Number of Builidngs </p>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/build.webp0')}}" height="100px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.building.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Number of Builidngs</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $buildings??'' }}">{{ $buildings??'' }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
+                    </div>
                         @can('ElectricityBill')
-                        <div class="col-6 col-sm-4">
-
-                            <a href="{{ route('admin.electricity.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/electricity1.webp')}}" height="50px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$electricity??'0'}}">{{$electricity??'0' }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Electricity Bill Generated</p>
+                     <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/electricity1.webp')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.electricity.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Electricity Bill Generated</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{$electricity??'0' }}">{{$electricity??'0' }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
+                    </div>
                         @endcan
                         @php $res=App\Models\Invoice::where('payment_status','Paid')->pluck('contract_id') @endphp
-                        <div class="col-6 col-sm-4">
-                            <a href="{{ route('admin.Overdue') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/overdue.png')}}" height="50px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">OverDue</p>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/overdue.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.Overdue') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            OverDue</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{  $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{  $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
-
+                    </div>
                     </div>
                 </div><!-- end card header -->
                 <!-- end card body -->
@@ -295,27 +349,60 @@
 
                 <div id="card-header" class="card-header p-0 border-0 bg-soft-light">
                     <div class="row g-0 text-center">
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.unit.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$unit??'0' }}">{{$unit??'0' }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total unit</p>
+                    <div class="col-xl-6">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/overdue.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.unit.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total unit</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{$unit??'0' }}">{{$unit??'0' }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.unit.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $vacant??'0'}}">{{ $vacant??'0'}}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Vacant unit</p>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/vacant.jpg')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.unit.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Vacant unit</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $vacant??'0'}}">{{ $vacant??'0'}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
+                    </div>
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body p-0 pb-2">
                     <div>
-                        <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' dir="ltr" class="apex-charts"></div>
+                        <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]'
+                            dir="ltr" class="apex-charts"></div>
                     </div>
                 </div><!-- end card body -->
             </div><!-- end card -->
@@ -346,61 +433,134 @@
 
                 <div id="card-header" class="card-header p-0 border-0 bg-soft-light">
                     <div class="row g-0 text-center">
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.tenant.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/tenant.webp')}}" height="70px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total Tenants</p>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/tenant.webp')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.tenant.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Tenants</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.contract.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/contract-sign.webp')}}" height="70px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant_not_sign??'0' }}">{{$tenant_not_sign}}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Tenant Not Signature</p>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/contract-sign.webp')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.contract.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Tenant Not Signature</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $tenant_not_sign??'0' }}">{{ $tenant_not_sign??'0' }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.contract.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total Tenant Renew Contract</p>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/electricity1.webp')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.contract.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Tenant Renew Contract</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.contract.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total Tenant Not Renew Contract</p>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/electricity1.webp')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.contract.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Tenant Not Renew Contract</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <a href="{{ route('admin.legal.create') }}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/legal.png')}}" height="70px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Legal::count() }}">{{ App\Models\Legal::count() }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total Legal</p>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/legal.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.legal.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Legal</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{  App\Models\Legal::count() }}">{{  App\Models\Legal::count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
+                    </div>
+                        
 
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body p-0 pb-2">
                     <div>
-                        <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' dir="ltr" class="apex-charts"></div>
+                        <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]'
+                            dir="ltr" class="apex-charts"></div>
                     </div>
                 </div><!-- end card body -->
             </div><!-- end card -->
@@ -431,21 +591,36 @@
 
                 <div id="card-header" class="card-header p-0 border-0 bg-soft-light">
                     <div class="row g-0 text-center">
-                        <div class="col-6 col-sm-4">
-                            <a href="{{route('admin.contract.create')}}">
-                                <div class="p-3 m-2 border" id="background_card">
-                                    <span class="fs-4">
-                                        <img src="{{asset('3x/contract.jpeg')}}" height="50px" style="border-radius: 100%;" />
-                                    </span>
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$totle_contract->count()??'' }}">{{$totle_contract->count()??'' }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total Contract</p>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/contract.jpeg')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{route('admin.contract.create')}}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Contract</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{$totle_contract->count()??'' }}">{{$totle_contract->count()??'' }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div><!-- end card body -->
                         </div>
+                    </div>
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','Done')->count() }}">{{ $totle_contract->where('attestation_status','Done')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->where('attestation_status','Done')->count() }}">{{ $totle_contract->where('attestation_status','Done')->count() }}</span>
+                                    </h5>
                                     <p id="parag" class="text-muted mb-0">Total Attestation Contract</p>
                                 </div>
                             </a>
@@ -453,7 +628,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','Not Yet')->count() }}">{{ $totle_contract->where('attestation_status','Not Yet')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->where('attestation_status','Not Yet')->count() }}">{{ $totle_contract->where('attestation_status','Not Yet')->count() }}</span>
+                                    </h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Not Attestation Yet</p>
                                 </div>
                             </a>
@@ -461,7 +638,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','under process')->count() }}">{{ $totle_contract->where('attestation_status','under process')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->where('attestation_status','under process')->count() }}">{{ $totle_contract->where('attestation_status','under process')->count() }}</span>
+                                    </h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Under Process</p>
                                 </div>
                             </a>
@@ -469,7 +648,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span>
+                                    </h5>
                                     <p id="parag" class="text-muted mb-0">Total Renewed Contract</p>
                                 </div>
                             </a>
@@ -477,7 +658,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span>
+                                    </h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Not Renewed </p>
                                 </div>
                             </a>
@@ -485,19 +668,47 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->whereNotNull('approved_by')->count() }}">{{ $totle_contract->whereNotNull('approved_by')->count() }}</span></h5>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->whereNotNull('approved_by')->count() }}">{{ $totle_contract->whereNotNull('approved_by')->count() }}</span>
+                                    </h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Approved by Lessor </p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-sm-4">
+                     <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/230x0w.webp')}}" height="50px" width="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{route('admin.contract.create')}}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Internal Contact</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $totle_contract->where('contract_type','Internal')->count() }}">{{ $totle_contract->where('contract_type','Internal')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
+                    </div>
+                        <!-- <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
-                                    <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_type','Internal')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
-                                    <p id="parag" class="text-muted mb-0">Total Internal Contact</p>
+                                    <h5 class="mb-1"><span id="parag" class="counter-value"
+                                            data-target="{{ $totle_contract->where('contract_type','Internal')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span>
+                                    </h5>
+                                    <p id="parag" class="text-muted mb-0"></p>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -530,35 +741,84 @@
 
             <div id="card-header" class="card-header p-0 border-0 bg-soft-light">
                 <div class="row g-0 text-center">
-                    <div class="col-6 col-sm-6">
-                        <a href="{{ route('admin.unit.create') }}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Electricity::where('electric_under','tenant')->count() }}">{{ App\Models\Electricity::where('electric_under','tenant')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Electricity Accoount Under Tenant Name</p>
-                            </div>
-                        </a>
+                <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/6108273.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.unit.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Electricity Accoount <br> Under Tenant Name</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Electricity::where('electric_under','tenant')->count() }}">{{ App\Models\Electricity::where('electric_under','tenant')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-6">
-                        <a href="{{ route('admin.unit.create') }}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Electricity::where('electric_under','lessor')->count() }}">{{ App\Models\Electricity::where('electric_under','lessor')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Electricity Accoount Under Lessor Name</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/9266702.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.unit.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Electricity Accoount<br> Under Lessor Name</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Electricity::where('electric_under','lessor')->count() }}">{{ App\Models\Electricity::where('electric_under','lessor')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-6">
-                        <a href="{{ route('admin.unit.create') }}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','vacant')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Electricity Bill Not Paid</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/230x0w.webp')}}" height="50px" width="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.unit.create') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                            Total Electricity Bill <br> Not Paid<br></p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','Vacant')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
                 </div>
             </div><!-- end card header -->
             <div class="card-body p-0 pb-2">
                 <div>
-                    <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]' dir="ltr" class="apex-charts"></div>
+                    <div id="projects-overview-chart" data-colors='["--vz-primary", "--vz-warning", "--vz-success"]'
+                        dir="ltr" class="apex-charts"></div>
                 </div>
             </div><!-- end card body -->
         </div><!-- end card -->
@@ -591,77 +851,228 @@
 
             <div id="card-header" class="card-header p-0 border-0 bg-soft-light">
                 <div class="row g-0 text-center">
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.invoice.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $dueInvoice}}">{{ $dueInvoice}}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Invoice Due</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/inv6.png')}}" height="50px"
+                                                style="border-radius: 100%;" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Total Paid Invoice</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{$invoice->where('payment_status','Paid')->count() }}">{{$invoice->where('payment_status','Paid')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                            {{-- <p id="parag"class="text-muted text-truncate mb-0">Projects this month</p> --}}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.invoice.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$invoice->where('payment_status','Paid')->count() }}">{{ $invoice->where('payment_status','Paid')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Paid Invoice</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/inv7.png')}}" height="50px"
+                                                style="border-radius: 100%;" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Total Invoice Due</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ $dueInvoice??0}}">{{ $dueInvoice??0}}</span>
+                                                </h4>
+                                            </div>
+                                            {{-- <p id="parag"class="text-muted text-truncate mb-0">Projects this month</p> --}}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$overdue??''}}">{{ $overdue??''}}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Overdue Invoice</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/inv4.png')}}" height="50px"
+                                                style="border-radius: 100%;" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Total Overdue Invoice</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{$overdue??''}}">{{$overdue??''}}</span></h4>
+                                            </div>
+                                            {{-- <p id="parag"class="text-muted text-truncate mb-0">Projects this month</p> --}}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$cheque_reccord??'' }}">{{ $cheque_reccord??''}}</span></h5>
-                                <p id="parag" class="text-muted mb-0"> Record Cheque</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/che1.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Record Cheque</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{$cheque_reccord??'' }}">{{$cheque_reccord??'' }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}">{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0"> Bounced Cheques</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/Cheque-Bounce_img-1.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Bounced Cheques</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}">{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Postponed')->count() }}">{{ App\Models\Cheque::where('cheque_status','Postponed')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0"> Postponed Cheques </p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/postponed.jpeg')}}" height="50px"
+                                                style="border-radius: 100%;" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Postponed Cheques</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Cheque::where('cheque_status','Postponed')->count() }}">{{ App\Models\Cheque::where('cheque_status','Postponed')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Expired')->count() }}">{{ App\Models\Cheque::where('cheque_status','Expired')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0"> Expired Cheques</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/exp.png')}}" height="50px"/>
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Expired Cheques</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Cheque::where('cheque_status','Expired')->count() }}">{{ App\Models\Cheque::where('cheque_status','Expired')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Cleared')->count() }}">{{ App\Models\Cheque::where('cheque_status','Cleared')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0"> Cleared Cheques</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/che2.png')}}" height="50px"
+                                                style="border-radius: 100%;" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Cleared Cheques</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Cheque::where('cheque_status','Cleared')->count() }}">{{ App\Models\Cheque::where('cheque_status','Cleared')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-4">
-                        <a href="{{route('admin.contract.create')}}">
-                            <div class="p-3 m-2 border" id="background_card">
-                                <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Deposited')->count() }}">{{ App\Models\Cheque::where('cheque_status','Deposited')->count() }}</span></h5>
-                                <p id="parag" class="text-muted mb-0">Total Deposited Cheques</p>
-                            </div>
-                        </a>
+                    <div class="col-xl-4">
+                        <div class="card card-animate" id="cards">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <span class="fs-4">
+                                            <img src="{{asset('3x/7315298.png')}}" height="50px" />
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('admin.customer.index') }}">
+                                        <div class="flex-grow-1 overflow-hidden ms-3">
+                                            <p id="para" class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                                Total Deposited Cheques</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" id="para"
+                                                        data-target="{{ App\Models\Cheque::where('cheque_status','Deposited')->count() }}">{{ App\Models\Cheque::where('cheque_status','Deposited')->count() }}</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- end card body -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -673,7 +1084,8 @@
                     <div id="card-header" class="card-header align-items-center d-flex">
                         <h4 id="h1" class="card-title mb-0 flex-grow-1">Cheque Status</h4>
                         <div class="flex-shrink-0">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="cheque_status">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                id="cheque_status">
                                 <option value=" " selected>Sort By</option>
                                 <option value="all">All</option>
                                 <option value="valid">Valid Cheque</option>
@@ -707,7 +1119,8 @@
                                         <td>{{$ch->TenantName->tenant_english_name??''}}</td>
                                         <td>{{$ch->cheque_no??''}}</td>
                                         <td>{{ $ch->qar_amt??''}} </td>
-                                        <td><span class="badge badge-soft-success p-2">{{$ch->cheque_status}}</span></td>
+                                        <td><span class="badge badge-soft-success p-2">{{$ch->cheque_status}}</span>
+                                        </td>
                                         <td>
                                             <div class="text-nowrap">{{$ch->created_at}}</div>
                                         </td>
@@ -735,7 +1148,8 @@
                                         <td>{{$bc->TenantName->tenant_english_name??''}}</td>
                                         <td>{{$bc->cheque_no??''}}</td>
                                         <td>{{ $bc->qar_amt ??''}} </td>
-                                        <td><span class="badge badge-soft-success p-2">{{$bc->cheque_status}}</span></td>
+                                        <td><span class="badge badge-soft-success p-2">{{$bc->cheque_status}}</span>
+                                        </td>
                                         <td>
                                             <div class="text-nowrap">{{$bc->created_at}}</div>
                                         </td>
@@ -763,7 +1177,8 @@
                                         <td>{{$cc->TenantName->tenant_english_name??''}}</td>
                                         <td>{{$cc->cheque_no??''}}</td>
                                         <td>{{ $cc->qar_amt ??''}} </td>
-                                        <td><span class="badge badge-soft-success p-2">{{$cc->cheque_status??''}}</span></td>
+                                        <td><span class="badge badge-soft-success p-2">{{$cc->cheque_status??''}}</span>
+                                        </td>
                                         <td>
                                             <div class="text-nowrap">{{$cc->created_at??''}}</div>
                                         </td>
@@ -777,7 +1192,8 @@
                                         <td>{{$sc->TenantName->tenant_english_name??''}}</td>
                                         <td>{{$sc->cheque_no??''}}</td>
                                         <td>{{ $sc->qar_amt??'' }} </td>
-                                        <td><span class="badge badge-soft-success p-2">{{$sc->cheque_status??''}}</span></td>
+                                        <td><span class="badge badge-soft-success p-2">{{$sc->cheque_status??''}}</span>
+                                        </td>
                                         <td>
                                             <div class="text-nowrap">{{$sc->created_at??''}}</div>
                                         </td>
@@ -814,94 +1230,94 @@
 </div><!-- end row -->
 
 <script>
-    $(document).ready(function() {
-        $("#cheque_status").change(function() {
-            $(this).find("option:selected").each(function() {
-                var optionValue = $(this).attr("value");
-                if (optionValue == 'all') {
-                    $('#valid_cheque').show();
-                    $('#bounced_cheque').show();
-                    $('#expired_cheque').show();
-                    $('#cleared_cheque').show();
-                    $('#security_cheque').show();
-                    $('#postponed_cheque').show();
+$(document).ready(function() {
+    $("#cheque_status").change(function() {
+        $(this).find("option:selected").each(function() {
+            var optionValue = $(this).attr("value");
+            if (optionValue == 'all') {
+                $('#valid_cheque').show();
+                $('#bounced_cheque').show();
+                $('#expired_cheque').show();
+                $('#cleared_cheque').show();
+                $('#security_cheque').show();
+                $('#postponed_cheque').show();
 
-                } else if (optionValue == 'valid') {
-                    $('#valid_cheque').show();
-                    $('#bounced_cheque').hide();
-                    $('#expired_cheque').hide();
-                    $('#cleared_cheque').hide();
-                    $('#security_cheque').hide();
-                    $('#postponed_cheque').hide();
+            } else if (optionValue == 'valid') {
+                $('#valid_cheque').show();
+                $('#bounced_cheque').hide();
+                $('#expired_cheque').hide();
+                $('#cleared_cheque').hide();
+                $('#security_cheque').hide();
+                $('#postponed_cheque').hide();
 
-                } else if (optionValue == 'postponed') {
-                    $('#valid_cheque').hide();
-                    $('#postponed_cheque').show();
-                    $('#bounced_cheque').hide();
-                    $('#expired_cheque').hide();
-                    $('#cleared_cheque').hide();
-                    $('#security_cheque').hide();
-                } else if (optionValue == 'bounced') {
-                    $('#valid_cheque').hide();
-                    $('#postponed_cheque').hide();
-                    $('#bounced_cheque').show();
-                    $('#expired_cheque').hide();
-                    $('#cleared_cheque').hide();
-                    $('#security_cheque').hide();
-                    $('#postponed_cheque').hide();
+            } else if (optionValue == 'postponed') {
+                $('#valid_cheque').hide();
+                $('#postponed_cheque').show();
+                $('#bounced_cheque').hide();
+                $('#expired_cheque').hide();
+                $('#cleared_cheque').hide();
+                $('#security_cheque').hide();
+            } else if (optionValue == 'bounced') {
+                $('#valid_cheque').hide();
+                $('#postponed_cheque').hide();
+                $('#bounced_cheque').show();
+                $('#expired_cheque').hide();
+                $('#cleared_cheque').hide();
+                $('#security_cheque').hide();
+                $('#postponed_cheque').hide();
 
-                } else if (optionValue == 'expired') {
-                    $('#valid_cheque').hide();
-                    $('#bounced_cheque').hide();
-                    $('#expired_cheque').show();
-                    $('#cleared_cheque').hide();
-                    $('#security_cheque').hide();
-                    $('#postponed_cheque').hide();
+            } else if (optionValue == 'expired') {
+                $('#valid_cheque').hide();
+                $('#bounced_cheque').hide();
+                $('#expired_cheque').show();
+                $('#cleared_cheque').hide();
+                $('#security_cheque').hide();
+                $('#postponed_cheque').hide();
 
-                } else if (optionValue == 'cleared') {
-                    $('#valid_cheque').hide();
-                    $('#bounced_cheque').hide();
-                    $('#expired_cheque').hide();
-                    $('#cleared_cheque').show();
-                    $('#security_cheque').hide();
-                    $('#postponed_cheque').hide();
+            } else if (optionValue == 'cleared') {
+                $('#valid_cheque').hide();
+                $('#bounced_cheque').hide();
+                $('#expired_cheque').hide();
+                $('#cleared_cheque').show();
+                $('#security_cheque').hide();
+                $('#postponed_cheque').hide();
 
-                } else if (optionValue == 'security') {
-                    $('#valid_cheque').hide();
-                    $('#bounced_cheque').hide();
-                    $('#expired_cheque').show();
-                    $('#cleared_cheque').hide();
-                    $('#security_cheque').hide();
-                    $('#postponed_cheque').hide();
+            } else if (optionValue == 'security') {
+                $('#valid_cheque').hide();
+                $('#bounced_cheque').hide();
+                $('#expired_cheque').show();
+                $('#cleared_cheque').hide();
+                $('#security_cheque').hide();
+                $('#postponed_cheque').hide();
 
-                }
-            });
-        }).change();
-    });
+            }
+        });
+    }).change();
+});
 </script>
 <script>
-    var greet = [
-        'What are you doing that early?',
-        'Good Morning,',
-        'Good Afternoon,',
-        'Good Evening,'
-    ][parseInt(new Date().getHours() / 24 * 4)];
+var greet = [
+    'What are you doing that early?',
+    'Good Morning,',
+    'Good Afternoon,',
+    'Good Evening,'
+][parseInt(new Date().getHours() / 24 * 4)];
 
 
-    document.getElementById("good").innerHTML = greet;
+document.getElementById("good").innerHTML = greet;
 </script>
 
 <script>
-    var datetime = new Date();
-    document.getElementById("time").textContent = datetime;
+var datetime = new Date();
+document.getElementById("time").textContent = datetime;
 
-    function refreshTime() {
-        const timeDisplay = document.getElementById("time");
-        const dateString = new Date().toLocaleString();
-        const formattedString = dateString.replace(", ", " - ");
-        timeDisplay.textContent = formattedString;
-    }
-    setInterval(refreshTime, 1000);
+function refreshTime() {
+    const timeDisplay = document.getElementById("time");
+    const dateString = new Date().toLocaleString();
+    const formattedString = dateString.replace(", ", " - ");
+    timeDisplay.textContent = formattedString;
+}
+setInterval(refreshTime, 1000);
 </script>
 @include('admin.businessModal.businessModal')
 @endsection
