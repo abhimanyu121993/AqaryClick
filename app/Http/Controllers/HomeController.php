@@ -18,6 +18,7 @@ use AmrShawky\LaravelCurrency\Facade\Currency;
 use App\Models\Membership;
 use App\Models\Profile;
 use App\Models\WebsiteSetting;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -133,5 +134,42 @@ class HomeController extends Controller
         return view('frontend.home',compact('buildings','websiteSetting','build','profile'));
         }
 
+        public function aboutUs(){
+            $profile=Profile::get();
+            $websiteSetting=WebsiteSetting::get();
+           return view('frontend.about',compact('profile','websiteSetting'));
+        }
 
+        public function contactUs(){
+            $websiteSetting=WebsiteSetting::get();
+            return view('frontend.contact',compact('websiteSetting'));
+        }
+
+        public function contactUser(Request $request){
+           
+            $request->validate([
+                'name'=>'required',
+                'email'=>'required',
+                'phone'=>'required',
+                'message'=>'required',
+            ]);
+            $data=ContactUs::create([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'message'=>$request->message,
+            ]);
+            if($data){
+                Alert::success('Contact Us', 'Create Successfully.');
+                return redirect()->back();
+            }else{
+                Alert::error('Contact Us', 'not created.');
+                return redirect()->back();
+            }
+        }
+
+    public function single_product()
+    {
+        # code...
+    }
 }

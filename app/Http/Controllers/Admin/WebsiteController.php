@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactUs;
 use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
 
@@ -28,4 +29,10 @@ class WebsiteController extends Controller
         }
         return redirect()->back();
     }
+
+    public function contactList(){
+        $data=ContactUs::all();
+        return view('admin.all_contact',compact('data'));
+    }
+
 }

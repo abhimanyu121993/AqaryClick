@@ -472,7 +472,10 @@
                                             <a class='nav-link menu-link' href=''>
                                                 <i class="feather-globe"></i> <span data-key="t-dashboards">Website Setting</span></a>
                                         </li>
-
+                                        <li class='nav-item'>
+                                            <a class='nav-link menu-link' href="{{route('admin.contact-list')}}">
+                                                <i class="feather-globe"></i> <span data-key="t-dashboards">Contact User</span></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

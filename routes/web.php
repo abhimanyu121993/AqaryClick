@@ -80,6 +80,11 @@ Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
     Route::get('/register',[AuthLoginController::class,'registerIndex'])->name('registerIndex');
     Route::post('/register-store-customer',[AuthLoginController::class,'registerStore'])->name('registerStore');
+    // Route::get('');
+    Route::get('/about-us',[HomeController::class,'aboutUs'])->name('about-us');
+    Route::get('/contact-us',[HomeController::class,'contactUs'])->name('contact-us');
+    Route::post('/contact-user',[HomeController::class,'contactUser'])->name('contact-user');
+
 });
 // Backend Routes
 Route::get('/admin',[LoginController::class, 'index'])->name('admin');
@@ -218,6 +223,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('bulk-upload-contract',[ContractController::class,'bulkUpload'])->name('bulkUploadContract');
 
     Route::get('website-setting',[WebsiteController::class,'index'])->name('website-setting');
+    Route::get('website-setting-contact-list',[WebsiteController::class,'contactList'])->name('contact-list');
     Route::post('website-setting-update',[WebsiteController::class,'setting_update'])->name('website-setting-update');
     Route::get('report',[ReportController::class,'report'])->name('report');
     Route::get('new-report',[ReportController::class,'newReport'])->name('newReport');
