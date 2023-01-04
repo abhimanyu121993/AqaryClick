@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Building;
+use App\Models\BuildingAsset;
 use App\Models\BuildingFiles;
 use App\Models\BuildingStatus;
 use App\Models\BuildingType;
@@ -583,5 +584,171 @@ class BuildingController extends Controller
         {
             return redirect()->back()->with('error','Data not deleted.');
         }
+    }
+
+    public function buildingDetails(){
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $building = Building::all();               
+        } else { 
+            $building = Building::where('user_id',$this->user_id)->get();
+        }
+        return view('admin.building.building_details',compact('building'));
+    }
+
+    public function buildingAssetStore(Request $request){
+       
+        $request->validate([
+            'building_id'=>'required',
+            'type'=>'required',
+            'title'=>'required',
+            'detail'=>'required',
+        ]);
+
+        foreach($request->type as $k=>$t){
+            if($t=='img'){
+                $files=$request->image;
+                $name='bimg'.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
+                $files[$k]->move(public_path('upload/building/asset/img'), $name);
+                $data = BuildingAsset::create([
+                    'building_id' => $request->building_id[$k], 
+                    'type' => $t ?? '', 
+                    'title' =>$request->title[$k] ?? '',
+                    'detail' =>$request->detail[$k] ?? '', 
+                    'content' =>'upload/building/asset/img/'.$name ?? '',
+                ]);
+            }
+            else if($t=='plan'){
+                $files=$request->plan;
+                $name='pimg'.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
+                $files[$k]->move(public_path('upload/building/asset/plan'), $name);
+                $data = BuildingAsset::create([
+                    'building_id' => $request->building_id[$k], 
+                    'type' => $t ?? '', 
+                    'title' =>$request->title[$k] ?? '',
+                    'detail' =>$request->detail[$k] ?? '', 
+                    'content' =>'upload/building/asset/plan/'.$name ?? '',
+                ]);
+            }
+            else if($t=='video'){
+                $data = BuildingAsset::create([
+                    'building_id' => $request->building_id[$k], 
+                    'type' => $t ?? '', 
+                    'title' =>$request->title[$k] ?? '',
+                    'detail' =>$request->detail[$k] ?? '', 
+                    'content' =>$request->video[$k] ??'',
+                ]);
+            }
+        }
+        if($data)
+        {
+            return redirect()->back()->with('success','Building Assest Add  successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Building Assest not Added.');
+        }
+    }
+
+    public function buildingAssetEdit($id){
+        $id = Crypt::decrypt($id);
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $building = Building::all();               
+        } else { 
+            $building = Building::where('user_id',$this->user_id)->get();
+        }
+        $editAsset=BuildingAsset::find($id);
+        return view('admin.building.building_details',compact('building','editAsset'));
+    }
+
+    public function buildingAssetDelete($id){
+        $id =Crypt::decrypt($id);
+         $data= BuildingAsset::find($id);
+         $name=$data->content;
+         if($data->delete())
+        {
+            if($data->type == 'img'){
+                $file=File::delete((public_path($name)));
+            }elseif($data->type == 'plan'){
+                $file=File::delete((public_path($name))); 
+            } 
+            return redirect()->back()->with('success','Data Deleted successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data not deleted.');
+        }
+    }
+
+    public function buildingAssetUpdate(Request $request,$id){
+
+        $request->validate([
+            'building_id'=>'required',
+            'type'=>'required',
+        ]);
+
+        foreach($request->type as $k=>$t){
+            if($t=='img'){
+                $files=$request->image;
+                if($request->hasFile('image')){
+                    $data= BuildingAsset::find($id);
+                    $name=$data->content;
+                    if($name !=''){
+                        $file=File::delete((public_path($name)));
+                    } 
+                    $name='bimg'.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
+                    $files[$k]->move(public_path('upload/building/asset/img'), $name);
+                    $data = BuildingAsset::find($id)->update([ 
+                        'content' =>'upload/building/asset/img/'.$name ?? '',
+                    ]);
+                }
+                $data = BuildingAsset::find($id)->update([
+                    'building_id' => $request->building_id[$k], 
+                    'type' => $t ?? '', 
+                    'title' =>$request->title[$k] ?? '',
+                    'detail' =>$request->detail[$k] ?? '', 
+                ]);
+            }
+            else if($t=='plan'){
+                $files=$request->plan;
+                if($request->hasFile('plan')){
+                    $data= BuildingAsset::find($id);
+                    $name=$data->content;
+                    if($name !=''){
+                        $file=File::delete((public_path($name)));
+                    } 
+                    $name='pimg'.'-'.time().'-'.rand(0,9).'.'.$files[$k]->extension();
+                    $files[$k]->move(public_path('upload/building/asset/plan'), $name);
+                    $data = BuildingAsset::find($id)->update([
+                        'content' =>'upload/building/asset/plan/'.$name ?? '',
+                    ]);   
+                }
+                $data = BuildingAsset::find($id)->update([
+                    'building_id' => $request->building_id[$k], 
+                    'type' => $t ?? '', 
+                    'title' =>$request->title[$k] ?? '',
+                    'detail' =>$request->detail[$k] ?? '', 
+                ]);
+            }
+            else if($t=='video'){
+                $data = BuildingAsset::find($id)->update([
+                    'building_id' => $request->building_id[$k], 
+                    'type' => $t ?? '', 
+                    'title' =>$request->title[$k] ?? '',
+                    'detail' =>$request->detail[$k] ?? '', 
+                    'content' =>$request->video[$k] ??'',
+                ]);
+            }
+        }
+        if($data)
+        {
+            return redirect()->back()->with('success','Building Assest Update  successfully.');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Building Assest not Updated.');
+        }
+
     }
 }
