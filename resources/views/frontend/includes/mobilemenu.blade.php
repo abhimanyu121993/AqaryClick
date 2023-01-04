@@ -6,11 +6,11 @@
     <div class="mdc-drawer__content"> 
         <div class="vertical-menu">   
             <div class="mdc-menu-surface--anchor"> 
-                <a href="javascript:void(0);" class="mdc-button menu-item-has-children"> 
+                <a href="{{url('home')}}" class="mdc-button menu-item-has-children"> 
                     <span class="mdc-button__ripple"></span> 
                     <span class="mdc-button__label">Home</span>
                 </a>  
-                <div class="mdc-menu mdc-menu-surface">
+                <!-- <div class="mdc-menu mdc-menu-surface">
                     <div class="mdc-list"> 
                         <div> 
                             <a href="header-default.html" class="mdc-button"> 
@@ -55,7 +55,7 @@
                             </div>                                          
                         </div>  
                     </div>
-                </div>  
+                </div>   -->
             </div>   
             <div>
                 <a href="properties.html" class="mdc-button">
@@ -161,13 +161,13 @@
                 </div>  
             </div> 
             <div>
-                <a href="contact.html" class="mdc-button">
+                <a href="{{route('home.contact-us')}}" class="mdc-button">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__label">Contact</span> 
                 </a> 
             </div> 
             <div>
-                <a href="about.html" class="mdc-button">
+                <a href="{{route('home.about-us')}}" class="mdc-button">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__label">About us</span> 
                 </a> 
