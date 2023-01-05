@@ -54,7 +54,7 @@
 </style>
 @section('title', 'Building Details')
 @section('main-content')
-
+<!----Building Asset form start------>
 <div class="row">
     <div class="col-lg-12">
         <div class="card" id="header1">
@@ -137,7 +137,7 @@
                                             </textarea>
                                         </div>
                                     </div>
-                                    <div class="col-xxl-3 col-md-2 mt-2">
+                                    <div class="col-xxl-3 col-md-2 mt-2" {{isset($editAsset)? 'hidden':''}}>
                                         <div class="input-group">
                                             <a href="javascript:new_link()" id="btn-btn" class="btn btn-success fw-medium addButton"><i class="ri-add-fill me-1 align-bottom"></i></a>
                                         </div>
@@ -157,7 +157,7 @@
         </div>
     </div>
 </div>
-
+<!----Building Asset form start------>
 
 <!----Building Asset table start------>
 <div class="row">
@@ -180,11 +180,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php $i=1; @endphp
                         @foreach ($building as $build)
                         @if ($build->buildingAssets)
                         @foreach ($build->buildingAssets as $asset)
                         <tr>
-                            <th scope="row">{{$asset->id}}</th>
+                            <th scope="row">{{$i++}}</th>
                             <td>{{ $asset->building->name??''}}</td>
                             <td>{{ $asset->title??''}}</td>
                             <td>{{ $asset->type??''}}</td>
@@ -221,7 +222,102 @@
     </div>
 </div>
 <!----Building Asset table End------>
-<!-- Grids in modals -->
+
+<!----Building Meta form start------>
+{{--<div class="row">
+    <div class="col-lg-12">
+        <div class="card" id="header1">
+            <div class="card-header align-items-center d-flex" id="card-header">
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">Building Details Meta </h4>
+            </div><!-- end card header -->
+            <div class="card-body">
+                <div class="live-preview">
+                    <form action="{{isset($editAsset)? route('admin.asset-update',$editAsset->id):route('admin.building-asset')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <div class="field_wrapper mt-2" id="header1">
+                            <div class="card-header align-items-center d-flex">
+                                <div class="row">
+                                    <div class="row gy-4 mb-3">
+                                        <div class="col-xxl-3 col-md-3 mb-2">
+                                            <label class="form-label" for="flag">Building Name</label>
+                                            <select class="form-select js-example-basic-single" id="building_name" name="building_id">
+                                                <option value="">
+                                                    @if (isset($editAsset))
+                                                    @if ($editAsset->building_id =='')
+                                                    --Select Builidng Name--
+                                                    @endif
+                                                    @else
+                                                    --Select Builidng Name--
+                                                    @endif
+                                                </option>
+                                                @foreach ($building as $build)
+                                                <option value="{{ $build->id }}" {{ isset($editAsset)? ($editAsset->building_id == $build->id ? 'selected' : '') :'' }}>{{ $build->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-3 col-md-3">
+                                            <label for="space" class="form-label">Property Type</label>
+                                            <select class="select2  form-select js-example-basic-single" id="property_type" name="property_type">
+                                            <option value="" selected hidden>--Select Type--</option>
+                                                <option value="1" {{isset($editAsset)?($editAsset->type =='img' ?'selected hidden':''):''}}>Able</option>
+                                                <option value="0" {{isset($editAsset)?($editAsset->type =='plan' ?'selected hidden':''):''}}>Disable</option>
+                                                <option value="video" {{isset($editAsset)?($editAsset->type =='video' ?'selected hidden':''):''}}>video</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-3 col-md-3">
+                                            <label for="space" class="form-label">Property Status</label>
+                                            <select class="select2  form-select js-example-basic-single" id="property_status" name="property_status[]">
+                                            <option value="" selected hidden>--Select Status--</option>
+                                                <option value="able" {{isset($editAsset)?($editAsset->type =='able' ?'selected hidden':''):''}}>Able</option>
+                                                <option value="disable" {{isset($editAsset)?($editAsset->type =='disable' ?'selected hidden':''):''}}>Disable</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-3 col-md-3" id="content_video">
+                                            <label for="name" class="form-label">Feature</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="feature[]" value="" placeholder="Building Feature">
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-md-3">
+                                            <label for="name" class="form-label">Description</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="description" name="description" value="{{$editAsset->description ?? ''}}" placeholder="Building Description">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row gy-4 mb-3">
+                                        <div class="col-xxl-3 col-md-12">
+                                            <label for="building_desc" class="form-label">Long Description</label>
+                                            <textarea class="form-control" name="long_description" id="long_description">
+                                            {{$editAsset->long_description ?? ''}}
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row gy-4">
+                            <div class="col-xxl-3 col-md-6">
+                                <button class="btn btn-primary" id="btn-btn" type="submit">{{isset($editAsset) ? 'Update' : 'Submit'}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>--}}
+<!----Building Meta form start------>
 @endsection
 
 
