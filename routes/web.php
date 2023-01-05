@@ -295,6 +295,9 @@ Route::view('payment-success','home.paymentsuccess');
 Route::get('check',[InvoiceController::class,'checck']);
 Route::view('import-data','admin.import.importdata');
 Route::view('business-modal', 'admin.businessModal.businessModal');
-
-
-
+// Route::view('about-us','admin.aboutUs.aboutus');
+Route::get('website-setting',[WebsiteController::class,'webSettingPages']);
+Route::post('store-website-setting',[WebsiteController::class,'storeWebSettingPages'])->name('storeWebSetting');
+Route::post('store-website-title',[WebsiteController::class,'storeTitle'])->name('storeTitle');
+Route::post('store-website-aboutus',[WebsiteController::class,'storeAboutUs'])->name('storeAboutus');
+Route::post('store-website-description',[WebsiteController::class,'storeDescription'])->name('storeDesc');
