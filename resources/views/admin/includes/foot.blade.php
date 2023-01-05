@@ -192,7 +192,7 @@
     $(document).on('keyup','#menusearch',function(){
         var v=$(this).val();
        var matches=$('ul#navbar-nav').find('li:contains('+v+')');
-       $('.nav-item','ul#navbar-nav').not(matches).slideUp();
+       $('li','ul#navbar-nav').not(matches).slideUp();
        matches.slideDown();
     });
 </script>

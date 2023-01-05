@@ -231,7 +231,7 @@
                             <a href="{{ route('admin.building.create') }}">
                                 <div class="p-3 m-2 border" id="background_card" style="background-image:url('3x/building.jpg');">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/building.jpg')}}" height="50px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/building.jpg')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $buildings }}">{{ $buildings }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Number of Builidngs </p>
@@ -244,7 +244,7 @@
                             <a href="{{ route('admin.electricity.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/electricity1.webp')}}" height="50px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/electricity1.webp')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$electricity??'0'}}">{{$electricity??'0' }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Electricity Bill Generated</p>
@@ -257,7 +257,7 @@
                             <a href="{{ route('admin.Overdue') }}">
                                 <div class="p-3 m-2 border" id="background_card">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/overdue.png')}}" height="50px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/overdue.png')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}">{{ $totle_contract->where('overdue','>=',90)->whereNotIn('id',$res)->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">OverDue</p>
@@ -298,6 +298,9 @@
                         <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.unit.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                 <span class="fs-4">
+                                        <img src="{{asset('3x/unit.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$unit??'0' }}">{{$unit??'0' }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total unit</p>
                                 </div>
@@ -306,6 +309,9 @@
                         <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.unit.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/vacant.jpg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $vacant??'0'}}">{{ $vacant??'0'}}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Vacant unit</p>
                                 </div>
@@ -350,7 +356,7 @@
                             <a href="{{ route('admin.tenant.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/tenant.webp')}}" height="70px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/tenant.webp')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant??'0'}}">{{ $tenant??'0'}}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Tenants</p>
@@ -361,7 +367,7 @@
                             <a href="{{ route('admin.contract.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/contract-sign.webp')}}" height="70px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/contract.png')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $tenant_not_sign??'0' }}">{{$tenant_not_sign}}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Tenant Not Signature</p>
@@ -371,6 +377,9 @@
                         <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.contract.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/renewed.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Tenant Renew Contract</p>
                                 </div>
@@ -379,6 +388,9 @@
                         <div class="col-6 col-sm-6">
                             <a href="{{ route('admin.contract.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/contract not.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Tenant Not Renew Contract</p>
                                 </div>
@@ -388,7 +400,7 @@
                             <a href="{{ route('admin.legal.create') }}">
                                 <div class="p-3 m-2 border" id="background_card">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/legal.png')}}" height="70px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/legal.png')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{  App\Models\Legal::count() }}">{{ App\Models\Legal::count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Legal</p>
@@ -435,7 +447,7 @@
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
                                     <span class="fs-4">
-                                        <img src="{{asset('3x/contract.jpeg')}}" height="50px" style="border-radius: 100%;" />
+                                        <img src="{{asset('3x/icons8-contract-64.png')}}" height="55px" style="border-radius: 100%;" />
                                     </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$totle_contract->count()??'' }}">{{$totle_contract->count()??'' }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract</p>
@@ -445,6 +457,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/check file.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','Done')->count() }}">{{ $totle_contract->where('attestation_status','Done')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Attestation Contract</p>
                                 </div>
@@ -453,6 +468,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/cross file.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','Not Yet')->count() }}">{{ $totle_contract->where('attestation_status','Not Yet')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Not Attestation Yet</p>
                                 </div>
@@ -461,6 +479,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/under proccess.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('attestation_status','under process')->count() }}">{{ $totle_contract->where('attestation_status','under process')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Under Process</p>
                                 </div>
@@ -469,6 +490,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/renewed.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','renewed')->count() }}">{{ $totle_contract->where('contract_status','renewed')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Renewed Contract</p>
                                 </div>
@@ -477,6 +501,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/contract not.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_status','not renewed')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Not Renewed </p>
                                 </div>
@@ -485,6 +512,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/contract approved.jpg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->whereNotNull('approved_by')->count() }}">{{ $totle_contract->whereNotNull('approved_by')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Contract Approved by Lessor </p>
                                 </div>
@@ -493,6 +523,9 @@
                         <div class="col-6 col-sm-4">
                             <a href="{{route('admin.contract.create')}}">
                                 <div class="p-3 m-2 border" id="background_card">
+                                <span class="fs-4">
+                                        <img src="{{asset('3x/internal contract.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                     <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $totle_contract->where('contract_type','Internal')->count() }}">{{ $totle_contract->where('contract_status','not renewed')->count() }}</span></h5>
                                     <p id="parag" class="text-muted mb-0">Total Internal Contact</p>
                                 </div>
@@ -533,6 +566,9 @@
                     <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.unit.create') }}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/bill Account name.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Electricity::where('electric_under','tenant')->count() }}">{{ App\Models\Electricity::where('electric_under','tenant')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Electricity Accoount Under Tenant Name</p>
                             </div>
@@ -541,6 +577,9 @@
                     <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.unit.create') }}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/bill Account name.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Electricity::where('electric_under','lessor')->count() }}">{{ App\Models\Electricity::where('electric_under','lessor')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Electricity Accoount Under Lessor Name</p>
                             </div>
@@ -549,6 +588,9 @@
                     <div class="col-6 col-sm-6">
                         <a href="{{ route('admin.unit.create') }}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/ele2.jpg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Unit::where('unit_status','Vacant')->count() }}">{{ App\Models\Unit::where('unit_status','vacant')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Electricity Bill Not Paid</p>
                             </div>
@@ -594,6 +636,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.invoice.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/invoicedue.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ $dueInvoice}}">{{ $dueInvoice}}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Invoice Due</p>
                             </div>
@@ -602,6 +647,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.invoice.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/invoice-paid.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$invoice->where('payment_status','Paid')->count() }}">{{ $invoice->where('payment_status','Paid')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Paid Invoice</p>
                             </div>
@@ -610,6 +658,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/overdue2.jpg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$overdue??''}}">{{ $overdue??''}}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Overdue Invoice</p>
                             </div>
@@ -618,6 +669,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/cheque.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{$cheque_reccord??'' }}">{{ $cheque_reccord??''}}</span></h5>
                                 <p id="parag" class="text-muted mb-0"> Record Cheque</p>
                             </div>
@@ -626,6 +680,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/Cheque-Bounce_img-1.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}">{{ App\Models\Cheque::where('cheque_status','Bounced')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0"> Bounced Cheques</p>
                             </div>
@@ -634,6 +691,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/che2.png ')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Postponed')->count() }}">{{ App\Models\Cheque::where('cheque_status','Postponed')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0"> Postponed Cheques </p>
                             </div>
@@ -642,6 +702,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/expaired cheque.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Expired')->count() }}">{{ App\Models\Cheque::where('cheque_status','Expired')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0"> Expired Cheques</p>
                             </div>
@@ -650,6 +713,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/cleared cheque.png')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Cleared')->count() }}">{{ App\Models\Cheque::where('cheque_status','Cleared')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0"> Cleared Cheques</p>
                             </div>
@@ -658,6 +724,9 @@
                     <div class="col-6 col-sm-4">
                         <a href="{{route('admin.contract.create')}}">
                             <div class="p-3 m-2 border" id="background_card">
+                            <span class="fs-4">
+                                        <img src="{{asset('3x/deposites.jpeg')}}" height="55px" style="border-radius: 100%;" />
+                                    </span>
                                 <h5 class="mb-1"><span id="parag" class="counter-value" data-target="{{ App\Models\Cheque::where('cheque_status','Deposited')->count() }}">{{ App\Models\Cheque::where('cheque_status','Deposited')->count() }}</span></h5>
                                 <p id="parag" class="text-muted mb-0">Total Deposited Cheques</p>
                             </div>
