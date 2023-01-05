@@ -120,6 +120,11 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::post('user-pass-update',[UserController::class,'updatePassword'])->name('uppass');
 
     Route::resource('building',BuildingController::class);
+    Route::get('building-details',[BuildingController::class,'buildingDetails'])->name('building-details');
+    Route::post('building-asset-store',[BuildingController::class,'buildingAssetStore'])->name('building-asset');
+    Route::get('building-asset-edit/{id}',[BuildingController::class,'buildingAssetEdit'])->name('asset-edit');
+    Route::get('building-asset-delete/{id}',[BuildingController::class,'buildingAssetDelete'])->name('asset-delete');
+    Route::post('building-asset-update/{id}',[BuildingController::class,'buildingAssetUpdate'])->name('asset-update');
     Route::get('get-buildings',[BuildingController::class,'get_buildings'])->name('get-buildings');
     Route::get('import-export-building',[BuildingController::class,'ImportExportBuilding'])->name('ImportExportBuilding');
     Route::get('import-export-unit',[UnitController::class,'ImportExportUnit'])->name('ImportExportUnit');

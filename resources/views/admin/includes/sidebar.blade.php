@@ -111,6 +111,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.buildingFiles') }}" class="nav-link" data-key="t-analytics">Add Files</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.building-details') }}" class="nav-link" data-key="t-analytics">Building Details</a>
+                            </li>
                             @endcan
                             @can('Building_read')
                             <li class="nav-item">

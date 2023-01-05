@@ -42,5 +42,10 @@ class Building extends Model
     {
         return $this->belongsTo(User::class, 'lessor_name', 'id');
     }
+
+    public function BuildingAssets()
+    {
+        return $this->hasMany(BuildingAsset::class, 'building_id','id');
+    }
     
 }

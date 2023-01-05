@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BuildingAsset extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function building()
+    {
+        return $this->belongsTo(Building::class, 'building_id','id');
+    }
 }
