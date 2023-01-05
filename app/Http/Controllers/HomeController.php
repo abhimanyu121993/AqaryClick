@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use AmrShawky\LaravelCurrency\Facade\Currency;
+use App\Models\AboutUs;
 use App\Models\Membership;
 use App\Models\Profile;
 use App\Models\WebsiteSetting;
@@ -146,7 +147,7 @@ class HomeController extends Controller
         }
 
         public function contactUser(Request $request){
-           
+
             $request->validate([
                 'name'=>'required',
                 'email'=>'required',
@@ -172,4 +173,5 @@ class HomeController extends Controller
     {
         # code...
     }
+
 }
