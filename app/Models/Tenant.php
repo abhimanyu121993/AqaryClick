@@ -49,4 +49,7 @@ class Tenant extends Model
     {
        return  $this->hasManyThrough(Legal::class, Contract::class, 'tenant_name', 'contract_id');
     }
+    public function cheques(){
+        return $this->hasMany(ChequeStatement::class,'tenant_id','id');
+    }
 }

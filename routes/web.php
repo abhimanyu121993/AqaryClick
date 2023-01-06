@@ -121,6 +121,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('import-export-contract',[ContractController::class,'ImportExportContract'])->name('ImportExportContract');
     Route::get('import-export-tenant',[TenantController::class,'ImportExportTenant'])->name('ImportExportTenant');
     Route::get('yearly-statement/{id}',[TenantController::class,'yearlyStatement'])->name('yearlyStatement');
+    Route::get('cheque-statement',[TenantController::class,'chequeStatement'])->name('chequeStatement');
+    Route::post('cheque-statement-store',[TenantController::class,'chequeStore'])->name('chequeStore');
 
     Route::resource('add-agents-profile',ProfileController::class);
 

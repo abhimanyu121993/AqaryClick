@@ -9,6 +9,10 @@
         /* font-weight: 500; */
     }
 
+    .setting{
+        width: calc(200px + 20px) !important;
+    }
+
     /* svg{
         color: black !important;
     }*/
@@ -33,15 +37,17 @@
             </span>
         </a>
 
-        <input type="text" class="form-control mb-2 " placeholder="search" id='menusearch'>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
+
     <div id="scrollbar" @role('Owner')style="background-color:{{$rolecolor}}" @endrole>
         <div class="container-fluid mt-1">
 
-            <div id="two-column-menu">
+            <div id="two-column-menu" class="sticky-top">
+            <input type="text" class="form-control mb-2 " placeholder="search" id='menusearch'>
+
             </div>
             <ul class="navbar-nav" id="navbar-nav">
 
@@ -132,6 +138,9 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.tenant-files.index') }}" class="nav-link" data-key="t-analytics">Add Files</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.chequeStatement') }}" class="nav-link" data-key="t-analytics"> Tenant Cheque</a>
                             </li>
                             @endcan
                             @can('Tenant_read')
@@ -339,8 +348,8 @@
                             <!-- customer Management Menu -->
                             @role('superadmin')
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards12345" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12345">
-                                    <span data-key="t-dashboards">Customer Management</span>
+                                <a class="nav-link menu-link setting" href="#sidebarDashboards12345" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12345">
+                                    <span data-key="t-dashboards" style="display:block !important">Customer Management</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards12345">
                                     <ul class="nav nav-sm flex-column">
@@ -355,8 +364,8 @@
                             <!-- end customer Module -->
                             <!-- Business SetUp Menu -->
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards122552" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards122552">
-                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Business SetUp</span>
+                                <a class="nav-link menu-link setting" href="#sidebarDashboards122552" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards122552">
+                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards" style="display:block !important">Business SetUp</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards122552">
                                     <ul class="nav nav-sm flex-column">
@@ -406,8 +415,8 @@
                             <!-- Role/Permission Menu -->
                             @can('Roles')
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1">
-                                    <i data-feather="lock" class="icon-dual"></i> <span data-key="t-dashboards">Roles/Permission</span>
+                                <a class="nav-link menu-link setting" href="#sidebarDashboards1" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1">
+                                    <i data-feather="lock" class="icon-dual"></i> <span data-key="t-dashboards" style="display:block !important">Roles/Permission</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards1">
                                     <ul class="nav nav-sm flex-column">
@@ -437,8 +446,8 @@
                             @role('superadmin')
                             <!-- Membership Menu -->
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards12223589" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12223589">
-                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Membership</span>
+                                <a class="nav-link menu-link setting" href="#sidebarDashboards12223589" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12223589">
+                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards" style="display:block !important">Membership</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards12223589">
                                     <ul class="nav nav-sm flex-column">
@@ -458,14 +467,13 @@
 
                             <!-- Membership Menu -->
                             <li class="nav-item">
-                                <a class="nav-link menu-link" href="#sidebarDashboards12223589" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12223589">
-                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Website Settings</span>
+                                <a class="nav-link menu-link setting" href="#sidebarDashboards12223589" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards12223589">
+                                    <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards" style="display:block !important">Website Settings</span>
                                 </a>
                                 <div class="collapse menu-dropdown" id="sidebarDashboards12223589">
                                     <ul class="nav nav-sm flex-column">
-                                        <li class='nav-item'>
-                                            <a class='nav-link menu-link' href=''>
-                                                <i class="feather-globe"></i> <span data-key="t-dashboards">Website Setting</span></a>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link" data-key="t-analytics"><i class="feather-globe"></i> Website Setting </a>
                                         </li>
 
                                     </ul>
@@ -483,6 +491,5 @@
 
         <!-- Sidebar -->
     </div>
-
     <!-- <div class="sidebar-background"></div> -->
 </div>

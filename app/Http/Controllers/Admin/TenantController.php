@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\TenantMail;
 use App\Models\Building;
+use App\Models\ChequeStatement;
 use App\Models\Invoice;
 use App\Models\Nationality;
 use App\Models\PaymentHistory;
@@ -457,5 +458,48 @@ class TenantController extends Controller
         $tenant=Tenant::find($id);
         $inv=Invoice::where('tenant_id',$id)->get();
         return view('admin.tenant.yearly_statement',compact('tenant','inv'));
+    }
+
+    public function chequeStatement(){
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $tenantcode = Tenant::all();
+        }
+        else
+        {
+            $tenantcode = Tenant::where('user_id',$this->user_id)->get();
+        }
+
+        return view('admin.tenant.tenant_cheque',compact('tenantcode'));
+    }
+
+    public function chequeStore(Request $request){
+      
+        $request->validate([
+            'cheque_no'=>'required',
+            'tenant_name'=>'required',
+            'cheque_start_date'=>'required',
+            'cheque_expaire_date'=>'required',
+            'cheque_status'=>'required'
+        ]);
+
+        foreach ($request->cheque_no as $k=>$tcheque)
+     {
+        $res =ChequeStatement::create([
+            'tenant_id' =>$request->tenant_name,
+            'cheque_no'=>$tcheque,
+            'cheque_start_date' => $request->cheque_start_date[$k],
+            'cheque_expaire_date' => $request->cheque_expaire_date[$k],
+            'cheque_status' => $request->cheque_status[$k],
+        ]);
+  
+        
+    } 
+    if($res){
+        return redirect()->back()->with('success','Cheque Statement has been created successfully.');
+        }
+        else{
+            return redirect()->back()->with('error','Cheque Statement not created.');
+        }
     }
 }
