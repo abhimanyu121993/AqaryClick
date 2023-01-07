@@ -123,6 +123,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('yearly-statement/{id}',[TenantController::class,'yearlyStatement'])->name('yearlyStatement');
     Route::get('cheque-statement',[TenantController::class,'chequeStatement'])->name('chequeStatement');
     Route::post('cheque-statement-store',[TenantController::class,'chequeStore'])->name('chequeStore');
+    Route::get('cheque-statement-delete/{id}',[TenantController::class,'chequeDelete'])->name('chequeDelete');
+    Route::get('cheque-edit/{id}',[TenantController::class,'chequeEdit'])->name('chequeEdit');
+    Route::post('cheque-update/{id}',[TenantController::class,'chequeUpdate'])->name('chequeUpdate');
 
     Route::resource('add-agents-profile',ProfileController::class);
 

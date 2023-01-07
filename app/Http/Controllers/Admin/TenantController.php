@@ -502,4 +502,56 @@ class TenantController extends Controller
             return redirect()->back()->with('error','Cheque Statement not created.');
         }
     }
+
+    public function chequeDelete($id)
+    {
+        $id = Crypt::decrypt($id);
+        $cheque = ChequeStatement::find($id);
+        if ($cheque->delete()) {
+            return redirect()->back()->with('success', 'Cheque Statement has been Deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Cheque Statement not Delete.');
+        }
+    }
+
+    public function chequeEdit($id)
+    {
+        $id = Crypt::decrypt($id);
+
+        $this->getUser();
+        if (Auth::user()->hasRole('superadmin')) {
+            $tenantcode = Tenant::all();
+        } else {
+            $tenantcode = Tenant::where('user_id', $this->user_id)->get();
+        }
+        $chequeEdit = ChequeStatement::find($id);
+        return view('admin.tenant.tenant_cheque', compact('tenantcode', 'chequeEdit'));
+    }
+
+    public function chequeUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'cheque_no' => 'required',
+            'tenant_name' => 'required',
+            'cheque_start_date' => 'required',
+            'cheque_expaire_date' => 'required',
+            'cheque_status' => 'required'
+        ]);
+
+        foreach ($request->cheque_no as $k => $tcheque) {
+            $res = ChequeStatement::find($id)->update([
+                'tenant_id' => $request->tenant_name,
+                'cheque_no' => $tcheque,
+                'cheque_start_date' => $request->cheque_start_date[$k],
+                'cheque_expaire_date' => $request->cheque_expaire_date[$k],
+                'cheque_status' => $request->cheque_status[$k],
+            ]);
+        }
+        if ($res) {
+            return redirect()->back()->with('success', 'Cheque Statement has been updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Cheque Statement not update.');
+        }
+    }
+
 }

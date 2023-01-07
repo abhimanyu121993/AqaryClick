@@ -139,9 +139,6 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.tenant-files.index') }}" class="nav-link" data-key="t-analytics">Add Files</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.chequeStatement') }}" class="nav-link" data-key="t-analytics"> Tenant Cheque</a>
-                            </li>
                             @endcan
                             @can('Tenant_read')
                             <li class="nav-item">
@@ -336,6 +333,24 @@
                     </div>
                 </li>
                 <!-- end business Module -->
+                <!-- start cheque Module -->
+                @can('Cheque')
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards8" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards8">
+                        <i data-feather="file" class="icon-dual"></i> <span data-key="t-dashboards">Cheque</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards8">
+                        <ul class="nav nav-sm flex-column">
+                            @can('Cheque_create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.chequeStatement') }}" class="nav-link" data-key="t-analytics"> Register Cheque</a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+                @endcan
+                 <!-- end cheque Module -->
                 <!-- Settings Menu -->
 
                 @can('Setting')

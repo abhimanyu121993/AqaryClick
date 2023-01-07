@@ -62,11 +62,11 @@
     <div class="col-lg-12">
         <div class="card" id="header1">
             <div class="card-header align-items-center d-flex" id="card-header">
-                <h4 class="card-title mb-0 flex-grow-1" id="h1">Cheque File</h4>
+                <h4 class="card-title mb-0 flex-grow-1" id="h1">{{isset($chequeEdit)?'Cheque Update':'Cheque Register'}}</h4>
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
-                    <form action="{{route('admin.chequeStore')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{isset($chequeEdit)? route('admin.chequeUpdate',$chequeEdit->id):route('admin.chequeStore')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
@@ -83,8 +83,8 @@
                                 <select class="select2  form-select js-example-basic-single" id="tenant_name" name="tenant_name">
                                     <option value="" selected hidden>--Select Tenant Name--</option>
                                     @foreach ($tenantcode as $code)
-                                    <option value="{{ $code->id }}">
-                                        {{ $code->tenant_english_name ?? '' }}/{{ $code->unit_no ?? '' }}
+                                    <option value="{{ $code->id }}"{{isset($chequeEdit)?($chequeEdit->tenant_id == $code->id ? 'selected':''):''}}>
+                                        {{ $code->tenant_english_name ?? '' }}/{{ $code->unit->unit_no ?? '' }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -93,34 +93,34 @@
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Cheque No.</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="cheque_no" name="cheque_no[]" placeholder="Cheque number">
+                                        <input type="text" class="form-control" id="cheque_no" name="cheque_no[]" placeholder="Cheque number" value="{{$chequeEdit->cheque_no ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-2 col-md-3">
                                     <label for="name" class="form-label">Cheque Start Date</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="cheque_start_date" name="cheque_start_date[]" placeholder="Cheque start date">
+                                        <input type="date" class="form-control" id="cheque_start_date" name="cheque_start_date[]" placeholder="Cheque start date" value="{{$chequeEdit->cheque_start_date ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-2 col-md-3">
                                     <label for="name" class="form-label">Cheque Expaire Date</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="cheque_expaire_date" name="cheque_expaire_date[]" placeholder="Cheque expaire date">
+                                        <input type="date" class="form-control" id="cheque_expaire_date" name="cheque_expaire_date[]" placeholder="Cheque expaire date" value="{{$chequeEdit->cheque_expaire_date ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-3">
                                     <label for="name" class="form-label">Cheque Status</label>
                                     <select class="form-control select2 form-select" name="cheque_status[]" id="cheque_status">
                                         <option value="" selected hidden>Select Cheque</option>
-                                        <option value="Valid">Valid</option>
-                                        <option value="Expired">Expired</option>
-                                        <option value="Bounced">Bounced</option>
-                                        <option value="Postponed">Postponed</option>
-                                        <option value="Cleared">Cleared</option>
-                                        <option value="Security Cheque">Security Cheque</option>
+                                        <option value="Valid" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Valid' ? 'selected':''):''}}>Valid</option>
+                                        <option value="Expired" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Expired' ? 'selected':''):''}}>Expired</option>
+                                        <option value="Bounced" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Bounced' ? 'selected':''):''}}>Bounced</option>
+                                        <option value="Postponed" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Postponed' ? 'selected':''):''}}>Postponed</option>
+                                        <option value="Cleared" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Cleared' ? 'selected':''):''}}>Cleared</option>
+                                        <option value="Security Cheque" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Security Cheque' ? 'selected':''):''}}>Security Cheque</option>
                                     </select>
                                 </div>
-                                <div class="row">
+                                <div class="row {{ isset($chequeEdit)?'d-none':'' }}" >
                                     <div class="col-sm-1 mt-3">
                                         <a href="javascript:void(0);" id="btn-btn" class="add_button addButton btn btn-success" title="Add field">+</a>
                                     </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="row gy-4">
                             <div class="col-xxl-3 col-md-6">
-                                <button class="btn btn-primary" id="btn-btn" type="submit">Submit</button>
+                                <button class="btn btn-primary" id="btn-btn" type="submit">{{isset($chequeEdit)?'Update':'Submit'}}</button>
                             </div>
                         </div>
                     </form>
@@ -161,35 +161,38 @@
                         </thead>
                         <tbody>
                             @foreach ($tenantcode as $cheque)
+                            @php
+                                $id=1;
+                            @endphp
                                 @foreach ($cheque->cheques as $ch)
                                    <tr>
-                                    <td>{{ $cheque->tenant_name ?? '' }}</td>
-                                    <td>{{ $cheque->cheque_no ?? '' }}</td>
-                                    <td>{{ $cheque->cheque_start_date ?? '' }}</td>
-                                    <td>{{ $cheque->cheque_expaire_date ?? '' }}</td>
-                                    <td>{{ $cheque->cheque_status ?? '' }}</td>
+                                    <td>{{$id++}}</td>
+                                    <td>{{ $cheque->tenant_english_name ?? '' }}/{{ $cheque->unit->unit_no ?? '' }}</td>
+                                    <td>{{ $ch->cheque_no ?? '' }}</td>
+                                    <td>{{ $ch->cheque_start_date ?? '' }}</td>
+                                    <td>{{ $ch->cheque_expaire_date ?? '' }}</td>
+                                    <td>{{ $ch->cheque_status ?? '' }}</td>
+                                    @can('Cheque')
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
                                                 <i class="ri-more-2-fill"></i>
                                             </a>
-                                            @php $bid=Crypt::encrypt($ch->id); @endphp
+                                            @php
+                                                $bid = Crypt::encrypt($ch->id);
+                                            @endphp
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <!-- <li><a class="dropdown-item" href="{{ route('admin.tenant-files.edit', $bid) }}">Edit</a></li> -->
-                                                <li><a class="dropdown-item" id="pop" href="#"
-                                                        onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();">Delete</a>
-                                                </li>
-
-                                                <form id="delete-form-{{ $bid }}"
-                                                    action="#" method="post"
-                                                    style="display: none;">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                </form>
+                                                @can('Cheque_edit')
+                                                <li><a class="dropdown-item"  id="pop" href="{{route('admin.chequeEdit',$bid)}}">Edit</a></li>
+                                                @endcan
+                                                @can('Cheque_delete')
+                                                <li><a class="dropdown-item" id="pop" href="{{route('admin.chequeDelete',$bid)}}">Delete</a></li>                               
+                                                @endcan
                                             </ul>
                                         </div>
-                                    </td>
+                                    </td> 
+                                    @endcan
                                    </tr>
                                 @endforeach
                             @endforeach
