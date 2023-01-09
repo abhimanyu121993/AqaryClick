@@ -168,8 +168,9 @@ class HomeController extends Controller
             }
         }
 
-    public function single_product()
-    {
-        # code...
-    }
+      public function propertie(){
+        $buildings=Building::all();
+        $websiteSetting=WebsiteSetting::get();
+        return view('frontend.properties',compact('websiteSetting','buildings'));       
+      }
 }

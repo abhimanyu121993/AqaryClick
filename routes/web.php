@@ -84,6 +84,7 @@ Route::group(['prefix'=>'home','as'=>'home.'],function(){
     Route::get('/about-us',[HomeController::class,'aboutUs'])->name('about-us');
     Route::get('/contact-us',[HomeController::class,'contactUs'])->name('contact-us');
     Route::post('/contact-user',[HomeController::class,'contactUser'])->name('contact-user');
+    Route::get('/properties',[HomeController::class,'propertie'])->name('properties');
 
 });
 // Backend Routes

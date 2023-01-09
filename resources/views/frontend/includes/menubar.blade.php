@@ -63,7 +63,7 @@
                 </div>   -->
             </div>   
             <div>
-                <a href="properties.html" class="mdc-button">
+                <a href="{{route('home.properties')}}" class="mdc-button">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__label">Properties</span> 
                 </a> 
