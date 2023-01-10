@@ -766,7 +766,7 @@
                                                 <i class="material-icons text-muted">date_range</i>
                                                 <span class="mx-2">{{$building->created_at?$building->created_at->format('d-M-Y'):''}}</span>
                                             </p>
-                                            <a href="javascript:void(0);" class="mdc-button mdc-button--outlined">
+                                            <a href="{{route('home.singleProperty')}}" class="mdc-button mdc-button--outlined">
                                                 <span class="mdc-button__ripple"></span>
                                                 <span class="mdc-button__label">Details</span>
                                             </a>

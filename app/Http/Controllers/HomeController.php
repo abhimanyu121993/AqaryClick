@@ -173,4 +173,9 @@ class HomeController extends Controller
         $websiteSetting=WebsiteSetting::get();
         return view('frontend.properties',compact('websiteSetting','buildings'));       
       }
+
+    public function singleProperty(){
+        $websiteSetting=WebsiteSetting::get();
+        return view('frontend.singleproperty',compact('websiteSetting'));
+    }
 }
