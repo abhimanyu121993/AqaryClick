@@ -94,7 +94,7 @@
                             <div class="col-xxl-6 col-md-6">
                                 <label for="space" class="form-label">Unit No.</label>
                                 <select class="select2 form-select js-example-disabled" id="unit_no" name='unit_no' required>
-                                    <option value="{{isset($chequeEdit)? $chequeEdit->unit_no:old('unit_no')}}" selected hidden>{{isset($chequeEdit)? $chequeEdit->unit_no:old('unit_no','--Select Unit No--')}}</option>
+                                    <option value="{{isset($chequeEdit)? $chequeEdit->unit_no:old('unit_no')}}" selected hidden>{{isset($chequeEdit)? $chequeEdit->unit->unit_no:old('unit_no','--Select Unit No--')}}</option>
                                 </select>
                             </div>
 
@@ -293,7 +293,7 @@
 
 <script>
     $(document).ready(function() {
-        $(document).onkeyup("#tenant_name", function() {
+        $(document).on('change',"#tenant_name", function() {
             $(this).find("option:selected").each(function() {
 
                 var optionValue = $(this).attr("value");
@@ -302,9 +302,12 @@
                 $.ajax({
                     url: newurl,
                     method: 'get',
+                    beforeSend: function() {
+                        $('#unit_no').html('<option selected hidden>Fetching.......</option>');
+                    },
                     success: function(p) {
                         console.log(p);
-                        $("#tenant_name").html(p.html);
+                        $("#unit_no").html(p.html);
 
                     }
                 });

@@ -15,4 +15,8 @@ class ChequeStatement extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_id', 'id');
     }
+
+    public function unit(){
+        return $this->belongsTo(Unit::class, 'unit_no', 'id');
+    }
 }

@@ -58,4 +58,8 @@ class Unit extends Model
     {
         return $this->HasOne(Tenant::class, 'unit_no');
     }
+
+    public function cheques(){
+        return $this->hasMany(ChequeStatement::class, 'unit_no', 'id');
+    }
 }
