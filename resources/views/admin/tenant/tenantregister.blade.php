@@ -244,7 +244,7 @@
                         </div>
                         <div class="col-xxl-3 col-md-3 mb-2">
                             <label class="form-label" for="flag">Unit No</label>
-                            <select class="select2 form-select js-example-disabled" id="unit_no" name='unit_no' required>
+                            <select class="select2 form-select js-example-disabled" id="unit_no" name='unit_no[]' required multiple>
                                 <option value="{{isset($editTenant)? $editTenant->unit_no:old('unit_no')}}" selected hidden>{{isset($editTenant)? $editTenant->unit_no:old('unit_no','--Select Unit No--')}}</option>
                             </select>
                         </div>

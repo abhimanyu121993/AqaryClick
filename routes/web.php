@@ -159,6 +159,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.', 'middleware' => 'auth'],function
     Route::get('fetch-tenant-details/{tenant_name}',[ContractController::class,'fetchTenantDetails'])->name('fetchTenantDetails');
     Route::get('fetchCountry/{country_id}',[BuildingController::class,'fetchCountry'])->name('fetchCountry');
     Route::get('fetch-building-details/{building_id}',[TenantController::class,'BuildingDetails'])->name('BuildingDetails');
+ 
+    Route::get('fetch-units-details/{tenant_id}',[TenantController::class,'unitsDetails'])->name('unitsDetails');
     Route::get('fetch-unit-by-building/{id}',[UnitController::class,'fetch_unit_by_building']);
     Route::get('fetchzone/{city_id}',[BuildingController::class,'fetchZone'])->name('fetchZone');
     Route::get('document/{id}',[BuildingController::class,'document'])->name('document');
