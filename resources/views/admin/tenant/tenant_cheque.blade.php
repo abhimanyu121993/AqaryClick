@@ -97,13 +97,13 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-2 col-md-3">
-                                    <label for="name" class="form-label">Cheque Start Date</label>
+                                    <label for="name" class="form-label">From Rent Period Date</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="cheque_start_date" name="cheque_start_date[]" placeholder="Cheque start date" value="{{$chequeEdit->cheque_start_date ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-2 col-md-3">
-                                    <label for="name" class="form-label">Cheque Expaire Date</label>
+                                    <label for="name" class="form-label">To Rent Period Date</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="cheque_expaire_date" name="cheque_expaire_date[]" placeholder="Cheque expaire date" value="{{$chequeEdit->cheque_expaire_date ?? ''}}">
                                     </div>
@@ -153,8 +153,8 @@
                                 <th scope="col">Sr.No.</th>
                                 <th scope="col">Tenant Name</th>
                                 <th scope="col">Cheque No.</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">Expaire Date</th>
+                                <th scope="col">From Rent Period Date</th>
+                                <th scope="col">To Rent Period Date</th>
                                 <th scope="col">Cheque Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -169,8 +169,8 @@
                                     <td>{{$id++}}</td>
                                     <td>{{ $cheque->tenant_english_name ?? '' }}/{{ $cheque->unit->unit_no ?? '' }}</td>
                                     <td>{{ $ch->cheque_no ?? '' }}</td>
-                                    <td>{{ $ch->cheque_start_date ?? '' }}</td>
-                                    <td>{{ $ch->cheque_expaire_date ?? '' }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($ch->cheque_start_date ?? '' )->format('d/m/Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($ch->cheque_expaire_date ?? '')->format('d/m/Y')}}</td>
                                     <td>{{ $ch->cheque_status ?? '' }}</td>
                                     @can('Cheque')
                                     <td>
