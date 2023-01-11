@@ -106,25 +106,25 @@
                                     </div>
                                 </div>
                                 <div class="col-xxl-3 col-md-4">
-                                    <label for="name" class="form-label">Amount</label>
+                                    <label for="name" class="form-label">Cheque Amount.</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="amount" name="amount[]" placeholder="Cheque number" value="{{$chequeEdit->amount ?? ''}}">
                                     </div>
                                 </div>
                                 <div class="col-xxl-2 col-md-4">
-                                    <label for="name" class="form-label">From Rent Period Date</label>
+                                    <label for="name" class="form-label">Deposit Date</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="cheque_start_date" name="cheque_start_date[]" placeholder="Cheque start date" value="{{$chequeEdit->cheque_start_date ?? ''}}">
                                     </div>
                                 </div>
-                                <div class="col-xxl-2 col-md-4">
+                                {{-- <div class="col-xxl-2 col-md-4">
                                     <label for="name" class="form-label">To Rent Period Date</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="cheque_expaire_date" name="cheque_expaire_date[]" placeholder="Cheque expaire date" value="{{$chequeEdit->cheque_expaire_date ?? ''}}">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-xxl-3 col-md-4">
-                                    <label for="name" class="form-label">Cheque Status</label>
+                                    <label for="name" class="form-label">Cheque status</label>
                                     <select class="form-control select2 form-select" name="cheque_status[]" id="cheque_status">
                                         <option value="" selected hidden>Select Cheque</option>
                                         <option value="Valid" {{isset($chequeEdit)?($chequeEdit->cheque_status =='Valid' ? 'selected':''):''}}>Valid</option>
@@ -136,9 +136,9 @@
                                     </select>
                                 </div>
                                 <div class="col-xxl-2 col-md-4">
-                                    <label for="name" class="form-label">Remark</label>
+                                    <label for="name" class="form-label">Remarks</label>
                                     <div class="input-group">
-                                        <textarea  cols="30" rows="2" id="remark" name="remark[]">{{$chequeEdit->remark ?? ''}}</textarea>
+                                        <textarea  cols="40" rows="2" id="remark" name="remark[]">{{$chequeEdit->remark ?? ''}}</textarea>
                                     </div>
                                 </div>
                                 
@@ -182,10 +182,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tenantcode as $cheque)
-                        @php
+                          @php
                         $id=1;
                         @endphp
+                        @foreach ($tenantcode as $cheque)
+                      
                         @foreach ($cheque->cheques as $ch)
                         <tr>
                             <td>{{$id++}}</td>
@@ -233,26 +234,25 @@
     var wrapper1 = $('.field_wrapper');
     var fieldHTML1 = '<div class="field_wrapper mt-2 row">\
                                     <div class="col-xxl-3 col-md-4">\
+                                        <label>Cheque No.</label>\
                                         <div class="input-group">\
                                             <input type="text" class="form-control" id="cheque_no" name="cheque_no[]" placeholder="Cheque number">\
                                         </div>\
                                     </div>\
                                     <div class="col-xxl-3 col-md-4">\
-                                    <div class="input-group">\
-                                        <input type="text" class="form-control" id="amount" name="amount[]" placeholder="Cheque number" value="">\
-                                    </div>\
+                                        <label>Cheque Amount.</label>\
+                                        <div class="input-group">\
+                                            <input type="text" class="form-control" id="amount" name="amount[]" placeholder="Cheque number" value="">\
+                                        </div>\
                                    </div>\
                                     <div class="col-xxl-2 col-md-4">\
+                                        <label>Deposit Date</label>\
                                         <div class="input-group">\
                                             <input type="date" class="form-control" id="cheque_start_date" name="cheque_start_date[]" placeholder="Cheque start date">\
                                         </div>\
                                     </div>\
-                                    <div class="col-xxl-2 col-md-4 mt-2">\
-                                        <div class="input-group">\
-                                            <input type="date" class="form-control" id="cheque_expaire_date" name="cheque_expaire_date[]" placeholder="Cheque expaire date">\
-                                        </div>\
-                                    </div>\
                                     <div class="col-xxl-3 col-md-4 mt-2">\
+                                        <label>Cheque status</label>\
                                         <select class="form-control select2 form-select" name="cheque_status[]" id="cheque_status">\
                                             <option value="" selected hidden>Select Cheque</option>\
                                             <option value="Valid">Valid</option>\
@@ -264,11 +264,14 @@
                                         </select>\
                                     </div>\
                                     <div class="col-xxl-2 col-md-4 mt-2">\
-                                    <div class="input-group">\
-                                        <textarea  cols="30" rows="2" id="remark" name="remark[]" placeholder="Remark"></textarea>\
+                                        <label>Remarks</label>\
+                                        <div class="input-group">\
+                                            <textarea  cols="40" rows="2" id="remark" name="remark[]" placeholder="Remark"></textarea>\
+                                        </div>\
                                     </div>\
-                                </div>\
-                                    <div class="col-xxl-12 col-md-2 mt-2">\
+                                    <br>\
+                                    <div class="col-xxl-2 col-md-2" style="margin-top:32px;">\
+                                        <label></label>\
                                        <div class="input-group">\
                                           <a href="javascript:new_link()" id="btn-btn" class="btn btn-success fw-medium removeButton">-</a>\
                                         </div>\

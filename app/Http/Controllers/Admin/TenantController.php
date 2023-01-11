@@ -481,7 +481,7 @@ class TenantController extends Controller
             'cheque_no' => 'required',
             'tenant_name' => 'required',
             'cheque_start_date' => 'required',
-            'cheque_expaire_date' => 'required',
+            // 'cheque_expaire_date' => 'required',
             'cheque_status' => 'required',
             'unit_no'=>'required',
             'amount'=>'required'
@@ -493,7 +493,7 @@ class TenantController extends Controller
                 'cheque_no' => $tcheque,
                 'amount'=>$request->amount[$k],
                 'cheque_start_date' => $request->cheque_start_date[$k],
-                'cheque_expaire_date' => $request->cheque_expaire_date[$k],
+                // 'cheque_expaire_date' => $request->cheque_expaire_date[$k],
                 'cheque_status' => $request->cheque_status[$k],
                 'remark'=>$request->remark[$k]
             ]);
@@ -536,7 +536,7 @@ class TenantController extends Controller
             'cheque_no' => 'required',
             'tenant_name' => 'required',
             'cheque_start_date' => 'required',
-            'cheque_expaire_date' => 'required',
+            // 'cheque_expaire_date' => 'required',
             'cheque_status' => 'required',
             'unit_no'=>'required',
             'amount'=>'required'
@@ -549,7 +549,7 @@ class TenantController extends Controller
                 'cheque_no' => $tcheque,
                 'amount'=>$request->amount[$k],
                 'cheque_start_date' => $request->cheque_start_date[$k],
-                'cheque_expaire_date' => $request->cheque_expaire_date[$k],
+                // 'cheque_expaire_date' => $request->cheque_expaire_date[$k],
                 'cheque_status' => $request->cheque_status[$k],
                 'remark'=>$request->remark[$k]
             ]);
