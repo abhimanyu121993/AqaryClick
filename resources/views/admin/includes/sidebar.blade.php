@@ -241,21 +241,29 @@
                 @endcan
                 @endcan
                 <!-- Business Management Menu -->
+                @can('CompanyManagement')
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDashboards1222" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards1222">
                         <i data-feather="slack" class="icon-dual"></i><span data-key="t-dashboards">Company Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarDashboards1222">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.business.index') }}" class="nav-link" data-key="t-analytics">Registration </a>
-                            </li>
+                            @can('CompanyManagement_create')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.business.index') }}" class="nav-link" data-key="t-analytics">Registration </a>
+                                </li>
+                            @endcan
+                            @can('CompanyManagement_read')
+                                
+                            
                             <li class="nav-item">
                                 <a href="{{ route('admin.business.create') }}" class="nav-link" data-key="t-analytics">My Company</a>
                             </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>
+                @endcan
                 <!-- end business Module -->
                 <!-- Electricity Management Menu -->
                 @can('ElectricityBill')

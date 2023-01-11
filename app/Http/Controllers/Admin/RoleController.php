@@ -107,5 +107,6 @@ class RoleController extends Controller
         else
         {
             return redirect()->back()->with('error','Data not deleted.');
-        }    }
+        }    
+    }
 }
